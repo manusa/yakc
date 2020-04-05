@@ -1,0 +1,29 @@
+import com.marcnuri.yack.schema.CodeGen
+
+plugins {
+  id 'java-library'
+}
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compileOnly 'org.projectlombok:lombok:1.18.12'
+  compile 'io.swagger:swagger-annotations:1.6.0'
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.4.2'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.4.2'
+}
+
+test {
+  useJUnitPlatform()
+}
+
+def schemaDir = new File(projectDir, "schema");
+task generateCode(type: CodeGen) {
+  schema = new File(schemaDir, "kubernetes-1.16.0.json")
+  templatesDir = new File(schemaDir, "templates")
+//  outputDirectory = sourceSets.main.java.srcDirs[0]
+//  outputDirectory = new File(projectDir, "delete")
+  outputDirectory = projectDir
+}
