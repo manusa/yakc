@@ -1,0 +1,8 @@
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile gradleApi()
+  compile 'org.openapitools:openapi-generator:4.3.0'
+}
