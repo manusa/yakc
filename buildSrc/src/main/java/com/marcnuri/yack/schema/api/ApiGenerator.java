@@ -9,7 +9,6 @@ import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Mustache.TemplateLoader;
 import io.swagger.v3.oas.models.OpenAPI;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +26,8 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import static com.marcnuri.yack.schema.api.TemplateContextResolver.resolveClassName;
 
 /**
  * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-10.
@@ -80,8 +80,9 @@ class ApiGenerator {
     return ret;
   }
 
-  private static Set<String> initDefaultImports() {
+  private Set<String> initDefaultImports() {
     return new HashSet<>(Arrays.asList(
+        settings.getPackageName().concat(".api.Api"),
         "feign.Headers",
         "feign.RequestLine"
     ));
@@ -94,12 +95,6 @@ class ApiGenerator {
       throw new RuntimeException("Can't generate package directory for " + entry.getKey());
     }
     return entry;
-  }
-
-  private static String resolveClassName(String tag) {
-    return Stream.concat(Stream.of(tag.split("\\.")), Stream.of("Api"))
-        .map(StringUtils::capitalize)
-        .collect(Collectors.joining());
   }
 
   private String resolvePackageName(String tag) {

@@ -1,0 +1,10 @@
+{{#queryParameters}}{{#-first}}
+  @Builder
+  @Data
+  final class {{queryParametersClassName}} { {{/-first}}
+    /**
+     * {{description}}
+     */
+    @JsonProperty("{{propertyName}}")
+    private {{type}} {{name}};
+{{#-last}}  } {{/-last}}{{/queryParameters}}
