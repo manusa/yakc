@@ -5,22 +5,18 @@ package {{package}};
 import {{.}};
 {{/imports}}
 
-public interface {{className}} {
+public interface {{className}} extends Api {
 {{#operations}}
 
-  {{#description}}
-    /**
-    * {{.}}
-    */
-  {{/description}}
-  @RequestLine("{{method}} {{path}}")
-  @Headers({
-  {{#headers}}
-    "{{.}}"{{#hasMore}},
-    {{/hasMore}}
+{{>api_description}}
+{{>api_annotations}}
+  {{returnType}} {{methodName}}({{>api_path_parameters}});
+{{#hasQueryParameters}}
 
-  {{/headers}}
-  })
-  {{returnType}} {{methodName}}();
+{{>api_description}}
+{{>api_annotations}}
+  {{returnType}} {{methodName}}({{>api_path_parameters}}{{#hasPathParameters}}, {{/hasPathParameters}}@QueryMap(encoded=true) {{queryParametersClassName}} queryParameters);
+  {{>api_query_parameter_pojo}}
+{{/hasQueryParameters}}
 {{/operations}}
 }

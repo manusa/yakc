@@ -1,0 +1,6 @@
+  @RequestLine("{{httpMethod}} {{path}}")
+  @Headers({
+  {{#headers}}
+    "{{.}}"{{^-last}},{{/-last}}
+  {{/headers}}
+  })
