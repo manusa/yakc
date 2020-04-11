@@ -1,0 +1,26 @@
+{{>licenseInfo}}
+package {{package}};
+
+{{#imports}}
+import {{.}};
+{{/imports}}
+
+public interface {{className}} {
+{{#operations}}
+
+  {{#description}}
+    /**
+    * {{.}}
+    */
+  {{/description}}
+  @RequestLine("{{method}} {{path}}")
+  @Headers({
+  {{#headers}}
+    "{{.}}"{{#hasMore}},
+    {{/hasMore}}
+
+  {{/headers}}
+  })
+  {{returnType}} {{methodName}}();
+{{/operations}}
+}

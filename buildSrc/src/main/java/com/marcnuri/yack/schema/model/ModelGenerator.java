@@ -3,7 +3,7 @@
  *
  * Created on 2020-04-05, 7:18
  */
-package com.marcnuri.yack.schema;
+package com.marcnuri.yack.schema.model;
 
 import io.swagger.v3.oas.models.media.ArraySchema;
 import io.swagger.v3.oas.models.media.Schema;
@@ -29,8 +29,9 @@ import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.TreeMap;
+import java.util.stream.Stream;
 
-import static com.marcnuri.yack.schema.QualifiedName.qualifiedName;
+import static com.marcnuri.yack.schema.model.QualifiedName.qualifiedName;
 
 /**
  * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-05.
@@ -41,7 +42,7 @@ public class ModelGenerator extends DefaultCodegen implements CodegenConfig {
       new ArraysConfigurator(),
       new MapConfigurator()
   );
-  private String projectFolder = "src/main";
+  private String projectFolder = "src/model";
   private String sourceFolder = projectFolder + "/java";
 
   public ModelGenerator() {
@@ -176,15 +177,11 @@ public class ModelGenerator extends DefaultCodegen implements CodegenConfig {
 
   private void replaceQualifiedNames(String modelName, Map<String, Object> model) {
     final QualifiedName qualifiedName = qualifiedName(modelName);
+    final String packageName = String.format("%s.%s", modelPackage(), qualifiedName.packageName);
     model.put("qualifiedClassName", qualifiedName.className);
-    model.put("package",
-      String.format("%s.%s", modelPackage(), qualifiedName.packageName));
-    model.put("apiPackage",
-      String.format("%s.%s", modelPackage(), qualifiedName.packageName));
-    model.put("modelPackage",
-      String.format("%s.%s", modelPackage(), qualifiedName.packageName));
-    model.put("packageName",
-      String.format("%s.%s", modelPackage(), qualifiedName.packageName));
+    Stream.of("package", "apiPackage", "modelPackage", "packageName").forEach(
+        property -> model.put(property, packageName)
+    );
   }
 
   private void initSettings() {
@@ -233,7 +230,7 @@ public class ModelGenerator extends DefaultCodegen implements CodegenConfig {
             "native", "super", "while", "null")
     );
 
-    languageSpecificPrimitives = new HashSet<String>(
+    languageSpecificPrimitives = new HashSet<>(
         Arrays.asList(
             "String",
             "boolean",

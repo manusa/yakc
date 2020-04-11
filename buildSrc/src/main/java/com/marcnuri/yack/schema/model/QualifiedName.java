@@ -1,4 +1,4 @@
-package com.marcnuri.yack.schema;
+package com.marcnuri.yack.schema.model;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

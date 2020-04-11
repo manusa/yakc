@@ -9,7 +9,10 @@
 })
 {{/jackson}}
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
+@ToString
 public class {{qualifiedClassName}} {{#parent}}extends {{{parent}}} {{/parent}}{{#vendorExtensions.x-implements}}{{#-first}}implements {{{.}}}{{/-first}}{{^-first}}, {{{.}}}{{/-first}}{{#-last}} {{/-last}}{{/vendorExtensions.x-implements}}{
 
   private static final long serialVersionUID = 1L;
