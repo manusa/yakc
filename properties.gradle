@@ -1,0 +1,11 @@
+ext {
+  version_feign = '10.7.4'
+  version_jackson = '2.10.0.pr3' // Matches transitive version for feign-jackson:10.7.4 ^^^
+  version_junit = '5.4.2'
+  version_openapi_generator = '4.3.0'
+  version_projectlombok = '1.18.12'
+}
+
+repositories {
+  jcenter()
+}

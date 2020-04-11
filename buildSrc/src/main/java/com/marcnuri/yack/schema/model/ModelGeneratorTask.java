@@ -3,22 +3,20 @@
  *
  * Created on 2020-04-04, 17:31
  */
-package com.marcnuri.yack.schema;
+package com.marcnuri.yack.schema.model;
 
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
-import org.openapitools.codegen.CodegenConstants;
 import org.openapitools.codegen.DefaultGenerator;
 import org.openapitools.codegen.config.CodegenConfigurator;
-import org.openapitools.codegen.config.GlobalSettings;
 
 import java.io.File;
 
 /**
  * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-04.
  */
-public class CodeGen extends DefaultTask {
+public class ModelGeneratorTask extends DefaultTask {
 
   @Input
   public File schema;
@@ -29,7 +27,7 @@ public class CodeGen extends DefaultTask {
 
   @TaskAction
   public void run() {
-    GlobalSettings.setProperty(CodegenConstants.MODEL_DOCS, "false");
+//    GlobalSettings.setProperty(CodegenConstants.MODEL_DOCS, "false");
     final CodegenConfigurator configurator = new CodegenConfigurator();
     configurator.setInputSpec(schema.getAbsolutePath());
     configurator.setTemplateDir(templatesDir.getAbsolutePath());

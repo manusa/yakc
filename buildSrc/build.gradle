@@ -1,8 +1,17 @@
-repositories {
-  jcenter()
+plugins {
+  id 'java-library'
+}
+
+apply from: rootDir.parentFile.toPath().resolve('properties.gradle').toFile();
+
+java {
+  sourceCompatibility = JavaVersion.VERSION_11
+  targetCompatibility = JavaVersion.VERSION_11
 }
 
 dependencies {
   compile gradleApi()
-  compile 'org.openapitools:openapi-generator:4.3.0'
+  compile "org.openapitools:openapi-generator:$version_openapi_generator"
+  compileOnly "org.projectlombok:lombok:$version_projectlombok"
+  annotationProcessor "org.projectlombok:lombok:$version_projectlombok"
 }
