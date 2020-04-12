@@ -1,10 +1,10 @@
 {{#queryParameters}}{{#-first}}
-  @Builder
-  @Data
-  final class {{queryParametersClassName}} { {{/-first}}
+  final class {{queryParametersClassName}} extends HashMap<String, Object> { {{/-first}}
     /**
      * {{description}}
      */
-    @JsonProperty("{{propertyName}}")
-    private {{type}} {{name}};
+    public {{queryParametersClassName}} {{name}}({{type}} {{name}}) {
+      put("{{propertyName}}", {{name}});
+      return this;
+    }
 {{#-last}}  } {{/-last}}{{/queryParameters}}

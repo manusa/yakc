@@ -1,274 +1,159 @@
 /*
- * ModelGenerator.java
+ * ModelGeneratorV2.java
  *
- * Created on 2020-04-05, 7:18
+ * Created on 2020-04-12, 8:49
  */
 package com.marcnuri.yack.schema.model;
 
-import io.swagger.v3.oas.models.media.ArraySchema;
+import com.marcnuri.yack.schema.GeneratorSettings;
+import com.marcnuri.yack.schema.SchemaUtils;
+import com.samskivert.mustache.Escapers;
+import com.samskivert.mustache.Mustache;
+import com.samskivert.mustache.Mustache.TemplateLoader;
+import com.samskivert.mustache.Template;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.media.ObjectSchema;
 import io.swagger.v3.oas.models.media.Schema;
-import org.openapitools.codegen.CodegenConfig;
-import org.openapitools.codegen.CodegenModel;
-import org.openapitools.codegen.CodegenProperty;
-import org.openapitools.codegen.DefaultCodegen;
-import org.openapitools.codegen.meta.features.ClientModificationFeature;
-import org.openapitools.codegen.meta.features.DocumentationFeature;
-import org.openapitools.codegen.meta.features.GlobalFeature;
-import org.openapitools.codegen.meta.features.SchemaSupportFeature;
-import org.openapitools.codegen.meta.features.SecurityFeature;
-import org.openapitools.codegen.meta.features.WireFormatFeature;
-import org.openapitools.codegen.utils.ModelUtils;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.EnumSet;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.TreeMap;
-import java.util.stream.Stream;
+import java.util.Set;
 
-import static com.marcnuri.yack.schema.model.QualifiedName.qualifiedName;
+import static com.marcnuri.yack.schema.SchemaUtils.sanitizeDescription;
+import static com.marcnuri.yack.schema.SchemaUtils.sanitizeVariable;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-05.
+ * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-12.
  */
-public class ModelGenerator extends DefaultCodegen implements CodegenConfig {
+class ModelGenerator {
 
-  private final List<ModelGeneratorListener> listeners = Arrays.asList(
-      new ArraysConfigurator(),
-      new MapConfigurator()
-  );
-  private String projectFolder = "src/model";
-  private String sourceFolder = projectFolder + "/java";
+  private final GeneratorSettings settings;
+  private final SchemaUtils utils;
+  private final TemplateLoader templateLoader;
+  private final Template modelTemplate;
 
-  public ModelGenerator() {
-    initSettings();
+  ModelGenerator(GeneratorSettings settings, OpenAPI openAPI) {
+    this.settings = settings;
+    this.utils = new SchemaUtils(settings);
+    this.templateLoader = name -> new StringReader(utils.readTemplate(name));
+    this.modelTemplate = Mustache.compiler()
+        .withLoader(templateLoader)
+        .defaultValue("")
+        .withEscaper(Escapers.NONE)
+        .compile(utils.readTemplate("model"));
   }
 
-  @Override
-  public String escapeReservedWord(String name) {
-    if (this.reservedWordsMappings().containsKey(name)) {
-      return this.reservedWordsMappings().get(name);
-    }
-    return "_" + name;
+  void generate() {
+    final Map<String, Schema> schemas = ModelExtractor.extractSchemas(settings.getOpenAPI());
+    settings.getLogger().lifecycle("Found {} schemas", schemas.size());
+    schemas.entrySet().stream()
+        .map(this::mkPackageDirectories)
+        .filter(entry -> entry.getValue() instanceof ObjectSchema)
+        .forEach(entry -> {
+          final String key = entry.getKey();
+          settings.getLogger().lifecycle("Generating {}.{}", resolvePackageName(key), resolveClassName(key));
+          final Map<String, Object> templateContext = templateContext(entry);
+          final String fileContents = modelTemplate.execute(templateContext);
+          writeFile(key, fileContents);
+        });
+    settings.getLogger().lifecycle("Generated {} api entries", schemas.size());
   }
 
-  @Override
-  public String escapeUnsafeCharacters(String input) {
-    return input
-        .replace("*/", "*_/")
-        .replace("/*", "/_*")
-        .replace('\u201C', '"')
-        .replace('\u201D', '"');
+  private Map<String, Object> templateContext(Entry<String, Schema> entry) {
+    final Map<String, Object> ret = new HashMap<>();
+    final String key = entry.getKey();
+    final Schema schema = entry.getValue();
+    final Set<String> imports = initDefaultImports();
+    final List<Map<String, Object>> templateFields = templateFields(imports, schema);
+    ret.put("package", resolvePackageName(key));
+    ret.put("imports", imports);
+    ret.put("description", sanitizeDescription(schema.getDescription()));
+    ret.put("className", resolveClassName(key));
+    ret.put("fields", templateFields);
+    ret.put("hasFields", !templateFields.isEmpty());
+    return ret;
   }
 
-  @Override
-  public String modelPackage() {
-    return "com.marcnuri.yakc.model";
+  private Set<String> initDefaultImports() {
+    return new HashSet<>(Arrays.asList(
+        settings.getPackageName().concat(".model.Model"),
+        "lombok.Builder",
+        "lombok.AllArgsConstructor",
+        "lombok.NoArgsConstructor",
+        "lombok.Data",
+        "lombok.ToString",
+        "com.fasterxml.jackson.annotation.JsonProperty"
+    ));
   }
 
-  @Override
-  public String modelFileFolder() {
-    return (outputFolder + File.separator + sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar)).replace('/', File.separatorChar);
-  }
-
-  @Override
-  public String toModelName(String name) {
-    return name;
-  }
-
-  @Override
-  protected boolean needToImport(String type) {
-    return super.needToImport(type) && !type.contains(".");
-  }
-
-  @Override
-  public String getSchemaType(Schema p) {
-    String openAPIType = super.getSchemaType(p);
-    if (typeMapping.containsKey(openAPIType)) {
-      return typeMapping.get(openAPIType);
-    }
-    return toModelName(openAPIType);
-  }
-
-  @Override
-  public String getTypeDeclaration(Schema p) {
-    if (ModelUtils.isArraySchema(p)) {
-      Schema<?> items = getSchemaItems((ArraySchema) p);
-      return "List<" + getTypeDeclaration(ModelUtils.unaliasSchema(this.openAPI, items)) + ">";
-    } else if (ModelUtils.isMapSchema(p) && !ModelUtils.isComposedSchema(p)) {
-      // Note: ModelUtils.isMapSchema(p) returns true when p is a composed schema that also defines
-      // additionalproperties: true
-      Schema<?> inner = getSchemaAdditionalProperties(p);
-      return "Map<String, " + getTypeDeclaration(ModelUtils.unaliasSchema(this.openAPI, inner)) + ">";
-    }
-    return super.getTypeDeclaration(p);
-  }
-
-  @Override
-  public String toDefaultValue(Schema schema) {
-    final Schema referencedSchema = ModelUtils.getReferencedSchema(this.openAPI, schema);
-    return listeners.stream()
-        .map(l -> l.toDefaultValue(referencedSchema))
-        .filter(Objects::nonNull)
-        .findAny()
-        .orElseGet(() -> super.toDefaultValue(referencedSchema));
-  }
-
-  @Override
-  public String toModelFilename(String name) {
-    final QualifiedName qualifiedName = qualifiedName(name);
-    return String.format("%s%s%s",
-      qualifiedName.packageName.replace('.', File.separatorChar),
-      File.separator,
-      qualifiedName.className
-    );
-  }
-
-
-  @Override
-  public CodegenModel fromModel(String name, Schema model) {
-    final CodegenModel codegenModel = super.fromModel(name, model);
-    final Map<String, Object> vendorExtensions =
-        Optional.ofNullable(codegenModel.getVendorExtensions()).orElse(new TreeMap<>());
-    vendorExtensions.put("x-implements", "Serializable");
-    codegenModel.setVendorExtensions(vendorExtensions);
-    return codegenModel;
-  }
-
-  @Override
-  public void postProcessModelProperty(CodegenModel model, CodegenProperty property) {
-    super.postProcessModelProperty(model, property);
-    if (!property.isPrimitiveType && property.isModel && !property.isContainer) {
-      final QualifiedName qualifiedName = qualifiedName(property.getBaseType());
-      final String datatype = String.format("%s.%s.%s",
-          modelPackage(), qualifiedName.packageName, qualifiedName.className);
-      property.setDatatype(datatype);
-      property.setDatatypeWithEnum(datatype);
-    } else if (!property.isPrimitiveType && property.isContainer
-        && property.complexType.startsWith("io.k8s.")) { // TODO: Find something more elegant
-      final QualifiedName qualifiedName = qualifiedName(property.getComplexType());
-      final String complexType = String.format("%s.%s.%s",
-          modelPackage(), qualifiedName.packageName, qualifiedName.className);
-      final String datatype = property.getDataType().replace(property.getComplexType(), complexType);
-      property.setDatatype(datatype);
-      property.setDatatypeWithEnum(datatype);
-    }
-    listeners.forEach(l -> l.postProcessModelProperty(model, property));
-  }
-
-  @Override
-  public Map<String, Object> postProcessAllModels(Map<String, Object> models) {
-    for(Entry<String, Object> modelEntry : models.entrySet()) {
-      final String modelName = modelEntry.getKey();
-      if (!(modelEntry.getValue() instanceof Map)) {
-        throw new IllegalArgumentException(String.format("Invalid model for: %s", modelName));
+  private List<Map<String, Object>> templateFields(Set<String> imports, Schema schema) {
+    final List<Map<String, Object>> properties = new ArrayList<>();
+    final Set<Entry<String,Schema>> entries = Optional.ofNullable(schema.getProperties())
+        .map(m -> (Set<Entry<String,Schema>>)m.entrySet()).orElse(Collections.emptySet());
+    for (Entry<String, Schema> property : entries) {
+      final Map<String, Object> templateProp = new HashMap<>();
+      final Schema propertySchema = property.getValue();
+      properties.add(templateProp);
+      if (Optional.ofNullable(schema.getRequired()).orElse(Collections.emptyList()).contains(property.getKey())) {
+        imports.add("lombok.NonNull");
+        templateProp.put("required", true);
       }
-      @SuppressWarnings("unchecked")
-      final Map<String, Object> model = (Map<String, Object>)modelEntry.getValue();
-      replaceQualifiedNames(modelName, model);
+      templateProp.put("hasDescription",
+          !StringUtils.isBlank(sanitizeDescription(propertySchema.getDescription())));
+      templateProp.put("description", sanitizeDescription(propertySchema.getDescription()));
+      templateProp.put("propertyName", property.getKey());
+      templateProp.put("type", utils.schemaToClassName(imports, propertySchema));
+      templateProp.put("name", sanitizeVariable(property.getKey()));
     }
-    return models;
+    return properties;
   }
 
-  private void replaceQualifiedNames(String modelName, Map<String, Object> model) {
-    final QualifiedName qualifiedName = qualifiedName(modelName);
-    final String packageName = String.format("%s.%s", modelPackage(), qualifiedName.packageName);
-    model.put("qualifiedClassName", qualifiedName.className);
-    Stream.of("package", "apiPackage", "modelPackage", "packageName").forEach(
-        property -> model.put(property, packageName)
+  private Entry<String, Schema> mkPackageDirectories(Entry<String, Schema> schemaEntry){
+    try {
+      FileUtils.forceMkdir(resolvePackageDirectory(schemaEntry.getKey()).toFile());
+    } catch (IOException e) {
+      throw new RuntimeException("Can't generate package directory for " + schemaEntry.getKey());
+    }
+    return schemaEntry;
+  }
+
+  private String resolvePackageName(String key) {
+    return utils.toModelPackage(key.substring(0, key.lastIndexOf('.')));
+  }
+
+  private Path resolvePackageDirectory(String tag) {
+    return settings.getSourceDirectory().resolve(
+        resolvePackageName(tag).replace('.', File.separatorChar)
     );
   }
 
-  private void initSettings() {
-    modifyFeatureSet(features -> features
-        .includeDocumentationFeatures(DocumentationFeature.Readme)
-        .wireFormatFeatures(EnumSet.of(WireFormatFeature.JSON, WireFormatFeature.XML))
-        .securityFeatures(EnumSet.noneOf(
-            SecurityFeature.class
-        ))
-        .excludeGlobalFeatures(
-            GlobalFeature.XMLStructureDefinitions,
-            GlobalFeature.Callbacks,
-            GlobalFeature.LinkObjects,
-            GlobalFeature.ParameterStyling
-        )
-        .excludeSchemaSupportFeatures(
-            SchemaSupportFeature.Polymorphism
-        )
-        .includeClientModificationFeatures(
-            ClientModificationFeature.BasePath
-        )
-    );
-
-    supportsInheritance = true;
-    modelTemplateFiles.put("model.mustache", ".java");
-    hideGenerationTimestamp = false;
-
-    setReservedWordsLowerCase(
-        Arrays.asList(
-            // special words
-            "object",
-            // used as internal variables, can collide with parameter names
-            "localVarPath", "localVarQueryParams", "localVarCollectionQueryParams",
-            "localVarHeaderParams", "localVarCookieParams", "localVarFormParams", "localVarPostBody",
-            "localVarAccepts", "localVarAccept", "localVarContentTypes",
-            "localVarContentType", "localVarAuthNames", "localReturnType",
-            "ApiClient", "ApiException", "ApiResponse", "Configuration", "StringUtil",
-
-            // language reserved words
-            "abstract", "continue", "for", "new", "switch", "assert",
-            "default", "if", "package", "synchronized", "boolean", "do", "goto", "private",
-            "this", "break", "double", "implements", "protected", "throw", "byte", "else",
-            "import", "public", "throws", "case", "enum", "instanceof", "return", "transient",
-            "catch", "extends", "int", "short", "try", "char", "final", "interface", "static",
-            "void", "class", "finally", "long", "strictfp", "volatile", "const", "float",
-            "native", "super", "while", "null")
-    );
-
-    languageSpecificPrimitives = new HashSet<>(
-        Arrays.asList(
-            "String",
-            "boolean",
-            "Boolean",
-            "Double",
-            "Integer",
-            "Long",
-            "Float",
-            "Object",
-            "byte[]")
-    );
-
-    importMapping.put("BigDecimal", "java.math.BigDecimal");
-    importMapping.put("JsonProperty", "com.fasterxml.jackson.annotation.JsonProperty");
-    importMapping.put("JsonSubTypes", "com.fasterxml.jackson.annotation.JsonSubTypes");
-    importMapping.put("JsonTypeInfo", "com.fasterxml.jackson.annotation.JsonTypeInfo");
-    importMapping.put("JsonCreator", "com.fasterxml.jackson.annotation.JsonCreator");
-    importMapping.put("JsonValue", "com.fasterxml.jackson.annotation.JsonValue");
-    importMapping.put("JsonIgnore", "com.fasterxml.jackson.annotation.JsonIgnore");
-    importMapping.put("JsonInclude", "com.fasterxml.jackson.annotation.JsonInclude");
-    importMapping.put("IOException", "java.io.IOException");
-    importMapping.put("Objects", "java.util.Objects");
-    typeMapping.put("date", "LocalDate");
-    importMapping.put("LocalDate", "java.time.LocalDate");
-    typeMapping.put("DateTime", "LocalDateTime");
-    importMapping.put("LocalDateTime", "java.time.LocalDateTime");
-    listeners.forEach(l -> l.initSettings(this));
+  private String resolveClassName(String key){
+    return key.substring(key.lastIndexOf('.') + 1);
   }
 
-   Map<String, String> getImportMapping() {
-    return importMapping;
-  }
-
-  Map<String, String> getTypeMapping() {
-    return typeMapping;
-  }
-
-  Map<String, String> getInstantiationTypes() {
-    return instantiationTypes;
+  private void writeFile(String key, String fileContents) {
+    final Path file = resolvePackageDirectory(key).resolve(resolveClassName(key).concat(".java"));
+    try {
+      Files.writeString(file, fileContents,
+          StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+    } catch (IOException ex) {
+      settings.getLogger().error(ex.getMessage());
+      throw new RuntimeException("Can't write java generated class " + file.toString());
+    }
   }
 }

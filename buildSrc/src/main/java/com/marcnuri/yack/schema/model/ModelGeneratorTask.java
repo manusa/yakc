@@ -5,10 +5,11 @@
  */
 package com.marcnuri.yack.schema.model;
 
+import com.marcnuri.yack.schema.GeneratorSettings;
+import io.swagger.v3.oas.models.OpenAPI;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
-import org.openapitools.codegen.DefaultGenerator;
 import org.openapitools.codegen.config.CodegenConfigurator;
 
 import java.io.File;
@@ -19,6 +20,8 @@ import java.io.File;
 public class ModelGeneratorTask extends DefaultTask {
 
   @Input
+  public String packageName;
+  @Input
   public File schema;
   @Input
   public File templatesDir;
@@ -27,14 +30,19 @@ public class ModelGeneratorTask extends DefaultTask {
 
   @TaskAction
   public void run() {
-//    GlobalSettings.setProperty(CodegenConstants.MODEL_DOCS, "false");
     final CodegenConfigurator configurator = new CodegenConfigurator();
     configurator.setInputSpec(schema.getAbsolutePath());
-    configurator.setTemplateDir(templatesDir.getAbsolutePath());
-    configurator.setGeneratorName(ModelGenerator.class.getCanonicalName());
-    configurator.setOutputDir(outputDirectory.getAbsolutePath());
-    final DefaultGenerator generator = new DefaultGenerator();
-    generator.setGenerateMetadata(false);
-    generator.opts(configurator.toClientOptInput()).generate();
+    configurator.setGeneratorName("java");
+    final OpenAPI openAPI = (OpenAPI)configurator.toContext().getSpecDocument();
+    final GeneratorSettings settings = GeneratorSettings.builder()
+        .openAPI(openAPI)
+        .logger(getLogger())
+        .packageName(packageName)
+        .schema(schema.toPath())
+        .templatesDir(templatesDir.toPath())
+        .outputDirectory(outputDirectory.toPath())
+        .sourceDirectory(outputDirectory.toPath().resolve("src").resolve("model").resolve("java"))
+        .build();
+    new ModelGenerator(settings, openAPI).generate();
   }
 }

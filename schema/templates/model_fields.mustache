@@ -1,0 +1,8 @@
+{{#fields}}{{#hasDescription}}
+  /**
+   * {{description}}
+   */{{/hasDescription}}{{#required}}
+  @NonNull{{/required}}
+  @JsonProperty("{{propertyName}}")
+  private {{type}} {{name}};
+{{/fields}}
