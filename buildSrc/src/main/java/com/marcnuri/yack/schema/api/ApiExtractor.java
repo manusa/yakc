@@ -5,8 +5,8 @@
  */
 package com.marcnuri.yack.schema.api;
 
+import com.marcnuri.yack.schema.GeneratorSettings;
 import com.marcnuri.yack.schema.api.ApiOperation.Method;
-import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.PathItem;
 
 import java.util.Collections;
@@ -23,8 +23,8 @@ class ApiExtractor {
 
   private ApiExtractor() {}
 
-  static Map<String, List<ApiOperation>> extractOperationTags(OpenAPI openAPI) {
-    return openAPI.getPaths().entrySet().stream()
+  static Map<String, List<ApiOperation>> extractOperationTags(GeneratorSettings settings) {
+    return settings.getOpenAPI().getPaths().entrySet().stream()
         .flatMap(ApiExtractor::extractOperations)
         .flatMap(ApiExtractor::taggedOperation)
         .collect(Collectors.toMap(

@@ -2,20 +2,19 @@
 package {{package}};
 
 {{#imports}}
-import {{import}};
+import {{.}};
 {{/imports}}
-import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
-{{#jackson}}
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-{{/jackson}}
 
-{{#models}}
-{{#model}}
-{{>model_pojo}}
-{{/model}}
-{{/models}}
+/**
+ * {{description}}
+ */
+@Builder
+@AllArgsConstructor{{#hasFields}}
+@NoArgsConstructor{{/hasFields}}
+@Data
+@ToString
+public class {{className}} implements Model {
+
+{{>model_fields}}
+}
+

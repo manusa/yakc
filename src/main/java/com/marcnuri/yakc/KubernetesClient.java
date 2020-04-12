@@ -10,12 +10,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.marcnuri.yakc.api.Api;
 import com.marcnuri.yakc.config.Configuration;
-import feign.Feign;
-import feign.jackson.JacksonDecoder;
-import feign.jackson.JacksonEncoder;
-import feign.okhttp.OkHttpClient;
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
+import java.io.IOException;
 import java.util.Optional;
+import java.util.function.Function;
 
 /**
  * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-11.
@@ -23,7 +24,7 @@ import java.util.Optional;
 public class KubernetesClient {
 
   private final Configuration configuration;
-  private final Feign.Builder feignBuilder;
+  private final Retrofit retrofit;
 
   public KubernetesClient() {
    this(Configuration.builder().build());
@@ -31,19 +32,32 @@ public class KubernetesClient {
 
   public KubernetesClient(Configuration configuration) {
     this.configuration = configuration;
-    this.feignBuilder = initFeignBuilder();
+    this.retrofit = initRetrofit();
   }
 
-  private Feign.Builder initFeignBuilder() {
+  private Retrofit initRetrofit() {
     final ObjectMapper objectMapper = initObjectMapper();
-    return Feign.builder()
-        .client(new OkHttpClient())
-        .decoder(new JacksonDecoder(objectMapper))
-        .encoder(new JacksonEncoder(objectMapper));
+    return new Retrofit.Builder()
+        .addConverterFactory(JacksonConverterFactory.create(objectMapper))
+        .baseUrl(getUrl())
+        .build();
   }
 
-  public <T extends Api> T target(Class<T> clazz) {
-    return feignBuilder.target(clazz, getUrl());
+  public <T extends Api> T create(Class<T> clazz) {
+    return retrofit.create(clazz);
+  }
+
+  public <T extends Api, R> R body(Class<T> clazz, Function<T, Call<R>> function) throws IOException {
+    return function.apply(create(clazz)).execute().body();
+  }
+
+  public <T extends Api, R> Callable<Function<T, Call<R>>, R> body(Class<T> clazz) {
+    return f -> f.apply(create(clazz)).execute().body();
+  }
+
+  @FunctionalInterface
+  public interface Callable<T, R> {
+    R execute(T t) throws IOException;
   }
 
   private String getUrl() {
@@ -54,20 +68,8 @@ public class KubernetesClient {
   private static ObjectMapper initObjectMapper() {
     ObjectMapper objectMapper = new ObjectMapper();
     objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    objectMapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
     objectMapper.registerModule(new JavaTimeModule());
-//    objectMapper.enable(SerializationFeature.WRITE_ENUMS_USING_TO_STRING);
-//    objectMapper.enable(DeserializationFeature.READ_ENUMS_USING_TO_STRING);
-//    objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-//    objectMapper.disable(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE);
-//    objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-//    objectMapper.setDateFormat(new RFC3339DateFormat());
-//    ThreeTenModule module = new ThreeTenModule();
-//    module.addDeserializer(Instant.class, CustomInstantDeserializer.INSTANT);
-//    module.addDeserializer(OffsetDateTime.class, CustomInstantDeserializer.OFFSET_DATE_TIME);
-//    module.addDeserializer(ZonedDateTime.class, CustomInstantDeserializer.ZONED_DATE_TIME);
-//    objectMapper.registerModule(module);
-//    JsonNullableModule jnm = new JsonNullableModule();
-//    objectMapper.registerModule(jnm);
     return objectMapper;
   }
 }

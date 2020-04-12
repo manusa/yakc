@@ -5,15 +5,17 @@
  */
 package com.marcnuri.yack.schema.api;
 
+import com.marcnuri.yack.schema.GeneratorSettings;
+import com.marcnuri.yack.schema.SchemaUtils;
+import com.samskivert.mustache.Escapers;
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Mustache.TemplateLoader;
-import io.swagger.v3.oas.models.OpenAPI;
+import com.samskivert.mustache.Template;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -34,20 +36,26 @@ import static com.marcnuri.yack.schema.api.TemplateContextResolver.resolveClassN
  */
 class ApiGenerator {
 
-  private final ApiGeneratorSettings settings;
-  private final OpenAPI openAPI;
+  private final GeneratorSettings settings;
+  private final SchemaUtils utils;
   private final TemplateLoader templateLoader;
   private final TemplateContextResolver templateContextResolver;
+  private final Template apiTemplate;
 
-  ApiGenerator(ApiGeneratorSettings settings, OpenAPI openAPI) {
+  ApiGenerator(GeneratorSettings settings) {
     this.settings = settings;
-    this.openAPI = openAPI;
-    this.templateLoader = name -> new StringReader(readTemplate(name));
+    utils = new SchemaUtils(settings);
+    this.templateLoader = name -> new StringReader(utils.readTemplate(name));
     this.templateContextResolver = new TemplateContextResolver(settings);
+    this.apiTemplate = Mustache.compiler()
+        .withLoader(templateLoader)
+        .defaultValue("")
+        .withEscaper(Escapers.NONE)
+        .compile(utils.readTemplate("api"));
   }
 
   void generate() {
-    final Map<String, List<ApiOperation>> operationTags = ApiExtractor.extractOperationTags(openAPI);
+    final Map<String, List<ApiOperation>> operationTags = ApiExtractor.extractOperationTags(settings);
     settings.getLogger().lifecycle("Found {} operation tags", operationTags.size());
     operationTags.entrySet().stream()
         .map(this::mkPackageDirectories)
@@ -55,15 +63,10 @@ class ApiGenerator {
           final String tag = entry.getKey();
           settings.getLogger().lifecycle("Generating {}.{}", resolvePackageName(tag), resolveClassName(tag));
           final Map<String, Object> templateContext = templateContext(entry);
-          final String fileContents = compileAndExecuteTemplate(templateContext);
+          final String fileContents = apiTemplate.execute(templateContext);
           writeFile(entry.getKey(), fileContents);
         });
     settings.getLogger().lifecycle("Generated {} api entries", operationTags.size());
-  }
-
-  private String compileAndExecuteTemplate(Map<String, Object> templateContext) {
-    return Mustache.compiler().withLoader(templateLoader).defaultValue("")
-        .compile(readTemplate("api")).execute(templateContext);
   }
 
   private Map<String, Object> templateContext(Entry<String, List<ApiOperation>> entry) {
@@ -83,8 +86,7 @@ class ApiGenerator {
   private Set<String> initDefaultImports() {
     return new HashSet<>(Arrays.asList(
         settings.getPackageName().concat(".api.Api"),
-        "feign.Headers",
-        "feign.RequestLine"
+        "retrofit2.Call"
     ));
   }
 
@@ -105,16 +107,6 @@ class ApiGenerator {
     return settings.getSourceDirectory().resolve(
         resolvePackageName(tag).replace('.', File.separatorChar)
     );
-  }
-
-  private String readTemplate(String name) {
-    final Path template = settings.getTemplatesDir().resolve(name.concat(".mustache"));
-    try {
-      return Files.readString(template, StandardCharsets.UTF_8);
-    } catch (IOException ex) {
-      settings.getLogger().error(ex.getMessage());
-      throw new RuntimeException("Can't load template " + name);
-    }
   }
 
   private void writeFile(String tag, String fileContents) {

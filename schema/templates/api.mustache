@@ -5,17 +5,20 @@ package {{package}};
 import {{.}};
 {{/imports}}
 
+@SuppressWarnings({"squid:S1192", "unused"})
 public interface {{className}} extends Api {
 {{#operations}}
 
 {{>api_description}}
 {{>api_annotations}}
-  {{returnType}} {{methodName}}({{>api_path_parameters}});
+  Call<{{returnType}}> {{methodName}}({{>api_path_parameters}}{{#requestBodyType}}{{#hasPathParameters}}, {{/hasPathParameters}}
+    @Body {{.}} body{{/requestBodyType}});
 {{#hasQueryParameters}}
 
 {{>api_description}}
 {{>api_annotations}}
-  {{returnType}} {{methodName}}({{>api_path_parameters}}{{#hasPathParameters}}, {{/hasPathParameters}}@QueryMap(encoded=true) {{queryParametersClassName}} queryParameters);
+  Call<{{returnType}}> {{methodName}}({{>api_path_parameters}}{{#hasPathParameters}}, {{/hasPathParameters}}{{#requestBodyType}}
+  @Body {{.}} body, {{/requestBodyType}}@QueryMap {{queryParametersClassName}} queryParameters);
   {{>api_query_parameter_pojo}}
 {{/hasQueryParameters}}
 {{/operations}}

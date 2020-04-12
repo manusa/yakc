@@ -14,9 +14,8 @@ java {
 
 dependencies {
   compileOnly "org.projectlombok:lombok:$version_projectlombok"
-  compile "io.github.openfeign:feign-okhttp:$version_feign"
-  compile "io.github.openfeign:feign-jackson:$version_feign"
-  compile "io.github.openfeign:feign-slf4j:$version_feign"
+  compile "com.squareup.retrofit2:converter-jackson:$version_retrofit"
+  compile "com.squareup.retrofit2:retrofit:$version_retrofit"
   compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$version_jackson"
   annotationProcessor "org.projectlombok:lombok:$version_projectlombok"
   testImplementation "org.junit.jupiter:junit-jupiter-api:$version_junit"
@@ -31,6 +30,7 @@ test {
 def schemaDir = new File(projectDir, "schema");
 task generateModel(type: ModelGeneratorTask) {
   group = 'generators'
+  packageName = 'com.marcnuri.yakc'
   schema = new File(schemaDir, "kubernetes-1.16.0.json")
   templatesDir = new File(schemaDir, "templates")
   outputDirectory = projectDir
