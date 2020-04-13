@@ -102,6 +102,22 @@ public class SchemaUtils {
         .anyMatch(entry -> ref.endsWith(entry.getKey()));
   }
 
+  public String kubernetesListType(Set<String> imports, Schema schema) {
+    if (!isObject(schema)) {
+      return null;
+    }
+    return Optional.ofNullable(schema.getProperties())
+        .map(p -> p.get("items"))
+        .filter(s -> s instanceof ArraySchema)
+        .map(s -> (ArraySchema)s)
+        .map(as -> schemaToClassName(imports, as.getItems()))
+        .orElse(null);
+  }
+
+  private static boolean isObject(Schema schema) {
+    return Optional.ofNullable(schema.getType()).orElse("").equals("object");
+  }
+
   private static String schemaTypeToJavaPrimitive(Schema schema) {
     return Optional.ofNullable(TYPE_MAP.get(schema.getType())).orElse(schema.getType());
   }

@@ -32,6 +32,6 @@ public class KubernetesCallAdapter<T> implements CallAdapter<T, KubernetesCall<T
 
   @Override
   public KubernetesCall<T> adapt(Call<T> call) {
-    return new KubernetesHttpCall<>(call, retrofit);
+    return new KubernetesHttpCall<>(responseType, call, retrofit);
   }
 }

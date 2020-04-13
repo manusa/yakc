@@ -83,6 +83,7 @@ class ModelGenerator {
     ret.put("package", resolvePackageName(key));
     ret.put("imports", imports);
     ret.put("description", sanitizeDescription(schema.getDescription()));
+    ret.put("kubernetesListType", utils.kubernetesListType(imports, schema));
     ret.put("className", resolveClassName(key));
     ret.put("fields", templateFields);
     ret.put("hasFields", !templateFields.isEmpty());
@@ -91,6 +92,7 @@ class ModelGenerator {
 
   private Set<String> initDefaultImports() {
     return new HashSet<>(Arrays.asList(
+        settings.getPackageName().concat(".model.ListModel"),
         settings.getPackageName().concat(".model.Model"),
         "lombok.Builder",
         "lombok.AllArgsConstructor",

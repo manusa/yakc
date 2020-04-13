@@ -11,14 +11,10 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.marcnuri.yakc.api.Api;
 import com.marcnuri.yakc.config.Configuration;
 import com.marcnuri.yakc.retrofit.KubernetesCallAdapterFactory;
-import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
-import java.io.IOException;
 import java.util.Optional;
-import java.util.function.Function;
 
 /**
  * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-11.
@@ -48,27 +44,6 @@ public class KubernetesClient {
 
   public <T extends Api> T create(Class<T> clazz) {
     return retrofit.create(clazz);
-  }
-
-  public <T extends Api, R> Response<R> execute(Class<T> clazz, Function<T, Call<R>> function) throws IOException {
-    return function.apply(create(clazz)).execute();
-  }
-
-  public <T extends Api, R> Callable<Function<T, Call<R>>, Response<R>> execute(Class<T> clazz) {
-    return f -> execute(clazz, f);
-  }
-
-  public <T extends Api, R> R body(Class<T> clazz, Function<T, Call<R>> function) throws IOException {
-    return execute(clazz, function).body();
-  }
-
-  public <T extends Api, R> Callable<Function<T, Call<R>>, R> body(Class<T> clazz) {
-    return f -> execute(clazz, f).body();
-  }
-
-  @FunctionalInterface
-  public interface Callable<T, R> {
-    R execute(T t) throws IOException;
   }
 
   private String getUrl() {

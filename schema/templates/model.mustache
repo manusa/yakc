@@ -13,7 +13,7 @@ import {{.}};
 @NoArgsConstructor{{/hasFields}}
 @Data
 @ToString
-public class {{className}} implements Model {
+public class {{className}} implements Model{{#kubernetesListType}}, ListModel<{{.}}>{{/kubernetesListType}} {
 
 {{>model_fields}}
 }
