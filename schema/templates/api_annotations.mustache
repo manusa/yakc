@@ -1,1 +1,5 @@
-  @{{httpMethod}}("{{path}}")
+  @HTTP(
+    method = "{{httpMethod}}",
+    path = "{{path}}"{{#requestBodyType}},
+    hasBody = true{{/requestBodyType}}
+  )
