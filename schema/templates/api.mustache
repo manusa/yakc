@@ -8,17 +8,31 @@ import {{.}};
 @SuppressWarnings({"squid:S1192", "unused"})
 public interface {{className}} extends Api {
 {{#operations}}
-
+{{!Standard method for all operations operationFunction(parameters, body)}}
 {{>api_description}}
 {{>api_annotations}}
-  Call<{{returnType}}> {{methodName}}({{>api_path_parameters}}{{#requestBodyType}}{{#hasPathParameters}}, {{/hasPathParameters}}
+  KubernetesCall<{{returnType}}> {{methodName}}({{>api_path_parameters}}{{#requestBodyType}}{{#hasPathParameters}}, {{/hasPathParameters}}
     @Body {{.}} body{{/requestBodyType}});
+{{^requestBodyRequired}}{{#requestBodyType}}
+{{!Bodyless method for operations with optional body operationFunction(parameters)}}
+  {{>api_description}}
+  {{>api_annotations}}
+  KubernetesCall<{{returnType}}> {{methodName}}({{>api_path_parameters}});
+{{/requestBodyType}}{{/requestBodyRequired}}
 {{#hasQueryParameters}}
-
+{{!Standard method with parameter map for operations with query params operationFunction(parameters, body, queryParams)}}
 {{>api_description}}
 {{>api_annotations}}
-  Call<{{returnType}}> {{methodName}}({{>api_path_parameters}}{{#hasPathParameters}}, {{/hasPathParameters}}{{#requestBodyType}}
-  @Body {{.}} body, {{/requestBodyType}}@QueryMap {{queryParametersClassName}} queryParameters);
+  KubernetesCall<{{returnType}}> {{methodName}}({{>api_path_parameters}}{{#hasPathParameters}}, {{/hasPathParameters}}{{#requestBodyType}}
+    @Body {{.}} body, {{/requestBodyType}}
+    @QueryMap {{queryParametersClassName}} queryParameters);
+{{^requestBodyRequired}}{{#requestBodyType}}
+{{!Bodyless method for operations with optional body and parameter map for operations with query params operationFunction(parameters, queryParams)}}
+{{>api_description}}
+{{>api_annotations}}
+  KubernetesCall<{{returnType}}> {{methodName}}({{>api_path_parameters}}{{#hasPathParameters}}, {{/hasPathParameters}}
+    @QueryMap {{queryParametersClassName}} queryParameters);
+{{/requestBodyType}}{{/requestBodyRequired}}
   {{>api_query_parameter_pojo}}
 {{/hasQueryParameters}}
 {{/operations}}

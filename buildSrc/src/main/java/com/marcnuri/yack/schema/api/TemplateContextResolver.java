@@ -9,6 +9,7 @@ import com.marcnuri.yack.schema.GeneratorSettings;
 import com.marcnuri.yack.schema.SchemaUtils;
 import io.swagger.v3.oas.models.media.MediaType;
 import io.swagger.v3.oas.models.parameters.Parameter;
+import io.swagger.v3.oas.models.parameters.RequestBody;
 import io.swagger.v3.oas.models.responses.ApiResponse;
 import org.apache.commons.lang3.StringUtils;
 
@@ -49,7 +50,7 @@ class TemplateContextResolver {
     final Map<String, Object> operation = new HashMap<>();
     final String methodName = apiOperation.getOperation().getOperationId()
         .replace(capitalizedTagName(apiOperation.getTag()), "");
-    imports.add(String.format("retrofit2.http.%s", httpMethod));
+    imports.add("retrofit2.http.HTTP");
     operation.put("description", getDescription(apiOperation));
     operation.put("descriptionParameters", apiOperation.getOperation().getDescription());
     operation.put("headers", Collections.singletonList("Accept: ".concat(APPLICATION_JSON)));
@@ -67,6 +68,8 @@ class TemplateContextResolver {
     operation.put("hasRequiredQueryParameters", getQueryParameters(apiOperation).stream()
         .anyMatch(p -> Optional.ofNullable(p.getRequired()).orElse(false)));
     operation.put("requestBodyType", getRequestBodyType(imports, apiOperation));
+    operation.put("requestBodyRequired",
+        Optional.ofNullable(apiOperation.getOperation().getRequestBody()).map(RequestBody::getRequired).orElse(false));
     return operation;
   }
 
@@ -124,7 +127,6 @@ class TemplateContextResolver {
         })
         .orElse(null);
   }
-
 
   static String resolveClassName(String tag) {
     return capitalizedTagName(tag).concat("Api");

@@ -86,7 +86,7 @@ class ApiGenerator {
   private Set<String> initDefaultImports() {
     return new HashSet<>(Arrays.asList(
         settings.getPackageName().concat(".api.Api"),
-        "retrofit2.Call"
+        settings.getPackageName().concat(".api.KubernetesCall")
     ));
   }
 
