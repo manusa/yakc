@@ -9,7 +9,7 @@ import {{.}};
  * {{description}}
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor{{#hasFields}}
 @NoArgsConstructor{{/hasFields}}
 @Data

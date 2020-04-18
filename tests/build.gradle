@@ -1,0 +1,16 @@
+plugins {
+  id 'java-library'
+}
+
+apply from: rootDir.toPath().resolve('properties.gradle').toFile();
+
+dependencies {
+  testImplementation project(':kubernetes-api'), project(':kubernetes-client')
+  testImplementation "org.junit.jupiter:junit-jupiter-api:$version_junit"
+  testImplementation "org.assertj:assertj-core:$version_assertj"
+  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$version_junit"
+}
+
+test {
+  useJUnitPlatform()
+}
