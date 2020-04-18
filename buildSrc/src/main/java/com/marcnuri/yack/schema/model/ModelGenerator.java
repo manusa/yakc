@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -35,6 +34,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
+import static com.marcnuri.yack.schema.SchemaUtils.isArray;
+import static com.marcnuri.yack.schema.SchemaUtils.isMap;
 import static com.marcnuri.yack.schema.SchemaUtils.removeUnnecessaryImports;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizeDescription;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizeVariable;
@@ -124,8 +125,17 @@ class ModelGenerator {
           !StringUtils.isBlank(sanitizeDescription(propertySchema.getDescription())));
       templateProp.put("description", sanitizeDescription(propertySchema.getDescription()));
       templateProp.put("propertyName", property.getKey());
+      final String variableName = sanitizeVariable(property.getKey());
+      if (isArray(propertySchema)) {
+        imports.add("lombok.Singular");
+        templateProp.put("singular", "addTo".concat(StringUtils.capitalize(variableName)));
+      }
+      if (isMap(propertySchema)) {
+        imports.add("lombok.Singular");
+        templateProp.put("singular", "putIn".concat(StringUtils.capitalize(variableName)));
+      }
       templateProp.put("type", utils.schemaToClassName(imports, propertySchema));
-      templateProp.put("name", sanitizeVariable(property.getKey()));
+      templateProp.put("name", variableName);
     }
     return properties;
   }

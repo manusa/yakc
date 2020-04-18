@@ -3,6 +3,7 @@
    * {{description}}
    */{{/hasDescription}}{{#required}}
   @NonNull{{/required}}
-  @JsonProperty("{{propertyName}}")
+  @JsonProperty("{{propertyName}}"){{#singular}}
+  @Singular("{{.}}"){{/singular}}
   private {{type}} {{name}};
 {{/fields}}

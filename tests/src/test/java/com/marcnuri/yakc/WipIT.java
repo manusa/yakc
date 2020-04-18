@@ -29,8 +29,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-18.
@@ -69,7 +69,7 @@ class WipIT {
           );
           cdl.countDown();
         }, e -> System.out.println("Received error: " + e));
-    cdl.await();
+    cdl.await(5, TimeUnit.SECONDS);
     d.dispose();
   }
 
@@ -102,17 +102,18 @@ class WipIT {
             .spec(DeploymentSpec.builder()
                 .replicas(1)
                 .selector(LabelSelector.builder()
-                    .matchLabels(Collections.singletonMap("app", "test-java")).build())
+                    .putInMatchLabels("k8s-app", "test-java")
+                    .build())
                 .template(PodTemplateSpec.builder()
                     .metadata(ObjectMeta.builder()
                         .name("java-test-pod")
-                        .labels(Collections.singletonMap("k8s-app", "test-java"))
+                        .putInLabels("k8s-app", "test-java")
                         .build())
                     .spec(PodSpec.builder()
-                        .containers(Collections.singletonList(Container.builder()
+                        .addToContainers(Container.builder()
                             .image("containous/whoami")
                             .name("java-test-pod")
-                            .build()))
+                            .build())
                         .build())
                     .build()
                 ).build()

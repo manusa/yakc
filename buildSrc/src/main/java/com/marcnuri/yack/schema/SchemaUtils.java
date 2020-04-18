@@ -64,12 +64,12 @@ public class SchemaUtils {
 
   public String schemaToClassName(Set<String> imports, Schema schema) {
     final String ref = schema.get$ref();
-    if (schema instanceof ArraySchema) {
+    if (isArray(schema)) {
       final ArraySchema arraySchema = (ArraySchema)schema;
       imports.add("java.util.List");
       return String.format("List<%s>", schemaToClassName(imports, arraySchema.getItems()));
     }
-    if (schema instanceof MapSchema) {
+    if (isMap(schema)) {
       imports.add("java.util.Map");
       final String valueType;
       if (schema.getAdditionalProperties() instanceof Schema) {
@@ -91,6 +91,14 @@ public class SchemaUtils {
       return refToClassName(ref);
     }
     return schemaTypeToJavaPrimitive(schema);
+  }
+
+  public static boolean isArray(Schema schema) {
+    return schema instanceof ArraySchema;
+  }
+
+  public static boolean isMap(Schema schema) {
+    return schema instanceof MapSchema;
   }
 
   public boolean isRefInstanceOf(String ref, Class clazz) {
@@ -157,6 +165,7 @@ public class SchemaUtils {
       throw new RuntimeException("Can't load template " + name);
     }
   }
+
   public static Set<String> removeUnnecessaryImports(String packageName, Set<String> imports) {
     return imports.stream()
         .filter(s -> !s.substring(0, s.lastIndexOf('.')).equals(packageName))
