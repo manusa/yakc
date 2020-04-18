@@ -36,69 +36,77 @@ import java.util.concurrent.CountDownLatch;
 public class TestMain {
 
   public static void main(String[] args) throws Exception {
-    final KubernetesClient kc = new KubernetesClient();
-    final CountDownLatch cdl = new CountDownLatch(2);
-    final Disposable d = kc.create(CoreV1Api.class)
-        .listNamespacedPod("default", new ListNamespacedPod().watch(true))
-        .<Pod>watch()
-        .subscribeOn(Schedulers.newThread())
-        .doOnComplete(() ->
-          System.out.println("This won't happen unless the inputstream from k8s is closed")
-        )
-        .subscribe(we -> {
-          System.out.println(we);
-          cdl.countDown();
-        });
-    cdl.await();
-    d.dispose();
-    printAllPods(kc);
-    final String deploymentName = "java-test";
-    final PodList podList = kc.create(CoreV1Api.class)
-        .listPodForAllNamespaces(new ListPodForAllNamespaces().labelSelector("app = test-java")).get();
-    for (Pod p : podList.getItems()) {
-      final Pod deletedPod = kc.create(CoreV1Api.class).deleteNamespacedPod(
-          p.getMetadata().getName(),
-          p.getMetadata().getNamespace(),
-          DeleteOptions.builder().gracePeriodSeconds(10).propagationPolicy("Foreground").build()
-      ).get(Pod.class);
-    }
-    try {
-      kc.create(AppsV1Api.class).deleteNamespacedDeployment(deploymentName, "default")
+    try (final KubernetesClient kc = new KubernetesClient()) {
+      final CountDownLatch cdl = new CountDownLatch(2);
+      final Disposable d = kc.create(CoreV1Api.class)
+          .listNamespacedPod("default", new ListNamespacedPod().watch(true))
+          .<Pod>watch()
+          .subscribeOn(Schedulers.newThread())
+          .doOnComplete(() ->
+              System.out.println("This won't happen unless the InputStream from k8s is closed")
+          )
+          .subscribe(we -> {
+            System.out.printf("++ New Watch Event %-15s - %s/%s (%s)%n",
+                we.getType(),
+                we.getObject().getMetadata().getNamespace(),
+                we.getObject().getMetadata().getName(),
+                we.getObject().getMetadata().getCreationTimestamp()
+            );
+            cdl.countDown();
+          }, e -> System.out.println("Received error: " + e));
+//    cdl.await();
+//    d.dispose();
+      printAllPods(kc);
+      final String deploymentName = "java-test";
+      final PodList podList = kc.create(CoreV1Api.class)
+          .listPodForAllNamespaces(new ListPodForAllNamespaces().labelSelector("app = test-java"))
           .get();
-    } catch (NotFoundException ex) {
-      System.out.println("Deployment not found, deletion not needed");
+      for (Pod p : podList.getItems()) {
+        kc.create(CoreV1Api.class).deleteNamespacedPod(
+            p.getMetadata().getName(),
+            p.getMetadata().getNamespace(),
+            DeleteOptions.builder().gracePeriodSeconds(10).propagationPolicy("Foreground").build()
+        ).get(Pod.class);
+      }
+      try {
+        kc.create(AppsV1Api.class).deleteNamespacedDeployment(deploymentName, "default")
+            .get();
+      } catch (NotFoundException ex) {
+        System.out.println("Deployment not found, deletion not needed");
+      }
+      final Deployment deployment = kc.create(AppsV1Api.class)
+          .createNamespacedDeployment("default", Deployment.builder()
+              .metadata(ObjectMeta.builder().name(deploymentName).build())
+              .spec(DeploymentSpec.builder()
+                  .replicas(1)
+                  .selector(LabelSelector.builder()
+                      .matchLabels(Collections.singletonMap("app", "test-java")).build())
+                  .template(PodTemplateSpec.builder()
+                      .metadata(ObjectMeta.builder()
+                          .name("java-test-pod")
+                          .labels(Collections.singletonMap("app", "test-java"))
+                          .build())
+                      .spec(PodSpec.builder()
+                          .containers(Collections.singletonList(Container.builder()
+                              .image("containous/whoami")
+                              .name("java-test-pod")
+                              .build()))
+                          .build())
+                      .build()
+                  ).build()
+              )
+              .build()).get();
+      System.out.println(deployment);
+      final PodList selectedPodList = kc.create(CoreV1Api.class)
+          .listPodForAllNamespaces(new ListPodForAllNamespaces().labelSelector("k8s-app=test-pod"))
+          .get();
+      System.out.println(selectedPodList);
+      final APIResourceList arl = kc.create(CoreV1Api.class).getAPIResources().get();
+      System.out.println(arl.toString());
+      final SecretList secretList = kc.create(CoreV1Api.class).listSecretForAllNamespaces().get();
+      System.out.println(secretList.toString());
+      d.dispose();
     }
-    final Deployment deployment = kc.create(AppsV1Api.class)
-        .createNamespacedDeployment("default", Deployment.builder()
-            .metadata(ObjectMeta.builder().name(deploymentName).build())
-            .spec(DeploymentSpec.builder()
-                .replicas(1)
-                .selector(LabelSelector.builder()
-                    .matchLabels(Collections.singletonMap("app", "test-java")).build())
-                .template(PodTemplateSpec.builder()
-                    .metadata(ObjectMeta.builder()
-                        .name("java-test-pod")
-                        .labels(Collections.singletonMap("app", "test-java"))
-                        .build())
-                    .spec(PodSpec.builder()
-                        .containers(Collections.singletonList(Container.builder()
-                            .image("containous/whoami")
-                            .name("java-test-pod")
-                            .build()))
-                        .build())
-                    .build()
-                ).build()
-            )
-            .build()).get();
-    System.out.println(deployment);
-    final PodList selectedPodList = kc.create(CoreV1Api.class)
-        .listPodForAllNamespaces(new ListPodForAllNamespaces().labelSelector("k8s-app=test-pod"))
-        .get();
-    System.out.println(selectedPodList);
-    final APIResourceList arl = kc.create(CoreV1Api.class).getAPIResources().get();
-    System.out.println(arl.toString());
-    final SecretList secretList = kc.create(CoreV1Api.class).listSecretForAllNamespaces().get();
-    System.out.println(secretList.toString());
   }
 
   private static void printAllPods(KubernetesClient kc) throws IOException {

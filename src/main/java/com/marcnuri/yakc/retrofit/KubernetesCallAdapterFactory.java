@@ -5,6 +5,7 @@
  */
 package com.marcnuri.yakc.retrofit;
 
+import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.KubernetesCall;
 import retrofit2.CallAdapter;
 import retrofit2.Retrofit;
@@ -20,11 +21,15 @@ public class KubernetesCallAdapterFactory extends CallAdapter.Factory {
 
   private static KubernetesCallAdapterFactory instance = null;
 
-  private KubernetesCallAdapterFactory() {}
+  private final KubernetesClient kubernetesClient;
 
-  public static synchronized KubernetesCallAdapterFactory getInstance() {
+  private KubernetesCallAdapterFactory(KubernetesClient kubernetesClient) {
+    this.kubernetesClient = kubernetesClient;
+  }
+
+  public static synchronized KubernetesCallAdapterFactory getInstance(KubernetesClient kubernetesClient) {
     if (instance == null) {
-      instance = new KubernetesCallAdapterFactory();
+      instance = new KubernetesCallAdapterFactory(kubernetesClient);
     }
     return instance;
   }
@@ -34,7 +39,7 @@ public class KubernetesCallAdapterFactory extends CallAdapter.Factory {
     Class<?> rawType = getRawType(returnType);
     if (rawType == KubernetesCall.class && returnType instanceof ParameterizedType) {
       Type callReturnType = getParameterUpperBound(0, (ParameterizedType) returnType);
-      return new KubernetesCallAdapter<>(callReturnType, retrofit);
+      return new KubernetesCallAdapter<>(callReturnType, kubernetesClient);
     }
     return null;
   }

@@ -7,6 +7,7 @@ package com.marcnuri.yakc.reactivex;
 
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
+import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.KubernetesException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.WatchException;
@@ -18,7 +19,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
-import retrofit2.Retrofit;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,24 +37,24 @@ import java.util.concurrent.Future;
  */
 public class WatchOnSubscribe<T> implements ObservableOnSubscribe<WatchEvent<T>> {
 
-  private final OkHttpClient noTimeoutClient; // TODO: KubernetesClient class should have its own instance, and we should pass it on to here
+  private final OkHttpClient noTimeoutClient;
   private final Request request;
   private final Converter<ResponseBody, WatchEvent<T>> converter;
   private final ExecutorService executorService;
 
-  public WatchOnSubscribe(Type responseType, Retrofit retrofit, Request request) throws KubernetesException {
+  public WatchOnSubscribe(Type responseType, Request request, KubernetesClient kubernetesClient) throws KubernetesException {
     checkRequestParams(request);
-    converter = retrofit.responseBodyConverter(
+    converter = kubernetesClient.getRetrofit().responseBodyConverter(
         parametrizedWatchEventType(resolveListModelParameterType(responseType)), new Annotation[0]);
     this.request = request;
-    this.noTimeoutClient = new OkHttpClient.Builder()
+    this.noTimeoutClient = kubernetesClient.getOkHttpClient().newBuilder()
         .readTimeout(Duration.ZERO)
         .build();
     executorService = Executors.newSingleThreadExecutor();
   }
 
   @Override
-  public void subscribe(ObservableEmitter<WatchEvent<T>> emitter) throws Exception {
+  public void subscribe(ObservableEmitter<WatchEvent<T>> emitter) {
     final Future<Void> readerTask = executorService.submit(() -> {
       try (
           final okhttp3.Response response = noTimeoutClient.newCall(request).execute();

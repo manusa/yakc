@@ -5,6 +5,7 @@
  */
 package com.marcnuri.yakc.retrofit;
 
+import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.KubernetesCall;
 import com.marcnuri.yakc.api.KubernetesException;
 import com.marcnuri.yakc.api.WatchEvent;
@@ -15,7 +16,6 @@ import okio.Timeout;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;
@@ -28,12 +28,12 @@ public class KubernetesHttpCall<T> implements KubernetesCall<T> {
 
   private final Type responseType;
   private final Call<T> delegate;
-  private final Retrofit retrofit;
+  private final KubernetesClient kubernetesClient;
 
-  KubernetesHttpCall(Type responseType, Call<T> delegate, Retrofit retrofit) {
+  KubernetesHttpCall(Type responseType, Call<T> delegate, KubernetesClient kubernetesClient) {
     this.responseType = responseType;
     this.delegate = delegate;
-    this.retrofit = retrofit;
+    this.kubernetesClient = kubernetesClient;
   }
 
   @SuppressWarnings("unchecked")
@@ -44,9 +44,9 @@ public class KubernetesHttpCall<T> implements KubernetesCall<T> {
 
   @Override
   public <O> O get(Class<O> returnType) throws IOException {
-    final okhttp3.Response response = retrofit.callFactory().newCall(request()).execute();
+    final okhttp3.Response response = kubernetesClient.getRetrofit().callFactory().newCall(request()).execute();
     if (response.isSuccessful()) {
-      return retrofit.<O>responseBodyConverter(returnType, new Annotation[0]).convert(response.body());
+      return kubernetesClient.getRetrofit().<O>responseBodyConverter(returnType, new Annotation[0]).convert(response.body());
     }
     throw KubernetesException.forResponse(
         response.body() == null ? "" : response.body().string(),
@@ -55,7 +55,7 @@ public class KubernetesHttpCall<T> implements KubernetesCall<T> {
 
   @Override
   public <O> Observable<WatchEvent<O>> watch() throws KubernetesException {
-    return Observable.create(new WatchOnSubscribe<>(responseType, retrofit, request()));
+    return Observable.create(new WatchOnSubscribe<>(responseType, request(), kubernetesClient));
   }
 
   @Override
@@ -83,9 +83,10 @@ public class KubernetesHttpCall<T> implements KubernetesCall<T> {
     return delegate.isCanceled();
   }
 
+  @SuppressWarnings({"CloneDoesntCallSuperClone", "squid:S1182", "squid:S2975"})
   @Override
   public KubernetesHttpCall<T> clone() {
-    return new KubernetesHttpCall<>(responseType, delegate.clone(), retrofit);
+    return new KubernetesHttpCall<>(responseType, delegate.clone(), kubernetesClient);
   }
 
   @Override

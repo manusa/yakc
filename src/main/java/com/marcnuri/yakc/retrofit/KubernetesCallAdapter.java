@@ -5,10 +5,10 @@
  */
 package com.marcnuri.yakc.retrofit;
 
+import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.KubernetesCall;
 import retrofit2.Call;
 import retrofit2.CallAdapter;
-import retrofit2.Retrofit;
 
 import java.lang.reflect.Type;
 
@@ -18,11 +18,11 @@ import java.lang.reflect.Type;
 public class KubernetesCallAdapter<T> implements CallAdapter<T, KubernetesCall<T>> {
 
   private final Type responseType;
-  private final Retrofit retrofit;
+  private final KubernetesClient kubernetesClient;
 
-  public KubernetesCallAdapter(Type responseType, Retrofit retrofit) {
+  KubernetesCallAdapter(Type responseType, KubernetesClient kubernetesClient) {
     this.responseType = responseType;
-    this.retrofit = retrofit;
+    this.kubernetesClient = kubernetesClient;
   }
 
   @Override
@@ -32,6 +32,6 @@ public class KubernetesCallAdapter<T> implements CallAdapter<T, KubernetesCall<T
 
   @Override
   public KubernetesCall<T> adapt(Call<T> call) {
-    return new KubernetesHttpCall<>(responseType, call, retrofit);
+    return new KubernetesHttpCall<>(responseType, call, kubernetesClient);
   }
 }
