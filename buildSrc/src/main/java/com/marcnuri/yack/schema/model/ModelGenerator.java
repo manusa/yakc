@@ -33,7 +33,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 
+import static com.marcnuri.yack.schema.SchemaUtils.removeUnnecessaryImports;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizeDescription;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizeVariable;
 
@@ -81,7 +83,6 @@ class ModelGenerator {
     final Set<String> imports = initDefaultImports();
     final List<Map<String, Object>> templateFields = templateFields(imports, schema);
     ret.put("package", resolvePackageName(key));
-    ret.put("imports", imports);
     ret.put("description", sanitizeDescription(schema.getDescription()));
     ret.put("kubernetesListType", Optional.ofNullable(utils.kubernetesListType(imports, schema))
       .map(klt -> {
@@ -91,11 +92,12 @@ class ModelGenerator {
     ret.put("className", resolveClassName(key));
     ret.put("fields", templateFields);
     ret.put("hasFields", !templateFields.isEmpty());
+    ret.put("imports", removeUnnecessaryImports(resolvePackageName(key), imports));
     return ret;
   }
 
   private Set<String> initDefaultImports() {
-    return new HashSet<>(Arrays.asList(
+    return new TreeSet<>(Arrays.asList(
         settings.getPackageName().concat(".model.Model"),
         "lombok.Builder",
         "lombok.AllArgsConstructor",

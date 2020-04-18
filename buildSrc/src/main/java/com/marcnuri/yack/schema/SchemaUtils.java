@@ -19,6 +19,7 @@ import java.nio.file.Path;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -69,9 +70,8 @@ public class SchemaUtils {
       return String.format("List<%s>", schemaToClassName(imports, arraySchema.getItems()));
     }
     if (schema instanceof MapSchema) {
-      final MapSchema mapSchema = (MapSchema)schema;
       imports.add("java.util.Map");
-      final String valueType;//mapS
+      final String valueType;
       if (schema.getAdditionalProperties() instanceof Schema) {
         valueType = schemaToClassName(imports, (Schema)schema.getAdditionalProperties());
       } else {
@@ -156,5 +156,10 @@ public class SchemaUtils {
       settings.getLogger().error(ex.getMessage());
       throw new RuntimeException("Can't load template " + name);
     }
+  }
+  public static Set<String> removeUnnecessaryImports(String packageName, Set<String> imports) {
+    return imports.stream()
+        .filter(s -> !s.substring(0, s.lastIndexOf('.')).equals(packageName))
+        .collect(Collectors.toCollection(TreeSet::new));
   }
 }

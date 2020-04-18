@@ -9,7 +9,6 @@ import com.marcnuri.yack.schema.GeneratorSettings;
 import com.marcnuri.yack.schema.SchemaUtils;
 import com.samskivert.mustache.Escapers;
 import com.samskivert.mustache.Mustache;
-import com.samskivert.mustache.Mustache.TemplateLoader;
 import com.samskivert.mustache.Template;
 import org.apache.commons.io.FileUtils;
 
@@ -21,14 +20,15 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import static com.marcnuri.yack.schema.SchemaUtils.removeUnnecessaryImports;
 import static com.marcnuri.yack.schema.api.TemplateContextResolver.resolveClassName;
 
 /**
@@ -38,17 +38,15 @@ class ApiGenerator {
 
   private final GeneratorSettings settings;
   private final SchemaUtils utils;
-  private final TemplateLoader templateLoader;
   private final TemplateContextResolver templateContextResolver;
   private final Template apiTemplate;
 
   ApiGenerator(GeneratorSettings settings) {
     this.settings = settings;
     utils = new SchemaUtils(settings);
-    this.templateLoader = name -> new StringReader(utils.readTemplate(name));
     this.templateContextResolver = new TemplateContextResolver(settings);
     this.apiTemplate = Mustache.compiler()
-        .withLoader(templateLoader)
+        .withLoader(name -> new StringReader(utils.readTemplate(name)))
         .defaultValue("")
         .withEscaper(Escapers.NONE)
         .compile(utils.readTemplate("api"));
@@ -74,17 +72,17 @@ class ApiGenerator {
     final String tag = entry.getKey();
     final Set<String> imports = initDefaultImports();
     ret.put("package", resolvePackageName(tag));
-    ret.put("imports", imports);
     ret.put("className", resolveClassName(tag));
     ret.put("operations", entry.getValue().stream()
         .map(apiOperation -> templateContextResolver.templateContext(imports, apiOperation))
         .filter(Objects::nonNull)
         .collect(Collectors.toList()));
+    ret.put("imports", removeUnnecessaryImports(resolvePackageName(tag), imports));
     return ret;
   }
 
   private Set<String> initDefaultImports() {
-    return new HashSet<>(Arrays.asList(
+    return new TreeSet<>(Arrays.asList(
         settings.getPackageName().concat(".api.Api"),
         settings.getPackageName().concat(".api.KubernetesCall")
     ));
