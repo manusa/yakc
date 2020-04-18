@@ -1,0 +1,14 @@
+plugins {
+  id 'java-library'
+}
+
+apply from: rootDir.toPath().resolve('properties.gradle').toFile();
+
+dependencies {
+  compileOnly "org.projectlombok:lombok:$version_projectlombok"
+  compile "com.squareup.retrofit2:converter-jackson:$version_retrofit"
+  compile "com.squareup.retrofit2:retrofit:$version_retrofit"
+  compile "io.reactivex.rxjava2:rxjava:$version_rxjava2"
+  annotationProcessor "org.projectlombok:lombok:$version_projectlombok"
+}
+sourceSets.main.java.srcDirs = ['src/api/java', 'src/main/java', 'src/model/java']

@@ -1,0 +1,24 @@
+plugins {
+  id 'java-library'
+}
+
+apply from: rootDir.toPath().resolve('properties.gradle').toFile();
+
+dependencies {
+  compileOnly "org.projectlombok:lombok:$version_projectlombok"
+  compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$version_jackson"
+  compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$version_jackson"
+  compile "com.squareup.retrofit2:converter-jackson:$version_retrofit"
+  compile "com.squareup.retrofit2:retrofit:$version_retrofit"
+  compile "io.reactivex.rxjava2:rxjava:$version_rxjava2"
+  compile "org.bouncycastle:bcprov-jdk15on:$version_bouncycastle"
+  compile project(':kubernetes-api')
+  annotationProcessor "org.projectlombok:lombok:$version_projectlombok"
+  testImplementation "org.junit.jupiter:junit-jupiter-api:$version_junit"
+  testImplementation "org.assertj:assertj-core:$version_assertj"
+  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$version_junit"
+}
+
+test {
+  useJUnitPlatform()
+}
