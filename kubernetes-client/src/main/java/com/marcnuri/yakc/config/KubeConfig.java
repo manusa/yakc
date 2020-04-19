@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-17.
+ * Created by Marc Nuri on 2020-04-17.
  */
 @SuppressWarnings("WeakerAccess")
 @NoArgsConstructor

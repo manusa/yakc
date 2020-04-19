@@ -10,7 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-10.
+ * Created by Marc Nuri on 2020-04-10.
  */
 @Builder(toBuilder = true)
 @Data

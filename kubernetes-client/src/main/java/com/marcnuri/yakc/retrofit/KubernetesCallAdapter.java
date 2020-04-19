@@ -13,7 +13,7 @@ import retrofit2.CallAdapter;
 import java.lang.reflect.Type;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-12.
+ * Created by Marc Nuri on 2020-04-12.
  */
 public class KubernetesCallAdapter<T> implements CallAdapter<T, KubernetesCall<T>> {
 

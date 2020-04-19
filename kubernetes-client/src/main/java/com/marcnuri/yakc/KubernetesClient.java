@@ -27,7 +27,7 @@ import java.util.Optional;
 import static com.marcnuri.yakc.config.OkHttpClientConfigurator.initOkHttpClient;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-11.
+ * Created by Marc Nuri on 2020-04-11.
  */
 @Log
 public class KubernetesClient implements Closeable {

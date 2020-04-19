@@ -8,7 +8,7 @@ package com.marcnuri.yakc.api;
 import okhttp3.Response;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-13.
+ * Created by Marc Nuri on 2020-04-13.
  */
 public class WatchException extends KubernetesException {
 

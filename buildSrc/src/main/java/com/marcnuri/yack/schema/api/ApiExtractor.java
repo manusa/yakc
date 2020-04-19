@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-10.
+ * Created by Marc Nuri on 2020-04-10.
  */
 class ApiExtractor {
 

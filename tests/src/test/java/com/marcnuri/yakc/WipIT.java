@@ -33,7 +33,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-18.
+ * Created by Marc Nuri on 2020-04-18.
  */
 class WipIT {
 

@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-13.
+ * Created by Marc Nuri on 2020-04-13.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class KubeConfigResolver {

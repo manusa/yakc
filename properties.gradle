@@ -9,8 +9,12 @@ ext {
   version_rxjava2 = '2.2.19'
 }
 
+project.group = 'com.marcnuri.yakc'
+project.version = '0.0.0'
+
 repositories {
   jcenter()
+  mavenCentral()
 }
 
 java {

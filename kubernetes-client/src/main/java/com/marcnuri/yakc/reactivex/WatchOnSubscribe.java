@@ -33,7 +33,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-13.
+ * Created by Marc Nuri on 2020-04-13.
  */
 public class WatchOnSubscribe<T> implements ObservableOnSubscribe<WatchEvent<T>> {
 

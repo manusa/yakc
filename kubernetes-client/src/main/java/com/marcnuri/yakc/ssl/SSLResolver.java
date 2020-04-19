@@ -37,7 +37,7 @@ import java.util.function.Predicate;
 import static okio.ByteString.decodeBase64;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-17.
+ * Created by Marc Nuri on 2020-04-17.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SSLResolver {

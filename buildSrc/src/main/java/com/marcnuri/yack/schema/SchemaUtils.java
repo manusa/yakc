@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-12.
+ * Created by Marc Nuri on 2020-04-12.
  */
 public class SchemaUtils {
 
@@ -137,9 +137,11 @@ public class SchemaUtils {
   public static String sanitizeDescription(String description) {
     return Optional.ofNullable(description).orElse("")
         .replace("*", "&#42;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
         .replace('\u201C', '"')
         .replace('\u201D', '"')
-        .replace("\n", "<br/>");
+        .replace("\n", "<br><p> ");
   }
 
   public static String sanitizeVariable(String variable) {

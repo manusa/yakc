@@ -41,7 +41,7 @@ import static com.marcnuri.yack.schema.SchemaUtils.sanitizeDescription;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizeVariable;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-12.
+ * Created by Marc Nuri on 2020-04-12.
  */
 class ModelGenerator {
 

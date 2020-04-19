@@ -23,7 +23,7 @@ import static com.marcnuri.yakc.config.Defaults.getReadTimeout;
 import static com.marcnuri.yakc.ssl.SSLResolver.TLS_V_1_2;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-17.
+ * Created by Marc Nuri on 2020-04-17.
  */
 @Log
 @NoArgsConstructor(access = AccessLevel.PRIVATE)

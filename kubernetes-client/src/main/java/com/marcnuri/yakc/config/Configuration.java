@@ -12,7 +12,7 @@ import java.io.File;
 import java.time.Duration;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-11.
+ * Created by Marc Nuri on 2020-04-11.
  */
 @Builder(toBuilder = true)
 @Data

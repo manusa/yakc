@@ -10,7 +10,7 @@ import javax.net.ssl.X509TrustManager;
 import java.security.cert.X509Certificate;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-17.
+ * Created by Marc Nuri on 2020-04-17.
  */
 @SuppressWarnings({"squid:S1168", "squid:S4424"})
 public class AlwaysTrustManager implements X509TrustManager {

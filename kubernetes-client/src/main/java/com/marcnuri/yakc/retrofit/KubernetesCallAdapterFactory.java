@@ -15,7 +15,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-12.
+ * Created by Marc Nuri on 2020-04-12.
  */
 public class KubernetesCallAdapterFactory extends CallAdapter.Factory {
 

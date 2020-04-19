@@ -12,7 +12,7 @@ import static com.marcnuri.yakc.ssl.SSLResolver.isTrustAllCertificates;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-18.
+ * Created by Marc Nuri on 2020-04-18.
  */
 class SSLResolverTest {
   @Nested

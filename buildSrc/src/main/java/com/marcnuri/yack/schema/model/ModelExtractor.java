@@ -11,7 +11,7 @@ import io.swagger.v3.oas.models.media.Schema;
 import java.util.Map;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-12.
+ * Created by Marc Nuri on 2020-04-12.
  */
 class ModelExtractor {
 

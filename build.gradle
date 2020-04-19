@@ -3,6 +3,7 @@ import com.marcnuri.yack.schema.model.ModelGeneratorTask
 
 plugins {
   id 'java-library'
+  id 'maven'
 }
 
 apply from: 'properties.gradle'
@@ -22,4 +23,28 @@ task generateApi(type: ApiGeneratorTask) {
   schema = new File(schemaDir, "kubernetes-1.18.2.json")
   templatesDir = new File(schemaDir, "templates")
   outputDirectory = kubernetesApiModuleDir
+}
+
+subprojects {
+  afterEvaluate {  task sourcesJar(type: Jar, dependsOn: classes) {
+    group = 'build'
+    archiveClassifier.set('sources')
+    from sourceSets.main.allSource
+  }
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+      group = 'documentation'
+      archiveClassifier.set('javadoc')
+      from javadoc.destinationDir
+    }
+    task assemblePublication(dependsOn: [assemble, sourcesJar, javadocJar]) {
+      group = 'build'
+      doLast {
+        artifacts {
+          archives sourcesJar
+          archives javadocJar
+        }
+      }
+    }
+    install.dependsOn assemblePublication
+  }
 }

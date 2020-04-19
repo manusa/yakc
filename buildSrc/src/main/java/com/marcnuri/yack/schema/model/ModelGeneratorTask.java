@@ -15,7 +15,7 @@ import org.openapitools.codegen.config.CodegenConfigurator;
 import java.io.File;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-04.
+ * Created by Marc Nuri on 2020-04-04.
  */
 public class ModelGeneratorTask extends DefaultTask {
 

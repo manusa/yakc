@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-13.
+ * Created by Marc Nuri on 2020-04-13.
  */
 public class KubernetesException extends IOException {
 
