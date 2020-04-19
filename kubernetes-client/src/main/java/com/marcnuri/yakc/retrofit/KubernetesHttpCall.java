@@ -6,9 +6,10 @@
 package com.marcnuri.yakc.retrofit;
 
 import com.marcnuri.yakc.KubernetesClient;
-import com.marcnuri.yakc.api.KubernetesCall;
 import com.marcnuri.yakc.api.KubernetesException;
+import com.marcnuri.yakc.api.KubernetesListCall;
 import com.marcnuri.yakc.api.WatchEvent;
+import com.marcnuri.yakc.model.ListModel;
 import com.marcnuri.yakc.reactivex.WatchOnSubscribe;
 import io.reactivex.Observable;
 import okhttp3.Request;
@@ -20,11 +21,12 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.util.stream.Stream;
 
 /**
  * Created by Marc Nuri on 2020-04-12.
  */
-public class KubernetesHttpCall<T> implements KubernetesCall<T> {
+public class KubernetesHttpCall<T, W> implements KubernetesListCall<T, W> {
 
   private final Type responseType;
   private final Call<T> delegate;
@@ -54,7 +56,13 @@ public class KubernetesHttpCall<T> implements KubernetesCall<T> {
   }
 
   @Override
-  public <O> Observable<WatchEvent<O>> watch() throws KubernetesException {
+  @SuppressWarnings("unchecked")
+  public Stream<W> stream() throws IOException {
+    return ((ListModel<W>)get()).getItems().stream();
+  }
+
+  @Override
+  public Observable<WatchEvent<W>> watch() throws KubernetesException {
     return Observable.create(new WatchOnSubscribe<>(responseType, request(), kubernetesClient));
   }
 
@@ -85,7 +93,7 @@ public class KubernetesHttpCall<T> implements KubernetesCall<T> {
 
   @SuppressWarnings({"CloneDoesntCallSuperClone", "squid:S1182", "squid:S2975"})
   @Override
-  public KubernetesHttpCall<T> clone() {
+  public KubernetesHttpCall<T, W> clone() {
     return new KubernetesHttpCall<>(responseType, delegate.clone(), kubernetesClient);
   }
 

@@ -56,6 +56,9 @@ class TemplateContextResolver {
     operation.put("headers", Collections.singletonList("Accept: ".concat(APPLICATION_JSON)));
     operation.put("httpMethod", httpMethod);
     operation.put("path", apiOperation.getPath());
+    operation.put("kubernetesCallType", utils.kubernetesCallType(imports, jsonResponse.getSchema()));
+    operation.put("kubernetesListReturnType",
+        utils.kubernetesListType(imports, utils.resolveComponentSchema(jsonResponse.getSchema())));
     operation.put("returnType", utils.schemaToClassName(imports, jsonResponse.getSchema()));
     operation.put("methodName", methodName);
     operation.put("pathParameters",

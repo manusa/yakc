@@ -6,7 +6,7 @@ plugins {
 apply from: rootDir.toPath().resolve('properties.gradle').toFile();
 
 dependencies {
-  compile  project(':kubernetes-model')
+  compile  project(':kubernetes-client-api')
   compileOnly "org.projectlombok:lombok:$version_projectlombok"
   annotationProcessor "org.projectlombok:lombok:$version_projectlombok"
 }

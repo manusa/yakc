@@ -37,7 +37,7 @@ public class KubernetesCallAdapterFactory extends CallAdapter.Factory {
   @Override
   public CallAdapter<?, ?> get(Type returnType, Annotation[] annotations, Retrofit retrofit) {
     Class<?> rawType = getRawType(returnType);
-    if (rawType == KubernetesCall.class && returnType instanceof ParameterizedType) {
+    if (KubernetesCall.class.isAssignableFrom(rawType) && returnType instanceof ParameterizedType) {
       Type callReturnType = getParameterUpperBound(0, (ParameterizedType) returnType);
       return new KubernetesCallAdapter<>(callReturnType, kubernetesClient);
     }

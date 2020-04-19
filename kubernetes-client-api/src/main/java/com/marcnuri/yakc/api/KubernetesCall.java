@@ -5,7 +5,6 @@
  */
 package com.marcnuri.yakc.api;
 
-import io.reactivex.Observable;
 import retrofit2.Call;
 
 import java.io.IOException;
@@ -15,6 +14,11 @@ import java.io.IOException;
  */
 public interface KubernetesCall<T> extends Call<T> {
 
+  /**
+   * Synchronously send the request and return its decoded response body.
+   *
+   * @throws IOException if a problem occurred talking to the server.
+   */
   T get() throws IOException;
 
   /**
@@ -37,5 +41,4 @@ public interface KubernetesCall<T> extends Call<T> {
    */
   <O> O get(Class<O> returnType) throws IOException;
 
-  <O> Observable<WatchEvent<O>> watch() throws KubernetesException;
 }

@@ -6,12 +6,13 @@
 package com.marcnuri.yakc;
 
 import com.marcnuri.yakc.api.NotFoundException;
+import com.marcnuri.yakc.api.WatchEvent.Type;
 import com.marcnuri.yakc.api.apps.v1.AppsV1Api;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
-import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListNamespacedPod;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListPodForAllNamespaces;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.Deployment;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.DeploymentSpec;
+import com.marcnuri.yakc.model.io.k8s.api.core.v1.ConfigMap;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Container;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodList;
@@ -29,8 +30,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 /**
  * Created by Marc Nuri on 2020-04-18.
@@ -51,11 +54,11 @@ class WipIT {
   }
 
   @Test
-  void watch() throws Exception {
+  void watchPods() throws Exception {
     final CountDownLatch cdl = new CountDownLatch(2);
     final Disposable d = kc.create(CoreV1Api.class)
-        .listNamespacedPod("default", new ListNamespacedPod().watch(true))
-        .<Pod>watch()
+        .listNamespacedPod("default")
+        .watch()
         .subscribeOn(Schedulers.newThread())
         .doOnComplete(() ->
             System.out.println("This won't happen unless the InputStream from k8s is closed")
@@ -74,6 +77,39 @@ class WipIT {
   }
 
   @Test
+  void configMaps() throws Exception {
+    final String configMapName = "test";
+    final CountDownLatch cdl = new CountDownLatch(1);
+    kc.create(CoreV1Api.class).listConfigMapForAllNamespaces().watch()
+        .subscribeOn(Schedulers.newThread())
+        .filter(we -> Stream.of(Type.ADDED, Type.DELETED).anyMatch(t -> we.getType() == t))
+        .filter(we -> we.getObject().getMetadata().getName().equals(configMapName))
+        .subscribe(we -> {
+          cdl.countDown();
+          System.out.printf("++ ConfigMap Watch %-15s - %s/%s%n",
+              we.getType(),
+              we.getObject().getMetadata().getNamespace(),
+              we.getObject().getMetadata().getName()
+          );
+        });
+    try {
+      kc.create(CoreV1Api.class).deleteNamespacedConfigMap(configMapName, "default").get();
+      System.out.println("Existing ConfigMap was deleted");
+    } catch (NotFoundException ex) {
+      System.out.println("ConfigMap not found, deletion not needed");
+    }
+    kc.create(CoreV1Api.class).createNamespacedConfigMap("default", ConfigMap.builder()
+        .metadata(ObjectMeta.builder()
+            .name(configMapName)
+            .putInAnnotations("one-annotation-key", "annotation-value")
+            .build())
+        .data(Collections.singletonMap("some", "to-keep"))
+        .putInData("test-key", "test-value")
+        .build()).get();
+    cdl.await(5, TimeUnit.SECONDS);
+  }
+
+  @Test
   void delete() throws IOException {
     final PodList podList = kc.create(CoreV1Api.class)
         .listPodForAllNamespaces(new ListPodForAllNamespaces().labelSelector("app = test-java"))
@@ -89,14 +125,16 @@ class WipIT {
 
   @Test
   void deployment() throws IOException {
+    final AppsV1Api api = kc.create(AppsV1Api.class);
     final String deploymentName = "java-test";
     try {
-      kc.create(AppsV1Api.class).deleteNamespacedDeployment(deploymentName, "default")
+      api.deleteNamespacedDeployment(deploymentName, "default")
           .get();
+      System.out.println("Deployment created");
     } catch (NotFoundException ex) {
       System.out.println("Deployment not found, deletion not needed");
     }
-    final Deployment deployment = kc.create(AppsV1Api.class)
+    final Deployment deployment =api
         .createNamespacedDeployment("default", Deployment.builder()
             .metadata(ObjectMeta.builder().name(deploymentName).build())
             .spec(DeploymentSpec.builder()
@@ -120,6 +158,10 @@ class WipIT {
             )
             .build()).get();
     System.out.println(deployment);
+    final Deployment mostRecentDeployment = api.readNamespacedDeployment(deploymentName, "default").get();
+    api.replaceNamespacedDeployment(deploymentName, "default",
+        mostRecentDeployment.toBuilder().spec(mostRecentDeployment.getSpec().toBuilder().replicas(3).build()).build()
+        ).get();
     final PodList selectedPodList = kc.create(CoreV1Api.class)
         .listPodForAllNamespaces(new ListPodForAllNamespaces().labelSelector("k8s-app=test-pod"))
         .get();
@@ -140,7 +182,7 @@ class WipIT {
     printUnderline();
     System.out.printf("%-15s %s%n", "Namespace", "Name");
     System.out.println("---------       ----");
-    kc.create(CoreV1Api.class).listPodForAllNamespaces().get().getItems().forEach(p ->
+    kc.create(CoreV1Api.class).listPodForAllNamespaces().stream().forEach(p ->
         System.out.printf("%-15s %s%n", p.getMetadata().getNamespace(), p.getMetadata().getName())
     );
   }

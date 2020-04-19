@@ -111,7 +111,7 @@ public class SchemaUtils {
   }
 
   public String kubernetesListType(Set<String> imports, Schema schema) {
-    if (!isObject(schema)) {
+    if (schema == null || !isObject(schema)) {
       return null;
     }
     return Optional.ofNullable(schema.getProperties())
@@ -120,6 +120,29 @@ public class SchemaUtils {
         .map(s -> (ArraySchema)s)
         .map(as -> schemaToClassName(imports, as.getItems()))
         .orElse(null);
+  }
+
+  public Schema resolveComponentSchema(Schema schema) {
+    return Optional.ofNullable(schema.get$ref())
+        .map(ref -> ref.replaceAll("^#/components/schemas/", ""))
+        .map(ref -> this.settings.getOpenAPI().getComponents().getSchemas().get(ref))
+        .orElse(null);
+  }
+
+  public String kubernetesCallType(Set<String> imports, Schema schema) {
+    final boolean isKubernetesList = Optional.ofNullable(resolveComponentSchema(schema))
+        .map(Schema::getProperties)
+        .map(p -> p.get("items"))
+        .filter(s -> s instanceof ArraySchema)
+        .isPresent();
+    final String kubernetesCallType;
+    if (isKubernetesList) {
+      kubernetesCallType = "KubernetesListCall";
+    } else {
+      kubernetesCallType = "KubernetesCall";
+    }
+    imports.add(settings.getPackageName().concat(".api.").concat(kubernetesCallType));
+    return kubernetesCallType;
   }
 
   private static boolean isObject(Schema schema) {

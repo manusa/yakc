@@ -14,6 +14,7 @@ import com.marcnuri.yakc.api.WatchException;
 import com.marcnuri.yakc.model.ListModel;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -43,7 +44,6 @@ public class WatchOnSubscribe<T> implements ObservableOnSubscribe<WatchEvent<T>>
   private final ExecutorService executorService;
 
   public WatchOnSubscribe(Type responseType, Request request, KubernetesClient kubernetesClient) throws KubernetesException {
-    checkRequestParams(request);
     converter = kubernetesClient.getRetrofit().responseBodyConverter(
         parametrizedWatchEventType(resolveListModelParameterType(responseType)), new Annotation[0]);
     this.request = request;
@@ -56,8 +56,13 @@ public class WatchOnSubscribe<T> implements ObservableOnSubscribe<WatchEvent<T>>
   @Override
   public void subscribe(ObservableEmitter<WatchEvent<T>> emitter) {
     final Future<Void> readerTask = executorService.submit(() -> {
+
+      final HttpUrl updatedUrl = request.url().newBuilder()
+          .addQueryParameter("watch", "true")
+          .build();
+      final Request updatedRequest = request.newBuilder().url(updatedUrl).build();
       try (
-          final okhttp3.Response response = noTimeoutClient.newCall(request).execute();
+          final okhttp3.Response response = noTimeoutClient.newCall(updatedRequest).execute();
           final InputStream is = Optional.ofNullable(response.body()).map(ResponseBody::source)
               .orElseThrow(() -> new WatchException("Response contains no body", response)).inputStream();
           final BufferedReader br = new BufferedReader(new InputStreamReader(is))
@@ -98,11 +103,5 @@ public class WatchOnSubscribe<T> implements ObservableOnSubscribe<WatchEvent<T>>
         .map(listModelInterface -> listModelInterface.containedType(0))
         .orElseThrow(() ->
             new WatchException("Watch is intended to be run for endpoints returning a ListModel instance", null));
-  }
-
-  private static void checkRequestParams(Request request) throws KubernetesException {
-    if (request.url().queryParameter("watch") == null) {
-      throw new WatchException("Watch is intended to be run for endpoints accepting a 'watch' query parameter", null);
-    }
   }
 }

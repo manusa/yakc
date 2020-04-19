@@ -11,26 +11,26 @@ public interface {{className}} extends Api {
 {{!Standard method for all operations operationFunction(parameters, body)}}
 {{>api_description}}
 {{>api_annotations}}
-  KubernetesCall<{{returnType}}> {{methodName}}({{>api_path_parameters}}{{#requestBodyType}}{{#hasPathParameters}}, {{/hasPathParameters}}
+  {{>api_method_return_type}} {{methodName}}({{>api_path_parameters}}{{#requestBodyType}}{{#hasPathParameters}}, {{/hasPathParameters}}
     @Body {{.}} body{{/requestBodyType}});
 {{^requestBodyRequired}}{{#requestBodyType}}
 {{!Bodyless method for operations with optional body operationFunction(parameters)}}
   {{>api_description}}
   {{>api_annotations}}
-  KubernetesCall<{{returnType}}> {{methodName}}({{>api_path_parameters}});
+  {{>api_method_return_type}} {{methodName}}({{>api_path_parameters}});
 {{/requestBodyType}}{{/requestBodyRequired}}
 {{#hasQueryParameters}}
 {{!Standard method with parameter map for operations with query params operationFunction(parameters, body, queryParams)}}
 {{>api_description}}
 {{>api_annotations}}
-  KubernetesCall<{{returnType}}> {{methodName}}({{>api_path_parameters}}{{#hasPathParameters}}, {{/hasPathParameters}}{{#requestBodyType}}
+  {{>api_method_return_type}} {{methodName}}({{>api_path_parameters}}{{#hasPathParameters}}, {{/hasPathParameters}}{{#requestBodyType}}
     @Body {{.}} body, {{/requestBodyType}}
     @QueryMap {{queryParametersClassName}} queryParameters);
 {{^requestBodyRequired}}{{#requestBodyType}}
 {{!Bodyless method for operations with optional body and parameter map for operations with query params operationFunction(parameters, queryParams)}}
 {{>api_description}}
 {{>api_annotations}}
-  KubernetesCall<{{returnType}}> {{methodName}}({{>api_path_parameters}}{{#hasPathParameters}}, {{/hasPathParameters}}
+  {{>api_method_return_type}} {{methodName}}({{>api_path_parameters}}{{#hasPathParameters}}, {{/hasPathParameters}}
     @QueryMap {{queryParametersClassName}} queryParameters);
 {{/requestBodyType}}{{/requestBodyRequired}}
   {{>api_query_parameter_pojo}}

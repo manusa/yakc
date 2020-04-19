@@ -8,7 +8,10 @@
 Provides the basic interfaces for the client
 
 ### kubernetes-model
-Retrofit API client interfaces and model objects.
+Kubernetes model objects to be used for REST API serialization/deserialization.
+
+### kubernetes-api
+Retrofit API client interfaces.
 
 ### kubernetes-client
 Java client implementation and helper methods
