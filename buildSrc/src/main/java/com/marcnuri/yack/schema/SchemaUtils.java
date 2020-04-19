@@ -28,6 +28,8 @@ import java.util.stream.Stream;
  */
 public class SchemaUtils {
 
+  public static final String APPLICATION_JSON = "application/json";
+
   private static final Map<String, String> TYPE_MAP = Map.of(
       "boolean", "Boolean",
       "integer", "Integer",
@@ -62,6 +64,14 @@ public class SchemaUtils {
     return settings.getPackageName().concat(".model.").concat(sanitizePackageName(packageName));
   }
 
+  /**
+   * Returns the mapped Class name associated to the provided {@link Schema} and adds
+   * an import to the canonical path of the class represented by that name if necessary.
+   *
+   * @param imports Set containing the current processed Class imports.
+   * @param schema the schema from which to retrieve the mapped Class name.
+   * @return String containing the Class name mapped to the provided Schema.
+   */
   public String schemaToClassName(Set<String> imports, Schema schema) {
     final String ref = schema.get$ref();
     if (isArray(schema)) {
@@ -147,6 +157,10 @@ public class SchemaUtils {
 
   private static boolean isObject(Schema schema) {
     return Optional.ofNullable(schema.getType()).orElse("").equals("object");
+  }
+
+  public static boolean isPatch(Schema schema){
+    return schema.get$ref() != null && schema.get$ref().equals("#/components/schemas/io.k8s.apimachinery.pkg.apis.meta.v1.Patch");
   }
 
   private static String schemaTypeToJavaPrimitive(Schema schema) {

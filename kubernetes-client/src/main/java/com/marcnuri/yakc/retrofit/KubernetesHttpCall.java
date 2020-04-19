@@ -46,7 +46,8 @@ public class KubernetesHttpCall<T, W> implements KubernetesListCall<T, W> {
 
   @Override
   public <O> O get(Class<O> returnType) throws IOException {
-    final okhttp3.Response response = kubernetesClient.getRetrofit().callFactory().newCall(request()).execute();
+    final okhttp3.Response response = kubernetesClient.getRetrofit().callFactory()
+        .newCall(request()).execute();
     if (response.isSuccessful()) {
       return kubernetesClient.getRetrofit().<O>responseBodyConverter(returnType, new Annotation[0]).convert(response.body());
     }

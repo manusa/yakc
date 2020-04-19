@@ -7,7 +7,7 @@ package com.marcnuri.yack.schema.api;
 
 import com.marcnuri.yack.schema.GeneratorSettings;
 import com.marcnuri.yack.schema.SchemaUtils;
-import io.swagger.v3.oas.models.media.MediaType;
+import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.parameters.RequestBody;
 import io.swagger.v3.oas.models.responses.ApiResponse;
@@ -23,16 +23,17 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import static com.marcnuri.yack.schema.SchemaUtils.APPLICATION_JSON;
 import static com.marcnuri.yack.schema.SchemaUtils.capitalizedTagName;
+import static com.marcnuri.yack.schema.SchemaUtils.isPatch;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizeDescription;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizeVariable;
+import static com.marcnuri.yack.schema.api.ApiOperation.Method.PATCH;
 
 /**
  * Created by Marc Nuri on 2020-04-10.
  */
 class TemplateContextResolver {
-
-  private static final String APPLICATION_JSON = "application/json";
 
   private final SchemaUtils utils;
 
@@ -46,20 +47,21 @@ class TemplateContextResolver {
       return null;
     }
     final String httpMethod = apiOperation.getMethod().name();
-    final MediaType jsonResponse = response.getContent().get(APPLICATION_JSON);
+    final Schema jsonResponseSchema = getJsonResponseSchema(apiOperation);
     final Map<String, Object> operation = new HashMap<>();
     final String methodName = apiOperation.getOperation().getOperationId()
         .replace(capitalizedTagName(apiOperation.getTag()), "");
     imports.add("retrofit2.http.HTTP");
+    imports.add("retrofit2.http.Headers");
     operation.put("description", getDescription(apiOperation));
     operation.put("descriptionParameters", apiOperation.getOperation().getDescription());
     operation.put("headers", Collections.singletonList("Accept: ".concat(APPLICATION_JSON)));
     operation.put("httpMethod", httpMethod);
     operation.put("path", apiOperation.getPath());
-    operation.put("kubernetesCallType", utils.kubernetesCallType(imports, jsonResponse.getSchema()));
+    operation.put("kubernetesCallType", utils.kubernetesCallType(imports, jsonResponseSchema));
     operation.put("kubernetesListReturnType",
-        utils.kubernetesListType(imports, utils.resolveComponentSchema(jsonResponse.getSchema())));
-    operation.put("returnType", utils.schemaToClassName(imports, jsonResponse.getSchema()));
+        utils.kubernetesListType(imports, utils.resolveComponentSchema(jsonResponseSchema)));
+    operation.put("returnType", utils.schemaToClassName(imports, jsonResponseSchema));
     operation.put("methodName", methodName);
     operation.put("pathParameters",
         templateParameters(TemplateContextResolver::getPathParameters, imports, apiOperation));
@@ -71,6 +73,8 @@ class TemplateContextResolver {
     operation.put("hasRequiredQueryParameters", getQueryParameters(apiOperation).stream()
         .anyMatch(p -> Optional.ofNullable(p.getRequired()).orElse(false)));
     operation.put("requestBodyType", getRequestBodyType(imports, apiOperation));
+    operation.put("requestBodyContentType",
+        apiOperation.getMethod() == PATCH ? "application/merge-patch+json" : "application/json");
     operation.put("requestBodyRequired",
         Optional.ofNullable(apiOperation.getOperation().getRequestBody()).map(RequestBody::getRequired).orElse(false));
     return operation;
@@ -123,7 +127,12 @@ class TemplateContextResolver {
   private String getRequestBodyType(Set<String> imports, ApiOperation apiOperation) {
     return Optional.ofNullable(apiOperation.getOperation().getRequestBody())
         .map(rb -> rb.getContent().values().iterator().next().getSchema())
-        .map(s -> utils.schemaToClassName(imports, s))
+        .map(s -> {
+          if (isPatch(s)) {
+            s = getJsonResponseSchema(apiOperation);
+          }
+          return utils.schemaToClassName(imports, s);
+        })
         .map(s -> {
           imports.add("retrofit2.http.Body");
           return s;
@@ -135,4 +144,11 @@ class TemplateContextResolver {
     return capitalizedTagName(tag).concat("Api");
   }
 
+  static Schema getJsonResponseSchema(ApiOperation apiOperation) {
+    final ApiResponse response = apiOperation.getOperation().getResponses().get("200");
+    if (response == null || !response.getContent().containsKey(APPLICATION_JSON)) {
+      return null;
+    }
+    return response.getContent().get(APPLICATION_JSON).getSchema();
+  }
 }

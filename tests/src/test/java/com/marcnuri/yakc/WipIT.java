@@ -106,6 +106,8 @@ class WipIT {
         .data(Collections.singletonMap("some", "to-keep"))
         .putInData("test-key", "test-value")
         .build()).get();
+    kc.create(CoreV1Api.class).patchNamespacedConfigMap(configMapName, "default",
+      ConfigMap.builder().metadata(ObjectMeta.builder().putInLabels("other", "label").build()).build()).get();
     cdl.await(5, TimeUnit.SECONDS);
   }
 
@@ -158,9 +160,8 @@ class WipIT {
             )
             .build()).get();
     System.out.println(deployment);
-    final Deployment mostRecentDeployment = api.readNamespacedDeployment(deploymentName, "default").get();
-    api.replaceNamespacedDeployment(deploymentName, "default",
-        mostRecentDeployment.toBuilder().spec(mostRecentDeployment.getSpec().toBuilder().replicas(3).build()).build()
+    api.patchNamespacedDeployment(deploymentName, "default",
+        Deployment.builder().spec(deployment.getSpec().toBuilder().replicas(2).build()).build()
         ).get();
     final PodList selectedPodList = kc.create(CoreV1Api.class)
         .listPodForAllNamespaces(new ListPodForAllNamespaces().labelSelector("k8s-app=test-pod"))

@@ -3,3 +3,7 @@
     path = "{{path}}"{{#requestBodyType}},
     hasBody = true{{/requestBodyType}}
   )
+  @Headers({ {{#requestBodyType}}
+    "Content-Type: {{requestBodyContentType}}",{{/requestBodyType}}
+    "Accept: */*"
+  })

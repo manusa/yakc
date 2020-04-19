@@ -5,6 +5,7 @@
  */
 package com.marcnuri.yakc;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -85,6 +86,7 @@ public class KubernetesClient implements Closeable {
     objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     objectMapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
     objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+    objectMapper.setSerializationInclusion(Include.NON_NULL);
     objectMapper.registerModule(new JavaTimeModule());
     return objectMapper;
   }
