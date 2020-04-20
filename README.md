@@ -2,6 +2,43 @@
 
 > Declarative Java REST client for Kubernetes API.
 
+**DISCLAIMER**
+
+This project is still a PoC, public API and classes are subject to constant changes.
+Please try it out and share your opinion, but use at your own risk.
+
+## Quick start
+
+### Maven
+```xml
+<dependencies>
+  <dependency>
+    <groupId>com.marcnuri.yakc</groupId>
+    <artifactId>kubernetes-api</artifactId>
+    <version>0.0.0</version>
+  </dependency>
+  <dependency>
+    <groupId>com.marcnuri.yakc</groupId>
+    <artifactId>kubernetes-client</artifactId>
+    <version>0.0.0</version>
+  </dependency>
+</dependencies>
+```
+### Gradle
+```groovy
+dependencies {
+  compile 'com.marcnuri.yakc:kubernetes-api:0.0.0'
+  compile 'com.marcnuri.yakc:kubernetes-client:0.0.0'
+}
+```
+### List all Pods
+```java
+try (KubernetesClient kc = new KubernetesClient()) {
+  kc.create(CoreV1Api.class).listPodForAllNamespaces().stream().forEach(p ->
+    System.out.printf("%-15s %s%n", p.getMetadata().getNamespace(), p.getMetadata().getName()
+  )
+}
+```
 ## Modules
 
 ### kubernetes-client-api
