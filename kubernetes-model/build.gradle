@@ -1,4 +1,4 @@
-apply from: rootDir.toPath().resolve('properties.gradle').toFile()
+apply from: rootDir.toPath().resolve('shared.gradle').toFile()
 
 ext {
   isPublishable = true

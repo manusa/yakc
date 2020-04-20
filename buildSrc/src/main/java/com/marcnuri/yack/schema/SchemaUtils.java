@@ -185,6 +185,7 @@ public class SchemaUtils {
 
   public static String sanitizeDescription(String description) {
     return Optional.ofNullable(description).orElse("")
+        .replace("&", "&amp;")
         .replace("*", "&#42;")
         .replace("<", "&lt;")
         .replace(">", "&gt;")

@@ -5,7 +5,7 @@ plugins {
   id 'java-library'
 }
 
-apply from: 'properties.gradle'
+apply from: 'shared.gradle'
 
 def schemaDir = new File(projectDir, "schema")
 def currentSchema = new File(schemaDir, "kubernetes-1.18.2.json")

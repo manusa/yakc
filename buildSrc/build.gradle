@@ -2,7 +2,7 @@ plugins {
   id 'java-library'
 }
 
-apply from: rootDir.parentFile.toPath().resolve('properties.gradle').toFile();
+apply from: rootDir.parentFile.toPath().resolve('shared.gradle').toFile()
 
 java {
   sourceCompatibility = JavaVersion.VERSION_11

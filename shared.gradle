@@ -24,24 +24,47 @@ java {
   targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+
 ext.configurePublishing = { Project evaluatedProject ->
   if (!evaluatedProject.isPublishable) {
     return
   }
   apply plugin: 'maven'
   apply plugin: 'signing'
+  def delombokedSourceDir = "$buildDir/delombok";
+  task delombok(dependsOn: classes) {
+    group = 'maven'
+    inputs.dir projectDir.toPath().resolve("src").toFile()
+    outputs.dir file(delombokedSourceDir)
+    doLast {
+      ant.taskdef(
+        name: 'delombok',
+        classname: 'lombok.delombok.ant.Tasks$Delombok',
+        classpath: configurations.compile.asPath + ";" + configurations.compileOnly.asPath
+      )
+      ant.mkdir(dir: delombokedSourceDir)
+      evaluatedProject.sourceSets.main.java.srcDirs.each { srcDir ->
+        ant.delombok(verbose: 'true', encoding: 'UTF-8', to: delombokedSourceDir, from: srcDir)
+      }
+    }
+  }
+  task delombokedJavadoc(type: Javadoc, dependsOn: delombok) {
+    group = 'maven'
+    source = delombokedSourceDir
+    classpath = files(configurations.compile, configurations.compileOnly.asPath)
+  }
   task sourcesJar(type: Jar, dependsOn: classes) {
     group = 'maven'
     archiveClassifier.set('sources')
     from sourceSets.main.allSource
   }
-  task javadocJar(type: Jar, dependsOn: javadoc) {
+  task javadocJar(type: Jar, dependsOn: delombokedJavadoc) {
     group = 'maven'
     archiveClassifier.set('javadoc')
-    from javadoc.destinationDir
+    from delombokedJavadoc.destinationDir
   }
   task assemblePublication(dependsOn: [classes, assemble, sourcesJar, javadocJar]) {
-    group = 'build'
+    group = 'maven'
   }
   install.group 'maven'
   install.dependsOn assemblePublication
