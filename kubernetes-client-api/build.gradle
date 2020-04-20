@@ -1,9 +1,10 @@
-plugins {
-  id 'java-library'
-  id 'maven'
-}
+apply from: rootDir.toPath().resolve('properties.gradle').toFile()
 
-apply from: rootDir.toPath().resolve('properties.gradle').toFile();
+ext {
+  isPublishable = true
+  pomName = 'Kubernetes Client API'
+  pomDescription = 'Main interfaces and Exception classes for te rest of com.marcnuri.yakc modules.'
+}
 
 dependencies {
   compileOnly "org.projectlombok:lombok:$version_projectlombok"

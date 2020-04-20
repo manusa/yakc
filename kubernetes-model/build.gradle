@@ -1,9 +1,10 @@
-plugins {
-  id 'java-library'
-  id 'maven'
-}
+apply from: rootDir.toPath().resolve('properties.gradle').toFile()
 
-apply from: rootDir.toPath().resolve('properties.gradle').toFile();
+ext {
+  isPublishable = true
+  pomName = 'Kubernetes Model'
+  pomDescription = 'Java POJOs consumed by com.marcnuri.yakc:kubernetes-api.'
+}
 
 dependencies {
   compile  project(':kubernetes-client-api')

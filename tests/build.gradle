@@ -1,8 +1,4 @@
-plugins {
-  id 'java-library'
-}
-
-apply from: rootDir.toPath().resolve('properties.gradle').toFile();
+apply from: rootDir.toPath().resolve('properties.gradle').toFile()
 
 dependencies {
   testImplementation project(':kubernetes-api'), project(':kubernetes-client')
