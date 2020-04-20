@@ -51,9 +51,9 @@ public class SchemaUtils {
   );
 
   private static final Map<String, String> PROTECTED_WORD_MAP = Map.of(
-      "continue", "continue_",
-      "default", "default_",
-      "enum", "enum_",
+      "continue", "continues",
+      "default", "defaults",
+      "enum", "enumeration",
       "class", "clazz"
   );
 
@@ -68,8 +68,8 @@ public class SchemaUtils {
   }
 
   private String refToModelPackage(String ref) {
-    final String packageName = ref.substring(ref.lastIndexOf('/') + 1);
-    return toModelPackage(packageName);
+    final String packageName = ref.substring(ref.lastIndexOf('/') + 1, ref.lastIndexOf('.'));
+    return toModelPackage(packageName).concat(ref.substring(ref.lastIndexOf('.')));
   }
 
   public String toModelPackage(String packageName) {
@@ -179,8 +179,8 @@ public class SchemaUtils {
     return Optional.ofNullable(TYPE_MAP.get(schema.getType())).orElse(schema.getType());
   }
 
-  private static String sanitizePackageName(String packageName) {
-    return packageName.replace("-", "");
+  public static String sanitizePackageName(String packageName) {
+    return packageName.replace("-", "").toLowerCase();
   }
 
   public static String sanitizeDescription(String description) {
@@ -213,7 +213,7 @@ public class SchemaUtils {
       return Files.readString(template, StandardCharsets.UTF_8);
     } catch (IOException ex) {
       settings.getLogger().error(ex.getMessage());
-      throw new RuntimeException("Can't load template " + name);
+      throw new GeneratorException("Can't load template " + name);
     }
   }
 

@@ -77,7 +77,10 @@ class TemplateContextResolver {
     operation.put("methodName", methodName);
     operation.put("pathParameters",
         templateParameters(TemplateContextResolver::getPathParameters, imports, apiOperation));
-    operation.put("hasPathParameters", !getPathParameters(apiOperation).isEmpty());
+    if (!getPathParameters(apiOperation).isEmpty()) {
+      imports.add("retrofit2.http.Path");
+      operation.put("hasPathParameters", true);
+    }
     operation.put("queryParametersClassName", StringUtils.capitalize(methodName));
     operation.put("queryParameters",
         templateParameters(TemplateContextResolver::getQueryParameters, imports, apiOperation));
@@ -110,7 +113,6 @@ class TemplateContextResolver {
     parameterProvider.apply(apiOperation).forEach(p -> {
       final Map<String, Object> parameter = new HashMap<>();
       pathParameters.add(parameter);
-      imports.add("retrofit2.http.Path");
       imports.add("retrofit2.http.QueryMap");
       imports.add("java.util.HashMap");
       parameter.put("propertyName", p.getName());

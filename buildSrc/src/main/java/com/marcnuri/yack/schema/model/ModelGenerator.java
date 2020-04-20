@@ -17,6 +17,7 @@
  */
 package com.marcnuri.yack.schema.model;
 
+import com.marcnuri.yack.schema.GeneratorException;
 import com.marcnuri.yack.schema.GeneratorSettings;
 import com.marcnuri.yack.schema.SchemaUtils;
 import com.samskivert.mustache.Escapers;
@@ -50,6 +51,7 @@ import static com.marcnuri.yack.schema.SchemaUtils.isArray;
 import static com.marcnuri.yack.schema.SchemaUtils.isMap;
 import static com.marcnuri.yack.schema.SchemaUtils.removeUnnecessaryImports;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizeDescription;
+import static com.marcnuri.yack.schema.SchemaUtils.sanitizePackageName;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizeVariable;
 
 /**
@@ -104,7 +106,11 @@ class ModelGenerator {
       }).orElse(null));
     ret.put("className", resolveClassName(key));
     ret.put("fields", templateFields);
-    ret.put("hasFields", !templateFields.isEmpty());
+    if (!templateFields.isEmpty()) {
+      ret.put("hasFields", true);
+      imports.add("lombok.NoArgsConstructor");
+      imports.add("com.fasterxml.jackson.annotation.JsonProperty");
+    }
     ret.put("imports", removeUnnecessaryImports(resolvePackageName(key), imports));
     return ret;
   }
@@ -114,10 +120,8 @@ class ModelGenerator {
         settings.getPackageName().concat(".model.Model"),
         "lombok.Builder",
         "lombok.AllArgsConstructor",
-        "lombok.NoArgsConstructor",
         "lombok.Data",
-        "lombok.ToString",
-        "com.fasterxml.jackson.annotation.JsonProperty"
+        "lombok.ToString"
     ));
   }
 
@@ -156,13 +160,13 @@ class ModelGenerator {
     try {
       FileUtils.forceMkdir(resolvePackageDirectory(schemaEntry.getKey()).toFile());
     } catch (IOException e) {
-      throw new RuntimeException("Can't generate package directory for " + schemaEntry.getKey());
+      throw new GeneratorException("Can't generate package directory for " + schemaEntry.getKey());
     }
     return schemaEntry;
   }
 
   private String resolvePackageName(String key) {
-    return utils.toModelPackage(key.substring(0, key.lastIndexOf('.')));
+    return sanitizePackageName(utils.toModelPackage(key.substring(0, key.lastIndexOf('.'))));
   }
 
   private Path resolvePackageDirectory(String tag) {
@@ -182,7 +186,7 @@ class ModelGenerator {
           StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     } catch (IOException ex) {
       settings.getLogger().error(ex.getMessage());
-      throw new RuntimeException("Can't write java generated class " + file.toString());
+      throw new GeneratorException("Can't write java generated class " + file.toString());
     }
   }
 }

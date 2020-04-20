@@ -19,10 +19,10 @@ package com.marcnuri.yack.schema.api;
 
 import com.marcnuri.yack.schema.GeneratorSettings;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.parser.OpenAPIV3Parser;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
-import org.openapitools.codegen.config.CodegenConfigurator;
 
 import java.io.File;
 
@@ -41,10 +41,7 @@ public class ApiGeneratorTask extends DefaultTask {
 
   @TaskAction
   public void run() {
-    final CodegenConfigurator configurator = new CodegenConfigurator();
-    configurator.setInputSpec(schema.getAbsolutePath());
-    configurator.setGeneratorName("java");
-    final OpenAPI openAPI = (OpenAPI)configurator.toContext().getSpecDocument();
+    final OpenAPI openAPI = new OpenAPIV3Parser().read(schema.getAbsolutePath());
     final GeneratorSettings settings = GeneratorSettings.builder()
         .openAPI(openAPI)
         .logger(getLogger())

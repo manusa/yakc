@@ -17,6 +17,7 @@
  */
 package com.marcnuri.yack.schema.api;
 
+import com.marcnuri.yack.schema.GeneratorException;
 import com.marcnuri.yack.schema.GeneratorSettings;
 import com.marcnuri.yack.schema.SchemaUtils;
 import com.samskivert.mustache.Escapers;
@@ -41,6 +42,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import static com.marcnuri.yack.schema.SchemaUtils.removeUnnecessaryImports;
+import static com.marcnuri.yack.schema.SchemaUtils.sanitizePackageName;
 import static com.marcnuri.yack.schema.api.TemplateContextResolver.resolveClassName;
 
 /**
@@ -104,13 +106,13 @@ class ApiGenerator {
     try {
       FileUtils.forceMkdir(resolvePackageDirectory(entry.getKey()).toFile());
     } catch (IOException e) {
-      throw new RuntimeException("Can't generate package directory for " + entry.getKey());
+      throw new GeneratorException("Can't generate package directory for " + entry.getKey());
     }
     return entry;
   }
 
   private String resolvePackageName(String tag) {
-    return settings.getPackageName().concat(".api.").concat(tag);
+    return sanitizePackageName(settings.getPackageName().concat(".api.").concat(tag));
   }
 
   private Path resolvePackageDirectory(String tag) {
@@ -126,7 +128,7 @@ class ApiGenerator {
           StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     } catch (IOException ex) {
       settings.getLogger().error(ex.getMessage());
-      throw new RuntimeException("Can't write java generated class " + file.toString());
+      throw new GeneratorException("Can't write java generated class " + file.toString());
     }
   }
 }
