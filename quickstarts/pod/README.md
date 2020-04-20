@@ -24,9 +24,10 @@ Finally, the Pod will be read and updated to remove all annotations.
 In order to run the example you need an active K8s cluster
 (e.g. [Minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)).
 
-In the project directory, run `mvn exec:java`.
+In the project directory, run `mvn package`:
 
 ```shell script
+$ mvn package
 [INFO] Scanning for projects...
 [INFO]
 [INFO] -----------------< com.marcnuri.yakc.quickstarts:pods >-----------------
