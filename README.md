@@ -9,7 +9,8 @@ Please try it out and share your opinion, but use at your own risk.
 
 ## Quick start
 
-### Maven
+### TL;DR
+#### Maven
 ```xml
 <dependencies>
   <dependency>
@@ -24,14 +25,14 @@ Please try it out and share your opinion, but use at your own risk.
   </dependency>
 </dependencies>
 ```
-### Gradle
+#### Gradle
 ```groovy
 dependencies {
   compile 'com.marcnuri.yakc:kubernetes-api:0.0.0'
   compile 'com.marcnuri.yakc:kubernetes-client:0.0.0'
 }
 ```
-### List all Pods
+#### List all Pods
 ```java
 try (KubernetesClient kc = new KubernetesClient()) {
   kc.create(CoreV1Api.class).listPodForAllNamespaces().stream().forEach(p ->
@@ -39,6 +40,14 @@ try (KubernetesClient kc = new KubernetesClient()) {
   )
 }
 ```
+
+### Quick start example projects
+
+Check the [quickstarts](quickstarts) directory for projects ready to use with illustrative examples on how to use
+the client.
+
+- [Pod](quickstarts/pod) contains a Maven project with examples to the diverse available API operations
+for  Pod resources. See nested [README.md](quickstarts/pod/README.md) for more information.
 ## Modules
 
 ### kubernetes-client-api

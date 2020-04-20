@@ -68,7 +68,6 @@ public class WatchOnSubscribe<T> implements ObservableOnSubscribe<WatchEvent<T>>
   @Override
   public void subscribe(ObservableEmitter<WatchEvent<T>> emitter) {
     final Future<Void> readerTask = executorService.submit(() -> {
-
       final HttpUrl updatedUrl = request.url().newBuilder()
           .addQueryParameter("watch", "true")
           .build();
@@ -77,7 +76,8 @@ public class WatchOnSubscribe<T> implements ObservableOnSubscribe<WatchEvent<T>>
           final okhttp3.Response response = noTimeoutClient.newCall(updatedRequest).execute();
           final InputStream is = Optional.ofNullable(response.body()).map(ResponseBody::source)
               .orElseThrow(() -> new WatchException("Response contains no body", response)).inputStream();
-          final BufferedReader br = new BufferedReader(new InputStreamReader(is))
+          final InputStreamReader isr = new InputStreamReader(is);
+          final BufferedReader br = new BufferedReader(isr)
       ) {
         String line;
         while (!emitter.isDisposed() && (line = br.readLine()) != null) {

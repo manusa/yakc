@@ -29,6 +29,7 @@ import com.marcnuri.yakc.retrofit.KubernetesCallAdapterFactory;
 import lombok.Getter;
 import lombok.extern.java.Log;
 import okhttp3.ConnectionPool;
+import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
@@ -37,6 +38,7 @@ import java.io.Closeable;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
 
 import static com.marcnuri.yakc.config.OkHttpClientConfigurator.initOkHttpClient;
 
@@ -105,6 +107,8 @@ public class KubernetesClient implements Closeable {
 
   @Override
   public void close() {
+    Optional.ofNullable(getOkHttpClient()).map(OkHttpClient::dispatcher)
+        .map(Dispatcher::executorService).ifPresent(ExecutorService::shutdownNow);
     Optional.ofNullable(getOkHttpClient()).map(OkHttpClient::connectionPool)
         .ifPresent(ConnectionPool::evictAll);
   }
