@@ -17,6 +17,7 @@
  */
 package com.marcnuri.yakc;
 
+import com.marcnuri.yakc.api.KubernetesException;
 import com.marcnuri.yakc.api.NotFoundException;
 import com.marcnuri.yakc.api.WatchEvent.Type;
 import com.marcnuri.yakc.api.apps.v1.AppsV1Api;
@@ -45,7 +46,10 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by Marc Nuri on 2020-04-18.
@@ -66,12 +70,24 @@ class WipIT {
   }
 
   @Test
+  void namespaceWatchBlocksUntilOneIsAdded() throws KubernetesException {
+    final AtomicInteger count = new AtomicInteger(0);
+    final Disposable namespaceWatch = kc.create(CoreV1Api.class)
+        .listNamespace()
+        .watch()
+        .takeUntil(we -> we.getType() == Type.ADDED)
+        .subscribe(we -> count.incrementAndGet());
+    assertThat(namespaceWatch.isDisposed()).isEqualTo(true);
+    assertThat(count.get()).isEqualTo(1);
+  }
+
+  @Test
   void watchPods() throws Exception {
     final CountDownLatch cdl = new CountDownLatch(2);
     final Disposable d = kc.create(CoreV1Api.class)
         .listNamespacedPod("default")
         .watch()
-        .subscribeOn(Schedulers.newThread())
+        .subscribeOn(Schedulers.io())
         .doOnComplete(() ->
             System.out.println("This won't happen unless the InputStream from k8s is closed")
         )

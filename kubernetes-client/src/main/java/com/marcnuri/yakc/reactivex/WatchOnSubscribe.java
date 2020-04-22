@@ -26,6 +26,7 @@ import com.marcnuri.yakc.api.WatchException;
 import com.marcnuri.yakc.model.ListModel;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.disposables.Disposable;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -40,20 +41,23 @@ import java.io.InputStreamReader;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 import java.time.Duration;
+import java.util.Collections;
 import java.util.Optional;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Created by Marc Nuri on 2020-04-13.
  */
-public class WatchOnSubscribe<T> implements ObservableOnSubscribe<WatchEvent<T>> {
+public class WatchOnSubscribe<T> implements ObservableOnSubscribe<WatchEvent<T>>, Disposable {
 
   private final OkHttpClient noTimeoutClient;
   private final Request request;
   private final Converter<ResponseBody, WatchEvent<T>> converter;
   private final ExecutorService executorService;
+  private final AtomicBoolean disposed = new AtomicBoolean(false);
 
   public WatchOnSubscribe(Type responseType, Request request, KubernetesClient kubernetesClient) throws KubernetesException {
     converter = kubernetesClient.getRetrofit().responseBodyConverter(
@@ -67,7 +71,7 @@ public class WatchOnSubscribe<T> implements ObservableOnSubscribe<WatchEvent<T>>
 
   @Override
   public void subscribe(ObservableEmitter<WatchEvent<T>> emitter) {
-    final Future<Void> readerTask = executorService.submit(() -> {
+    final Callable<Void> responseReader = () -> {
       final HttpUrl updatedUrl = request.url().newBuilder()
           .addQueryParameter("watch", "true")
           .build();
@@ -75,31 +79,43 @@ public class WatchOnSubscribe<T> implements ObservableOnSubscribe<WatchEvent<T>>
       try (
           final okhttp3.Response response = noTimeoutClient.newCall(updatedRequest).execute();
           final InputStream is = Optional.ofNullable(response.body()).map(ResponseBody::source)
-              .orElseThrow(() -> new WatchException("Response contains no body", response)).inputStream();
+              .orElseThrow(() -> new WatchException("Response contains no body", response))
+              .inputStream();
           final InputStreamReader isr = new InputStreamReader(is);
           final BufferedReader br = new BufferedReader(isr)
       ) {
         String line;
         while (!emitter.isDisposed() && (line = br.readLine()) != null) {
-          final WatchEvent<T> next = converter.convert(ResponseBody.create(MediaType.get("application/json"), line));
+          final WatchEvent<T> next = converter
+              .convert(ResponseBody.create(MediaType.get("application/json"), line));
           emitter.onNext(next);
         }
       } catch (IOException ex) {
         emitter.tryOnError(ex);
       }
       emitter.onComplete();
+      executorService.shutdownNow();
       return null;
-    });
+    };
+    emitter.setDisposable(this);
     try {
-      while (!emitter.isDisposed()) {
-        Thread.sleep(1000L);
-      }
+      executorService.invokeAll(Collections.singletonList(responseReader));
     } catch(InterruptedException ex) {
       Thread.currentThread().interrupt();
     } finally {
-      readerTask.cancel(true);
       executorService.shutdownNow();
     }
+  }
+
+  @Override
+  public void dispose() {
+    executorService.shutdownNow();
+    disposed.set(true);
+  }
+
+  @Override
+  public boolean isDisposed() {
+    return disposed.get();
   }
 
   private static JavaType parametrizedWatchEventType(JavaType listParameterModelType) {
