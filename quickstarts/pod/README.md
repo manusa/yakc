@@ -31,7 +31,7 @@ $ mvn package
 [INFO] Scanning for projects...
 [INFO]
 [INFO] -----------------< com.marcnuri.yakc.quickstarts:pods >-----------------
-[INFO] Building YAKC :: Quickstarts :: Pods 0.0.0
+[INFO] Building YAKC :: Quickstarts :: Pods 0.0.1
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ pods ---
@@ -39,9 +39,7 @@ $ mvn package
 [INFO] skip non existing resourceDirectory D:\00-MN\projects\manusa\yakc\quickstarts\pod\src\main\resources
 [INFO]
 [INFO] --- maven-compiler-plugin:3.1:compile (default-compile) @ pods ---
-[INFO] Changes detected - recompiling the module!
-[WARNING] File encoding has not been set, using platform encoding Cp1252, i.e. build is platform dependent!
-[INFO] Compiling 1 source file to D:\00-MN\projects\manusa\yakc\quickstarts\pod\target\classes
+[INFO] Nothing to compile - all classes are up to date
 [INFO]
 [INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ pods ---
 [WARNING] Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
@@ -54,7 +52,6 @@ $ mvn package
 [INFO] No tests to run.
 [INFO]
 [INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ pods ---
-[INFO] Building jar: D:\00-MN\projects\manusa\yakc\quickstarts\pod\target\pods-0.0.0.jar
 [INFO]
 [INFO] >>> exec-maven-plugin:1.2.1:java (default) > validate @ pods >>>
 [INFO]
@@ -68,17 +65,23 @@ Complete POD example:
  - Creates POD
  - Patches POD's labels
  - Updates POD removing annotations and adding another label
-    ++ New Watch Event ADDED           - yakc-namespace/yakc-quickstart-pod (2020-04-20T15:53:50Z) [{app=yakc-pod-example, label2=otherlabel, label3=an-extra-one}]
-    ++ New Watch Event MODIFIED        - yakc-namespace/yakc-quickstart-pod (2020-04-20T15:53:50Z) [{app=yakc-pod-example, label2=otherlabel, label3=an-extra-one}]
+         ++ New Watch Event ADDED      - yakc-namespace/yakc-quickstart-pod (2020-04-24T17:10:45Z) [{app=yakc-pod-example, label2=otherlabel, label3=an-extra-one}]
+Namespace with name yakc-namespace is available
+Waiting for pre-existing POD yakc-quickstart-pod to be deleted
+         ++ New Watch Event MODIFIED   - yakc-namespace/yakc-quickstart-pod (2020-04-24T17:10:45Z) [{app=yakc-pod-example, label2=otherlabel, label3=an-extra-one}]
+         ++ New Watch Event MODIFIED   - yakc-namespace/yakc-quickstart-pod (2020-04-24T17:10:45Z) [{app=yakc-pod-example, label2=otherlabel, label3=an-extra-one}]
+         ++ New Watch Event MODIFIED   - yakc-namespace/yakc-quickstart-pod (2020-04-24T17:10:45Z) [{app=yakc-pod-example, label2=otherlabel, label3=an-extra-one}]
+         ++ New Watch Event DELETED    - yakc-namespace/yakc-quickstart-pod (2020-04-24T17:10:45Z) [{app=yakc-pod-example, label2=otherlabel, label3=an-extra-one}]
 Existing POD yakc-quickstart-pod was deleted
-    ++ New Watch Event MODIFIED        - yakc-namespace/yakc-quickstart-pod (2020-04-20T15:53:50Z) [{app=yakc-pod-example, label2=otherlabel, label3=an-extra-one}]
-    ++ New Watch Event MODIFIED        - yakc-namespace/yakc-quickstart-pod (2020-04-20T15:53:50Z) [{app=yakc-pod-example, label2=otherlabel, label3=an-extra-one}]
-    ++ New Watch Event DELETED         - yakc-namespace/yakc-quickstart-pod (2020-04-20T15:53:50Z) [{app=yakc-pod-example, label2=otherlabel, label3=an-extra-one}]
-    ++ New Watch Event ADDED           - yakc-namespace/yakc-quickstart-pod (2020-04-20T15:55:28Z) [{app=yakc-pod-example}]
-POD successfully added and detected in Watch
-    ++ New Watch Event MODIFIED        - yakc-namespace/yakc-quickstart-pod (2020-04-20T15:55:28Z) [{app=yakc-pod-example}]
-    ++ New Watch Event MODIFIED        - yakc-namespace/yakc-quickstart-pod (2020-04-20T15:55:28Z) [{app=yakc-pod-example, label2=otherlabel}]
+         ++ New Watch Event ADDED      - yakc-namespace/yakc-quickstart-pod (2020-04-24T17:12:50Z) [{app=yakc-pod-example}]
+Waiting for POD yakc-quickstart-pod to be created
+         ++ New Watch Event MODIFIED   - yakc-namespace/yakc-quickstart-pod (2020-04-24T17:12:50Z) [{app=yakc-pod-example}]
+POD yakc-quickstart-pod was created
+         ++ New Watch Event MODIFIED   - yakc-namespace/yakc-quickstart-pod (2020-04-24T17:12:50Z) [{app=yakc-pod-example}]
+         ++ New Watch Event MODIFIED   - yakc-namespace/yakc-quickstart-pod (2020-04-24T17:12:50Z) [{app=yakc-pod-example, label2=otherlabel}]
 POD labels patched [{app=yakc-pod-example, label2=otherlabel}]
-    ++ New Watch Event MODIFIED        - yakc-namespace/yakc-quickstart-pod (2020-04-20T15:55:28Z) [{app=yakc-pod-example, label2=otherlabel, label3=an-extra-one}]
+         ++ New Watch Event MODIFIED   - yakc-namespace/yakc-quickstart-pod (2020-04-24T17:12:50Z) [{app=yakc-pod-example, label2=otherlabel, label3=an-extra-one}]
 POD replaced: annotations removed, labels modified  [{app=yakc-pod-example, label2=otherlabel, label3=an-extra-one}]
+Pod demo concluded successfully!
+
 ```
