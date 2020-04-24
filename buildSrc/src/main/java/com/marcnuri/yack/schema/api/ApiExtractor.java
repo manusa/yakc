@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -47,7 +48,7 @@ class ApiExtractor {
   }
 
   private static Stream<Entry<String, List<ApiOperation>>> taggedOperation(ApiOperation apiOperation) {
-    return apiOperation.getOperation().getTags().stream()
+    return Optional.ofNullable(apiOperation.getOperation().getTags()).orElse(Collections.emptyList()).stream()
         .map(tag -> tag.replace('_', '.'))
         .map(tag -> apiOperation.toBuilder().tag(tag).build())
         .collect(Collectors.toMap(ApiOperation::getTag, Collections::singletonList))

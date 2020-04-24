@@ -18,6 +18,8 @@
 package com.marcnuri.yakc.config;
 
 import com.marcnuri.yakc.ssl.SSLResolver;
+
+import javax.net.ssl.KeyManager;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -41,6 +43,8 @@ import static com.marcnuri.yakc.ssl.SSLResolver.TLS_V_1_2;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class OkHttpClientConfigurator {
 
+  private static final String HEADER_AUTHORIZATION = "Authorization";
+
   @SuppressWarnings("squid:S3510")
   public static OkHttpClient initOkHttpClient(Configuration optionalConfiguration) {
     final Configuration configuration = Optional.ofNullable(optionalConfiguration)
@@ -55,25 +59,29 @@ public class OkHttpClientConfigurator {
     }
     try {
       final TrustManager[] trustManagers = SSLResolver.trustManagers(configuration);
-      SSLContext sslContext = SSLContext.getInstance(TLS_V_1_2);
+      final KeyManager[] keyManagers;
       if (SSLResolver.hasClientCertificate(configuration)) {
-        sslContext.init(SSLResolver.keyManagers(configuration), trustManagers, new SecureRandom());
+        keyManagers = SSLResolver.keyManagers(configuration);
+      } else {
+        keyManagers = null;
       }
+      SSLContext sslContext = SSLContext.getInstance(TLS_V_1_2);
+      sslContext.init(keyManagers, trustManagers, new SecureRandom());
       builder.sslSocketFactory(sslContext.getSocketFactory(), (X509TrustManager) trustManagers[0]);
     } catch (Exception e) {
       log.warning(String.format("Error while loading certificates: %s", e.getMessage()));
     }
     if (configuration.getUsername() != null) {
-      builder.authenticator((route, response) ->
-          response.request().newBuilder().header("Authorization",
-              Credentials.basic(configuration.getUsername(), configuration.getPassword()))
-              .build());
+      builder.addInterceptor(c -> c.proceed(
+        c.request().newBuilder().addHeader(HEADER_AUTHORIZATION,
+          Credentials.basic(configuration.getUsername(), configuration.getPassword())).build()
+      ));
     }
     if (configuration.getToken() != null) {
-      builder.authenticator((route, response) ->
-          response.request().newBuilder().header("Authorization",
-              String.format("Bearer %s", configuration.getToken()))
-              .build());
+      builder.addInterceptor(c -> c.proceed(
+        c.request().newBuilder().header(HEADER_AUTHORIZATION,
+          String.format("Bearer %s", configuration.getToken())).build()
+      ));
     }
     return builder.build();
   }

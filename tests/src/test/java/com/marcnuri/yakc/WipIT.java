@@ -27,6 +27,7 @@ import com.marcnuri.yakc.model.io.k8s.api.apps.v1.Deployment;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.DeploymentSpec;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.ConfigMap;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Container;
+import com.marcnuri.yakc.model.io.k8s.api.core.v1.NamespaceList;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodList;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodSpec;
@@ -44,9 +45,11 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -211,9 +214,11 @@ class WipIT {
     printUnderline();
     System.out.printf("%-15s %s%n", "Namespace", "Name");
     System.out.println("---------       ----");
-    kc.create(CoreV1Api.class).listPodForAllNamespaces().stream().forEach(p ->
-        System.out.printf("%-15s %s%n", p.getMetadata().getNamespace(), p.getMetadata().getName())
-    );
+    Optional.ofNullable(kc.getConfiguration().getNamespace())
+      .map(n -> kc.create(CoreV1Api.class).listNamespacedPod(n))
+      .orElse(kc.create(CoreV1Api.class).listPodForAllNamespaces())
+      .stream()
+      .forEach(p -> System.out.printf("%-15s %s%n", p.getMetadata().getNamespace(), p.getMetadata().getName()));
   }
 
   private static void printUnderline() {
