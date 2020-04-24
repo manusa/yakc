@@ -19,6 +19,7 @@ package com.marcnuri.yakc.quickstarts;
 
 import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.NotFoundException;
+import com.marcnuri.yakc.api.WatchEvent.Type;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Container;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Namespace;
@@ -30,8 +31,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
+
 
 /**
  * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-19.
@@ -50,57 +50,56 @@ public class PodQuickstart {
         + " - Updates POD removing annotations and adding another label");
     try (KubernetesClient kc = new KubernetesClient()) {
       final CoreV1Api api = kc.create(CoreV1Api.class);
+      final Disposable podMonitor = monitorPods(api);
       createNamespace(api);
-      final CountDownLatch podDelete = new CountDownLatch(1);
-      final CountDownLatch podAdd = new CountDownLatch(1);
-      final Disposable podAddedWatch = watchPod(api, podDelete, podAdd);
-      if (deletePodIfExists(api) && !podDelete.await(20, TimeUnit.SECONDS)) {
-        throw new IOException("Existing POD was not deleted");
-      }
+      deletePodIfExists(api);
       createPod(api);
-      final boolean podAdded = podAdd.await(5, TimeUnit.SECONDS);
-      if (podAdded) {
-        System.out.println("POD successfully added and detected in Watch");
-      } else {
-        podAddedWatch.dispose();
-      }
       final Pod patchedPod = patchPodLabels(api);
       System.out.printf("POD labels patched [%s]%n", patchedPod.getMetadata().getLabels());
       final Pod updatedPod = replacePod(patchedPod, api);
       System.out.printf("POD replaced: annotations removed, labels modified  [%s]%n",
           updatedPod.getMetadata().getLabels());
+      podMonitor.dispose();
+      System.out.println("Pod demo concluded successfully!");
     } catch (Exception ex) {
       ex.printStackTrace();
     }
-    System.exit(0);
   }
 
   private static void createNamespace(CoreV1Api api) throws IOException {
     try {
       api.readNamespace(NAMESPACE).get();
+      System.out.printf("Namespace with name %s is available%n", NAMESPACE);
     } catch (NotFoundException ex) {
       System.out.printf("No existing Namespace with name %s, creating a new one%n", NAMESPACE);
       api.createNamespace(Namespace.builder()
           .metadata(ObjectMeta.builder().name(NAMESPACE).build())
           .build()
       ).get();
+      api.listNamespace().watch()
+          .filter(we -> we.getObject().getMetadata().getName().equals(NAMESPACE))
+          .takeUntil(we -> we.getType() == Type.ADDED)
+          .subscribe();
     }
   }
 
-  private static boolean deletePodIfExists(CoreV1Api api) throws IOException {
+  private static void deletePodIfExists(CoreV1Api api) throws IOException {
     try {
       api.deleteNamespacedPod(POD_NAME, NAMESPACE,
           DeleteOptions.builder().gracePeriodSeconds(1).build()).get();
+      System.out.printf("Waiting for pre-existing POD %s to be deleted%n", POD_NAME);
+      api.listNamespacedPod(NAMESPACE).watch()
+          .filter(we -> we.getObject().getMetadata().getName().equals(POD_NAME))
+          .takeUntil(we -> we.getType() == Type.DELETED)
+          .subscribe();
       System.out.printf("Existing POD %s was deleted%n", POD_NAME);
-      return true;
     } catch (NotFoundException ex) {
       System.out.printf("No existing PODs with name %s%n", POD_NAME);
     }
-    return false;
   }
 
-  private static Pod createPod(CoreV1Api api) throws IOException {
-    return api.createNamespacedPod(NAMESPACE, Pod.builder()
+  private static void createPod(CoreV1Api api) throws IOException {
+    api.createNamespacedPod(NAMESPACE, Pod.builder()
         .metadata(ObjectMeta.builder()
             .name(POD_NAME)
             .putInLabels("app", "yakc-pod-example")
@@ -113,6 +112,12 @@ public class PodQuickstart {
                 .build())
             .build())
         .build()).get();
+    System.out.printf("Waiting for POD %s to be created%n", POD_NAME);
+    api.listNamespacedPod(NAMESPACE).watch()
+        .filter(we -> we.getObject().getMetadata().getName().equals(POD_NAME))
+        .takeUntil(we -> we.getType() == Type.ADDED)
+        .subscribe();
+    System.out.printf("POD %s was created%n", POD_NAME);
   }
 
   private static Pod patchPodLabels(CoreV1Api api) throws IOException {
@@ -132,7 +137,7 @@ public class PodQuickstart {
             .build())
         .build()).get();
   }
-  private static Disposable watchPod(CoreV1Api api, CountDownLatch podDelete, CountDownLatch podAdd) throws IOException {
+  private static Disposable monitorPods(CoreV1Api api) throws IOException {
     return api.listNamespacedPod(NAMESPACE)
         .watch()
         .subscribeOn(Schedulers.io())
@@ -140,18 +145,14 @@ public class PodQuickstart {
         .doOnComplete(() ->
             System.out.println("This won't happen unless the InputStream from k8s is closed")
         )
-        .subscribe(we -> {
-          System.out.printf("    ++ New Watch Event %-15s - %s/%s (%s) [%s]%n",
+        .subscribe(we ->
+          System.out.printf("         ++ New Watch Event %-10s - %s/%s (%s) [%s]%n",
               we.getType(),
               we.getObject().getMetadata().getNamespace(),
               we.getObject().getMetadata().getName(),
               we.getObject().getMetadata().getCreationTimestamp(),
               we.getObject().getMetadata().getLabels()
-          );
-          switch (we.getType()) {
-            case ADDED: podAdd.countDown(); break;
-            case DELETED: podDelete.countDown(); break;
-          }
-        }, e -> System.out.println("Received error: " + e));
+          ), e -> System.out.println("Received error: " + e));
   }
+
 }

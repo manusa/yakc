@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.marcnuri.yakc.quickstarts</groupId>
   <artifactId>pods</artifactId>
-  <version>0.0.0</version>
+  <version>0.0.1</version>
   <name>YAKC :: Quickstarts :: Pods</name>
 
   <properties>
@@ -15,12 +15,12 @@
     <dependency>
       <groupId>com.marcnuri.yakc</groupId>
       <artifactId>kubernetes-api</artifactId>
-      <version>0.0.0</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>com.marcnuri.yakc</groupId>
       <artifactId>kubernetes-client</artifactId>
-      <version>0.0.0</version>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
   <build>
