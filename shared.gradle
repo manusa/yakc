@@ -26,7 +26,7 @@ java {
 
 
 ext.configurePublishing = { Project evaluatedProject ->
-  if (!evaluatedProject.isPublishable) {
+  if (!evaluatedProject.isPublishable || project.hasProperty("skipPublishing")) {
     return
   }
   apply plugin: 'maven'
