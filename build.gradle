@@ -3,6 +3,8 @@ import com.marcnuri.yack.schema.model.ModelGeneratorTask
 
 plugins {
   id 'java-library'
+  id 'jacoco'
+  id 'org.sonarqube' version '2.7'
 }
 
 apply from: 'shared.gradle'
@@ -26,8 +28,46 @@ task generateApi(type: ApiGeneratorTask) {
 
 allprojects  {
   apply plugin: 'java-library'
+  apply plugin: 'jacoco'
   afterEvaluate {
-    Project evaluatedProject -> configurePublishing(evaluatedProject)
+    Project evaluatedProject ->
+      configurePublishing(evaluatedProject)
+//      jacocoTestReport {
+//        executionData = fileTree(dir: evaluatedProject.projectDir, includes: ["**/*.exec"])
+//        reports {
+//          xml.enabled = true
+//          html.enabled = true
+//        }
+//      }
+    }
+  }
+
+task jacocoRootReport(type: JacocoReport) {
+  group = 'verification'
+  dependsOn = subprojects.test
+  additionalSourceDirs.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
+  sourceDirectories.setFrom files(subprojects.sourceSets.main.allSource.srcDirs)
+  classDirectories.setFrom files(subprojects.sourceSets.main.output)
+  executionData.setFrom project.fileTree(dir: '.', include: '**/build/jacoco/test.exec')
+  reports {
+    xml.enabled true
+    csv.enabled true
+    html.enabled true
+  }
+}
+
+sonarqube {
+  properties {
+    property "sonar.host.url", "https://sonarcloud.io"
+    property "sonar.projectKey", "manusa_yakc"
+    property "sonar.organization", "manusa-github"
+    property "sonar.cpd.exclusions", "kubernetes-api/**/*,kubernetes-model/**/*"
+    property "sonar.links.homepage", "https://github.com/manusa/yakc"
+    property "sonar.links.ci", "https://github.com/manusa/yakc/actions"
+    property "sonar.links.scm", "https://github.com/manusa/yakc"
+    property "sonar.links.issue", "https://github.com/manusa/yakc/issues"
+    property "sonar.coverage.jacoco.xmlReportPaths",
+      file("$buildDir/reports/jacoco/jacocoRootReport/jacocoRootReport.xml").toString()
   }
 }
 
