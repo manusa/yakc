@@ -16,20 +16,20 @@ Please try it out and share your opinion, but use at your own risk.
   <dependency>
     <groupId>com.marcnuri.yakc</groupId>
     <artifactId>kubernetes-api</artifactId>
-    <version>0.0.0</version>
+    <version>0.0.1</version>
   </dependency>
   <dependency>
     <groupId>com.marcnuri.yakc</groupId>
     <artifactId>kubernetes-client</artifactId>
-    <version>0.0.0</version>
+    <version>0.0.1</version>
   </dependency>
 </dependencies>
 ```
 #### Gradle
 ```groovy
 dependencies {
-  compile 'com.marcnuri.yakc:kubernetes-api:0.0.0'
-  compile 'com.marcnuri.yakc:kubernetes-client:0.0.0'
+  compile 'com.marcnuri.yakc:kubernetes-api:0.0.1'
+  compile 'com.marcnuri.yakc:kubernetes-client:0.0.1'
 }
 ```
 #### List all Pods
@@ -43,24 +43,40 @@ try (KubernetesClient kc = new KubernetesClient()) {
 
 ### Quick start example projects
 
-Check the [quickstarts](quickstarts) directory for projects ready to use with illustrative examples on how to use
-the client.
+Check the [quickstarts](quickstarts) directory for projects ready to use with illustrative examples
+on how to use the client.
 
 - [Pod](quickstarts/pod) contains a Maven project with examples to the diverse available API operations
-for  Pod resources. See nested [README.md](quickstarts/pod/README.md) for more information.
+  for  Pod resources.
+  See nested [README.md](quickstarts/pod/README.md) for more information.
+- [Top for Nodes](quickstarts/top-nodes) contains a Maven project with an example on how to query
+  Nodes and Pod containers to calculate resource availability and usage.
+  See nested [README.md](quickstarts/top-nodes/README.md) for more information.
 ## Modules
 
 ### kubernetes-client-api
+![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc/kubernetes-client-api)
+[![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc/kubernetes-client-api/javadoc.svg)](https://javadoc.io/doc/com.marcnuri.yakc/kubernetes-client-api)
+
 Provides the basic interfaces and Exception types to be used across the different modules.
 
 ### kubernetes-model
+![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc/kubernetes-model)
+[![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc/kubernetes-model/javadoc.svg)](https://javadoc.io/doc/com.marcnuri.yakc/kubernetes-model)
+
 Kubernetes model objects to be used for REST API serialization/deserialization.
 
 ### kubernetes-api
+![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc/kubernetes-api)
+[![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc/kubernetes-api/javadoc.svg)](https://javadoc.io/doc/com.marcnuri.yakc/kubernetes-api)
+
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for the latest
 [Kubernetes JSON](https://github.com/kubernetes/kubernetes/blob/master/api/openapi-spec/swagger.json)
 [OpenAPI](https://swagger.io/specification/) schema.
 
 ### kubernetes-client
+![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc/kubernetes-client)
+[![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc/kubernetes-client/javadoc.svg)](https://javadoc.io/doc/com.marcnuri.yakc/kubernetes-client)
+
 Kubernetes Retrofit2 based Java client to be used with kubernetes-api.
 
