@@ -49,7 +49,7 @@ public class StatefulSetStatus implements Model {
    * Represents the latest available observations of a statefulset's current state.
    */
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<StatefulSetCondition> conditions;
 
   /**

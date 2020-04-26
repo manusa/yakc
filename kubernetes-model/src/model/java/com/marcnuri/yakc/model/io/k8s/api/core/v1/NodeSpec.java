@@ -57,7 +57,7 @@ public class NodeSpec implements Model {
    * podCIDRs represents the IP ranges assigned to the node for usage by Pods on that node. If this field is specified, the 0th entry must match the podCIDR field. It may contain at most 1 value for each of IPv4 and IPv6.
    */
   @JsonProperty("podCIDRs")
-  @Singular("addToPodCIDRs")
+  @Singular(value = "addToPodCIDRs", ignoreNullCollections = true)
   private List<String> podCIDRs;
 
   /**
@@ -70,7 +70,7 @@ public class NodeSpec implements Model {
    * If specified, the node's taints.
    */
   @JsonProperty("taints")
-  @Singular("addToTaints")
+  @Singular(value = "addToTaints", ignoreNullCollections = true)
   private List<Taint> taints;
 
   /**

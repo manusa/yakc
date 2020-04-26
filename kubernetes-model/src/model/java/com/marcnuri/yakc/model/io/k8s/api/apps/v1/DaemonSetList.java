@@ -52,7 +52,7 @@ public class DaemonSetList implements Model, ListModel<DaemonSet> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<DaemonSet> items;
 
   /**

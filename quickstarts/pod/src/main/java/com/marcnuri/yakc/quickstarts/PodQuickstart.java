@@ -106,6 +106,7 @@ public class PodQuickstart {
             .putInAnnotations("com.marcnuri.yakc", "pod-example")
             .build())
         .spec(PodSpec.builder()
+          .overhead(null)
             .addToContainers(Container.builder()
                 .image("containous/whoami")
                 .name("java-test-pod")

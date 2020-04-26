@@ -43,28 +43,28 @@ public class EphemeralContainer implements Model {
    * Arguments to the entrypoint. The docker image's CMD is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
    */
   @JsonProperty("args")
-  @Singular("addToArgs")
+  @Singular(value = "addToArgs", ignoreNullCollections = true)
   private List<String> args;
 
   /**
    * Entrypoint array. Not executed within a shell. The docker image's ENTRYPOINT is used if this is not provided. Variable references $(VAR_NAME) are expanded using the container's environment. If a variable cannot be resolved, the reference in the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie: $$(VAR_NAME). Escaped references will never be expanded, regardless of whether the variable exists or not. Cannot be updated. More info: https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
    */
   @JsonProperty("command")
-  @Singular("addToCommand")
+  @Singular(value = "addToCommand", ignoreNullCollections = true)
   private List<String> command;
 
   /**
    * List of environment variables to set in the container. Cannot be updated.
    */
   @JsonProperty("env")
-  @Singular("addToEnv")
+  @Singular(value = "addToEnv", ignoreNullCollections = true)
   private List<EnvVar> env;
 
   /**
    * List of sources to populate environment variables in the container. The keys defined within a source must be a C_IDENTIFIER. All invalid keys will be reported as an event when the container is starting. When a key exists in multiple sources, the value associated with the last source will take precedence. Values defined by an Env with a duplicate key will take precedence. Cannot be updated.
    */
   @JsonProperty("envFrom")
-  @Singular("addToEnvFrom")
+  @Singular(value = "addToEnvFrom", ignoreNullCollections = true)
   private List<EnvFromSource> envFrom;
 
   /**
@@ -96,7 +96,7 @@ public class EphemeralContainer implements Model {
    * Ports are not allowed for ephemeral containers.
    */
   @JsonProperty("ports")
-  @Singular("addToPorts")
+  @Singular(value = "addToPorts", ignoreNullCollections = true)
   private List<ContainerPort> ports;
 
   @JsonProperty("readinessProbe")
@@ -151,14 +151,14 @@ public class EphemeralContainer implements Model {
    * volumeDevices is the list of block devices to be used by the container.
    */
   @JsonProperty("volumeDevices")
-  @Singular("addToVolumeDevices")
+  @Singular(value = "addToVolumeDevices", ignoreNullCollections = true)
   private List<VolumeDevice> volumeDevices;
 
   /**
    * Pod volumes to mount into the container's filesystem. Cannot be updated.
    */
   @JsonProperty("volumeMounts")
-  @Singular("addToVolumeMounts")
+  @Singular(value = "addToVolumeMounts", ignoreNullCollections = true)
   private List<VolumeMount> volumeMounts;
 
   /**

@@ -48,7 +48,7 @@ public class DeleteOptions implements Model {
    * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
    */
   @JsonProperty("dryRun")
-  @Singular("addToDryRun")
+  @Singular(value = "addToDryRun", ignoreNullCollections = true)
   private List<String> dryRun;
 
   /**

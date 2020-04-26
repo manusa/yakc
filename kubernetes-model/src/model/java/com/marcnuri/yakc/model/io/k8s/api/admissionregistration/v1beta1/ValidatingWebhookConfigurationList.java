@@ -52,7 +52,7 @@ public class ValidatingWebhookConfigurationList implements Model, ListModel<Vali
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<ValidatingWebhookConfiguration> items;
 
   /**

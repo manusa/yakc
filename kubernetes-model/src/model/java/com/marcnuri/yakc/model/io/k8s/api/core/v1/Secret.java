@@ -49,7 +49,7 @@ public class Secret implements Model {
    * Data contains the secret data. Each key must consist of alphanumeric characters, '-', '_' or '.'. The serialized form of the secret data is a base64 encoded string, representing the arbitrary (possibly non-string) data value here. Described in https://tools.ietf.org/html/rfc4648#section-4
    */
   @JsonProperty("data")
-  @Singular("putInData")
+  @Singular(value = "putInData", ignoreNullCollections = true)
   private Map<String, String> data;
 
   /**
@@ -71,7 +71,7 @@ public class Secret implements Model {
    * stringData allows specifying non-binary secret data in string form. It is provided as a write-only convenience method. All keys and values are merged into the data field on write, overwriting any existing values. It is never output when reading from the API.
    */
   @JsonProperty("stringData")
-  @Singular("putInStringData")
+  @Singular(value = "putInStringData", ignoreNullCollections = true)
   private Map<String, String> stringData;
 
   /**

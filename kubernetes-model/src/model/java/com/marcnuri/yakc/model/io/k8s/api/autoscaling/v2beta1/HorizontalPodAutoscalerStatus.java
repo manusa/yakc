@@ -45,14 +45,14 @@ public class HorizontalPodAutoscalerStatus implements Model {
    */
   @NonNull
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<HorizontalPodAutoscalerCondition> conditions;
 
   /**
    * currentMetrics is the last read state of the metrics used by this autoscaler.
    */
   @JsonProperty("currentMetrics")
-  @Singular("addToCurrentMetrics")
+  @Singular(value = "addToCurrentMetrics", ignoreNullCollections = true)
   private List<MetricStatus> currentMetrics;
 
   /**

@@ -52,7 +52,7 @@ public class SecretList implements Model, ListModel<Secret> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<Secret> items;
 
   /**

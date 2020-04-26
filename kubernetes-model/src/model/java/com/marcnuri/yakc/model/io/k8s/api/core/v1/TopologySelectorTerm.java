@@ -42,7 +42,7 @@ public class TopologySelectorTerm implements Model {
    * A list of topology selector requirements by labels.
    */
   @JsonProperty("matchLabelExpressions")
-  @Singular("addToMatchLabelExpressions")
+  @Singular(value = "addToMatchLabelExpressions", ignoreNullCollections = true)
   private List<TopologySelectorLabelRequirement> matchLabelExpressions;
 
 }

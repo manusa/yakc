@@ -52,7 +52,7 @@ public class PodSecurityPolicyList implements Model, ListModel<PodSecurityPolicy
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<PodSecurityPolicy> items;
 
   /**

@@ -44,7 +44,7 @@ public class ContainerImage implements Model {
    */
   @NonNull
   @JsonProperty("names")
-  @Singular("addToNames")
+  @Singular(value = "addToNames", ignoreNullCollections = true)
   private List<String> names;
 
   /**

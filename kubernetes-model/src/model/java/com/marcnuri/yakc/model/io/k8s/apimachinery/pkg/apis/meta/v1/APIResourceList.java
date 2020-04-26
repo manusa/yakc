@@ -63,7 +63,7 @@ public class APIResourceList implements Model {
    */
   @NonNull
   @JsonProperty("resources")
-  @Singular("addToResources")
+  @Singular(value = "addToResources", ignoreNullCollections = true)
   private List<APIResource> resources;
 
 }

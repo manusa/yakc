@@ -49,7 +49,7 @@ public class HTTPGetAction implements Model {
    * Custom headers to set in the request. HTTP allows repeated headers.
    */
   @JsonProperty("httpHeaders")
-  @Singular("addToHttpHeaders")
+  @Singular(value = "addToHttpHeaders", ignoreNullCollections = true)
   private List<HTTPHeader> httpHeaders;
 
   /**

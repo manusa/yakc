@@ -87,7 +87,7 @@ public class ISCSIVolumeSource implements Model {
    * iSCSI Target Portal List. The portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260).
    */
   @JsonProperty("portals")
-  @Singular("addToPortals")
+  @Singular(value = "addToPortals", ignoreNullCollections = true)
   private List<String> portals;
 
   /**

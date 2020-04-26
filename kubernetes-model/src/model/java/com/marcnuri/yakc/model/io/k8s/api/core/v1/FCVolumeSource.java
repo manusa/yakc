@@ -60,14 +60,14 @@ public class FCVolumeSource implements Model {
    * Optional: FC target worldwide names (WWNs)
    */
   @JsonProperty("targetWWNs")
-  @Singular("addToTargetWWNs")
+  @Singular(value = "addToTargetWWNs", ignoreNullCollections = true)
   private List<String> targetWWNs;
 
   /**
    * Optional: FC volume world wide identifiers (wwids) Either wwids or combination of targetWWNs and lun must be set, but not both simultaneously.
    */
   @JsonProperty("wwids")
-  @Singular("addToWwids")
+  @Singular(value = "addToWwids", ignoreNullCollections = true)
   private List<String> wwids;
 
 }

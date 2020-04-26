@@ -43,35 +43,35 @@ public class LimitRangeItem implements Model {
    * Default resource requirement limit value by resource name if resource limit is omitted.
    */
   @JsonProperty("default")
-  @Singular("putInDefaults")
+  @Singular(value = "putInDefaults", ignoreNullCollections = true)
   private Map<String, String> defaults;
 
   /**
    * DefaultRequest is the default resource requirement request value by resource name if resource request is omitted.
    */
   @JsonProperty("defaultRequest")
-  @Singular("putInDefaultRequest")
+  @Singular(value = "putInDefaultRequest", ignoreNullCollections = true)
   private Map<String, String> defaultRequest;
 
   /**
    * Max usage constraints on this kind by resource name.
    */
   @JsonProperty("max")
-  @Singular("putInMax")
+  @Singular(value = "putInMax", ignoreNullCollections = true)
   private Map<String, String> max;
 
   /**
    * MaxLimitRequestRatio if specified, the named resource must have a request and limit that are both non-zero where limit divided by request is less than or equal to the enumerated value; this represents the max burst for the named resource.
    */
   @JsonProperty("maxLimitRequestRatio")
-  @Singular("putInMaxLimitRequestRatio")
+  @Singular(value = "putInMaxLimitRequestRatio", ignoreNullCollections = true)
   private Map<String, String> maxLimitRequestRatio;
 
   /**
    * Min usage constraints on this kind by resource name.
    */
   @JsonProperty("min")
-  @Singular("putInMin")
+  @Singular(value = "putInMin", ignoreNullCollections = true)
   private Map<String, String> min;
 
   /**

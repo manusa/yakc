@@ -44,7 +44,7 @@ public class CSINodeSpec implements Model {
    */
   @NonNull
   @JsonProperty("drivers")
-  @Singular("addToDrivers")
+  @Singular(value = "addToDrivers", ignoreNullCollections = true)
   private List<CSINodeDriver> drivers;
 
 }

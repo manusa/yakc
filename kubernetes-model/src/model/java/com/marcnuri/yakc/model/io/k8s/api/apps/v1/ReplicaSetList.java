@@ -52,7 +52,7 @@ public class ReplicaSetList implements Model, ListModel<ReplicaSet> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<ReplicaSet> items;
 
   /**

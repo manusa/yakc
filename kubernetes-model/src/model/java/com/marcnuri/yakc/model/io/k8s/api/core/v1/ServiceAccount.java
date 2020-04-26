@@ -55,7 +55,7 @@ public class ServiceAccount implements Model {
    * ImagePullSecrets is a list of references to secrets in the same namespace to use for pulling any images in pods that reference this ServiceAccount. ImagePullSecrets are distinct from Secrets because Secrets can be mounted in the pod, but ImagePullSecrets are only accessed by the kubelet. More info: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
    */
   @JsonProperty("imagePullSecrets")
-  @Singular("addToImagePullSecrets")
+  @Singular(value = "addToImagePullSecrets", ignoreNullCollections = true)
   private List<LocalObjectReference> imagePullSecrets;
 
   /**
@@ -71,7 +71,7 @@ public class ServiceAccount implements Model {
    * Secrets is the list of secrets allowed to be used by pods running using this ServiceAccount. More info: https://kubernetes.io/docs/concepts/configuration/secret
    */
   @JsonProperty("secrets")
-  @Singular("addToSecrets")
+  @Singular(value = "addToSecrets", ignoreNullCollections = true)
   private List<ObjectReference> secrets;
 
 }

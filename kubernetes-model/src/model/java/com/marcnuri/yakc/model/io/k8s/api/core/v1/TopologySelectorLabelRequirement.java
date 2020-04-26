@@ -51,7 +51,7 @@ public class TopologySelectorLabelRequirement implements Model {
    */
   @NonNull
   @JsonProperty("values")
-  @Singular("addToValues")
+  @Singular(value = "addToValues", ignoreNullCollections = true)
   private List<String> values;
 
 }

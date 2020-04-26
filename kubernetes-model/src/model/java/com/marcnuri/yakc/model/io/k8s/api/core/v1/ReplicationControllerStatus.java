@@ -49,7 +49,7 @@ public class ReplicationControllerStatus implements Model {
    * Represents the latest available observations of a replication controller's current state.
    */
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<ReplicationControllerCondition> conditions;
 
   /**

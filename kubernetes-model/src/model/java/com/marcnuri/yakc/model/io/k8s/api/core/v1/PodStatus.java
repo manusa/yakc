@@ -43,21 +43,21 @@ public class PodStatus implements Model {
    * Current service state of pod. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions
    */
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<PodCondition> conditions;
 
   /**
    * The list has one entry per container in the manifest. Each entry is currently the output of `docker inspect`. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
    */
   @JsonProperty("containerStatuses")
-  @Singular("addToContainerStatuses")
+  @Singular(value = "addToContainerStatuses", ignoreNullCollections = true)
   private List<ContainerStatus> containerStatuses;
 
   /**
    * Status for any ephemeral containers that have run in this pod. This field is alpha-level and is only populated by servers that enable the EphemeralContainers feature.
    */
   @JsonProperty("ephemeralContainerStatuses")
-  @Singular("addToEphemeralContainerStatuses")
+  @Singular(value = "addToEphemeralContainerStatuses", ignoreNullCollections = true)
   private List<ContainerStatus> ephemeralContainerStatuses;
 
   /**
@@ -70,7 +70,7 @@ public class PodStatus implements Model {
    * The list has one entry per init container in the manifest. The most recent successful init container will have ready = true, the most recently started container will have startTime set. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
    */
   @JsonProperty("initContainerStatuses")
-  @Singular("addToInitContainerStatuses")
+  @Singular(value = "addToInitContainerStatuses", ignoreNullCollections = true)
   private List<ContainerStatus> initContainerStatuses;
 
   /**
@@ -101,7 +101,7 @@ public class PodStatus implements Model {
    * podIPs holds the IP addresses allocated to the pod. If this field is specified, the 0th entry must match the podIP field. Pods may be allocated at most 1 value for each of IPv4 and IPv6. This list is empty if no IPs have been allocated yet.
    */
   @JsonProperty("podIPs")
-  @Singular("addToPodIPs")
+  @Singular(value = "addToPodIPs", ignoreNullCollections = true)
   private List<PodIP> podIPs;
 
   /**

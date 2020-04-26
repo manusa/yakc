@@ -44,7 +44,7 @@ public class RuntimeClassStrategyOptions implements Model {
    */
   @NonNull
   @JsonProperty("allowedRuntimeClassNames")
-  @Singular("addToAllowedRuntimeClassNames")
+  @Singular(value = "addToAllowedRuntimeClassNames", ignoreNullCollections = true)
   private List<String> allowedRuntimeClassNames;
 
   /**

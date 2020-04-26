@@ -74,7 +74,7 @@ public class CSIPersistentVolumeSource implements Model {
    * Attributes of the volume to publish.
    */
   @JsonProperty("volumeAttributes")
-  @Singular("putInVolumeAttributes")
+  @Singular(value = "putInVolumeAttributes", ignoreNullCollections = true)
   private Map<String, String> volumeAttributes;
 
   /**

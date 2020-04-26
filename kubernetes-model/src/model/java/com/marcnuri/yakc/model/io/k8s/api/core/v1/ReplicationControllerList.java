@@ -52,7 +52,7 @@ public class ReplicationControllerList implements Model, ListModel<ReplicationCo
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<ReplicationController> items;
 
   /**

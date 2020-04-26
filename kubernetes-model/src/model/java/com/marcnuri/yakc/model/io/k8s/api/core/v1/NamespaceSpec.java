@@ -42,7 +42,7 @@ public class NamespaceSpec implements Model {
    * Finalizers is an opaque list of values that must be empty to permanently remove object from storage. More info: https://kubernetes.io/docs/tasks/administer-cluster/namespaces/
    */
   @JsonProperty("finalizers")
-  @Singular("addToFinalizers")
+  @Singular(value = "addToFinalizers", ignoreNullCollections = true)
   private List<String> finalizers;
 
 }

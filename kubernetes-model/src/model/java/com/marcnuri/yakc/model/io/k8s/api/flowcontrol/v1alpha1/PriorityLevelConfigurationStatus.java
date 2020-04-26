@@ -42,7 +42,7 @@ public class PriorityLevelConfigurationStatus implements Model {
    * `conditions` is the current state of "request-priority".
    */
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<PriorityLevelConfigurationCondition> conditions;
 
 }

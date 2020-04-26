@@ -42,7 +42,7 @@ public class Overhead implements Model {
    * PodFixed represents the fixed resource overhead associated with running a pod.
    */
   @JsonProperty("podFixed")
-  @Singular("putInPodFixed")
+  @Singular(value = "putInPodFixed", ignoreNullCollections = true)
   private Map<String, String> podFixed;
 
 }

@@ -44,7 +44,7 @@ public class HTTPIngressRuleValue implements Model {
    */
   @NonNull
   @JsonProperty("paths")
-  @Singular("addToPaths")
+  @Singular(value = "addToPaths", ignoreNullCollections = true)
   private List<HTTPIngressPath> paths;
 
 }

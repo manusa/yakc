@@ -42,14 +42,14 @@ public class NodeSelectorTerm implements Model {
    * A list of node selector requirements by node's labels.
    */
   @JsonProperty("matchExpressions")
-  @Singular("addToMatchExpressions")
+  @Singular(value = "addToMatchExpressions", ignoreNullCollections = true)
   private List<NodeSelectorRequirement> matchExpressions;
 
   /**
    * A list of node selector requirements by node's fields.
    */
   @JsonProperty("matchFields")
-  @Singular("addToMatchFields")
+  @Singular(value = "addToMatchFields", ignoreNullCollections = true)
   private List<NodeSelectorRequirement> matchFields;
 
 }

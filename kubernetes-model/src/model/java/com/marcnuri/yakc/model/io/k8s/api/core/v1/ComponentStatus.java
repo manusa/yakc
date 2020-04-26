@@ -49,7 +49,7 @@ public class ComponentStatus implements Model {
    * List of component conditions observed
    */
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<ComponentCondition> conditions;
 
   /**

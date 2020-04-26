@@ -52,7 +52,7 @@ public class PersistentVolumeList implements Model, ListModel<PersistentVolume> 
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<PersistentVolume> items;
 
   /**

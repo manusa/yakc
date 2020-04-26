@@ -65,7 +65,7 @@ public class CSIVolumeSource implements Model {
    * VolumeAttributes stores driver-specific properties that are passed to the CSI driver. Consult your driver's documentation for supported values.
    */
   @JsonProperty("volumeAttributes")
-  @Singular("putInVolumeAttributes")
+  @Singular(value = "putInVolumeAttributes", ignoreNullCollections = true)
   private Map<String, String> volumeAttributes;
 
 }

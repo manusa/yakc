@@ -42,7 +42,7 @@ public class HostAlias implements Model {
    * Hostnames for the above IP address.
    */
   @JsonProperty("hostnames")
-  @Singular("addToHostnames")
+  @Singular(value = "addToHostnames", ignoreNullCollections = true)
   private List<String> hostnames;
 
   /**

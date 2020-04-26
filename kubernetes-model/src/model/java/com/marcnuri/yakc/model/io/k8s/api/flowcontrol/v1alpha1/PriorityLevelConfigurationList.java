@@ -52,7 +52,7 @@ public class PriorityLevelConfigurationList implements Model, ListModel<Priority
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<PriorityLevelConfiguration> items;
 
   /**

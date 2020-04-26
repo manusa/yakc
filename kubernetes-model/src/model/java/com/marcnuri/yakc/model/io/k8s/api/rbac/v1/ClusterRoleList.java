@@ -52,7 +52,7 @@ public class ClusterRoleList implements Model, ListModel<ClusterRole> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<ClusterRole> items;
 
   /**

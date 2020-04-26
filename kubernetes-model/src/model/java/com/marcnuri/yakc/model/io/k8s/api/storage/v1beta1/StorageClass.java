@@ -52,7 +52,7 @@ public class StorageClass implements Model {
    * Restrict the node topologies where volumes can be dynamically provisioned. Each volume plugin defines its own supported topology specifications. An empty TopologySelectorTerm list means there is no topology restriction. This field is only honored by servers that enable the VolumeScheduling feature.
    */
   @JsonProperty("allowedTopologies")
-  @Singular("addToAllowedTopologies")
+  @Singular(value = "addToAllowedTopologies", ignoreNullCollections = true)
   private List<TopologySelectorTerm> allowedTopologies;
 
   /**
@@ -74,14 +74,14 @@ public class StorageClass implements Model {
    * Dynamically provisioned PersistentVolumes of this storage class are created with these mountOptions, e.g. ["ro", "soft"]. Not validated - mount of the PVs will simply fail if one is invalid.
    */
   @JsonProperty("mountOptions")
-  @Singular("addToMountOptions")
+  @Singular(value = "addToMountOptions", ignoreNullCollections = true)
   private List<String> mountOptions;
 
   /**
    * Parameters holds the parameters for the provisioner that should create volumes of this storage class.
    */
   @JsonProperty("parameters")
-  @Singular("putInParameters")
+  @Singular(value = "putInParameters", ignoreNullCollections = true)
   private Map<String, String> parameters;
 
   /**

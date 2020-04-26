@@ -43,7 +43,7 @@ public class CustomResourceDefinitionVersion implements Model {
    * additionalPrinterColumns specifies additional columns returned in Table output. See https://kubernetes.io/docs/reference/using-api/api-concepts/#receiving-resources-as-tables for details. Top-level and per-version columns are mutually exclusive. Per-version columns must not all be set to identical values (top-level columns should be used instead). If no top-level or per-version columns are specified, a single column displaying the age of the custom resource is used.
    */
   @JsonProperty("additionalPrinterColumns")
-  @Singular("addToAdditionalPrinterColumns")
+  @Singular(value = "addToAdditionalPrinterColumns", ignoreNullCollections = true)
   private List<CustomResourceColumnDefinition> additionalPrinterColumns;
 
   /**

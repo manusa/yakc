@@ -50,7 +50,7 @@ public class ProjectedVolumeSource implements Model {
    */
   @NonNull
   @JsonProperty("sources")
-  @Singular("addToSources")
+  @Singular(value = "addToSources", ignoreNullCollections = true)
   private List<VolumeProjection> sources;
 
 }

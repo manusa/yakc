@@ -42,7 +42,7 @@ public class StatusDetails implements Model {
    * The Causes array includes more details associated with the StatusReason failure. Not all StatusReasons may provide detailed causes.
    */
   @JsonProperty("causes")
-  @Singular("addToCauses")
+  @Singular(value = "addToCauses", ignoreNullCollections = true)
   private List<StatusCause> causes;
 
   /**

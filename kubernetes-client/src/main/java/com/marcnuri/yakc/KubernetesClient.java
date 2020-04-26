@@ -101,6 +101,7 @@ public class KubernetesClient implements Closeable {
     objectMapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
     objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     objectMapper.setSerializationInclusion(Include.NON_NULL);
+    objectMapper.setSerializationInclusion(Include.NON_EMPTY);
     objectMapper.registerModule(new JavaTimeModule());
     return objectMapper;
   }

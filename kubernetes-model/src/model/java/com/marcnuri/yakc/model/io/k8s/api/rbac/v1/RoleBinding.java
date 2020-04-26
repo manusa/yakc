@@ -63,7 +63,7 @@ public class RoleBinding implements Model {
    * Subjects holds references to the objects the role applies to.
    */
   @JsonProperty("subjects")
-  @Singular("addToSubjects")
+  @Singular(value = "addToSubjects", ignoreNullCollections = true)
   private List<Subject> subjects;
 
 }

@@ -44,7 +44,7 @@ public class CronJobStatus implements Model {
    * A list of pointers to currently running jobs.
    */
   @JsonProperty("active")
-  @Singular("addToActive")
+  @Singular(value = "addToActive", ignoreNullCollections = true)
   private List<ObjectReference> active;
 
   @JsonProperty("lastScheduleTime")

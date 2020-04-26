@@ -56,7 +56,7 @@ public class FlexVolumeSource implements Model {
    * Optional: Extra command options if any.
    */
   @JsonProperty("options")
-  @Singular("putInOptions")
+  @Singular(value = "putInOptions", ignoreNullCollections = true)
   private Map<String, String> options;
 
   /**

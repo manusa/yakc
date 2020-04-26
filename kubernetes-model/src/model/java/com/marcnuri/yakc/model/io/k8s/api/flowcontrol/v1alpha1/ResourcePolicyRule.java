@@ -44,7 +44,7 @@ public class ResourcePolicyRule implements Model {
    */
   @NonNull
   @JsonProperty("apiGroups")
-  @Singular("addToApiGroups")
+  @Singular(value = "addToApiGroups", ignoreNullCollections = true)
   private List<String> apiGroups;
 
   /**
@@ -57,7 +57,7 @@ public class ResourcePolicyRule implements Model {
    * `namespaces` is a list of target namespaces that restricts matches.  A request that specifies a target namespace matches only if either (a) this list contains that target namespace or (b) this list contains "&#42;".  Note that "&#42;" matches any specified namespace but does not match a request that _does not specify_ a namespace (see the `clusterScope` field for that). This list may be empty, but only if `clusterScope` is true.
    */
   @JsonProperty("namespaces")
-  @Singular("addToNamespaces")
+  @Singular(value = "addToNamespaces", ignoreNullCollections = true)
   private List<String> namespaces;
 
   /**
@@ -65,7 +65,7 @@ public class ResourcePolicyRule implements Model {
    */
   @NonNull
   @JsonProperty("resources")
-  @Singular("addToResources")
+  @Singular(value = "addToResources", ignoreNullCollections = true)
   private List<String> resources;
 
   /**
@@ -73,7 +73,7 @@ public class ResourcePolicyRule implements Model {
    */
   @NonNull
   @JsonProperty("verbs")
-  @Singular("addToVerbs")
+  @Singular(value = "addToVerbs", ignoreNullCollections = true)
   private List<String> verbs;
 
 }

@@ -57,7 +57,7 @@ public class SubjectRulesReviewStatus implements Model {
    */
   @NonNull
   @JsonProperty("nonResourceRules")
-  @Singular("addToNonResourceRules")
+  @Singular(value = "addToNonResourceRules", ignoreNullCollections = true)
   private List<NonResourceRule> nonResourceRules;
 
   /**
@@ -65,7 +65,7 @@ public class SubjectRulesReviewStatus implements Model {
    */
   @NonNull
   @JsonProperty("resourceRules")
-  @Singular("addToResourceRules")
+  @Singular(value = "addToResourceRules", ignoreNullCollections = true)
   private List<ResourceRule> resourceRules;
 
 }

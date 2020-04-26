@@ -52,7 +52,7 @@ public class FlowSchemaList implements Model, ListModel<FlowSchema> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<FlowSchema> items;
 
   /**

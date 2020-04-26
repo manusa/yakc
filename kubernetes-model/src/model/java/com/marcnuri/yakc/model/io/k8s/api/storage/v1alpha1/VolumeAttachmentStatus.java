@@ -53,7 +53,7 @@ public class VolumeAttachmentStatus implements Model {
    * Upon successful attach, this field is populated with any information returned by the attach operation that must be passed into subsequent WaitForAttach or Mount calls. This field must only be set by the entity completing the attach operation, i.e. the external-attacher.
    */
   @JsonProperty("attachmentMetadata")
-  @Singular("putInAttachmentMetadata")
+  @Singular(value = "putInAttachmentMetadata", ignoreNullCollections = true)
   private Map<String, String> attachmentMetadata;
 
   @JsonProperty("detachError")

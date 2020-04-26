@@ -42,7 +42,7 @@ public class FlowSchemaStatus implements Model {
    * `conditions` is a list of the current states of FlowSchema.
    */
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<FlowSchemaCondition> conditions;
 
 }

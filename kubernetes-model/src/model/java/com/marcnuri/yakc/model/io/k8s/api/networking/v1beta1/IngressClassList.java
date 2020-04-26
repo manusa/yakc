@@ -52,7 +52,7 @@ public class IngressClassList implements Model, ListModel<IngressClass> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<IngressClass> items;
 
   /**

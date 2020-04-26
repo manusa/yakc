@@ -49,7 +49,7 @@ public class ReplicaSetStatus implements Model {
    * Represents the latest available observations of a replica set's current state.
    */
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<ReplicaSetCondition> conditions;
 
   /**

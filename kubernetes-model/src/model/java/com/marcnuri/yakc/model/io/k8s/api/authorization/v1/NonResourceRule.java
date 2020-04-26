@@ -43,7 +43,7 @@ public class NonResourceRule implements Model {
    * NonResourceURLs is a set of partial urls that a user should have access to.  &#42;s are allowed, but only as the full, final step in the path.  "&#42;" means all.
    */
   @JsonProperty("nonResourceURLs")
-  @Singular("addToNonResourceURLs")
+  @Singular(value = "addToNonResourceURLs", ignoreNullCollections = true)
   private List<String> nonResourceURLs;
 
   /**
@@ -51,7 +51,7 @@ public class NonResourceRule implements Model {
    */
   @NonNull
   @JsonProperty("verbs")
-  @Singular("addToVerbs")
+  @Singular(value = "addToVerbs", ignoreNullCollections = true)
   private List<String> verbs;
 
 }

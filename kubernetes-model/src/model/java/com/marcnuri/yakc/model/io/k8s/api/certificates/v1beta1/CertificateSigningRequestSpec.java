@@ -44,14 +44,14 @@ public class CertificateSigningRequestSpec implements Model {
    * Extra information about the requesting user. See user.Info interface for details.
    */
   @JsonProperty("extra")
-  @Singular("putInExtra")
+  @Singular(value = "putInExtra", ignoreNullCollections = true)
   private Map<String, List<String>> extra;
 
   /**
    * Group information about the requesting user. See user.Info interface for details.
    */
   @JsonProperty("groups")
-  @Singular("addToGroups")
+  @Singular(value = "addToGroups", ignoreNullCollections = true)
   private List<String> groups;
 
   /**
@@ -77,7 +77,7 @@ public class CertificateSigningRequestSpec implements Model {
    * allowedUsages specifies a set of usage contexts the key will be valid for. See: https://tools.ietf.org/html/rfc5280#section-4.2.1.3<br><p>      https://tools.ietf.org/html/rfc5280#section-4.2.1.12
    */
   @JsonProperty("usages")
-  @Singular("addToUsages")
+  @Singular(value = "addToUsages", ignoreNullCollections = true)
   private List<String> usages;
 
   /**

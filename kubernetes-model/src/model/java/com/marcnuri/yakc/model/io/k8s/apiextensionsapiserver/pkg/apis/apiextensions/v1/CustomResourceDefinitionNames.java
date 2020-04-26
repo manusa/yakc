@@ -43,7 +43,7 @@ public class CustomResourceDefinitionNames implements Model {
    * categories is a list of grouped resources this custom resource belongs to (e.g. 'all'). This is published in API discovery documents, and used by clients to support invocations like `kubectl get all`.
    */
   @JsonProperty("categories")
-  @Singular("addToCategories")
+  @Singular(value = "addToCategories", ignoreNullCollections = true)
   private List<String> categories;
 
   /**
@@ -70,7 +70,7 @@ public class CustomResourceDefinitionNames implements Model {
    * shortNames are short names for the resource, exposed in API discovery documents, and used by clients to support invocations like `kubectl get &lt;shortname&gt;`. It must be all lowercase.
    */
   @JsonProperty("shortNames")
-  @Singular("addToShortNames")
+  @Singular(value = "addToShortNames", ignoreNullCollections = true)
   private List<String> shortNames;
 
   /**

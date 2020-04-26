@@ -43,14 +43,14 @@ public class PolicyRulesWithSubjects implements Model {
    * `nonResourceRules` is a list of NonResourcePolicyRules that identify matching requests according to their verb and the target non-resource URL.
    */
   @JsonProperty("nonResourceRules")
-  @Singular("addToNonResourceRules")
+  @Singular(value = "addToNonResourceRules", ignoreNullCollections = true)
   private List<NonResourcePolicyRule> nonResourceRules;
 
   /**
    * `resourceRules` is a slice of ResourcePolicyRules that identify matching requests according to their verb and the target resource. At least one of `resourceRules` and `nonResourceRules` has to be non-empty.
    */
   @JsonProperty("resourceRules")
-  @Singular("addToResourceRules")
+  @Singular(value = "addToResourceRules", ignoreNullCollections = true)
   private List<ResourcePolicyRule> resourceRules;
 
   /**
@@ -58,7 +58,7 @@ public class PolicyRulesWithSubjects implements Model {
    */
   @NonNull
   @JsonProperty("subjects")
-  @Singular("addToSubjects")
+  @Singular(value = "addToSubjects", ignoreNullCollections = true)
   private List<Subject> subjects;
 
 }

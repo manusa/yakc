@@ -52,7 +52,7 @@ public class RoleList implements Model, ListModel<Role> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<Role> items;
 
   /**

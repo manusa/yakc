@@ -43,7 +43,7 @@ public class RunAsGroupStrategyOptions implements Model {
    * ranges are the allowed ranges of gids that may be used. If you would like to force a single gid then supply a single range with the same start and end. Required for MustRunAs.
    */
   @JsonProperty("ranges")
-  @Singular("addToRanges")
+  @Singular(value = "addToRanges", ignoreNullCollections = true)
   private List<IDRange> ranges;
 
   /**

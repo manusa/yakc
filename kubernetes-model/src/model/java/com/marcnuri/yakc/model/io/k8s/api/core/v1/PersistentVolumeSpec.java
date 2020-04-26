@@ -43,7 +43,7 @@ public class PersistentVolumeSpec implements Model {
    * AccessModes contains all ways the volume can be mounted. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes
    */
   @JsonProperty("accessModes")
-  @Singular("addToAccessModes")
+  @Singular(value = "addToAccessModes", ignoreNullCollections = true)
   private List<String> accessModes;
 
   @JsonProperty("awsElasticBlockStore")
@@ -59,7 +59,7 @@ public class PersistentVolumeSpec implements Model {
    * A description of the persistent volume's resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
    */
   @JsonProperty("capacity")
-  @Singular("putInCapacity")
+  @Singular(value = "putInCapacity", ignoreNullCollections = true)
   private Map<String, String> capacity;
 
   @JsonProperty("cephfs")
@@ -102,7 +102,7 @@ public class PersistentVolumeSpec implements Model {
    * A list of mount options, e.g. ["ro", "soft"]. Not validated - mount will simply fail if one is invalid. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options
    */
   @JsonProperty("mountOptions")
-  @Singular("addToMountOptions")
+  @Singular(value = "addToMountOptions", ignoreNullCollections = true)
   private List<String> mountOptions;
 
   @JsonProperty("nfs")

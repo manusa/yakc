@@ -44,7 +44,7 @@ public class NonResourcePolicyRule implements Model {
    */
   @NonNull
   @JsonProperty("nonResourceURLs")
-  @Singular("addToNonResourceURLs")
+  @Singular(value = "addToNonResourceURLs", ignoreNullCollections = true)
   private List<String> nonResourceURLs;
 
   /**
@@ -52,7 +52,7 @@ public class NonResourcePolicyRule implements Model {
    */
   @NonNull
   @JsonProperty("verbs")
-  @Singular("addToVerbs")
+  @Singular(value = "addToVerbs", ignoreNullCollections = true)
   private List<String> verbs;
 
 }

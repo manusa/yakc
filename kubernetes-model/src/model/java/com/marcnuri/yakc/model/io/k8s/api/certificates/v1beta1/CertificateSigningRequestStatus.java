@@ -48,7 +48,7 @@ public class CertificateSigningRequestStatus implements Model {
    * Conditions applied to the request, such as approval or denial.
    */
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<CertificateSigningRequestCondition> conditions;
 
 }

@@ -52,7 +52,7 @@ public class NetworkPolicyList implements Model, ListModel<NetworkPolicy> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<NetworkPolicy> items;
 
   /**

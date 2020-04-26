@@ -43,7 +43,7 @@ public class AggregationRule implements Model {
    * ClusterRoleSelectors holds a list of selectors which will be used to find ClusterRoles and create the rules. If any of the selectors match, then the ClusterRole's permissions will be added
    */
   @JsonProperty("clusterRoleSelectors")
-  @Singular("addToClusterRoleSelectors")
+  @Singular(value = "addToClusterRoleSelectors", ignoreNullCollections = true)
   private List<LabelSelector> clusterRoleSelectors;
 
 }

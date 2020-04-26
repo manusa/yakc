@@ -47,7 +47,7 @@ public class WebhookConversion implements Model {
    */
   @NonNull
   @JsonProperty("conversionReviewVersions")
-  @Singular("addToConversionReviewVersions")
+  @Singular(value = "addToConversionReviewVersions", ignoreNullCollections = true)
   private List<String> conversionReviewVersions;
 
 }

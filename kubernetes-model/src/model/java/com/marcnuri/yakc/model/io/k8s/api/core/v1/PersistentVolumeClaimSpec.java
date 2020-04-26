@@ -43,7 +43,7 @@ public class PersistentVolumeClaimSpec implements Model {
    * AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
    */
   @JsonProperty("accessModes")
-  @Singular("addToAccessModes")
+  @Singular(value = "addToAccessModes", ignoreNullCollections = true)
   private List<String> accessModes;
 
   @JsonProperty("dataSource")

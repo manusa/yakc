@@ -42,7 +42,7 @@ public class IngressTLS implements Model {
    * Hosts are a list of hosts included in the TLS certificate. The values in this list must match the name/s used in the tlsSecret. Defaults to the wildcard host setting for the loadbalancer controller fulfilling this Ingress, if left unspecified.
    */
   @JsonProperty("hosts")
-  @Singular("addToHosts")
+  @Singular(value = "addToHosts", ignoreNullCollections = true)
   private List<String> hosts;
 
   /**

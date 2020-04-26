@@ -50,7 +50,7 @@ public class APIGroupList implements Model {
    */
   @NonNull
   @JsonProperty("groups")
-  @Singular("addToGroups")
+  @Singular(value = "addToGroups", ignoreNullCollections = true)
   private List<APIGroup> groups;
 
   /**

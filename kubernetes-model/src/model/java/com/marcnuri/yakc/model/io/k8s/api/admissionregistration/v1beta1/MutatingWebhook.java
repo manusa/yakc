@@ -44,7 +44,7 @@ public class MutatingWebhook implements Model {
    * AdmissionReviewVersions is an ordered list of preferred `AdmissionReview` versions the Webhook expects. API server will try to use first version in the list which it supports. If none of the versions specified in this list supported by API server, validation will fail for this object. If a persisted webhook configuration specifies allowed versions and does not include any versions known to the API Server, calls to the webhook will fail and be subject to the failure policy. Default to `['v1beta1']`.
    */
   @JsonProperty("admissionReviewVersions")
-  @Singular("addToAdmissionReviewVersions")
+  @Singular(value = "addToAdmissionReviewVersions", ignoreNullCollections = true)
   private List<String> admissionReviewVersions;
 
   @NonNull
@@ -86,7 +86,7 @@ public class MutatingWebhook implements Model {
    * Rules describes what operations on what resources/subresources the webhook cares about. The webhook cares about an operation if it matches _any_ Rule. However, in order to prevent ValidatingAdmissionWebhooks and MutatingAdmissionWebhooks from putting the cluster in a state which cannot be recovered from without completely disabling the plugin, ValidatingAdmissionWebhooks and MutatingAdmissionWebhooks are never called on admission requests for ValidatingWebhookConfiguration and MutatingWebhookConfiguration objects.
    */
   @JsonProperty("rules")
-  @Singular("addToRules")
+  @Singular(value = "addToRules", ignoreNullCollections = true)
   private List<RuleWithOperations> rules;
 
   /**

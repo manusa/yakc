@@ -52,7 +52,7 @@ public class ControllerRevisionList implements Model, ListModel<ControllerRevisi
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<ControllerRevision> items;
 
   /**

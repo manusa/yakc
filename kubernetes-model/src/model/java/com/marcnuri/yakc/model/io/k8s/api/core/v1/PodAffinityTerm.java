@@ -47,7 +47,7 @@ public class PodAffinityTerm implements Model {
    * namespaces specifies which namespaces the labelSelector applies to (matches against); null or empty list means "this pod's namespace"
    */
   @JsonProperty("namespaces")
-  @Singular("addToNamespaces")
+  @Singular(value = "addToNamespaces", ignoreNullCollections = true)
   private List<String> namespaces;
 
   /**

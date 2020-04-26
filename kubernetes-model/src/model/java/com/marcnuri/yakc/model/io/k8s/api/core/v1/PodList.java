@@ -52,7 +52,7 @@ public class PodList implements Model, ListModel<Pod> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<Pod> items;
 
   /**

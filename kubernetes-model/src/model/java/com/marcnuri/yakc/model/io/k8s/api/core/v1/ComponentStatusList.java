@@ -52,7 +52,7 @@ public class ComponentStatusList implements Model, ListModel<ComponentStatus> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<ComponentStatus> items;
 
   /**

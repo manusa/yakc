@@ -43,7 +43,7 @@ public class APIResource implements Model {
    * categories is a list of the grouped resources this resource belongs to (e.g. 'all')
    */
   @JsonProperty("categories")
-  @Singular("addToCategories")
+  @Singular(value = "addToCategories", ignoreNullCollections = true)
   private List<String> categories;
 
   /**
@@ -77,7 +77,7 @@ public class APIResource implements Model {
    * shortNames is a list of suggested short names of the resource.
    */
   @JsonProperty("shortNames")
-  @Singular("addToShortNames")
+  @Singular(value = "addToShortNames", ignoreNullCollections = true)
   private List<String> shortNames;
 
   /**
@@ -98,7 +98,7 @@ public class APIResource implements Model {
    */
   @NonNull
   @JsonProperty("verbs")
-  @Singular("addToVerbs")
+  @Singular(value = "addToVerbs", ignoreNullCollections = true)
   private List<String> verbs;
 
   /**

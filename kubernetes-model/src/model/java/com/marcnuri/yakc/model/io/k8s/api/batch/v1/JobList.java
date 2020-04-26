@@ -52,7 +52,7 @@ public class JobList implements Model, ListModel<Job> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<Job> items;
 
   /**

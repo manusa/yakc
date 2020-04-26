@@ -60,7 +60,7 @@ public class PodSpec implements Model {
    */
   @NonNull
   @JsonProperty("containers")
-  @Singular("addToContainers")
+  @Singular(value = "addToContainers", ignoreNullCollections = true)
   private List<Container> containers;
 
   @JsonProperty("dnsConfig")
@@ -82,14 +82,14 @@ public class PodSpec implements Model {
    * List of ephemeral containers run in this pod. Ephemeral containers may be run in an existing pod to perform user-initiated actions such as debugging. This list cannot be specified when creating a pod, and it cannot be modified by updating the pod spec. In order to add an ephemeral container to an existing pod, use the pod's ephemeralcontainers subresource. This field is alpha-level and is only honored by servers that enable the EphemeralContainers feature.
    */
   @JsonProperty("ephemeralContainers")
-  @Singular("addToEphemeralContainers")
+  @Singular(value = "addToEphemeralContainers", ignoreNullCollections = true)
   private List<EphemeralContainer> ephemeralContainers;
 
   /**
    * HostAliases is an optional list of hosts and IPs that will be injected into the pod's hosts file if specified. This is only valid for non-hostNetwork pods.
    */
   @JsonProperty("hostAliases")
-  @Singular("addToHostAliases")
+  @Singular(value = "addToHostAliases", ignoreNullCollections = true)
   private List<HostAlias> hostAliases;
 
   /**
@@ -120,14 +120,14 @@ public class PodSpec implements Model {
    * ImagePullSecrets is an optional list of references to secrets in the same namespace to use for pulling any of the images used by this PodSpec. If specified, these secrets will be passed to individual puller implementations for them to use. For example, in the case of docker, only DockerConfig type secrets are honored. More info: https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod
    */
   @JsonProperty("imagePullSecrets")
-  @Singular("addToImagePullSecrets")
+  @Singular(value = "addToImagePullSecrets", ignoreNullCollections = true)
   private List<LocalObjectReference> imagePullSecrets;
 
   /**
    * List of initialization containers belonging to the pod. Init containers are executed in order prior to containers being started. If any init container fails, the pod is considered to have failed and is handled according to its restartPolicy. The name for an init container or normal container must be unique among all containers. Init containers may not have Lifecycle actions, Readiness probes, Liveness probes, or Startup probes. The resourceRequirements of an init container are taken into account during scheduling by finding the highest request/limit for each resource type, and then using the max of of that value or the sum of the normal containers. Limits are applied to init containers in a similar fashion. Init containers cannot currently be added or removed. Cannot be updated. More info: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
    */
   @JsonProperty("initContainers")
-  @Singular("addToInitContainers")
+  @Singular(value = "addToInitContainers", ignoreNullCollections = true)
   private List<Container> initContainers;
 
   /**
@@ -140,14 +140,14 @@ public class PodSpec implements Model {
    * NodeSelector is a selector which must be true for the pod to fit on a node. Selector which must match a node's labels for the pod to be scheduled on that node. More info: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
    */
   @JsonProperty("nodeSelector")
-  @Singular("putInNodeSelector")
+  @Singular(value = "putInNodeSelector", ignoreNullCollections = true)
   private Map<String, String> nodeSelector;
 
   /**
    * Overhead represents the resource overhead associated with running a pod for a given RuntimeClass. This field will be autopopulated at admission time by the RuntimeClass admission controller. If the RuntimeClass admission controller is enabled, overhead must not be set in Pod create requests. The RuntimeClass admission controller will reject Pod create requests which have the overhead already set. If RuntimeClass is configured and selected in the PodSpec, Overhead will be set to the value defined in the corresponding RuntimeClass, otherwise it will remain unset and treated as zero. More info: https://git.k8s.io/enhancements/keps/sig-node/20190226-pod-overhead.md This field is alpha-level as of Kubernetes v1.16, and is only honored by servers that enable the PodOverhead feature.
    */
   @JsonProperty("overhead")
-  @Singular("putInOverhead")
+  @Singular(value = "putInOverhead", ignoreNullCollections = true)
   private Map<String, String> overhead;
 
   /**
@@ -172,7 +172,7 @@ public class PodSpec implements Model {
    * If specified, all readiness gates will be evaluated for pod readiness. A pod is ready when all its containers are ready AND all conditions specified in the readiness gates have status equal to "True" More info: https://git.k8s.io/enhancements/keps/sig-network/0007-pod-ready%2B%2B.md
    */
   @JsonProperty("readinessGates")
-  @Singular("addToReadinessGates")
+  @Singular(value = "addToReadinessGates", ignoreNullCollections = true)
   private List<PodReadinessGate> readinessGates;
 
   /**
@@ -230,21 +230,21 @@ public class PodSpec implements Model {
    * If specified, the pod's tolerations.
    */
   @JsonProperty("tolerations")
-  @Singular("addToTolerations")
+  @Singular(value = "addToTolerations", ignoreNullCollections = true)
   private List<Toleration> tolerations;
 
   /**
    * TopologySpreadConstraints describes how a group of pods ought to spread across topology domains. Scheduler will schedule pods in a way which abides by the constraints. This field is only honored by clusters that enable the EvenPodsSpread feature. All topologySpreadConstraints are ANDed.
    */
   @JsonProperty("topologySpreadConstraints")
-  @Singular("addToTopologySpreadConstraints")
+  @Singular(value = "addToTopologySpreadConstraints", ignoreNullCollections = true)
   private List<TopologySpreadConstraint> topologySpreadConstraints;
 
   /**
    * List of volumes that can be mounted by containers belonging to the pod. More info: https://kubernetes.io/docs/concepts/storage/volumes
    */
   @JsonProperty("volumes")
-  @Singular("addToVolumes")
+  @Singular(value = "addToVolumes", ignoreNullCollections = true)
   private List<Volume> volumes;
 
 }

@@ -52,7 +52,7 @@ public class PodTemplateList implements Model, ListModel<PodTemplate> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<PodTemplate> items;
 
   /**

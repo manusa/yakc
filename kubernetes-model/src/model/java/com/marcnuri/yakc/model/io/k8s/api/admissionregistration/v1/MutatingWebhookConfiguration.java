@@ -58,7 +58,7 @@ public class MutatingWebhookConfiguration implements Model {
    * Webhooks is a list of webhooks and the affected resources and operations.
    */
   @JsonProperty("webhooks")
-  @Singular("addToWebhooks")
+  @Singular(value = "addToWebhooks", ignoreNullCollections = true)
   private List<MutatingWebhook> webhooks;
 
 }

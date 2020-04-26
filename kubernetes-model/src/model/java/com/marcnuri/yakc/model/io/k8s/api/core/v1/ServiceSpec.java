@@ -49,7 +49,7 @@ public class ServiceSpec implements Model {
    * externalIPs is a list of IP addresses for which nodes in the cluster will also accept traffic for this service.  These IPs are not managed by Kubernetes.  The user is responsible for ensuring that traffic arrives at a node with this IP.  A common example is external load-balancers that are not part of the Kubernetes system.
    */
   @JsonProperty("externalIPs")
-  @Singular("addToExternalIPs")
+  @Singular(value = "addToExternalIPs", ignoreNullCollections = true)
   private List<String> externalIPs;
 
   /**
@@ -86,14 +86,14 @@ public class ServiceSpec implements Model {
    * If specified and supported by the platform, this will restrict traffic through the cloud-provider load-balancer will be restricted to the specified client IPs. This field will be ignored if the cloud-provider does not support the feature." More info: https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/
    */
   @JsonProperty("loadBalancerSourceRanges")
-  @Singular("addToLoadBalancerSourceRanges")
+  @Singular(value = "addToLoadBalancerSourceRanges", ignoreNullCollections = true)
   private List<String> loadBalancerSourceRanges;
 
   /**
    * The list of ports that are exposed by this service. More info: https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
    */
   @JsonProperty("ports")
-  @Singular("addToPorts")
+  @Singular(value = "addToPorts", ignoreNullCollections = true)
   private List<ServicePort> ports;
 
   /**
@@ -106,7 +106,7 @@ public class ServiceSpec implements Model {
    * Route service traffic to pods with label keys and values matching this selector. If empty or not present, the service is assumed to have an external process managing its endpoints, which Kubernetes will not modify. Only applies to types ClusterIP, NodePort, and LoadBalancer. Ignored if type is ExternalName. More info: https://kubernetes.io/docs/concepts/services-networking/service/
    */
   @JsonProperty("selector")
-  @Singular("putInSelector")
+  @Singular(value = "putInSelector", ignoreNullCollections = true)
   private Map<String, String> selector;
 
   /**
@@ -122,7 +122,7 @@ public class ServiceSpec implements Model {
    * topologyKeys is a preference-order list of topology keys which implementations of services should use to preferentially sort endpoints when accessing this Service, it can not be used at the same time as externalTrafficPolicy=Local. Topology keys must be valid label keys and at most 16 keys may be specified. Endpoints are chosen based on the first topology key with available backends. If this field is specified and all entries have no backends that match the topology of the client, the service has no backends for that client and connections should fail. The special value "&#42;" may be used to mean "any topology". This catch-all value, if used, only makes sense as the last value in the list. If this is not specified or empty, no topology constraints will be applied.
    */
   @JsonProperty("topologyKeys")
-  @Singular("addToTopologyKeys")
+  @Singular(value = "addToTopologyKeys", ignoreNullCollections = true)
   private List<String> topologyKeys;
 
   /**

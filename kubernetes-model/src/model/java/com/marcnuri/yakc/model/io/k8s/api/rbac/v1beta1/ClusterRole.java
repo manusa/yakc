@@ -61,7 +61,7 @@ public class ClusterRole implements Model {
    * Rules holds all the PolicyRules for this ClusterRole
    */
   @JsonProperty("rules")
-  @Singular("addToRules")
+  @Singular(value = "addToRules", ignoreNullCollections = true)
   private List<PolicyRule> rules;
 
 }

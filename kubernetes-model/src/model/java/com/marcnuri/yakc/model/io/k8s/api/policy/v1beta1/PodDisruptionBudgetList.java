@@ -49,7 +49,7 @@ public class PodDisruptionBudgetList implements Model, ListModel<PodDisruptionBu
 
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<PodDisruptionBudget> items;
 
   /**

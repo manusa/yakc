@@ -49,7 +49,7 @@ public class DownwardAPIVolumeSource implements Model, ListModel<DownwardAPIVolu
    * Items is a list of downward API volume file
    */
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<DownwardAPIVolumeFile> items;
 
 }

@@ -56,7 +56,7 @@ public class FlowSchemaSpec implements Model {
    * `rules` describes which requests will match this flow schema. This FlowSchema matches a request if and only if at least one member of rules matches the request. if it is an empty slice, there will be no requests matching the FlowSchema.
    */
   @JsonProperty("rules")
-  @Singular("addToRules")
+  @Singular(value = "addToRules", ignoreNullCollections = true)
   private List<PolicyRulesWithSubjects> rules;
 
 }

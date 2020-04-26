@@ -43,28 +43,28 @@ public class PolicyRule implements Model {
    * APIGroups is the name of the APIGroup that contains the resources.  If multiple API groups are specified, any action requested against one of the enumerated resources in any API group will be allowed.
    */
   @JsonProperty("apiGroups")
-  @Singular("addToApiGroups")
+  @Singular(value = "addToApiGroups", ignoreNullCollections = true)
   private List<String> apiGroups;
 
   /**
    * NonResourceURLs is a set of partial urls that a user should have access to.  &#42;s are allowed, but only as the full, final step in the path Since non-resource URLs are not namespaced, this field is only applicable for ClusterRoles referenced from a ClusterRoleBinding. Rules can either apply to API resources (such as "pods" or "secrets") or non-resource URL paths (such as "/api"),  but not both.
    */
   @JsonProperty("nonResourceURLs")
-  @Singular("addToNonResourceURLs")
+  @Singular(value = "addToNonResourceURLs", ignoreNullCollections = true)
   private List<String> nonResourceURLs;
 
   /**
    * ResourceNames is an optional white list of names that the rule applies to.  An empty set means that everything is allowed.
    */
   @JsonProperty("resourceNames")
-  @Singular("addToResourceNames")
+  @Singular(value = "addToResourceNames", ignoreNullCollections = true)
   private List<String> resourceNames;
 
   /**
    * Resources is a list of resources this rule applies to.  '&#42;' represents all resources in the specified apiGroups. '&#42;/foo' represents the subresource 'foo' for all resources in the specified apiGroups.
    */
   @JsonProperty("resources")
-  @Singular("addToResources")
+  @Singular(value = "addToResources", ignoreNullCollections = true)
   private List<String> resources;
 
   /**
@@ -72,7 +72,7 @@ public class PolicyRule implements Model {
    */
   @NonNull
   @JsonProperty("verbs")
-  @Singular("addToVerbs")
+  @Singular(value = "addToVerbs", ignoreNullCollections = true)
   private List<String> verbs;
 
 }

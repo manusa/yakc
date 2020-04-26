@@ -56,7 +56,7 @@ public class APIVersions implements Model {
    */
   @NonNull
   @JsonProperty("serverAddressByClientCIDRs")
-  @Singular("addToServerAddressByClientCIDRs")
+  @Singular(value = "addToServerAddressByClientCIDRs", ignoreNullCollections = true)
   private List<ServerAddressByClientCIDR> serverAddressByClientCIDRs;
 
   /**
@@ -64,7 +64,7 @@ public class APIVersions implements Model {
    */
   @NonNull
   @JsonProperty("versions")
-  @Singular("addToVersions")
+  @Singular(value = "addToVersions", ignoreNullCollections = true)
   private List<String> versions;
 
 }

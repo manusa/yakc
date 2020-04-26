@@ -49,7 +49,7 @@ public class CertificateSigningRequestList implements Model, ListModel<Certifica
 
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<CertificateSigningRequest> items;
 
   /**

@@ -52,7 +52,7 @@ public class StorageClassList implements Model, ListModel<StorageClass> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<StorageClass> items;
 
   /**

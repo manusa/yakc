@@ -44,7 +44,7 @@ public class LimitRangeSpec implements Model {
    */
   @NonNull
   @JsonProperty("limits")
-  @Singular("addToLimits")
+  @Singular(value = "addToLimits", ignoreNullCollections = true)
   private List<LimitRangeItem> limits;
 
 }

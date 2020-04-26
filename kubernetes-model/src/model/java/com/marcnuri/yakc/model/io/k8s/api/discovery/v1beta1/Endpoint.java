@@ -46,7 +46,7 @@ public class Endpoint implements Model {
    */
   @NonNull
   @JsonProperty("addresses")
-  @Singular("addToAddresses")
+  @Singular(value = "addToAddresses", ignoreNullCollections = true)
   private List<String> addresses;
 
   @JsonProperty("conditions")
@@ -65,7 +65,7 @@ public class Endpoint implements Model {
    * topology contains arbitrary topology information associated with the endpoint. These key/value pairs must conform with the label format. https://kubernetes.io/docs/concepts/overview/working-with-objects/labels Topology may include a maximum of 16 key/value pairs. This includes, but is not limited to the following well known keys: &#42; kubernetes.io/hostname: the value indicates the hostname of the node<br><p>   where the endpoint is located. This should match the corresponding<br><p>   node label.<br><p> &#42; topology.kubernetes.io/zone: the value indicates the zone where the<br><p>   endpoint is located. This should match the corresponding node label.<br><p> &#42; topology.kubernetes.io/region: the value indicates the region where the<br><p>   endpoint is located. This should match the corresponding node label.
    */
   @JsonProperty("topology")
-  @Singular("putInTopology")
+  @Singular(value = "putInTopology", ignoreNullCollections = true)
   private Map<String, String> topology;
 
 }

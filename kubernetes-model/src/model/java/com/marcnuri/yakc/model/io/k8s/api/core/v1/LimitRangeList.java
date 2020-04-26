@@ -52,7 +52,7 @@ public class LimitRangeList implements Model, ListModel<LimitRange> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<LimitRange> items;
 
   /**

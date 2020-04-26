@@ -42,7 +42,7 @@ public class ScopeSelector implements Model {
    * A list of scope selector requirements by scope of the resources.
    */
   @JsonProperty("matchExpressions")
-  @Singular("addToMatchExpressions")
+  @Singular(value = "addToMatchExpressions", ignoreNullCollections = true)
   private List<ScopedResourceSelectorRequirement> matchExpressions;
 
 }

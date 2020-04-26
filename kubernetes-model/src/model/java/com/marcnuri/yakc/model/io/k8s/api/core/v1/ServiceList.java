@@ -52,7 +52,7 @@ public class ServiceList implements Model, ListModel<Service> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<Service> items;
 
   /**

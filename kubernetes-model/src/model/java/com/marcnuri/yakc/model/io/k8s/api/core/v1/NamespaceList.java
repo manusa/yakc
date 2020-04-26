@@ -52,7 +52,7 @@ public class NamespaceList implements Model, ListModel<Namespace> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<Namespace> items;
 
   /**

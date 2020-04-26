@@ -52,7 +52,7 @@ public class RoleBindingList implements Model, ListModel<RoleBinding> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<RoleBinding> items;
 
   /**

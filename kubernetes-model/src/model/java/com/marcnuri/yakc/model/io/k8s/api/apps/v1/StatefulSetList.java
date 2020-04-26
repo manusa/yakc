@@ -49,7 +49,7 @@ public class StatefulSetList implements Model, ListModel<StatefulSet> {
 
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<StatefulSet> items;
 
   /**

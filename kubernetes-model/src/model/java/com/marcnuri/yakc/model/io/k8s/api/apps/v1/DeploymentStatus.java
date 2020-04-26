@@ -54,7 +54,7 @@ public class DeploymentStatus implements Model {
    * Represents the latest available observations of a deployment's current state.
    */
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<DeploymentCondition> conditions;
 
   /**

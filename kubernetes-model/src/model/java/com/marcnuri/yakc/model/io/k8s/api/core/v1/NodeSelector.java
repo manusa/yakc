@@ -44,7 +44,7 @@ public class NodeSelector implements Model {
    */
   @NonNull
   @JsonProperty("nodeSelectorTerms")
-  @Singular("addToNodeSelectorTerms")
+  @Singular(value = "addToNodeSelectorTerms", ignoreNullCollections = true)
   private List<NodeSelectorTerm> nodeSelectorTerms;
 
 }

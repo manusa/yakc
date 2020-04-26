@@ -42,7 +42,7 @@ public class NamespaceStatus implements Model {
    * Represents the latest available observations of a namespace's current state.
    */
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<NamespaceCondition> conditions;
 
   /**

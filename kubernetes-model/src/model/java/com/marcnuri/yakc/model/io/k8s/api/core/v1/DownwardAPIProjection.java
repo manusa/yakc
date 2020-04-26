@@ -43,7 +43,7 @@ public class DownwardAPIProjection implements Model, ListModel<DownwardAPIVolume
    * Items is a list of DownwardAPIVolume file
    */
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<DownwardAPIVolumeFile> items;
 
 }

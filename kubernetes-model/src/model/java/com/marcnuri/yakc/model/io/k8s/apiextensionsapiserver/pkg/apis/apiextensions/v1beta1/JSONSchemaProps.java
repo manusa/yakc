@@ -52,29 +52,29 @@ public class JSONSchemaProps implements Model {
   private JSONSchemaPropsOrBool additionalProperties;
 
   @JsonProperty("allOf")
-  @Singular("addToAllOf")
+  @Singular(value = "addToAllOf", ignoreNullCollections = true)
   private List<JSONSchemaProps> allOf;
 
   @JsonProperty("anyOf")
-  @Singular("addToAnyOf")
+  @Singular(value = "addToAnyOf", ignoreNullCollections = true)
   private List<JSONSchemaProps> anyOf;
 
   @JsonProperty("default")
   private JSON defaults;
 
   @JsonProperty("definitions")
-  @Singular("putInDefinitions")
+  @Singular(value = "putInDefinitions", ignoreNullCollections = true)
   private Map<String, JSONSchemaProps> definitions;
 
   @JsonProperty("dependencies")
-  @Singular("putInDependencies")
+  @Singular(value = "putInDependencies", ignoreNullCollections = true)
   private Map<String, JSONSchemaPropsOrStringArray> dependencies;
 
   @JsonProperty("description")
   private String description;
 
   @JsonProperty("enum")
-  @Singular("addToEnumeration")
+  @Singular(value = "addToEnumeration", ignoreNullCollections = true)
   private List<JSON> enumeration;
 
   @JsonProperty("example")
@@ -135,22 +135,22 @@ public class JSONSchemaProps implements Model {
   private Boolean nullable;
 
   @JsonProperty("oneOf")
-  @Singular("addToOneOf")
+  @Singular(value = "addToOneOf", ignoreNullCollections = true)
   private List<JSONSchemaProps> oneOf;
 
   @JsonProperty("pattern")
   private String pattern;
 
   @JsonProperty("patternProperties")
-  @Singular("putInPatternProperties")
+  @Singular(value = "putInPatternProperties", ignoreNullCollections = true)
   private Map<String, JSONSchemaProps> patternProperties;
 
   @JsonProperty("properties")
-  @Singular("putInProperties")
+  @Singular(value = "putInProperties", ignoreNullCollections = true)
   private Map<String, JSONSchemaProps> properties;
 
   @JsonProperty("required")
-  @Singular("addToRequired")
+  @Singular(value = "addToRequired", ignoreNullCollections = true)
   private List<String> required;
 
   @JsonProperty("title")
@@ -178,7 +178,7 @@ public class JSONSchemaProps implements Model {
    * x-kubernetes-list-map-keys annotates an array with the x-kubernetes-list-type `map` by specifying the keys used as the index of the map.<br><p> <br><p> This tag MUST only be used on lists that have the "x-kubernetes-list-type" extension set to "map". Also, the values specified for this attribute must be a scalar typed field of the child structure (no nesting is supported).<br><p> <br><p> The properties specified must either be required or have a default value, to ensure those properties are present for all list items.
    */
   @JsonProperty("x-kubernetes-list-map-keys")
-  @Singular("addToXKubernetesListMapKeys")
+  @Singular(value = "addToXKubernetesListMapKeys", ignoreNullCollections = true)
   private List<String> xKubernetesListMapKeys;
 
   /**

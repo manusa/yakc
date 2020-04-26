@@ -42,7 +42,7 @@ public class HPAScalingRules implements Model {
    * policies is a list of potential scaling polices which can be used during scaling. At least one policy must be specified, otherwise the HPAScalingRules will be discarded as invalid
    */
   @JsonProperty("policies")
-  @Singular("addToPolicies")
+  @Singular(value = "addToPolicies", ignoreNullCollections = true)
   private List<HPAScalingPolicy> policies;
 
   /**

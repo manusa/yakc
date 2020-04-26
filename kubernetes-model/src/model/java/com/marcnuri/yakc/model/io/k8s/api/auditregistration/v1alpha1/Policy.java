@@ -50,7 +50,7 @@ public class Policy implements Model {
    * Stages is a list of stages for which events are created.
    */
   @JsonProperty("stages")
-  @Singular("addToStages")
+  @Singular(value = "addToStages", ignoreNullCollections = true)
   private List<String> stages;
 
 }

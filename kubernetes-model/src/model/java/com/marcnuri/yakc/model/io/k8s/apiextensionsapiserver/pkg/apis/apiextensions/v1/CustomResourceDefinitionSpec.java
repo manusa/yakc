@@ -71,7 +71,7 @@ public class CustomResourceDefinitionSpec implements Model {
    */
   @NonNull
   @JsonProperty("versions")
-  @Singular("addToVersions")
+  @Singular(value = "addToVersions", ignoreNullCollections = true)
   private List<CustomResourceDefinitionVersion> versions;
 
 }

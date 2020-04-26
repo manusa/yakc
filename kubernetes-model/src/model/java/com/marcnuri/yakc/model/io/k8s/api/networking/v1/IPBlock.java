@@ -50,7 +50,7 @@ public class IPBlock implements Model {
    * Except is a slice of CIDRs that should not be included within an IP Block Valid examples are "192.168.1.1/24" or "2001:db9::/64" Except values will be rejected if they are outside the CIDR range
    */
   @JsonProperty("except")
-  @Singular("addToExcept")
+  @Singular(value = "addToExcept", ignoreNullCollections = true)
   private List<String> except;
 
 }

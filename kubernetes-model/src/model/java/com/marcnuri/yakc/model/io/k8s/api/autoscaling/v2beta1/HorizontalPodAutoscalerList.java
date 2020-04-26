@@ -52,7 +52,7 @@ public class HorizontalPodAutoscalerList implements Model, ListModel<HorizontalP
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<HorizontalPodAutoscaler> items;
 
   /**

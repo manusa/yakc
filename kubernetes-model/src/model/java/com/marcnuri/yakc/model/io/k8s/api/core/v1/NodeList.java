@@ -52,7 +52,7 @@ public class NodeList implements Model, ListModel<Node> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<Node> items;
 
   /**

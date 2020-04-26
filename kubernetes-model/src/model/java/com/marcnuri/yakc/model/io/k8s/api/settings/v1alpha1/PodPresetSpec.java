@@ -47,14 +47,14 @@ public class PodPresetSpec implements Model {
    * Env defines the collection of EnvVar to inject into containers.
    */
   @JsonProperty("env")
-  @Singular("addToEnv")
+  @Singular(value = "addToEnv", ignoreNullCollections = true)
   private List<EnvVar> env;
 
   /**
    * EnvFrom defines the collection of EnvFromSource to inject into containers.
    */
   @JsonProperty("envFrom")
-  @Singular("addToEnvFrom")
+  @Singular(value = "addToEnvFrom", ignoreNullCollections = true)
   private List<EnvFromSource> envFrom;
 
   @JsonProperty("selector")
@@ -64,14 +64,14 @@ public class PodPresetSpec implements Model {
    * VolumeMounts defines the collection of VolumeMount to inject into containers.
    */
   @JsonProperty("volumeMounts")
-  @Singular("addToVolumeMounts")
+  @Singular(value = "addToVolumeMounts", ignoreNullCollections = true)
   private List<VolumeMount> volumeMounts;
 
   /**
    * Volumes defines the collection of Volume to inject into the pod.
    */
   @JsonProperty("volumes")
-  @Singular("addToVolumes")
+  @Singular(value = "addToVolumes", ignoreNullCollections = true)
   private List<Volume> volumes;
 
 }

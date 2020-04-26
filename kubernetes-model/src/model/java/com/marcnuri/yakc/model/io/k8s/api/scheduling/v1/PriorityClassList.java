@@ -52,7 +52,7 @@ public class PriorityClassList implements Model, ListModel<PriorityClass> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<PriorityClass> items;
 
   /**

@@ -43,28 +43,28 @@ public class NodeStatus implements Model {
    * List of addresses reachable to the node. Queried from cloud provider, if available. More info: https://kubernetes.io/docs/concepts/nodes/node/#addresses Note: This field is declared as mergeable, but the merge key is not sufficiently unique, which can cause data corruption when it is merged. Callers should instead use a full-replacement patch. See http://pr.k8s.io/79391 for an example.
    */
   @JsonProperty("addresses")
-  @Singular("addToAddresses")
+  @Singular(value = "addToAddresses", ignoreNullCollections = true)
   private List<NodeAddress> addresses;
 
   /**
    * Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity.
    */
   @JsonProperty("allocatable")
-  @Singular("putInAllocatable")
+  @Singular(value = "putInAllocatable", ignoreNullCollections = true)
   private Map<String, String> allocatable;
 
   /**
    * Capacity represents the total resources of a node. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
    */
   @JsonProperty("capacity")
-  @Singular("putInCapacity")
+  @Singular(value = "putInCapacity", ignoreNullCollections = true)
   private Map<String, String> capacity;
 
   /**
    * Conditions is an array of current observed node conditions. More info: https://kubernetes.io/docs/concepts/nodes/node/#condition
    */
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<NodeCondition> conditions;
 
   @JsonProperty("config")
@@ -77,7 +77,7 @@ public class NodeStatus implements Model {
    * List of container images on this node
    */
   @JsonProperty("images")
-  @Singular("addToImages")
+  @Singular(value = "addToImages", ignoreNullCollections = true)
   private List<ContainerImage> images;
 
   @JsonProperty("nodeInfo")
@@ -93,14 +93,14 @@ public class NodeStatus implements Model {
    * List of volumes that are attached to the node.
    */
   @JsonProperty("volumesAttached")
-  @Singular("addToVolumesAttached")
+  @Singular(value = "addToVolumesAttached", ignoreNullCollections = true)
   private List<AttachedVolume> volumesAttached;
 
   /**
    * List of attachable volumes in use (mounted) by the node.
    */
   @JsonProperty("volumesInUse")
-  @Singular("addToVolumesInUse")
+  @Singular(value = "addToVolumesInUse", ignoreNullCollections = true)
   private List<String> volumesInUse;
 
 }

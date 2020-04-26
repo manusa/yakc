@@ -42,7 +42,7 @@ public class LoadBalancerStatus implements Model {
    * Ingress is a list containing ingress points for the load-balancer. Traffic intended for the service should be sent to these ingress points.
    */
   @JsonProperty("ingress")
-  @Singular("addToIngress")
+  @Singular(value = "addToIngress", ignoreNullCollections = true)
   private List<LoadBalancerIngress> ingress;
 
 }

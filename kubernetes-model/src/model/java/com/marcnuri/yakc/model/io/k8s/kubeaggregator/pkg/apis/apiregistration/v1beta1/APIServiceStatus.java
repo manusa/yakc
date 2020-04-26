@@ -42,7 +42,7 @@ public class APIServiceStatus implements Model {
    * Current service state of apiService.
    */
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<APIServiceCondition> conditions;
 
 }

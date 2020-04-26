@@ -42,21 +42,21 @@ public class EndpointSubset implements Model {
    * IP addresses which offer the related ports that are marked as ready. These endpoints should be considered safe for load balancers and clients to utilize.
    */
   @JsonProperty("addresses")
-  @Singular("addToAddresses")
+  @Singular(value = "addToAddresses", ignoreNullCollections = true)
   private List<EndpointAddress> addresses;
 
   /**
    * IP addresses which offer the related ports but are not currently marked as ready because they have not yet finished starting, have recently failed a readiness check, or have recently failed a liveness check.
    */
   @JsonProperty("notReadyAddresses")
-  @Singular("addToNotReadyAddresses")
+  @Singular(value = "addToNotReadyAddresses", ignoreNullCollections = true)
   private List<EndpointAddress> notReadyAddresses;
 
   /**
    * Port numbers available on the related IP addresses.
    */
   @JsonProperty("ports")
-  @Singular("addToPorts")
+  @Singular(value = "addToPorts", ignoreNullCollections = true)
   private List<EndpointPort> ports;
 
 }

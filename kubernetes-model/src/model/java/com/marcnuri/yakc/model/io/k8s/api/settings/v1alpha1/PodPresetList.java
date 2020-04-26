@@ -52,7 +52,7 @@ public class PodPresetList implements Model, ListModel<PodPreset> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<PodPreset> items;
 
   /**

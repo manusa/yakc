@@ -52,7 +52,7 @@ public class EndpointSliceList implements Model, ListModel<EndpointSlice> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<EndpointSlice> items;
 
   /**

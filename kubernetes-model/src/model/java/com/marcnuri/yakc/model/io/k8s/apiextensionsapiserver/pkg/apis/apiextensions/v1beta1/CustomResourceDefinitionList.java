@@ -52,7 +52,7 @@ public class CustomResourceDefinitionList implements Model, ListModel<CustomReso
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<CustomResourceDefinition> items;
 
   /**

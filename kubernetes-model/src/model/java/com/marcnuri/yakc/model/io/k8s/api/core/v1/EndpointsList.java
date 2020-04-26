@@ -52,7 +52,7 @@ public class EndpointsList implements Model, ListModel<Endpoints> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<Endpoints> items;
 
   /**

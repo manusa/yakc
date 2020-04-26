@@ -43,14 +43,14 @@ public class SubjectAccessReviewSpec implements Model {
    * Extra corresponds to the user.Info.GetExtra() method from the authenticator.  Since that is input to the authorizer it needs a reflection here.
    */
   @JsonProperty("extra")
-  @Singular("putInExtra")
+  @Singular(value = "putInExtra", ignoreNullCollections = true)
   private Map<String, List<String>> extra;
 
   /**
    * Groups is the groups you're testing for.
    */
   @JsonProperty("group")
-  @Singular("addToGroup")
+  @Singular(value = "addToGroup", ignoreNullCollections = true)
   private List<String> group;
 
   @JsonProperty("nonResourceAttributes")

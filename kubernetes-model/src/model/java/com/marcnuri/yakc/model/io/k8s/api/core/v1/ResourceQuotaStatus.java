@@ -42,14 +42,14 @@ public class ResourceQuotaStatus implements Model {
    * Hard is the set of enforced hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/
    */
   @JsonProperty("hard")
-  @Singular("putInHard")
+  @Singular(value = "putInHard", ignoreNullCollections = true)
   private Map<String, String> hard;
 
   /**
    * Used is the current observed total usage of the resource in the namespace.
    */
   @JsonProperty("used")
-  @Singular("putInUsed")
+  @Singular(value = "putInUsed", ignoreNullCollections = true)
   private Map<String, String> used;
 
 }

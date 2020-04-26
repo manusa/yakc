@@ -63,7 +63,7 @@ public class RBDPersistentVolumeSource implements Model {
    */
   @NonNull
   @JsonProperty("monitors")
-  @Singular("addToMonitors")
+  @Singular(value = "addToMonitors", ignoreNullCollections = true)
   private List<String> monitors;
 
   /**

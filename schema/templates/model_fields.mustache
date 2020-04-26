@@ -4,6 +4,6 @@
    */{{/hasDescription}}{{#required}}
   @NonNull{{/required}}
   @JsonProperty("{{propertyName}}"){{#singular}}
-  @Singular("{{.}}"){{/singular}}
+  @Singular(value = "{{.}}", ignoreNullCollections = true){{/singular}}
   private {{type}} {{name}};
 {{/fields}}

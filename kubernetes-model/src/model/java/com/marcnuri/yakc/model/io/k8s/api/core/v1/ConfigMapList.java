@@ -52,7 +52,7 @@ public class ConfigMapList implements Model, ListModel<ConfigMap> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<ConfigMap> items;
 
   /**

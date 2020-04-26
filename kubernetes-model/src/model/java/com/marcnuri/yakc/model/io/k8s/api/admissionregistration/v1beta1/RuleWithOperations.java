@@ -42,28 +42,28 @@ public class RuleWithOperations implements Model {
    * APIGroups is the API groups the resources belong to. '&#42;' is all groups. If '&#42;' is present, the length of the slice must be one. Required.
    */
   @JsonProperty("apiGroups")
-  @Singular("addToApiGroups")
+  @Singular(value = "addToApiGroups", ignoreNullCollections = true)
   private List<String> apiGroups;
 
   /**
    * APIVersions is the API versions the resources belong to. '&#42;' is all versions. If '&#42;' is present, the length of the slice must be one. Required.
    */
   @JsonProperty("apiVersions")
-  @Singular("addToApiVersions")
+  @Singular(value = "addToApiVersions", ignoreNullCollections = true)
   private List<String> apiVersions;
 
   /**
    * Operations is the operations the admission hook cares about - CREATE, UPDATE, or &#42; for all operations. If '&#42;' is present, the length of the slice must be one. Required.
    */
   @JsonProperty("operations")
-  @Singular("addToOperations")
+  @Singular(value = "addToOperations", ignoreNullCollections = true)
   private List<String> operations;
 
   /**
    * Resources is a list of resources this rule applies to.<br><p> <br><p> For example: 'pods' means pods. 'pods/log' means the log subresource of pods. '&#42;' means all resources, but not subresources. 'pods/&#42;' means all subresources of pods. '&#42;/scale' means all scale subresources. '&#42;/&#42;' means all resources and their subresources.<br><p> <br><p> If wildcard is present, the validation rule will ensure resources do not overlap with each other.<br><p> <br><p> Depending on the enclosing object, subresources might not be allowed. Required.
    */
   @JsonProperty("resources")
-  @Singular("addToResources")
+  @Singular(value = "addToResources", ignoreNullCollections = true)
   private List<String> resources;
 
   /**

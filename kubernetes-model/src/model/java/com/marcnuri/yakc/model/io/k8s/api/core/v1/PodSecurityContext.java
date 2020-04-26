@@ -75,14 +75,14 @@ public class PodSecurityContext implements Model {
    * A list of groups applied to the first process run in each container, in addition to the container's primary GID.  If unspecified, no groups will be added to any container.
    */
   @JsonProperty("supplementalGroups")
-  @Singular("addToSupplementalGroups")
+  @Singular(value = "addToSupplementalGroups", ignoreNullCollections = true)
   private List<Integer> supplementalGroups;
 
   /**
    * Sysctls hold a list of namespaced sysctls used for the pod. Pods with unsupported sysctls (by the container runtime) might fail to launch.
    */
   @JsonProperty("sysctls")
-  @Singular("addToSysctls")
+  @Singular(value = "addToSysctls", ignoreNullCollections = true)
   private List<Sysctl> sysctls;
 
   @JsonProperty("windowsOptions")

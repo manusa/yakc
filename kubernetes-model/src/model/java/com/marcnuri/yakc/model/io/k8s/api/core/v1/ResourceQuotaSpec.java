@@ -43,7 +43,7 @@ public class ResourceQuotaSpec implements Model {
    * hard is the set of desired hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/
    */
   @JsonProperty("hard")
-  @Singular("putInHard")
+  @Singular(value = "putInHard", ignoreNullCollections = true)
   private Map<String, String> hard;
 
   @JsonProperty("scopeSelector")
@@ -53,7 +53,7 @@ public class ResourceQuotaSpec implements Model {
    * A collection of filters that must match each object tracked by a quota. If not specified, the quota matches all objects.
    */
   @JsonProperty("scopes")
-  @Singular("addToScopes")
+  @Singular(value = "addToScopes", ignoreNullCollections = true)
   private List<String> scopes;
 
 }

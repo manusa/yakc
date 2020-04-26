@@ -49,7 +49,7 @@ public class DaemonSetStatus implements Model {
    * Represents the latest available observations of a DaemonSet's current state.
    */
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<DaemonSetCondition> conditions;
 
   /**

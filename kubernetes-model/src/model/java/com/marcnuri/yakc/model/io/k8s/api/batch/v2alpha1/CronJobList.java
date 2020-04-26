@@ -52,7 +52,7 @@ public class CronJobList implements Model, ListModel<CronJob> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<CronJob> items;
 
   /**

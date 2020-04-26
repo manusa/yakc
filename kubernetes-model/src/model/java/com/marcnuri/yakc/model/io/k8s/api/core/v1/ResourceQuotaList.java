@@ -52,7 +52,7 @@ public class ResourceQuotaList implements Model, ListModel<ResourceQuota> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<ResourceQuota> items;
 
   /**

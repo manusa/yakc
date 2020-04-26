@@ -52,7 +52,7 @@ public class MutatingWebhookConfigurationList implements Model, ListModel<Mutati
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<MutatingWebhookConfiguration> items;
 
   /**

@@ -52,7 +52,7 @@ public class DeploymentList implements Model, ListModel<Deployment> {
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<Deployment> items;
 
   /**

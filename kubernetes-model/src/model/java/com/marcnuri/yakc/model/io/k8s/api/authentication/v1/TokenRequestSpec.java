@@ -44,7 +44,7 @@ public class TokenRequestSpec implements Model {
    */
   @NonNull
   @JsonProperty("audiences")
-  @Singular("addToAudiences")
+  @Singular(value = "addToAudiences", ignoreNullCollections = true)
   private List<String> audiences;
 
   @JsonProperty("boundObjectRef")

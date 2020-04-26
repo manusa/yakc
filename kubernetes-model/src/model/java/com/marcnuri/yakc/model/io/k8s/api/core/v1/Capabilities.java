@@ -42,14 +42,14 @@ public class Capabilities implements Model {
    * Added capabilities
    */
   @JsonProperty("add")
-  @Singular("addToAdd")
+  @Singular(value = "addToAdd", ignoreNullCollections = true)
   private List<String> add;
 
   /**
    * Removed capabilities
    */
   @JsonProperty("drop")
-  @Singular("addToDrop")
+  @Singular(value = "addToDrop", ignoreNullCollections = true)
   private List<String> drop;
 
 }

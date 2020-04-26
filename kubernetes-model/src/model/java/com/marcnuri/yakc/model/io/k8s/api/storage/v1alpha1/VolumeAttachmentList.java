@@ -52,7 +52,7 @@ public class VolumeAttachmentList implements Model, ListModel<VolumeAttachment> 
    */
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<VolumeAttachment> items;
 
   /**

@@ -43,14 +43,14 @@ public class UserInfo implements Model {
    * Any additional information provided by the authenticator.
    */
   @JsonProperty("extra")
-  @Singular("putInExtra")
+  @Singular(value = "putInExtra", ignoreNullCollections = true)
   private Map<String, List<String>> extra;
 
   /**
    * The names of groups this user is a part of.
    */
   @JsonProperty("groups")
-  @Singular("addToGroups")
+  @Singular(value = "addToGroups", ignoreNullCollections = true)
   private List<String> groups;
 
   /**

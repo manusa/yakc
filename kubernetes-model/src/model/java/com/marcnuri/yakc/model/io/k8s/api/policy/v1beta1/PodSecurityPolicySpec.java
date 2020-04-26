@@ -49,49 +49,49 @@ public class PodSecurityPolicySpec implements Model {
    * AllowedCSIDrivers is a whitelist of inline CSI drivers that must be explicitly set to be embedded within a pod spec. An empty value indicates that any CSI driver can be used for inline ephemeral volumes. This is an alpha field, and is only honored if the API server enables the CSIInlineVolume feature gate.
    */
   @JsonProperty("allowedCSIDrivers")
-  @Singular("addToAllowedCSIDrivers")
+  @Singular(value = "addToAllowedCSIDrivers", ignoreNullCollections = true)
   private List<AllowedCSIDriver> allowedCSIDrivers;
 
   /**
    * allowedCapabilities is a list of capabilities that can be requested to add to the container. Capabilities in this field may be added at the pod author's discretion. You must not list a capability in both allowedCapabilities and requiredDropCapabilities.
    */
   @JsonProperty("allowedCapabilities")
-  @Singular("addToAllowedCapabilities")
+  @Singular(value = "addToAllowedCapabilities", ignoreNullCollections = true)
   private List<String> allowedCapabilities;
 
   /**
    * allowedFlexVolumes is a whitelist of allowed Flexvolumes.  Empty or nil indicates that all Flexvolumes may be used.  This parameter is effective only when the usage of the Flexvolumes is allowed in the "volumes" field.
    */
   @JsonProperty("allowedFlexVolumes")
-  @Singular("addToAllowedFlexVolumes")
+  @Singular(value = "addToAllowedFlexVolumes", ignoreNullCollections = true)
   private List<AllowedFlexVolume> allowedFlexVolumes;
 
   /**
    * allowedHostPaths is a white list of allowed host paths. Empty indicates that all host paths may be used.
    */
   @JsonProperty("allowedHostPaths")
-  @Singular("addToAllowedHostPaths")
+  @Singular(value = "addToAllowedHostPaths", ignoreNullCollections = true)
   private List<AllowedHostPath> allowedHostPaths;
 
   /**
    * AllowedProcMountTypes is a whitelist of allowed ProcMountTypes. Empty or nil indicates that only the DefaultProcMountType may be used. This requires the ProcMountType feature flag to be enabled.
    */
   @JsonProperty("allowedProcMountTypes")
-  @Singular("addToAllowedProcMountTypes")
+  @Singular(value = "addToAllowedProcMountTypes", ignoreNullCollections = true)
   private List<String> allowedProcMountTypes;
 
   /**
    * allowedUnsafeSysctls is a list of explicitly allowed unsafe sysctls, defaults to none. Each entry is either a plain sysctl name or ends in "&#42;" in which case it is considered as a prefix of allowed sysctls. Single &#42; means all unsafe sysctls are allowed. Kubelet has to whitelist all allowed unsafe sysctls explicitly to avoid rejection.<br><p> <br><p> Examples: e.g. "foo/&#42;" allows "foo/bar", "foo/baz", etc. e.g. "foo.&#42;" allows "foo.bar", "foo.baz", etc.
    */
   @JsonProperty("allowedUnsafeSysctls")
-  @Singular("addToAllowedUnsafeSysctls")
+  @Singular(value = "addToAllowedUnsafeSysctls", ignoreNullCollections = true)
   private List<String> allowedUnsafeSysctls;
 
   /**
    * defaultAddCapabilities is the default set of capabilities that will be added to the container unless the pod spec specifically drops the capability.  You may not list a capability in both defaultAddCapabilities and requiredDropCapabilities. Capabilities added here are implicitly allowed, and need not be included in the allowedCapabilities list.
    */
   @JsonProperty("defaultAddCapabilities")
-  @Singular("addToDefaultAddCapabilities")
+  @Singular(value = "addToDefaultAddCapabilities", ignoreNullCollections = true)
   private List<String> defaultAddCapabilities;
 
   /**
@@ -104,7 +104,7 @@ public class PodSecurityPolicySpec implements Model {
    * forbiddenSysctls is a list of explicitly forbidden sysctls, defaults to none. Each entry is either a plain sysctl name or ends in "&#42;" in which case it is considered as a prefix of forbidden sysctls. Single &#42; means all sysctls are forbidden.<br><p> <br><p> Examples: e.g. "foo/&#42;" forbids "foo/bar", "foo/baz", etc. e.g. "foo.&#42;" forbids "foo.bar", "foo.baz", etc.
    */
   @JsonProperty("forbiddenSysctls")
-  @Singular("addToForbiddenSysctls")
+  @Singular(value = "addToForbiddenSysctls", ignoreNullCollections = true)
   private List<String> forbiddenSysctls;
 
   @NonNull
@@ -133,7 +133,7 @@ public class PodSecurityPolicySpec implements Model {
    * hostPorts determines which host port ranges are allowed to be exposed.
    */
   @JsonProperty("hostPorts")
-  @Singular("addToHostPorts")
+  @Singular(value = "addToHostPorts", ignoreNullCollections = true)
   private List<HostPortRange> hostPorts;
 
   /**
@@ -152,7 +152,7 @@ public class PodSecurityPolicySpec implements Model {
    * requiredDropCapabilities are the capabilities that will be dropped from the container.  These are required to be dropped and cannot be added.
    */
   @JsonProperty("requiredDropCapabilities")
-  @Singular("addToRequiredDropCapabilities")
+  @Singular(value = "addToRequiredDropCapabilities", ignoreNullCollections = true)
   private List<String> requiredDropCapabilities;
 
   @JsonProperty("runAsGroup")
@@ -177,7 +177,7 @@ public class PodSecurityPolicySpec implements Model {
    * volumes is a white list of allowed volume plugins. Empty indicates that no volumes may be used. To allow all volumes you may use '&#42;'.
    */
   @JsonProperty("volumes")
-  @Singular("addToVolumes")
+  @Singular(value = "addToVolumes", ignoreNullCollections = true)
   private List<String> volumes;
 
 }

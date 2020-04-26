@@ -43,21 +43,21 @@ public class PersistentVolumeClaimStatus implements Model {
    * AccessModes contains the actual access modes the volume backing the PVC has. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
    */
   @JsonProperty("accessModes")
-  @Singular("addToAccessModes")
+  @Singular(value = "addToAccessModes", ignoreNullCollections = true)
   private List<String> accessModes;
 
   /**
    * Represents the actual resources of the underlying volume.
    */
   @JsonProperty("capacity")
-  @Singular("putInCapacity")
+  @Singular(value = "putInCapacity", ignoreNullCollections = true)
   private Map<String, String> capacity;
 
   /**
    * Current Condition of persistent volume claim. If underlying persistent volume is being resized then the Condition will be set to 'ResizeStarted'.
    */
   @JsonProperty("conditions")
-  @Singular("addToConditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<PersistentVolumeClaimCondition> conditions;
 
   /**

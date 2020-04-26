@@ -43,21 +43,21 @@ public class ResourceRule implements Model {
    * APIGroups is the name of the APIGroup that contains the resources.  If multiple API groups are specified, any action requested against one of the enumerated resources in any API group will be allowed.  "&#42;" means all.
    */
   @JsonProperty("apiGroups")
-  @Singular("addToApiGroups")
+  @Singular(value = "addToApiGroups", ignoreNullCollections = true)
   private List<String> apiGroups;
 
   /**
    * ResourceNames is an optional white list of names that the rule applies to.  An empty set means that everything is allowed.  "&#42;" means all.
    */
   @JsonProperty("resourceNames")
-  @Singular("addToResourceNames")
+  @Singular(value = "addToResourceNames", ignoreNullCollections = true)
   private List<String> resourceNames;
 
   /**
    * Resources is a list of resources this rule applies to.  "&#42;" means all in the specified apiGroups.<br><p>  "&#42;/foo" represents the subresource 'foo' for all resources in the specified apiGroups.
    */
   @JsonProperty("resources")
-  @Singular("addToResources")
+  @Singular(value = "addToResources", ignoreNullCollections = true)
   private List<String> resources;
 
   /**
@@ -65,7 +65,7 @@ public class ResourceRule implements Model {
    */
   @NonNull
   @JsonProperty("verbs")
-  @Singular("addToVerbs")
+  @Singular(value = "addToVerbs", ignoreNullCollections = true)
   private List<String> verbs;
 
 }

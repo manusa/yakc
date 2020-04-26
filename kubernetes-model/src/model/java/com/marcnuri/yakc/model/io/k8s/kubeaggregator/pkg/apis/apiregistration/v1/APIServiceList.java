@@ -49,7 +49,7 @@ public class APIServiceList implements Model, ListModel<APIService> {
 
   @NonNull
   @JsonProperty("items")
-  @Singular("addToItems")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
   private List<APIService> items;
 
   /**
