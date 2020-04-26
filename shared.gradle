@@ -32,7 +32,6 @@ ext.configurePublishing = { Project evaluatedProject ->
   if (project.hasProperty("publish")) {
     apply plugin: 'signing'
     signing {
-      onlyIf { project.hasProperty("publish") }
       def signingKey = findProperty("signingKey")
       def signingPassword = findProperty("signingPassword")
       useInMemoryPgpKeys(signingKey, signingPassword)
