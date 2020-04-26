@@ -80,6 +80,8 @@ ext.configurePublishing = { Project evaluatedProject ->
     archives sourcesJar
     archives javadocJar
   }
+  def ossrhUsername = findProperty("ossrhUsername")
+  def ossrhPassword = findProperty("ossrhPassword")
   uploadArchives {
     repositories {
       mavenDeployer {
