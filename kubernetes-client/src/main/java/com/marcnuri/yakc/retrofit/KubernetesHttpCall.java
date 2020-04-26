@@ -33,6 +33,7 @@ import retrofit2.Response;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -40,6 +41,7 @@ import java.util.stream.Stream;
  */
 public class KubernetesHttpCall<T, W> implements KubernetesListCall<T, W> {
 
+  private static final String HEADER_CONTENT_TYPE = "Content-Type";
   private final Type responseType;
   private final Call<T> delegate;
   private final KubernetesClient kubernetesClient;
@@ -58,14 +60,25 @@ public class KubernetesHttpCall<T, W> implements KubernetesListCall<T, W> {
 
   @Override
   public <O> O get(Class<O> returnType) throws IOException {
-    final okhttp3.Response response = kubernetesClient.getRetrofit().callFactory()
-        .newCall(request()).execute();
+    final okhttp3.Response response = executeRaw();
     if (response.isSuccessful()) {
-      return kubernetesClient.getRetrofit().<O>responseBodyConverter(returnType, new Annotation[0]).convert(response.body());
+      final String contentType = Optional.ofNullable(response.header(HEADER_CONTENT_TYPE))
+        .orElseThrow(() -> KubernetesException.forResponse("Response with no Content-Type", response));
+      if (contentType.startsWith("text/") && returnType == String.class) {
+        return returnType.cast(response.body() != null ? response.body().string() : "");
+      } else if (contentType.equalsIgnoreCase("application/json")) {
+        return kubernetesClient.getRetrofit().<O>responseBodyConverter(returnType, new Annotation[0]).convert(response.body());
+      }
+      throw KubernetesException.forResponse("Unprocessable response body", response);
     }
     throw KubernetesException.forResponse(
         response.body() == null ? "" : response.body().string(),
         response);
+  }
+
+  @Override
+  public okhttp3.Response executeRaw() throws IOException {
+    return kubernetesClient.getRetrofit().callFactory().newCall(request()).execute();
   }
 
   @Override

@@ -12,7 +12,7 @@ The report ends with a list of the total resources used in the provided Node.
 In order to run the example you need an active K8s cluster
 (e.g. [Minikube](https://kubernetes.io/docs/setup/learning-environment/minikube/)).
 
-In the project directory, run `mvn package`:
+In the project quick start directory, run `mvn package`:
 
 ```shell script
 $ mvn package

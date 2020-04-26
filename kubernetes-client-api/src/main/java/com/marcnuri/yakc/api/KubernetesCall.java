@@ -17,6 +17,7 @@
  */
 package com.marcnuri.yakc.api;
 
+import okhttp3.Response;
 import retrofit2.Call;
 
 import java.io.IOException;
@@ -53,4 +54,15 @@ public interface KubernetesCall<T> extends Call<T> {
    */
   <O> O get(Class<O> returnType) throws IOException;
 
+  /**
+   * Synchronously send the request and return an unprocessed {@link Response} with no IO operations
+   * performed to the {@link Response#body()}.
+   *
+   * <p>To avoid leaking resources callers should close the Response which in turn will close the
+   * underlying ResponseBody.
+   *
+   * @return a raw Response ready to be processed.
+   * @throws IOException if a problem occurred talking to the server.
+   */
+  Response executeRaw() throws IOException;
 }
