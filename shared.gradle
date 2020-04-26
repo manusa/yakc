@@ -29,8 +29,17 @@ ext.configurePublishing = { Project evaluatedProject ->
   if (!evaluatedProject.isPublishable || project.hasProperty("skipPublishing")) {
     return
   }
+  if (project.hasProperty("publish")) {
+    apply plugin: 'signing'
+    signing {
+      onlyIf { project.hasProperty("publish") }
+      def signingKey = findProperty("signingKey")
+      def signingPassword = findProperty("signingPassword")
+      useInMemoryPgpKeys(signingKey, signingPassword)
+      sign configurations.archives
+    }
+  }
   apply plugin: 'maven'
-  apply plugin: 'signing'
   def delombokedSourceDir = "$buildDir/delombok";
   task delombok(dependsOn: classes) {
     group = 'maven'
@@ -68,9 +77,6 @@ ext.configurePublishing = { Project evaluatedProject ->
   }
   install.group 'maven'
   install.dependsOn assemblePublication
-  signing {
-    sign configurations.archives
-  }
   artifacts {
     archives sourcesJar
     archives javadocJar
