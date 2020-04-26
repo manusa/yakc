@@ -29,7 +29,7 @@ ext.configurePublishing = { Project evaluatedProject ->
   if (!evaluatedProject.isPublishable || project.hasProperty("skipPublishing")) {
     return
   }
-  if (project.hasProperty("publish")) {
+  if (project.hasProperty("sign")) {
     apply plugin: 'signing'
     signing {
       def signingKey = findProperty("signingKey")
