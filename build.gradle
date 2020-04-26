@@ -32,13 +32,6 @@ allprojects  {
   afterEvaluate {
     Project evaluatedProject ->
       configurePublishing(evaluatedProject)
-//      jacocoTestReport {
-//        executionData = fileTree(dir: evaluatedProject.projectDir, includes: ["**/*.exec"])
-//        reports {
-//          xml.enabled = true
-//          html.enabled = true
-//        }
-//      }
     }
   }
 

@@ -19,7 +19,7 @@ $ mvn package
 [INFO] Scanning for projects...
 [INFO]
 [INFO] --------------< com.marcnuri.yakc.quickstarts:top-nodes >---------------
-[INFO] Building YAKC :: Quickstarts :: Top Nodes 0.0.1
+[INFO] Building YAKC :: Quickstarts :: Top Nodes 0.0.2
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ top-nodes ---
@@ -42,7 +42,7 @@ $ mvn package
 [INFO] No tests to run.
 [INFO]
 [INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ top-nodes ---
-[INFO] Building jar: D:\00-MN\projects\manusa\yakc\quickstarts\top-nodes\target\top-nodes-0.0.1.jar
+[INFO] Building jar: D:\00-MN\projects\manusa\yakc\quickstarts\top-nodes\target\top-nodes-0.0.2.jar
 [INFO]
 [INFO] >>> exec-maven-plugin:1.2.1:java (default) > validate @ top-nodes >>>
 [INFO]
