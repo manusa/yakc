@@ -31,7 +31,7 @@ $ mvn package
 [INFO] Scanning for projects...
 [INFO]
 [INFO] -----------------< com.marcnuri.yakc.quickstarts:pods >-----------------
-[INFO] Building YAKC :: Quickstarts :: Pods 0.0.2
+[INFO] Building YAKC :: Quickstarts :: Pods 0.0.3
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ pods ---

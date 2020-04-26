@@ -16,20 +16,20 @@ Please try it out and share your opinion, but use at your own risk.
   <dependency>
     <groupId>com.marcnuri.yakc</groupId>
     <artifactId>kubernetes-api</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
   </dependency>
   <dependency>
     <groupId>com.marcnuri.yakc</groupId>
     <artifactId>kubernetes-client</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
   </dependency>
 </dependencies>
 ```
 #### Gradle
 ```groovy
 dependencies {
-  compile 'com.marcnuri.yakc:kubernetes-api:0.0.2'
-  compile 'com.marcnuri.yakc:kubernetes-client:0.0.2'
+  compile 'com.marcnuri.yakc:kubernetes-api:0.0.3'
+  compile 'com.marcnuri.yakc:kubernetes-client:0.0.3'
 }
 ```
 #### List all Pods

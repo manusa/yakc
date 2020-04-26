@@ -19,6 +19,7 @@ package com.marcnuri.yakc;
 
 import com.marcnuri.yakc.api.WatchEvent.Type;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
+import com.marcnuri.yakc.api.core.v1.CoreV1Api.ReadNamespacedPodLog;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Container;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodSpec;
@@ -157,6 +158,25 @@ class PodIT {
 
   @Test
   @Order(6)
+  @DisplayName("readNamespacedPodLog, should wait for pod to start and retrieve logs")
+  void readNamespacedPodLog() throws IOException {
+    // Given
+    kc.create(CoreV1Api.class).listNamespacedPod(NAMESPACE).watch()
+      .filter(we -> we.getType() == Type.MODIFIED)
+      .filter(we -> we.getObject().getMetadata().getName().equals(podName))
+      .takeUntil(we -> (boolean)we.getObject().getStatus().getConditions().stream()
+        .anyMatch(pc -> pc.getType().equals("ContainersReady")))
+      .timeout(20, TimeUnit.SECONDS)
+      .subscribe();
+    // When
+    final String podLog = kc.create(CoreV1Api.class).readNamespacedPodLog(podName, NAMESPACE,
+      new ReadNamespacedPodLog().timestamps(true)).get();
+    // Then
+    assertThat(podLog).contains("Starting up on port 80");
+  }
+
+  @Test
+  @Order(7)
   @DisplayName("deleteNamespacedPod, should delete existing Pod")
   void deleteNamespacedPod() throws IOException {
     // When
