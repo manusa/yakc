@@ -29,10 +29,11 @@ import java.util.List;
  */
 public interface ExtendedCoreV1Api extends CoreV1Api {
   /**
-   * Execute a command in the Pod with the provided name in the provided namespace.
+   * Execute a command in the only container of the Pod with the provided name in the provided namespace.
    *
    * @param name name of the Pod.
    * @param namespace namespace where the Pod resides.
+   * @param commands the command and args to execute in the Pod container.
    */
   @HTTP(
     method = "GET",
@@ -46,4 +47,24 @@ public interface ExtendedCoreV1Api extends CoreV1Api {
     @Path("namespace") String namespace,
     @Query("command") List<String> commands);
 
+  /**
+   * Execute a command in the provided container of the Pod with the provided name in the provided namespace.
+   *
+   * @param name name of the Pod.
+   * @param namespace namespace where the Pod resides.
+   * @param container the name of the container.
+   * @param commands the command and args to execute in the Pod container.
+   */
+  @HTTP(
+    method = "GET",
+    path = "/api/v1/namespaces/{namespace}/pods/{name}/exec"
+  )
+  @Headers({
+    "Accept: */*"
+  })
+  KubernetesExecCall<String> execInNamespacedPod(
+    @Path("name") String name,
+    @Path("namespace") String namespace,
+    @Query("container") String container,
+    @Query("command") List<String> commands);
 }

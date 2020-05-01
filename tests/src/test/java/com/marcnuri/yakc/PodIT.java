@@ -17,9 +17,13 @@
  */
 package com.marcnuri.yakc;
 
+import com.marcnuri.yakc.api.ExecMessage;
+import com.marcnuri.yakc.api.ExecMessage.StandardStream;
+import com.marcnuri.yakc.api.KubernetesException;
 import com.marcnuri.yakc.api.WatchEvent.Type;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api.ReadNamespacedPodLog;
+import com.marcnuri.yakc.apiextensions.ExtendedCoreV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Container;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodSpec;
@@ -34,9 +38,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -76,7 +82,10 @@ class PodIT {
         .build())
       .spec(PodSpec.builder()
         .addToContainers(Container.builder()
-          .image("containous/whoami")
+          .image("busybox")
+          .addToCommand("/bin/sh")
+          .addToCommand("-c")
+          .addToCommand("echo 'Busybox for IT started' && sleep 3600")
           .name("yakc-pod-it")
           .build())
         .build())
@@ -85,7 +94,7 @@ class PodIT {
     assertThat(pod).isNotNull();
     assertThat(pod.getMetadata().getName()).isEqualTo(podName);
     assertThat(pod.getSpec().getContainers()).hasSize(1);
-    assertThat(pod.getSpec().getContainers().get(0).getImage()).isEqualTo("containous/whoami");
+    assertThat(pod.getSpec().getContainers().get(0).getImage()).isEqualTo("busybox");
   }
 
   @Test
@@ -135,11 +144,71 @@ class PodIT {
     assertThat(result).isNotNull();
     assertThat(result.getMetadata().getName()).isEqualTo(podName);
     assertThat(result.getSpec().getContainers()).hasSize(1);
-    assertThat(result.getSpec().getContainers().get(0).getImage()).isEqualTo("containous/whoami");
+    assertThat(result.getSpec().getContainers().get(0).getImage()).isEqualTo("busybox");
   }
 
   @Test
   @Order(5)
+  @DisplayName("execInNamespacedPod, with no container param, should stream response in out standard stream")
+  void execInNamespacedPodOnlyContainer() throws IOException {
+    // Given
+    kc.create(CoreV1Api.class).listNamespacedPod(NAMESPACE).watch()
+      .filter(we -> we.getType() == Type.MODIFIED)
+      .filter(we -> we.getObject().getMetadata().getName().equals(podName))
+      .takeUntil(we -> (boolean)we.getObject().getStatus().getConditions().stream()
+        .anyMatch(pc -> pc.getType().equals("ContainersReady")))
+      .timeout(20, TimeUnit.SECONDS)
+      .subscribe();
+    final AtomicReference<ExecMessage> response = new AtomicReference<>();
+    final AtomicReference<Throwable> error = new AtomicReference<>();
+    // When
+    kc.create(ExtendedCoreV1Api.class)
+      .execInNamespacedPod(podName, NAMESPACE, Arrays.asList("/bin/sh", "-c", "echo 'Hello World'"))
+      .exec().skip(1).subscribe(response::set, error::set);
+    // Then
+    assertThat(error.get()).isNull();
+    assertThat(response.get().getStandardStream()).isEqualTo(StandardStream.STDOUT);
+    assertThat(response.get().getMessage()).isEqualTo("Hello World\n");
+  }
+
+  @Test
+  @Order(6)
+  @DisplayName("execInNamespacedPod, with valid container param, should stream response in out standard stream")
+  void execInNamespacedPodValidContainer() {
+    // Given
+    final AtomicReference<ExecMessage> response = new AtomicReference<>();
+    final AtomicReference<Throwable> error = new AtomicReference<>();
+    // When
+    kc.create(ExtendedCoreV1Api.class)
+      .execInNamespacedPod(podName, NAMESPACE, "yakc-pod-it", Arrays.asList("/bin/sh", "-c", "echo 'Hello World for yakc-pod-it'"))
+      .exec().skip(1).subscribe(response::set, error::set);
+    // Then
+    assertThat(error.get()).isNull();
+    assertThat(response.get().getStandardStream()).isEqualTo(StandardStream.STDOUT);
+    assertThat(response.get().getMessage()).isEqualTo("Hello World for yakc-pod-it\n");
+  }
+
+  @Test
+  @Order(7)
+  @DisplayName("execInNamespacedPod, with invalid container param, should throw exception")
+  void execInNamespacedPodInvalidContainer() throws IOException {
+    // Given
+    final AtomicReference<ExecMessage> response = new AtomicReference<>();
+    final AtomicReference<Throwable> error = new AtomicReference<>();
+    // When
+    kc.create(ExtendedCoreV1Api.class)
+      .execInNamespacedPod(podName, NAMESPACE, "not-valid-container", Arrays.asList("/bin/sh", "-c", "echo 'Hello World for yakc-pod-it'"))
+      .exec().skip(1).subscribe(response::set, error::set);
+    // Then
+    assertThat(response.get()).isNull();
+    assertThat(error.get().getMessage())
+      .contains(String.format("container not-valid-container is not valid for pod %s", podName));
+    assertThat(error.get()).isInstanceOf(KubernetesException.class);
+    assertThat(((KubernetesException)error.get()).getCode()).isEqualTo(400);
+  }
+
+  @Test
+  @Order(8)
   @DisplayName("replaceNamespacedPod, should replace existing Pod's image")
   void replaceNamespacedPod() throws IOException {
     // Given
@@ -157,7 +226,7 @@ class PodIT {
   }
 
   @Test
-  @Order(6)
+  @Order(9)
   @DisplayName("readNamespacedPodLog, should wait for pod to start and retrieve logs")
   void readNamespacedPodLog() throws IOException {
     // Given
@@ -172,11 +241,11 @@ class PodIT {
     final String podLog = kc.create(CoreV1Api.class).readNamespacedPodLog(podName, NAMESPACE,
       new ReadNamespacedPodLog().timestamps(true)).get();
     // Then
-    assertThat(podLog).contains("Starting up on port 80");
+    assertThat(podLog).contains("Busybox for IT started");
   }
 
   @Test
-  @Order(7)
+  @Order(10)
   @DisplayName("deleteNamespacedPod, should delete existing Pod")
   void deleteNamespacedPod() throws IOException {
     // When

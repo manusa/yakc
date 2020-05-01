@@ -20,6 +20,7 @@ package com.marcnuri.yakc.reactivex;
 import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.ExecMessage;
 import com.marcnuri.yakc.api.ExecMessage.StandardStream;
+import com.marcnuri.yakc.api.KubernetesException;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.disposables.Disposable;
@@ -30,6 +31,7 @@ import okhttp3.WebSocket;
 import okhttp3.WebSocketListener;
 import okio.ByteString;
 
+import java.io.IOException;
 import java.util.Optional;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -89,7 +91,16 @@ public class ExecOnSubscribe implements ObservableOnSubscribe<ExecMessage>, Disp
 
       @Override
       public void onFailure(WebSocket webSocket, Throwable t, Response response) {
-        emitter.onError(t);
+        final String message = Optional.ofNullable(response)
+          .map(Response::body)
+          .map(rb -> {
+            try {
+              return rb.string();
+            } catch(IOException ex) {
+              return null;
+            }
+          }).orElse(t.getMessage());
+        emitter.onError(new KubernetesException(message, response));
         close();
       }
 
