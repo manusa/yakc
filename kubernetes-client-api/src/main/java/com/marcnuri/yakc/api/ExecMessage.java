@@ -37,9 +37,9 @@ public class ExecMessage {
   @Getter
   public enum StandardStream {
     STDIN(0), STDOUT(1), STDERR(2);
-    private final int standardStream;
+    private final int standardStreamCode;
     public static StandardStream fromByte(int byteCode) {
-      return Stream.of(values()).filter(ss -> ss.getStandardStream() == byteCode).findFirst()
+      return Stream.of(values()).filter(ss -> ss.getStandardStreamCode() == byteCode).findFirst()
         .orElse(STDOUT);
     }
   }
