@@ -47,7 +47,8 @@ public class PodQuickstart {
         + " - Deletes POD if exists\n"
         + " - Creates POD\n"
         + " - Patches POD's labels\n"
-        + " - Updates POD removing annotations and adding another label");
+        + " - Updates POD removing annotations and adding another label\n"
+        + "Starting...\n");
     try (KubernetesClient kc = new KubernetesClient()) {
       final CoreV1Api api = kc.create(CoreV1Api.class);
       final Disposable podMonitor = monitorPods(api);

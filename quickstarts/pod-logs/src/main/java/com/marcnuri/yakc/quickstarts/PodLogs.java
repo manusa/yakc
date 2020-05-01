@@ -112,7 +112,6 @@ public class PodLogs {
         .subscribe();
       System.out.printf("POD %s was created%n", POD_NAME);
     }
-
   }
 
   private static final class LogReader implements Callable<Void> {

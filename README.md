@@ -52,6 +52,9 @@ on how to use the client.
 - [Pod Logs](quickstarts/pod-logs) contains a Maven project with an example showcasing how to retrieve
   Pod logs, both with follow and no-follow options.
   See nested [README.md](quickstarts/pod-logs/README.md) for more information.
+- [Pod Exec](quickstarts/pod-exec) contains a Maven project with an example showcasing how to execute
+  commands in a Pod container.
+  See nested [README.md](quickstarts/pod-exec/README.md) for more information.
 - [Top for Nodes](quickstarts/top-nodes) contains a Maven project with an example on how to query
   Nodes and Pod containers to calculate resource availability and usage.
   See nested [README.md](quickstarts/top-nodes/README.md) for more information.
