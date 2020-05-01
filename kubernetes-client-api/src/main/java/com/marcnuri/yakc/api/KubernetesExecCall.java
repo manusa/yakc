@@ -18,15 +18,10 @@ package com.marcnuri.yakc.api;
 
 import io.reactivex.Observable;
 
-import java.io.IOException;
-import java.util.stream.Stream;
-
 /**
  * {@inheritDoc}
  */
-public interface KubernetesListCall<T, W> extends KubernetesCall<T> {
+public interface KubernetesExecCall<T> extends KubernetesCall<T> {
 
-  Stream<W> stream() throws IOException;
-
-  Observable<WatchEvent<W>> watch() throws KubernetesException;
+  Observable<ExecMessage> exec();
 }

@@ -18,10 +18,13 @@
 package com.marcnuri.yakc.retrofit;
 
 import com.marcnuri.yakc.KubernetesClient;
+import com.marcnuri.yakc.api.ExecMessage;
 import com.marcnuri.yakc.api.KubernetesException;
+import com.marcnuri.yakc.api.KubernetesExecCall;
 import com.marcnuri.yakc.api.KubernetesListCall;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.model.ListModel;
+import com.marcnuri.yakc.reactivex.ExecOnSubscribe;
 import com.marcnuri.yakc.reactivex.WatchOnSubscribe;
 import io.reactivex.Observable;
 import okhttp3.Request;
@@ -39,7 +42,7 @@ import java.util.stream.Stream;
 /**
  * Created by Marc Nuri on 2020-04-12.
  */
-public class KubernetesHttpCall<T, W> implements KubernetesListCall<T, W> {
+public class KubernetesHttpCall<T, W> implements KubernetesListCall<T, W>, KubernetesExecCall<T> {
 
   private static final String HEADER_CONTENT_TYPE = "Content-Type";
   private final Type responseType;
@@ -77,8 +80,8 @@ public class KubernetesHttpCall<T, W> implements KubernetesListCall<T, W> {
   }
 
   @Override
-  public okhttp3.Response executeRaw() throws IOException {
-    return kubernetesClient.getRetrofit().callFactory().newCall(request()).execute();
+  public Observable<WatchEvent<W>> watch() throws KubernetesException {
+    return Observable.create(new WatchOnSubscribe<>(responseType, request(), kubernetesClient));
   }
 
   @Override
@@ -88,9 +91,15 @@ public class KubernetesHttpCall<T, W> implements KubernetesListCall<T, W> {
   }
 
   @Override
-  public Observable<WatchEvent<W>> watch() throws KubernetesException {
-    return Observable.create(new WatchOnSubscribe<>(responseType, request(), kubernetesClient));
+  public Observable<ExecMessage> exec() {
+    return Observable.create(new ExecOnSubscribe(request(), kubernetesClient));
   }
+
+  @Override
+  public okhttp3.Response executeRaw() throws IOException {
+    return kubernetesClient.getRetrofit().callFactory().newCall(request()).execute();
+  }
+
 
   @Override
   public Response<T> execute() throws IOException {

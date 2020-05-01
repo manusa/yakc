@@ -55,6 +55,7 @@ sonarqube {
     property "sonar.projectKey", "manusa_yakc"
     property "sonar.organization", "manusa-github"
     property "sonar.cpd.exclusions", "kubernetes-api/**/*,kubernetes-model/**/*"
+    property "sonar.coverage.exclusions", "quickstarts/**/*"
     property "sonar.links.homepage", "https://github.com/manusa/yakc"
     property "sonar.links.ci", "https://github.com/manusa/yakc/actions"
     property "sonar.links.scm", "https://github.com/manusa/yakc"
