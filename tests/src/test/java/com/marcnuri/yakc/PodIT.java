@@ -65,7 +65,7 @@ class PodIT {
 
   @AfterAll
   static void tearDown() {
-    kc.close();
+//    kc.close(); // TODO: Enable when isolated OkHttp dispatchers and pools are available
     kc = null;
   }
 
@@ -166,7 +166,7 @@ class PodIT {
       .execInNamespacedPod(podName, NAMESPACE, Arrays.asList("/bin/sh", "-c", "echo 'Hello World'"))
       .exec().skip(1).subscribe(response::set, error::set);
     // Then
-    assertThat(error.get()).isNull();
+    assertThat(error.get()).as("Expected error to be null, but was: %s", error.get()).isNull();
     assertThat(response.get().getStandardStream()).isEqualTo(StandardStream.STDOUT);
     assertThat(response.get().getMessage()).isEqualTo("Hello World\n");
   }

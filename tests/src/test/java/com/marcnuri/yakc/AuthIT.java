@@ -57,7 +57,7 @@ class AuthIT {
 
   @AfterAll
   static void tearDown() {
-    kc.close();
+//    kc.close(); // TODO: Enable when isolated OkHttp dispatchers and pools are available
     kc = null;
   }
 
