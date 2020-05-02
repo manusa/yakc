@@ -22,6 +22,7 @@ import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
+import javax.security.auth.x500.X500Principal;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -42,9 +43,11 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import static okio.ByteString.decodeBase64;
 
@@ -98,15 +101,20 @@ public class SSLResolver {
         final InputStream javaIS = loadJavaTrustStore()
     ) {
       Security.addProvider(new BouncyCastleProvider());
-      final X509Certificate cert = (X509Certificate) certFactory.generateCertificate(certIS);
+      final Collection<? extends Certificate> certs = certFactory.generateCertificates(certIS);
       final KeyFactory keyFactory = KeyFactory.getInstance(RSA_ALGO);
       final byte[] decodedPem = new PemReader(keyISR).readPemObject().getContent();
       final PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(decodedPem);
       final PrivateKey privateKey = keyFactory.generatePrivate(spec);
       final KeyStore keyStore = KeyStore.getInstance("JKS");
       keyStore.load(javaIS, DEFAULT_JAVA_TRUSTSTORE_P455W0RD.toCharArray());
-      final String alias = cert.getSubjectX500Principal().getName();
-      keyStore.setKeyEntry(alias, privateKey, DEFAULT_JAVA_TRUSTSTORE_P455W0RD.toCharArray(), new Certificate[]{cert});
+      final String alias = certs.stream()
+        .map(X509Certificate.class::cast)
+        .map(X509Certificate::getIssuerX500Principal)
+        .map(X500Principal::getName)
+        .collect(Collectors.joining("_"));
+      keyStore.setKeyEntry(alias, privateKey, DEFAULT_JAVA_TRUSTSTORE_P455W0RD.toCharArray(),
+        certs.toArray(new Certificate[0]));
       kmf.init(keyStore, DEFAULT_JAVA_TRUSTSTORE_P455W0RD.toCharArray());
     }
     return kmf.getKeyManagers();
