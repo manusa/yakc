@@ -31,7 +31,6 @@ import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodList;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodSpec;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodTemplateSpec;
-import com.marcnuri.yakc.model.io.k8s.api.core.v1.SecretList;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.APIResourceList;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector;
@@ -201,8 +200,6 @@ class WipIT {
   void other() throws IOException {
     final APIResourceList arl = kc.create(CoreV1Api.class).getAPIResources().get();
     System.out.println(arl.toString());
-    final SecretList secretList = kc.create(CoreV1Api.class).listSecretForAllNamespaces().get();
-    System.out.println(secretList.toString());
   }
 
 }

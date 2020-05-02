@@ -93,6 +93,7 @@ class PodIT {
     // Then
     assertThat(pod).isNotNull();
     assertThat(pod.getMetadata().getName()).isEqualTo(podName);
+    assertThat(pod.getMetadata().getCreationTimestamp()).isNotNull();
     assertThat(pod.getSpec().getContainers()).hasSize(1);
     assertThat(pod.getSpec().getContainers().get(0).getImage()).isEqualTo("busybox");
   }
@@ -119,7 +120,7 @@ class PodIT {
 
   @Test
   @Order(3)
-  @DisplayName("listNamespacedPod.stream, should await for notification of newly created Pod")
+  @DisplayName("listNamespacedPod.stream, should list newly created Pod")
   void listNamespacedPodStream() throws IOException {
     // When
     final boolean result = kc.create(CoreV1Api.class).listNamespacedPod(NAMESPACE).stream()
