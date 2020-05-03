@@ -39,7 +39,7 @@ public class KubeConfig {
   private List<NamedContext> contexts;
   private List<NamedExtension> extensions;
   private List<NamedAuthInfo> users;
-  private Map preferences;
+  private Map<String, Object> preferences;
 
   @NoArgsConstructor
   @Data

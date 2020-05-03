@@ -33,7 +33,7 @@ public class KubernetesException extends IOException {
     EXCEPTIONS.put(404, NotFoundException.class);
   }
 
-  private final Response rawResponse;
+  private final transient Response rawResponse;
 
   public KubernetesException(String message, Response rawResponse) {
     super(message);

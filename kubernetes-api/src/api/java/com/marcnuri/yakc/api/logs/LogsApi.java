@@ -17,7 +17,6 @@
 package com.marcnuri.yakc.api.logs;
 
 import com.marcnuri.yakc.api.Api;
-import com.marcnuri.yakc.api.KubernetesCall;
 
 @SuppressWarnings({"squid:S1192", "unused"})
 public interface LogsApi extends Api {

@@ -31,7 +31,7 @@ import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,9 +96,8 @@ class ApiGenerator {
   }
 
   private Set<String> initDefaultImports() {
-    return new TreeSet<>(Arrays.asList(
-        settings.getPackageName().concat(".api.Api"),
-        settings.getPackageName().concat(".api.KubernetesCall")
+    return new TreeSet<>(Collections.singletonList(
+      settings.getPackageName().concat(".api.Api")
     ));
   }
 
