@@ -17,6 +17,7 @@
  */
 package com.marcnuri.yakc;
 
+import com.marcnuri.yakc.ClusterExecutionCondition.ClusterMinVersion;
 import com.marcnuri.yakc.api.Api;
 import com.marcnuri.yakc.api.KubernetesCall;
 import com.marcnuri.yakc.api.KubernetesListCall;
@@ -58,7 +59,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @TestMethodOrder(OrderAnnotation.class)
 @ExtendWith(KubernetesClientExtension.class)
-class CustomResourceDefinitionIT {
+@ClusterMinVersion(minVersion = "1.17.0")
+class CustomResourceDefinitionV1IT {
 
   private static final String NAMESPACE = "default";
 
