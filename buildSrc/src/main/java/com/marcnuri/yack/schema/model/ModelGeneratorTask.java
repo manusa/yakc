@@ -25,6 +25,7 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
+import java.util.stream.Stream;
 
 /**
  * Created by Marc Nuri on 2020-04-04.
@@ -34,7 +35,7 @@ public class ModelGeneratorTask extends DefaultTask {
   @Input
   public String packageName;
   @Input
-  public File schema;
+  public File[] schemas;
   @Input
   public File templatesDir;
   @Input
@@ -42,16 +43,22 @@ public class ModelGeneratorTask extends DefaultTask {
 
   @TaskAction
   public void run() {
+    Stream.of(schemas).forEach(this::generateModel);
+    getLogger().lifecycle("Model generation completed");
+  }
+
+  private void generateModel(File schema) {
+    getLogger().lifecycle("Generating Model for schema {}", schema.getName());
     final OpenAPI openAPI = new OpenAPIV3Parser().read(schema.getAbsolutePath());
     final GeneratorSettings settings = GeneratorSettings.builder()
-        .openAPI(openAPI)
-        .logger(getLogger())
-        .packageName(packageName)
-        .schema(schema.toPath())
-        .templatesDir(templatesDir.toPath())
-        .outputDirectory(outputDirectory.toPath())
-        .sourceDirectory(outputDirectory.toPath().resolve("src").resolve("model").resolve("java"))
-        .build();
+      .openAPI(openAPI)
+      .logger(getLogger())
+      .packageName(packageName)
+      .schema(schema.toPath())
+      .templatesDir(templatesDir.toPath())
+      .outputDirectory(outputDirectory.toPath())
+      .sourceDirectory(outputDirectory.toPath().resolve("src").resolve("model").resolve("java"))
+      .build();
     new ModelGenerator(settings, openAPI).generate();
   }
 }

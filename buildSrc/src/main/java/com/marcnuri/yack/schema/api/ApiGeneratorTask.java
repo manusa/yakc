@@ -25,6 +25,7 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
+import java.util.stream.Stream;
 
 /**
  * Created by Marc Nuri on 2020-04-05.
@@ -33,7 +34,7 @@ public class ApiGeneratorTask extends DefaultTask {
   @Input
   public String packageName;
   @Input
-  public File schema;
+  public File[] schemas;
   @Input
   public File templatesDir;
   @Input
@@ -41,18 +42,23 @@ public class ApiGeneratorTask extends DefaultTask {
 
   @TaskAction
   public void run() {
+    Stream.of(schemas).forEach(this::generateApi);
+    getLogger().lifecycle("Api generation completed");
+  }
+
+  private void generateApi(File schema) {
+    getLogger().lifecycle("Generating API for schema {}", schema.getName());
     final OpenAPI openAPI = new OpenAPIV3Parser().read(schema.getAbsolutePath());
     final GeneratorSettings settings = GeneratorSettings.builder()
-        .openAPI(openAPI)
-        .logger(getLogger())
-        .packageName(packageName)
-        .schema(schema.toPath())
-        .templatesDir(templatesDir.toPath())
-        .outputDirectory(outputDirectory.toPath())
-        .sourceDirectory(outputDirectory.toPath().resolve("src").resolve("api").resolve("java"))
-        .build();
+      .openAPI(openAPI)
+      .logger(getLogger())
+      .packageName(packageName)
+      .schema(schema.toPath())
+      .templatesDir(templatesDir.toPath())
+      .outputDirectory(outputDirectory.toPath())
+      .sourceDirectory(outputDirectory.toPath().resolve("src").resolve("api").resolve("java"))
+      .build();
     new ApiGenerator(settings).generate();
-    getLogger().lifecycle("Generation completed");
   }
 
 }
