@@ -24,40 +24,34 @@ import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOption
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
 import java.util.UUID;
 
+import static com.marcnuri.yakc.KubernetesClientExtension.KC;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by Marc Nuri on 2020-05-02.
  */
 @TestMethodOrder(OrderAnnotation.class)
+@ExtendWith(KubernetesClientExtension.class)
 class NetworkPolicyIT {
 
   private static final String NAMESPACE = "default";
 
-  private static KubernetesClient kc;
   private static String networkPolicyName;
 
   @BeforeAll
   static void setUp() {
-    kc = new KubernetesClient();
     networkPolicyName = UUID.randomUUID().toString();
-  }
-
-  @AfterAll
-  static void tearDown() {
-//    kc.close(); // TODO: Enable when isolated OkHttp dispatchers and pools are available
-    kc = null;
   }
 
   @Test
@@ -65,7 +59,7 @@ class NetworkPolicyIT {
   @DisplayName("createNamespacedNetworkPolicy, should create network policy in default namespace")
   void createNamespacedNetworkPolicy() throws IOException {
     // When
-    final NetworkPolicy networkPolicy = kc.create(NetworkingV1Api.class)
+    final NetworkPolicy networkPolicy = KC.create(NetworkingV1Api.class)
       .createNamespacedNetworkPolicy("default", NetworkPolicy
         .builder()
         .metadata(ObjectMeta.builder()
@@ -89,7 +83,7 @@ class NetworkPolicyIT {
   @DisplayName("listNamespacedNetworkPolicy.stream, should list newly created NetworkPolicy")
   void listNamespacedNetworkPolicy() throws IOException {
     // When
-    final boolean result = kc.create(NetworkingV1Api.class).listNamespacedNetworkPolicy(NAMESPACE)
+    final boolean result = KC.create(NetworkingV1Api.class).listNamespacedNetworkPolicy(NAMESPACE)
       .stream().anyMatch(pod -> pod.getMetadata().getName().equals(networkPolicyName));
     // Then
     assertThat(result).as("Created NetworkPolicy was not found").isTrue();
@@ -100,7 +94,7 @@ class NetworkPolicyIT {
   @DisplayName("deleteNamespacedNetworkPolicy, should delete existing NetworkPolicy")
   void deleteNamespacedPod() throws IOException {
     // When
-    final Status result = kc.create(NetworkingV1Api.class)
+    final Status result = KC.create(NetworkingV1Api.class)
       .deleteNamespacedNetworkPolicy(networkPolicyName, NAMESPACE,
         DeleteOptions.builder().gracePeriodSeconds(1).build()).get();
     // Then

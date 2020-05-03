@@ -37,9 +37,8 @@ import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelecto
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -48,30 +47,19 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
+import static com.marcnuri.yakc.KubernetesClientExtension.KC;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by Marc Nuri on 2020-04-18.
  */
+@ExtendWith(KubernetesClientExtension.class)
 class WipIT {
-
-  private static KubernetesClient kc;
-
-  @BeforeAll
-  static void setUp() {
-    kc = new KubernetesClient();
-  }
-
-  @AfterAll
-  static void tearDown() {
-//    kc.close(); // TODO: Enable when isolated OkHttp dispatchers and pools are available
-    kc = null;
-  }
 
   @Test
   void namespaceWatchBlocksUntilOneIsAdded() throws KubernetesException {
     final AtomicInteger count = new AtomicInteger(0);
-    final Disposable namespaceWatch = kc.create(CoreV1Api.class)
+    final Disposable namespaceWatch = KC.create(CoreV1Api.class)
         .listNamespace()
         .watch()
         .takeUntil(we -> we.getType() == Type.ADDED)
@@ -83,7 +71,7 @@ class WipIT {
   @Test
   void watchPods() throws Exception {
     final CountDownLatch cdl = new CountDownLatch(2);
-    final Disposable d = kc.create(CoreV1Api.class)
+    final Disposable d = KC.create(CoreV1Api.class)
         .listNamespacedPod("default")
         .watch()
         .subscribeOn(Schedulers.io())
@@ -107,7 +95,7 @@ class WipIT {
   void configMaps() throws Exception {
     final String configMapName = "test";
     final CountDownLatch cdl = new CountDownLatch(1);
-    kc.create(CoreV1Api.class).listConfigMapForAllNamespaces().watch()
+    KC.create(CoreV1Api.class).listConfigMapForAllNamespaces().watch()
         .subscribeOn(Schedulers.newThread())
         .filter(we -> Stream.of(Type.ADDED, Type.DELETED).anyMatch(t -> we.getType() == t))
         .filter(we -> we.getObject().getMetadata().getName().equals(configMapName))
@@ -120,12 +108,12 @@ class WipIT {
           );
         });
     try {
-      kc.create(CoreV1Api.class).deleteNamespacedConfigMap(configMapName, "default").get();
+      KC.create(CoreV1Api.class).deleteNamespacedConfigMap(configMapName, "default").get();
       System.out.println("Existing ConfigMap was deleted");
     } catch (NotFoundException ex) {
       System.out.println("ConfigMap not found, deletion not needed");
     }
-    kc.create(CoreV1Api.class).createNamespacedConfigMap("default", ConfigMap.builder()
+    KC.create(CoreV1Api.class).createNamespacedConfigMap("default", ConfigMap.builder()
         .metadata(ObjectMeta.builder()
             .name(configMapName)
             .putInAnnotations("one-annotation-key", "annotation-value")
@@ -133,18 +121,18 @@ class WipIT {
         .data(Collections.singletonMap("some", "to-keep"))
         .putInData("test-key", "test-value")
         .build()).get();
-    kc.create(CoreV1Api.class).patchNamespacedConfigMap(configMapName, "default",
+    KC.create(CoreV1Api.class).patchNamespacedConfigMap(configMapName, "default",
       ConfigMap.builder().metadata(ObjectMeta.builder().putInLabels("other", "label").build()).build()).get();
     cdl.await(5, TimeUnit.SECONDS);
   }
 
   @Test
   void delete() throws IOException {
-    final PodList podList = kc.create(CoreV1Api.class)
+    final PodList podList = KC.create(CoreV1Api.class)
         .listPodForAllNamespaces(new ListPodForAllNamespaces().labelSelector("app = test-java"))
         .get();
     for (Pod p : podList.getItems()) {
-      kc.create(CoreV1Api.class).deleteNamespacedPod(
+      KC.create(CoreV1Api.class).deleteNamespacedPod(
           p.getMetadata().getName(),
           p.getMetadata().getNamespace(),
           DeleteOptions.builder().gracePeriodSeconds(10).propagationPolicy("Foreground").build()
@@ -154,7 +142,7 @@ class WipIT {
 
   @Test
   void deployment() throws IOException {
-    final AppsV1Api api = kc.create(AppsV1Api.class);
+    final AppsV1Api api = KC.create(AppsV1Api.class);
     final String deploymentName = "java-test";
     try {
       api.deleteNamespacedDeployment(deploymentName, "default")
@@ -190,7 +178,7 @@ class WipIT {
     api.patchNamespacedDeployment(deploymentName, "default",
         Deployment.builder().spec(deployment.getSpec().toBuilder().replicas(2).build()).build()
         ).get();
-    final PodList selectedPodList = kc.create(CoreV1Api.class)
+    final PodList selectedPodList = KC.create(CoreV1Api.class)
         .listPodForAllNamespaces(new ListPodForAllNamespaces().labelSelector("k8s-app=test-pod"))
         .get();
     System.out.println(selectedPodList);
@@ -198,7 +186,7 @@ class WipIT {
 
   @Test
   void other() throws IOException {
-    final APIResourceList arl = kc.create(CoreV1Api.class).getAPIResources().get();
+    final APIResourceList arl = KC.create(CoreV1Api.class).getAPIResources().get();
     System.out.println(arl.toString());
   }
 

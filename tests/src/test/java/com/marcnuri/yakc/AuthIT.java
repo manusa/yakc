@@ -23,49 +23,43 @@ import com.marcnuri.yakc.model.io.k8s.api.core.v1.Node;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.ObjectReference;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Secret;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.ServiceAccount;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
 
+import static com.marcnuri.yakc.KubernetesClientExtension.KC;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by Marc Nuri on 2020-05-02.
  */
 @TestMethodOrder(OrderAnnotation.class)
+@ExtendWith(KubernetesClientExtension.class)
 class AuthIT {
 
   private static final String NAMESPACE = "default";
 
-  private static KubernetesClient kc;
   private static String secretName;
   private static String caData;
   private static String token;
 
   @BeforeAll
   static void setUp() {
-    kc = new KubernetesClient();
     secretName = null;
     caData = null;
     token = null;
-  }
-
-  @AfterAll
-  static void tearDown() {
-//    kc.close(); // TODO: Enable when isolated OkHttp dispatchers and pools are available
-    kc = null;
   }
 
   @Test
   @Order(1)
   void retrieveServiceAccount() throws IOException {
     // When
-    final ServiceAccount sa = kc.create(CoreV1Api.class).listNamespacedServiceAccount(NAMESPACE)
+    final ServiceAccount sa = KC.create(CoreV1Api.class).listNamespacedServiceAccount(NAMESPACE)
       .stream().findFirst().orElse(null);
     // Then
     assertThat(sa).isNotNull();
@@ -76,7 +70,7 @@ class AuthIT {
   @Order(2)
   void retrieveSecretForServiceAccount() throws IOException {
     // When
-    final Secret secret = kc.create(CoreV1Api.class).listNamespacedSecret(NAMESPACE)
+    final Secret secret = KC.create(CoreV1Api.class).listNamespacedSecret(NAMESPACE)
       .stream()
       .filter(s -> s.getType().equals("kubernetes.io/service-account-token"))
       .filter(s -> s.getMetadata().getName().equals(secretName))
@@ -93,12 +87,12 @@ class AuthIT {
   void performTokenAuthInNewClient() throws IOException {
     // Given
     final Configuration configuration = Configuration.builder()
-      .server(kc.getConfiguration().getServer())
+      .server(KC.getConfiguration().getServer())
       .certificateAuthorityData(caData)
       .token(token)
       .build();
     final KubernetesClient tokenClient = new KubernetesClient(configuration);
-    final String accessibleTokenName = kc.create(CoreV1Api.class).listNode().stream().findFirst()
+    final String accessibleTokenName = KC.create(CoreV1Api.class).listNode().stream().findFirst()
       .orElseThrow(() -> new IllegalStateException("Node not accessible with default client"))
       .getMetadata().getName();
     // When

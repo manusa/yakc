@@ -29,13 +29,13 @@ import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodSpec;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import io.reactivex.disposables.Disposable;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -44,29 +44,23 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static com.marcnuri.yakc.KubernetesClientExtension.KC;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-25.
  */
 @TestMethodOrder(OrderAnnotation.class)
+@ExtendWith(KubernetesClientExtension.class)
 class PodIT {
 
   private static final String NAMESPACE = "default";
 
-  private static KubernetesClient kc;
   private static String podName;
 
   @BeforeAll
   static void setUp() {
-    kc = new KubernetesClient();
     podName = UUID.randomUUID().toString();
-  }
-
-  @AfterAll
-  static void tearDown() {
-//    kc.close(); // TODO: Enable when isolated OkHttp dispatchers and pools are available
-    kc = null;
   }
 
   @Test
@@ -74,7 +68,7 @@ class PodIT {
   @DisplayName("createNamespacedPod, should create pod in default namespace")
   void createNamespacedPod() throws IOException {
     // When
-    final Pod pod = kc.create(CoreV1Api.class).createNamespacedPod(NAMESPACE, Pod.builder()
+    final Pod pod = KC.create(CoreV1Api.class).createNamespacedPod(NAMESPACE, Pod.builder()
       .metadata(ObjectMeta.builder()
         .name(podName)
         .putInLabels("app", "yakc-pod-it")
@@ -106,7 +100,7 @@ class PodIT {
     final AtomicBoolean hasError = new AtomicBoolean(false);
     final AtomicBoolean hasCompleted = new AtomicBoolean(false);
     // When
-    final Disposable d = kc.create(CoreV1Api.class).listNamespacedPod(NAMESPACE)
+    final Disposable d = KC.create(CoreV1Api.class).listNamespacedPod(NAMESPACE)
       .watch()
       .filter(we -> we.getObject().getMetadata().getName().equals(podName))
       .takeUntil(we -> we.getType() == Type.ADDED)
@@ -123,7 +117,7 @@ class PodIT {
   @DisplayName("listNamespacedPod.stream, should list newly created Pod")
   void listNamespacedPodStream() throws IOException {
     // When
-    final boolean result = kc.create(CoreV1Api.class).listNamespacedPod(NAMESPACE).stream()
+    final boolean result = KC.create(CoreV1Api.class).listNamespacedPod(NAMESPACE).stream()
       .anyMatch(pod -> pod.getMetadata().getName().equals(podName));
     // Then
     assertThat(result).as("Created Pod was not found").isTrue();
@@ -134,7 +128,7 @@ class PodIT {
   @DisplayName("patchNamespacedPod, should patch labels of Pod")
   void patchNamespacedPod() throws IOException {
     // When
-    final Pod result = kc.create(CoreV1Api.class)
+    final Pod result = KC.create(CoreV1Api.class)
       .patchNamespacedPod(podName, NAMESPACE, Pod.builder()
         .metadata(
           ObjectMeta.builder()
@@ -153,7 +147,7 @@ class PodIT {
   @DisplayName("execInNamespacedPod, with no container param, should stream response in out standard stream")
   void execInNamespacedPodOnlyContainer() throws IOException {
     // Given
-    kc.create(CoreV1Api.class).listNamespacedPod(NAMESPACE).watch()
+    KC.create(CoreV1Api.class).listNamespacedPod(NAMESPACE).watch()
       .filter(we -> we.getType() == Type.MODIFIED)
       .filter(we -> we.getObject().getMetadata().getName().equals(podName))
       .takeUntil(we -> (boolean)we.getObject().getStatus().getConditions().stream()
@@ -163,7 +157,7 @@ class PodIT {
     final AtomicReference<ExecMessage> response = new AtomicReference<>();
     final AtomicReference<Throwable> error = new AtomicReference<>();
     // When
-    kc.create(ExtendedCoreV1Api.class)
+    KC.create(ExtendedCoreV1Api.class)
       .execInNamespacedPod(podName, NAMESPACE, Arrays.asList("/bin/sh", "-c", "echo 'Hello World'"))
       .exec().skip(1).subscribe(response::set, error::set);
     // Then
@@ -180,7 +174,7 @@ class PodIT {
     final AtomicReference<ExecMessage> response = new AtomicReference<>();
     final AtomicReference<Throwable> error = new AtomicReference<>();
     // When
-    kc.create(ExtendedCoreV1Api.class)
+    KC.create(ExtendedCoreV1Api.class)
       .execInNamespacedPod(podName, NAMESPACE, "yakc-pod-it", Arrays.asList("/bin/sh", "-c", "echo 'Hello World for yakc-pod-it'"))
       .exec().skip(1).subscribe(response::set, error::set);
     // Then
@@ -197,7 +191,7 @@ class PodIT {
     final AtomicReference<ExecMessage> response = new AtomicReference<>();
     final AtomicReference<Throwable> error = new AtomicReference<>();
     // When
-    kc.create(ExtendedCoreV1Api.class)
+    KC.create(ExtendedCoreV1Api.class)
       .execInNamespacedPod(podName, NAMESPACE, "not-valid-container", Arrays.asList("/bin/sh", "-c", "echo 'Hello World for yakc-pod-it'"))
       .exec().skip(1).subscribe(response::set, error::set);
     // Then
@@ -213,11 +207,11 @@ class PodIT {
   @DisplayName("replaceNamespacedPod, should replace existing Pod's image")
   void replaceNamespacedPod() throws IOException {
     // Given
-    final Pod existingPod = kc.create(CoreV1Api.class).readNamespacedPod(podName, NAMESPACE).get();
+    final Pod existingPod = KC.create(CoreV1Api.class).readNamespacedPod(podName, NAMESPACE).get();
     existingPod.getMetadata().setResourceVersion(null);
     existingPod.getSpec().getContainers().get(0).setImage("nginxdemos/hello");
     // When
-    final Pod result = kc.create(CoreV1Api.class)
+    final Pod result = KC.create(CoreV1Api.class)
       .replaceNamespacedPod(podName, NAMESPACE, existingPod).get();
     // Then
     assertThat(result).isNotNull();
@@ -231,7 +225,7 @@ class PodIT {
   @DisplayName("readNamespacedPodLog, should wait for pod to start and retrieve logs")
   void readNamespacedPodLog() throws IOException {
     // Given
-    kc.create(CoreV1Api.class).listNamespacedPod(NAMESPACE).watch()
+    KC.create(CoreV1Api.class).listNamespacedPod(NAMESPACE).watch()
       .filter(we -> we.getType() == Type.MODIFIED)
       .filter(we -> we.getObject().getMetadata().getName().equals(podName))
       .takeUntil(we -> (boolean)we.getObject().getStatus().getConditions().stream()
@@ -239,7 +233,7 @@ class PodIT {
       .timeout(20, TimeUnit.SECONDS)
       .subscribe();
     // When
-    final String podLog = kc.create(CoreV1Api.class).readNamespacedPodLog(podName, NAMESPACE,
+    final String podLog = KC.create(CoreV1Api.class).readNamespacedPodLog(podName, NAMESPACE,
       new ReadNamespacedPodLog().timestamps(true)).get();
     // Then
     assertThat(podLog).contains("Busybox for IT started");
@@ -250,7 +244,7 @@ class PodIT {
   @DisplayName("deleteNamespacedPod, should delete existing Pod")
   void deleteNamespacedPod() throws IOException {
     // When
-    final Pod result = kc.create(CoreV1Api.class).deleteNamespacedPod(podName, NAMESPACE).get();
+    final Pod result = KC.create(CoreV1Api.class).deleteNamespacedPod(podName, NAMESPACE).get();
     // Then
     assertThat(result).isNotNull();
     assertThat(result.getMetadata().getName()).isEqualTo(podName);
