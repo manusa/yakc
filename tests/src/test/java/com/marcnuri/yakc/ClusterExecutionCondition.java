@@ -33,24 +33,30 @@ import java.util.stream.Stream;
  */
 public class ClusterExecutionCondition implements ExecutionCondition {
 
+  private static Integer[] extractComponents(String version) {
+    return Stream.of(version.replaceAll("[^0-9.]", "").split("\\."))
+      .map(Integer::valueOf).toArray(Integer[]::new);
+  }
+
   @Override
   public ConditionEvaluationResult evaluateExecutionCondition(ExtensionContext context) {
-    final String kubernetesVersion =System.getenv().getOrDefault("K8S_VERSION",
-      Integer.MAX_VALUE + ".0.0");
-    final Integer[] kubernetesVersionComponents = Stream.of(kubernetesVersion.split("\\."))
-      .map(Integer::valueOf).toArray(Integer[]::new);
-    final String minVersion = context.getTestClass()
-      .orElseThrow(() -> new IllegalArgumentException("@ClusterMinVersion must be used on a Class"))
-      .getAnnotation(ClusterMinVersion.class).minVersion();
-    final Integer[] minVersionComponents = Stream.of(minVersion.split("\\."))
-      .map(Integer::valueOf).toArray(Integer[]::new);
+    final Integer[] kubernetesVersionComponents = extractComponents(
+      System.getenv().getOrDefault("K8S_VERSION", Integer.MAX_VALUE + ".0.0"));
+    final Integer[] minVersionComponents = extractComponents(
+      context.getTestClass()
+        .orElseThrow(() -> new IllegalArgumentException("@ClusterMinVersion must be used on a Class"))
+        .getAnnotation(ClusterMinVersion.class).minVersion()
+    );
     if (minVersionComponents.length != kubernetesVersionComponents.length) {
       throw new IllegalArgumentException(String.format("Versions must be formatted as x.x.x found %s / %s",
-        kubernetesVersion, minVersion));
+        kubernetesVersionComponents, minVersionComponents));
     }
     for(int it = 0; it < kubernetesVersionComponents.length; it++){
       if (kubernetesVersionComponents[it] > minVersionComponents[it]) {
         return ConditionEvaluationResult.enabled("Current cluster is supported by the Test Suite");
+      }
+      if (kubernetesVersionComponents[it] < minVersionComponents[it]) {
+        break;
       }
     }
     return ConditionEvaluationResult.disabled("Current cluster is not supported by the Test Suite");
