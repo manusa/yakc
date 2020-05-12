@@ -46,7 +46,7 @@ try (KubernetesClient kc = new KubernetesClient()) {
 Check the [quickstarts](quickstarts) directory for projects ready to use with illustrative examples
 on how to use the client.
 
-- [Pod](quickstarts/pod) contains a Maven project with examples to the diverse available API operations
+- [Pods](quickstarts/pods) contains a Maven project with examples to the diverse available API operations
   for  Pod resources.
   See nested [README.md](quickstarts/pod/README.md) for more information.
 - [Pod Logs](quickstarts/pod-logs) contains a Maven project with an example showcasing how to retrieve
@@ -58,6 +58,10 @@ on how to use the client.
 - [Top for Nodes](quickstarts/top-nodes) contains a Maven project with an example on how to query
   Nodes and Pod containers to calculate resource availability and usage.
   See nested [README.md](quickstarts/top-nodes/README.md) for more information.
+- [Custom Resource Definition](quickstarts/crd) contains a Maven project with a complete example on
+  how to create Custom Resource Definitions and how to create and use an API to manipulate those
+  custom resources.
+  See nested [README.md](quickstarts/crd/README.md) for more information.
 ## Modules
 
 ### kubernetes-client-api
