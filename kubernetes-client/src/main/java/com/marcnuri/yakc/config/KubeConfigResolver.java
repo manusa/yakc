@@ -30,6 +30,8 @@ import lombok.NoArgsConstructor;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Optional;
@@ -40,6 +42,35 @@ import java.util.Optional;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class KubeConfigResolver {
 
+  private static final String SA_TOKEN_POD_FILE = "/var/run/secrets/kubernetes.io/serviceaccount/token";
+  private static final String NAMESPACE_POD_FILE = "/var/run/secrets/kubernetes.io/serviceaccount/namespace";
+  private static final String CA_POD_FILE = "/var/run/secrets/kubernetes.io/serviceaccount/ca.crt";
+
+  public static Configuration resolveConfig() throws IOException {
+    if (new File(SA_TOKEN_POD_FILE).exists()) {
+      return resolvePodConfig();
+    }
+    return resolveKubeConfig();
+  }
+
+  @SuppressWarnings("WeakerAccess")
+  public static Configuration resolvePodConfig() throws IOException {
+    final Configuration.ConfigurationBuilder cb = Configuration.builder();
+    cb.server("kubernetes.default.svc");
+    cb.certificateAuthority(new File(CA_POD_FILE));
+    cb.token(readFile(new File(SA_TOKEN_POD_FILE)));
+    cb.namespace(readFile(new File(NAMESPACE_POD_FILE)));
+    return cb.build();
+  }
+
+  /**
+   * Resolves {@link Configuration} values from "~/.kube/config" current-context. It returns an
+   * empty configuration if file doesn't exist.
+   *
+   * @return the resolved Configuration with values from KubeConfig file empty Configuration if it doesn't exist.
+   * @throws IOException if a problem occurred while reading the config file.
+   */
+  @SuppressWarnings("WeakerAccess")
   public static Configuration resolveKubeConfig() throws IOException {
     final Path kubeConfigPath = new File(System.getProperty("user.home")).toPath().resolve(".kube").resolve("config");
     final ObjectMapper objectMapper = new ObjectMapper(new YAMLFactory());
@@ -96,5 +127,13 @@ public class KubeConfigResolver {
           .findFirst();
     }
     return Optional.empty();
+  }
+
+  private static String readFile(File file) throws IOException {
+    if (file.exists() && file.isFile()) {
+      return new String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8).trim()
+        .replace("\n", "").replace("\r", "");
+    }
+    return null;
   }
 }

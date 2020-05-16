@@ -2,9 +2,8 @@
 
 > Declarative Java REST client for Kubernetes API.
 
-**DISCLAIMER**
+This project is still in an early stage, public API and classes are subject to changes.
 
-This project is still a PoC, public API and classes are subject to constant changes.
 Please try it out and share your opinion, but use at your own risk.
 
 ## Quick start
@@ -62,6 +61,14 @@ on how to use the client.
   how to create Custom Resource Definitions and how to create and use an API to manipulate those
   custom resources.
   See nested [README.md](quickstarts/crd/README.md) for more information.
+  
+### Katacoda
+Check out the different [Katacoda scenarios](https://www.katacoda.com/marcnuri/courses/yakc/)
+where you can try YAKC from your browser and without installing anything in your machine.
+
+We'll be adding several scenarios with increasing complexity, as of now you can try out [how to 
+setup Maven to use YAKC](https://www.katacoda.com/marcnuri/courses/yakc/maven-quick-start).
+
 ## Modules
 
 ### kubernetes-client-api

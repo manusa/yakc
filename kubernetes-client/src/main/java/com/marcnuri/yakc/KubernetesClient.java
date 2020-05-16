@@ -74,9 +74,9 @@ public class KubernetesClient implements Closeable {
     Configuration ret;
     if (configuration == null) {
       try {
-        ret = KubeConfigResolver.resolveKubeConfig();
+        ret = KubeConfigResolver.resolveConfig();
       } catch(IOException ex) {
-        log.warning(String.format("Error while loading  .kube/config: %s", ex.getMessage()));
+        log.warning(String.format("Error while loading autodetected Configuration: %s", ex.getMessage()));
         ret = Configuration.builder().build();
       }
     } else {
