@@ -40,7 +40,7 @@ import java.util.Optional;
  * Created by Marc Nuri on 2020-04-13.
  */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class KubeConfigResolver {
+public class ConfigurationResolver {
 
   private static final String SA_TOKEN_POD_FILE = "/var/run/secrets/kubernetes.io/serviceaccount/token";
   private static final String NAMESPACE_POD_FILE = "/var/run/secrets/kubernetes.io/serviceaccount/namespace";
@@ -56,7 +56,7 @@ public class KubeConfigResolver {
   @SuppressWarnings("WeakerAccess")
   public static Configuration resolvePodConfig() throws IOException {
     final Configuration.ConfigurationBuilder cb = Configuration.builder();
-    cb.server("kubernetes.default.svc");
+    cb.server("https://kubernetes.default.svc");
     cb.certificateAuthority(new File(CA_POD_FILE));
     cb.token(readFile(new File(SA_TOKEN_POD_FILE)));
     cb.namespace(readFile(new File(NAMESPACE_POD_FILE)));

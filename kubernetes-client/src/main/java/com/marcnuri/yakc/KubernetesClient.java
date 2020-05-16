@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.marcnuri.yakc.api.Api;
 import com.marcnuri.yakc.config.Configuration;
-import com.marcnuri.yakc.config.KubeConfigResolver;
+import com.marcnuri.yakc.config.ConfigurationResolver;
 import com.marcnuri.yakc.retrofit.KubernetesCallAdapterFactory;
 import lombok.Getter;
 import lombok.extern.java.Log;
@@ -74,7 +74,7 @@ public class KubernetesClient implements Closeable {
     Configuration ret;
     if (configuration == null) {
       try {
-        ret = KubeConfigResolver.resolveConfig();
+        ret = ConfigurationResolver.resolveConfig();
       } catch(IOException ex) {
         log.warning(String.format("Error while loading autodetected Configuration: %s", ex.getMessage()));
         ret = Configuration.builder().build();
