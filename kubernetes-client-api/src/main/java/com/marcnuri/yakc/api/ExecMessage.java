@@ -25,7 +25,8 @@ import lombok.Getter;
 import java.util.stream.Stream;
 
 /**
- * Created by Marc Nuri on 2020-05-01.
+ * Object containing a Standard stream output message and the {@link StandardStream} where the
+ * message was output.
  */
 @SuppressWarnings("JavaDoc")
 @Builder
@@ -55,6 +56,9 @@ public class ExecMessage {
    */
   private final String message;
 
+  /**
+   * {@inheritDoc}
+   */
   @Override
   public String toString() {
     return message;

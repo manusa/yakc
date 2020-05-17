@@ -20,10 +20,15 @@ package com.marcnuri.yakc.api;
 import okhttp3.Response;
 
 /**
- * Created by Marc Nuri on 2020-04-13.
+ * Signals that an exception corresponding to a 4xx class status code was received as a response while
+ * performing some cluster action.
  */
+@SuppressWarnings("WeakerAccess")
 public class ClientErrorException extends KubernetesException {
 
+  /**
+   * {@inheritDoc}
+   */
   public ClientErrorException(String message, Response rawResponse) {
     super(message, rawResponse);
   }

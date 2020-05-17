@@ -24,7 +24,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Marc Nuri on 2020-04-13.
+ * Signals that an exception of some sort has occurred while performing some cluster action.
+ * This class is the general class of exceptions produced by failed or interrupted k8s cluster
+ * operations.
  */
 public class KubernetesException extends IOException {
 
@@ -35,15 +37,40 @@ public class KubernetesException extends IOException {
 
   private final transient Response rawResponse;
 
+  /**
+   * Constructs a {@code KubernetesException} with the specified detail message and OkHttp
+   * {@link Response}.
+   *
+   * @param message The detail message.
+   * @param rawResponse The OkHttp that caused this exception.
+   */
   public KubernetesException(String message, Response rawResponse) {
     super(message);
     this.rawResponse = rawResponse;
   }
 
+  /**
+   * Returns the HTTP status code that caused this exception.
+   *
+   * @return the HTTP status code.
+   */
   public int getCode() {
     return rawResponse.code();
   }
 
+  /**
+   * Factory method to create {@code KubernetesException} based on the {@link Response} produced by
+   * the server.
+   *
+   * <p>Depending on the response code it will return a specific {@code KubernetesException}
+   * implementation applicable for that code. In case no specific {@code KubernetesException} is found
+   * a generic one will be returned.
+   *
+   * @param message The detail message for the {@code KubernetesException}.
+   * @param rawResponse The {@code Response} from which to compute the applicable
+   *        {@code KubernetesException}.
+   * @return the applicable {@code KubernetesException} instance.
+   */
   public static KubernetesException forResponse(String message, Response rawResponse) {
     final int statusCode = rawResponse.code();
     if (EXCEPTIONS.containsKey(rawResponse.code())) {

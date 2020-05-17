@@ -22,7 +22,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Created by Marc Nuri on 2020-04-13.
+ * Class containing an object returned during a Watch event and the {@link Type} of event that
+ * produced it.
  */
 @AllArgsConstructor
 @NoArgsConstructor

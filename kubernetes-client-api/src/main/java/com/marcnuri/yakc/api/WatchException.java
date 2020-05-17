@@ -20,7 +20,7 @@ package com.marcnuri.yakc.api;
 import okhttp3.Response;
 
 /**
- * Created by Marc Nuri on 2020-04-13.
+ * Exception thrown while performing a Kubernetes watch operation.
  */
 public class WatchException extends KubernetesException {
 

@@ -17,7 +17,10 @@
 package com.marcnuri.yakc.api;
 
 /**
- * Created by Marc Nuri on 2020-04-11.
+ * Interface to be implemented by any class to be used as a Retrofit2 {@code service} interface
+ * in {@code KubernetesClient#create}.
+ *
+ * <p> {@code KubernetesClient#create} will create an implementation of the API endpoints it defines.
  */
 public interface Api {
 

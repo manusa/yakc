@@ -17,7 +17,7 @@
 package com.marcnuri.yakc.model;
 
 /**
- * Created by Marc Nuri on 2020-04-12.
+ * Interface to be implemented by any class to be used as a {@code KubernetesClient} model object.
  */
 public interface Model {
 

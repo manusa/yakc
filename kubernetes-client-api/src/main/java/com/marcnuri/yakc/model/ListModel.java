@@ -19,7 +19,8 @@ package com.marcnuri.yakc.model;
 import java.util.List;
 
 /**
- * Created by Marc Nuri on 2020-04-13.
+ * {@link Model} interface extension to be implemented by any class that represents a "listable"
+ * Kubernetes resource.
  */
 public interface ListModel<T> extends Model {
 

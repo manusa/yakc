@@ -23,7 +23,7 @@ import retrofit2.Call;
 import java.io.IOException;
 
 /**
- * {@inheritDoc}
+ * Retrofit {@link Call} extension specific for calls performed using the {@code KubernetesClient}.
  */
 public interface KubernetesCall<T> extends Call<T> {
 

@@ -20,7 +20,7 @@ package com.marcnuri.yakc.api;
 import okhttp3.Response;
 
 /**
- * Created by Marc Nuri on 2020-04-13.
+ * Exception thrown while performing a cluster operation against a resource that wasn't found.
  */
 public class NotFoundException extends ClientErrorException {
 
