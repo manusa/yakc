@@ -76,7 +76,7 @@ public class SSLResolver {
     boolean hasCert = configuration.getClientCertificate() != null
         || isNotNullOrEmpty(configuration.getClientCertificateData());
     boolean hasKey = configuration.getClientKey() != null
-        || isNotNullOrEmpty(configuration.getClientCertificateData());
+        || isNotNullOrEmpty(configuration.getClientKeyData());
     return hasCert && hasKey;
   }
 

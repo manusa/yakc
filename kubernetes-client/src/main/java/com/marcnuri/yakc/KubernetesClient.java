@@ -59,7 +59,6 @@ public class KubernetesClient implements Closeable {
    this(null);
   }
 
-  @SuppressWarnings("WeakerAccess")
   public KubernetesClient(Configuration configuration) {
     this.configuration = initConfiguration(configuration);
     this.okHttpClient = initOkHttpClient(this.configuration);
