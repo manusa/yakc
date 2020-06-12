@@ -58,6 +58,7 @@ public class ModelGeneratorTask extends DefaultTask {
       .templatesDir(templatesDir.toPath())
       .outputDirectory(outputDirectory.toPath())
       .sourceDirectory(outputDirectory.toPath().resolve("src").resolve("model").resolve("java"))
+      .overridesDirectory(outputDirectory.toPath().resolve("src").resolve("main").resolve("java"))
       .build();
     new ModelGenerator(settings, openAPI).generate();
   }

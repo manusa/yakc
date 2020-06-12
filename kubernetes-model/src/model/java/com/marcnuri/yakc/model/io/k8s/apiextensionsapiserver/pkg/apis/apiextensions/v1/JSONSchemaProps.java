@@ -60,7 +60,7 @@ public class JSONSchemaProps implements Model {
   private List<JSONSchemaProps> anyOf;
 
   @JsonProperty("default")
-  private JSON defaults;
+  private Object defaults;
 
   @JsonProperty("definitions")
   @Singular(value = "putInDefinitions", ignoreNullCollections = true)
@@ -75,10 +75,10 @@ public class JSONSchemaProps implements Model {
 
   @JsonProperty("enum")
   @Singular(value = "addToEnumeration", ignoreNullCollections = true)
-  private List<JSON> enumeration;
+  private List<Object> enumeration;
 
   @JsonProperty("example")
-  private JSON example;
+  private Object example;
 
   @JsonProperty("exclusiveMaximum")
   private Boolean exclusiveMaximum;

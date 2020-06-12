@@ -1,0 +1,325 @@
+kind: CustomResourceDefinition
+apiVersion: apiextensions.k8s.io/v1
+metadata:
+  name: sparkclusters.radanalytics.io
+  selfLink: >-
+    /apis/apiextensions.k8s.io/v1/customresourcedefinitions/sparkclusters.radanalytics.io
+  uid: fc324cf3-de35-432d-b454-6d377fcfac17
+  resourceVersion: '1337'
+  generation: 1
+  creationTimestamp: '2020-06-06T22:08:49Z'
+  managedFields:
+    - manager: dashboard
+      operation: Update
+      apiVersion: apiextensions.k8s.io/v1beta1
+      time: '2020-06-06T22:08:49Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:conversion':
+            .: {}
+            'f:strategy': {}
+          'f:group': {}
+          'f:names':
+            'f:kind': {}
+            'f:listKind': {}
+            'f:plural': {}
+            'f:singular': {}
+          'f:preserveUnknownFields': {}
+          'f:scope': {}
+          'f:validation':
+            .: {}
+            'f:openAPIV3Schema':
+              .: {}
+              'f:properties':
+                .: {}
+                'f:customImage':
+                  .: {}
+                  'f:type': {}
+                'f:downloadData':
+                  .: {}
+                  'f:items': {}
+                  'f:type': {}
+                'f:env':
+                  .: {}
+                  'f:items': {}
+                  'f:type': {}
+                'f:historyServer':
+                  .: {}
+                  'f:properties':
+                    .: {}
+                    'f:name':
+                      .: {}
+                      'f:type': {}
+                    'f:remoteURI':
+                      .: {}
+                      'f:description': {}
+                      'f:type': {}
+                    'f:sharedVolume':
+                      .: {}
+                      'f:properties':
+                        .: {}
+                        'f:matchLabels':
+                          .: {}
+                          'f:type': {}
+                        'f:mountPath':
+                          .: {}
+                          'f:type': {}
+                        'f:size':
+                          .: {}
+                          'f:type': {}
+                      'f:type': {}
+                    'f:type':
+                      .: {}
+                      'f:enum': {}
+                      'f:type': {}
+                  'f:type': {}
+                'f:labels':
+                  .: {}
+                  'f:type': {}
+                'f:master':
+                  .: {}
+                  'f:properties':
+                    .: {}
+                    'f:command':
+                      .: {}
+                      'f:items': {}
+                      'f:type': {}
+                    'f:commandArgs':
+                      .: {}
+                      'f:items': {}
+                      'f:type': {}
+                    'f:cpu':
+                      .: {}
+                      'f:type': {}
+                    'f:instances':
+                      .: {}
+                      'f:minimum': {}
+                      'f:type': {}
+                    'f:labels':
+                      .: {}
+                      'f:pattern': {}
+                      'f:type': {}
+                    'f:memory':
+                      .: {}
+                      'f:type': {}
+                  'f:type': {}
+                'f:metrics':
+                  .: {}
+                  'f:type': {}
+                'f:sparkConfiguration':
+                  .: {}
+                  'f:items': {}
+                  'f:type': {}
+                'f:sparkConfigurationMap':
+                  .: {}
+                  'f:type': {}
+                'f:sparkWebUI':
+                  .: {}
+                  'f:type': {}
+                'f:worker':
+                  .: {}
+                  'f:properties':
+                    .: {}
+                    'f:command':
+                      .: {}
+                      'f:items': {}
+                      'f:type': {}
+                    'f:commandArgs':
+                      .: {}
+                      'f:items': {}
+                      'f:type': {}
+                    'f:cpu':
+                      .: {}
+                      'f:type': {}
+                    'f:instances':
+                      .: {}
+                      'f:minimum': {}
+                      'f:type': {}
+                    'f:labels':
+                      .: {}
+                      'f:pattern': {}
+                      'f:type': {}
+                    'f:memory':
+                      .: {}
+                      'f:type': {}
+                  'f:type': {}
+          'f:version': {}
+          'f:versions': {}
+        'f:status':
+          'f:storedVersions': {}
+    - manager: kube-apiserver
+      operation: Update
+      apiVersion: apiextensions.k8s.io/v1
+      time: '2020-06-06T22:08:49Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:acceptedNames':
+            'f:kind': {}
+            'f:listKind': {}
+            'f:plural': {}
+            'f:singular': {}
+          'f:conditions': {}
+spec:
+  group: radanalytics.io
+  names:
+    plural: sparkclusters
+    singular: sparkcluster
+    kind: SparkCluster
+    listKind: SparkClusterList
+  scope: Namespaced
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          properties:
+            specialItem:
+              type: array
+              items:
+                - type: string
+                - type: object
+                  properties:
+                    name:
+                      type: string
+            customImage:
+              type: string
+            downloadData:
+              type: array
+              items:
+                type: object
+                required:
+                  - url
+                  - to
+                properties:
+                  to:
+                    type: string
+                  url:
+                    type: string
+            env:
+              type: array
+              items:
+                type: object
+                required:
+                  - name
+                  - value
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+            historyServer:
+              type: object
+              properties:
+                name:
+                  type: string
+                remoteURI:
+                  description: s3 bucket or hdfs path
+                  type: string
+                sharedVolume:
+                  type: object
+                  properties:
+                    matchLabels:
+                      type: object
+                    mountPath:
+                      type: string
+                    size:
+                      type: string
+                type:
+                  type: string
+                  enum:
+                    - sharedVolume
+                    - remoteStorage
+            labels:
+              type: object
+            master:
+              type: object
+              properties:
+                command:
+                  type: array
+                  items:
+                    type: string
+                commandArgs:
+                  type: array
+                  items:
+                    type: string
+                cpu:
+                  type: string
+                instances:
+                  type: integer
+                  minimum: 1
+                labels:
+                  type: string
+                  pattern: '([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]'
+                memory:
+                  type: string
+            metrics:
+              type: boolean
+            sparkConfiguration:
+              type: array
+              items:
+                type: object
+                required:
+                  - name
+                  - value
+                properties:
+                  name:
+                    type: string
+                  value:
+                    type: string
+            sparkConfigurationMap:
+              type: string
+            sparkWebUI:
+              type: boolean
+            worker:
+              type: object
+              properties:
+                command:
+                  type: array
+                  items:
+                    type: string
+                commandArgs:
+                  type: array
+                  items:
+                    type: string
+                cpu:
+                  type: string
+                instances:
+                  type: integer
+                  minimum: 0
+                labels:
+                  type: string
+                  pattern: '([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9]'
+                memory:
+                  type: string
+  conversion:
+    strategy: None
+  preserveUnknownFields: true
+status:
+  conditions:
+    - type: NonStructuralSchema
+      status: 'True'
+      lastTransitionTime: '2020-06-06T22:08:49Z'
+      reason: Violations
+      message: >-
+        spec.versions[0].schema.openAPIV3Schema.type: Required value: must not
+        be empty at the root
+    - type: NamesAccepted
+      status: 'True'
+      lastTransitionTime: '2020-06-06T22:08:49Z'
+      reason: NoConflicts
+      message: no conflicts found
+    - type: Established
+      status: 'True'
+      lastTransitionTime: '2020-06-06T22:08:49Z'
+      reason: InitialNamesAccepted
+      message: the initial names have been accepted
+  acceptedNames:
+    plural: sparkclusters
+    singular: sparkcluster
+    kind: SparkCluster
+    listKind: SparkClusterList
+  storedVersions:
+    - v1

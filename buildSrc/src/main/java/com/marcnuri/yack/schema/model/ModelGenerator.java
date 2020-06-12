@@ -53,6 +53,7 @@ import static com.marcnuri.yack.schema.SchemaUtils.removeUnnecessaryImports;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizeDescription;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizePackageName;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizeVariable;
+import static java.util.function.Predicate.not;
 
 /**
  * Created by Marc Nuri on 2020-04-12.
@@ -79,9 +80,10 @@ class ModelGenerator {
     final Map<String, Schema> schemas = ModelExtractor.extractSchemas(settings.getOpenAPI());
     settings.getLogger().lifecycle("Found {} schemas", schemas.size());
     schemas.entrySet().stream()
-        .map(this::mkPackageDirectories)
-        .filter(entry -> entry.getValue() instanceof ObjectSchema)
-        .forEach(entry -> {
+      .filter(entry -> entry.getValue() instanceof ObjectSchema)
+      .filter(not(this::hasOverride))
+      .map(this::mkPackageDirectories)
+      .forEach(entry -> {
           final String key = entry.getKey();
           settings.getLogger().lifecycle("Generating {}.{}", resolvePackageName(key), resolveClassName(key));
           final Map<String, Object> templateContext = templateContext(entry);
@@ -163,6 +165,13 @@ class ModelGenerator {
       throw new GeneratorException("Can't generate package directory for " + schemaEntry.getKey());
     }
     return schemaEntry;
+  }
+
+  private boolean hasOverride(Entry<String, Schema> schemaEntry) {
+    return settings.getOverridesDirectory()
+      .resolve(resolvePackageName(schemaEntry.getKey()).replace('.', File.separatorChar))
+      .resolve(resolveClassName(schemaEntry.getKey()).concat(".java"))
+      .toFile().exists();
   }
 
   private String resolvePackageName(String key) {

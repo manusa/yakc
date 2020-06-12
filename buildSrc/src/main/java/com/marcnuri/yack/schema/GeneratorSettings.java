@@ -36,5 +36,6 @@ public class GeneratorSettings {
   private final Path templatesDir;
   private final Path outputDirectory;
   private final Path sourceDirectory;
+  private final Path overridesDirectory;
   private final OpenAPI openAPI;
 }

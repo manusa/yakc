@@ -42,12 +42,20 @@ public class SchemaUtils {
 
   public static final String APPLICATION_JSON = "application/json";
 
+  private static final String OBJECT_PRIMITIVE = "Object";
+  private static final String STRING_PRIMITIVE = "String";
+
+  private static final Map<String, String> REF_MAP = Map.of(
+    "#/components/schemas/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1beta1.JSON", OBJECT_PRIMITIVE,
+    "#/components/schemas/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON", OBJECT_PRIMITIVE
+  );
+
   private static final Map<String, String> TYPE_MAP = Map.of(
       "boolean", "Boolean",
       "integer", "Integer",
       "number", "Number",
-      "object", "Object",
-      "string", "String"
+      "object", OBJECT_PRIMITIVE,
+      "string", STRING_PRIMITIVE
   );
 
   private static final Map<String, String> PROTECTED_WORD_MAP = Map.of(
@@ -63,7 +71,7 @@ public class SchemaUtils {
     this.settings = settings;
   }
 
-  public static String refToClassName(String ref) {
+  private static String refToClassName(String ref) {
     return ref.substring(ref.lastIndexOf('.') + 1);
   }
 
@@ -109,8 +117,11 @@ public class SchemaUtils {
       return "String";
     }
     if (StringUtils.isNotBlank(ref)) {
-      imports.add(refToModelPackage(ref));
-      return refToClassName(ref);
+      return schemaRefToJavaPrimitive(schema)
+        .orElseGet(() -> {
+          imports.add(refToModelPackage(ref));
+          return refToClassName(ref);
+        });
     }
     return schemaTypeToJavaPrimitive(schema);
   }
@@ -173,6 +184,10 @@ public class SchemaUtils {
 
   public static boolean isPatch(Schema schema){
     return schema.get$ref() != null && schema.get$ref().equals("#/components/schemas/io.k8s.apimachinery.pkg.apis.meta.v1.Patch");
+  }
+
+  private static Optional<String> schemaRefToJavaPrimitive(Schema schema) {
+    return Optional.ofNullable(REF_MAP.get(schema.get$ref()));
   }
 
   private static String schemaTypeToJavaPrimitive(Schema schema) {

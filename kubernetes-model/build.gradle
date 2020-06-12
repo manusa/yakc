@@ -8,7 +8,18 @@ ext {
 
 dependencies {
   compile  project(':kubernetes-client-api')
+  compileOnly "com.fasterxml.jackson.core:jackson-databind:$version_jackson"
   compileOnly "org.projectlombok:lombok:$version_projectlombok"
   annotationProcessor "org.projectlombok:lombok:$version_projectlombok"
+  testImplementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$version_jackson"
+  testImplementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$version_jackson"
+  testImplementation "org.junit.jupiter:junit-jupiter-api:$version_junit"
+  testImplementation "org.assertj:assertj-core:$version_assertj"
+  testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$version_junit"
 }
+
 sourceSets.main.java.srcDirs = ['src/api/java', 'src/main/java', 'src/model/java']
+
+test {
+  useJUnitPlatform()
+}

@@ -57,6 +57,7 @@ public class ApiGeneratorTask extends DefaultTask {
       .templatesDir(templatesDir.toPath())
       .outputDirectory(outputDirectory.toPath())
       .sourceDirectory(outputDirectory.toPath().resolve("src").resolve("api").resolve("java"))
+      .overridesDirectory(outputDirectory.toPath().resolve("src").resolve("main").resolve("java"))
       .build();
     new ApiGenerator(settings).generate();
   }
