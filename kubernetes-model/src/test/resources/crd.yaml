@@ -184,7 +184,12 @@ spec:
                   properties:
                     name:
                       type: string
+            someProperty:
+              type: string
+              additionalProperties:
+                type: integer
             customImage:
+              additionalProperties: false
               type: string
             downloadData:
               type: array

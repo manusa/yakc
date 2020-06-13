@@ -13,14 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Created on 2020-06-13, 7:57
+ * Created on 2020-06-13, 17:24
  */
 package com.marcnuri.yakc.model.serialization;
 
-import java.util.List;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 
-public interface ObjectOrArray<T, L> {
+import java.io.IOException;
 
-  T getObject();
-  List<L> getArray();
+/**
+ * Created by Marc Nuri on 2020-06-13.
+ */
+public class ObjectOrBoolSerializer<T extends ObjectOrBool<T>> extends JsonSerializer<T> {
+
+  @Override
+  public final void serialize(T value, JsonGenerator gen,
+    SerializerProvider serializers) throws IOException {
+
+    if (value.getObject() != null) {
+      gen.writeObject(value.getObject());
+    } else {
+      gen.writeBoolean(value.bool());
+    }
+  }
 }

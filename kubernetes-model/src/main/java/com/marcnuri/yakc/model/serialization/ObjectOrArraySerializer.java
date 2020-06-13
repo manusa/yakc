@@ -26,13 +26,16 @@ import java.io.IOException;
 /**
  * Created by Marc Nuri on 2020-06-13.
  */
-public class ObjectOrArraySerializer<T, L extends ObjectOrArray<T>> extends JsonSerializer<L> {
+public class ObjectOrArraySerializer<T, L, D extends ObjectOrArray<T, L>> extends JsonSerializer<D> {
 
   @Override
-  public final void serialize(L value, JsonGenerator gen,
+  public final void serialize(D value, JsonGenerator gen,
     SerializerProvider serializers) throws IOException {
-    if (value.getArray().size() == 1) {
-      gen.writeObject(value.getArray().iterator().next());
+    if (value.getArray() != null && !value.getArray().isEmpty() && value.getObject() != null) {
+      throw new IllegalArgumentException("Invalid object, only one of array or object is allowed");
+    }
+    if (value.getObject() != null) {
+      gen.writeObject(value.getObject());
     } else {
       gen.writeObject(value.getArray());
     }

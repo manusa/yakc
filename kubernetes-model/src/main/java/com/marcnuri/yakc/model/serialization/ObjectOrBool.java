@@ -12,26 +12,16 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Created on 2020-06-13, 17:18
  */
-
-package com.marcnuri.yakc.model.io.k8s.apiextensionsapiserver.pkg.apis.apiextensions.v1beta1;
-
-import com.marcnuri.yakc.model.Model;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+package com.marcnuri.yakc.model.serialization;
 
 /**
- * JSONSchemaPropsOrBool represents JSONSchemaProps or a boolean value. Defaults to true for the boolean property.
+ * Created by Marc Nuri on 2020-06-13.
  */
-@SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
-@AllArgsConstructor
-@Data
-@ToString
-public class JSONSchemaPropsOrBool implements Model {
+public interface ObjectOrBool<T> {
 
-
+  T getObject();
+  boolean bool();
 }
-

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Created on 2020-06-13, 8:08
+ * Created on 2020-06-13, 17:34
  */
 package com.marcnuri.yakc.model.serialization;
 
@@ -22,33 +22,28 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Created by Marc Nuri on 2020-06-13.
  */
-public abstract class ObjectOrArrayDeserializer<T, L, D extends ObjectOrArray<T, L>> extends JsonDeserializer<D> {
+public abstract class ObjectOrBoolDeserializer<O, T extends ObjectOrBool<O>> extends JsonDeserializer<T> {
 
-  private final Class<T> targetClazz;
-  private final Class<L> targetListClazz;
+  private final Class<O> objectClazz;
 
-  public ObjectOrArrayDeserializer(Class<T> targetClazz, Class<L> targetListClazz) {
-    this.targetClazz = targetClazz;
-    this.targetListClazz = targetListClazz;
+  public ObjectOrBoolDeserializer(Class<O> objectClazz) {
+    this.objectClazz = objectClazz;
   }
 
-  public abstract D instantiate(List<L> strings);
-
-  public abstract D instantiate(T object);
+  public abstract T instantiate(O object);
+  public abstract T instantiate(boolean bool);
 
   @Override
-  public final D deserialize(
+  public final T deserialize(
     JsonParser p, DeserializationContext ctxt) throws IOException {
-    if (p.isExpectedStartArrayToken()) {
-      return instantiate(ctxt.<List<L>>readValue(p,
-        ctxt.getTypeFactory().constructCollectionType(List.class, targetListClazz)));
+    if (p.isExpectedStartObjectToken()) {
+      return instantiate(ctxt.readValue(p, objectClazz));
     } else {
-      return instantiate(ctxt.readValue(p, targetClazz));
+      return instantiate(ctxt.readValue(p, Boolean.class));
     }
   }
 }

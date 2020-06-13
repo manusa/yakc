@@ -42,28 +42,37 @@ import java.util.List;
 @ToString
 @JsonSerialize(using = ObjectOrArraySerializer.class)
 @JsonDeserialize(using = JSONSchemaPropsOrArray.Deserializer.class)
-public class JSONSchemaPropsOrArray implements Model, ObjectOrArray<JSONSchemaProps> {
+public class JSONSchemaPropsOrArray implements Model, ObjectOrArray<JSONSchemaProps, JSONSchemaProps> {
 
   @Singular
   private List<JSONSchemaProps> jsonSchemaProps;
 
   @Override
+  public JSONSchemaProps getObject() {
+    return getJsonSchemaProps().size() == 1 ? getJsonSchemaProps().iterator().next() : null;
+  }
+
+  @Override
   public List<JSONSchemaProps> getArray() {
-    return getJsonSchemaProps();
+    return getJsonSchemaProps().size() == 1 ? null : getJsonSchemaProps();
   }
 
   public static final class Deserializer extends
-    ObjectOrArrayDeserializer<JSONSchemaProps, JSONSchemaPropsOrArray> {
+    ObjectOrArrayDeserializer<JSONSchemaProps, JSONSchemaProps, JSONSchemaPropsOrArray> {
 
     public Deserializer() {
-      super(JSONSchemaProps.class);
+      super(JSONSchemaProps.class, JSONSchemaProps.class);
     }
 
     @Override
     public JSONSchemaPropsOrArray instantiate(List<JSONSchemaProps> deserializedItems) {
       return JSONSchemaPropsOrArray.builder().jsonSchemaProps(deserializedItems).build();
     }
-  }
 
+    @Override
+    public JSONSchemaPropsOrArray instantiate(JSONSchemaProps object) {
+      return JSONSchemaPropsOrArray.builder().jsonSchemaProp(object).build();
+    }
+  }
 }
 

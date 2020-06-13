@@ -12,6 +12,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Created on 2020-06-13, 10:12
  */
 package com.marcnuri.yakc.model.io.k8s.apiextensionsapiserver.pkg.apis.apiextensions.v1beta1;
 
@@ -30,8 +32,7 @@ import lombok.ToString;
 import java.util.List;
 
 /**
- * JSONSchemaPropsOrArray represents a value that can either be a JSONSchemaProps or an array of JSONSchemaProps.
- * Mainly here for serialization purposes.
+ * JSONSchemaPropsOrStringArray represents a JSONSchemaProps or a string array.
  */
 @SuppressWarnings({"squid:S1192", "unused"})
 @Builder(toBuilder = true)
@@ -39,37 +40,33 @@ import java.util.List;
 @Data
 @ToString
 @JsonSerialize(using = ObjectOrArraySerializer.class)
-@JsonDeserialize(using = JSONSchemaPropsOrArray.Deserializer.class)
-public class JSONSchemaPropsOrArray implements Model, ObjectOrArray<JSONSchemaProps, JSONSchemaProps> {
+@JsonDeserialize(using = JSONSchemaPropsOrStringArray.Deserializer.class)
+public class JSONSchemaPropsOrStringArray  implements Model, ObjectOrArray<JSONSchemaProps, String> {
 
+  private JSONSchemaProps object;
   @Singular
-  private List<JSONSchemaProps> jsonSchemaProps;
+  private List<String> strings;
 
   @Override
-  public JSONSchemaProps getObject() {
-    return getJsonSchemaProps().size() == 1 ? getJsonSchemaProps().iterator().next() : null;
-  }
-
-  @Override
-  public List<JSONSchemaProps> getArray() {
-    return getJsonSchemaProps().size() == 1 ? null : getJsonSchemaProps();
+  public List<String> getArray() {
+    return getStrings();
   }
 
   public static final class Deserializer extends
-    ObjectOrArrayDeserializer<JSONSchemaProps, JSONSchemaProps, JSONSchemaPropsOrArray> {
+    ObjectOrArrayDeserializer<JSONSchemaProps, String, JSONSchemaPropsOrStringArray> {
 
     public Deserializer() {
-      super(JSONSchemaProps.class, JSONSchemaProps.class);
+      super(JSONSchemaProps.class, String.class);
     }
 
     @Override
-    public JSONSchemaPropsOrArray instantiate(List<JSONSchemaProps> deserializedItems) {
-      return JSONSchemaPropsOrArray.builder().jsonSchemaProps(deserializedItems).build();
+    public JSONSchemaPropsOrStringArray instantiate(List<String> deserializedItems) {
+      return JSONSchemaPropsOrStringArray.builder().strings(deserializedItems).build();
     }
 
     @Override
-    public JSONSchemaPropsOrArray instantiate(JSONSchemaProps object) {
-      return JSONSchemaPropsOrArray.builder().jsonSchemaProp(object).build();
+    public JSONSchemaPropsOrStringArray instantiate(JSONSchemaProps object) {
+      return JSONSchemaPropsOrStringArray.builder().object(object).build();
     }
   }
 }
