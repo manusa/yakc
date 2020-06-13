@@ -12,26 +12,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ * Created on 2020-06-13, 7:57
  */
+package com.marcnuri.yakc.model.serialization;
 
-package com.marcnuri.yakc.model.io.k8s.apiextensionsapiserver.pkg.apis.apiextensions.v1beta1;
+import java.util.List;
 
-import com.marcnuri.yakc.model.Model;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+public interface ObjectOrArray<T> {
 
-/**
- * JSONSchemaPropsOrArray represents a value that can either be a JSONSchemaProps or an array of JSONSchemaProps. Mainly here for serialization purposes.
- */
-@SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
-@AllArgsConstructor
-@Data
-@ToString
-public class JSONSchemaPropsOrArray implements Model {
-
-
+  List<T> getArray();
 }
-
