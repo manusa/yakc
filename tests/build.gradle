@@ -11,4 +11,12 @@ dependencies {
 
 test {
   useJUnitPlatform()
+
+  maxParallelForks = 10
+
+  systemProperty 'junit.jupiter.execution.parallel.enabled', 'true'
+  systemProperty 'junit.jupiter.execution.parallel.mode.default', 'same_thread'
+  systemProperty 'junit.jupiter.execution.parallel.mode.classes.default', 'concurrent'
+  systemProperty 'junit.jupiter.execution.parallel.strategy', 'fixed'
+  systemProperty 'junit.jupiter.execution.parallel.fixed.parallelism', '5'
 }
