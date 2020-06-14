@@ -22,4 +22,7 @@ sourceSets.main.java.srcDirs = ['src/api/java', 'src/main/java', 'src/model/java
 
 test {
   useJUnitPlatform()
+  testLogging {
+    events "passed", "skipped", "failed", "standardOut", "standardError"
+  }
 }
