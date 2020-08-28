@@ -71,6 +71,9 @@ public class PodSecurityContext implements Model {
   @JsonProperty("seLinuxOptions")
   private SELinuxOptions seLinuxOptions;
 
+  @JsonProperty("seccompProfile")
+  private SeccompProfile seccompProfile;
+
   /**
    * A list of groups applied to the first process run in each container, in addition to the container's primary GID.  If unspecified, no groups will be added to any container.
    */

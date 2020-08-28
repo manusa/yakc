@@ -46,7 +46,7 @@ public class PodSecurityPolicySpec implements Model {
   private Boolean allowPrivilegeEscalation;
 
   /**
-   * AllowedCSIDrivers is a whitelist of inline CSI drivers that must be explicitly set to be embedded within a pod spec. An empty value indicates that any CSI driver can be used for inline ephemeral volumes. This is an alpha field, and is only honored if the API server enables the CSIInlineVolume feature gate.
+   * AllowedCSIDrivers is an allowlist of inline CSI drivers that must be explicitly set to be embedded within a pod spec. An empty value indicates that any CSI driver can be used for inline ephemeral volumes. This is a beta field, and is only honored if the API server enables the CSIInlineVolume feature gate.
    */
   @JsonProperty("allowedCSIDrivers")
   @Singular(value = "addToAllowedCSIDrivers", ignoreNullCollections = true)
@@ -60,28 +60,28 @@ public class PodSecurityPolicySpec implements Model {
   private List<String> allowedCapabilities;
 
   /**
-   * allowedFlexVolumes is a whitelist of allowed Flexvolumes.  Empty or nil indicates that all Flexvolumes may be used.  This parameter is effective only when the usage of the Flexvolumes is allowed in the "volumes" field.
+   * allowedFlexVolumes is an allowlist of Flexvolumes.  Empty or nil indicates that all Flexvolumes may be used.  This parameter is effective only when the usage of the Flexvolumes is allowed in the "volumes" field.
    */
   @JsonProperty("allowedFlexVolumes")
   @Singular(value = "addToAllowedFlexVolumes", ignoreNullCollections = true)
   private List<AllowedFlexVolume> allowedFlexVolumes;
 
   /**
-   * allowedHostPaths is a white list of allowed host paths. Empty indicates that all host paths may be used.
+   * allowedHostPaths is an allowlist of host paths. Empty indicates that all host paths may be used.
    */
   @JsonProperty("allowedHostPaths")
   @Singular(value = "addToAllowedHostPaths", ignoreNullCollections = true)
   private List<AllowedHostPath> allowedHostPaths;
 
   /**
-   * AllowedProcMountTypes is a whitelist of allowed ProcMountTypes. Empty or nil indicates that only the DefaultProcMountType may be used. This requires the ProcMountType feature flag to be enabled.
+   * AllowedProcMountTypes is an allowlist of allowed ProcMountTypes. Empty or nil indicates that only the DefaultProcMountType may be used. This requires the ProcMountType feature flag to be enabled.
    */
   @JsonProperty("allowedProcMountTypes")
   @Singular(value = "addToAllowedProcMountTypes", ignoreNullCollections = true)
   private List<String> allowedProcMountTypes;
 
   /**
-   * allowedUnsafeSysctls is a list of explicitly allowed unsafe sysctls, defaults to none. Each entry is either a plain sysctl name or ends in "&#42;" in which case it is considered as a prefix of allowed sysctls. Single &#42; means all unsafe sysctls are allowed. Kubelet has to whitelist all allowed unsafe sysctls explicitly to avoid rejection.<br><p> <br><p> Examples: e.g. "foo/&#42;" allows "foo/bar", "foo/baz", etc. e.g. "foo.&#42;" allows "foo.bar", "foo.baz", etc.
+   * allowedUnsafeSysctls is a list of explicitly allowed unsafe sysctls, defaults to none. Each entry is either a plain sysctl name or ends in "&#42;" in which case it is considered as a prefix of allowed sysctls. Single &#42; means all unsafe sysctls are allowed. Kubelet has to allowlist all allowed unsafe sysctls explicitly to avoid rejection.<br><p> <br><p> Examples: e.g. "foo/&#42;" allows "foo/bar", "foo/baz", etc. e.g. "foo.&#42;" allows "foo.bar", "foo.baz", etc.
    */
   @JsonProperty("allowedUnsafeSysctls")
   @Singular(value = "addToAllowedUnsafeSysctls", ignoreNullCollections = true)
@@ -174,7 +174,7 @@ public class PodSecurityPolicySpec implements Model {
   private SupplementalGroupsStrategyOptions supplementalGroups;
 
   /**
-   * volumes is a white list of allowed volume plugins. Empty indicates that no volumes may be used. To allow all volumes you may use '&#42;'.
+   * volumes is an allowlist of volume plugins. Empty indicates that no volumes may be used. To allow all volumes you may use '&#42;'.
    */
   @JsonProperty("volumes")
   @Singular(value = "addToVolumes", ignoreNullCollections = true)

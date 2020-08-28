@@ -38,6 +38,9 @@ import lombok.ToString;
 public class CertificateSigningRequestCondition implements Model {
 
 
+  @JsonProperty("lastTransitionTime")
+  private OffsetDateTime lastTransitionTime;
+
   @JsonProperty("lastUpdateTime")
   private OffsetDateTime lastUpdateTime;
 
@@ -54,7 +57,13 @@ public class CertificateSigningRequestCondition implements Model {
   private String reason;
 
   /**
-   * request approval state, currently Approved or Denied.
+   * Status of the condition, one of True, False, Unknown. Approved, Denied, and Failed conditions may not be "False" or "Unknown". Defaults to "True". If unset, should be treated as "True".
+   */
+  @JsonProperty("status")
+  private String status;
+
+  /**
+   * type of the condition. Known conditions include "Approved", "Denied", and "Failed".
    */
   @NonNull
   @JsonProperty("type")

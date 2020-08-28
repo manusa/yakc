@@ -117,14 +117,6 @@ public interface StorageV1alpha1Api extends Api {
     }
 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-     */
-    public DeleteCollectionVolumeAttachment allowWatchBookmarks(Boolean allowWatchBookmarks) {
-      put("allowWatchBookmarks", allowWatchBookmarks);
-      return this;
-    }
-
-    /**
      * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      */
     public DeleteCollectionVolumeAttachment continues(String continues) {
@@ -189,10 +181,18 @@ public interface StorageV1alpha1Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public DeleteCollectionVolumeAttachment resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionVolumeAttachment resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -201,14 +201,6 @@ public interface StorageV1alpha1Api extends Api {
      */
     public DeleteCollectionVolumeAttachment timeoutSeconds(Integer timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
-      return this;
-    }
-
-    /**
-     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-     */
-    public DeleteCollectionVolumeAttachment watch(Boolean watch) {
-      put("watch", watch);
       return this;
     }
   } 
@@ -288,10 +280,18 @@ public interface StorageV1alpha1Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ListVolumeAttachment resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListVolumeAttachment resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -749,10 +749,18 @@ public interface StorageV1alpha1Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public WatchVolumeAttachmentList resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchVolumeAttachmentList resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -854,10 +862,18 @@ public interface StorageV1alpha1Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public WatchVolumeAttachment resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchVolumeAttachment resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 

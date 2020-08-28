@@ -53,7 +53,7 @@ public class RuleWithOperations implements Model {
   private List<String> apiVersions;
 
   /**
-   * Operations is the operations the admission hook cares about - CREATE, UPDATE, or &#42; for all operations. If '&#42;' is present, the length of the slice must be one. Required.
+   * Operations is the operations the admission hook cares about - CREATE, UPDATE, DELETE, CONNECT or &#42; for all of those operations and any future admission operations that are added. If '&#42;' is present, the length of the slice must be one. Required.
    */
   @JsonProperty("operations")
   @Singular(value = "addToOperations", ignoreNullCollections = true)

@@ -117,14 +117,6 @@ public interface CertificatesV1beta1Api extends Api {
     }
 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-     */
-    public DeleteCollectionCertificateSigningRequest allowWatchBookmarks(Boolean allowWatchBookmarks) {
-      put("allowWatchBookmarks", allowWatchBookmarks);
-      return this;
-    }
-
-    /**
      * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      */
     public DeleteCollectionCertificateSigningRequest continues(String continues) {
@@ -189,10 +181,18 @@ public interface CertificatesV1beta1Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public DeleteCollectionCertificateSigningRequest resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionCertificateSigningRequest resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -201,14 +201,6 @@ public interface CertificatesV1beta1Api extends Api {
      */
     public DeleteCollectionCertificateSigningRequest timeoutSeconds(Integer timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
-      return this;
-    }
-
-    /**
-     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-     */
-    public DeleteCollectionCertificateSigningRequest watch(Boolean watch) {
-      put("watch", watch);
       return this;
     }
   } 
@@ -288,10 +280,18 @@ public interface CertificatesV1beta1Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ListCertificateSigningRequest resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListCertificateSigningRequest resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -674,6 +674,118 @@ public interface CertificatesV1beta1Api extends Api {
     }
   } 
   /**
+   * read approval of the specified CertificateSigningRequest
+   *
+   * @param name name of the CertificateSigningRequest
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/certificates.k8s.io/v1beta1/certificatesigningrequests/{name}/approval"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<CertificateSigningRequest> readCertificateSigningRequestApproval(
+    @Path("name") String name);
+
+  /**
+   * read approval of the specified CertificateSigningRequest
+   *
+   * @param name name of the CertificateSigningRequest
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/certificates.k8s.io/v1beta1/certificatesigningrequests/{name}/approval"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<CertificateSigningRequest> readCertificateSigningRequestApproval(
+    @Path("name") String name, 
+    @QueryMap ReadCertificateSigningRequestApproval queryParameters);
+
+  
+  final class ReadCertificateSigningRequestApproval extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReadCertificateSigningRequestApproval pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+  } 
+  /**
+   * partially update approval of the specified CertificateSigningRequest
+   *
+   * @param name name of the CertificateSigningRequest
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/certificates.k8s.io/v1beta1/certificatesigningrequests/{name}/approval",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<CertificateSigningRequest> patchCertificateSigningRequestApproval(
+    @Path("name") String name, 
+    @Body CertificateSigningRequest body);
+
+  /**
+   * partially update approval of the specified CertificateSigningRequest
+   *
+   * @param name name of the CertificateSigningRequest
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/certificates.k8s.io/v1beta1/certificatesigningrequests/{name}/approval",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<CertificateSigningRequest> patchCertificateSigningRequestApproval(
+    @Path("name") String name, 
+    @Body CertificateSigningRequest body, 
+    @QueryMap PatchCertificateSigningRequestApproval queryParameters);
+
+  
+  final class PatchCertificateSigningRequestApproval extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public PatchCertificateSigningRequestApproval pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public PatchCertificateSigningRequestApproval dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+     */
+    public PatchCertificateSigningRequestApproval fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+     */
+    public PatchCertificateSigningRequestApproval force(Boolean force) {
+      put("force", force);
+      return this;
+    }
+  } 
+  /**
    * replace approval of the specified CertificateSigningRequest
    *
    * @param name name of the CertificateSigningRequest
@@ -713,6 +825,14 @@ public interface CertificatesV1beta1Api extends Api {
   
   final class ReplaceCertificateSigningRequestApproval extends HashMap<String, Object> { 
     /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReplaceCertificateSigningRequestApproval pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
     public ReplaceCertificateSigningRequestApproval dryRun(String dryRun) {
@@ -725,14 +845,6 @@ public interface CertificatesV1beta1Api extends Api {
      */
     public ReplaceCertificateSigningRequestApproval fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
-      return this;
-    }
-
-    /**
-     * If 'true', then the output is pretty printed.
-     */
-    public ReplaceCertificateSigningRequestApproval pretty(String pretty) {
-      put("pretty", pretty);
       return this;
     }
   } 
@@ -987,10 +1099,18 @@ public interface CertificatesV1beta1Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public WatchCertificateSigningRequestList resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchCertificateSigningRequestList resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -1092,10 +1212,18 @@ public interface CertificatesV1beta1Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public WatchCertificateSigningRequest resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchCertificateSigningRequest resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 

@@ -74,7 +74,7 @@ public class CertificateSigningRequestSpec implements Model {
   private String uid;
 
   /**
-   * allowedUsages specifies a set of usage contexts the key will be valid for. See: https://tools.ietf.org/html/rfc5280#section-4.2.1.3<br><p>      https://tools.ietf.org/html/rfc5280#section-4.2.1.12
+   * allowedUsages specifies a set of usage contexts the key will be valid for. See: https://tools.ietf.org/html/rfc5280#section-4.2.1.3<br><p>      https://tools.ietf.org/html/rfc5280#section-4.2.1.12<br><p> Valid values are:<br><p>  "signing",<br><p>  "digital signature",<br><p>  "content commitment",<br><p>  "key encipherment",<br><p>  "key agreement",<br><p>  "data encipherment",<br><p>  "cert sign",<br><p>  "crl sign",<br><p>  "encipher only",<br><p>  "decipher only",<br><p>  "any",<br><p>  "server auth",<br><p>  "client auth",<br><p>  "code signing",<br><p>  "email protection",<br><p>  "s/mime",<br><p>  "ipsec end system",<br><p>  "ipsec tunnel",<br><p>  "ipsec user",<br><p>  "timestamping",<br><p>  "ocsp signing",<br><p>  "microsoft sgc",<br><p>  "netscape sgc"
    */
   @JsonProperty("usages")
   @Singular(value = "addToUsages", ignoreNullCollections = true)

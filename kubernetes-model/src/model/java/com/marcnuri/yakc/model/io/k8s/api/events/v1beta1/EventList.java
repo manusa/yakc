@@ -48,7 +48,7 @@ public class EventList implements Model, ListModel<Event> {
   private String apiVersion;
 
   /**
-   * Items is a list of schema objects.
+   * items is a list of schema objects.
    */
   @NonNull
   @JsonProperty("items")

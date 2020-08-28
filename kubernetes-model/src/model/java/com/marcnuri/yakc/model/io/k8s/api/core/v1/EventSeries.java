@@ -46,11 +46,5 @@ public class EventSeries implements Model {
   @JsonProperty("lastObservedTime")
   private OffsetDateTime lastObservedTime;
 
-  /**
-   * State of this Series: Ongoing or Finished Deprecated. Planned removal for 1.18
-   */
-  @JsonProperty("state")
-  private String state;
-
 }
 

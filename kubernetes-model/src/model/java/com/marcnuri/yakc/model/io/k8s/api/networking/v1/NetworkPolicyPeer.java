@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * NetworkPolicyPeer describes a peer to allow traffic from. Only certain combinations of fields are allowed
+ * NetworkPolicyPeer describes a peer to allow traffic to/from. Only certain combinations of fields are allowed
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true)

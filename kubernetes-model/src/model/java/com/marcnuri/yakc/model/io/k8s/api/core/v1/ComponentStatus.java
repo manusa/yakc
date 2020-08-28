@@ -28,7 +28,7 @@ import lombok.Singular;
 import lombok.ToString;
 
 /**
- * ComponentStatus (and ComponentStatusList) holds the cluster validation info.
+ * ComponentStatus (and ComponentStatusList) holds the cluster validation info. Deprecated: This API is deprecated in v1.19+
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true)
