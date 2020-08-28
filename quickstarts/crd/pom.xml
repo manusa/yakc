@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.marcnuri.yakc.quickstarts</groupId>
   <artifactId>crd</artifactId>
-  <version>0.0.6</version>
+  <version>0.0.7</version>
   <name>YAKC :: Quickstarts :: Custom Resource Definition</name>
 
   <properties>
