@@ -62,7 +62,7 @@ $ mvn clean package
 [INFO] --- spring-boot-maven-plugin:2.3.0.RELEASE:repackage (repackage) @ access-cluster-from-pod ---
 [INFO] Replacing main artifact with repackaged archive
 [INFO]
-[INFO] --- kubernetes-maven-plugin:1.0.0-alpha-4:build (jkube) @ access-cluster-from-pod ---
+[INFO] --- kubernetes-maven-plugin:1.0.0-rc-1:build (jkube) @ access-cluster-from-pod ---
 [WARNING] The POM for io.sundr:sundr-codegen:jar:0.21.0 is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details
 [INFO] k8s: Running in Kubernetes mode
 [INFO] k8s: Building Docker image in Kubernetes mode
@@ -72,14 +72,14 @@ $ mvn clean package
 [INFO] k8s: [quickstarts/access-cluster-from-pod:0.0.6] "spring-boot": Built image sha256:2d7e1
 [INFO] k8s: [quickstarts/access-cluster-from-pod:0.0.6] "spring-boot": Removed old image sha256:3aaa4
 [INFO]
-[INFO] --- kubernetes-maven-plugin:1.0.0-alpha-4:resource (jkube) @ access-cluster-from-pod ---
+[INFO] --- kubernetes-maven-plugin:1.0.0-rc-1:resource (jkube) @ access-cluster-from-pod ---
 [INFO] k8s: Running generator spring-boot
 [INFO] k8s: spring-boot: Using Docker image fabric8/java-centos-openjdk8-jdk:1.5.6 as base / builder
 [INFO] k8s: jkube-controller: Adding a default Deployment
 [INFO] k8s: jkube-service: Adding a default service 'access-cluster-from-pod' with ports [8080]
 [INFO] k8s: jkube-revision-history: Adding revision history limit to 2
 [INFO]
-[INFO] --- kubernetes-maven-plugin:1.0.0-alpha-4:apply (jkube) @ access-cluster-from-pod ---
+[INFO] --- kubernetes-maven-plugin:1.0.0-rc-1:apply (jkube) @ access-cluster-from-pod ---
 [INFO] k8s: Using Kubernetes at https://192.168.99.116:8443/ in namespace default with manifest D:\00-MN\projects\manusa\yakc\quickstarts\access-cluster-from-pod\target\classes\META-INF\jkube\kubernetes.yml 
 [INFO] k8s: Using namespace: default
 [INFO] k8s: Updating a Service from kubernetes.yml
