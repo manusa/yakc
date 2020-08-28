@@ -64,6 +64,9 @@ public class Volume implements Model {
   @JsonProperty("emptyDir")
   private EmptyDirVolumeSource emptyDir;
 
+  @JsonProperty("ephemeral")
+  private EphemeralVolumeSource ephemeral;
+
   @JsonProperty("fc")
   private FCVolumeSource fc;
 

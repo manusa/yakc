@@ -30,7 +30,7 @@ import lombok.Singular;
 import lombok.ToString;
 
 /**
- * Status of all the conditions for the component as a list of ComponentStatus objects.
+ * Status of all the conditions for the component as a list of ComponentStatus objects. Deprecated: This API is deprecated in v1.19+
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true)

@@ -42,7 +42,7 @@ public class Event implements Model {
 
 
   /**
-   * What action was taken/failed regarding to the regarding object.
+   * action is what action was taken/failed regarding to the regarding object. It is machine-readable. This field can have at most 128 characters.
    */
   @JsonProperty("action")
   private String action;
@@ -54,7 +54,7 @@ public class Event implements Model {
   private String apiVersion;
 
   /**
-   * Deprecated field assuring backward compatibility with core.v1 Event type
+   * deprecatedCount is the deprecated field assuring backward compatibility with core.v1 Event type.
    */
   @JsonProperty("deprecatedCount")
   private Integer deprecatedCount;
@@ -82,13 +82,13 @@ public class Event implements Model {
   private ObjectMeta metadata;
 
   /**
-   * Optional. A human-readable description of the status of this operation. Maximal length of the note is 1kB, but libraries should be prepared to handle values up to 64kB.
+   * note is a human-readable description of the status of this operation. Maximal length of the note is 1kB, but libraries should be prepared to handle values up to 64kB.
    */
   @JsonProperty("note")
   private String note;
 
   /**
-   * Why the action was taken.
+   * reason is why the action was taken. It is human-readable. This field can have at most 128 characters.
    */
   @JsonProperty("reason")
   private String reason;
@@ -100,13 +100,13 @@ public class Event implements Model {
   private ObjectReference related;
 
   /**
-   * Name of the controller that emitted this Event, e.g. `kubernetes.io/kubelet`.
+   * reportingController is the name of the controller that emitted this Event, e.g. `kubernetes.io/kubelet`. This field cannot be empty for new Events.
    */
   @JsonProperty("reportingController")
   private String reportingController;
 
   /**
-   * ID of the controller instance, e.g. `kubelet-xyzf`.
+   * reportingInstance is the ID of the controller instance, e.g. `kubelet-xyzf`. This field cannot be empty for new Events and it can have at most 128 characters.
    */
   @JsonProperty("reportingInstance")
   private String reportingInstance;
@@ -115,7 +115,7 @@ public class Event implements Model {
   private EventSeries series;
 
   /**
-   * Type of this event (Normal, Warning), new types could be added in the future.
+   * type is the type of this event (Normal, Warning), new types could be added in the future. It is machine-readable.
    */
   @JsonProperty("type")
   private String type;

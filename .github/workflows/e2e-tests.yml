@@ -11,7 +11,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        kubernetes: [v1.18.6,v1.12.0]
+        kubernetes: [v1.19.0,v1.12.0]
     env:
       K8S_VERSION: ${{ matrix.kubernetes }}
     steps:

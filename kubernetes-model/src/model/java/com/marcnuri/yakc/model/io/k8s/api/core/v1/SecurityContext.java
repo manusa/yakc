@@ -84,6 +84,9 @@ public class SecurityContext implements Model {
   @JsonProperty("seLinuxOptions")
   private SELinuxOptions seLinuxOptions;
 
+  @JsonProperty("seccompProfile")
+  private SeccompProfile seccompProfile;
+
   @JsonProperty("windowsOptions")
   private WindowsSecurityContextOptions windowsOptions;
 

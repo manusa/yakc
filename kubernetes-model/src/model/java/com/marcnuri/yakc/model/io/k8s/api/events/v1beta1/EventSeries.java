@@ -39,7 +39,7 @@ public class EventSeries implements Model {
 
 
   /**
-   * Number of occurrences in this series up to the last heartbeat time
+   * count is the number of occurrences in this series up to the last heartbeat time.
    */
   @NonNull
   @JsonProperty("count")
@@ -48,13 +48,6 @@ public class EventSeries implements Model {
   @NonNull
   @JsonProperty("lastObservedTime")
   private OffsetDateTime lastObservedTime;
-
-  /**
-   * Information whether this series is ongoing or finished. Deprecated. Planned removal for 1.18
-   */
-  @NonNull
-  @JsonProperty("state")
-  private String state;
 
 }
 
