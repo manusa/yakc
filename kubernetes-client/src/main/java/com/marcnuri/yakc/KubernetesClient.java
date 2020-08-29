@@ -26,6 +26,7 @@ import com.marcnuri.yakc.api.Api;
 import com.marcnuri.yakc.config.Configuration;
 import com.marcnuri.yakc.config.ConfigurationResolver;
 import com.marcnuri.yakc.retrofit.KubernetesCallAdapterFactory;
+import com.marcnuri.yakc.serialization.GoCompatibleTimeModule;
 import lombok.Getter;
 import lombok.extern.java.Log;
 import okhttp3.ConnectionPool;
@@ -102,6 +103,7 @@ public class KubernetesClient implements Closeable {
     objectMapper.setSerializationInclusion(Include.NON_NULL);
     objectMapper.setSerializationInclusion(Include.NON_EMPTY);
     objectMapper.registerModule(new JavaTimeModule());
+    objectMapper.registerModule(new GoCompatibleTimeModule());
     return objectMapper;
   }
 
