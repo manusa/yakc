@@ -52,14 +52,11 @@ public class ClusterExecutionCondition implements ExecutionCondition {
         kubernetesVersionComponents, minVersionComponents));
     }
     for(int it = 0; it < kubernetesVersionComponents.length; it++){
-      if (kubernetesVersionComponents[it] > minVersionComponents[it]) {
-        return ConditionEvaluationResult.enabled("Current cluster is supported by the Test Suite");
-      }
       if (kubernetesVersionComponents[it] < minVersionComponents[it]) {
-        break;
+        return ConditionEvaluationResult.disabled("Current cluster is not supported by the Test Suite");
       }
     }
-    return ConditionEvaluationResult.disabled("Current cluster is not supported by the Test Suite");
+    return ConditionEvaluationResult.enabled("Current cluster is supported by the Test Suite");
   }
 
   @Retention(RetentionPolicy.RUNTIME)
