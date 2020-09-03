@@ -4,6 +4,7 @@ dependencies {
   testImplementation project(':kubernetes-api'), project(':kubernetes-client')
   testImplementation "org.junit.jupiter:junit-jupiter-api:$version_junit"
   testImplementation "org.assertj:assertj-core:$version_assertj"
+  testImplementation "org.awaitility:awaitility:$version_awaitility"
   testImplementation "org.projectlombok:lombok:$version_projectlombok"
   testAnnotationProcessor "org.projectlombok:lombok:$version_projectlombok"
   testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$version_junit"
