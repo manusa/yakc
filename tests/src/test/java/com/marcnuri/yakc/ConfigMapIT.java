@@ -17,19 +17,17 @@
  */
 package com.marcnuri.yakc;
 
+import com.marcnuri.yakc.api.NotFoundException;
 import com.marcnuri.yakc.api.WatchEvent.Type;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.ConfigMap;
-import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import io.reactivex.disposables.Disposable;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
@@ -45,45 +43,41 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 /**
  * Created by Marc Nuri on 2020-06-13.
  */
-@TestMethodOrder(OrderAnnotation.class)
 @ExtendWith(KubernetesClientExtension.class)
 class ConfigMapIT {
 
   private static final String NAMESPACE = "default";
 
-  private static String configMapName;
+  private String configMapName;
+  private ConfigMap configMap;
 
-  @BeforeAll
-  static void setUp() {
+  @BeforeEach
+  void setUp() throws IOException {
     configMapName = UUID.randomUUID().toString();
+    configMap = createConfigMapForTest();
+  }
+
+  @AfterEach
+  void tearDown() throws IOException {
+    deleteConfigMapForTest();
   }
 
   @Test
-  @Order(1)
   @DisplayName("createNamespacedConfigMap, should create ConfigMap in default namespace")
-  void createNamespacedConfigMap() throws IOException {
-    // When
-    final ConfigMap result = KC.create(CoreV1Api.class)
-      .createNamespacedConfigMap(NAMESPACE, ConfigMap.builder()
-        .metadata(ObjectMeta.builder().name(configMapName).build())
-        .data(Collections.singletonMap("VAR_1", "VAR_1_VALUE"))
-        .putInData("VAR_2", "VAR_2_VALUE")
-        .putInData("FOO", "BAR")
-        .build()).get();
+  void createNamespacedConfigMap() {
     // Then
     assertAll(
       "Created expected configMap",
-      () -> assertThat(result).isNotNull(),
-      () -> assertThat(result.getKind()).isEqualTo("ConfigMap"),
-      () -> assertThat(result.getMetadata().getCreationTimestamp()).isNotNull(),
-      () -> assertThat(result.getMetadata().getResourceVersion()).isNotNull(),
-      () -> assertThat(result.getData()).containsEntry("VAR_1", "VAR_1_VALUE"),
-      () -> assertThat(result.getData()).containsEntry("VAR_2", "VAR_2_VALUE")
+      () -> assertThat(configMap).isNotNull(),
+      () -> assertThat(configMap.getKind()).isEqualTo("ConfigMap"),
+      () -> assertThat(configMap.getMetadata().getCreationTimestamp()).isNotNull(),
+      () -> assertThat(configMap.getMetadata().getResourceVersion()).isNotNull(),
+      () -> assertThat(configMap.getData()).containsEntry("VAR_1", "VAR_1_VALUE"),
+      () -> assertThat(configMap.getData()).containsEntry("VAR_2", "VAR_2_VALUE")
     );
   }
 
   @Test
-  @Order(2)
   @DisplayName("listNamespacedConfigMap.watch, should await for notification of newly created ConfigMap")
   void awaitCreateWatch() throws IOException {
     // Given
@@ -106,7 +100,6 @@ class ConfigMapIT {
   }
 
   @Test
-  @Order(3)
   @DisplayName("listNamespacedConfigMap.stream, should list newly created ConfigMap")
   void listNamespacedConfigMap() throws IOException {
     // When
@@ -117,7 +110,6 @@ class ConfigMapIT {
   }
 
   @Test
-  @Order(3)
   @DisplayName("readNamespacedConfigMap, should retrieve newly created ConfigMap")
   void readNamespacedConfigMap() throws IOException {
     // When
@@ -135,7 +127,6 @@ class ConfigMapIT {
   }
 
   @Test
-  @Order(4)
   @DisplayName("patchNamespacedConfigMap, should patch labels of ConfigMap")
   void patchNamespacedConfigMap() throws IOException {
     // When
@@ -161,7 +152,6 @@ class ConfigMapIT {
   }
 
   @Test
-  @Order(5)
   @DisplayName("replaceNamespacedConfigMap, should replace existing ConfigMap data")
   void replaceNamespacedConfigMap() throws IOException {
     // Given
@@ -185,16 +175,33 @@ class ConfigMapIT {
   }
 
   @Test
-  @Order(6)
   @DisplayName("deleteNamespacedConfigMap, should delete existing ConfigMap")
   void deleteNamespacedConfigMap() throws IOException {
     // When
     final Status result = KC.create(CoreV1Api.class).deleteNamespacedConfigMap(configMapName, NAMESPACE).get();
     // Then
     assertAll(
-      "Created expected configMap",
+      "Deleted configMap",
       () -> assertThat(result).isNotNull(),
       () -> assertThat(result.getStatus()).isEqualTo("Success")
     );
+  }
+
+  private ConfigMap createConfigMapForTest() throws IOException {
+    return KC.create(CoreV1Api.class)
+      .createNamespacedConfigMap(NAMESPACE, ConfigMap.builder()
+        .metadata(ObjectMeta.builder().name(configMapName).build())
+        .data(Collections.singletonMap("VAR_1", "VAR_1_VALUE"))
+        .putInData("VAR_2", "VAR_2_VALUE")
+        .putInData("FOO", "BAR")
+        .build()).get();
+  }
+
+  private void deleteConfigMapForTest() throws IOException {
+    try {
+      KC.create(CoreV1Api.class).deleteNamespacedConfigMap(configMapName, NAMESPACE).get();
+    } catch (NotFoundException ex) {
+      // Ignore, this is only clean up. Resource may have been deleted by delete test
+    }
   }
 }
