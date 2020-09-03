@@ -17,6 +17,7 @@
  */
 package com.marcnuri.yakc;
 
+import com.marcnuri.yakc.api.NotFoundException;
 import com.marcnuri.yakc.api.networking.v1.NetworkingV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.networking.v1.NetworkPolicy;
 import com.marcnuri.yakc.model.io.k8s.api.networking.v1.NetworkPolicySpec;
@@ -24,10 +25,11 @@ import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOption
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
-import org.junit.jupiter.api.BeforeAll;
+import org.assertj.core.api.InstanceOfAssertFactories;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -47,39 +49,35 @@ class NetworkPolicyIT {
 
   private static final String NAMESPACE = "default";
 
-  private static String networkPolicyName;
+  private String networkPolicyName;
+  private NetworkPolicy networkPolicy;
 
-  @BeforeAll
-  static void setUp() {
+  @BeforeEach
+  void setUp() throws IOException {
     networkPolicyName = UUID.randomUUID().toString();
+    networkPolicy = createNetworkPolicyForTest();
+  }
+
+  @AfterEach
+  void tearDown() throws IOException {
+    deleteNetworkPolicyForTest();
   }
 
   @Test
-  @Order(1)
   @DisplayName("createNamespacedNetworkPolicy, should create network policy in default namespace")
-  void createNamespacedNetworkPolicy() throws IOException {
-    // When
-    final NetworkPolicy networkPolicy = KC.create(NetworkingV1Api.class)
-      .createNamespacedNetworkPolicy("default", NetworkPolicy
-        .builder()
-        .metadata(ObjectMeta.builder()
-          .name(networkPolicyName)
-          .build())
-        .spec(NetworkPolicySpec.builder()
-          .podSelector(LabelSelector.builder().putInMatchLabels("app", "yakc").build())
-          .build())
-        .build()
-      ).get();
+  void createNamespacedNetworkPolicy() {
     // Then
-    assertThat(networkPolicy).isNotNull();
-    assertThat(networkPolicy.getMetadata().getName()).isEqualTo(networkPolicyName);
+    assertThat(networkPolicy)
+      .isNotNull()
+      .hasFieldOrPropertyWithValue("metadata.name", networkPolicyName)
+      .extracting(NetworkPolicy::getSpec).extracting(NetworkPolicySpec::getPodSelector)
+      .extracting(LabelSelector::getMatchLabels).asInstanceOf(InstanceOfAssertFactories.MAP)
+      .hasSize(1)
+      .containsEntry("app", "yakc");
     assertThat(networkPolicy.getMetadata().getCreationTimestamp()).isNotNull();
-    assertThat(networkPolicy.getSpec().getPodSelector().getMatchLabels()).hasSize(1);
-    assertThat(networkPolicy.getSpec().getPodSelector().getMatchLabels()).containsEntry("app", "yakc");
   }
 
   @Test
-  @Order(2)
   @DisplayName("listNamespacedNetworkPolicy.stream, should list newly created NetworkPolicy")
   void listNamespacedNetworkPolicy() throws IOException {
     // When
@@ -90,15 +88,38 @@ class NetworkPolicyIT {
   }
 
   @Test
-  @Order(3)
   @DisplayName("deleteNamespacedNetworkPolicy, should delete existing NetworkPolicy")
-  void deleteNamespacedPod() throws IOException {
+  void deleteNamespacedNetworkPolicy() throws IOException {
     // When
     final Status result = KC.create(NetworkingV1Api.class)
       .deleteNamespacedNetworkPolicy(networkPolicyName, NAMESPACE,
         DeleteOptions.builder().gracePeriodSeconds(1).build()).get();
     // Then
-    assertThat(result).isNotNull();
-    assertThat(result.getStatus()).isEqualTo("Success");
+    assertThat(result)
+      .isNotNull()
+      .extracting(Status::getStatus)
+      .isEqualTo("Success");
+  }
+
+  private NetworkPolicy createNetworkPolicyForTest() throws IOException {
+    return KC.create(NetworkingV1Api.class)
+      .createNamespacedNetworkPolicy("default", NetworkPolicy
+        .builder()
+        .metadata(ObjectMeta.builder()
+          .name(networkPolicyName)
+          .build())
+        .spec(NetworkPolicySpec.builder()
+          .podSelector(LabelSelector.builder().putInMatchLabels("app", "yakc").build())
+          .build())
+        .build()
+      ).get();
+  }
+
+  private void deleteNetworkPolicyForTest() throws IOException {
+    try {
+      KC.create(NetworkingV1Api.class).deleteNamespacedNetworkPolicy(networkPolicyName, NAMESPACE).get();
+    } catch (NotFoundException ex) {
+      // Ignore, this is only clean up. Resource may have been deleted by delete test
+    }
   }
 }
