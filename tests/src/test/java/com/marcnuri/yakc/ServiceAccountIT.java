@@ -40,6 +40,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @ExtendWith(KubernetesClientExtension.class)
 class ServiceAccountIT {
+
   private static final String NAMESPACE = "default";
 
   private String serviceAccountName;

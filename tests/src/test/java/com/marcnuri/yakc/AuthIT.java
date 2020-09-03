@@ -24,10 +24,7 @@ import com.marcnuri.yakc.model.io.k8s.api.core.v1.ObjectReference;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Secret;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.ServiceAccount;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
@@ -38,68 +35,54 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by Marc Nuri on 2020-05-02.
  */
-@TestMethodOrder(OrderAnnotation.class)
 @ExtendWith(KubernetesClientExtension.class)
 class AuthIT {
 
   private static final String NAMESPACE = "default";
 
-  private static String secretName;
-  private static String caData;
-  private static String token;
+  private static String nodeName;
 
   @BeforeAll
-  static void setUp() {
-    secretName = null;
-    caData = null;
-    token = null;
+  static void setUp() throws IOException {
+    nodeName = KC.create(CoreV1Api.class).listNode().stream().findFirst()
+      .orElseThrow(() -> new IllegalStateException("Node not accessible with default client"))
+      .getMetadata().getName();
   }
 
   @Test
-  @Order(1)
-  void retrieveServiceAccount() throws IOException {
+  void performTokenAuthInNewClient() throws IOException {
+    // Given
+    final Secret secret = retrieveSecretForServiceAccount(retrieveServiceAccountSecret());
+    final Configuration configuration = Configuration.builder()
+      .server(KC.getConfiguration().getServer())
+      .certificateAuthorityData(secret.getData().get("ca.crt"))
+      .token(secret.getData().get("token"))
+      .build();
     // When
-    final ServiceAccount sa = KC.create(CoreV1Api.class).listNamespacedServiceAccount(NAMESPACE)
-      .stream().findFirst().orElse(null);
+    final Node node = new KubernetesClient(configuration).create(CoreV1Api.class)
+      .listNode().stream().findFirst()
+      .orElse(null);
     // Then
-    assertThat(sa).isNotNull();
-    secretName = sa.getSecrets().stream().findFirst().map(ObjectReference::getName).orElse(null);
+    assertThat(node)
+      .isNotNull()
+      .hasFieldOrPropertyWithValue("metadata.name", nodeName);
   }
 
-  @Test
-  @Order(2)
-  void retrieveSecretForServiceAccount() throws IOException {
-    // When
-    final Secret secret = KC.create(CoreV1Api.class).listNamespacedSecret(NAMESPACE)
+  private String retrieveServiceAccountSecret() throws IOException {
+    return KC.create(CoreV1Api.class).listNamespacedServiceAccount(NAMESPACE)
+      .stream().findFirst()
+      .map(ServiceAccount::getSecrets)
+      .flatMap(secrets -> secrets.stream().findFirst().map(ObjectReference::getName))
+      .orElseThrow(() -> new AssertionError("No Service Account found"));
+  }
+
+  private Secret retrieveSecretForServiceAccount(String secretName) throws IOException {
+    return KC.create(CoreV1Api.class).listNamespacedSecret(NAMESPACE)
       .stream()
       .filter(s -> s.getType().equals("kubernetes.io/service-account-token"))
       .filter(s -> s.getMetadata().getName().equals(secretName))
-      .findAny().orElse(null);
-    // Then
-    assertThat(secret).isNotNull();
-    assertThat(secret.getData()).containsKeys("ca.crt", "token");
-    caData = secret.getData().get("ca.crt");
-    token = secret.getData().get("token");
+      .findAny()
+      .orElseThrow(() -> new AssertionError(String.format("Secret %s doesn't exist", secretName)));
   }
 
-  @Test
-  @Order(3)
-  void performTokenAuthInNewClient() throws IOException {
-    // Given
-    final Configuration configuration = Configuration.builder()
-      .server(KC.getConfiguration().getServer())
-      .certificateAuthorityData(caData)
-      .token(token)
-      .build();
-    final KubernetesClient tokenClient = new KubernetesClient(configuration);
-    final String accessibleTokenName = KC.create(CoreV1Api.class).listNode().stream().findFirst()
-      .orElseThrow(() -> new IllegalStateException("Node not accessible with default client"))
-      .getMetadata().getName();
-    // When
-    final Node node = tokenClient.create(CoreV1Api.class).listNode().stream().findFirst()
-      .orElse(null);
-    // Then
-    assertThat(node).isNotNull();
-    assertThat(node.getMetadata().getName()).isEqualTo(accessibleTokenName);
-  }
 }

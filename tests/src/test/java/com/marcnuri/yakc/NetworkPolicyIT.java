@@ -29,9 +29,7 @@ import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
@@ -43,7 +41,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Created by Marc Nuri on 2020-05-02.
  */
-@TestMethodOrder(OrderAnnotation.class)
 @ExtendWith(KubernetesClientExtension.class)
 class NetworkPolicyIT {
 
@@ -82,7 +79,7 @@ class NetworkPolicyIT {
   void listNamespacedNetworkPolicy() throws IOException {
     // When
     final boolean result = KC.create(NetworkingV1Api.class).listNamespacedNetworkPolicy(NAMESPACE)
-      .stream().anyMatch(pod -> pod.getMetadata().getName().equals(networkPolicyName));
+      .stream().anyMatch(np -> np.getMetadata().getName().equals(networkPolicyName));
     // Then
     assertThat(result).as("Created NetworkPolicy was not found").isTrue();
   }

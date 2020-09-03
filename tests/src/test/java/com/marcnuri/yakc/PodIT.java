@@ -28,6 +28,7 @@ import com.marcnuri.yakc.apiextensions.ExtendedCoreV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Container;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodSpec;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import io.reactivex.disposables.Disposable;
 import org.assertj.core.api.InstanceOfAssertFactories;
@@ -273,7 +274,8 @@ class PodIT {
 
   private void deletePodForTest() throws IOException {
     try {
-      KC.create(CoreV1Api.class).deleteNamespacedPod(podName, NAMESPACE).get();
+      KC.create(CoreV1Api.class)
+        .deleteNamespacedPod(podName, NAMESPACE, DeleteOptions.builder().gracePeriodSeconds(0).build()).get();
     } catch (NotFoundException ex) {
       // Ignore, this is only clean up. Resource may have been deleted by delete test
     }
