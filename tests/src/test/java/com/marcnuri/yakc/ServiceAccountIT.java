@@ -92,7 +92,7 @@ class ServiceAccountIT {
       .isNotNull()
       .hasFieldOrPropertyWithValue("metadata.name", serviceAccountName)
       .extracting(ServiceAccount::getSecrets).asList()
-      .hasSize(1)
+      .hasSizeGreaterThanOrEqualTo(1)
       .element(0)
       .hasFieldOrPropertyWithValue("name", "doesnt-exist");
   }
