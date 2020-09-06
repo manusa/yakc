@@ -14,22 +14,30 @@
  * limitations under the License.
  *
  */
-const creationTimestamp = object => {
-  const ct = object?.metadata?.creationTimestamp;
-  if (ct) {
-    return new Date(ct);
-  }
-}
+const statusPhase = pod => pod?.status?.phase ?? '';
 
-const labels = object =>  object?.metadata?.labels ?? {};
+const isReady = pod => statusPhase(pod) === 'Running';
 
-const name = object =>  object?.metadata?.name ?? '';
+const containerStatuses = pod => (pod?.status?.containerStatuses ?? []);
 
-const namespace = object =>  object?.metadata?.namespace ?? '';
+const containersReady = pod => containerStatuses(pod).every(cs => cs.ready);
+
+const restartCount = pod => containerStatuses(pod).reduce(
+  (acc, containerStatus) => acc + containerStatus.restartCount,
+  0
+);
+
+// Selectors for array of Pods
+
+const readyCount = pods => pods.reduce(
+  (count, pod) => containersReady(pod) ? ++count : count,
+  0
+);
 
 export default {
-  creationTimestamp,
-  labels,
-  name,
-  namespace
+  statusPhase,
+  isReady,
+  containersReady,
+  restartCount,
+  readyCount
 };

@@ -20,26 +20,18 @@ import {
 } from 'tabler-react';
 import events from './events';
 import nodes from './nodes';
+import pods from './pods';
 import DashboardPage from './components/DashboardPage';
-import StatusCard from './components/StatusCard';
-import icons from './icons';
-
 
 const Home = () => (
   <DashboardPage>
     <Grid>
       <Grid.Row cards={true}>
-        <Grid.Col width={6} sm={4} lg={2}>
+        <Grid.Col width={12} sm={6}>
           <nodes.NodesCard />
         </Grid.Col>
-        <Grid.Col width={6} sm={4} lg={2}>
-          <StatusCard
-            header='Pods'
-            icon={icons.pod}
-            ready={3}
-            total={4}
-            progressWidth={Math.round(3/4*100)}
-          />
+        <Grid.Col width={12} sm={6}>
+          <pods.PodsCard />
         </Grid.Col>
       </Grid.Row>
       <Grid.Row>

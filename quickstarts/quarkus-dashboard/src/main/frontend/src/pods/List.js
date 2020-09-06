@@ -14,41 +14,28 @@
  * limitations under the License.
  *
  */
-import React, {useState} from 'react';
+import React from 'react';
 import {connect} from 'react-redux'
-import {Button, Card, Icon, Table, Tag} from 'tabler-react';
+import {Button, Card, Icon, Table} from 'tabler-react';
 import metadata from '../metadata';
-import nodesModule from './'
+import podsModule from './'
 
-const maxLabels = 2;
 
 const headers = [
   'Ready',
   'Name',
-  'Labels'
+  'Namespace',
+  'Status',
+  'Restarts',
+  ''
 ]
 
-const sort = (n1, n2) =>
-  metadata.selectors.creationTimestamp(n1) - metadata.selectors.creationTimestamp(n2);
+const sort = (p1, p2) =>
+  metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
 
-const Labels = ({labels}) => {
-  const [collapsed, setCollapsed] = useState(true);
-  const toggle = () => setCollapsed(!collapsed);
-  const truncate = labels.length > maxLabels;
-  const displayedLabels = truncate && collapsed ? labels.slice(0, maxLabels) : labels;
-  return (
-    <div className='d-flex flex-wrap align-items-center'>
-      {displayedLabels.map((label, idx) =>
-        <Tag key={idx} rounded color='blue' className='mr-1 mb-1'>{label}</Tag>
-      )}
-      {truncate && <Button link onClick={toggle}>{collapsed ? '...' : 'Show less'}</Button>}
-    </div>
-  );
-};
-
-const Rows = ({nodes}) => {
-  const allNodes = Object.values(nodes);
-  if (allNodes.length === 0){
+const Rows = ({pods}) => {
+  const allPods = Object.values(pods);
+  if (allPods.length === 0){
     return (
       <Table.Row>
         <Table.Col colSpan={headers.length}>
@@ -57,28 +44,44 @@ const Rows = ({nodes}) => {
       </Table.Row>
     );
   }
-  return allNodes
+  const deletePod = pod => async () => await podsModule.api.requestDelete(pod);
+  return allPods
     .sort(sort)
-    .map(node => (
-        <Table.Row key={node.metadata.uid}>
+    .map(pod => (
+        <Table.Row key={pod.metadata.uid}>
           <Table.Col>
             <Icon
-              name={nodesModule.selectors.isReady(node) ? 'check' : 'alert-circle'}
+              className={podsModule.selectors.containersReady(pod) ? 'text-success' : 'text-danger'}
+              name={podsModule.selectors.containersReady(pod) ? 'check' : 'alert-circle'}
             />
           </Table.Col>
           <Table.Col className='text-nowrap'>
-            {metadata.selectors.name(node)}
+            {metadata.selectors.name(pod)}
+          </Table.Col>
+          <Table.Col className='text-nowrap'>
+            {metadata.selectors.namespace(pod)}
+          </Table.Col>
+          <Table.Col className='text-nowrap'>
+            {podsModule.selectors.statusPhase(pod)}
           </Table.Col>
           <Table.Col >
-            <Labels labels={Object.entries(metadata.selectors.labels(node))
-              .map(([key, value]) => `${key}: ${value}`)} />
+            {podsModule.selectors.restartCount(pod)}
+          </Table.Col>
+          <Table.Col>
+            <Button
+              icon='trash'
+              color='danger'
+              outline
+              size='sm'
+              onClick={deletePod(pod)}
+            />
           </Table.Col>
         </Table.Row>
     ));
 }
 
-const List = ({nodes}) => (
-  <Card title='Nodes' className='table-responsive-sm'>
+const List = ({pods}) => (
+  <Card title='Pods' className='table-responsive-sm'>
     <Table
       responsive
       className='card-table table-vcenter table-striped'
@@ -91,14 +94,14 @@ const List = ({nodes}) => (
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        <Rows nodes={nodes} />
+        <Rows pods={pods} />
       </Table.Body>
     </Table>
   </Card>
 );
 
-const mapStateToProps = ({nodes}) => ({
-  nodes
+const mapStateToProps = ({pods}) => ({
+  pods
 });
 
 export default connect(mapStateToProps)(List);

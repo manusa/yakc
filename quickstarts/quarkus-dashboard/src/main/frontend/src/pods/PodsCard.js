@@ -18,17 +18,17 @@ import React from 'react';
 import {connect} from 'react-redux';
 import StatusCard from '../components/StatusCard';
 import icons from '../icons';
-import nodesModule from './'
+import podsModule from './';
 
-const NodesCard = ({nodes}) => {
-  const nodeObjects = Object.values(nodes);
-  const ready = nodesModule.selectors.readyCount(nodeObjects);
-  const total = nodeObjects.length;
+const PodsCard = ({pods}) => {
+  const podObjects = Object.values(pods);
+  const ready = podsModule.selectors.readyCount(podObjects);
+  const total = podObjects.length
   return (
     <StatusCard
-      header='Nodes'
-      to={'/nodes'}
-      icon={icons.node}
+      header='Pods'
+      to={'/pods'}
+      icon={icons.pod}
       ready={ready}
       total={total}
       progressWidth={Math.round(ready/total*100)}
@@ -36,8 +36,8 @@ const NodesCard = ({nodes}) => {
   );
 };
 
-const mapStateToProps = ({nodes}) => ({
-  nodes
+const mapStateToProps = ({pods}) => ({
+  pods
 });
 
-export default connect(mapStateToProps)(NodesCard);
+export default connect(mapStateToProps)(PodsCard);

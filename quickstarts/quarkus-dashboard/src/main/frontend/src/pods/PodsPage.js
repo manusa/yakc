@@ -14,22 +14,26 @@
  * limitations under the License.
  *
  */
-const creationTimestamp = object => {
-  const ct = object?.metadata?.creationTimestamp;
-  if (ct) {
-    return new Date(ct);
-  }
-}
+import React from 'react';
+import {Grid} from 'tabler-react';
+import DashboardPage from '../components/DashboardPage';
+import pods from './';
 
-const labels = object =>  object?.metadata?.labels ?? {};
+const PodsPage = () => (
+  <DashboardPage>
+    <Grid>
+      <Grid.Row cards={true}>
+        <Grid.Col width={12} >
+          <pods.PodsCard />
+        </Grid.Col>
+      </Grid.Row>
+      <Grid.Row>
+        <Grid.Col>
+          <pods.List />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  </DashboardPage>
+);
 
-const name = object =>  object?.metadata?.name ?? '';
-
-const namespace = object =>  object?.metadata?.namespace ?? '';
-
-export default {
-  creationTimestamp,
-  labels,
-  name,
-  namespace
-};
+export default PodsPage;

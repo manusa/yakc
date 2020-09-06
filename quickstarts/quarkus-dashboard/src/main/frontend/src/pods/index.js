@@ -14,22 +14,21 @@
  * limitations under the License.
  *
  */
-const creationTimestamp = object => {
-  const ct = object?.metadata?.creationTimestamp;
-  if (ct) {
-    return new Date(ct);
-  }
-}
-
-const labels = object =>  object?.metadata?.labels ?? {};
-
-const name = object =>  object?.metadata?.name ?? '';
-
-const namespace = object =>  object?.metadata?.namespace ?? '';
+import api from './api';
+import reducer, {addOrReplacePod, deletePod, clearPods} from './reducer';
+import selectors from './selectors';
+import List from './List'
+import PodsCard from './PodsCard';
+import PodsPage from './PodsPage';
 
 export default {
-  creationTimestamp,
-  labels,
-  name,
-  namespace
+  api,
+  addOrReplacePod,
+  deletePod,
+  clearPods,
+  reducer,
+  selectors,
+  List,
+  PodsCard,
+  PodsPage
 };

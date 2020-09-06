@@ -20,6 +20,12 @@ const isReady = node => {
   return ready && ready.status;
 };
 
+const readyCount = nodes => nodes.reduce(
+  (count, node) => isReady(node) ? ++count : count,
+  0
+);
+
 export default {
-  isReady
+  isReady,
+  readyCount
 };

@@ -16,14 +16,14 @@
  */
 import {getApiURL} from '../env';
 
-export const startNodesEventSource = ({addNode, deleteNode, clearNodes}) => {
+const startNodesEventSource = ({addNode, deleteNode, clearNodes}) => {
   const eventSource = new EventSource(`${getApiURL()}/nodes`);
   eventSource.onopen = () => {
     clearNodes();
   }
   eventSource.onmessage = ({data}) => {
     const message = JSON.parse(data);
-    if (message.object && message.type === 'ADDED') {
+    if (message.object) {
       switch (message.type) {
         case 'ADDED':
           addNode(message.object);
@@ -42,3 +42,6 @@ export const startNodesEventSource = ({addNode, deleteNode, clearNodes}) => {
   return eventSource;
 }
 
+export default {
+  startNodesEventSource
+}
