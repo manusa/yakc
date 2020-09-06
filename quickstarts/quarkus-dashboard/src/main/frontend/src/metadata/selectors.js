@@ -14,34 +14,8 @@
  * limitations under the License.
  *
  */
-import Types from '../actions';
+const labels = metadata => metadata?.labels ?? {};
 
-export const addEvent = event => {
-  return {
-    type: Types.ADD_EVENT,
-    payload: event
-  }
-}
-
-export const clearEvents = () => {
-  return {
-    type: Types.CLEAR_EVENTS
-  }
-}
-
-const reducer = (state = {}, action = {}) => {
-  switch (action.type) {
-    case Types.ADD_EVENT: {
-      const newState = {...state};
-      newState[action.payload.metadata.uid] = action.payload;
-      return newState;
-    }
-    case Types.CLEAR_EVENTS: {
-      return {};
-    }
-    default:
-      return {...state};
-  }
+export default {
+  labels
 };
-
-export default reducer;

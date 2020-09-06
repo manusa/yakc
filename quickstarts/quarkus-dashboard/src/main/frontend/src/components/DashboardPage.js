@@ -15,14 +15,14 @@
  *
  */
 import React, {useState} from 'react';
-import {NavLink, withRouter} from 'react-router-dom';
+import {NavLink, useHistory, withRouter} from 'react-router-dom';
 import {
   Nav,
   Page,
   Site,
 } from 'tabler-react';
 
-import yakcLogo from './assets/YAKC-logo.png';
+import yakcLogo from '../assets/YAKC-logo.png';
 
 import './DashboardPage.css'
 
@@ -32,29 +32,41 @@ const withStaticContextFix = BaseComponent => ({staticContext, ...other}) => (
 
 const RoutedLink = withRouter(withStaticContextFix(NavLink));
 
-const Header = ({toggleMenu}) => (
-  <Site.Header>
-    <Page.Title className='d-flex w-100 align-items-center'>
-      <Site.Logo src={yakcLogo} alt='YAKC logo' />
-      Kubernetes Dashboard
-      <a
-        className="header-toggler d-lg-none ml-auto"
-        onClick={toggleMenu}
-      >
-        <span className="header-toggler-icon" />
-      </a>
-    </Page.Title>
-  </Site.Header>
-);
+const Header = ({toggleMenu}) => {
+  const history = useHistory();
+  const goHome = () => history.push('/');
+  return (
+    <Site.Header>
+      <Page.Title className='d-flex w-100 align-items-center'>
+        <a className='header-brand' href='#' onClick={goHome}>
+          <img src={yakcLogo} className='header-brand-img' alt='YAKC logo' />
+        </a>
+        Kubernetes Dashboard
+        <a
+          href='#'
+          className="header-toggler d-lg-none ml-auto"
+          onClick={toggleMenu}
+        >
+          <span className="header-toggler-icon" />
+        </a>
+      </Page.Title>
+    </Site.Header>
+  );
+}
+
+const MainNavItem = ({to, icon, value}) => (
+  <Nav.Item
+    key={to} value={value} useExact={true} to={to}
+    icon={icon}
+    LinkComponent={RoutedLink}
+  />
+)
 
 const NavBar = ({collapse}) => (
   <Site.Nav collapse={collapse}>
     <Nav>
-      <Nav.Item
-        key='/' value='Home' useExact={true} to='/'
-        icon='k8s'
-        LinkComponent={RoutedLink}
-      />
+      <MainNavItem value='Home' to='/' icon='k8s' />
+      <MainNavItem value='Nodes' to='/nodes' icon='node' />
       <Nav.Item
         key='about'
         value='About'

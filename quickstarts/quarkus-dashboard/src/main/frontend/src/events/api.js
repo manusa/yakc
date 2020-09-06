@@ -14,34 +14,22 @@
  * limitations under the License.
  *
  */
-import Types from '../actions';
+import {getApiURL} from '../env';
 
-export const addEvent = event => {
-  return {
-    type: Types.ADD_EVENT,
-    payload: event
+export const startEventSource = ({addEvent, clearEvents}) => {
+  const eventSource = new EventSource(`${getApiURL()}/events`);
+  eventSource.onopen = () => {
+    clearEvents();
   }
+  eventSource.onmessage = ({data}) => {
+    const message = JSON.parse(data);
+    if (message.object && message.type === 'ADDED') {
+      addEvent(message.object);
+    }
+  }
+  eventSource.onerror = ({status, message}) => {
+    console.error(`${status}: ${message}`);
+  }
+  return eventSource;
 }
 
-export const clearEvents = () => {
-  return {
-    type: Types.CLEAR_EVENTS
-  }
-}
-
-const reducer = (state = {}, action = {}) => {
-  switch (action.type) {
-    case Types.ADD_EVENT: {
-      const newState = {...state};
-      newState[action.payload.metadata.uid] = action.payload;
-      return newState;
-    }
-    case Types.CLEAR_EVENTS: {
-      return {};
-    }
-    default:
-      return {...state};
-  }
-};
-
-export default reducer;

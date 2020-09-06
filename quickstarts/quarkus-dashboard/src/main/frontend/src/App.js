@@ -19,47 +19,37 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {Error404Page} from 'tabler-react';
-import {getApiURL} from './env';
 import events from './events'
+import nodes from './nodes'
 import Home from './Home';
 
-import './App.css';
-import {clearEvents} from './events/reducer';
+const eventSources = [];
 
-let eventSource;
-
-const onMount = ({addEvent}) => {
-  eventSource = new EventSource(`${getApiURL()}/events`);
-  eventSource.onopen = () => {
-    clearEvents();
-  }
-  eventSource.onmessage = ({data}) => {
-    const message = JSON.parse(data);
-    if (message.object && message.type === 'ADDED') {
-      addEvent(message.object);
-    }
-  }
-  eventSource.onerror = ({status, message}) => {
-    console.error(`${status}: ${message}`);
-  }
+const onMount = ({addEvent, clearEvents, addNode, deleteNode, clearNodes}) => {
+  eventSources.push(
+    events.startEventSource({addEvent, clearEvents}),
+    nodes.startNodesEventSource({addNode, deleteNode, clearNodes})
+  );
 };
 
 const onUnmount = () => {
-  if (eventSource && eventSource.close) {
-    eventSource.close();
-  }
+  eventSources.forEach(eventSource => {
+    if (eventSource.close) {
+      eventSource.close();
+    }
+  });
 }
 
-const App = ({addEvent, clearEvents}) => {
+const App = (props) => {
   useEffect(() =>{
-    onMount({addEvent, clearEvents});
+    onMount(props);
     return onUnmount;
-  }, [addEvent, clearEvents])
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
       <Router>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/other" component={Home} />
+          <Route exact path='/' component={Home} />
+          <Route exact path='/nodes' component={nodes.NodesPage} />
           <Route component={Error404Page} />
         </Switch>
       </Router>
@@ -72,7 +62,10 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   addEvent: events.addEvent,
-  clearEvents: events.clearEvents
+  clearEvents: events.clearEvents,
+  addNode: nodes.addNode,
+  deleteNode: nodes.deleteNode,
+  clearNodes: nodes.clearNodes
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

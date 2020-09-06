@@ -14,34 +14,14 @@
  * limitations under the License.
  *
  */
-import Types from '../actions';
+import k8s from './assets/k8s-icons/k8s.svg'
+import node from './assets/k8s-icons/node.svg';
+import pod from './assets/k8s-icons/pod.svg';
 
-export const addEvent = event => {
-  return {
-    type: Types.ADD_EVENT,
-    payload: event
-  }
-}
-
-export const clearEvents = () => {
-  return {
-    type: Types.CLEAR_EVENTS
-  }
-}
-
-const reducer = (state = {}, action = {}) => {
-  switch (action.type) {
-    case Types.ADD_EVENT: {
-      const newState = {...state};
-      newState[action.payload.metadata.uid] = action.payload;
-      return newState;
-    }
-    case Types.CLEAR_EVENTS: {
-      return {};
-    }
-    default:
-      return {...state};
-  }
+const icons = {
+  k8s,
+  node,
+  pod
 };
 
-export default reducer;
+export default icons;
