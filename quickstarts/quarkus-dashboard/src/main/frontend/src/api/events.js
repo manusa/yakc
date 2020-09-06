@@ -1,1 +1,0 @@
-import {getApiURL} from '../env';

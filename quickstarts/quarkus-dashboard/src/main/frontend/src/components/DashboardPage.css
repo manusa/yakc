@@ -1,0 +1,14 @@
+.header .nav .nav-link .fe {
+  background: transparent 50% 50% no-repeat;
+  background-size: contain;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.header .nav .nav-link .fe-k8s {
+  background-image: url("../assets/k8s-icons/k8s.svg");
+}
+
+.header .nav .nav-link .fe-node {
+  background-image: url("../assets/k8s-icons/node.svg");
+}

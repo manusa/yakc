@@ -14,34 +14,28 @@
  * limitations under the License.
  *
  */
-import Types from '../actions';
+import React from 'react';
+import {connect} from 'react-redux';
+import StatusCard from '../components/StatusCard';
+import icons from '../icons';
 
-export const addEvent = event => {
-  return {
-    type: Types.ADD_EVENT,
-    payload: event
-  }
-}
-
-export const clearEvents = () => {
-  return {
-    type: Types.CLEAR_EVENTS
-  }
-}
-
-const reducer = (state = {}, action = {}) => {
-  switch (action.type) {
-    case Types.ADD_EVENT: {
-      const newState = {...state};
-      newState[action.payload.metadata.uid] = action.payload;
-      return newState;
-    }
-    case Types.CLEAR_EVENTS: {
-      return {};
-    }
-    default:
-      return {...state};
-  }
+const NodesCard = ({nodes}) => {
+  const ready = Object.entries(nodes).length;
+  const total = Object.entries(nodes).length;
+  return (
+    <StatusCard
+      header='Nodes'
+      to={'/nodes'}
+      icon={icons.node}
+      ready={ready}
+      total={total}
+      progressWidth={Math.round(ready/total*100)}
+    />
+  );
 };
 
-export default reducer;
+const mapStateToProps = ({nodes}) => ({
+  nodes
+});
+
+export default connect(mapStateToProps)(NodesCard);

@@ -52,7 +52,7 @@ const Rows = ({events}) => {
             {event.involvedObject.name}
           </Table.Col>
           <Table.Col>
-            <Tooltip content={event.lastTimestamp} placement='bottom'>
+            <Tooltip content={event.lastTimestamp} placement='right'>
               <span>{new Date(event.lastTimestamp).toLocaleDateString()}</span>
             </Tooltip>
           </Table.Col>

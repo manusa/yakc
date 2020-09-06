@@ -16,27 +16,39 @@
  */
 import Types from '../actions';
 
-export const addEvent = event => {
+export const addNode = node => {
   return {
-    type: Types.ADD_EVENT,
-    payload: event
+    type: Types.ADD_NODE,
+    payload: node
   }
 }
 
-export const clearEvents = () => {
+export const deleteNode = node => {
   return {
-    type: Types.CLEAR_EVENTS
+    type: Types.DELETE_NODE,
+    payload: node
+  }
+}
+
+export const clearNodes = () => {
+  return {
+    type: Types.CLEAR_NODES
   }
 }
 
 const reducer = (state = {}, action = {}) => {
   switch (action.type) {
-    case Types.ADD_EVENT: {
+    case Types.ADD_NODE: {
       const newState = {...state};
       newState[action.payload.metadata.uid] = action.payload;
       return newState;
     }
-    case Types.CLEAR_EVENTS: {
+    case Types.DELETE_NODE: {
+      const newState = {...state};
+      delete newState[action.payload.metadata.uid];
+      return newState;
+    }
+    case Types.CLEAR_NODES: {
       return {};
     }
     default:

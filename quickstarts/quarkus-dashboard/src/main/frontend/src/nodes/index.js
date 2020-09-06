@@ -14,34 +14,21 @@
  * limitations under the License.
  *
  */
-import Types from '../actions';
+import {startNodesEventSource} from './api';
+import reducer, {addNode, deleteNode, clearNodes} from './reducer';
+import selectors from './selectors';
+import List from './List';
+import NodesCard from './NodesCard';
+import NodesPage from './NodesPage'
 
-export const addEvent = event => {
-  return {
-    type: Types.ADD_EVENT,
-    payload: event
-  }
-}
-
-export const clearEvents = () => {
-  return {
-    type: Types.CLEAR_EVENTS
-  }
-}
-
-const reducer = (state = {}, action = {}) => {
-  switch (action.type) {
-    case Types.ADD_EVENT: {
-      const newState = {...state};
-      newState[action.payload.metadata.uid] = action.payload;
-      return newState;
-    }
-    case Types.CLEAR_EVENTS: {
-      return {};
-    }
-    default:
-      return {...state};
-  }
+export default {
+  addNode,
+  deleteNode,
+  clearNodes,
+  reducer,
+  selectors,
+  startNodesEventSource,
+  List,
+  NodesCard,
+  NodesPage
 };
-
-export default reducer;

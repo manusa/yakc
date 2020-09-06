@@ -15,40 +15,25 @@
  *
  */
 import React from 'react';
-import {
-  Grid
-} from 'tabler-react';
-import events from './events';
-import nodes from './nodes';
-import DashboardPage from './components/DashboardPage';
-import StatusCard from './components/StatusCard';
-import icons from './icons';
+import nodes from './';
+import DashboardPage from '../components/DashboardPage';
+import {Grid} from 'tabler-react';
 
-
-const Home = () => (
+const NodesPage = () => (
   <DashboardPage>
     <Grid>
       <Grid.Row cards={true}>
-        <Grid.Col width={6} sm={4} lg={2}>
+        <Grid.Col width={12} >
           <nodes.NodesCard />
-        </Grid.Col>
-        <Grid.Col width={6} sm={4} lg={2}>
-          <StatusCard
-            header='Pods'
-            icon={icons.pod}
-            ready={3}
-            total={4}
-            progressWidth={Math.round(3/4*100)}
-          />
         </Grid.Col>
       </Grid.Row>
       <Grid.Row>
         <Grid.Col>
-          <events.List />
+          <nodes.List />
         </Grid.Col>
       </Grid.Row>
     </Grid>
   </DashboardPage>
 );
 
-export default Home;
+export default NodesPage;
