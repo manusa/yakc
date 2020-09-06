@@ -12,6 +12,8 @@
     <maven.compiler.target>11</maven.compiler.target>
     <version.quarkus>1.7.2.Final</version.quarkus>
     <version.smallrye.reactive>0.7.0</version.smallrye.reactive>
+    <version.jkube>1.0.0-rc-1</version.jkube>
+    <version.exec-maven-plugin>3.0.0</version.exec-maven-plugin>
   </properties>
 
   <dependencyManagement>
@@ -89,6 +91,7 @@
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
+            <version>${version.exec-maven-plugin}</version>
             <executions>
               <execution>
                 <id>npm-install</id>
@@ -118,6 +121,33 @@
                     <argument>build</argument>
                   </arguments>
                 </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+    <profile>
+      <id>minikube</id>
+      <properties>
+        <jkube.enricher.jkube-service.type>NodePort</jkube.enricher.jkube-service.type>
+        <jkube.enricher.jkube-service.name>yakc-dashboard</jkube.enricher.jkube-service.name>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.jkube</groupId>
+            <artifactId>kubernetes-maven-plugin</artifactId>
+            <version>1.0.0-rc-1</version>
+            <executions>
+              <execution>
+                <id>install</id>
+                <phase>install</phase>
+                <goals>
+                  <goal>build</goal>
+                  <goal>resource</goal>
+                  <goal>apply</goal>
+                </goals>
               </execution>
             </executions>
           </plugin>
