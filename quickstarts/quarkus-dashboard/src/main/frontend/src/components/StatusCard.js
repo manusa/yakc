@@ -47,7 +47,8 @@ const StatusCard = ({
         />
         <h5>{ready} / {total}</h5>
         <Progress size='sm'>
-          <Progress.Bar width={progressWidth}/>
+          <Progress.Bar width={progressWidth} />
+          <Progress.Bar width={100 - progressWidth} color='warning' />
         </Progress>
       </Card.Body>
     </Card>

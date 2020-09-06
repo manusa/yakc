@@ -20,6 +20,7 @@ import {Provider} from 'react-redux';
 import {combineReducers, createStore} from 'redux';
 import events from './events';
 import nodes from './nodes';
+import pods from './pods';
 import App from './App';
 
 import 'tabler-react/dist/Tabler.css';
@@ -33,7 +34,8 @@ const storeEnhancer = () => {
 
 const store = createStore(combineReducers({
   events: events.reducer,
-  nodes: nodes.reducer
+  nodes: nodes.reducer,
+  pods: pods.reducer
 }), storeEnhancer());
 
 ReactDOM.render(

@@ -17,6 +17,7 @@
 import React, {useState} from 'react';
 import {NavLink, useHistory, withRouter} from 'react-router-dom';
 import {
+  Button,
   Nav,
   Page,
   Site,
@@ -38,17 +39,17 @@ const Header = ({toggleMenu}) => {
   return (
     <Site.Header>
       <Page.Title className='d-flex w-100 align-items-center'>
-        <a className='header-brand' href='#' onClick={goHome}>
+        <Button link className='header-brand' href='#' onClick={goHome}>
           <img src={yakcLogo} className='header-brand-img' alt='YAKC logo' />
-        </a>
+        </Button>
         Kubernetes Dashboard
-        <a
-          href='#'
+        <Button
+          link
           className="header-toggler d-lg-none ml-auto"
           onClick={toggleMenu}
         >
           <span className="header-toggler-icon" />
-        </a>
+        </Button>
       </Page.Title>
     </Site.Header>
   );
@@ -67,6 +68,7 @@ const NavBar = ({collapse}) => (
     <Nav>
       <MainNavItem value='Home' to='/' icon='k8s' />
       <MainNavItem value='Nodes' to='/nodes' icon='node' />
+      <MainNavItem value='Pods' to='/pods' icon='pod' />
       <Nav.Item
         key='about'
         value='About'

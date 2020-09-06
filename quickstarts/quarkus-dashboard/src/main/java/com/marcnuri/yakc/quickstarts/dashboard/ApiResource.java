@@ -19,6 +19,7 @@ package com.marcnuri.yakc.quickstarts.dashboard;
 
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeResource;
+import com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 
@@ -27,12 +28,14 @@ public class ApiResource {
 
   private final EventResource eventResource;
   private final NodeResource nodeResource;
+  private final PodResource podResource;
 
   @Inject
   public ApiResource(EventResource eventResource,
-    NodeResource nodeResource) {
+    NodeResource nodeResource, PodResource podResource) {
     this.eventResource = eventResource;
     this.nodeResource = nodeResource;
+    this.podResource = podResource;
   }
 
   @Path("/events")
@@ -43,5 +46,10 @@ public class ApiResource {
   @Path("/nodes")
   public NodeResource getNodeResource() {
     return nodeResource;
+  }
+
+  @Path("/pods")
+  public PodResource getPodResource() {
+    return podResource;
   }
 }

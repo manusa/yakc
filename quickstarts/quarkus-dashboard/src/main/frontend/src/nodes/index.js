@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-import {startNodesEventSource} from './api';
+import api from './api';
 import reducer, {addNode, deleteNode, clearNodes} from './reducer';
 import selectors from './selectors';
 import List from './List';
@@ -22,12 +22,12 @@ import NodesCard from './NodesCard';
 import NodesPage from './NodesPage'
 
 export default {
+  api,
   addNode,
   deleteNode,
   clearNodes,
   reducer,
   selectors,
-  startNodesEventSource,
   List,
   NodesCard,
   NodesPage

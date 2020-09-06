@@ -12,3 +12,6 @@
 .header .nav .nav-link .fe-node {
   background-image: url("../assets/k8s-icons/node.svg");
 }
+.header .nav .nav-link .fe-pod {
+  background-image: url("../assets/k8s-icons/pod.svg");
+}

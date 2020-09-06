@@ -19,16 +19,18 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {Error404Page} from 'tabler-react';
-import events from './events'
-import nodes from './nodes'
+import events from './events';
+import nodes from './nodes';
+import pods from './pods';
 import Home from './Home';
 
 const eventSources = [];
 
-const onMount = ({addEvent, clearEvents, addNode, deleteNode, clearNodes}) => {
+const onMount = (props) => {
   eventSources.push(
-    events.startEventSource({addEvent, clearEvents}),
-    nodes.startNodesEventSource({addNode, deleteNode, clearNodes})
+    events.startEventSource(props),
+    nodes.api.startNodesEventSource(props),
+    pods.api.startPodsEventSource(props)
   );
 };
 
@@ -50,6 +52,7 @@ const App = (props) => {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/nodes' component={nodes.NodesPage} />
+          <Route exact path='/pods' component={pods.PodsPage} />
           <Route component={Error404Page} />
         </Switch>
       </Router>
@@ -65,7 +68,10 @@ const mapDispatchToProps = dispatch => bindActionCreators({
   clearEvents: events.clearEvents,
   addNode: nodes.addNode,
   deleteNode: nodes.deleteNode,
-  clearNodes: nodes.clearNodes
+  clearNodes: nodes.clearNodes,
+  addOrReplacePod: pods.addOrReplacePod,
+  deletePod: pods.deletePod,
+  clearPods: pods.clearPods
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
