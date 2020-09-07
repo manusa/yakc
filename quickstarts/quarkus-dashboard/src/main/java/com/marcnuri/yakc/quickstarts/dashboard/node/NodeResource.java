@@ -21,14 +21,15 @@ import com.marcnuri.yakc.api.KubernetesException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Node;
 import io.smallrye.mutiny.Multi;
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import org.jboss.resteasy.annotations.SseElementType;
 
-@Path("/")
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import javax.ws.rs.GET;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+@Singleton
 public class NodeResource {
 
   private final NodeService nodeService;
