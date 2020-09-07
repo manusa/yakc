@@ -14,22 +14,30 @@
  * limitations under the License.
  *
  */
-import {getApiURL} from '../env';
+import Types from '../actions';
 
-export const startEventSource = ({addEvent, clearEvents}) => {
-  const eventSource = new EventSource(`${getApiURL()}/events`);
-  eventSource.onopen = () => {
-    clearEvents();
+export const addOrReplacePod = pod => {
+  return {
+    type: Types.ADD_OR_REPLACE_POD,
+    payload: pod
   }
-  eventSource.onmessage = ({data}) => {
-    const message = JSON.parse(data);
-    if (message.object && message.type === 'ADDED') {
-      addEvent(message.object);
-    }
-  }
-  eventSource.onerror = ({status, message}) => {
-    console.error(`${status}: ${message}`);
-  }
-  return eventSource;
 }
 
+export const deletePod = pod => {
+  return {
+    type: Types.DELETE_POD,
+    payload: pod
+  }
+}
+
+export const clearPods = () => {
+  return {
+    type: Types.CLEAR_PODS
+  }
+}
+
+export default {
+  addOrReplacePod,
+  deletePod,
+  clearPods
+};

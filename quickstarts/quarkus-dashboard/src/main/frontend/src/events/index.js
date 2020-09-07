@@ -14,14 +14,12 @@
  * limitations under the License.
  *
  */
-import {startEventSource} from './api';
-import reducer, {addEvent, clearEvents} from './reducer';
+import actions from './actions';
+import reducer from './reducer';
 import List from './List'
 
 export default {
-  addEvent,
-  clearEvents,
+  actions,
   reducer,
-  startEventSource,
   List
 };

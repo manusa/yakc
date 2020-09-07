@@ -15,22 +15,19 @@
  *
  */
 import React, {useEffect} from 'react';
-import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {Error404Page} from 'tabler-react';
-import events from './events';
 import nodes from './nodes';
 import pods from './pods';
+import watch from './watch';
 import Home from './Home';
 
 const eventSources = [];
 
-const onMount = (props) => {
+const onMount = ({dispatch}) => {
   eventSources.push(
-    events.startEventSource(props),
-    nodes.api.startNodesEventSource(props),
-    pods.api.startPodsEventSource(props)
+    watch.api.startEventSource({dispatch})
   );
 };
 
@@ -42,9 +39,9 @@ const onUnmount = () => {
   });
 }
 
-const App = (props) => {
-  useEffect(() =>{
-    onMount(props);
+const App = ({dispatch}) => {
+  useEffect(() => {
+    onMount({dispatch});
     return onUnmount;
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
   return (
@@ -59,19 +56,8 @@ const App = (props) => {
   );
 }
 
-const mapStateToProps = state => ({
-  events: state.events
-});
+const mapStateToProps = () => ({});
 
-const mapDispatchToProps = dispatch => bindActionCreators({
-  addEvent: events.addEvent,
-  clearEvents: events.clearEvents,
-  addNode: nodes.addNode,
-  deleteNode: nodes.deleteNode,
-  clearNodes: nodes.clearNodes,
-  addOrReplacePod: pods.addOrReplacePod,
-  deletePod: pods.deletePod,
-  clearPods: pods.clearPods
-}, dispatch);
+const mapDispatchToProps = dispatch => ({dispatch});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

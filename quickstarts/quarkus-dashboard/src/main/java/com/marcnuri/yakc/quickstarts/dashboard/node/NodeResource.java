@@ -21,6 +21,7 @@ import com.marcnuri.yakc.api.KubernetesException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Node;
 import io.smallrye.mutiny.Multi;
+import io.smallrye.mutiny.converters.multi.MultiRxConverters;
 import org.jboss.resteasy.annotations.SseElementType;
 
 import javax.inject.Inject;
@@ -43,6 +44,7 @@ public class NodeResource {
   @Produces(MediaType.SERVER_SENT_EVENTS)
   @SseElementType(MediaType.APPLICATION_JSON)
   public Multi<WatchEvent<Node>> get() throws KubernetesException {
-    return nodeService.getNodes();
+    return Multi.createFrom().converter(MultiRxConverters.fromObservable(),
+      nodeService.getNodes());
   }
 }

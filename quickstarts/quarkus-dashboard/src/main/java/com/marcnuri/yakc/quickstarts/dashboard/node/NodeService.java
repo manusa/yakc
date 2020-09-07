@@ -22,8 +22,8 @@ import com.marcnuri.yakc.api.KubernetesException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Node;
-import io.smallrye.mutiny.Multi;
-import io.smallrye.mutiny.converters.multi.MultiRxConverters;
+import io.reactivex.Observable;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -37,9 +37,8 @@ public class NodeService {
     this.kubernetesClient = kubernetesClient;
   }
 
-  public Multi<WatchEvent<Node>> getNodes() throws KubernetesException {
-    return Multi.createFrom().converter(MultiRxConverters.fromObservable(),
-      kubernetesClient.create(CoreV1Api.class).listNode().watch());
+  public  Observable<WatchEvent<Node>> getNodes() throws KubernetesException {
+    return kubernetesClient.create(CoreV1Api.class).listNode().watch();
   }
 
 }
