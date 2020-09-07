@@ -20,10 +20,12 @@ package com.marcnuri.yakc.quickstarts.dashboard;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeResource;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource;
+
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.ws.rs.Path;
 
-@Path("/")
+@Singleton
 public class ApiResource {
 
   private final EventResource eventResource;
