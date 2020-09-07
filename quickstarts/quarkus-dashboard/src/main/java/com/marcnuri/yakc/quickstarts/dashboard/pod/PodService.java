@@ -22,11 +22,10 @@ import com.marcnuri.yakc.api.KubernetesException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
-import io.smallrye.mutiny.Multi;
-import io.smallrye.mutiny.converters.multi.MultiRxConverters;
+import io.reactivex.Observable;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import java.io.IOException;
 
 @Singleton
@@ -39,9 +38,8 @@ public class PodService {
     this.kubernetesClient = kubernetesClient;
   }
 
-  public Multi<WatchEvent<Pod>> getPods() throws KubernetesException {
-    return Multi.createFrom().converter(MultiRxConverters.fromObservable(),
-      kubernetesClient.create(CoreV1Api.class).listPodForAllNamespaces().watch());
+  public Observable<WatchEvent<Pod>> getPods() throws KubernetesException {
+    return kubernetesClient.create(CoreV1Api.class).listPodForAllNamespaces().watch();
   }
 
   public Pod deletePod(String name, String namespace) throws IOException {

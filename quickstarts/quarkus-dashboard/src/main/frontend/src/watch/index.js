@@ -14,20 +14,8 @@
  * limitations under the License.
  *
  */
-const actions = {
-  CLEAR: 'CLEAR',
-  ADD_EVENT: 'ADD_EVENT',
-  CLEAR_EVENTS: 'CLEAR_EVENTS',
-  ADD_NODE: 'ADD_NODE',
-  DELETE_NODE: 'DELETE_NODE',
-  CLEAR_NODES: 'CLEAR_NODES',
-  ADD_OR_REPLACE_POD: 'ADD_OR_REPLACE_POD',
-  DELETE_POD: 'DELETE_POD',
-  CLEAR_PODS: 'CLEAR_PODS'
-}
+import api from './api';
 
-export const clear = () => ({
-  type: actions.CLEAR
-});
-
-export default actions;
+export default {
+  api
+};

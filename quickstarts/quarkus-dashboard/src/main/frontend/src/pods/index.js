@@ -15,7 +15,8 @@
  *
  */
 import api from './api';
-import reducer, {addOrReplacePod, deletePod, clearPods} from './reducer';
+import actions from './actions';
+import reducer from './reducer';
 import selectors from './selectors';
 import List from './List'
 import PodsCard from './PodsCard';
@@ -23,9 +24,7 @@ import PodsPage from './PodsPage';
 
 export default {
   api,
-  addOrReplacePod,
-  deletePod,
-  clearPods,
+  actions,
   reducer,
   selectors,
   List,

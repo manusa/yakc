@@ -17,34 +17,6 @@
 import {getApiURL} from '../env';
 import metadata from '../metadata';
 
-const startPodsEventSource =
-  ({addOrReplacePod, deletePod, clearPods}) => {
-    const eventSource = new EventSource(`${getApiURL()}/pods`);
-    eventSource.onopen = () => {
-      clearPods();
-    }
-    eventSource.onmessage = ({data}) => {
-      const message = JSON.parse(data);
-      if (message.object) {
-        switch (message.type) {
-          case 'MODIFIED':
-          case 'ADDED':
-            addOrReplacePod(message.object);
-            break;
-          case 'DELETED':
-            deletePod(message.object);
-            break;
-          default:
-            // NOOP
-        }
-      }
-    }
-    eventSource.onerror = ({status, message}) => {
-      console.error(`${status}: ${message}`);
-    }
-    return eventSource;
-  };
-
 const requestDelete = async pod => {
   await fetch(
     `${getApiURL()}/pods/${metadata.selectors.namespace(pod)}/${metadata.selectors.name(pod)}`,
@@ -53,6 +25,5 @@ const requestDelete = async pod => {
 }
 
 export  default {
-  startPodsEventSource,
   requestDelete
 };

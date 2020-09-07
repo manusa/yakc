@@ -14,18 +14,15 @@
  * limitations under the License.
  *
  */
-import api from './api';
-import reducer, {addNode, deleteNode, clearNodes} from './reducer';
+import actions from './actions';
+import reducer from './reducer';
 import selectors from './selectors';
 import List from './List';
 import NodesCard from './NodesCard';
 import NodesPage from './NodesPage'
 
 export default {
-  api,
-  addNode,
-  deleteNode,
-  clearNodes,
+  actions,
   reducer,
   selectors,
   List,

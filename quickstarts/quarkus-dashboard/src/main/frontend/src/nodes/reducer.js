@@ -16,26 +16,6 @@
  */
 import Types from '../actions';
 
-export const addNode = node => {
-  return {
-    type: Types.ADD_NODE,
-    payload: node
-  }
-}
-
-export const deleteNode = node => {
-  return {
-    type: Types.DELETE_NODE,
-    payload: node
-  }
-}
-
-export const clearNodes = () => {
-  return {
-    type: Types.CLEAR_NODES
-  }
-}
-
 const reducer = (state = {}, action = {}) => {
   switch (action.type) {
     case Types.ADD_NODE: {
@@ -48,6 +28,7 @@ const reducer = (state = {}, action = {}) => {
       delete newState[action.payload.metadata.uid];
       return newState;
     }
+    case Types.CLEAR:
     case Types.CLEAR_NODES: {
       return {};
     }

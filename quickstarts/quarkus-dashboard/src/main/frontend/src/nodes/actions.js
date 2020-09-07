@@ -14,20 +14,30 @@
  * limitations under the License.
  *
  */
-const actions = {
-  CLEAR: 'CLEAR',
-  ADD_EVENT: 'ADD_EVENT',
-  CLEAR_EVENTS: 'CLEAR_EVENTS',
-  ADD_NODE: 'ADD_NODE',
-  DELETE_NODE: 'DELETE_NODE',
-  CLEAR_NODES: 'CLEAR_NODES',
-  ADD_OR_REPLACE_POD: 'ADD_OR_REPLACE_POD',
-  DELETE_POD: 'DELETE_POD',
-  CLEAR_PODS: 'CLEAR_PODS'
+import Types from '../actions';
+
+export const addNode = node => {
+  return {
+    type: Types.ADD_NODE,
+    payload: node
+  }
 }
 
-export const clear = () => ({
-  type: actions.CLEAR
-});
+export const deleteNode = node => {
+  return {
+    type: Types.DELETE_NODE,
+    payload: node
+  }
+}
 
-export default actions;
+export const clearNodes = () => {
+  return {
+    type: Types.CLEAR_NODES
+  }
+}
+
+export default {
+  addNode,
+  deleteNode,
+  clearNodes
+};

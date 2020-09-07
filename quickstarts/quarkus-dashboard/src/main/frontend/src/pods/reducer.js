@@ -16,26 +16,6 @@
  */
 import Types from '../actions';
 
-export const addOrReplacePod = pod => {
-  return {
-    type: Types.ADD_OR_REPLACE_POD,
-    payload: pod
-  }
-}
-
-export const deletePod = pod => {
-  return {
-    type: Types.DELETE_POD,
-    payload: pod
-  }
-}
-
-export const clearPods = () => {
-  return {
-    type: Types.CLEAR_PODS
-  }
-}
-
 const reducer = (state = {}, action = {}) => {
   switch (action.type) {
     case Types.ADD_OR_REPLACE_POD: {
@@ -48,6 +28,7 @@ const reducer = (state = {}, action = {}) => {
       delete newState[action.payload.metadata.uid];
       return newState;
     }
+    case Types.CLEAR:
     case Types.CLEAR_PODS: {
       return {};
     }
