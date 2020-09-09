@@ -105,5 +105,24 @@ const mapStateToProps = ({pods}) => ({
   pods
 });
 
-export default connect(mapStateToProps)(List);
+const filterPods = (pods = [], {nodeName}) => Object.entries(pods)
+  .filter(([, pod]) => {
+    if (nodeName) {
+      return podsModule.selectors.nodeName(pod) === nodeName;
+    }
+    return true;
+  })
+  .reduce((acc, [key, pod]) => {
+    acc[key] = pod;
+    return acc;
+  }, {});
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  ...ownProps,
+  pods: filterPods(stateProps.pods, ownProps)
+});
+
+export default connect(mapStateToProps, null, mergeProps)(List);
 

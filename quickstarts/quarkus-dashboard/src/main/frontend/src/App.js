@@ -49,6 +49,7 @@ const App = ({dispatch}) => {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/nodes' component={nodes.NodesPage} />
+          <Route exact path='/nodes/:name' component={nodes.NodesDetailPage} />
           <Route exact path='/pods' component={pods.PodsPage} />
           <Route exact path='/pods/:uid' component={pods.PodsDetailPage} />
           <Route component={Error404Page} />

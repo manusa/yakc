@@ -19,6 +19,7 @@ import reducer from './reducer';
 import selectors from './selectors';
 import List from './List';
 import NodesCard from './NodesCard';
+import NodesDetailPage from './NodesDetailPage';
 import NodesPage from './NodesPage'
 
 export default {
@@ -27,5 +28,6 @@ export default {
   selectors,
   List,
   NodesCard,
+  NodesDetailPage,
   NodesPage
 };

@@ -16,15 +16,16 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {Card, Form, Grid, Table} from 'tabler-react';
 import DashboardPage from '../components/DashboardPage';
-import metadata from '../metadata'
+import metadata from '../metadata';
 import pods from './';
 
-const Field = ({label, value}) => (
+const Field = ({label, children}) => (
   <Grid.Col width={12} md={6} lg={4}>
     <Form.Group label={label}>
-      <Form.StaticText>{value}</Form.StaticText>
+      <Form.StaticText>{children}</Form.StaticText>
     </Form.Group>
   </Grid.Col>
 );
@@ -56,7 +57,6 @@ const ContainerList = ({containers}) => (
               </Table.Col>
             </Table.Row>
           ))}
-          {/*<Rows pods={pods} />*/}
         </Table.Body>
       </Table>
     </Card>
@@ -64,18 +64,22 @@ const ContainerList = ({containers}) => (
 
 const PodsDetailPage = ({pod}) => (
   <DashboardPage>
-    <Card title={` Pod - ${metadata.selectors.namespace(pod)} - ${metadata.selectors.name(pod)}`}>
+    <Card title={`Pod - ${metadata.selectors.namespace(pod)} - ${metadata.selectors.name(pod)}`}>
       <Card.Body>
         <Grid.Row>
-          <Field label='Name' value={metadata.selectors.name(pod)}/>
-          <Field label='Namespace' value={metadata.selectors.namespace(pod)}/>
-          <Field label='Node' value={pods.selectors.nodeName(pod)}/>
+          <Field label='Name'>{metadata.selectors.name(pod)}</Field>
+          <Field label='Namespace'>{metadata.selectors.namespace(pod)}</Field>
+          <Field label='Node'>
+            <Link to={`/nodes/${pods.selectors.nodeName(pod)}`}>
+              {pods.selectors.nodeName(pod)}
+            </Link>
+          </Field>
           <Grid.Col width={12} >
             <Form.Group label='Labels'>
               <metadata.Labels labels={metadata.selectors.labels(pod)} />
             </Form.Group>
           </Grid.Col>
-          <Field label='Phase' value={pods.selectors.statusPhase(pod)}/>
+          <Field label='Phase'>{pods.selectors.statusPhase(pod)}</Field>
         </Grid.Row>
       </Card.Body>
     </Card>

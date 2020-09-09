@@ -19,6 +19,7 @@ import {connect} from 'react-redux'
 import {Card, Icon, Table} from 'tabler-react';
 import metadata from '../metadata';
 import nodesModule from './'
+import {Link} from "react-router-dom";
 
 const headers = [
   'Ready',
@@ -50,7 +51,9 @@ const Rows = ({nodes}) => {
             />
           </Table.Col>
           <Table.Col className='text-nowrap'>
-            {metadata.selectors.name(node)}
+            <Link to={`/nodes/${metadata.selectors.name(node)}`}>
+              {metadata.selectors.name(node)}
+            </Link>
           </Table.Col>
           <Table.Col >
             <metadata.Labels
