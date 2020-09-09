@@ -85,6 +85,12 @@ const NavBar = ({collapse}) => (
             // LinkComponent: RoutedLink
           }
         ]}
+        subItems={[
+          <Nav.SubItem key={1}><a href='https://github.com/manusa/yakc/tree/master/quickstarts/quarkus-dashboard'>
+            Quarkus Kubernetes Dashboard</a>
+          </Nav.SubItem>,
+          <Nav.SubItem key={2}><a href='https://github.com/manusa/yakc'>YAKC</a></Nav.SubItem>
+        ]}
       />
     </Nav>
   </Site.Nav>

@@ -17,6 +17,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import {Card, Table, Tooltip} from 'tabler-react';
+import metadata from "../metadata";
 
 const headers = [
   'Type',
@@ -44,7 +45,7 @@ const Rows = ({events}) => {
     .sort(sort)
     .slice(0, 10)
     .map(event => (
-        <Table.Row key={event.metadata.uid}>
+        <Table.Row key={metadata.selectors.uid(event)}>
           <Table.Col className='text-nowrap'>
             {event.involvedObject.kind}
           </Table.Col>
