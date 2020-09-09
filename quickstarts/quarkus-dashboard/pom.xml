@@ -129,6 +129,7 @@
     <profile>
       <id>minikube</id>
       <properties>
+        <jkube.generator.name>marcnuri/yakc-kubernetes-dashboard</jkube.generator.name>
         <jkube.enricher.jkube-service.type>NodePort</jkube.enricher.jkube-service.type>
         <jkube.enricher.jkube-service.name>yakc-dashboard</jkube.enricher.jkube-service.name>
       </properties>
@@ -137,7 +138,7 @@
           <plugin>
             <groupId>org.eclipse.jkube</groupId>
             <artifactId>kubernetes-maven-plugin</artifactId>
-            <version>1.0.0-rc-1</version>
+            <version>1.0.0</version>
             <executions>
               <execution>
                 <id>install</id>
