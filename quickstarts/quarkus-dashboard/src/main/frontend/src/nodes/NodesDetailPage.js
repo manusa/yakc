@@ -16,7 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import {Card, Form, Grid, Table} from 'tabler-react';
+import {Card, Form, Grid} from 'tabler-react';
 import DashboardPage from '../components/DashboardPage';
 import metadata from '../metadata';
 import pods from '../pods';
