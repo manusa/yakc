@@ -20,6 +20,7 @@ import reducer from './reducer';
 import selectors from './selectors';
 import List from './List'
 import PodsCard from './PodsCard';
+import PodsDetailPage from './PodsDetailPage';
 import PodsPage from './PodsPage';
 
 export default {
@@ -29,5 +30,6 @@ export default {
   selectors,
   List,
   PodsCard,
+  PodsDetailPage,
   PodsPage
 };

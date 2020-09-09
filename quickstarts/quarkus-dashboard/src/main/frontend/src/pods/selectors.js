@@ -18,6 +18,10 @@ const statusPhase = pod => pod?.status?.phase ?? '';
 
 const isReady = pod => statusPhase(pod) === 'Running';
 
+const nodeName = pod => (pod?.spec?.nodeName ?? '');
+
+const containers = pod => (pod?.spec?.containers ?? []);
+
 const containerStatuses = pod => (pod?.status?.containerStatuses ?? []);
 
 const containersReady = pod => containerStatuses(pod).every(cs => cs.ready);
@@ -37,6 +41,8 @@ const readyCount = pods => pods.reduce(
 export default {
   statusPhase,
   isReady,
+  nodeName,
+  containers,
   containersReady,
   restartCount,
   readyCount

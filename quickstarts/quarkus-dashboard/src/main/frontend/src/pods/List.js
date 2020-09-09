@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
+import {Link} from "react-router-dom";
 import {Button, Card, Icon, Table} from 'tabler-react';
 import metadata from '../metadata';
 import podsModule from './'
@@ -48,7 +49,7 @@ const Rows = ({pods}) => {
   return allPods
     .sort(sort)
     .map(pod => (
-        <Table.Row key={pod.metadata.uid}>
+        <Table.Row key={metadata.selectors.uid(pod)}>
           <Table.Col>
             <Icon
               className={podsModule.selectors.containersReady(pod) ? 'text-success' : 'text-danger'}
@@ -56,7 +57,7 @@ const Rows = ({pods}) => {
             />
           </Table.Col>
           <Table.Col className='text-nowrap'>
-            {metadata.selectors.name(pod)}
+            <Link to={`/pods/${metadata.selectors.uid(pod)}`}>{metadata.selectors.name(pod)}</Link>
           </Table.Col>
           <Table.Col className='text-nowrap'>
             {metadata.selectors.namespace(pod)}

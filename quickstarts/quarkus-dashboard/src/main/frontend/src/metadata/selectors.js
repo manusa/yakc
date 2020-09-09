@@ -27,9 +27,12 @@ const name = object =>  object?.metadata?.name ?? '';
 
 const namespace = object =>  object?.metadata?.namespace ?? '';
 
+const uid = object =>  object?.metadata?.uid ?? '';
+
 export default {
   creationTimestamp,
   labels,
   name,
-  namespace
+  namespace,
+  uid
 };

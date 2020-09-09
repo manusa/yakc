@@ -15,7 +15,9 @@
  *
  */
 import selectors from './selectors';
+import Labels from './Labels';
 
 export default {
-  selectors
+  selectors,
+  Labels
 };

@@ -14,13 +14,11 @@
  * limitations under the License.
  *
  */
-import React, {useState} from 'react';
+import React from 'react';
 import {connect} from 'react-redux'
-import {Button, Card, Icon, Table, Tag} from 'tabler-react';
+import {Card, Icon, Table} from 'tabler-react';
 import metadata from '../metadata';
 import nodesModule from './'
-
-const maxLabels = 2;
 
 const headers = [
   'Ready',
@@ -30,21 +28,6 @@ const headers = [
 
 const sort = (n1, n2) =>
   metadata.selectors.creationTimestamp(n1) - metadata.selectors.creationTimestamp(n2);
-
-const Labels = ({labels}) => {
-  const [collapsed, setCollapsed] = useState(true);
-  const toggle = () => setCollapsed(!collapsed);
-  const truncate = labels.length > maxLabels;
-  const displayedLabels = truncate && collapsed ? labels.slice(0, maxLabels) : labels;
-  return (
-    <div className='d-flex flex-wrap align-items-center'>
-      {displayedLabels.map((label, idx) =>
-        <Tag key={idx} rounded color='blue' className='mr-1 mb-1'>{label}</Tag>
-      )}
-      {truncate && <Button link onClick={toggle}>{collapsed ? '...' : 'Show less'}</Button>}
-    </div>
-  );
-};
 
 const Rows = ({nodes}) => {
   const allNodes = Object.values(nodes);
@@ -70,8 +53,10 @@ const Rows = ({nodes}) => {
             {metadata.selectors.name(node)}
           </Table.Col>
           <Table.Col >
-            <Labels labels={Object.entries(metadata.selectors.labels(node))
-              .map(([key, value]) => `${key}: ${value}`)} />
+            <metadata.Labels
+              labels={metadata.selectors.labels(node)}
+              maxLabels={2}
+            />
           </Table.Col>
         </Table.Row>
     ));
