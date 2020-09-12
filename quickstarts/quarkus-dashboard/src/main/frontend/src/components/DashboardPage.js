@@ -68,6 +68,7 @@ const NavBar = ({collapse}) => (
     <Nav>
       <MainNavItem value='Home' to='/' icon='k8s' />
       <MainNavItem value='Nodes' to='/nodes' icon='node' />
+      <MainNavItem value='Deployments' to='/deployments' icon='deployment' />
       <MainNavItem value='Pods' to='/pods' icon='pod' />
       <Nav.Item
         key='about'

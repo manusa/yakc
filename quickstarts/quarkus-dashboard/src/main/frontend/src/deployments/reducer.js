@@ -14,16 +14,27 @@
  * limitations under the License.
  *
  */
-import k8s from './assets/k8s-icons/k8s.svg'
-import deployment from './assets/k8s-icons/deploy.svg';
-import node from './assets/k8s-icons/node.svg';
-import pod from './assets/k8s-icons/pod.svg';
+import Types from '../actions';
 
-const icons = {
-  k8s,
-  deployment,
-  node,
-  pod
+const reducer = (state = {}, action = {}) => {
+  switch (action.type) {
+    case Types.ADD_OR_REPLACE_DEPLOYMENT: {
+      const newState = {...state};
+      newState[action.payload.metadata.uid] = action.payload;
+      return newState;
+    }
+    case Types.DELETE_DEPLOYMENT: {
+      const newState = {...state};
+      delete newState[action.payload.metadata.uid];
+      return newState;
+    }
+    case Types.CLEAR:
+    case Types.CLEAR_DEPLOYMENTS: {
+      return {};
+    }
+    default:
+      return {...state};
+  }
 };
 
-export default icons;
+export default reducer;

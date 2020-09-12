@@ -14,16 +14,15 @@
  * limitations under the License.
  *
  */
-import k8s from './assets/k8s-icons/k8s.svg'
-import deployment from './assets/k8s-icons/deploy.svg';
-import node from './assets/k8s-icons/node.svg';
-import pod from './assets/k8s-icons/pod.svg';
+import React from 'react';
+import {Table} from 'tabler-react';
 
-const icons = {
-  k8s,
-  deployment,
-  node,
-  pod
-};
+const TableNoResults = ({colSpan = 1}) => (
+  <Table.Row>
+    <Table.Col colSpan={colSpan}>
+      No results found
+    </Table.Col>
+  </Table.Row>
+);
 
-export default icons;
+export default TableNoResults;

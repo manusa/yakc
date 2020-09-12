@@ -16,10 +16,11 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom';
 import {Card, Icon, Table} from 'tabler-react';
+import TableNoResults from '../components/TableNoResults';
 import metadata from '../metadata';
 import nodesModule from './'
-import {Link} from "react-router-dom";
 
 const headers = [
   'Ready',
@@ -32,14 +33,8 @@ const sort = (n1, n2) =>
 
 const Rows = ({nodes}) => {
   const allNodes = Object.values(nodes);
-  if (allNodes.length === 0){
-    return (
-      <Table.Row>
-        <Table.Col colSpan={headers.length}>
-          No results found
-        </Table.Col>
-      </Table.Row>
-    );
+  if (allNodes.length === 0) {
+    return <TableNoResults colSpan={headers.length} />;
   }
   return allNodes
     .sort(sort)

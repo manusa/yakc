@@ -17,6 +17,7 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard;
 
+import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentResource;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeResource;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource;
@@ -29,17 +30,28 @@ import javax.ws.rs.Path;
 @Singleton
 public class ApiResource {
 
+  private final DeploymentResource deploymentResource;
   private final EventResource eventResource;
   private final NodeResource nodeResource;
   private final PodResource podResource;
   private final WatchResource watchResource;
 
   @Inject
-  public ApiResource(EventResource eventResource, NodeResource nodeResource, PodResource podResource, WatchResource watchResource) {
+  public ApiResource(
+    DeploymentResource deploymentResource,
+    EventResource eventResource,
+    NodeResource nodeResource, PodResource podResource,
+    WatchResource watchResource) {
+    this.deploymentResource = deploymentResource;
     this.eventResource = eventResource;
     this.nodeResource = nodeResource;
     this.podResource = podResource;
     this.watchResource = watchResource;
+  }
+
+  @Path("/deployments")
+  public DeploymentResource getDeploymentResource() {
+    return deploymentResource;
   }
 
   @Path("/events")

@@ -18,6 +18,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {Error404Page} from 'tabler-react';
+import deployments from './deployments';
 import nodes from './nodes';
 import pods from './pods';
 import watch from './watch';
@@ -48,6 +49,7 @@ const App = ({dispatch}) => {
       <Router>
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route exact path='/deployments' component={deployments.DeploymentsPage} />
           <Route exact path='/nodes' component={nodes.NodesPage} />
           <Route exact path='/nodes/:name' component={nodes.NodesDetailPage} />
           <Route exact path='/pods' component={pods.PodsPage} />

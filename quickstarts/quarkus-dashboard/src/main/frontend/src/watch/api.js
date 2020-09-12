@@ -17,12 +17,16 @@
 import {getApiURL} from '../env';
 import {bindActionCreators} from "redux";
 import {clear} from '../actions';
+import deployments from '../deployments';
 import events from '../events';
 import nodes from '../nodes';
 import pods from '../pods';
 
 const addOrReplace = (actions, object) => {
   switch (object.kind) {
+    case 'Deployment':
+      actions.addOrReplaceDeployment(object);
+      break;
     case 'Event':
       actions.addEvent(object);
       break;
@@ -39,6 +43,9 @@ const addOrReplace = (actions, object) => {
 
 const deleteObject = (actions, object) => {
   switch (object.kind) {
+    case 'Deployment':
+      actions.deleteDeployment(object);
+      break;
     case 'Node':
       actions.deleteNode(object);
       break;
@@ -54,6 +61,7 @@ const startEventSource =
   ({dispatch}) => {
     const actions = bindActionCreators({
       clear,
+      ...deployments.actions,
       ...events.actions,
       ...nodes.actions,
       ...pods.actions
