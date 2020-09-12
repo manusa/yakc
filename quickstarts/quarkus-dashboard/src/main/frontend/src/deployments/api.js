@@ -14,16 +14,16 @@
  * limitations under the License.
  *
  */
-import k8s from './assets/k8s-icons/k8s.svg'
-import deployment from './assets/k8s-icons/deploy.svg';
-import node from './assets/k8s-icons/node.svg';
-import pod from './assets/k8s-icons/pod.svg';
+import {getApiURL} from '../env';
+import metadata from '../metadata';
 
-const icons = {
-  k8s,
-  deployment,
-  node,
-  pod
+const requestDelete = async deployment => {
+  await fetch(
+    `${getApiURL()}/deployments/${metadata.selectors.namespace(deployment)}/${metadata.selectors.name(deployment)}`,
+    {method: 'DELETE'}
+    );
+}
+
+export  default {
+  requestDelete
 };
-
-export default icons;

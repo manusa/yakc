@@ -14,16 +14,30 @@
  * limitations under the License.
  *
  */
-import k8s from './assets/k8s-icons/k8s.svg'
-import deployment from './assets/k8s-icons/deploy.svg';
-import node from './assets/k8s-icons/node.svg';
-import pod from './assets/k8s-icons/pod.svg';
+import Types from '../actions';
 
-const icons = {
-  k8s,
-  deployment,
-  node,
-  pod
+export const addOrReplaceDeployment = deployment => {
+  return {
+    type: Types.ADD_OR_REPLACE_DEPLOYMENT,
+    payload: deployment
+  }
+}
+
+export const deleteDeployment = deployment => {
+  return {
+    type: Types.DELETE_DEPLOYMENT,
+    payload: deployment
+  }
+}
+
+export const clearDeployments = () => {
+  return {
+    type: Types.CLEAR_DEPLOYMENTS
+  }
+}
+
+export default {
+  addOrReplaceDeployment,
+  deleteDeployment,
+  clearDeployments
 };
-
-export default icons;

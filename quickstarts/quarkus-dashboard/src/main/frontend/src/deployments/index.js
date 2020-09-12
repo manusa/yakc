@@ -14,16 +14,21 @@
  * limitations under the License.
  *
  */
-import k8s from './assets/k8s-icons/k8s.svg'
-import deployment from './assets/k8s-icons/deploy.svg';
-import node from './assets/k8s-icons/node.svg';
-import pod from './assets/k8s-icons/pod.svg';
+import api from './api';
+import actions from './actions';
+import reducer from './reducer';
+import selectors from './selectors';
+import List from './List';
+import DeploymentsCard from './DeploymentsCard';
+import DeploymentsPage from './DeploymentsPage';
 
-const icons = {
-  k8s,
-  deployment,
-  node,
-  pod
+
+export default {
+  api,
+  actions,
+  reducer,
+  selectors,
+  List,
+  DeploymentsCard,
+  DeploymentsPage
 };
-
-export default icons;

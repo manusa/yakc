@@ -20,48 +20,46 @@ import {Link} from 'react-router-dom';
 import {Button, Card, Icon, Table} from 'tabler-react';
 import TableNoResults from '../components/TableNoResults';
 import metadata from '../metadata';
-import podsModule from './'
+import deploymentsModule from './'
 
 
 const headers = [
   'Ready',
   'Name',
   'Namespace',
-  'Status',
-  'Restarts',
+  'Images',
   ''
 ]
 
 const sort = (p1, p2) =>
   metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
 
-const Rows = ({pods}) => {
-  const allPods = Object.values(pods);
-  if (allPods.length === 0) {
-    return <TableNoResults colSpan={headers.length} />;;
+const Rows = ({deployments}) => {
+  const allDeployments = Object.values(deployments);
+  if (allDeployments.length === 0) {
+    return <TableNoResults colSpan={headers.length} />;
   }
-  const deletePod = pod => async () => await podsModule.api.requestDelete(pod);
-  return allPods
+  const deleteDeployment = deployment => async () => await deploymentsModule.api.requestDelete(deployment);
+  return allDeployments
     .sort(sort)
-    .map(pod => (
-        <Table.Row key={metadata.selectors.uid(pod)}>
+    .map(deployment => (
+        <Table.Row key={metadata.selectors.uid(deployment)}>
           <Table.Col>
             <Icon
-              className={podsModule.selectors.containersReady(pod) ? 'text-success' : 'text-danger'}
-              name={podsModule.selectors.containersReady(pod) ? 'check' : 'alert-circle'}
+              className={deploymentsModule.selectors.isReady(deployment) ? 'text-success' : 'text-danger'}
+              name={deploymentsModule.selectors.isReady(deployment) ? 'check' : 'alert-circle'}
             />
           </Table.Col>
           <Table.Col className='text-nowrap'>
-            <Link to={`/pods/${metadata.selectors.uid(pod)}`}>{metadata.selectors.name(pod)}</Link>
+            <Link to={`/deployments/${metadata.selectors.uid(deployment)}`}>{metadata.selectors.name(deployment)}</Link>
           </Table.Col>
           <Table.Col className='text-nowrap'>
-            {metadata.selectors.namespace(pod)}
-          </Table.Col>
-          <Table.Col className='text-nowrap'>
-            {podsModule.selectors.statusPhase(pod)}
+            {metadata.selectors.namespace(deployment)}
           </Table.Col>
           <Table.Col >
-            {podsModule.selectors.restartCount(pod)}
+            {deploymentsModule.selectors.images(deployment).map((image, idx) =>
+              <div key={idx}>{image}</div>
+            )}
           </Table.Col>
           <Table.Col>
             <Button
@@ -69,15 +67,15 @@ const Rows = ({pods}) => {
               color='danger'
               outline
               size='sm'
-              onClick={deletePod(pod)}
+              onClick={deleteDeployment(deployment)}
             />
           </Table.Col>
         </Table.Row>
     ));
 }
 
-const List = ({pods}) => (
-  <Card title='Pods' className='table-responsive-sm'>
+const List = ({deployments}) => (
+  <Card title='Deployments' className='table-responsive-sm'>
     <Table
       responsive
       className='card-table table-vcenter table-striped'
@@ -90,34 +88,15 @@ const List = ({pods}) => (
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        <Rows pods={pods} />
+        <Rows deployments={deployments} />
       </Table.Body>
     </Table>
   </Card>
 );
 
-const mapStateToProps = ({pods}) => ({
-  pods
+const mapStateToProps = ({deployments}) => ({
+  deployments
 });
 
-const filterPods = (pods = [], {nodeName}) => Object.entries(pods)
-  .filter(([, pod]) => {
-    if (nodeName) {
-      return podsModule.selectors.nodeName(pod) === nodeName;
-    }
-    return true;
-  })
-  .reduce((acc, [key, pod]) => {
-    acc[key] = pod;
-    return acc;
-  }, {});
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  ...stateProps,
-  ...dispatchProps,
-  ...ownProps,
-  pods: filterPods(stateProps.pods, ownProps)
-});
-
-export default connect(mapStateToProps, null, mergeProps)(List);
+export default connect(mapStateToProps, null, null)(List);
 

@@ -18,6 +18,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {combineReducers, createStore} from 'redux';
+import deployments from './deployments';
 import events from './events';
 import nodes from './nodes';
 import pods from './pods';
@@ -33,6 +34,7 @@ const storeEnhancer = () => {
 };
 
 const store = createStore(combineReducers({
+  deployments: deployments.reducer,
   events: events.reducer,
   nodes: nodes.reducer,
   pods: pods.reducer

@@ -17,6 +17,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import {Card, Table, Tooltip} from 'tabler-react';
+import TableNoResults from '../components/TableNoResults';
 import metadata from "../metadata";
 
 const headers = [
@@ -32,14 +33,8 @@ const sort = (ev1, ev2) =>
 
 const Rows = ({events}) => {
   const allEvents = Object.values(events);
-  if (allEvents.length === 0){
-    return (
-      <Table.Row>
-        <Table.Col colSpan={headers.length}>
-          No results found
-        </Table.Col>
-      </Table.Row>
-    );
+  if (allEvents.length === 0) {
+    return <TableNoResults colSpan={headers.length} />;
   }
   return allEvents
     .sort(sort)
