@@ -53,6 +53,14 @@ public class PodResource {
       podService.getPods());
   }
 
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/{namespace}/{name}")
+  public Pod get(@PathParam("namespace") String namespace, @PathParam("name") String name)
+    throws IOException {
+    return podService.getPod(name, namespace);
+  }
+
   @DELETE
   @Path("/{namespace}/{name}")
   public Response delete(@PathParam("namespace") String namespace, @PathParam("name") String name)

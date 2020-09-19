@@ -42,6 +42,10 @@ public class PodService {
     return kubernetesClient.create(CoreV1Api.class).listPodForAllNamespaces().watch();
   }
 
+  public Pod getPod(String name, String namespace) throws IOException {
+    return kubernetesClient.create(CoreV1Api.class).readNamespacedPod(name, namespace).get();
+  }
+
   public Pod deletePod(String name, String namespace) throws IOException {
     return kubernetesClient.create(CoreV1Api.class).deleteNamespacedPod(name, namespace).get();
   }
