@@ -53,7 +53,7 @@ public class GatewayResource {
 
   @GET
   @Path("/")
-  public Response getFrontedRoot() throws IOException {
+  public Response getFrontendRoot() throws IOException {
     return getFrontendStaticFile("index.html");
   }
 
