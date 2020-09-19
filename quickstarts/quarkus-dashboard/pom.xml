@@ -14,6 +14,7 @@
     <version.smallrye.reactive>0.7.0</version.smallrye.reactive>
     <version.jkube>1.0.0-rc-1</version.jkube>
     <version.exec-maven-plugin>3.0.0</version.exec-maven-plugin>
+    <k8s.namespace>default</k8s.namespace>
   </properties>
 
   <dependencyManagement>
