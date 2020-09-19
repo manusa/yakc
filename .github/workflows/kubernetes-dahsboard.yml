@@ -18,6 +18,6 @@ jobs:
       - name: Build and Push
         working-directory: ./quickstarts/quarkus-dashboard
         run: |
-          mvn -Pbuild-frontend,minikube clean package k8s:build k8s:push   \
+          mvn -Pbuild-frontend,k8s clean package k8s:build k8s:push   \
           -Djkube.docker.push.username=${{ secrets.DOCKER_USERNAME }}      \
           -Djkube.docker.push.password=${{ secrets.DOCKER_PASSWORD }}
