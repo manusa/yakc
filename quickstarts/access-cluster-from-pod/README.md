@@ -31,7 +31,7 @@ $ mvn clean package
 [INFO] Scanning for projects...
 [INFO]
 [INFO] -------< com.marcnuri.yakc.quickstarts:access-cluster-from-pod >--------
-[INFO] Building YAKC :: Quickstarts :: Access Cluster API from a Pod 0.0.7
+[INFO] Building YAKC :: Quickstarts :: Access Cluster API from a Pod 0.0.8
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO]
 [INFO] --- maven-clean-plugin:3.1.0:clean (default-clean) @ access-cluster-from-pod ---
@@ -57,7 +57,7 @@ $ mvn clean package
 [INFO] No tests to run.
 [INFO]
 [INFO] --- maven-jar-plugin:3.2.0:jar (default-jar) @ access-cluster-from-pod ---
-[INFO] Building jar: D:\00-MN\projects\manusa\yakc\quickstarts\access-cluster-from-pod\target\access-cluster-from-pod-0.0.7.jar
+[INFO] Building jar: D:\00-MN\projects\manusa\yakc\quickstarts\access-cluster-from-pod\target\access-cluster-from-pod-0.0.8.jar
 [INFO]
 [INFO] --- spring-boot-maven-plugin:2.3.0.RELEASE:repackage (repackage) @ access-cluster-from-pod ---
 [INFO] Replacing main artifact with repackaged archive
@@ -68,9 +68,9 @@ $ mvn clean package
 [INFO] k8s: Building Docker image in Kubernetes mode
 [INFO] k8s: Running generator spring-boot
 [INFO] k8s: spring-boot: Using Docker image fabric8/java-centos-openjdk8-jdk:1.5.6 as base / builder
-[INFO] k8s: [quickstarts/access-cluster-from-pod:0.0.7] "spring-boot": Created docker-build.tar in 551 milliseconds
-[INFO] k8s: [quickstarts/access-cluster-from-pod:0.0.7] "spring-boot": Built image sha256:2d7e1
-[INFO] k8s: [quickstarts/access-cluster-from-pod:0.0.7] "spring-boot": Removed old image sha256:3aaa4
+[INFO] k8s: [quickstarts/access-cluster-from-pod:0.0.8] "spring-boot": Created docker-build.tar in 551 milliseconds
+[INFO] k8s: [quickstarts/access-cluster-from-pod:0.0.8] "spring-boot": Built image sha256:2d7e1
+[INFO] k8s: [quickstarts/access-cluster-from-pod:0.0.8] "spring-boot": Removed old image sha256:3aaa4
 [INFO]
 [INFO] --- kubernetes-maven-plugin:1.0.0-rc-1:resource (jkube) @ access-cluster-from-pod ---
 [INFO] k8s: Running generator spring-boot
@@ -101,7 +101,7 @@ e.g `curl $(minikube service --url access-cluster-from-pod)/deployments/access-c
 
 ```shell script
 $ curl $(minikube service --url access-cluster-from-pod)/deployments/access-cluster-from-pod/logs
-2020-05-03T03:10:43.977274092Z [access-cluster-from-pod-76db69cc56-gnmtd] - exec java -javaagent:/opt/agent-bond/agent-bond.jar=jolokia{{host=0.0.0.0}},jmx_exporter{{9779:/opt/agent-bond/jmx_exporter_config.yml}} -XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:+ExitOnOutOfMemoryError -cp . -jar /deployments/access-cluster-from-pod-0.0.7.jar
+2020-05-03T03:10:43.977274092Z [access-cluster-from-pod-76db69cc56-gnmtd] - exec java -javaagent:/opt/agent-bond/agent-bond.jar=jolokia{{host=0.0.0.0}},jmx_exporter{{9779:/opt/agent-bond/jmx_exporter_config.yml}} -XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:+ExitOnOutOfMemoryError -cp . -jar /deployments/access-cluster-from-pod-0.0.8.jar
 2020-05-03T03:10:44.021250749Z [access-cluster-from-pod-76db69cc56-gnmtd] - OpenJDK 64-Bit Server VM warning: If the number of processors is expected to increase from one, then you should configure the number of parallel GC threads appropriately using -XX:ParallelGCThreads=N
 2020-05-03T03:10:44.523717612Z [access-cluster-from-pod-76db69cc56-gnmtd] - I> No access restrictor found, access to any MBean is allowed
 2020-05-03T03:10:44.63848559Z [access-cluster-from-pod-76db69cc56-gnmtd] - Jolokia: Agent started with URL http://172.17.0.6:8778/jolokia/
@@ -114,7 +114,7 @@ $ curl $(minikube service --url access-cluster-from-pod)/deployments/access-clus
 2020-05-03T03:10:48.350110937Z [access-cluster-from-pod-76db69cc56-gnmtd] -  =========|_|==============|___/=/_/_/_/
 2020-05-03T03:10:48.352006628Z [access-cluster-from-pod-76db69cc56-gnmtd] -  :: Spring Boot ::        (v2.3.0.RELEASE)
 2020-05-03T03:10:48.352489888Z [access-cluster-from-pod-76db69cc56-gnmtd] -
-2020-05-03T03:10:48.87126487Z [access-cluster-from-pod-76db69cc56-gnmtd] - 2020-05-03 03:10:48.863  INFO 1 --- [           main] c.m.y.q.AccessClusterFromPodApplication  : Starting AccessClusterFromPodApplication v0.0.7 on access-cluster-from-pod-76db69cc56-gnmtd with PID 1 (/deployments/access-cluster-from-pod-0.0.7.jar started by jboss in /deployments)
+2020-05-03T03:10:48.87126487Z [access-cluster-from-pod-76db69cc56-gnmtd] - 2020-05-03 03:10:48.863  INFO 1 --- [           main] c.m.y.q.AccessClusterFromPodApplication  : Starting AccessClusterFromPodApplication v0.0.8 on access-cluster-from-pod-76db69cc56-gnmtd with PID 1 (/deployments/access-cluster-from-pod-0.0.8.jar started by jboss in /deployments)
 2020-05-03T03:10:48.874298908Z [access-cluster-from-pod-76db69cc56-gnmtd] - 2020-05-03 03:10:48.873  INFO 1 --- [           main] c.m.y.q.AccessClusterFromPodApplication  : No active profile set, falling back to default profiles: default
 2020-05-03T03:10:53.442496122Z [access-cluster-from-pod-76db69cc56-gnmtd] - 2020-05-03 03:10:53.441  INFO 1 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
 2020-05-03T03:10:53.488753251Z [access-cluster-from-pod-76db69cc56-gnmtd] - 2020-05-03 03:10:53.488  INFO 1 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
