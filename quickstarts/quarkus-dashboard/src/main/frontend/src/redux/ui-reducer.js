@@ -14,12 +14,25 @@
  * limitations under the License.
  *
  */
-import actions from './actions';
-import reducer from './reducer';
-import uiReducer from './ui-reducer';
 
-export default {
-  actions,
-  reducer,
-  uiReducer
+import redux from './index';
+
+const uiReducer = (state = {}, action = {}) => {
+  const {actions: {Types}} = redux;
+  switch (action.type) {
+    case Types.UI_SET_ERROR: {
+      const newState = {...state};
+      newState.error = action.payload
+      return newState;
+    }
+    case Types.UI_CLEAR_ERROR: {
+      const newState = {...state};
+      delete newState.error;
+      return newState;
+    }
+    default:
+      return {...state};
+  }
 };
+
+export default uiReducer;
