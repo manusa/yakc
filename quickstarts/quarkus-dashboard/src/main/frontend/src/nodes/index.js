@@ -14,7 +14,6 @@
  * limitations under the License.
  *
  */
-import actions from './actions';
 import reducer from './reducer';
 import selectors from './selectors';
 import List from './List';
@@ -23,7 +22,6 @@ import NodesDetailPage from './NodesDetailPage';
 import NodesPage from './NodesPage'
 
 export default {
-  actions,
   reducer,
   selectors,
   List,

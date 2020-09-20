@@ -14,12 +14,10 @@
  * limitations under the License.
  *
  */
-import actions from './actions';
 import reducer from './reducer';
 import List from './List'
 
 export default {
-  actions,
   reducer,
   List
 };

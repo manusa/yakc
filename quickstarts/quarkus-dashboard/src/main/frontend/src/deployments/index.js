@@ -15,7 +15,6 @@
  *
  */
 import api from './api';
-import actions from './actions';
 import reducer from './reducer';
 import selectors from './selectors';
 import List from './List';
@@ -26,7 +25,6 @@ import DeploymentsPage from './DeploymentsPage';
 
 export default {
   api,
-  actions,
   reducer,
   selectors,
   List,

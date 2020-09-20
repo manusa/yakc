@@ -14,30 +14,30 @@
  * limitations under the License.
  *
  */
-import Types from '../actions';
-
-export const addOrReplaceDeployment = deployment => {
-  return {
-    type: Types.ADD_OR_REPLACE_DEPLOYMENT,
-    payload: deployment
-  }
+const Types = {
+  CLEAR: 'CLEAR',
+  CRUD_CLEAR: 'CRUD_CLEAR',
+  CRUD_ADD_OR_REPLACE: 'CRUD_ADD_OR_REPLACE',
+  CRUD_DELETE: 'CRUD_DELETE'
 }
 
-export const deleteDeployment = deployment => {
-  return {
-    type: Types.DELETE_DEPLOYMENT,
-    payload: deployment
-  }
-}
+const clear = () => ({
+  type: Types.CLEAR
+});
 
-export const clearDeployments = () => {
-  return {
-    type: Types.CLEAR_DEPLOYMENTS
-  }
-}
+const crudAddOrReplace = object => ({
+  type: Types.CRUD_ADD_OR_REPLACE,
+  payload: object
+});
+
+const crudDelete = object => ({
+  type: Types.CRUD_DELETE,
+  payload: object
+});
 
 export default {
-  addOrReplaceDeployment,
-  deleteDeployment,
-  clearDeployments
+  Types,
+  clear,
+  crudAddOrReplace,
+  crudDelete
 };

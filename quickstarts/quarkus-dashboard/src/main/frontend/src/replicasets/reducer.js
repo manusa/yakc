@@ -14,27 +14,8 @@
  * limitations under the License.
  *
  */
-import Types from '../actions';
+import redux from '../redux';
 
-const reducer = (state = {}, action = {}) => {
-  switch (action.type) {
-    case Types.ADD_OR_REPLACE_REPLICASET: {
-      const newState = {...state};
-      newState[action.payload.metadata.uid] = action.payload;
-      return newState;
-    }
-    case Types.DELETE_REPLICASET: {
-      const newState = {...state};
-      delete newState[action.payload.metadata.uid];
-      return newState;
-    }
-    case Types.CLEAR:
-    case Types.CLEAR_REPLICASETS: {
-      return {};
-    }
-    default:
-      return {...state};
-  }
-};
+const reducer = redux.reducer('ReplicaSet');
 
 export default reducer;

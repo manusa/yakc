@@ -14,30 +14,10 @@
  * limitations under the License.
  *
  */
-import Types from '../actions';
-
-export const addOrReplaceReplicaSet = replicaSet => {
-  return {
-    type: Types.ADD_OR_REPLACE_REPLICASET,
-    payload: replicaSet
-  }
-}
-
-export const deleteReplicaSet = replicaSet => {
-  return {
-    type: Types.DELETE_REPLICASET,
-    payload: replicaSet
-  }
-}
-
-export const clearReplicaSets = () => {
-  return {
-    type: Types.CLEAR_REPLICASETS
-  }
-}
+import actions from './actions';
+import reducer from './reducer';
 
 export default {
-  addOrReplaceReplicaSet,
-  deleteReplicaSet,
-  clearReplicaSets
+  actions,
+  reducer
 };
