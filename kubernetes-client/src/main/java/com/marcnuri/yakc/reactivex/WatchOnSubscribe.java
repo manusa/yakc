@@ -84,8 +84,12 @@ public class WatchOnSubscribe<T> implements ObservableOnSubscribe<WatchEvent<T>>
           final InputStreamReader isr = new InputStreamReader(is);
           final BufferedReader br = new BufferedReader(isr)
       ) {
+        if (!response.isSuccessful()) {
+          emitter.tryOnError(
+            KubernetesException.forResponse("Error opening Watch connection", response));
+        }
         String line;
-        while (!emitter.isDisposed() && (line = br.readLine()) != null) {
+        while (response.isSuccessful() && !emitter.isDisposed() && (line = br.readLine()) != null) {
           final WatchEvent<T> next = converter
               .convert(ResponseBody.create(MediaType.get("application/json"), line));
           emitter.onNext(next);
