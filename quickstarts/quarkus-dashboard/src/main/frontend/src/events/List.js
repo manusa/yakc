@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom';
 import {Card, Table, Tooltip} from 'tabler-react';
 import TableNoResults from '../components/TableNoResults';
 import metadata from "../metadata";
@@ -27,6 +28,24 @@ const headers = [
   'Reason',
   'Event'
 ]
+
+const EventName = ({event}) => {
+  let url;
+  switch (event.involvedObject.kind) {
+    case 'Deployment':
+      url = `/deployments/${event.involvedObject.uid}`;
+      break;
+    case 'Pod':
+      url = `/pods/${event.involvedObject.uid}`;
+      break;
+    default:
+      url = null;
+  }
+  if (url) {
+    return <Link to={url}>{event.involvedObject.name}</Link>;
+  }
+  return event.involvedObject.name;
+}
 
 const sort = (ev1, ev2) =>
   new Date(ev2.lastTimestamp) - new Date(ev1.lastTimestamp);
@@ -45,7 +64,7 @@ const Rows = ({events}) => {
             {event.involvedObject.kind}
           </Table.Col>
           <Table.Col>
-            {event.involvedObject.name}
+            <EventName event={event} />
           </Table.Col>
           <Table.Col>
             <Tooltip content={event.lastTimestamp} placement='right'>

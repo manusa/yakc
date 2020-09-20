@@ -14,29 +14,25 @@
  * limitations under the License.
  *
  */
-const creationTimestamp = object => {
-  const ct = object?.metadata?.creationTimestamp;
-  if (ct) {
-    return new Date(ct);
-  }
-}
+const statusReplicas = replicaSet => replicaSet?.status?.replicas ?? 0;
 
-const labels = object => object?.metadata?.labels ?? {};
+const statusReadyReplicas = replicaSet => replicaSet?.status?.readyReplicas ?? 0;
 
-const name = object => object?.metadata?.name ?? '';
+const isReady = replicaSet => statusReplicas(replicaSet) === statusReadyReplicas(replicaSet);
 
-const namespace = object => object?.metadata?.namespace ?? '';
+const specReplicas = replicaSet => replicaSet?.spec?.replicas ?? 0;
 
-const uid = object => object?.metadata?.uid ?? '';
+// Selectors for array of Deployments
 
-const ownerReferencesUids = object => (object?.metadata?.ownerReferences ?? [])
-  .map(or => or.uid);
+const readyCount = replicaSets => replicaSets.reduce(
+  (count, replicaSet) => isReady(replicaSet) ? count + 1 : count,
+  0
+);
 
 export default {
-  creationTimestamp,
-  labels,
-  name,
-  namespace,
-  uid,
-  ownerReferencesUids
+  statusReplicas,
+  statusReadyReplicas,
+  isReady,
+  specReplicas,
+  readyCount
 };

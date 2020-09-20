@@ -14,29 +14,14 @@
  * limitations under the License.
  *
  */
-const creationTimestamp = object => {
-  const ct = object?.metadata?.creationTimestamp;
-  if (ct) {
-    return new Date(ct);
-  }
-}
-
-const labels = object => object?.metadata?.labels ?? {};
-
-const name = object => object?.metadata?.name ?? '';
-
-const namespace = object => object?.metadata?.namespace ?? '';
-
-const uid = object => object?.metadata?.uid ?? '';
-
-const ownerReferencesUids = object => (object?.metadata?.ownerReferences ?? [])
-  .map(or => or.uid);
+import actions from './actions';
+import reducer from './reducer';
+import selectors from './selectors';
+import List from './List';
 
 export default {
-  creationTimestamp,
-  labels,
-  name,
-  namespace,
-  uid,
-  ownerReferencesUids
+  actions,
+  reducer,
+  selectors,
+  List
 };

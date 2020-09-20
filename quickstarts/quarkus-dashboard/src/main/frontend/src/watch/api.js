@@ -21,6 +21,7 @@ import deployments from '../deployments';
 import events from '../events';
 import nodes from '../nodes';
 import pods from '../pods';
+import replicaSets from '../replicasets';
 
 const addOrReplace = (actions, object) => {
   switch (object.kind) {
@@ -35,6 +36,9 @@ const addOrReplace = (actions, object) => {
       break;
     case 'Pod':
       actions.addOrReplacePod(object);
+      break;
+    case 'ReplicaSet':
+      actions.addOrReplaceReplicaSet(object);
       break;
     default:
       // NOOP
@@ -52,6 +56,9 @@ const deleteObject = (actions, object) => {
     case 'Pod':
       actions.deletePod(object);
       break;
+    case 'ReplicaSet':
+      actions.deleteReplicaSet(object);
+      break;
     default:
     // NOOP
   }
@@ -64,7 +71,8 @@ const startEventSource =
       ...deployments.actions,
       ...events.actions,
       ...nodes.actions,
-      ...pods.actions
+      ...pods.actions,
+      ...replicaSets.actions
     }, dispatch);
     const eventSource = new EventSource(`${getApiURL()}/watch`);
     eventSource.onopen = () => {

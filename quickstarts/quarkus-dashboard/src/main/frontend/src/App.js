@@ -50,6 +50,7 @@ const App = ({dispatch}) => {
         <Switch>
           <Route exact path='/' component={Home} />
           <Route exact path='/deployments' component={deployments.DeploymentsPage} />
+          <Route exact path='/deployments/:uid' component={deployments.DeploymentsDetailPage} />
           <Route exact path='/nodes' component={nodes.NodesPage} />
           <Route exact path='/nodes/:name' component={nodes.NodesDetailPage} />
           <Route exact path='/pods' component={pods.PodsPage} />
