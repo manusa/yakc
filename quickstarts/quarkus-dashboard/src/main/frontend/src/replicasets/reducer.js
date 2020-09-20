@@ -14,29 +14,27 @@
  * limitations under the License.
  *
  */
-const creationTimestamp = object => {
-  const ct = object?.metadata?.creationTimestamp;
-  if (ct) {
-    return new Date(ct);
+import Types from '../actions';
+
+const reducer = (state = {}, action = {}) => {
+  switch (action.type) {
+    case Types.ADD_OR_REPLACE_REPLICASET: {
+      const newState = {...state};
+      newState[action.payload.metadata.uid] = action.payload;
+      return newState;
+    }
+    case Types.DELETE_REPLICASET: {
+      const newState = {...state};
+      delete newState[action.payload.metadata.uid];
+      return newState;
+    }
+    case Types.CLEAR:
+    case Types.CLEAR_REPLICASETS: {
+      return {};
+    }
+    default:
+      return {...state};
   }
-}
-
-const labels = object => object?.metadata?.labels ?? {};
-
-const name = object => object?.metadata?.name ?? '';
-
-const namespace = object => object?.metadata?.namespace ?? '';
-
-const uid = object => object?.metadata?.uid ?? '';
-
-const ownerReferencesUids = object => (object?.metadata?.ownerReferences ?? [])
-  .map(or => or.uid);
-
-export default {
-  creationTimestamp,
-  labels,
-  name,
-  namespace,
-  uid,
-  ownerReferencesUids
 };
+
+export default reducer;

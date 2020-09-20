@@ -22,6 +22,7 @@ import deployments from './deployments';
 import events from './events';
 import nodes from './nodes';
 import pods from './pods';
+import replicaSets from './replicasets';
 import App from './App';
 
 import 'tabler-react/dist/Tabler.css';
@@ -37,7 +38,8 @@ const store = createStore(combineReducers({
   deployments: deployments.reducer,
   events: events.reducer,
   nodes: nodes.reducer,
-  pods: pods.reducer
+  pods: pods.reducer,
+  replicaSets: replicaSets.reducer
 }), storeEnhancer());
 
 ReactDOM.render(

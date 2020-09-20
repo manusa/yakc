@@ -20,6 +20,7 @@ import reducer from './reducer';
 import selectors from './selectors';
 import List from './List';
 import DeploymentsCard from './DeploymentsCard';
+import DeploymentsDetailPage from './DeploymentsDetailPage';
 import DeploymentsPage from './DeploymentsPage';
 
 
@@ -30,5 +31,6 @@ export default {
   selectors,
   List,
   DeploymentsCard,
+  DeploymentsDetailPage,
   DeploymentsPage
 };

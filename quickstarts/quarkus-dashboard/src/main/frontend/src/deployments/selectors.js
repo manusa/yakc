@@ -35,6 +35,7 @@ export default {
   statusReplicas,
   statusReadyReplicas,
   isReady,
+  containers,
   images,
   readyCount
 };

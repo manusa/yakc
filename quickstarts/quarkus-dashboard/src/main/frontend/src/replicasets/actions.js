@@ -14,29 +14,30 @@
  * limitations under the License.
  *
  */
-const creationTimestamp = object => {
-  const ct = object?.metadata?.creationTimestamp;
-  if (ct) {
-    return new Date(ct);
+import Types from '../actions';
+
+export const addOrReplaceReplicaSet = replicaSet => {
+  return {
+    type: Types.ADD_OR_REPLACE_REPLICASET,
+    payload: replicaSet
   }
 }
 
-const labels = object => object?.metadata?.labels ?? {};
+export const deleteReplicaSet = replicaSet => {
+  return {
+    type: Types.DELETE_REPLICASET,
+    payload: replicaSet
+  }
+}
 
-const name = object => object?.metadata?.name ?? '';
-
-const namespace = object => object?.metadata?.namespace ?? '';
-
-const uid = object => object?.metadata?.uid ?? '';
-
-const ownerReferencesUids = object => (object?.metadata?.ownerReferences ?? [])
-  .map(or => or.uid);
+export const clearReplicaSets = () => {
+  return {
+    type: Types.CLEAR_REPLICASETS
+  }
+}
 
 export default {
-  creationTimestamp,
-  labels,
-  name,
-  namespace,
-  uid,
-  ownerReferencesUids
+  addOrReplaceReplicaSet,
+  deleteReplicaSet,
+  clearReplicaSets
 };

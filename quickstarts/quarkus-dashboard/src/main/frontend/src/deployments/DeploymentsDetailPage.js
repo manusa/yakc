@@ -16,12 +16,12 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import {Card, Form, Grid} from 'tabler-react';
 import ContainerList from '../components/ContainerList';
 import DashboardPage from '../components/DashboardPage';
 import metadata from '../metadata';
-import podsModule from './';
+import deploymentsModule from './';
+import replicaSets from '../replicasets';
 
 const Field = ({label, children}) => (
   <Grid.Col width={12} md={6} lg={4}>
@@ -31,40 +31,35 @@ const Field = ({label, children}) => (
   </Grid.Col>
 );
 
-const PodsDetailPage = ({pod}) => (
+const DeploymentsDetailPage = ({deployment}) => (
   <DashboardPage>
-    <Card title={`Pod - ${metadata.selectors.namespace(pod)} - ${metadata.selectors.name(pod)}`}>
+    <Card title={`Deployment - ${metadata.selectors.namespace(deployment)} - ${metadata.selectors.name(deployment)}`}>
       <Card.Body>
         <Grid.Row>
-          <Field label='Name'>{metadata.selectors.name(pod)}</Field>
-          <Field label='Namespace'>{metadata.selectors.namespace(pod)}</Field>
-          <Field label='Node'>
-            <Link to={`/nodes/${podsModule.selectors.nodeName(pod)}`}>
-              {podsModule.selectors.nodeName(pod)}
-            </Link>
-          </Field>
+          <Field label='Name'>{metadata.selectors.name(deployment)}</Field>
+          <Field label='Namespace'>{metadata.selectors.namespace(deployment)}</Field>
           <Grid.Col width={12} >
             <Form.Group label='Labels'>
-              <metadata.Labels labels={metadata.selectors.labels(pod)} />
+              <metadata.Labels labels={metadata.selectors.labels(deployment)} />
             </Form.Group>
           </Grid.Col>
-          <Field label='Phase'>{podsModule.selectors.statusPhase(pod)}</Field>
         </Grid.Row>
       </Card.Body>
     </Card>
-    <ContainerList containers={podsModule.selectors.containers(pod)} />
+    <ContainerList containers={deploymentsModule.selectors.containers(deployment)} />
+    <replicaSets.List ownerId={metadata.selectors.uid(deployment)} />
   </DashboardPage>
 );
 
-const mapStateToProps = ({pods}) => ({
-  pods
+const mapStateToProps = ({deployments}) => ({
+  deployments
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  pod: stateProps.pods[ownProps.match.params.uid]
+  deployment: stateProps.deployments[ownProps.match.params.uid]
 });
 
-export default connect(mapStateToProps, null, mergeProps)(PodsDetailPage);
+export default connect(mapStateToProps, null, mergeProps)(DeploymentsDetailPage);

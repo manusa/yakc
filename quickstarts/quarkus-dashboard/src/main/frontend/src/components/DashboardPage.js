@@ -53,7 +53,18 @@ const Header = ({toggleMenu}) => {
       </Page.Title>
     </Site.Header>
   );
-}
+};
+
+const Footer = () => (
+  <Site.Footer
+    copyright={<>
+      Copyright © 2020 - <a href='https://www.marcnuri.com'>Marc Nuri</a> -
+      Licensed under the <a href='https://www.apache.org/licenses/LICENSE-2.0'>
+      Apache License 2.0</a>
+    </>}
+  />
+)
+
 
 const MainNavItem = ({to, icon, value}) => (
   <Nav.Item
@@ -108,6 +119,7 @@ const DashboardPage = ({children}) => {
         <Page.Content>
           {children}
         </Page.Content>
+        <Footer />
       </Page.Main>
     </Page>
   );

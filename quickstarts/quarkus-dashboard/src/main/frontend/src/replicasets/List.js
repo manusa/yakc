@@ -16,68 +16,52 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom';
-import {Button, Card, Icon, Table} from 'tabler-react';
+import {Card, Icon, Table} from 'tabler-react';
 import TableNoResults from '../components/TableNoResults';
 import metadata from '../metadata';
-import podsModule from './'
+import rs from './'
 
 
 const headers = [
   'Ready',
   'Name',
   'Namespace',
-  'Status',
-  'Restarts',
-  ''
+  'Replicas'
 ]
 
 const sort = (p1, p2) =>
   metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
 
-const Rows = ({pods}) => {
-  const allPods = Object.values(pods);
-  if (allPods.length === 0) {
+const Rows = ({replicaSets}) => {
+  const allRS = Object.values(replicaSets);
+  if (allRS.length === 0) {
     return <TableNoResults colSpan={headers.length} />;
   }
-  const deletePod = pod => async () => await podsModule.api.requestDelete(pod);
-  return allPods
+  return allRS
     .sort(sort)
-    .map(pod => (
-        <Table.Row key={metadata.selectors.uid(pod)}>
+    .map(replicaSet => (
+        <Table.Row key={metadata.selectors.uid(replicaSet)}>
           <Table.Col>
             <Icon
-              className={podsModule.selectors.containersReady(pod) ? 'text-success' : 'text-danger'}
-              name={podsModule.selectors.containersReady(pod) ? 'check' : 'alert-circle'}
+              className={rs.selectors.isReady(replicaSet) ? 'text-success' : 'text-danger'}
+              name={rs.selectors.isReady(replicaSet) ? 'check' : 'alert-circle'}
             />
           </Table.Col>
           <Table.Col className='text-nowrap'>
-            <Link to={`/pods/${metadata.selectors.uid(pod)}`}>{metadata.selectors.name(pod)}</Link>
+            {metadata.selectors.name(replicaSet)}
           </Table.Col>
           <Table.Col className='text-nowrap'>
-            {metadata.selectors.namespace(pod)}
+            {metadata.selectors.namespace(replicaSet)}
           </Table.Col>
           <Table.Col className='text-nowrap'>
-            {podsModule.selectors.statusPhase(pod)}
-          </Table.Col>
-          <Table.Col >
-            {podsModule.selectors.restartCount(pod)}
-          </Table.Col>
-          <Table.Col>
-            <Button
-              icon='trash'
-              color='danger'
-              outline
-              size='sm'
-              onClick={deletePod(pod)}
-            />
+            {rs.selectors.specReplicas(replicaSet)}
           </Table.Col>
         </Table.Row>
     ));
 }
 
-const List = ({pods}) => (
-  <Card title='Pods' className='table-responsive-sm'>
+const List = ({replicaSets}) => (
+  <Card title='Replica Sets' className='table-responsive-sm'>
     <Table
       responsive
       className='card-table table-vcenter table-striped'
@@ -90,25 +74,25 @@ const List = ({pods}) => (
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        <Rows pods={pods} />
+        <Rows replicaSets={replicaSets} />
       </Table.Body>
     </Table>
   </Card>
 );
 
-const mapStateToProps = ({pods}) => ({
-  pods
+const mapStateToProps = ({replicaSets}) => ({
+  replicaSets
 });
 
-const filterPods = (pods = [], {nodeName} = undefined) => Object.entries(pods)
-  .filter(([, pod]) => {
-    if (nodeName) {
-      return podsModule.selectors.nodeName(pod) === nodeName;
+const filterReplicaSet = (replicaSets = [], {ownerId} = undefined) => Object.entries(replicaSets)
+  .filter(([, replicaSet]) => {
+    if (ownerId) {
+      return metadata.selectors.ownerReferencesUids(replicaSet).includes(ownerId);
     }
     return true;
   })
-  .reduce((acc, [key, pod]) => {
-    acc[key] = pod;
+  .reduce((acc, [key, replicaSet]) => {
+    acc[key] = replicaSet;
     return acc;
   }, {});
 
@@ -116,7 +100,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  pods: filterPods(stateProps.pods, ownProps)
+  replicaSets: filterReplicaSet(stateProps.replicaSets, ownProps)
 });
 
 export default connect(mapStateToProps, null, mergeProps)(List);
