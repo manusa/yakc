@@ -100,10 +100,17 @@ const mapStateToProps = ({pods}) => ({
   pods
 });
 
-const filterPods = (pods = [], {nodeName} = undefined) => Object.entries(pods)
+const filterPods = (pods = [], replicaSets = [], {
+  nodeName,
+  ownerUids
+} = undefined) => Object.entries(pods)
   .filter(([, pod]) => {
     if (nodeName) {
       return podsModule.selectors.nodeName(pod) === nodeName;
+    }
+    if (ownerUids) {
+      return metadata.selectors.ownerReferencesUids(pod)
+        .some(ownerUid => ownerUids.includes(ownerUid));
     }
     return true;
   })
@@ -116,7 +123,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  pods: filterPods(stateProps.pods, ownProps)
+  pods: filterPods(stateProps.pods, stateProps.replicaSets, ownProps)
 });
 
 export default connect(mapStateToProps, null, mergeProps)(List);
