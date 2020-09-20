@@ -21,6 +21,7 @@ import ContainerList from '../components/ContainerList';
 import DashboardPage from '../components/DashboardPage';
 import metadata from '../metadata';
 import deploymentsModule from './';
+import pods from '../pods';
 import replicaSets from '../replicasets';
 
 const Field = ({label, children}) => (
@@ -31,7 +32,7 @@ const Field = ({label, children}) => (
   </Grid.Col>
 );
 
-const DeploymentsDetailPage = ({deployment}) => (
+const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
   <DashboardPage>
     <Card title={`Deployment - ${metadata.selectors.namespace(deployment)} - ${metadata.selectors.name(deployment)}`}>
       <Card.Body>
@@ -43,23 +44,31 @@ const DeploymentsDetailPage = ({deployment}) => (
               <metadata.Labels labels={metadata.selectors.labels(deployment)} />
             </Form.Group>
           </Grid.Col>
+          <Field label='Replicas'>{deploymentsModule.selectors.specReplicas(deployment)}</Field>
+          <Field label='Strategy'>{deploymentsModule.selectors.specStrategyType(deployment)}</Field>
         </Grid.Row>
       </Card.Body>
     </Card>
     <ContainerList containers={deploymentsModule.selectors.containers(deployment)} />
     <replicaSets.List ownerId={metadata.selectors.uid(deployment)} />
+    <pods.List ownerUids={replicaSetsUids} />
   </DashboardPage>
 );
 
-const mapStateToProps = ({deployments}) => ({
-  deployments
+const mapStateToProps = ({deployments, replicaSets}) => ({
+  deployments,
+  replicaSets
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  deployment: stateProps.deployments[ownProps.match.params.uid]
+  deployment: stateProps.deployments[ownProps.match.params.uid],
+  replicaSetsUids: Object.values(stateProps.replicaSets)
+    .filter(replicaSet => metadata.selectors.ownerReferencesUids(replicaSet)
+      .includes(metadata.selectors.uid(stateProps.deployments[ownProps.match.params.uid])))
+    .map(replicaSet => metadata.selectors.uid(replicaSet))
 });
 
 export default connect(mapStateToProps, null, mergeProps)(DeploymentsDetailPage);

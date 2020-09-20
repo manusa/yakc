@@ -24,6 +24,10 @@ const containers = deployment => deployment?.spec?.template?.spec?.containers ??
 
 const images = deployment => containers(deployment).map(c => c.image);
 
+const specReplicas = deployment => deployment?.spec?.replicas ?? 0;
+
+const specStrategyType = deployment => deployment?.spec?.strategy?.type ?? '';
+
 // Selectors for array of Deployments
 
 const readyCount = deployments => deployments.reduce(
@@ -37,5 +41,7 @@ export default {
   isReady,
   containers,
   images,
+  specReplicas,
+  specStrategyType,
   readyCount
 };
