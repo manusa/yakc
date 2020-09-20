@@ -15,14 +15,18 @@
  *
  */
 import React, {useState} from 'react';
+import {bindActionCreators} from 'redux';
 import {NavLink, useHistory, withRouter} from 'react-router-dom';
+import {connect} from 'react-redux';
 import {
+  Alert,
   Button,
   Nav,
   Page,
   Site,
 } from 'tabler-react';
 
+import redux from '../redux';
 import yakcLogo from '../assets/YAKC-logo.png';
 
 import './DashboardPage.css'
@@ -108,7 +112,7 @@ const NavBar = ({collapse}) => (
   </Site.Nav>
 )
 
-const DashboardPage = ({children}) => {
+const DashboardPage = ({error, clearError, children}) => {
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const toggleMenu = () => setMenuCollapsed(!menuCollapsed);
   return (
@@ -116,6 +120,9 @@ const DashboardPage = ({children}) => {
       <Page.Main>
         <Header toggleMenu={toggleMenu} />
         <NavBar collapse={menuCollapsed} />
+        {error && <Alert type='danger' isDismissible onDismissClick={clearError}>
+          {error}
+        </Alert>}
         <Page.Content>
           {children}
         </Page.Content>
@@ -124,5 +131,12 @@ const DashboardPage = ({children}) => {
     </Page>
   );
 }
+const mapStateToProps = ({ui: {error}}) => ({
+  error
+});
 
-export default DashboardPage;
+const mapDispatchToProps = dispatch =>  bindActionCreators({
+  clearError: redux.actions.clearError
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(DashboardPage);

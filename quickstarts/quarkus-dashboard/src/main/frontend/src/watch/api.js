@@ -38,13 +38,16 @@ const startEventSource =
           case 'DELETED':
             actions.crudDelete(message.object);
             break;
+          case 'ERROR':
+            actions.setError(`${message.object.code ?? ''} ${message.object.message}`);
+            break;
           default:
             // NOOP
         }
       }
     }
-    eventSource.onerror = ({status, message}) => {
-      console.error(`${status}: ${message}`);
+    eventSource.onerror = () => {
+      console.error('Error starting watch');
     }
     return eventSource;
   };
