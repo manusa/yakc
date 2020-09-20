@@ -15,64 +15,13 @@
  *
  */
 import {getApiURL} from '../env';
-import {bindActionCreators} from "redux";
-import {clear} from '../actions';
-import deployments from '../deployments';
-import events from '../events';
-import nodes from '../nodes';
-import pods from '../pods';
-import replicaSets from '../replicasets';
-
-const addOrReplace = (actions, object) => {
-  switch (object.kind) {
-    case 'Deployment':
-      actions.addOrReplaceDeployment(object);
-      break;
-    case 'Event':
-      actions.addEvent(object);
-      break;
-    case 'Node':
-      actions.addNode(object);
-      break;
-    case 'Pod':
-      actions.addOrReplacePod(object);
-      break;
-    case 'ReplicaSet':
-      actions.addOrReplaceReplicaSet(object);
-      break;
-    default:
-      // NOOP
-  }
-};
-
-const deleteObject = (actions, object) => {
-  switch (object.kind) {
-    case 'Deployment':
-      actions.deleteDeployment(object);
-      break;
-    case 'Node':
-      actions.deleteNode(object);
-      break;
-    case 'Pod':
-      actions.deletePod(object);
-      break;
-    case 'ReplicaSet':
-      actions.deleteReplicaSet(object);
-      break;
-    default:
-    // NOOP
-  }
-}
+import {bindActionCreators} from 'redux';
+import redux from '../redux';
 
 const startEventSource =
   ({dispatch}) => {
     const actions = bindActionCreators({
-      clear,
-      ...deployments.actions,
-      ...events.actions,
-      ...nodes.actions,
-      ...pods.actions,
-      ...replicaSets.actions
+      ...redux.actions
     }, dispatch);
     const eventSource = new EventSource(`${getApiURL()}/watch`);
     eventSource.onopen = () => {
@@ -84,10 +33,10 @@ const startEventSource =
         switch (message.type) {
           case 'MODIFIED':
           case 'ADDED':
-            addOrReplace(actions, message.object);
+            actions.crudAddOrReplace(message.object);
             break;
           case 'DELETED':
-            deleteObject(actions, message.object);
+            actions.crudDelete(message.object);
             break;
           default:
             // NOOP
