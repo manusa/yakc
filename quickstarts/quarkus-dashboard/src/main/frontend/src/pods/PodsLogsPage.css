@@ -1,0 +1,42 @@
+.pods-logs-page .page-main {
+  height: 100vh;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.pods-logs-page .page-main .page-content {
+  height: 1px;
+  flex: 1;
+  display: flex;
+}
+
+
+.pods-logs-page .page-main .page-content .container {
+  flex: 1;
+  display: flex;
+}
+
+.pods-logs-page .page-main .page-content .container .card-body {
+  height: 1px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pods-logs-page .pods-logs-page__log-container {
+  height: 1px;
+  flex: 1;
+  background: #333;
+  color: white;
+}
+
+.pods-logs-page .pods-logs-page__log-row {
+  white-space: nowrap;
+  font-family: monospace;
+  padding: 0 0.5rem;
+}
+.pods-logs-page .ReactVirtualized__List {
+  border: 0;
+}
+
+.pods-logs-page .ReactVirtualized__Grid__innerScrollContainer { overflow: initial !important; }

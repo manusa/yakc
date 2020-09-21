@@ -17,7 +17,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {Card, Form, Grid} from 'tabler-react';
+import {Card, Form, Grid, Icon} from 'tabler-react';
 import ContainerList from '../components/ContainerList';
 import DashboardPage from '../components/DashboardPage';
 import metadata from '../metadata';
@@ -36,6 +36,12 @@ const PodsDetailPage = ({pod}) => (
     <Card title={`Pod - ${metadata.selectors.namespace(pod)} - ${metadata.selectors.name(pod)}`}>
       <Card.Body>
         <Grid.Row>
+          <Grid.Col width={12} className='text-right mb-2'>
+            <Link
+              className='btn btn-outline-primary btn-icon'
+              to={`/pods/${metadata.selectors.uid(pod)}/logs`}
+            ><Icon name='file-text' className='mr-2' />Logs</Link>
+          </Grid.Col>
           <Field label='Name'>{metadata.selectors.name(pod)}</Field>
           <Field label='Namespace'>{metadata.selectors.namespace(pod)}</Field>
           <Field label='Node'>

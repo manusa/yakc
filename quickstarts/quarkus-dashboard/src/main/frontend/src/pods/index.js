@@ -20,6 +20,7 @@ import selectors from './selectors';
 import List from './List'
 import PodsCard from './PodsCard';
 import PodsDetailPage from './PodsDetailPage';
+import PodsLogsPage from './PodsLogsPage';
 import PodsPage from './PodsPage';
 
 export default {
@@ -29,5 +30,6 @@ export default {
   List,
   PodsCard,
   PodsDetailPage,
+  PodsLogsPage,
   PodsPage
 };
