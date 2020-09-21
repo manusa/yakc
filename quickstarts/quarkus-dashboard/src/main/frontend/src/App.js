@@ -55,6 +55,7 @@ const App = ({dispatch}) => {
           <Route exact path='/nodes/:name' component={nodes.NodesDetailPage} />
           <Route exact path='/pods' component={pods.PodsPage} />
           <Route exact path='/pods/:uid' component={pods.PodsDetailPage} />
+          <Route exact path='/pods/:uid/logs' component={pods.PodsLogsPage} />
           <Route component={Error404Page} />
         </Switch>
       </Router>

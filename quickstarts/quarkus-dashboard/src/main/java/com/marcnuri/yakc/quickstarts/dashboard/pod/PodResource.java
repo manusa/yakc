@@ -69,4 +69,15 @@ public class PodResource {
     podService.deletePod(name, namespace);
     return Response.noContent().build();
   }
+
+  @GET
+  @Produces(MediaType.SERVER_SENT_EVENTS)
+  @SseElementType(MediaType.APPLICATION_JSON)
+  @Path("/{namespace}/{name}/logs")
+  public Multi<String> getLogs(
+    @PathParam("namespace") String namespace, @PathParam("name") String name) {
+
+    return Multi.createFrom().converter(MultiRxConverters.fromObservable(),
+      podService.getPodLog(name, namespace));
+  }
 }

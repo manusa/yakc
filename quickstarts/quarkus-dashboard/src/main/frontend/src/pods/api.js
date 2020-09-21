@@ -17,6 +17,10 @@
 import {getApiURL} from '../env';
 import metadata from '../metadata';
 
+const logs = (namespace, name) => new EventSource(
+  `${getApiURL()}/pods/${namespace}/${name}/logs`
+);
+
 const requestDelete = async pod => {
   await fetch(
     `${getApiURL()}/pods/${metadata.selectors.namespace(pod)}/${metadata.selectors.name(pod)}`,
@@ -25,5 +29,6 @@ const requestDelete = async pod => {
 }
 
 export  default {
+  logs,
   requestDelete
 };

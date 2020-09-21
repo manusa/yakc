@@ -22,7 +22,6 @@ import TableNoResults from '../components/TableNoResults';
 import metadata from '../metadata';
 import podsModule from './'
 
-
 const headers = [
   'Ready',
   'Name',
