@@ -24,7 +24,10 @@ const containers = pod => (pod?.spec?.containers ?? []);
 
 const containerStatuses = pod => (pod?.status?.containerStatuses ?? []);
 
-const containersReady = pod => containerStatuses(pod).every(cs => cs.ready);
+const containersReady = pod => {
+  const css = containerStatuses(pod);
+  return css.length > 0 && css.every(cs => cs.ready);
+}
 
 const restartCount = pod => containerStatuses(pod).reduce(
   (acc, containerStatus) => acc + containerStatus.restartCount,

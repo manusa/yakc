@@ -62,7 +62,12 @@ const Rows = ({pods}) => {
           <Table.Col >
             {podsModule.selectors.restartCount(pod)}
           </Table.Col>
-          <Table.Col>
+          <Table.Col className='text-center'>
+            <Link
+              className='btn btn-sm btn-outline-primary btn-icon mr-1'
+              to={`/pods/${metadata.selectors.uid(pod)}/logs`}
+              title='Logs'
+            ><Icon name='file-text' /></Link>
             <Button
               icon='trash'
               color='danger'

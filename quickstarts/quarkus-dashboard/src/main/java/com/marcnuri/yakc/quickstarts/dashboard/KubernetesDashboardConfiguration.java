@@ -18,15 +18,20 @@
 package com.marcnuri.yakc.quickstarts.dashboard;
 
 import com.marcnuri.yakc.KubernetesClient;
+import com.marcnuri.yakc.config.ConfigurationResolver;
 import javax.inject.Singleton;
 import javax.ws.rs.Produces;
+
+import java.io.IOException;
+import java.time.Duration;
 
 @Singleton
 public class KubernetesDashboardConfiguration {
 
   @Produces
   @Singleton
-  public KubernetesClient kubernetesClient() {
-    return new KubernetesClient();
+  public KubernetesClient kubernetesClient() throws IOException {
+    return new KubernetesClient(
+      ConfigurationResolver.resolveConfig().toBuilder().readTimeout(Duration.ZERO).build());
   }
 }

@@ -18,7 +18,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import throttle from 'lodash/throttle';
-import {Card} from 'tabler-react';
+import {Card, Container, Form, Header} from 'tabler-react';
 import {AutoSizer, List} from 'react-virtualized';
 import DashboardPage from '../components/DashboardPage';
 import metadata from '../metadata';
@@ -27,13 +27,16 @@ import './PodsLogsPage.css'
 
 const PodsLogsPage = ({uid, namespace, name}) => {
   const [log, setLog] = useState(['Loading logs...']);
+  const [follow, setFollow] = useState(true);
   const throttledSetLog = throttle(setLog, 100, {trailing: true});
   const listRef = useRef();
   const [eventSource, setEventSource] = useState();
   useEffect(() => {
     if (!eventSource && namespace && name) {
       const es = pods.api.logs(namespace, name);
-      es.currentLog = [];
+      es.onopen = () => {
+        es.currentLog = [];
+      }
       es.onmessage = ({data}) => {
         es.currentLog.push(data);
         throttledSetLog([...es.currentLog]);
@@ -41,7 +44,12 @@ const PodsLogsPage = ({uid, namespace, name}) => {
       setEventSource(es);
     }
   }, [eventSource, namespace, name, throttledSetLog]);
-  useEffect(() => listRef.current.scrollToRow(log.length), [log]);
+  useEffect(() => {
+        if (follow) {
+          listRef.current.scrollToRow(log.length);
+        }
+      },
+    [log, follow]);
   useEffect(() => () =>  eventSource && eventSource.close(), [eventSource]);
   const rowRenderer = ({key, index, style}) => (
     <span key={key} className='pods-logs-page__log-row' style={style}>{log[index]}</span>
@@ -49,10 +57,16 @@ const PodsLogsPage = ({uid, namespace, name}) => {
   return (
     <DashboardPage className='pods-logs-page'>
       <Card
-        title={<>
-          Pod - {namespace} - <Link to={`/pods/${uid}`}>{name}</Link>
-        </>}
+        className='mb-0'
       >
+        <Card.Header>
+          <Header RootComponent='h3' size={3} className='card-title'>
+            Pod - {namespace} - <Link to={`/pods/${uid}`}>{name}</Link>
+          </Header>
+          <Container className='justify-content-end'>
+            <Form.Switch label='Follow' checked={follow} onChange={() => setFollow(!follow)}/>
+          </Container>
+        </Card.Header>
         <Card.Body>
           <div className='pods-logs-page__log-container'>
             <AutoSizer>

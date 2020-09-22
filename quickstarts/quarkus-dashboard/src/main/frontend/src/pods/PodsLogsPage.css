@@ -37,6 +37,9 @@
 }
 .pods-logs-page .ReactVirtualized__List {
   border: 0;
+  overflow-x: scroll !important;
 }
 
-.pods-logs-page .ReactVirtualized__Grid__innerScrollContainer { overflow: initial !important; }
+.pods-logs-page .ReactVirtualized__Grid__innerScrollContainer {
+  overflow: initial !important;
+}
