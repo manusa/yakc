@@ -11,7 +11,7 @@ into Minikube (or any other k8s cluster - needs access to node):
 
 ```shell script
 # Deploy the application using https://hub.docker.com/r/marcnuri/yakc-kubernetes-dashboard SNAPSHOT
-$ kubectl apply -f yakc-kubernetes-dashboard.minikube.yml
+$ kubectl create -f https://raw.githubusercontent.com/manusa/yakc/master/quickstarts/quarkus-dashboard/yakc-kubernetes-dashboard.minikube.yml
 # Open Browser and navigate to deployed application
 $ minikube service yakc-dashboard
 ``` 

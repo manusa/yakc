@@ -3,6 +3,7 @@ name: Kubernetes Dashboard
 on:
   push:
     branches:
+      - master
 
 jobs:
   publish-image:
