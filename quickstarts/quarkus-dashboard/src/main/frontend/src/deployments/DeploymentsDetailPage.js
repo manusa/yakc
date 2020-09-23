@@ -16,34 +16,21 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import {Card, Form, Grid} from 'tabler-react';
+import {Card, Grid} from 'tabler-react';
 import ContainerList from '../components/ContainerList';
 import DashboardPage from '../components/DashboardPage';
+import Field from '../components/Field';
 import metadata from '../metadata';
 import deploymentsModule from './';
 import pods from '../pods';
 import replicaSets from '../replicasets';
 
-const Field = ({label, children}) => (
-  <Grid.Col width={12} md={6} lg={4}>
-    <Form.Group label={label}>
-      <Form.StaticText>{children}</Form.StaticText>
-    </Form.Group>
-  </Grid.Col>
-);
-
 const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
   <DashboardPage>
     <Card title={`Deployment - ${metadata.selectors.namespace(deployment)} - ${metadata.selectors.name(deployment)}`}>
       <Card.Body>
+        <metadata.Details resource={deployment} />
         <Grid.Row>
-          <Field label='Name'>{metadata.selectors.name(deployment)}</Field>
-          <Field label='Namespace'>{metadata.selectors.namespace(deployment)}</Field>
-          <Grid.Col width={12} >
-            <Form.Group label='Labels'>
-              <metadata.Labels labels={metadata.selectors.labels(deployment)} />
-            </Form.Group>
-          </Grid.Col>
           <Field label='Replicas'>{deploymentsModule.selectors.specReplicas(deployment)}</Field>
           <Field label='Strategy'>{deploymentsModule.selectors.specStrategyType(deployment)}</Field>
         </Grid.Row>

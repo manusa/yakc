@@ -14,12 +14,15 @@
  * limitations under the License.
  *
  */
-import selectors from './selectors';
-import Details from './Details';
-import Labels from './Labels';
+import React from 'react';
+import {Form, Grid} from 'tabler-react';
 
-export default {
-  selectors,
-  Details,
-  Labels,
-};
+const Field = ({label, children}) => (
+  <Grid.Col width={12} md={6} lg={4}>
+    <Form.Group label={label}>
+      <Form.StaticText>{children}</Form.StaticText>
+    </Form.Group>
+  </Grid.Col>
+);
+
+export default Field;

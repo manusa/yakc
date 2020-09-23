@@ -16,31 +16,16 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import {Card, Form, Grid} from 'tabler-react';
+import {Card} from 'tabler-react';
 import DashboardPage from '../components/DashboardPage';
 import metadata from '../metadata';
 import pods from '../pods';
-
-const Field = ({label, value}) => (
-  <Grid.Col width={12} md={6} lg={4}>
-    <Form.Group label={label}>
-      <Form.StaticText>{value}</Form.StaticText>
-    </Form.Group>
-  </Grid.Col>
-);
 
 const NodesDetailPage = ({node}) => (
   <DashboardPage>
     <Card title={`Node - ${metadata.selectors.name(node)}`}>
       <Card.Body>
-        <Grid.Row>
-          <Field label='Name' value={metadata.selectors.name(node)}/>
-          <Grid.Col width={12} >
-            <Form.Group label='Labels'>
-              <metadata.Labels labels={metadata.selectors.labels(node)} />
-            </Form.Group>
-          </Grid.Col>
-        </Grid.Row>
+        <metadata.Details resource={node} />
       </Card.Body>
     </Card>
     <pods.List nodeName={metadata.selectors.name(node)}/>
