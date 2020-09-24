@@ -116,7 +116,7 @@ const DashboardPage = ({error, clearError, className, children}) => {
   const [menuCollapsed, setMenuCollapsed] = useState(true);
   const toggleMenu = () => setMenuCollapsed(!menuCollapsed);
   return (
-    <Page className={className}>
+    <Page className={`dashboard-page ${className?? ''}`}>
       <Page.Main>
         <Header toggleMenu={toggleMenu} />
         <NavBar collapse={menuCollapsed} />

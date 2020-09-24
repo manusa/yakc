@@ -1,3 +1,9 @@
+.dashboard-page .page-main > .header > .container,
+.dashboard-page .page-main > .page-content > .container,
+.dashboard-page .page-main > .footer > .container  {
+  max-width: initial;
+}
+
 .header .nav .nav-link .fe {
   background: transparent 50% 50% no-repeat;
   background-size: contain;
