@@ -23,7 +23,8 @@ import events from './events';
 import nodes from './nodes';
 import pods from './pods';
 import replicaSets from './replicasets';
-import redux from './redux'
+import redux from './redux';
+import services from './services';
 import App from './App';
 
 import 'tabler-react/dist/Tabler.css';
@@ -41,6 +42,7 @@ const store = createStore(combineReducers({
   nodes: nodes.reducer,
   pods: pods.reducer,
   replicaSets: replicaSets.reducer,
+  services: services.reducer,
   ui: redux.uiReducer
 }), storeEnhancer());
 

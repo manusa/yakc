@@ -21,6 +21,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentResource;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeResource;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource;
+import com.marcnuri.yakc.quickstarts.dashboard.service.ServiceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.WatchResource;
 
 import javax.inject.Inject;
@@ -34,6 +35,7 @@ public class ApiResource {
   private final EventResource eventResource;
   private final NodeResource nodeResource;
   private final PodResource podResource;
+  private final ServiceResource serviceResource;
   private final WatchResource watchResource;
 
   @Inject
@@ -41,11 +43,13 @@ public class ApiResource {
     DeploymentResource deploymentResource,
     EventResource eventResource,
     NodeResource nodeResource, PodResource podResource,
+    ServiceResource serviceResource,
     WatchResource watchResource) {
     this.deploymentResource = deploymentResource;
     this.eventResource = eventResource;
     this.nodeResource = nodeResource;
     this.podResource = podResource;
+    this.serviceResource = serviceResource;
     this.watchResource = watchResource;
   }
 
@@ -67,6 +71,11 @@ public class ApiResource {
   @Path("/pods")
   public PodResource getPodResource() {
     return podResource;
+  }
+
+  @Path("/services")
+  public ServiceResource getServiceResource() {
+    return serviceResource;
   }
 
   @Path("/watch")

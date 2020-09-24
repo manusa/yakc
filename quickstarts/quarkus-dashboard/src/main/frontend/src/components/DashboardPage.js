@@ -69,14 +69,18 @@ const Footer = () => (
   />
 )
 
+const DashboardNavItem = component => ({to, icon, value}) => React.createElement(
+  component,
+  {to, icon, value,
+    key: to,
+    useExact: true,
+    LinkComponent: RoutedLink
+  }
+);
 
-const MainNavItem = ({to, icon, value}) => (
-  <Nav.Item
-    key={to} value={value} useExact={true} to={to}
-    icon={icon}
-    LinkComponent={RoutedLink}
-  />
-)
+const MainNavItem = DashboardNavItem(Nav.Item);
+
+const SubNavItem = DashboardNavItem(Nav.SubItem);
 
 const NavBar = ({collapse}) => (
   <Site.Nav collapse={collapse}>
@@ -86,21 +90,17 @@ const NavBar = ({collapse}) => (
       <MainNavItem value='Deployments' to='/deployments' icon='deployment' />
       <MainNavItem value='Pods' to='/pods' icon='pod' />
       <Nav.Item
+        key='application'
+        value='Application'
+        hasSubNav={true}
+        subItems={[
+          <SubNavItem key='svc' value='Services' to='/services' icon='svc' />
+        ]}
+      />
+      <Nav.Item
         key='about'
         value='About'
         hasSubNav={true}
-        subItemsObjects={[
-          {
-            value: 'Nodes',
-            useExact: true,
-            to:'/nodes',
-            LinkComponent: RoutedLink
-          },
-          {
-            value: 'Namespaces',
-            // LinkComponent: RoutedLink
-          }
-        ]}
         subItems={[
           <Nav.SubItem key={1}><a href='https://github.com/manusa/yakc/tree/master/quickstarts/quarkus-dashboard'>
             Quarkus Kubernetes Dashboard</a>

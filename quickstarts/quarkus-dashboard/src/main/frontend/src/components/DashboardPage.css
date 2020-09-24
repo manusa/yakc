@@ -20,3 +20,11 @@
 .header .nav .nav-link .fe-pod {
   background-image: url("../assets/k8s-icons/pod.svg");
 }
+
+.header .nav .nav-item .fe-svc {
+  background: transparent url("../assets/k8s-icons/svc.svg") 50% 50% no-repeat;
+  background-size: contain;
+  height: 1.5rem;
+  width: 1.5rem;
+  vertical-align: bottom;
+}

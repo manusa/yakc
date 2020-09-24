@@ -21,12 +21,24 @@ import {Error404Page} from 'tabler-react';
 import deployments from './deployments';
 import nodes from './nodes';
 import pods from './pods';
+import services from './services';
 import watch from './watch';
+import redux from './redux';
 import Home from './Home';
 
 const eventSources = [];
 
+const pollResources = dispatch => {
+  const dispatchedPoll = async () => {
+    const serviceList = await services.api.list();
+    dispatch(redux.actions.crudSetAll({kind: 'Service', resources: serviceList}));
+    setTimeout(dispatchedPoll, 5000)
+  };
+  return dispatchedPoll;
+};
+
 const onMount = ({dispatch}) => {
+  pollResources(dispatch)();
   eventSources.push(
     watch.api.startEventSource({dispatch})
   );
@@ -56,6 +68,8 @@ const App = ({dispatch}) => {
           <Route exact path='/pods' component={pods.PodsPage} />
           <Route exact path='/pods/:uid' component={pods.PodsDetailPage} />
           <Route exact path='/pods/:uid/logs' component={pods.PodsLogsPage} />
+          <Route exact path='/services' component={services.ServicesPage} />
+          <Route exact path='/services/:uid' component={services.ServicesDetailPage} />
           <Route component={Error404Page} />
         </Switch>
       </Router>

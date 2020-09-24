@@ -14,18 +14,21 @@
  * limitations under the License.
  *
  */
-import k8s from './assets/k8s-icons/k8s.svg'
-import deployment from './assets/k8s-icons/deploy.svg';
-import node from './assets/k8s-icons/node.svg';
-import pod from './assets/k8s-icons/pod.svg';
-import svc from './assets/k8s-icons/svc.svg';
+import React from 'react';
+import {Grid} from 'tabler-react';
+import DashboardPage from '../components/DashboardPage';
+import services from './';
 
-const icons = {
-  k8s,
-  deployment,
-  node,
-  pod,
-  svc
-};
+const ServicesPage = () => (
+  <DashboardPage>
+    <Grid>
+      <Grid.Row>
+        <Grid.Col>
+          <services.List />
+        </Grid.Col>
+      </Grid.Row>
+    </Grid>
+  </DashboardPage>
+);
 
-export default icons;
+export default ServicesPage;

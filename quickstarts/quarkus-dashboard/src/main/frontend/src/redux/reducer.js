@@ -39,6 +39,15 @@ const reducer = kind => (state = {}, action = {}) => {
       delete newState[action.payload.metadata.uid];
       return newState;
     }
+    case Types.CRUD_SET_ALL: {
+      if (!belongsToThisReducer(kind, action)) {
+        break;
+      }
+      return action.payload.resources.reduce((acc, resource) =>{
+        acc[resource.metadata.uid] = resource;
+        return acc;
+      }, {});
+    }
     case Types.CLEAR:
     case Types.CRUD_CLEAR: {
       return {};

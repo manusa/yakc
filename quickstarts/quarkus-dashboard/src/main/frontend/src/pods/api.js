@@ -28,7 +28,7 @@ const requestDelete = async pod => {
     );
 }
 
-export  default {
+export default {
   logs,
   requestDelete
 };

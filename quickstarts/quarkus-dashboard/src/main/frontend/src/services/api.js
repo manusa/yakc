@@ -14,18 +14,21 @@
  * limitations under the License.
  *
  */
-import k8s from './assets/k8s-icons/k8s.svg'
-import deployment from './assets/k8s-icons/deploy.svg';
-import node from './assets/k8s-icons/node.svg';
-import pod from './assets/k8s-icons/pod.svg';
-import svc from './assets/k8s-icons/svc.svg';
+import {getApiURL} from '../env';
 
-const icons = {
-  k8s,
-  deployment,
-  node,
-  pod,
-  svc
+const toJson = response => {
+  if (!response.ok) {
+    throw Error(`${response.status}`);
+  }
+  return response.json();
+}
+const list = async () => {
+  const response = await fetch(
+    `${getApiURL()}/services`
+  );
+  return await toJson(response);
+}
+
+export default {
+  list
 };
-
-export default icons;

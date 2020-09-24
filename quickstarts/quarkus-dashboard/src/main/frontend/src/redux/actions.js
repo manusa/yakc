@@ -19,6 +19,7 @@ const Types = {
   CRUD_CLEAR: 'CRUD_CLEAR',
   CRUD_ADD_OR_REPLACE: 'CRUD_ADD_OR_REPLACE',
   CRUD_DELETE: 'CRUD_DELETE',
+  CRUD_SET_ALL: 'CRUD_SET_ALL',
   UI_SET_ERROR: 'UI_SET_ERROR',
   UI_CLEAR_ERROR: 'UI_CLEAR_ERROR',
 }
@@ -37,6 +38,11 @@ const crudDelete = object => ({
   payload: object
 });
 
+const crudSetAll = ({kind, resources}) => ({
+  type: Types.CRUD_SET_ALL,
+  payload: {kind, resources}
+});
+
 const setError = error => ({
   type: Types.UI_SET_ERROR,
   payload: error
@@ -52,6 +58,7 @@ export default {
   clear,
   crudAddOrReplace,
   crudDelete,
+  crudSetAll,
   setError,
   clearError
 };

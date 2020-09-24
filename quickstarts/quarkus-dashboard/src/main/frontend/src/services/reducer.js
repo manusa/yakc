@@ -14,18 +14,8 @@
  * limitations under the License.
  *
  */
-import k8s from './assets/k8s-icons/k8s.svg'
-import deployment from './assets/k8s-icons/deploy.svg';
-import node from './assets/k8s-icons/node.svg';
-import pod from './assets/k8s-icons/pod.svg';
-import svc from './assets/k8s-icons/svc.svg';
+import redux from '../redux';
 
-const icons = {
-  k8s,
-  deployment,
-  node,
-  pod,
-  svc
-};
+const reducer = redux.reducer('Service');
 
-export default icons;
+export default reducer;

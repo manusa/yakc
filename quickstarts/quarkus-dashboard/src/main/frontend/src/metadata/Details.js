@@ -19,6 +19,16 @@ import {Form, Grid} from 'tabler-react';
 import Field from '../components/Field';
 import metadata from './';
 
+const LabelsRow = ({labels}) => labels && Object.values(labels).length > 0 && (
+  <Grid.Row>
+    <Grid.Col width={12} >
+      <Form.Group label='Labels'>
+        <metadata.Labels labels={labels} />
+      </Form.Group>
+    </Grid.Col>
+  </Grid.Row>
+);
+
 const Details = ({resource}) => {
   const namespace = metadata.selectors.namespace(resource);
   const creationTimestamp = metadata.selectors.creationTimestamp(resource);
@@ -31,13 +41,7 @@ const Details = ({resource}) => {
           {`${creationTimestamp?.toLocaleDateString()} ${creationTimestamp?.toLocaleTimeString()}`}
         </Field>
       </Grid.Row>
-      <Grid.Row>
-        <Grid.Col width={12} >
-          <Form.Group label='Labels'>
-            <metadata.Labels labels={metadata.selectors.labels(resource)} />
-          </Form.Group>
-        </Grid.Col>
-      </Grid.Row>
+      <LabelsRow labels={metadata.selectors.labels(resource)} />
     </>
   );
 };
