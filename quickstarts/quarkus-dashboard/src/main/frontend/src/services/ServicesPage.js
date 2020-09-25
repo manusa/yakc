@@ -15,19 +15,12 @@
  *
  */
 import React from 'react';
-import {Grid} from 'tabler-react';
 import DashboardPage from '../components/DashboardPage';
 import services from './';
 
 const ServicesPage = () => (
-  <DashboardPage>
-    <Grid>
-      <Grid.Row>
-        <Grid.Col>
-          <services.List />
-        </Grid.Col>
-      </Grid.Row>
-    </Grid>
+  <DashboardPage title='Services'>
+    <services.List />
   </DashboardPage>
 );
 

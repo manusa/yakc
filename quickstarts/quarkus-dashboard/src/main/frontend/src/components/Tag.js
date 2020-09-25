@@ -15,14 +15,20 @@
  *
  */
 import React from 'react';
-import {Table} from 'tabler-react';
 
-const TableNoResults = ({colSpan = 1}) => (
-  <Table.Row>
-    <Table.Col colSpan={colSpan}>
-      No results found
-    </Table.Col>
-  </Table.Row>
+const variants = {
+  default: 'text-white text-xs font-medium bg-blue-600 py-1 px-2 rounded-full align-middle'
+};
+
+const Tag = ({className, children, variant = variants.default}, ...props) => (
+  <span
+    className={`${variant} ${className ?? ''}`}
+    {...props}
+  >
+    {children}
+  </span>
 );
 
-export default TableNoResults;
+Tag.variants = variants;
+
+export default Tag;

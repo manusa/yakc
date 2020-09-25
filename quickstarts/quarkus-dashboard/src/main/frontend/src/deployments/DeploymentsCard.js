@@ -20,7 +20,7 @@ import StatusCard from '../components/StatusCard';
 import icons from '../icons';
 import deploymentsModule from './';
 
-const DeploymentsCard = ({deployments}) => {
+const DeploymentsCard = ({deployments, ...properties}) => {
   const objects = Object.values(deployments);
   const ready = deploymentsModule.selectors.readyCount(objects);
   const total = objects.length
@@ -32,6 +32,7 @@ const DeploymentsCard = ({deployments}) => {
       ready={ready}
       total={total}
       progressWidth={Math.round(ready/total*100)}
+      {...properties}
     />
   );
 };

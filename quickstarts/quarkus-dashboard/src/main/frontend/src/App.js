@@ -17,7 +17,6 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import {Error404Page} from 'tabler-react';
 import deployments from './deployments';
 import nodes from './nodes';
 import pods from './pods';
@@ -70,7 +69,7 @@ const App = ({dispatch}) => {
           <Route exact path='/pods/:uid/logs' component={pods.PodsLogsPage} />
           <Route exact path='/services' component={services.ServicesPage} />
           <Route exact path='/services/:uid' component={services.ServicesDetailPage} />
-          <Route component={Error404Page} />
+          {/*<Route component={Error404Page} />*/}
         </Switch>
       </Router>
   );

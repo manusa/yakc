@@ -16,29 +16,43 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import {Card, Grid} from 'tabler-react';
-import ContainerList from '../components/ContainerList';
-import DashboardPage from '../components/DashboardPage';
-import Field from '../components/Field';
 import metadata from '../metadata';
 import deploymentsModule from './';
 import pods from '../pods';
 import replicaSets from '../replicasets';
+import Card from '../components/Card';
+import ContainerList from '../components/ContainerList';
+import DashboardPage from '../components/DashboardPage';
+import Form from '../components/Form';
 
 const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
-  <DashboardPage>
-    <Card title={`Deployment - ${metadata.selectors.namespace(deployment)} - ${metadata.selectors.name(deployment)}`}>
+  <DashboardPage
+    title={`Deployments - ${metadata.selectors.namespace(deployment)} - ${metadata.selectors.name(deployment)}`}
+  >
+    <Card >
+      <Card.Title>
+        {metadata.selectors.namespace(deployment)} - {metadata.selectors.name(deployment)}
+      </Card.Title>
       <Card.Body>
-        <metadata.Details resource={deployment} />
-        <Grid.Row>
-          <Field label='Replicas'>{deploymentsModule.selectors.specReplicas(deployment)}</Field>
-          <Field label='Strategy'>{deploymentsModule.selectors.specStrategyType(deployment)}</Field>
-        </Grid.Row>
+        <Form>
+          <metadata.Details resource={deployment} />
+          <Form.Field label='Replicas'>{deploymentsModule.selectors.specReplicas(deployment)}</Form.Field>
+          <Form.Field label='Strategy'>{deploymentsModule.selectors.specStrategyType(deployment)}</Form.Field>
+        </Form>
       </Card.Body>
     </Card>
-    <ContainerList containers={deploymentsModule.selectors.containers(deployment)} />
-    <replicaSets.List ownerId={metadata.selectors.uid(deployment)} />
-    <pods.List ownerUids={replicaSetsUids} />
+    <ContainerList
+      title='Containers'
+      className='mt-4'
+      containers={deploymentsModule.selectors.containers(deployment)} />
+    <replicaSets.List
+      title='Replica Sets'
+      className='mt-4'
+      ownerId={metadata.selectors.uid(deployment)} />
+    <pods.List
+      title='Pods'
+      className='mt-4'
+      ownerUids={replicaSetsUids} />
   </DashboardPage>
 );
 

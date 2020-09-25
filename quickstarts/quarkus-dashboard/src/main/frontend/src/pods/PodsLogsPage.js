@@ -16,19 +16,23 @@
  */
 import React, {useEffect, useRef, useState} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
 import throttle from 'lodash/throttle';
-import {Card, Container, Form, Header} from 'tabler-react';
 import {AutoSizer, List} from 'react-virtualized';
-import DashboardPage from '../components/DashboardPage';
+import SimpleBar from 'simplebar-react';
 import metadata from '../metadata';
 import pods from '../pods';
-import './PodsLogsPage.css'
+import Card from '../components/Card';
+import DashboardPage from '../components/DashboardPage';
+import Link from '../components/Link';
+import Switch from '../components/Switch';
+
+import './PodsLogsPage.css';
 
 const PodsLogsPage = ({uid, namespace, name}) => {
   const [log, setLog] = useState(['Loading logs...']);
   const [follow, setFollow] = useState(true);
   const throttledSetLog = throttle(setLog, 100, {trailing: true});
+  const barRef = useRef();
   const listRef = useRef();
   const [eventSource, setEventSource] = useState();
   useEffect(() => {
@@ -46,44 +50,53 @@ const PodsLogsPage = ({uid, namespace, name}) => {
   }, [eventSource, namespace, name, throttledSetLog]);
   useEffect(() => {
         if (follow) {
-          listRef.current.scrollToRow(log.length);
+          const scrollElement = barRef.current.getScrollElement();
+          scrollElement.scrollTo(0, scrollElement.scrollHeight);
         }
       },
     [log, follow]);
   useEffect(() => () =>  eventSource && eventSource.close(), [eventSource]);
   const rowRenderer = ({key, index, style}) => (
-    <span key={key} className='pods-logs-page__log-row' style={style}>{log[index]}</span>
+    <div key={key} className='whitespace-no-wrap' style={{...style, width: 'auto'}}>{log[index]}</div>
   );
   return (
-    <DashboardPage className='pods-logs-page'>
-      <Card
-        className='mb-0'
-      >
-        <Card.Header>
-          <Header RootComponent='h3' size={3} className='card-title'>
-            Pod - {namespace} - <Link to={`/pods/${uid}`}>{name}</Link>
-          </Header>
-          <Container className='justify-content-end'>
-            <Form.Switch label='Follow' checked={follow} onChange={() => setFollow(!follow)}/>
-          </Container>
-        </Card.Header>
-        <Card.Body>
-          <div className='pods-logs-page__log-container'>
+    <DashboardPage
+      title={`Pods - ${namespace} - ${name} - Logs`}
+      className='pods-logs-page'
+    >
+      <div className='absolute inset-0 md:p-4 flex flex-col'>
+        <Card className='flex-1 flex flex-col'>
+          <Card.Title className='flex items-center'>
+            <div className='flex-1'>Logs - <Link.RouterLink to={`/pods/${uid}`}>{name}</Link.RouterLink></div>
+            <div className='justify-self-end text-sm font-normal'>
+              <Switch label='Follow' checked={follow} onChange={() => setFollow(!follow)} />
+            </div>
+          </Card.Title>
+          <Card.Body className='flex-1 bg-black text-white font-mono text-sm'>
             <AutoSizer>
-              {({height, width}) =>(
-                <List
-                  ref={listRef}
-                  height={height}
-                  width={width}
-                  rowCount={log.length}
-                  rowHeight={19}
-                  rowRenderer={rowRenderer}
-                />
+              {({ height, width }) => (
+                <SimpleBar
+                  ref={barRef}
+                  onScroll={({target: {scrollTop, scrollLeft}}) => {
+                    listRef.current.Grid.handleScrollEvent({scrollTop, scrollLeft});
+                  }}
+                  style={{height, width}}
+                >
+                  <List
+                    ref={listRef}
+                    height={height}
+                    width={width}
+                    rowCount={log.length}
+                    rowHeight={19}
+                    rowRenderer={rowRenderer}
+                    style={{overflowX: false, overflowY: false}}
+                  />
+                </SimpleBar>
               )}
             </AutoSizer>
-          </div>
-        </Card.Body>
-      </Card>
+          </Card.Body>
+        </Card>
+      </div>
     </DashboardPage>
   );
 };

@@ -15,24 +15,13 @@
  *
  */
 import React from 'react';
-import {Grid} from 'tabler-react';
 import DashboardPage from '../components/DashboardPage';
 import pods from './';
 
 const PodsPage = () => (
-  <DashboardPage>
-    <Grid>
-      <Grid.Row cards={true}>
-        <Grid.Col width={12} >
-          <pods.PodsCard />
-        </Grid.Col>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Col>
-          <pods.List />
-        </Grid.Col>
-      </Grid.Row>
-    </Grid>
+  <DashboardPage title='Pods'>
+    <pods.PodsCard className='w-full' />
+    <pods.List className='mt-4' />
   </DashboardPage>
 );
 

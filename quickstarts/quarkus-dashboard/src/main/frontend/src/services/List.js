@@ -16,12 +16,10 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom';
-import {Card, Table} from 'tabler-react';
-import TableNoResults from '../components/TableNoResults';
+import Link from '../components/Link';
+import Table from '../components/Table';
 import metadata from '../metadata';
 import svc from './';
-
 
 const headers = [
   'Name',
@@ -36,45 +34,38 @@ const sort = (p1, p2) =>
 const Rows = ({services}) => {
   const allServices = Object.values(services);
   if (allServices.length === 0) {
-    return <TableNoResults colSpan={headers.length} />;
+    return <Table.NoResultsRow colSpan={headers.length} />;
   }
   return allServices
     .sort(sort)
     .map(service => (
         <Table.Row key={metadata.selectors.uid(service)}>
-          <Table.Col className='text-nowrap'>
-            <Link to={`/services/${metadata.selectors.uid(service)}`}>{metadata.selectors.name(service)}</Link>
-          </Table.Col>
-          <Table.Col className='text-nowrap'>
+          <Table.Cell className='text-nowrap'>
+            <Link.RouterLink to={`/services/${metadata.selectors.uid(service)}`}>
+              {metadata.selectors.name(service)}
+            </Link.RouterLink>
+          </Table.Cell>
+          <Table.Cell className='text-nowrap'>
             {metadata.selectors.namespace(service)}
-          </Table.Col>
-          <Table.Col>
+          </Table.Cell>
+          <Table.Cell>
             {svc.selectors.specClusterIP(service)}
-          </Table.Col>
-          <Table.Col>
-          </Table.Col>
+          </Table.Cell>
+          <Table.Cell>
+          </Table.Cell>
         </Table.Row>
     ));
 }
 
-const List = ({services}) => (
-  <Card title='Services' className='table-responsive-sm'>
-    <Table
-      responsive
-      className='card-table table-vcenter table-striped'
-    >
-      <Table.Header>
-        <Table.Row>
-          {headers.map((header, idx) => (
-            <Table.ColHeader key={idx}>{header}</Table.ColHeader>
-          ))}
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        <Rows services={services} />
-      </Table.Body>
-    </Table>
-  </Card>
+const List = ({services, ...properties}) => (
+  <Table {...properties}>
+    <Table.Head
+      columns={headers}
+    />
+    <Table.Body>
+      <Rows services={services} />
+    </Table.Body>
+  </Table>
 );
 
 const mapStateToProps = ({services}) => ({

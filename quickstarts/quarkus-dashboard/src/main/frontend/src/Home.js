@@ -15,35 +15,23 @@
  *
  */
 import React from 'react';
-import {
-  Grid
-} from 'tabler-react';
 import deployments from './deployments';
 import events from './events';
 import nodes from './nodes';
 import pods from './pods';
 import DashboardPage from './components/DashboardPage';
 
+const cardResponsiveClass = 'w-full sm:w-1/2 md:w-1/3';
+const cardClass = 'm-2'
+
 const Home = () => (
-  <DashboardPage>
-    <Grid>
-      <Grid.Row cards={true}>
-        <Grid.Col width={12} sm={6} md={4}>
-          <nodes.NodesCard />
-        </Grid.Col>
-        <Grid.Col width={12} sm={6} md={4}>
-          <deployments.DeploymentsCard />
-        </Grid.Col>
-        <Grid.Col width={12} sm={6} md={4}>
-          <pods.PodsCard />
-        </Grid.Col>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Col>
-          <events.List />
-        </Grid.Col>
-      </Grid.Row>
-    </Grid>
+  <DashboardPage title='Kubernetes Dashboard'>
+    <div className='flex flex-wrap -m-2'>
+      <nodes.NodesCard responsiveClassName={cardResponsiveClass} className={cardClass} />
+      <deployments.DeploymentsCard responsiveClassName={cardResponsiveClass} className={cardClass} />
+      <pods.PodsCard responsiveClassName={cardResponsiveClass} className={cardClass} />
+    </div>
+    <events.List className='mt-4' />
   </DashboardPage>
 );
 

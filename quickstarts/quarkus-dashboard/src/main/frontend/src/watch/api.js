@@ -48,6 +48,7 @@ const startEventSource =
     }
     eventSource.onerror = () => {
       console.error('Error starting watch');
+      actions.setError('Connection error');
     }
     return eventSource;
   };

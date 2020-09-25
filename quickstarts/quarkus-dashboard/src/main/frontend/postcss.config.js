@@ -14,15 +14,14 @@
  * limitations under the License.
  *
  */
-import React from 'react';
-import DashboardPage from '../components/DashboardPage';
-import deployments from './';
+const tailwind = require('tailwindcss');
+const autoprefixer = require('autoprefixer');
 
-const DeploymentsPage = () => (
-  <DashboardPage title='Deployments'>
-    <deployments.DeploymentsCard />
-    <deployments.List className='mt-4' />
-  </DashboardPage>
-);
+const config = {
+  plugins: [
+    tailwind('./tailwind.config.js'),
+    autoprefixer
+  ]
+};
 
-export default DeploymentsPage;
+module.exports = config;

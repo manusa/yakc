@@ -16,15 +16,14 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom';
-import {Button, Card, Icon, Table} from 'tabler-react';
-import TableNoResults from '../components/TableNoResults';
 import metadata from '../metadata';
-import deploymentsModule from './'
-
+import deploymentsModule from './';
+import Icon from '../components/Icon';
+import Link from '../components/Link';
+import Table from '../components/Table';
 
 const headers = [
-  'Ready',
+  '',
   'Name',
   'Namespace',
   'Images',
@@ -37,61 +36,52 @@ const sort = (p1, p2) =>
 const Rows = ({deployments}) => {
   const allDeployments = Object.values(deployments);
   if (allDeployments.length === 0) {
-    return <TableNoResults colSpan={headers.length} />;
+    return <Table.NoResultsRow colSpan={headers.length} />;
   }
   const deleteDeployment = deployment => async () => await deploymentsModule.api.requestDelete(deployment);
   return allDeployments
     .sort(sort)
     .map(deployment => (
-        <Table.Row key={metadata.selectors.uid(deployment)}>
-          <Table.Col>
-            <Icon
-              className={deploymentsModule.selectors.isReady(deployment) ? 'text-success' : 'text-danger'}
-              name={deploymentsModule.selectors.isReady(deployment) ? 'check' : 'alert-circle'}
-            />
-          </Table.Col>
-          <Table.Col className='text-nowrap'>
-            <Link to={`/deployments/${metadata.selectors.uid(deployment)}`}>{metadata.selectors.name(deployment)}</Link>
-          </Table.Col>
-          <Table.Col className='text-nowrap'>
-            {metadata.selectors.namespace(deployment)}
-          </Table.Col>
-          <Table.Col >
-            {deploymentsModule.selectors.images(deployment).map((image, idx) =>
-              <div key={idx}>{image}</div>
-            )}
-          </Table.Col>
-          <Table.Col>
-            <Button
-              icon='trash'
-              color='danger'
-              outline
-              size='sm'
-              onClick={deleteDeployment(deployment)}
-            />
-          </Table.Col>
-        </Table.Row>
+      <Table.Row key={metadata.selectors.uid(deployment)}>
+        <Table.Cell className='whitespace-no-wrap w-3 text-center'>
+          <Icon
+            className={deploymentsModule.selectors.isReady(deployment) ? 'text-green-500' : 'text-red-500'}
+            icon={deploymentsModule.selectors.isReady(deployment) ? 'fa-check' : 'fa-exclamation-circle'}
+          />
+        </Table.Cell>
+        <Table.Cell className='whitespace-no-wrap'>
+          <Link.RouterLink to={`/deployments/${metadata.selectors.uid(deployment)}`}>
+            {metadata.selectors.name(deployment)}
+          </Link.RouterLink>
+        </Table.Cell>
+        <Table.Cell className='whitespace-no-wrap'>
+          {metadata.selectors.namespace(deployment)}
+        </Table.Cell>
+        <Table.Cell >
+          {deploymentsModule.selectors.images(deployment).map((image, idx) =>
+            <div key={idx}>{image}</div>
+          )}
+        </Table.Cell>
+        <Table.Cell>
+          <Link
+            variant={Link.variants.outlineDanger}
+            onClick={deleteDeployment(deployment)}
+            title='Delete'
+          ><Icon stylePrefix='far' icon='fa-trash-alt' /></Link>
+        </Table.Cell>
+      </Table.Row>
     ));
 }
 
-const List = ({deployments}) => (
-  <Card title='Deployments' className='table-responsive-sm'>
-    <Table
-      responsive
-      className='card-table table-vcenter table-striped'
-    >
-      <Table.Header>
-        <Table.Row>
-          {headers.map((header, idx) => (
-            <Table.ColHeader key={idx}>{header}</Table.ColHeader>
-          ))}
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        <Rows deployments={deployments} />
-      </Table.Body>
-    </Table>
-  </Card>
+const List = ({deployments, ...properties}) => (
+  <Table {...properties}>
+    <Table.Head
+      columns={headers}
+    />
+    <Table.Body>
+      <Rows deployments={deployments} />
+    </Table.Body>
+  </Table>
 );
 
 const mapStateToProps = ({deployments}) => ({

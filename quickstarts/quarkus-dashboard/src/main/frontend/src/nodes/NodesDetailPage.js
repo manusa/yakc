@@ -16,19 +16,25 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import {Card} from 'tabler-react';
 import DashboardPage from '../components/DashboardPage';
 import metadata from '../metadata';
 import pods from '../pods';
+import Card from '../components/Card';
+import Form from '../components/Form';
 
 const NodesDetailPage = ({node}) => (
-  <DashboardPage>
-    <Card title={`Node - ${metadata.selectors.name(node)}`}>
+  <DashboardPage title={`Nodes - ${metadata.selectors.name(node)}`}>
+    <Card>
+      <Card.Title>
+        {`${metadata.selectors.name(node)}`}
+      </Card.Title>
       <Card.Body>
-        <metadata.Details resource={node} />
+        <Form>
+          <metadata.Details resource={node} />
+        </Form>
       </Card.Body>
     </Card>
-    <pods.List nodeName={metadata.selectors.name(node)}/>
+    <pods.List className='mt-4' nodeName={metadata.selectors.name(node)}/>
   </DashboardPage>
 );
 

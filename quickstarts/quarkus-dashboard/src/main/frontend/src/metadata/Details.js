@@ -15,18 +15,13 @@
  *
  */
 import React from 'react';
-import {Form, Grid} from 'tabler-react';
-import Field from '../components/Field';
 import metadata from './';
+import Form from '../components/Form';
 
 const LabelsRow = ({labels}) => labels && Object.values(labels).length > 0 && (
-  <Grid.Row>
-    <Grid.Col width={12} >
-      <Form.Group label='Labels'>
-        <metadata.Labels labels={labels} />
-      </Form.Group>
-    </Grid.Col>
-  </Grid.Row>
+  <Form.Field width={Form.widths.full} label='Labels'>
+    <metadata.Labels  maxLabels={4} labels={labels} />
+  </Form.Field>
 );
 
 const Details = ({resource}) => {
@@ -34,13 +29,11 @@ const Details = ({resource}) => {
   const creationTimestamp = metadata.selectors.creationTimestamp(resource);
   return (
     <>
-      <Grid.Row>
-        <Field label='Name'>{metadata.selectors.name(resource)}</Field>
-        {namespace && <Field label='Namespace'>{namespace}</Field>}
-        <Field label='Creation timestamp'>
-          {`${creationTimestamp?.toLocaleDateString()} ${creationTimestamp?.toLocaleTimeString()}`}
-        </Field>
-      </Grid.Row>
+      <Form.Field label='Name'>{metadata.selectors.name(resource)}</Form.Field>
+      {namespace && <Form.Field label='Namespace'>{namespace}</Form.Field>}
+      <Form.Field label='Creation timestamp'>
+        {`${creationTimestamp?.toLocaleDateString()} ${creationTimestamp?.toLocaleTimeString()}`}
+      </Form.Field>
       <LabelsRow labels={metadata.selectors.labels(resource)} />
     </>
   );

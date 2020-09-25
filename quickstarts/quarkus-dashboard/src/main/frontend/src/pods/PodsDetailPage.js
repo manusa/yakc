@@ -16,41 +16,49 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-import {Card, Container, Grid, Header, Icon} from 'tabler-react';
-import ContainerList from '../components/ContainerList';
-import DashboardPage from '../components/DashboardPage';
-import Field from '../components/Field';
 import metadata from '../metadata';
 import podsModule from './';
+import Card from '../components/Card';
+import ContainerList from '../components/ContainerList';
+import DashboardPage from '../components/DashboardPage';
+import Form from '../components/Form';
+import Icon from '../components/Icon';
+import Link from '../components/Link';
 
 const PodsDetailPage = ({pod}) => (
-  <DashboardPage>
+  <DashboardPage
+    title={`Pods - ${metadata.selectors.namespace(pod)} - ${metadata.selectors.name(pod)}`}
+  >
     <Card>
-      <Card.Header>
-        <Header RootComponent='h3' size={3} className='container pl-0 card-title'>
-          Pod - {metadata.selectors.namespace(pod)} - {metadata.selectors.name(pod)}
-        </Header>
-        <Container className='col-auto justify-content-end'>
-          <Link
-            className='btn btn-outline-primary btn-icon'
-            to={`/pods/${metadata.selectors.uid(pod)}/logs`}
-          ><Icon name='file-text' className='mr-2' />Logs</Link>
-        </Container>
-      </Card.Header>
+      <Card.Title className='flex items-center'>
+        <div className='flex-1'>
+          {metadata.selectors.namespace(pod)} - {metadata.selectors.name(pod)}
+        </div>
+        <Link.RouterLink
+          className='justify-self-end text-sm font-normal'
+          variant={Link.variants.outline}
+          to={`/pods/${metadata.selectors.uid(pod)}/logs`}
+          title='Logs'
+        >
+          <Icon stylePrefix='far' icon='fa-file-alt' className='mr-2'/>Logs
+        </Link.RouterLink>
+      </Card.Title>
       <Card.Body>
-        <metadata.Details resource={pod} />
-        <Grid.Row>
-          <Field label='Node'>
-            <Link to={`/nodes/${podsModule.selectors.nodeName(pod)}`}>
+        <Form>
+          <metadata.Details resource={pod} />
+          <Form.Field label='Node'>
+            <Link.RouterLink to={`/nodes/${podsModule.selectors.nodeName(pod)}`}>
               {podsModule.selectors.nodeName(pod)}
-            </Link>
-          </Field>
-          <Field label='Phase'>{podsModule.selectors.statusPhase(pod)}</Field>
-        </Grid.Row>
+            </Link.RouterLink>
+          </Form.Field>
+          <Form.Field label='Phase'>{podsModule.selectors.statusPhase(pod)}</Form.Field>
+        </Form>
       </Card.Body>
     </Card>
-    <ContainerList containers={podsModule.selectors.containers(pod)} />
+    <ContainerList
+      title='Containers'
+      className='mt-4'
+      containers={podsModule.selectors.containers(pod)} />
   </DashboardPage>
 );
 

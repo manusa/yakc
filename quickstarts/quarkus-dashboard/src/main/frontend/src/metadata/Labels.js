@@ -15,7 +15,8 @@
  *
  */
 import React, {useState} from 'react';
-import {Button, Tag} from "tabler-react";
+import Link from '../components/Link';
+import Tag from '../components/Tag';
 
 const Labels = ({labels = {}, maxLabels = 10}) => {
   const labelPairs = Object.entries(labels).map(([key, value]) => `${key}: ${value}`);
@@ -24,11 +25,11 @@ const Labels = ({labels = {}, maxLabels = 10}) => {
   const truncate = labelPairs.length > maxLabels;
   const displayedLabels = truncate && collapsed ? labelPairs.slice(0, maxLabels) : labelPairs;
   return (
-    <div className='d-flex flex-wrap align-items-center'>
+    <div className='flex flex-wrap items-center'>
       {displayedLabels.map((label, idx) =>
-        <Tag key={idx} rounded color='blue' className='mr-1 mb-1'>{label}</Tag>
+        <Tag key={idx} className='mr-1 mb-1'>{label}</Tag>
       )}
-      {truncate && <Button link onClick={toggle}>{collapsed ? '...' : 'Show less'}</Button>}
+      {truncate && <Link className='text-xs' onClick={toggle}>{collapsed ? '...' : 'Show less'}</Link>}
     </div>
   );
 };

@@ -16,9 +16,9 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom';
-import {Card, Table, Tooltip} from 'tabler-react';
-import TableNoResults from '../components/TableNoResults';
+import Link from '../components/Link';
+import Table from '../components/Table';
+import Tooltip from '../components/Tooltip';
 import metadata from "../metadata";
 
 const headers = [
@@ -42,7 +42,7 @@ const EventName = ({event}) => {
       url = null;
   }
   if (url) {
-    return <Link to={url}>{event.involvedObject.name}</Link>;
+    return <Link.RouterLink to={url}>{event.involvedObject.name}</Link.RouterLink>;
   }
   return event.involvedObject.name;
 }
@@ -53,52 +53,50 @@ const sort = (ev1, ev2) =>
 const Rows = ({events}) => {
   const allEvents = Object.values(events);
   if (allEvents.length === 0) {
-    return <TableNoResults colSpan={headers.length} />;
+    return <Table.NoResultsRow colSpan={headers.length} />;
   }
   return allEvents
     .sort(sort)
     .slice(0, 10)
-    .map(event => (
+    .map(event => {
+      const lastTimestamp = new Date(event.lastTimestamp);
+      return (
         <Table.Row key={metadata.selectors.uid(event)}>
-          <Table.Col className='text-nowrap'>
+          <Table.Cell className='whitespace-no-wrap'>
             {event.involvedObject.kind}
-          </Table.Col>
-          <Table.Col>
-            <EventName event={event} />
-          </Table.Col>
-          <Table.Col>
-            <Tooltip content={event.lastTimestamp} placement='right'>
-              <span>{new Date(event.lastTimestamp).toLocaleDateString()}</span>
+          </Table.Cell>
+          <Table.Cell>
+            <EventName event={event}/>
+          </Table.Cell>
+          <Table.Cell>
+            <Tooltip
+              content={`${lastTimestamp.toLocaleDateString()}
+                ${lastTimestamp.toLocaleTimeString()}`}
+              className='cursor-default'
+            >
+              <span>{lastTimestamp.toLocaleDateString()}</span>
             </Tooltip>
-          </Table.Col>
-          <Table.Col>
+          </Table.Cell>
+          <Table.Cell>
             {event.reason}
-          </Table.Col>
-          <Table.Col>
+          </Table.Cell>
+          <Table.Cell>
             {event.message}
-          </Table.Col>
+          </Table.Cell>
         </Table.Row>
-    ));
+      );
+    });
 }
 
-const List = ({events}) => (
-  <Card title='Latest Events' className='table-responsive-sm'>
-    <Table
-      responsive
-      className='card-table table-vcenter table-striped'
-    >
-      <Table.Header>
-        <Table.Row>
-          {headers.map((header, idx) => (
-            <Table.ColHeader key={idx}>{header}</Table.ColHeader>
-          ))}
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        <Rows events={events} />
-      </Table.Body>
-    </Table>
-  </Card>
+const List = ({events, ...properties}) => (
+  <Table title='Latest Events' {...properties}>
+    <Table.Head
+      columns={headers}
+    />
+    <Table.Body>
+      <Rows events={events} />
+    </Table.Body>
+  </Table>
 );
 
 const mapStateToProps = ({events}) => ({

@@ -16,14 +16,14 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom';
-import {Card, Icon, Table} from 'tabler-react';
-import TableNoResults from '../components/TableNoResults';
+import Icon from '../components/Icon';
+import Link from '../components/Link';
+import Table from '../components/Table';
 import metadata from '../metadata';
-import nodesModule from './'
+import n from './'
 
 const headers = [
-  'Ready',
+  '',
   'Name',
   'Labels'
 ]
@@ -34,50 +34,43 @@ const sort = (n1, n2) =>
 const Rows = ({nodes}) => {
   const allNodes = Object.values(nodes);
   if (allNodes.length === 0) {
-    return <TableNoResults colSpan={headers.length} />;
+    return <Table.NoResultsRow colSpan={headers.length} />;
   }
   return allNodes
     .sort(sort)
     .map(node => (
-        <Table.Row key={node.metadata.uid}>
-          <Table.Col>
-            <Icon
-              name={nodesModule.selectors.isReady(node) ? 'check' : 'alert-circle'}
-            />
-          </Table.Col>
-          <Table.Col className='text-nowrap'>
-            <Link to={`/nodes/${metadata.selectors.name(node)}`}>
-              {metadata.selectors.name(node)}
-            </Link>
-          </Table.Col>
-          <Table.Col >
-            <metadata.Labels
-              labels={metadata.selectors.labels(node)}
-              maxLabels={2}
-            />
-          </Table.Col>
-        </Table.Row>
+      <Table.Row key={metadata.selectors.uid(node)}>
+        <Table.Cell className='whitespace-no-wrap w-3 text-center'>
+          <Icon
+            className={n.selectors.isReady(node) ? 'text-green-500' : 'text-red-500'}
+            icon={n.selectors.isReady(node) ? 'fa-check' : 'fa-exclamation-circle'}
+          />
+        </Table.Cell>
+        <Table.Cell className='text-nowrap'>
+          <Link.RouterLink
+            to={`/nodes/${metadata.selectors.name(node)}`}
+          >{metadata.selectors.name(node)}
+          </Link.RouterLink>
+        </Table.Cell>
+        <Table.Cell >
+          <metadata.Labels
+            labels={metadata.selectors.labels(node)}
+            maxLabels={2}
+          />
+        </Table.Cell>
+      </Table.Row>
     ));
 }
 
-const List = ({nodes}) => (
-  <Card title='Nodes' className='table-responsive-sm'>
-    <Table
-      responsive
-      className='card-table table-vcenter table-striped'
-    >
-      <Table.Header>
-        <Table.Row>
-          {headers.map((header, idx) => (
-            <Table.ColHeader key={idx}>{header}</Table.ColHeader>
-          ))}
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        <Rows nodes={nodes} />
-      </Table.Body>
-    </Table>
-  </Card>
+const List = ({nodes, ...properties}) => (
+  <Table {...properties}>
+    <Table.Head
+      columns={headers}
+    />
+    <Table.Body>
+      <Rows nodes={nodes} />
+    </Table.Body>
+  </Table>
 );
 
 const mapStateToProps = ({nodes}) => ({

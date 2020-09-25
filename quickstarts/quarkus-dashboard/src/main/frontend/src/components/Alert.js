@@ -15,14 +15,18 @@
  *
  */
 import React from 'react';
-import {Form, Grid} from 'tabler-react';
 
-const Field = ({label, children}) => (
-  <Grid.Col width={12} md={6} lg={4}>
-    <Form.Group label={label}>
-      <Form.StaticText>{children}</Form.StaticText>
-    </Form.Group>
-  </Grid.Col>
+const Alert = ({clearError, children}) => (
+  <div
+    className={`
+      ${children ? 'block translate-y-0 m-2 py-1' : '-translate-y-full py-0'}
+      border rounded bg-red-200 border-red-300 p-2
+      cursor-pointer text-red-500 text-sm select-none
+      transform transition-transform duration-200
+      `}
+    onClick={clearError}
+  >
+    {children}
+  </div>
 );
-
-export default Field;
+export default Alert;
