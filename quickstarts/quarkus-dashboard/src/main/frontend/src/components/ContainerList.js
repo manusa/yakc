@@ -15,38 +15,29 @@
  *
  */
 import React from 'react';
-import {Card, Table} from 'tabler-react';
+import Table from '../components/Table';
 
 const containerHeaders = ['Name', 'Image', 'Ports'];
 
-const ContainerList = ({containers}) => (
-  <Card title='Containers'>
-    <Table
-      responsive
-      className='card-table table-vcenter table-striped'
-    >
-      <Table.Header>
-        <Table.Row>
-          {containerHeaders.map((header, idx) => (
-            <Table.ColHeader key={idx}>{header}</Table.ColHeader>
-          ))}
+const ContainerList = ({containers, ...properties}) => (
+  <Table {...properties}>
+    <Table.Head
+      columns={containerHeaders}
+    />
+    <Table.Body>
+      {containers.map(c => (
+        <Table.Row key={c.name}>
+          <Table.Cell>{c.name}</Table.Cell>
+          <Table.Cell>{c.image}</Table.Cell>
+          <Table.Cell>
+            {(c.ports ?? []).map((p, idx) => (
+              <div key={idx}>{p.name} {p.containerPort} {p.protocol}</div>
+            ))}
+          </Table.Cell>
         </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        {containers.map(c => (
-          <Table.Row key={c.name}>
-            <Table.Col>{c.name}</Table.Col>
-            <Table.Col>{c.image}</Table.Col>
-            <Table.Col>
-              {(c.ports ?? []).map((p, idx) => (
-                <div key={idx}>{p.name} {p.containerPort} {p.protocol}</div>
-              ))}
-            </Table.Col>
-          </Table.Row>
-        ))}
-      </Table.Body>
-    </Table>
-  </Card>
+      ))}
+    </Table.Body>
+  </Table>
 );
 
 export default ContainerList;

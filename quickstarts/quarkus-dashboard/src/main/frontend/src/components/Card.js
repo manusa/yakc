@@ -15,14 +15,31 @@
  *
  */
 import React from 'react';
-import DashboardPage from '../components/DashboardPage';
-import deployments from './';
 
-const DeploymentsPage = () => (
-  <DashboardPage title='Deployments'>
-    <deployments.DeploymentsCard />
-    <deployments.List className='mt-4' />
-  </DashboardPage>
+const Card = ({className, dispatch, children, ...props}) => (
+  <div
+    className={`block overflow-x-auto bg-white shadow border-b border-gray-500 sm:rounded-lg ${className ?? ''}`}
+    {...props}
+  >
+    {children}
+  </div>
 );
 
-export default DeploymentsPage;
+Card.Title = ({className, children}) => (
+  <div
+    className={`
+      p-3 text-gray-700 font-medium text-lg
+      border-b border-blue-700 border-opacity-25
+      ${className ?? ''}`}
+  >
+    {children}
+  </div>
+);
+
+Card.Body = ({className, children}) => (
+  <div className={`p-3 ${className ?? ''}`}>
+    {children}
+  </div>
+);
+
+export default Card;

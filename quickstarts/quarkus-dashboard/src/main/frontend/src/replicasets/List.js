@@ -16,14 +16,13 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
-import {Card, Icon, Table} from 'tabler-react';
-import TableNoResults from '../components/TableNoResults';
 import metadata from '../metadata';
-import rs from './'
-
+import rs from './';
+import Icon from '../components/Icon';
+import Table from '../components/Table';
 
 const headers = [
-  'Ready',
+  '',
   'Name',
   'Namespace',
   'Replicas'
@@ -35,49 +34,40 @@ const sort = (p1, p2) =>
 const Rows = ({replicaSets}) => {
   const allRS = Object.values(replicaSets);
   if (allRS.length === 0) {
-    return <TableNoResults colSpan={headers.length} />;
+    return <Table.NoResultsRow colSpan={headers.length} />;
   }
   return allRS
     .sort(sort)
     .map(replicaSet => (
-        <Table.Row key={metadata.selectors.uid(replicaSet)}>
-          <Table.Col>
-            <Icon
-              className={rs.selectors.isReady(replicaSet) ? 'text-success' : 'text-danger'}
-              name={rs.selectors.isReady(replicaSet) ? 'check' : 'alert-circle'}
-            />
-          </Table.Col>
-          <Table.Col className='text-nowrap'>
-            {metadata.selectors.name(replicaSet)}
-          </Table.Col>
-          <Table.Col className='text-nowrap'>
-            {metadata.selectors.namespace(replicaSet)}
-          </Table.Col>
-          <Table.Col className='text-nowrap'>
-            {rs.selectors.specReplicas(replicaSet)}
-          </Table.Col>
-        </Table.Row>
+      <Table.Row key={metadata.selectors.uid(replicaSet)}>
+        <Table.Cell className='whitespace-no-wrap w-3 text-center'>
+          <Icon
+            className={rs.selectors.isReady(replicaSet) ? 'text-green-500' : 'text-red-500'}
+            icon={rs.selectors.isReady(replicaSet) ? 'fa-check' : 'fa-exclamation-circle'}
+          />
+        </Table.Cell>
+        <Table.Cell className='whitespace-no-wrap'>
+          {metadata.selectors.name(replicaSet)}
+        </Table.Cell>
+        <Table.Cell className='whitespace-no-wrap'>
+          {metadata.selectors.namespace(replicaSet)}
+        </Table.Cell>
+        <Table.Cell className='whitespace-no-wrap'>
+          {rs.selectors.specReplicas(replicaSet)}
+        </Table.Cell>
+      </Table.Row>
     ));
 }
 
-const List = ({replicaSets}) => (
-  <Card title='Replica Sets' className='table-responsive-sm'>
-    <Table
-      responsive
-      className='card-table table-vcenter table-striped'
-    >
-      <Table.Header>
-        <Table.Row>
-          {headers.map((header, idx) => (
-            <Table.ColHeader key={idx}>{header}</Table.ColHeader>
-          ))}
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        <Rows replicaSets={replicaSets} />
-      </Table.Body>
-    </Table>
-  </Card>
+const List = ({replicaSets, ...properties}) => (
+  <Table {...properties}>
+    <Table.Head
+      columns={headers}
+    />
+    <Table.Body>
+      <Rows replicaSets={replicaSets} />
+    </Table.Body>
+  </Table>
 );
 
 const mapStateToProps = ({replicaSets}) => ({

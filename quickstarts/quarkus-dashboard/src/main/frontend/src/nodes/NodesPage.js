@@ -17,22 +17,13 @@
 import React from 'react';
 import nodes from './';
 import DashboardPage from '../components/DashboardPage';
-import {Grid} from 'tabler-react';
 
 const NodesPage = () => (
-  <DashboardPage>
-    <Grid>
-      <Grid.Row cards={true}>
-        <Grid.Col width={12} >
-          <nodes.NodesCard />
-        </Grid.Col>
-      </Grid.Row>
-      <Grid.Row>
-        <Grid.Col>
-          <nodes.List />
-        </Grid.Col>
-      </Grid.Row>
-    </Grid>
+  <DashboardPage title='Nodes'>
+    <div className='flex justify-center'>
+      <nodes.NodesCard responsiveClassName='w-full'/>
+    </div>
+    <nodes.List className='mt-4' />
   </DashboardPage>
 );
 

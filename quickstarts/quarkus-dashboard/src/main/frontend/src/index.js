@@ -27,8 +27,10 @@ import redux from './redux';
 import services from './services';
 import App from './App';
 
-import 'tabler-react/dist/Tabler.css';
-import './index.css';
+import 'typeface-open-sans/index.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import './assets/tailwind.css';
+import 'simplebar/dist/simplebar.min.css';
 
 const storeEnhancer = () => {
   if (process.env.NODE_ENV === 'development' && window.__REDUX_DEVTOOLS_EXTENSION__) {

@@ -15,14 +15,9 @@
  *
  */
 import React from 'react';
-import DashboardPage from '../components/DashboardPage';
-import deployments from './';
 
-const DeploymentsPage = () => (
-  <DashboardPage title='Deployments'>
-    <deployments.DeploymentsCard />
-    <deployments.List className='mt-4' />
-  </DashboardPage>
+const Icon = ({icon, stylePrefix = 'fas', className = '' }) => (
+  <i className={`${stylePrefix} ${icon} ${className}`} />
 );
 
-export default DeploymentsPage;
+export default Icon;

@@ -16,10 +16,15 @@
  */
 import React from 'react';
 import {useHistory} from 'react-router-dom';
-import {Card, Header, Progress} from 'tabler-react';
 import icons from '../icons';
 
-import './StatusCard.css';
+const Progress = ({bg = 'bg-grey-light', fg = 'bg-blue-700', progress = 0}) => (
+  <div className='self-stretch mx-6'>
+    <div className={`w-full rounded ${bg}`}>
+      <div className={`leading-none py-1 rounded ${fg}`} style={{width: `${progress}%`}} />
+    </div>
+  </div>
+);
 
 const StatusCard = ({
   header,
@@ -27,6 +32,8 @@ const StatusCard = ({
   ready = 0,
   total = 0,
   progressWidth = 0,
+  responsiveClassName = '',
+  className = '',
   to
 }) => {
   const history = useHistory();
@@ -36,23 +43,22 @@ const StatusCard = ({
     }
   }
   return (
-    <Card className='status-card'>
-      <Card.Body className='text-center'>
-        <Header size={5}>{header}</Header>
+    <div className={responsiveClassName}>
+      <div className={`
+        flex flex-col items-center py-6 shadow-sm rounded-md bg-white border-gray-700
+        ${className}
+      `}>
+        <h2 className='font-semibold text-lg mb-2'>{header}</h2>
         <img
           src={icon}
           onClick={onClick}
-          className='status-card__icon img-fluid mb-2'
+          className='cursor-pointer'
           alt={`Icon for ${header} status`}
         />
-        <h5>{ready} / {total}</h5>
-        <Progress size='sm'>
-          <Progress.Bar width={progressWidth} />
-          <Progress.Bar width={100 - progressWidth} color='warning' />
-        </Progress>
-      </Card.Body>
-    </Card>
-
+        <h3 className='text-lg my-2'>{ready} / {total}</h3>
+        <Progress progress={progressWidth} bg='bg-orange-400'/>
+      </div>
+    </div>
   );
 }
 

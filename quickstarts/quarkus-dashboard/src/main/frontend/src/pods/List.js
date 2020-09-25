@@ -16,14 +16,14 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom';
-import {Button, Card, Icon, Table} from 'tabler-react';
-import TableNoResults from '../components/TableNoResults';
+import Icon from '../components/Icon';
+import Link from '../components/Link';
+import Table from '../components/Table';
 import metadata from '../metadata';
 import podsModule from './'
 
 const headers = [
-  'Ready',
+  '',
   'Name',
   'Namespace',
   'Status',
@@ -37,67 +37,59 @@ const sort = (p1, p2) =>
 const Rows = ({pods}) => {
   const allPods = Object.values(pods);
   if (allPods.length === 0) {
-    return <TableNoResults colSpan={headers.length} />;
+    return <Table.NoResultsRow colSpan={headers.length} />;
   }
   const deletePod = pod => async () => await podsModule.api.requestDelete(pod);
   return allPods
     .sort(sort)
     .map(pod => (
-        <Table.Row key={metadata.selectors.uid(pod)}>
-          <Table.Col>
-            <Icon
-              className={podsModule.selectors.containersReady(pod) ? 'text-success' : 'text-danger'}
-              name={podsModule.selectors.containersReady(pod) ? 'check' : 'alert-circle'}
-            />
-          </Table.Col>
-          <Table.Col className='text-nowrap'>
-            <Link to={`/pods/${metadata.selectors.uid(pod)}`}>{metadata.selectors.name(pod)}</Link>
-          </Table.Col>
-          <Table.Col className='text-nowrap'>
-            {metadata.selectors.namespace(pod)}
-          </Table.Col>
-          <Table.Col className='text-nowrap'>
-            {podsModule.selectors.statusPhase(pod)}
-          </Table.Col>
-          <Table.Col >
-            {podsModule.selectors.restartCount(pod)}
-          </Table.Col>
-          <Table.Col className='text-center'>
-            <Link
-              className='btn btn-sm btn-outline-primary btn-icon mr-1'
-              to={`/pods/${metadata.selectors.uid(pod)}/logs`}
-              title='Logs'
-            ><Icon name='file-text' /></Link>
-            <Button
-              icon='trash'
-              color='danger'
-              outline
-              size='sm'
-              onClick={deletePod(pod)}
-            />
-          </Table.Col>
-        </Table.Row>
+      <Table.Row key={metadata.selectors.uid(pod)}>
+        <Table.Cell className='whitespace-no-wrap w-3 text-center'>
+          <Icon
+            className={podsModule.selectors.containersReady(pod) ? 'text-green-500' : 'text-red-500'}
+            icon={podsModule.selectors.containersReady(pod) ? 'fa-check' : 'fa-exclamation-circle'}
+          />
+        </Table.Cell>
+        <Table.Cell className='whitespace-no-wrap'>
+          <Link.RouterLink to={`/pods/${metadata.selectors.uid(pod)}`}>
+            {metadata.selectors.name(pod)}
+          </Link.RouterLink>
+        </Table.Cell>
+        <Table.Cell className='whitespace-no-wrap'>
+          {metadata.selectors.namespace(pod)}
+        </Table.Cell>
+        <Table.Cell className='whitespace-no-wrap'>
+          {podsModule.selectors.statusPhase(pod)}
+        </Table.Cell>
+        <Table.Cell >
+          {podsModule.selectors.restartCount(pod)}
+        </Table.Cell>
+        <Table.Cell className='text-center'>
+          <Link.RouterLink
+            variant={Link.variants.outline}
+            to={`/pods/${metadata.selectors.uid(pod)}/logs`}
+            title='Logs'
+          ><Icon stylePrefix='far' icon='fa-file-alt' /></Link.RouterLink>
+          <Link
+            variant={Link.variants.outlineDanger}
+            className='ml-1'
+            onClick={deletePod(pod)}
+            title='Delete'
+          ><Icon stylePrefix='far' icon='fa-trash-alt' /></Link>
+        </Table.Cell>
+      </Table.Row>
     ));
 }
 
-const List = ({pods}) => (
-  <Card title='Pods' className='table-responsive-sm'>
-    <Table
-      responsive
-      className='card-table table-vcenter table-striped'
-    >
-      <Table.Header>
-        <Table.Row>
-          {headers.map((header, idx) => (
-            <Table.ColHeader key={idx}>{header}</Table.ColHeader>
-          ))}
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        <Rows pods={pods} />
-      </Table.Body>
-    </Table>
-  </Card>
+const List = ({pods, ...properties}) => (
+  <Table {...properties}>
+    <Table.Head
+      columns={headers}
+    />
+    <Table.Body>
+      <Rows pods={pods} />
+    </Table.Body>
+  </Table>
 );
 
 const mapStateToProps = ({pods}) => ({

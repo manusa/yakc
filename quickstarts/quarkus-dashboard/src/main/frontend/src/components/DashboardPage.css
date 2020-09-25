@@ -1,36 +1,3 @@
-.dashboard-page .page-main > .header > .container,
-.dashboard-page .page-main > .page-content > .container,
-.dashboard-page .page-main > .footer > .container  {
-  max-width: initial;
-}
-
-.header .nav .nav-link .fe {
-  background: transparent 50% 50% no-repeat;
-  background-size: contain;
-  height: 1.5rem;
-  width: 1.5rem;
-}
-
-.header .nav .nav-link .fe-k8s {
-  background-image: url("../assets/k8s-icons/k8s.svg");
-}
-
-.header .nav .nav-link .fe-deployment {
-  background-image: url("../assets/k8s-icons/deploy.svg");
-}
-
-.header .nav .nav-link .fe-node {
-  background-image: url("../assets/k8s-icons/node.svg");
-}
-
-.header .nav .nav-link .fe-pod {
-  background-image: url("../assets/k8s-icons/pod.svg");
-}
-
-.header .nav .nav-item .fe-svc {
-  background: transparent url("../assets/k8s-icons/svc.svg") 50% 50% no-repeat;
-  background-size: contain;
-  height: 1.5rem;
-  width: 1.5rem;
-  vertical-align: bottom;
+.dashboard-page .side-bar .simplebar-scrollbar::before {
+  background-color: white;
 }

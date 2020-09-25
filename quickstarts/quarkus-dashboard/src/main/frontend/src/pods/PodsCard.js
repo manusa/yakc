@@ -20,7 +20,7 @@ import StatusCard from '../components/StatusCard';
 import icons from '../icons';
 import podsModule from './';
 
-const PodsCard = ({pods}) => {
+const PodsCard = ({pods, ...properties}) => {
   const podObjects = Object.values(pods);
   const ready = podsModule.selectors.readyCount(podObjects);
   const total = podObjects.length
@@ -32,6 +32,7 @@ const PodsCard = ({pods}) => {
       ready={ready}
       total={total}
       progressWidth={Math.round(ready/total*100)}
+      {...properties}
     />
   );
 };

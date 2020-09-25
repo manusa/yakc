@@ -16,20 +16,25 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import {Card, Grid} from 'tabler-react';
-import DashboardPage from '../components/DashboardPage';
-import Field from '../components/Field';
 import metadata from '../metadata';
 import svc from './';
+import Card from '../components/Card';
+import DashboardPage from '../components/DashboardPage';
+import Form from '../components/Form';
 
 const ServicesDetailPage = ({service}) => (
-  <DashboardPage>
-    <Card title={`Service - ${metadata.selectors.namespace(service)} - ${metadata.selectors.name(service)}`}>
+  <DashboardPage
+    title={`Services - ${metadata.selectors.namespace(service)} - ${metadata.selectors.name(service)}`}
+  >
+    <Card>
+      <Card.Title>
+        {metadata.selectors.namespace(service)} - {metadata.selectors.name(service)}
+      </Card.Title>
       <Card.Body>
-        <metadata.Details resource={service} />
-        <Grid.Row>
-          <Field label='Cluster IP'>{svc.selectors.specClusterIP(service)}</Field>
-        </Grid.Row>
+        <Form>
+          <metadata.Details resource={service} />
+          <Form.Field label='Cluster IP'>{svc.selectors.specClusterIP(service)}</Form.Field>
+        </Form>
       </Card.Body>
     </Card>
   </DashboardPage>

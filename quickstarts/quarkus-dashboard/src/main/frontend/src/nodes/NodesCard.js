@@ -20,7 +20,7 @@ import StatusCard from '../components/StatusCard';
 import icons from '../icons';
 import nodesModule from './'
 
-const NodesCard = ({nodes}) => {
+const NodesCard = ({nodes, ...properties}) => {
   const nodeObjects = Object.values(nodes);
   const ready = nodesModule.selectors.readyCount(nodeObjects);
   const total = nodeObjects.length;
@@ -32,6 +32,7 @@ const NodesCard = ({nodes}) => {
       ready={ready}
       total={total}
       progressWidth={Math.round(ready/total*100)}
+      {...properties}
     />
   );
 };
