@@ -29,8 +29,13 @@ const eventSources = [];
 
 const pollResources = dispatch => {
   const dispatchedPoll = async () => {
-    const serviceList = await services.api.list();
-    dispatch(redux.actions.crudSetAll({kind: 'Service', resources: serviceList}));
+    try {
+      const serviceList = await services.api.list();
+      dispatch(
+        redux.actions.crudSetAll({kind: 'Service', resources: serviceList}));
+    } catch (e) {
+      dispatch(redux.actions.setError('Error when polling resources (retrying)'));
+    }
     setTimeout(dispatchedPoll, 5000)
   };
   return dispatchedPoll;
