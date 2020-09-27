@@ -20,6 +20,7 @@ package com.marcnuri.yakc.quickstarts.dashboard.service;
 import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Service;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -38,5 +39,9 @@ public class ServiceService {
 
   public List<Service> get() throws IOException {
     return kubernetesClient.create(CoreV1Api.class).listServiceForAllNamespaces().get().getItems();
+  }
+
+  public Status deleteService(String name, String namespace) throws IOException {
+    return kubernetesClient.create(CoreV1Api.class).deleteNamespacedService(name, namespace).get();
   }
 }

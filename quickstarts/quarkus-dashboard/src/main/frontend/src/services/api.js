@@ -15,20 +15,35 @@
  *
  */
 import {getApiURL} from '../env';
+import metadata from '../metadata';
 
 const toJson = response => {
   if (!response.ok) {
     throw Error(`${response.status}`);
   }
   return response.json();
-}
+};
+
+const fixKind = kind => resources =>
+  resources.map(resource => ({kind, ...resource}));
+
 const list = async () => {
   const response = await fetch(
     `${getApiURL()}/services`
   );
-  return await toJson(response);
-}
+  const rawList =  await toJson(response);
+  return fixKind('Service')(rawList);
+};
+
+
+const requestDelete = async deployment => {
+  await fetch(
+    `${getApiURL()}/services/${metadata.selectors.namespace(deployment)}/${metadata.selectors.name(deployment)}`,
+    {method: 'DELETE'}
+  );
+};
 
 export default {
-  list
+  list,
+  requestDelete
 };

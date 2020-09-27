@@ -20,9 +20,13 @@ package com.marcnuri.yakc.quickstarts.dashboard.service;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Service;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import java.io.IOException;
 import java.util.List;
@@ -42,5 +46,14 @@ public class ServiceResource {
   @Produces(MediaType.APPLICATION_JSON)
   public List<Service> get() throws IOException {
     return serviceService.get();
+  }
+
+  @DELETE
+  @Path("/{namespace}/{name}")
+  public Response delete(@PathParam("namespace") String namespace, @PathParam("name") String name)
+    throws IOException {
+
+    serviceService.deleteService(name, namespace);
+    return Response.noContent().build();
   }
 }

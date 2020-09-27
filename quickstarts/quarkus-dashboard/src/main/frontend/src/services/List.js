@@ -20,6 +20,9 @@ import Link from '../components/Link';
 import Table from '../components/Table';
 import metadata from '../metadata';
 import svc from './';
+import Icon from '../components/Icon';
+import {bindActionCreators} from 'redux';
+import redux from '../redux';
 
 const headers = [
   'Name',
@@ -31,11 +34,15 @@ const headers = [
 const sort = (p1, p2) =>
   metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
 
-const Rows = ({services}) => {
+const Rows = ({services, deleteServiceAction}) => {
   const allServices = Object.values(services);
   if (allServices.length === 0) {
     return <Table.NoResultsRow colSpan={headers.length} />;
   }
+  const deleteService = service => async () => {
+    await svc.api.requestDelete(service);
+    deleteServiceAction(service);
+  };
   return allServices
     .sort(sort)
     .map(service => (
@@ -52,18 +59,23 @@ const Rows = ({services}) => {
             {svc.selectors.specClusterIP(service)}
           </Table.Cell>
           <Table.Cell>
+            <Link
+              variant={Link.variants.outlineDanger}
+              onClick={deleteService(service)}
+              title='Delete'
+            ><Icon stylePrefix='far' icon='fa-trash-alt' /></Link>
           </Table.Cell>
         </Table.Row>
     ));
 }
 
-const List = ({services, ...properties}) => (
+const List = ({services, deleteServiceAction, ...properties}) => (
   <Table {...properties}>
     <Table.Head
       columns={headers}
     />
     <Table.Body>
-      <Rows services={services} />
+      <Rows services={services} deleteServiceAction={deleteServiceAction} />
     </Table.Body>
   </Table>
 );
@@ -72,5 +84,9 @@ const mapStateToProps = ({services}) => ({
   services
 });
 
-export default connect(mapStateToProps)(List);
+const mapDispatchToProps = dispatch =>  bindActionCreators({
+  deleteServiceAction: redux.actions.crudDelete
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);
 
