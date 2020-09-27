@@ -21,11 +21,11 @@ import {connect} from 'react-redux';
 import SimpleBar from 'simplebar-react';
 import redux from '../redux';
 import icons from '../icons';
-import yakcLogo from '../assets/YAKC-logo.png';
 import Alert from './Alert';
 import Link from './Link';
 
 import './DashboardPage.css';
+import YAKCLogo from './YAKCLogo';
 
 const DashboardNavLink = ({match: {path}, to, staticContext, className = '', ...props}) => (
   <Link.RouterLink
@@ -74,8 +74,10 @@ const SideBar = ({sideBarOpen}) => {
           <Link.RouterLink
             to='/' variant={Link.variants.none} className='flex flex-col items-center'
           >
-            <img className='block h-8 lg:h-12' src={yakcLogo} alt='YAKC logo' />
-            <div className='text-white text-lg lg:text-xl mt-2 mx-2 font-semibold'>Kubernetes Dashboard</div>
+            <YAKCLogo kubernetesColor='#FFFFFF' className='block h-8 lg:h-12' />
+            <div className='text-white text-lg lg:text-xl mt-2 mx-2 font-semibold'>
+              Kubernetes Dashboard
+            </div>
           </Link.RouterLink>
         </div>
       <SimpleBar className='mt-4 lg:mt-6 flex-1 h-1 overflow-x-hidden'>
@@ -107,7 +109,7 @@ const Header = ({setSideBarOpen, title}) => {
             <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
                   strokeLinejoin="round"/>
           </svg>
-          <img className='block ml-2 h-6' src={yakcLogo} alt='YAKC logo' />
+          <YAKCLogo className='block ml-2 h-6' />
         </button>
         <div className="relative mx-4 lg:text-xl lg:mx-0 flex-1 truncate">
           {title}
