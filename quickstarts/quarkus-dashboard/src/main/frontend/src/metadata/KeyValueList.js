@@ -18,20 +18,35 @@ import React, {useState} from 'react';
 import Link from '../components/Link';
 import Tag from '../components/Tag';
 
-const Labels = ({labels = {}, maxLabels = 10}) => {
-  const labelPairs = Object.entries(labels).map(([key, value]) => `${key}: ${value}`);
+const KeyValueList = ({
+  leftBg, leftTextColor, rightBg, rightTextColor,
+  keyValues = {}, maxEntries = 10
+}) => {
+  const keyValueEntries = Object.entries(keyValues);
   const [collapsed, setCollapsed] = useState(true);
   const toggle = () => setCollapsed(!collapsed);
-  const truncate = labelPairs.length > maxLabels;
-  const displayedLabels = truncate && collapsed ? labelPairs.slice(0, maxLabels) : labelPairs;
+  const truncate = keyValueEntries.length > maxEntries;
+  const displayedAnnotations = truncate && collapsed ? keyValueEntries.slice(0, maxEntries) : keyValueEntries;
   return (
     <div className='flex flex-wrap items-center'>
-      {displayedLabels.map((label, idx) =>
-        <Tag key={idx} className='mr-1 mb-1'>{label}</Tag>
-      )}
+      {displayedAnnotations.map(([key, value], idx) => {
+        return <Tag.Double
+          key={idx} className='mr-1 mb-px' paddingY=''
+          leftContent={key}
+          leftBg={leftBg} leftTextColor={leftTextColor} rightBg={rightBg}
+          rightContent={value.trim() ? value : '\u200B'}
+        />;
+      })}
       {truncate && <Link className='text-xs' onClick={toggle}>{collapsed ? '...' : 'Show less'}</Link>}
     </div>
   );
 };
 
-export default Labels;
+KeyValueList.Annotations = props => (
+  <KeyValueList
+    leftBg='bg-gray-300' leftTextColor='text-black' rightBg='bg-gray-700'
+    {...props}
+  />
+)
+
+export default KeyValueList;

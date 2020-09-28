@@ -81,7 +81,7 @@ const Rows = ({pods}) => {
     ));
 }
 
-const List = ({pods, ...properties}) => (
+const List = ({pods, nodeName, ...properties}) => (
   <Table {...properties}>
     <Table.Head
       columns={headers}

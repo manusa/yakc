@@ -16,6 +16,9 @@
  */
 const specClusterIP = service => service?.spec?.clusterIP ?? '';
 
+const specType = service => service?.spec?.type ?? '';
+
 export default {
-  specClusterIP
+  specClusterIP,
+  specType
 };

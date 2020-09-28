@@ -30,7 +30,7 @@ Form.widths = {
   third: 'w-full md:w-1/3'
 };
 
-Form.Field = ({className, label, labelClassName, children, width = Form.widths.third}, ...props) => (
+Form.Field = ({className, label, labelClassName, children, width = Form.widths.third, ...props}) => (
   <div
     className={`m-1 ${width} ${className ?? ''}`}
     {...props}

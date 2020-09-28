@@ -27,6 +27,7 @@ import redux from '../redux';
 const headers = [
   'Name',
   'Namespace',
+  'Type',
   'Cluster IP',
   ''
 ]
@@ -54,6 +55,9 @@ const Rows = ({services, deleteServiceAction}) => {
           </Table.Cell>
           <Table.Cell className='text-nowrap'>
             {metadata.selectors.namespace(service)}
+          </Table.Cell>
+          <Table.Cell>
+            {svc.selectors.specType(service)}
           </Table.Cell>
           <Table.Cell>
             {svc.selectors.specClusterIP(service)}

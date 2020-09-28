@@ -53,9 +53,9 @@ const Rows = ({nodes}) => {
           </Link.RouterLink>
         </Table.Cell>
         <Table.Cell >
-          <metadata.Labels
-            labels={metadata.selectors.labels(node)}
-            maxLabels={2}
+          <metadata.KeyValueList
+            keyValues={metadata.selectors.labels(node)}
+            maxEntries={2}
           />
         </Table.Cell>
       </Table.Row>

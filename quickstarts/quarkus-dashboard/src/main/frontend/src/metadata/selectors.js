@@ -21,6 +21,8 @@ const creationTimestamp = object => {
   }
 }
 
+const annotations = object => object?.metadata?.annotations ?? {};
+
 const labels = object => object?.metadata?.labels ?? {};
 
 const name = object => object?.metadata?.name ?? '';
@@ -34,6 +36,7 @@ const ownerReferencesUids = object => (object?.metadata?.ownerReferences ?? [])
 
 export default {
   creationTimestamp,
+  annotations,
   labels,
   name,
   namespace,

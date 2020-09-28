@@ -19,8 +19,14 @@ import metadata from './';
 import Form from '../components/Form';
 
 const LabelsRow = ({labels}) => labels && Object.values(labels).length > 0 && (
-  <Form.Field width={Form.widths.full} label='Labels'>
-    <metadata.Labels  maxLabels={4} labels={labels} />
+  <Form.Field width={Form.widths.full}>
+    <metadata.KeyValueList maxEntries={4} keyValues={labels} />
+  </Form.Field>
+);
+
+const AnnotationsRow = ({annotations}) => annotations && Object.values(annotations).length > 0 && (
+  <Form.Field width={Form.widths.full} label='Annotations'>
+    <metadata.KeyValueList.Annotations maxEntries={4} keyValues={annotations} />
   </Form.Field>
 );
 
@@ -29,12 +35,13 @@ const Details = ({resource}) => {
   const creationTimestamp = metadata.selectors.creationTimestamp(resource);
   return (
     <>
+      <LabelsRow labels={metadata.selectors.labels(resource)} />
       <Form.Field label='Name'>{metadata.selectors.name(resource)}</Form.Field>
       {namespace && <Form.Field label='Namespace'>{namespace}</Form.Field>}
       <Form.Field label='Creation timestamp'>
         {`${creationTimestamp?.toLocaleDateString()} ${creationTimestamp?.toLocaleTimeString()}`}
       </Form.Field>
-      <LabelsRow labels={metadata.selectors.labels(resource)} />
+      <AnnotationsRow annotations={metadata.selectors.annotations(resource)} />
     </>
   );
 };

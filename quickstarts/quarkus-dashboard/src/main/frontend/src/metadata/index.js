@@ -15,11 +15,11 @@
  *
  */
 import selectors from './selectors';
+import KeyValueList from './KeyValueList';
 import Details from './Details';
-import Labels from './Labels';
 
 export default {
   selectors,
-  Details,
-  Labels,
+  KeyValueList,
+  Details
 };
