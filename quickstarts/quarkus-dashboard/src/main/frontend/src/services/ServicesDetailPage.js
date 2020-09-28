@@ -22,6 +22,22 @@ import Card from '../components/Card';
 import DashboardPage from '../components/DashboardPage';
 import Form from '../components/Form';
 
+const Selectors = ({selectors}) => (
+  <Form.Field label='Selectors' width={Form.widths.full}>
+    {Object.entries(selectors).reduce(
+      (acc, [key, value]) => `${acc ? `${acc}, ` : ''}${key}=${value}`,
+      ''
+    )}
+  </Form.Field>
+);
+
+const ExternalIps = ({ips}) => (
+  <Form.Field label='External IPs'>
+    {ips.length > 0 && ips.map((ip, idx) => <div key={idx}>{ip}</div>)}
+    {ips.length === 0 && <div>None</div>}
+  </Form.Field>
+);
+
 const ServicesDetailPage = ({service}) => (
   <DashboardPage
     title={`Services - ${metadata.selectors.namespace(service)} - ${metadata.selectors.name(service)}`}
@@ -33,7 +49,12 @@ const ServicesDetailPage = ({service}) => (
       <Card.Body>
         <Form>
           <metadata.Details resource={service} />
+          <Selectors selectors={svc.selectors.specSelector(service)} />
+          <Form.Field label='Type'>
+            <svc.Type service={service} />
+          </Form.Field>
           <Form.Field label='Cluster IP'>{svc.selectors.specClusterIP(service)}</Form.Field>
+          <ExternalIps ips={svc.selectors.specExternalIPs(service)} />
         </Form>
       </Card.Body>
     </Card>

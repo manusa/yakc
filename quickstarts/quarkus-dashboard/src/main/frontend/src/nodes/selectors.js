@@ -20,6 +20,13 @@ const isReady = node => {
   return ready && ready.status;
 };
 
+const statusAddresses = node => node?.status?.addresses ?? [];
+
+const statusAddressesFirstAddress = node =>
+  statusAddresses(node).map(a => a.address ?? '').find(a => a) ?? '';
+
+// Selectors for array of Nodes
+
 const readyCount = nodes => nodes.reduce(
   (count, node) => isReady(node) ? ++count : count,
   0
@@ -27,5 +34,7 @@ const readyCount = nodes => nodes.reduce(
 
 export default {
   isReady,
+  statusAddresses,
+  statusAddressesFirstAddress,
   readyCount
 };

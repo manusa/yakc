@@ -16,9 +16,22 @@
  */
 const specClusterIP = service => service?.spec?.clusterIP ?? '';
 
+const specExternalIPs = service => service?.spec?.externalIPs ?? [];
+
+const specSelector = service => service?.spec?.selector ?? {};
+
+const specPorts = service => service?.spec?.ports ?? [];
+
+const specPortsFirstNodePort = service => specPorts(service)
+  .map(p => p.nodePort).find(np => np) ?? 0;
+
 const specType = service => service?.spec?.type ?? '';
 
 export default {
   specClusterIP,
+  specExternalIPs,
+  specSelector,
+  specPorts,
+  specPortsFirstNodePort,
   specType
 };

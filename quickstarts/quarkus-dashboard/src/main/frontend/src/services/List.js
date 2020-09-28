@@ -57,7 +57,7 @@ const Rows = ({services, deleteServiceAction}) => {
             {metadata.selectors.namespace(service)}
           </Table.Cell>
           <Table.Cell>
-            {svc.selectors.specType(service)}
+            <svc.Type service={service} />
           </Table.Cell>
           <Table.Cell>
             {svc.selectors.specClusterIP(service)}

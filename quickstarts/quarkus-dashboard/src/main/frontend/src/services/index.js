@@ -20,6 +20,7 @@ import selectors from './selectors';
 import List from './List';
 import ServicesDetailPage from './ServicesDetailPage';
 import ServicesPage from './ServicesPage';
+import Type from './Type';
 
 export default {
   api,
@@ -27,5 +28,6 @@ export default {
   selectors,
   List,
   ServicesDetailPage,
-  ServicesPage
+  ServicesPage,
+  Type
 };

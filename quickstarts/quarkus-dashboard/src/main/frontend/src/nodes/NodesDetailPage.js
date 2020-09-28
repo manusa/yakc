@@ -34,7 +34,7 @@ const NodesDetailPage = ({node}) => (
         </Form>
       </Card.Body>
     </Card>
-    <pods.List className='mt-4' nodeName={metadata.selectors.name(node)}/>
+    <pods.List title='Pods' className='mt-4' nodeName={metadata.selectors.name(node)} />
   </DashboardPage>
 );
 
