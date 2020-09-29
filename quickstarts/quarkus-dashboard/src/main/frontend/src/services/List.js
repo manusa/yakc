@@ -25,7 +25,7 @@ import {bindActionCreators} from 'redux';
 import redux from '../redux';
 
 const headers = [
-  'Name',
+  <span><Icon className='fa-id-card' /> Name</span>,
   'Namespace',
   'Type',
   'Cluster IP',

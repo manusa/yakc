@@ -24,8 +24,8 @@ import n from './'
 
 const headers = [
   '',
-  'Name',
-  'Labels'
+  <span><Icon className='fa-id-card' /> Name</span>,
+  <span><Icon className='fa-tags' /> Labels</span>
 ]
 
 const sort = (n1, n2) =>

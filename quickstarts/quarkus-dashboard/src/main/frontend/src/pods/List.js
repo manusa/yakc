@@ -24,7 +24,7 @@ import podsModule from './'
 
 const headers = [
   '',
-  'Name',
+  <span><Icon className='fa-id-card' /> Name</span>,
   'Namespace',
   'Status',
   'Restarts',
@@ -50,7 +50,7 @@ const Rows = ({pods}) => {
             icon={podsModule.selectors.containersReady(pod) ? 'fa-check' : 'fa-exclamation-circle'}
           />
         </Table.Cell>
-        <Table.Cell className='whitespace-no-wrap'>
+        <Table.Cell>
           <Link.RouterLink to={`/pods/${metadata.selectors.uid(pod)}`}>
             {metadata.selectors.name(pod)}
           </Link.RouterLink>
@@ -64,7 +64,7 @@ const Rows = ({pods}) => {
         <Table.Cell >
           {podsModule.selectors.restartCount(pod)}
         </Table.Cell>
-        <Table.Cell className='text-center'>
+        <Table.Cell className='whitespace-no-wrap text-center'>
           <Link.RouterLink
             variant={Link.variants.outline}
             to={`/pods/${metadata.selectors.uid(pod)}/logs`}

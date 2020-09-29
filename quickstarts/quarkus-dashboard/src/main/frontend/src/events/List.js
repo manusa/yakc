@@ -20,10 +20,11 @@ import Link from '../components/Link';
 import Table from '../components/Table';
 import Tooltip from '../components/Tooltip';
 import metadata from "../metadata";
+import Icon from '../components/Icon';
 
 const headers = [
   'Type',
-  'Name',
+  <span><Icon className='fa-id-card' /> Name</span>,
   'Time',
   'Reason',
   'Event'

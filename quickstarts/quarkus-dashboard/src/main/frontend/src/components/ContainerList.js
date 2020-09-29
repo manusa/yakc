@@ -15,9 +15,14 @@
  *
  */
 import React from 'react';
-import Table from '../components/Table';
+import Icon from './Icon';
+import Table from './Table';
 
-const containerHeaders = ['Name', 'Image', 'Ports'];
+const containerHeaders = [
+  <span><Icon className='fa-id-card' /> Name</span>,
+  <span><Icon icon='fa-layer-group'/> Image</span>,
+  <span><Icon icon='fa-ethernet' /> Ports</span>
+];
 
 const ContainerList = ({containers, ...properties}) => (
   <Table {...properties}>
