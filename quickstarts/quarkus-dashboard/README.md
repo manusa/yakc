@@ -16,7 +16,7 @@ $ kubectl create -f https://raw.githubusercontent.com/manusa/yakc/master/quickst
 $ minikube service yakc-dashboard
 ``` 
 
-![An image of a screenshot YAKC Kubernetes Dashboard landing page](docs/yakc-kubernetes-dashboard.png)
+![An image of a screenshot YAKC Kubernetes Dashboard landing page](docs/yakc-kubernetes-dashboard.gif)
 
 ## Build
 
