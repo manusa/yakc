@@ -20,6 +20,7 @@ const Types = {
   CRUD_ADD_OR_REPLACE: 'CRUD_ADD_OR_REPLACE',
   CRUD_DELETE: 'CRUD_DELETE',
   CRUD_SET_ALL: 'CRUD_SET_ALL',
+  UI_SET_OFFLINE: 'UI_SET_OFFLINE',
   UI_SET_ERROR: 'UI_SET_ERROR',
   UI_CLEAR_ERROR: 'UI_CLEAR_ERROR',
 }
@@ -43,6 +44,11 @@ const crudSetAll = ({kind, resources}) => ({
   payload: {kind, resources}
 });
 
+const setOffline = (offline = false) => ({
+  type: Types.UI_SET_OFFLINE,
+  payload: offline
+});
+
 const setError = error => ({
   type: Types.UI_SET_ERROR,
   payload: error
@@ -59,6 +65,7 @@ export default {
   crudAddOrReplace,
   crudDelete,
   crudSetAll,
+  setOffline,
   setError,
   clearError
 };

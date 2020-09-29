@@ -20,6 +20,9 @@ import redux from './index';
 const uiReducer = (state = {}, action = {}) => {
   const {actions: {Types}} = redux;
   switch (action.type) {
+    case Types.UI_SET_OFFLINE: {
+      return {...state, offline: action.payload}
+    }
     case Types.UI_SET_ERROR: {
       const newState = {...state};
       newState.error = action.payload

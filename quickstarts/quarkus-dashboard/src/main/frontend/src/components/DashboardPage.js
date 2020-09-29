@@ -22,6 +22,7 @@ import SimpleBar from 'simplebar-react';
 import redux from '../redux';
 import icons from '../icons';
 import Alert from './Alert';
+import Icon from './Icon';
 import Link from './Link';
 
 import './DashboardPage.css';
@@ -97,10 +98,17 @@ const SideBar = ({sideBarOpen}) => {
   );
 };
 
-const Header = ({setSideBarOpen, title}) => {
+const OfflineIcon = () => (
+  <div className='fa-stack text-red-700' title='Watchers stopped (No network)'>
+    <Icon className='fa-wifi fa-stack-1x'/>
+    <Icon className='fa-slash fa-stack-1x'/>
+  </div>
+);
+
+const Header = ({offline, setSideBarOpen, title}) => {
   return (
     <header className='flex justify-between items-center py-4 px-6 bg-white border-b-2 border-blue-700 border-opacity-75'>
-      <div className='flex items-center'>
+      <div className='flex w-full items-center'>
         <button
           onClick={() => setSideBarOpen(true)}
           className='flex items-center text-gray-500 focus:outline-none lg:hidden'
@@ -114,6 +122,7 @@ const Header = ({setSideBarOpen, title}) => {
         <div className="relative mx-4 lg:text-xl lg:mx-0 flex-1 truncate">
           {title}
         </div>
+        {offline && <OfflineIcon />}
       </div>
     </header>
   );
@@ -129,7 +138,7 @@ const Footer = () => (
   </footer>
 );
 
-const DashboardPage = ({className, error, clearError, title, children}) => {
+const DashboardPage = ({className, offline, error, clearError, title, children}) => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
   return (
     <div className={`dashboard-page flex h-screen bg-gray-200 overflow-hidden ${className ?? ''}`}>
@@ -139,7 +148,7 @@ const DashboardPage = ({className, error, clearError, title, children}) => {
       />
       <SideBar sideBarOpen={sideBarOpen} />
       <div className='flex-1 flex flex-col overflow-hidden'>
-        <Header setSideBarOpen={setSideBarOpen} title={title} />
+        <Header offline={offline} setSideBarOpen={setSideBarOpen} title={title} />
         <main className='flex-1 flex flex-col overflow-x-hidden overflow-y-auto bg-gray-200'>
           <Alert clearError={clearError}>{error}</Alert>
           <div className='flex-1 w-100 p-4 relative'>
@@ -153,7 +162,8 @@ const DashboardPage = ({className, error, clearError, title, children}) => {
 };
 
 
-const mapStateToProps = ({ui: {error}}) => ({
+const mapStateToProps = ({ui: {offline, error}}) => ({
+  offline,
   error
 });
 

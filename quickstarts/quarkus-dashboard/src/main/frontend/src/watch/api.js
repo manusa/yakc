@@ -25,6 +25,7 @@ const startEventSource =
     }, dispatch);
     const eventSource = new EventSource(`${getApiURL()}/watch`);
     eventSource.onopen = () => {
+      actions.setOffline(false);
       actions.clear();
     }
     eventSource.onmessage = ({data}) => {
@@ -48,7 +49,7 @@ const startEventSource =
     }
     eventSource.onerror = () => {
       console.error('Error starting watch');
-      actions.setError('Connection error');
+      actions.setOffline(true);
     }
     return eventSource;
   };
