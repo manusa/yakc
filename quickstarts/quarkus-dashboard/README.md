@@ -52,6 +52,24 @@ the provided profile `build-frontend`.
 $ mvn clean package -Pbuild-frontend
 ```
 
+### Native image
+
+**WIP**
+
+The first step is building the `reflection-config.json` file that will be used by GraalVM to register
+classes for [reflection](https://www.graalvm.org/reference-manual/native-image/Reflection/.
+```shell script
+$ node scripts/generate-reflection-config.js
+```
+
+Next we can build the application
+```
+# On Windows first you need to run this
+$ "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat" && mvn clean install -Pnative
+# To build (You can combine with the front-end build profiles)
+$ mvn clean package -Dnative
+```
+
 ## Build & Deploy to Minikube using Maven
 
 Follow these instructions if you want to build & deploy the project into a Kubernetes Cluster, in

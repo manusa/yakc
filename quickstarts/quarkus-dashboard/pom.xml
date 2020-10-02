@@ -155,5 +155,28 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>native</id>
+      <activation>
+        <property>
+          <name>native</name>
+        </property>
+      </activation>
+      <properties>
+        <!-- allow-incomplete-classpath Option required for OkHTTP -->
+        <quarkus.package.type>native</quarkus.package.type>
+        <quarkus.native.additional-build-args>
+          -H:EnableURLProtocols=https,
+          -H:EnableURLProtocols=http,
+          --enable-all-security-services,
+          -H:+JNI,
+          -H:ReflectionConfigurationFiles=../../reflection-config.json,
+          -H:ResourceConfigurationFiles=resources-config.json,
+          -H:DynamicProxyConfigurationFiles=dynamic-proxy-classes-config.json,
+          --allow-incomplete-classpath,
+          --report-unsupported-elements-at-runtime
+        </quarkus.native.additional-build-args>
+      </properties>
+    </profile>
   </profiles>
 </project>
