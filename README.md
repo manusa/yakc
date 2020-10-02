@@ -45,6 +45,9 @@ try (KubernetesClient kc = new KubernetesClient()) {
 Check the [quickstarts](quickstarts) directory for projects ready to use with illustrative examples
 on how to use the client.
 
+- [Quarkus Kubernetes Dashboard](quickstarts/quarkus-dashboard), full featured reactive Kubernetes 
+  dashboard built with Quarkus and ReactJS. 
+  See nested [README.md](quickstarts/quarkus-dashboard/README.md) for more information.
 - [Pods](quickstarts/pods) contains a Maven project with examples to the diverse available API operations
   for  Pod resources.
   See nested [README.md](quickstarts/pod/README.md) for more information.
