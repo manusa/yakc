@@ -58,6 +58,12 @@ const PodsDetailPage = ({pod}) => (
             />
             {podsModule.selectors.statusPhase(pod)}
           </Form.Field>
+          <Form.Field label='Restart Policy'>
+            {podsModule.selectors.restartPolicy(pod)}
+          </Form.Field>
+          <Form.Field label='Pod IP'>
+            {podsModule.selectors.statusPodIP(pod)}
+          </Form.Field>
         </Form>
       </Card.Body>
     </Card>

@@ -16,9 +16,13 @@
  */
 const statusPhase = pod => pod?.status?.phase ?? '';
 
+const statusPodIP = pod => pod?.status?.podIP ?? '';
+
 const isReady = pod => statusPhase(pod) === 'Running';
 
-const nodeName = pod => (pod?.spec?.nodeName ?? '');
+const nodeName = pod => pod?.spec?.nodeName ?? '';
+
+const restartPolicy = pod => pod?.spec?.restartPolicy ?? '';
 
 const containers = pod => (pod?.spec?.containers ?? []);
 
@@ -43,8 +47,10 @@ const readyCount = pods => pods.reduce(
 
 export default {
   statusPhase,
+  statusPodIP,
   isReady,
   nodeName,
+  restartPolicy,
   containers,
   containersReady,
   restartCount,
