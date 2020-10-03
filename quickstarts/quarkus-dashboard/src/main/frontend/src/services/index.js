@@ -18,6 +18,7 @@ import api from './api';
 import reducer from './reducer';
 import selectors from './selectors';
 import List from './List';
+import PortList from './PortList';
 import ServicesDetailPage from './ServicesDetailPage';
 import ServicesPage from './ServicesPage';
 import Type from './Type';
@@ -27,6 +28,7 @@ export default {
   reducer,
   selectors,
   List,
+  PortList,
   ServicesDetailPage,
   ServicesPage,
   Type

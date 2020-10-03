@@ -43,15 +43,18 @@ const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
     </Card>
     <ContainerList
       title='Containers'
-      className='mt-4'
+      titleVariant={Card.titleVariants.medium}
+      className='mt-2'
       containers={deploymentsModule.selectors.containers(deployment)} />
     <replicaSets.List
       title='Replica Sets'
-      className='mt-4'
+      titleVariant={Card.titleVariants.medium}
+      className='mt-2'
       ownerId={metadata.selectors.uid(deployment)} />
     <pods.List
       title='Pods'
-      className='mt-4'
+      titleVariant={Card.titleVariants.medium}
+      className='mt-2'
       ownerUids={replicaSetsUids} />
   </DashboardPage>
 );

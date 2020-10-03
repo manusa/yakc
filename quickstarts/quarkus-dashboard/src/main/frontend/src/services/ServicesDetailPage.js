@@ -58,6 +58,12 @@ const ServicesDetailPage = ({service}) => (
         </Form>
       </Card.Body>
     </Card>
+    <svc.PortList
+      title='Service Ports'
+      titleVariant={Card.titleVariants.medium}
+      className='mt-2'
+      ports={svc.selectors.specPorts(service)}
+    />
   </DashboardPage>
 );
 
