@@ -21,6 +21,9 @@ import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.config.ConfigurationResolver;
 import javax.inject.Singleton;
 import javax.ws.rs.Produces;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -28,10 +31,20 @@ import java.time.Duration;
 @Singleton
 public class KubernetesDashboardConfiguration {
 
+  private static final Logger LOG = LoggerFactory.getLogger(KubernetesDashboardConfiguration.class);
+
+  @ConfigProperty(name = "yakc.dashboard.insecureSkipTlsVerify", defaultValue = "false")
+  boolean insecureSkipTlsVerify;
+
   @Produces
   @Singleton
   public KubernetesClient kubernetesClient() throws IOException {
+    LOG.info("Initializing KubernetesClient...");
+    LOG.info(" - Skip TLS verification: {}", insecureSkipTlsVerify);
     return new KubernetesClient(
-      ConfigurationResolver.resolveConfig().toBuilder().readTimeout(Duration.ZERO).build());
+      ConfigurationResolver.resolveConfig().toBuilder()
+        .insecureSkipTlsVerify(insecureSkipTlsVerify)
+        .readTimeout(Duration.ZERO)
+        .build());
   }
 }

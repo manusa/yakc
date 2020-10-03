@@ -65,6 +65,8 @@ items:
             valueFrom:
               fieldRef:
                 fieldPath: metadata.name
+          - name: YAKC_DASHBOARD_INSECURESKIPTLSVERIFY
+            value: false
           image: marcnuri/yakc-kubernetes-dashboard:latest
           imagePullPolicy: Always
           name: quarkus
