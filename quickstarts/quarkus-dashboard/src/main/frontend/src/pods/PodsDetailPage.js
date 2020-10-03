@@ -47,9 +47,9 @@ const PodsDetailPage = ({pod}) => (
         <Form>
           <metadata.Details resource={pod} />
           <Form.Field label='Node'>
-            <Link.RouterLink to={`/nodes/${podsModule.selectors.nodeName(pod)}`}>
+            <Link.Node to={`/nodes/${podsModule.selectors.nodeName(pod)}`}>
               {podsModule.selectors.nodeName(pod)}
-            </Link.RouterLink>
+            </Link.Node>
           </Form.Field>
           <Form.Field label='Phase'>
             <podsModule.StatusIcon
