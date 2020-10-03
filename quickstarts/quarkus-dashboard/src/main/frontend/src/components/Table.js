@@ -17,10 +17,10 @@
 import React from 'react';
 import Card from './Card';
 
-const Table = ({title, className, children, ...props}) => (
+const Table = ({title, titleVariant, className, children, ...props}) => (
   <Card className={className} {...props}>
     {title && (
-      <Card.Title>{title}</Card.Title>
+      <Card.Title titleVariant={titleVariant}>{title}</Card.Title>
     )}
     <table className='min-w-full'>
       {children}

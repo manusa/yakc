@@ -30,7 +30,7 @@ const headers = [
   'Type',
   'Cluster IP',
   ''
-]
+];
 
 const sort = (p1, p2) =>
   metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
@@ -71,7 +71,7 @@ const Rows = ({services, deleteServiceAction}) => {
           </Table.Cell>
         </Table.Row>
     ));
-}
+};
 
 const List = ({services, deleteServiceAction, ...properties}) => (
   <Table {...properties}>

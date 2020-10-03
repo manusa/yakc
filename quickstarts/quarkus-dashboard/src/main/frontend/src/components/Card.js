@@ -25,10 +25,17 @@ const Card = ({className, dispatch, children, ...props}) => (
   </div>
 );
 
-Card.Title = ({className, children}) => (
+Card.titleVariants = {
+  large: 'p-3 text-gray-700 font-medium text-lg',
+  medium: 'px-3 py-2 text-gray-700 font-medium text-md'
+}
+
+Card.Title = ({className, children,
+  titleVariant = Card.titleVariants.large
+}) => (
   <div
     className={`
-      p-3 text-gray-700 font-medium text-lg
+      ${titleVariant}
       border-b border-blue-700 border-opacity-25
       ${className ?? ''}`}
   >

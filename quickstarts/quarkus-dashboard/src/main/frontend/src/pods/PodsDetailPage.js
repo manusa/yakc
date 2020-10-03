@@ -69,7 +69,8 @@ const PodsDetailPage = ({pod}) => (
     </Card>
     <ContainerList
       title='Containers'
-      className='mt-4'
+      titleVariant={Card.titleVariants.medium}
+      className='mt-2'
       containers={podsModule.selectors.containers(pod)} />
   </DashboardPage>
 );
