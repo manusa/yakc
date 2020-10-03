@@ -14,24 +14,16 @@
  * limitations under the License.
  *
  */
-import api from './api';
-import reducer from './reducer';
-import selectors from './selectors';
-import List from './List'
-import PodsCard from './PodsCard';
-import PodsDetailPage from './PodsDetailPage';
-import PodsLogsPage from './PodsLogsPage';
-import PodsPage from './PodsPage';
-import StatusIcon from './StatusIcon';
+import React from 'react';
+import Icon from '../components/Icon';
 
-export default {
-  api,
-  reducer,
-  selectors,
-  List,
-  PodsCard,
-  PodsDetailPage,
-  PodsLogsPage,
-  PodsPage,
-  StatusIcon
-};
+const iconMap = {
+  'Running': 'fa-sync-alt',
+  'Terminated': 'fa-ban'
+}
+
+const StatusIcon = ({statusPhase, className}) => (
+  <Icon icon={iconMap[statusPhase] ?? 'fa-question'} className={className} />
+);
+
+export default StatusIcon;

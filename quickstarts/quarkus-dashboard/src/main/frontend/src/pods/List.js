@@ -60,6 +60,10 @@ const Rows = ({pods}) => {
           {metadata.selectors.namespace(pod)}
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
+          <podsModule.StatusIcon
+            className='mr-1'
+            statusPhase={podsModule.selectors.statusPhase(pod)}
+          />
           {podsModule.selectors.statusPhase(pod)}
         </Table.Cell>
         <Table.Cell >
