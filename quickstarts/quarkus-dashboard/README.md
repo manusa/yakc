@@ -5,18 +5,42 @@ PoC to show how to build a Kubernetes dashboard with YAKC,
 
 ## Getting started
 
+### Minikube
+
 If you want just to check-out the final project the easiest way is to deploy the
 [released snapshot](https://hub.docker.com/r/marcnuri/yakc-kubernetes-dashboard)
 into Minikube (or any other k8s cluster - needs access to node):
 
 ```shell script
 # Deploy the application using https://hub.docker.com/r/marcnuri/yakc-kubernetes-dashboard SNAPSHOT
-$ kubectl create -f https://raw.githubusercontent.com/manusa/yakc/master/quickstarts/quarkus-dashboard/yakc-kubernetes-dashboard.minikube.yml
+$ kubectl create -f https://raw.githubusercontent.com/manusa/yakc/master/quickstarts/quarkus-dashboard/docs/yakc-kubernetes-dashboard.minikube.yml
 # Open Browser and navigate to deployed application
 $ minikube service yakc-dashboard
 ``` 
 
 ![An image of a screenshot YAKC Kubernetes Dashboard landing page](docs/yakc-kubernetes-dashboard.gif)
+
+### OpenShift Katacoda
+
+You can test YAKC Kubernetes Dashboard by taking advantage of the OpenShift getting started Katacoda.
+
+Access the Course: https://learn.openshift.com/introduction/cluster-access/
+
+When the terminal loads, apply the provided YAKC Kubernetes Dashboard configuration:
+
+```shell script
+# Deploy the application using https://hub.docker.com/r/marcnuri/yakc-kubernetes-dashboard SNAPSHOT
+$ oc create -f https://raw.githubusercontent.com/manusa/yakc/master/quickstarts/quarkus-dashboard/docs/yakc-kubernetes-dashboard.openshift-4.yml
+service/yakc-dashboard created
+clusterrolebinding.rbac.authorization.k8s.io/yakc-kubernetes-dashboard-cluster-admin created
+deployment.apps/quarkus-kubernetes-dashboard created
+route.route.openshift.io/yakc-dashboard created
+# Retrieve URL for created route
+$ oc get route yakc-dashboard -o jsonpath='{.spec.host}'
+yakc-dashboard-default.1337-13-kota037.environments.katacoda.com
+```
+
+Now you can open the URL in your browser.
 
 ## Build
 
