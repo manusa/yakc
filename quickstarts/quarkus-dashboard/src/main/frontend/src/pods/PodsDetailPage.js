@@ -51,7 +51,13 @@ const PodsDetailPage = ({pod}) => (
               {podsModule.selectors.nodeName(pod)}
             </Link.RouterLink>
           </Form.Field>
-          <Form.Field label='Phase'>{podsModule.selectors.statusPhase(pod)}</Form.Field>
+          <Form.Field label='Phase'>
+            <podsModule.StatusIcon
+              className='mr-1'
+              statusPhase={podsModule.selectors.statusPhase(pod)}
+            />
+            {podsModule.selectors.statusPhase(pod)}
+          </Form.Field>
         </Form>
       </Card.Body>
     </Card>
