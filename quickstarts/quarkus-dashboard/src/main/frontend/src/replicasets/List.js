@@ -15,6 +15,7 @@
  *
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import metadata from '../metadata';
 import rs from './';
@@ -59,7 +60,7 @@ const Rows = ({replicaSets}) => {
     ));
 }
 
-const List = ({replicaSets, ...properties}) => (
+const List = ({replicaSets, ownerId, ...properties}) => (
   <Table {...properties}>
     <Table.Head
       columns={headers}
@@ -92,6 +93,10 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
   replicaSets: filterReplicaSet(stateProps.replicaSets, ownProps)
 });
+
+List.propTypes = {
+  ownerId: PropTypes.string
+};
 
 export default connect(mapStateToProps, null, mergeProps)(List);
 
