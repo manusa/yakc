@@ -52,9 +52,9 @@ const Rows = ({pods}) => {
           />
         </Table.Cell>
         <Table.Cell>
-          <Link.RouterLink to={`/pods/${metadata.selectors.uid(pod)}`}>
+          <Link.Pod to={`/pods/${metadata.selectors.uid(pod)}`}>
             {metadata.selectors.name(pod)}
-          </Link.RouterLink>
+          </Link.Pod>
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
           {metadata.selectors.namespace(pod)}

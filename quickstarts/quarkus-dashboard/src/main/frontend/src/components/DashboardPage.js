@@ -26,7 +26,7 @@ import Icon from './Icon';
 import Link from './Link';
 
 import './DashboardPage.css';
-import YAKCLogo from './YAKCLogo';
+import YAKCLogo from './icons/YAKCLogo';
 
 const DashboardNavLink = ({match: {path}, to, staticContext, className = '', ...props}) => (
   <Link.RouterLink

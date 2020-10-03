@@ -16,6 +16,8 @@
  */
 import React from 'react';
 import {Link as OriginalRouterLink} from 'react-router-dom';
+import Node from './icons/Node';
+import Pod from './icons/Pod';
 
 const variants = ({
   none: '',
@@ -40,6 +42,19 @@ Link.RouterLink = ({className, children, variant = variants.default, ...props}) 
     className={`${variant} ${className ?? ''}`}
     {...props}
   >{children}</OriginalRouterLink>
-)
+);
+
+Link.ResourceLink = ({className, Icon, iconClassName, children, ...props}) => (
+  <Link.RouterLink
+    className={`flex ${className ?? ''}`}
+    {...props}
+  >
+    <Icon className={`w-5 mr-1 ${iconClassName ?? ''}`} />
+    {children}
+  </Link.RouterLink>
+);
+
+Link.Node = ({...props}) => <Link.ResourceLink Icon={Node} {...props} />;
+Link.Pod = ({...props}) => <Link.ResourceLink Icon={Pod} {...props} />;
 
 export default Link;

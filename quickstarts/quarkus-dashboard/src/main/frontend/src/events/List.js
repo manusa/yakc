@@ -31,19 +31,21 @@ const headers = [
 ]
 
 const EventName = ({event}) => {
+  let Component = Link.RouterLink;
   let url;
   switch (event.involvedObject.kind) {
     case 'Deployment':
       url = `/deployments/${event.involvedObject.uid}`;
       break;
     case 'Pod':
+      Component = Link.Pod;
       url = `/pods/${event.involvedObject.uid}`;
       break;
     default:
       url = null;
   }
   if (url) {
-    return <Link.RouterLink to={url}>{event.involvedObject.name}</Link.RouterLink>;
+    return <Component to={url}>{event.involvedObject.name}</Component>;
   }
   return event.involvedObject.name;
 }
