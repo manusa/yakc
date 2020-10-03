@@ -15,6 +15,7 @@
  *
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import Icon from '../components/Icon';
 import Link from '../components/Link';
@@ -81,7 +82,7 @@ const Rows = ({pods}) => {
     ));
 }
 
-const List = ({pods, nodeName, ...properties}) => (
+const List = ({pods, nodeName, ownerUids, ...properties}) => (
   <Table {...properties}>
     <Table.Head
       columns={headers}
@@ -121,6 +122,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
   pods: filterPods(stateProps.pods, stateProps.replicaSets, ownProps)
 });
+
+List.propTypes = {
+  nodeName: PropTypes.string,
+  ownerUids: PropTypes.arrayOf(PropTypes.string),
+};
 
 export default connect(mapStateToProps, null, mergeProps)(List);
 
