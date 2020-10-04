@@ -20,15 +20,15 @@ import metadata from '../metadata';
 
 const list = async () => {
   const response = await fetch(
-    `${getApiURL()}/services`
+    `${getApiURL()}/ingresses`
   );
   const rawList =  await toJson(response);
-  return fixKind('Service')(rawList);
+  return fixKind('Ingress')(rawList);
 };
 
-const requestDelete = async service => {
+const requestDelete = async ingress => {
   await fetch(
-    `${getApiURL()}/services/${metadata.selectors.namespace(service)}/${metadata.selectors.name(service)}`,
+    `${getApiURL()}/ingresses/${metadata.selectors.namespace(ingress)}/${metadata.selectors.name(ingress)}`,
     {method: 'DELETE'}
   );
 };

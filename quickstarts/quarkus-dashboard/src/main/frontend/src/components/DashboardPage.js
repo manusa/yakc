@@ -88,6 +88,7 @@ const SideBar = ({sideBarOpen}) => {
           <NavItem to='/pods' icon={icons.pod}>Pods</NavItem>
           <NavItem to='/deployments' icon={icons.deployment}>Deployments</NavItem>
           <NavItem to='/services' icon={icons.svc}>Services</NavItem>
+          <NavItem to='/ingresses' icon={icons.ing}>Ingresses</NavItem>
           <h2 className='mt-6 mb-2 px-6 text-gray-100 text-xl'>About</h2>
           <ExtNavItem href='https://github.com/manusa/yakc/tree/master/quickstarts/quarkus-dashboard'>
             Quarkus Kubernetes Dashboard</ExtNavItem>

@@ -14,26 +14,16 @@
  * limitations under the License.
  *
  */
-import {getApiURL} from '../env';
-import {fixKind, toJson} from '../fetch';
-import metadata from '../metadata';
+const specRules = ingress => ingress?.spec?.rules ?? [];
 
-const list = async () => {
-  const response = await fetch(
-    `${getApiURL()}/services`
-  );
-  const rawList =  await toJson(response);
-  return fixKind('Service')(rawList);
-};
+const allHosts = ingress => specRules(ingress)
+  .map(r => r.host);
 
-const requestDelete = async service => {
-  await fetch(
-    `${getApiURL()}/services/${metadata.selectors.namespace(service)}/${metadata.selectors.name(service)}`,
-    {method: 'DELETE'}
-  );
-};
+const allPaths = ingress => specRules(ingress)
+  .flatMap(r => r.http.paths)
+  .map(p => p.path);
 
 export default {
-  list,
-  requestDelete
+  allHosts,
+  allPaths
 };
