@@ -50,7 +50,7 @@ Link.ResourceLink = ({className, Icon, iconClassName, children, ...props}) => (
     {...props}
   >
     <Icon className={`w-5 mr-1 ${iconClassName ?? ''}`} />
-    {children}
+    <div className='flex-1'>{children}</div>
   </Link.RouterLink>
 );
 
