@@ -14,26 +14,14 @@
  * limitations under the License.
  *
  */
-import {getApiURL} from '../env';
-import {fixKind, toJson} from '../fetch';
-import metadata from '../metadata';
-
-const list = async () => {
-  const response = await fetch(
-    `${getApiURL()}/services`
-  );
-  const rawList =  await toJson(response);
-  return fixKind('Service')(rawList);
+export const toJson = response => {
+  if (!response.ok) {
+    throw Error(`${response.status}`);
+  }
+  return response.json();
 };
 
-const requestDelete = async service => {
-  await fetch(
-    `${getApiURL()}/services/${metadata.selectors.namespace(service)}/${metadata.selectors.name(service)}`,
-    {method: 'DELETE'}
-  );
-};
+export const fixKind = kind => resources =>
+  resources.map(resource => ({kind, ...resource}));
 
-export default {
-  list,
-  requestDelete
-};
+export default {};

@@ -18,6 +18,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import deployments from './deployments';
+import ingresses from './ingresses';
 import nodes from './nodes';
 import pods from './pods';
 import services from './services';
@@ -29,10 +30,12 @@ const eventSources = [];
 
 const pollResources = dispatch => {
   const dispatchedPoll = async () => {
+    const crudSetAll = kind => resources => dispatch(redux.actions.crudSetAll({kind, resources}));
     try {
-      const serviceList = await services.api.list();
-      dispatch(
-        redux.actions.crudSetAll({kind: 'Service', resources: serviceList}));
+      await Promise.all([
+        services.api.list().then(crudSetAll('Service')),
+        ingresses.api.list().then(crudSetAll('Ingress'))
+      ]);
     } catch (e) {
       dispatch(redux.actions.setError('Error when polling resources (retrying)'));
     }
@@ -67,6 +70,8 @@ const App = ({dispatch}) => {
           <Route exact path='/' component={Home} />
           <Route exact path='/deployments' component={deployments.DeploymentsPage} />
           <Route exact path='/deployments/:uid' component={deployments.DeploymentsDetailPage} />
+          <Route exact path='/ingresses' component={ingresses.IngressesPage} />
+          <Route exact path='/ingresses/:uid' component={ingresses.IngressesDetailPage} />
           <Route exact path='/nodes' component={nodes.NodesPage} />
           <Route exact path='/nodes/:name' component={nodes.NodesDetailPage} />
           <Route exact path='/pods' component={pods.PodsPage} />

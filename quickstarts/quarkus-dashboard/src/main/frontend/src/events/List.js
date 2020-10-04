@@ -37,6 +37,10 @@ const EventName = ({event}) => {
     case 'Deployment':
       url = `/deployments/${event.involvedObject.uid}`;
       break;
+    case 'Ingress':
+      Component = Link.Ingress;
+      url = `/ingresses/${event.involvedObject.uid}`;
+      break;
     case 'Pod':
       Component = Link.Pod;
       url = `/pods/${event.involvedObject.uid}`;

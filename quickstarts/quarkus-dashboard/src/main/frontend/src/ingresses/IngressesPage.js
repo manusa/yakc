@@ -14,26 +14,14 @@
  * limitations under the License.
  *
  */
-import {getApiURL} from '../env';
-import {fixKind, toJson} from '../fetch';
-import metadata from '../metadata';
+import React from 'react';
+import DashboardPage from '../components/DashboardPage';
+import ing from './';
 
-const list = async () => {
-  const response = await fetch(
-    `${getApiURL()}/services`
-  );
-  const rawList =  await toJson(response);
-  return fixKind('Service')(rawList);
-};
+const IngressesPage = () => (
+  <DashboardPage title='Ingresses'>
+    <ing.List />
+  </DashboardPage>
+);
 
-const requestDelete = async service => {
-  await fetch(
-    `${getApiURL()}/services/${metadata.selectors.namespace(service)}/${metadata.selectors.name(service)}`,
-    {method: 'DELETE'}
-  );
-};
-
-export default {
-  list,
-  requestDelete
-};
+export default IngressesPage;

@@ -14,26 +14,18 @@
  * limitations under the License.
  *
  */
-import {getApiURL} from '../env';
-import {fixKind, toJson} from '../fetch';
-import metadata from '../metadata';
-
-const list = async () => {
-  const response = await fetch(
-    `${getApiURL()}/services`
-  );
-  const rawList =  await toJson(response);
-  return fixKind('Service')(rawList);
-};
-
-const requestDelete = async service => {
-  await fetch(
-    `${getApiURL()}/services/${metadata.selectors.namespace(service)}/${metadata.selectors.name(service)}`,
-    {method: 'DELETE'}
-  );
-};
+import api from './api';
+import reducer from './reducer';
+import selectors from './selectors';
+import List from './List';
+import IngressesDetailPage from './IngressesDetailPage';
+import IngressesPage from './IngressesPage';
 
 export default {
-  list,
-  requestDelete
+  api,
+  reducer,
+  selectors,
+  List,
+  IngressesDetailPage,
+  IngressesPage
 };

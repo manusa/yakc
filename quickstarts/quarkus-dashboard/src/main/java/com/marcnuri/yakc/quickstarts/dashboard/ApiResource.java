@@ -19,6 +19,7 @@ package com.marcnuri.yakc.quickstarts.dashboard;
 
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentResource;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
+import com.marcnuri.yakc.quickstarts.dashboard.ingresses.IngressResource;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeResource;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource;
 import com.marcnuri.yakc.quickstarts.dashboard.service.ServiceResource;
@@ -33,6 +34,7 @@ public class ApiResource {
 
   private final DeploymentResource deploymentResource;
   private final EventResource eventResource;
+  private final IngressResource ingressResource;
   private final NodeResource nodeResource;
   private final PodResource podResource;
   private final ServiceResource serviceResource;
@@ -42,11 +44,13 @@ public class ApiResource {
   public ApiResource(
     DeploymentResource deploymentResource,
     EventResource eventResource,
+    IngressResource ingressResource,
     NodeResource nodeResource, PodResource podResource,
     ServiceResource serviceResource,
     WatchResource watchResource) {
     this.deploymentResource = deploymentResource;
     this.eventResource = eventResource;
+    this.ingressResource = ingressResource;
     this.nodeResource = nodeResource;
     this.podResource = podResource;
     this.serviceResource = serviceResource;
@@ -61,6 +65,11 @@ public class ApiResource {
   @Path("/events")
   public EventResource getEventResource() {
     return eventResource;
+  }
+
+  @Path("/ingresses")
+  public IngressResource getIngressResource() {
+    return ingressResource;
   }
 
   @Path("/nodes")

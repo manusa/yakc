@@ -14,26 +14,8 @@
  * limitations under the License.
  *
  */
-import {getApiURL} from '../env';
-import {fixKind, toJson} from '../fetch';
-import metadata from '../metadata';
+import redux from '../redux';
 
-const list = async () => {
-  const response = await fetch(
-    `${getApiURL()}/services`
-  );
-  const rawList =  await toJson(response);
-  return fixKind('Service')(rawList);
-};
+const reducer = redux.reducer('Ingress');
 
-const requestDelete = async service => {
-  await fetch(
-    `${getApiURL()}/services/${metadata.selectors.namespace(service)}/${metadata.selectors.name(service)}`,
-    {method: 'DELETE'}
-  );
-};
-
-export default {
-  list,
-  requestDelete
-};
+export default reducer;

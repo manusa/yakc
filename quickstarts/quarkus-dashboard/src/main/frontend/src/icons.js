@@ -16,6 +16,7 @@
  */
 import k8s from './assets/k8s-icons/k8s.svg'
 import deployment from './assets/k8s-icons/deploy.svg';
+import ing from './assets/k8s-icons/ing.svg';
 import node from './assets/k8s-icons/node.svg';
 import pod from './assets/k8s-icons/pod.svg';
 import svc from './assets/k8s-icons/svc.svg';
@@ -23,6 +24,7 @@ import svc from './assets/k8s-icons/svc.svg';
 const icons = {
   k8s,
   deployment,
+  ing,
   node,
   pod,
   svc

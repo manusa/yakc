@@ -20,6 +20,7 @@ import {Provider} from 'react-redux';
 import {combineReducers, createStore} from 'redux';
 import deployments from './deployments';
 import events from './events';
+import ing from './ingresses';
 import nodes from './nodes';
 import pods from './pods';
 import replicaSets from './replicasets';
@@ -41,6 +42,7 @@ const storeEnhancer = () => {
 const store = createStore(combineReducers({
   deployments: deployments.reducer,
   events: events.reducer,
+  ingresses: ing.reducer,
   nodes: nodes.reducer,
   pods: pods.reducer,
   replicaSets: replicaSets.reducer,
