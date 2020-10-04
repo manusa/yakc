@@ -18,14 +18,17 @@ import React from 'react';
 import {connect} from 'react-redux';
 import DashboardPage from '../components/DashboardPage';
 import metadata from '../metadata';
+import nm from './';
 import pods from '../pods';
 import Card from '../components/Card';
 import Form from '../components/Form';
+import Minikube from '../components/icons/Minikube';
 
-const NodesDetailPage = ({node}) => (
+const NodesDetailPage = ({node, isMinikube}) => (
   <DashboardPage title={`Nodes - ${metadata.selectors.name(node)}`}>
     <Card>
-      <Card.Title>
+      <Card.Title className='flex items-center'>
+        {isMinikube && <Minikube className='h-6 mr-2' />}
         {`${metadata.selectors.name(node)}`}
       </Card.Title>
       <Card.Body>
@@ -51,6 +54,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
+  isMinikube: nm.selectors.isMinikube(stateProps.nodes),
   node: Object.values(stateProps.nodes).find(node =>
     metadata.selectors.name(node) === ownProps.match.params.name)
 });

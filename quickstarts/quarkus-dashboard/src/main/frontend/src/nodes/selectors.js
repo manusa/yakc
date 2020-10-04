@@ -14,6 +14,8 @@
  * limitations under the License.
  *
  */
+import metadata from '../metadata';
+
 const isReady = node => {
   const ready = (node?.status?.conditions ?? [])
     .find(condition => condition.type === 'Ready');
@@ -32,9 +34,16 @@ const readyCount = nodes => nodes.reduce(
   0
 );
 
+const isMinikube = nodes => Object.values(nodes).length === 1 && Object.values(nodes)
+  .filter(node => metadata.selectors.name(node) === 'minikube')
+  .filter(node => metadata.selectors.labels(node)['minikube.k8s.io/name'] === 'minikube')
+  .filter(node => metadata.selectors.labels(node).hasOwnProperty('node-role.kubernetes.io/master'))
+  .length === 1;
+
 export default {
   isReady,
   statusAddresses,
   statusAddressesFirstAddress,
-  readyCount
+  readyCount,
+  isMinikube
 };
