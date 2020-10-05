@@ -19,13 +19,15 @@ package com.marcnuri.yakc.quickstarts.dashboard.replicaset;
 
 
 import com.marcnuri.yakc.KubernetesClient;
-import com.marcnuri.yakc.api.KubernetesException;
+import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.apps.v1.AppsV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.ReplicaSet;
 import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import java.io.IOException;
 
 @Singleton
 public class ReplicaSetService {
@@ -37,7 +39,14 @@ public class ReplicaSetService {
     this.kubernetesClient = kubernetesClient;
   }
 
-  public Observable<WatchEvent<ReplicaSet>> getReplicaSets() throws KubernetesException {
-    return kubernetesClient.create(AppsV1Api.class).listReplicaSetForAllNamespaces().watch();
+  public Observable<WatchEvent<ReplicaSet>> getReplicaSets() throws IOException {
+    final AppsV1Api apps = kubernetesClient.create(AppsV1Api.class);
+    try {
+      apps.listReplicaSetForAllNamespaces().get();
+      return apps.listReplicaSetForAllNamespaces().watch();
+    } catch (ClientErrorException ex) {
+      return apps.listNamespacedReplicaSet(kubernetesClient.getConfiguration().getNamespace()).watch();
+    }
   }
+
 }

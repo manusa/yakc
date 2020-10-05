@@ -18,17 +18,22 @@
 package com.marcnuri.yakc.quickstarts.dashboard.node;
 
 import com.marcnuri.yakc.KubernetesClient;
-import com.marcnuri.yakc.api.KubernetesException;
+import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Node;
 import io.reactivex.Observable;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 @Singleton
 public class NodeService {
+
+  private static final Logger LOG = LoggerFactory.getLogger(NodeService.class);
 
   private final KubernetesClient kubernetesClient;
 
@@ -37,8 +42,18 @@ public class NodeService {
     this.kubernetesClient = kubernetesClient;
   }
 
-  public  Observable<WatchEvent<Node>> getNodes() throws KubernetesException {
-    return kubernetesClient.create(CoreV1Api.class).listNode().watch();
+  public  Observable<WatchEvent<Node>> getNodes() throws IOException {
+    final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
+    try {
+      core.listNode().get();
+      return core.listNode().watch();
+    } catch (ClientErrorException ex) {
+      if (ex.getCode() == 403) {
+        LOG.warn("Access to Node information is forbidden: {}", ex.getMessage());
+        return Observable.empty();
+      }
+      throw ex;
+    }
   }
 
 }

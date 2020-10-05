@@ -27,6 +27,8 @@ import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.List;
 
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
+
 @Singleton
 public class ServiceService {
 
@@ -38,7 +40,11 @@ public class ServiceService {
   }
 
   public List<Service> get() throws IOException {
-    return kubernetesClient.create(CoreV1Api.class).listServiceForAllNamespaces().get().getItems();
+    return tryWithFallback(
+      () -> kubernetesClient.create(CoreV1Api.class).listServiceForAllNamespaces().get().getItems(),
+      () -> kubernetesClient.create(CoreV1Api.class)
+        .listNamespacedService(kubernetesClient.getConfiguration().getNamespace()).get().getItems()
+    );
   }
 
   public Status deleteService(String name, String namespace) throws IOException {

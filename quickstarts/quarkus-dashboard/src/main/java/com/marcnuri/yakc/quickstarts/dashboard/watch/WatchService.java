@@ -31,6 +31,7 @@ import javax.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 @Singleton
@@ -57,7 +58,7 @@ public class WatchService {
     this.replicaSetService = replicaSetService;
   }
 
-  public Observable<WatchEvent<? extends Model>> getWatch() throws KubernetesException {
+  public Observable<WatchEvent<? extends Model>> getWatch() throws IOException {
     return Observable.merge(Arrays.asList(
       eventService.getEvents().subscribeOn(Schedulers.newThread()),
       deploymentService.getDeployments().subscribeOn(Schedulers.newThread()),

@@ -18,7 +18,7 @@
 package com.marcnuri.yakc.quickstarts.dashboard.deployment;
 
 import com.marcnuri.yakc.KubernetesClient;
-import com.marcnuri.yakc.api.KubernetesException;
+import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.apps.v1.AppsV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.Deployment;
@@ -39,8 +39,14 @@ public class DeploymentService {
     this.kubernetesClient = kubernetesClient;
   }
 
-  public Observable<WatchEvent<Deployment>> getDeployments() throws KubernetesException {
-    return kubernetesClient.create(AppsV1Api.class).listDeploymentForAllNamespaces().watch();
+  public Observable<WatchEvent<Deployment>> getDeployments() throws IOException {
+    final AppsV1Api apps = kubernetesClient.create(AppsV1Api.class);
+    try {
+      apps.listDeploymentForAllNamespaces().get();
+      return apps.listDeploymentForAllNamespaces().watch();
+    } catch (ClientErrorException ex) {
+      return apps.listNamespacedDeployment(kubernetesClient.getConfiguration().getNamespace()).watch();
+    }
   }
 
   public Status deleteDeployment(String name, String namespace) throws IOException {

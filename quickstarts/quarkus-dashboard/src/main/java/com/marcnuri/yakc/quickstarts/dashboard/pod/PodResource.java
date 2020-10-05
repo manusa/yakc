@@ -17,13 +17,10 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.pod;
 
-import com.marcnuri.yakc.api.KubernetesException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.converters.multi.MultiRxConverters;
-import org.jboss.resteasy.annotations.SseElementType;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.DELETE;
@@ -33,6 +30,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.jboss.resteasy.annotations.SseElementType;
+
 import java.io.IOException;
 
 @Singleton
@@ -48,7 +47,7 @@ public class PodResource {
   @GET
   @Produces(MediaType.SERVER_SENT_EVENTS)
   @SseElementType(MediaType.APPLICATION_JSON)
-  public Multi<WatchEvent<Pod>> get() throws KubernetesException {
+  public Multi<WatchEvent<Pod>> get() throws IOException {
     return Multi.createFrom().converter(MultiRxConverters.fromObservable(),
       podService.getPods());
   }

@@ -18,6 +18,7 @@
 package com.marcnuri.yakc.quickstarts.dashboard.pod;
 
 import com.marcnuri.yakc.KubernetesClient;
+import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.KubernetesCall;
 import com.marcnuri.yakc.api.KubernetesException;
 import com.marcnuri.yakc.api.WatchEvent;
@@ -51,8 +52,14 @@ public class PodService {
     this.kubernetesClient = kubernetesClient;
   }
 
-  public Observable<WatchEvent<Pod>> getPods() throws KubernetesException {
-    return kubernetesClient.create(CoreV1Api.class).listPodForAllNamespaces().watch();
+  public Observable<WatchEvent<Pod>> getPods() throws IOException {
+    final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
+    try {
+      core.listPodForAllNamespaces().get();
+      return core.listPodForAllNamespaces().watch();
+    } catch (ClientErrorException ex) {
+      return core.listNamespacedPod(kubernetesClient.getConfiguration().getNamespace()).watch();
+    }
   }
 
   public Pod getPod(String name, String namespace) throws IOException {

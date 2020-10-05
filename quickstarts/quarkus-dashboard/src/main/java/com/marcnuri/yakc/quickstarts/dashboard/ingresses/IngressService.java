@@ -18,6 +18,7 @@
 package com.marcnuri.yakc.quickstarts.dashboard.ingresses;
 
 import com.marcnuri.yakc.KubernetesClient;
+import com.marcnuri.yakc.api.extensions.v1beta1.ExtensionsV1beta1Api;
 import com.marcnuri.yakc.api.networking.v1.NetworkingV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.networking.v1.Ingress;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
@@ -26,6 +27,9 @@ import javax.inject.Singleton;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 @Singleton
 public class IngressService {
@@ -38,10 +42,28 @@ public class IngressService {
   }
 
   public List<Ingress> get() throws IOException {
-    return kubernetesClient.create(NetworkingV1Api.class).listIngressForAllNamespaces().get().getItems();
+    final NetworkingV1Api net = kubernetesClient.create(NetworkingV1Api.class);
+    final ExtensionsV1beta1Api ext = kubernetesClient.create(ExtensionsV1beta1Api.class);
+
+    return tryWithFallback(
+      () -> net.listIngressForAllNamespaces().get().getItems(),
+      () -> net.listNamespacedIngress(kubernetesClient.getConfiguration().getNamespace())
+        .get().getItems(),
+      () -> ext.listIngressForAllNamespaces().stream().map(IngressService::to).collect(Collectors.toList()),
+      () -> ext.listNamespacedIngress(kubernetesClient.getConfiguration().getNamespace())
+        .stream().map(IngressService::to).collect(Collectors.toList())
+    );
   }
 
   public Status deleteIngress(String name, String namespace) throws IOException {
     return kubernetesClient.create(NetworkingV1Api.class).deleteNamespacedIngress(name, namespace).get();
+  }
+
+  static Ingress to(com.marcnuri.yakc.model.io.k8s.api.extensions.v1beta1.Ingress from) {
+    return Ingress.builder()
+      .apiVersion(from.getApiVersion())
+      .kind(from.getKind())
+      .metadata(from.getMetadata())
+      .build();
   }
 }

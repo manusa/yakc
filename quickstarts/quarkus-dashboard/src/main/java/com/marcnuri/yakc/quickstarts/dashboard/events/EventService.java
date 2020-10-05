@@ -18,14 +18,15 @@
 package com.marcnuri.yakc.quickstarts.dashboard.events;
 
 import com.marcnuri.yakc.KubernetesClient;
-import com.marcnuri.yakc.api.KubernetesException;
+import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Event;
 import io.reactivex.Observable;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import java.io.IOException;
 
 @Singleton
 public class EventService {
@@ -37,8 +38,14 @@ public class EventService {
     this.kubernetesClient = kubernetesClient;
   }
 
-  public Observable<WatchEvent<Event>> getEvents() throws KubernetesException {
-    return kubernetesClient.create(CoreV1Api.class).listEventForAllNamespaces().watch();
+  public Observable<WatchEvent<Event>> getEvents() throws IOException {
+    final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
+    try {
+      core.listEventForAllNamespaces().get();
+      return core.listEventForAllNamespaces().watch();
+    } catch (ClientErrorException ex) {
+      return core.listNamespacedEvent(kubernetesClient.getConfiguration().getNamespace()).watch();
+    }
   }
 
 }
