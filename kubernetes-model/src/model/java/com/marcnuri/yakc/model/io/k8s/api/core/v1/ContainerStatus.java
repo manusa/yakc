@@ -79,7 +79,7 @@ public class ContainerStatus implements Model {
    */
   @NonNull
   @JsonProperty("restartCount")
-  private Integer restartCount;
+  private Number restartCount;
 
   /**
    * Specifies whether the container has passed its startup probe. Initialized as false, becomes true after startupProbe is considered successful. Resets to false when the container is restarted, or if kubelet loses state temporarily. Is always true when no startupProbe is defined.

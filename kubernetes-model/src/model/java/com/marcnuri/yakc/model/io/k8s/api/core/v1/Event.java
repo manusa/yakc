@@ -55,7 +55,7 @@ public class Event implements Model {
    * The number of times this event has occurred.
    */
   @JsonProperty("count")
-  private Integer count;
+  private Number count;
 
   @JsonProperty("eventTime")
   private OffsetDateTime eventTime;

@@ -43,7 +43,7 @@ public class EventSeries implements Model {
    */
   @NonNull
   @JsonProperty("count")
-  private Integer count;
+  private Number count;
 
   @NonNull
   @JsonProperty("lastObservedTime")

@@ -42,7 +42,7 @@ public class ContainerPort implements Model {
    */
   @NonNull
   @JsonProperty("containerPort")
-  private Integer containerPort;
+  private Number containerPort;
 
   /**
    * What host IP to bind the external port to.
@@ -54,7 +54,7 @@ public class ContainerPort implements Model {
    * Number of port to expose on the host. If specified, this must be a valid port number, 0 &lt; x &lt; 65536. If HostNetwork is specified, this must match ContainerPort. Most containers do not need this.
    */
   @JsonProperty("hostPort")
-  private Integer hostPort;
+  private Number hostPort;
 
   /**
    * If specified, this must be an IANA_SVC_NAME and unique within the pod. Each named port in a pod must have a unique name. Name for the port that can be referred to by services.

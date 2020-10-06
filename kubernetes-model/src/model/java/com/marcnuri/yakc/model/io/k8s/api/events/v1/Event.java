@@ -57,7 +57,7 @@ public class Event implements Model {
    * deprecatedCount is the deprecated field assuring backward compatibility with core.v1 Event type.
    */
   @JsonProperty("deprecatedCount")
-  private Integer deprecatedCount;
+  private Number deprecatedCount;
 
   @JsonProperty("deprecatedFirstTimestamp")
   private OffsetDateTime deprecatedFirstTimestamp;

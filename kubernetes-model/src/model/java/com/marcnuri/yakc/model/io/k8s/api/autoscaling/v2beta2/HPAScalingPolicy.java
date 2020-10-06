@@ -42,7 +42,7 @@ public class HPAScalingPolicy implements Model {
    */
   @NonNull
   @JsonProperty("periodSeconds")
-  private Integer periodSeconds;
+  private Number periodSeconds;
 
   /**
    * Type is used to specify the scaling policy.
@@ -56,7 +56,7 @@ public class HPAScalingPolicy implements Model {
    */
   @NonNull
   @JsonProperty("value")
-  private Integer value;
+  private Number value;
 
 }
 

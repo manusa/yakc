@@ -102,25 +102,25 @@ public class JSONSchemaProps implements Model {
   private JSONSchemaPropsOrArray items;
 
   @JsonProperty("maxItems")
-  private Integer maxItems;
+  private Number maxItems;
 
   @JsonProperty("maxLength")
-  private Integer maxLength;
+  private Number maxLength;
 
   @JsonProperty("maxProperties")
-  private Integer maxProperties;
+  private Number maxProperties;
 
   @JsonProperty("maximum")
   private Number maximum;
 
   @JsonProperty("minItems")
-  private Integer minItems;
+  private Number minItems;
 
   @JsonProperty("minLength")
-  private Integer minLength;
+  private Number minLength;
 
   @JsonProperty("minProperties")
-  private Integer minProperties;
+  private Number minProperties;
 
   @JsonProperty("minimum")
   private Number minimum;

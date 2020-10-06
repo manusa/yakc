@@ -46,7 +46,7 @@ public class TopologySpreadConstraint implements Model {
    */
   @NonNull
   @JsonProperty("maxSkew")
-  private Integer maxSkew;
+  private Number maxSkew;
 
   /**
    * TopologyKey is the key of node labels. Nodes that have a label with this key and identical values are considered to be in the same topology. We consider each &lt;key, value&gt; as a "bucket", and try to put balanced number of pods into each bucket. It's a required field.

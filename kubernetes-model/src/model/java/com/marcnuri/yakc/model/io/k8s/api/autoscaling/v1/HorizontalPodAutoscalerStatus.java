@@ -42,21 +42,21 @@ public class HorizontalPodAutoscalerStatus implements Model {
    * current average CPU utilization over all pods, represented as a percentage of requested CPU, e.g. 70 means that an average pod is using now 70% of its requested CPU.
    */
   @JsonProperty("currentCPUUtilizationPercentage")
-  private Integer currentCPUUtilizationPercentage;
+  private Number currentCPUUtilizationPercentage;
 
   /**
    * current number of replicas of pods managed by this autoscaler.
    */
   @NonNull
   @JsonProperty("currentReplicas")
-  private Integer currentReplicas;
+  private Number currentReplicas;
 
   /**
    * desired number of replicas of pods managed by this autoscaler.
    */
   @NonNull
   @JsonProperty("desiredReplicas")
-  private Integer desiredReplicas;
+  private Number desiredReplicas;
 
   @JsonProperty("lastScaleTime")
   private OffsetDateTime lastScaleTime;
@@ -65,7 +65,7 @@ public class HorizontalPodAutoscalerStatus implements Model {
    * most recent generation observed by this autoscaler.
    */
   @JsonProperty("observedGeneration")
-  private Integer observedGeneration;
+  private Number observedGeneration;
 
 }
 

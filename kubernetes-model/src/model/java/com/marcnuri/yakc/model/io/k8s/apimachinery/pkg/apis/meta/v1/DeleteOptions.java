@@ -55,7 +55,7 @@ public class DeleteOptions implements Model {
    * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
    */
   @JsonProperty("gracePeriodSeconds")
-  private Integer gracePeriodSeconds;
+  private Number gracePeriodSeconds;
 
   /**
    * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds

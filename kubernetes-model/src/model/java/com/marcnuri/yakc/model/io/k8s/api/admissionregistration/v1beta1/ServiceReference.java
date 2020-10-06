@@ -61,7 +61,7 @@ public class ServiceReference implements Model {
    * If specified, the port on the service that hosting webhook. Default to 443 for backward compatibility. `port` should be a valid port number (1-65535, inclusive).
    */
   @JsonProperty("port")
-  private Integer port;
+  private Number port;
 
 }
 

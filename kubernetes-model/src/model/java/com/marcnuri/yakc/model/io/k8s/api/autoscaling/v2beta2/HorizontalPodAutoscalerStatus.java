@@ -60,14 +60,14 @@ public class HorizontalPodAutoscalerStatus implements Model {
    */
   @NonNull
   @JsonProperty("currentReplicas")
-  private Integer currentReplicas;
+  private Number currentReplicas;
 
   /**
    * desiredReplicas is the desired number of replicas of pods managed by this autoscaler, as last calculated by the autoscaler.
    */
   @NonNull
   @JsonProperty("desiredReplicas")
-  private Integer desiredReplicas;
+  private Number desiredReplicas;
 
   @JsonProperty("lastScaleTime")
   private OffsetDateTime lastScaleTime;
@@ -76,7 +76,7 @@ public class HorizontalPodAutoscalerStatus implements Model {
    * observedGeneration is the most recent generation observed by this autoscaler.
    */
   @JsonProperty("observedGeneration")
-  private Integer observedGeneration;
+  private Number observedGeneration;
 
 }
 

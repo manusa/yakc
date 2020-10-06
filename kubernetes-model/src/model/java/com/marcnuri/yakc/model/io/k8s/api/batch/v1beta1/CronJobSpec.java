@@ -47,7 +47,7 @@ public class CronJobSpec implements Model {
    * The number of failed finished jobs to retain. This is a pointer to distinguish between explicit zero and not specified. Defaults to 1.
    */
   @JsonProperty("failedJobsHistoryLimit")
-  private Integer failedJobsHistoryLimit;
+  private Number failedJobsHistoryLimit;
 
   @NonNull
   @JsonProperty("jobTemplate")
@@ -64,13 +64,13 @@ public class CronJobSpec implements Model {
    * Optional deadline in seconds for starting the job if it misses scheduled time for any reason.  Missed jobs executions will be counted as failed ones.
    */
   @JsonProperty("startingDeadlineSeconds")
-  private Integer startingDeadlineSeconds;
+  private Number startingDeadlineSeconds;
 
   /**
    * The number of successful finished jobs to retain. This is a pointer to distinguish between explicit zero and not specified. Defaults to 3.
    */
   @JsonProperty("successfulJobsHistoryLimit")
-  private Integer successfulJobsHistoryLimit;
+  private Number successfulJobsHistoryLimit;
 
   /**
    * This flag tells the controller to suspend subsequent executions, it does not apply to already started executions.  Defaults to false.

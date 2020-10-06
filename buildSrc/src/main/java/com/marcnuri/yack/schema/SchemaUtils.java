@@ -52,7 +52,7 @@ public class SchemaUtils {
 
   private static final Map<String, String> TYPE_MAP = Map.of(
       "boolean", "Boolean",
-      "integer", "Integer",
+      "integer", "Number",
       "number", "Number",
       "object", OBJECT_PRIMITIVE,
       "string", STRING_PRIMITIVE

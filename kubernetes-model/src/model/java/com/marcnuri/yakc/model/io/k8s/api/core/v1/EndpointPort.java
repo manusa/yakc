@@ -54,7 +54,7 @@ public class EndpointPort implements Model {
    */
   @NonNull
   @JsonProperty("port")
-  private Integer port;
+  private Number port;
 
   /**
    * The IP protocol for this port. Must be UDP, TCP, or SCTP. Default is TCP.

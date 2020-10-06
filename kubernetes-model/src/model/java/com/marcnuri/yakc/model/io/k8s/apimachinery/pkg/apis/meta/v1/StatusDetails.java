@@ -67,7 +67,7 @@ public class StatusDetails implements Model {
    * If specified, the time in seconds before the operation should be retried. Some errors may indicate the client must take an alternate action - for those errors this field may indicate how long to wait before taking the alternate action.
    */
   @JsonProperty("retryAfterSeconds")
-  private Integer retryAfterSeconds;
+  private Number retryAfterSeconds;
 
   /**
    * UID of the resource. (when there is a single resource which can be described). More info: http://kubernetes.io/docs/user-guide/identifiers#uids

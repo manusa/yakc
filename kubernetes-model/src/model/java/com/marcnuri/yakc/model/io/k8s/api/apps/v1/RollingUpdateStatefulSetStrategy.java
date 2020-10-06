@@ -40,7 +40,7 @@ public class RollingUpdateStatefulSetStrategy implements Model {
    * Partition indicates the ordinal at which the StatefulSet should be partitioned. Default value is 0.
    */
   @JsonProperty("partition")
-  private Integer partition;
+  private Number partition;
 
 }
 

@@ -41,7 +41,7 @@ public class EventSeries implements Model {
    * Number of occurrences in this series up to the last heartbeat time
    */
   @JsonProperty("count")
-  private Integer count;
+  private Number count;
 
   @JsonProperty("lastObservedTime")
   private OffsetDateTime lastObservedTime;

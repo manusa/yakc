@@ -60,7 +60,7 @@ public class ObjectMeta implements Model {
    * Number of seconds allowed for this object to gracefully terminate before it will be removed from the system. Only set when deletionTimestamp is also set. May only be shortened. Read-only.
    */
   @JsonProperty("deletionGracePeriodSeconds")
-  private Integer deletionGracePeriodSeconds;
+  private Number deletionGracePeriodSeconds;
 
   @JsonProperty("deletionTimestamp")
   private OffsetDateTime deletionTimestamp;
@@ -82,7 +82,7 @@ public class ObjectMeta implements Model {
    * A sequence number representing a specific generation of the desired state. Populated by the system. Read-only.
    */
   @JsonProperty("generation")
-  private Integer generation;
+  private Number generation;
 
   /**
    * Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels

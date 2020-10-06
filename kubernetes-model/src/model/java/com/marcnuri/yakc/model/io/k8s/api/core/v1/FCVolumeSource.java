@@ -48,7 +48,7 @@ public class FCVolumeSource implements Model {
    * Optional: FC target lun number
    */
   @JsonProperty("lun")
-  private Integer lun;
+  private Number lun;
 
   /**
    * Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.

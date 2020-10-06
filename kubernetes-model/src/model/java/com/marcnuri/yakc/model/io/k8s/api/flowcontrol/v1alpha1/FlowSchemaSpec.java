@@ -46,7 +46,7 @@ public class FlowSchemaSpec implements Model {
    * `matchingPrecedence` is used to choose among the FlowSchemas that match a given request. The chosen FlowSchema is among those with the numerically lowest (which we take to be logically highest) MatchingPrecedence.  Each MatchingPrecedence value must be ranged in [1,10000]. Note that if the precedence is not specified, it will be set to 1000 as default.
    */
   @JsonProperty("matchingPrecedence")
-  private Integer matchingPrecedence;
+  private Number matchingPrecedence;
 
   @NonNull
   @JsonProperty("priorityLevelConfiguration")

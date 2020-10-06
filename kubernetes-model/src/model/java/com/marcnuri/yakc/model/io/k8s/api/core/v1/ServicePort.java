@@ -53,14 +53,14 @@ public class ServicePort implements Model {
    * The port on each node on which this service is exposed when type=NodePort or LoadBalancer. Usually assigned by the system. If specified, it will be allocated to the service if unused or else creation of the service will fail. Default is to auto-allocate a port if the ServiceType of this Service requires one. More info: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
    */
   @JsonProperty("nodePort")
-  private Integer nodePort;
+  private Number nodePort;
 
   /**
    * The port that will be exposed by this service.
    */
   @NonNull
   @JsonProperty("port")
-  private Integer port;
+  private Number port;
 
   /**
    * The IP protocol for this port. Supports "TCP", "UDP", and "SCTP". Default is TCP.

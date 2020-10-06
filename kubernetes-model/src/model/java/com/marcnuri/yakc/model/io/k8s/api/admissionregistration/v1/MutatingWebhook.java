@@ -101,7 +101,7 @@ public class MutatingWebhook implements Model {
    * TimeoutSeconds specifies the timeout for this webhook. After the timeout passes, the webhook call will be ignored or the API call will fail based on the failure policy. The timeout value must be between 1 and 30 seconds. Default to 10 seconds.
    */
   @JsonProperty("timeoutSeconds")
-  private Integer timeoutSeconds;
+  private Number timeoutSeconds;
 
 }
 

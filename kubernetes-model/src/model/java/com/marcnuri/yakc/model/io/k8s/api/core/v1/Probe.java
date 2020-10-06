@@ -43,7 +43,7 @@ public class Probe implements Model {
    * Minimum consecutive failures for the probe to be considered failed after having succeeded. Defaults to 3. Minimum value is 1.
    */
   @JsonProperty("failureThreshold")
-  private Integer failureThreshold;
+  private Number failureThreshold;
 
   @JsonProperty("httpGet")
   private HTTPGetAction httpGet;
@@ -52,19 +52,19 @@ public class Probe implements Model {
    * Number of seconds after the container has started before liveness probes are initiated. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
    */
   @JsonProperty("initialDelaySeconds")
-  private Integer initialDelaySeconds;
+  private Number initialDelaySeconds;
 
   /**
    * How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1.
    */
   @JsonProperty("periodSeconds")
-  private Integer periodSeconds;
+  private Number periodSeconds;
 
   /**
    * Minimum consecutive successes for the probe to be considered successful after having failed. Defaults to 1. Must be 1 for liveness and startup. Minimum value is 1.
    */
   @JsonProperty("successThreshold")
-  private Integer successThreshold;
+  private Number successThreshold;
 
   @JsonProperty("tcpSocket")
   private TCPSocketAction tcpSocket;
@@ -73,7 +73,7 @@ public class Probe implements Model {
    * Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
    */
   @JsonProperty("timeoutSeconds")
-  private Integer timeoutSeconds;
+  private Number timeoutSeconds;
 
 }
 

@@ -40,7 +40,7 @@ public class MetricValueStatus implements Model {
    * currentAverageUtilization is the current value of the average of the resource metric across all relevant pods, represented as a percentage of the requested value of the resource for the pods.
    */
   @JsonProperty("averageUtilization")
-  private Integer averageUtilization;
+  private Number averageUtilization;
 
   @JsonProperty("averageValue")
   private String averageValue;
