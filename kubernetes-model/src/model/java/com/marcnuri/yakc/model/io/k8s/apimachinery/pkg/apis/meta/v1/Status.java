@@ -46,7 +46,7 @@ public class Status implements Model {
    * Suggested HTTP return code for this status, 0 if not set.
    */
   @JsonProperty("code")
-  private Integer code;
+  private Number code;
 
   @JsonProperty("details")
   private StatusDetails details;

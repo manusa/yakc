@@ -42,7 +42,7 @@ public class DaemonEndpoint implements Model {
    */
   @NonNull
   @JsonProperty("Port")
-  private Integer port;
+  private Number port;
 
 }
 

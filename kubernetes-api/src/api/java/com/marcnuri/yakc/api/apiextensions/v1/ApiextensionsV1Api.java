@@ -143,7 +143,7 @@ public interface ApiextensionsV1Api extends Api {
     /**
      * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
      */
-    public DeleteCollectionCustomResourceDefinition gracePeriodSeconds(Integer gracePeriodSeconds) {
+    public DeleteCollectionCustomResourceDefinition gracePeriodSeconds(Number gracePeriodSeconds) {
       put("gracePeriodSeconds", gracePeriodSeconds);
       return this;
     }
@@ -159,7 +159,7 @@ public interface ApiextensionsV1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public DeleteCollectionCustomResourceDefinition limit(Integer limit) {
+    public DeleteCollectionCustomResourceDefinition limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -199,7 +199,7 @@ public interface ApiextensionsV1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public DeleteCollectionCustomResourceDefinition timeoutSeconds(Integer timeoutSeconds) {
+    public DeleteCollectionCustomResourceDefinition timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
@@ -274,7 +274,7 @@ public interface ApiextensionsV1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public ListCustomResourceDefinition limit(Integer limit) {
+    public ListCustomResourceDefinition limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -298,7 +298,7 @@ public interface ApiextensionsV1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public ListCustomResourceDefinition timeoutSeconds(Integer timeoutSeconds) {
+    public ListCustomResourceDefinition timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
@@ -461,7 +461,7 @@ public interface ApiextensionsV1Api extends Api {
     /**
      * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
      */
-    public DeleteCustomResourceDefinition gracePeriodSeconds(Integer gracePeriodSeconds) {
+    public DeleteCustomResourceDefinition gracePeriodSeconds(Number gracePeriodSeconds) {
       put("gracePeriodSeconds", gracePeriodSeconds);
       return this;
     }
@@ -910,7 +910,7 @@ public interface ApiextensionsV1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public WatchCustomResourceDefinitionList limit(Integer limit) {
+    public WatchCustomResourceDefinitionList limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -942,7 +942,7 @@ public interface ApiextensionsV1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public WatchCustomResourceDefinitionList timeoutSeconds(Integer timeoutSeconds) {
+    public WatchCustomResourceDefinitionList timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
@@ -1023,7 +1023,7 @@ public interface ApiextensionsV1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public WatchCustomResourceDefinition limit(Integer limit) {
+    public WatchCustomResourceDefinition limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -1055,7 +1055,7 @@ public interface ApiextensionsV1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public WatchCustomResourceDefinition timeoutSeconds(Integer timeoutSeconds) {
+    public WatchCustomResourceDefinition timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }

@@ -41,7 +41,7 @@ public class MetricTarget implements Model {
    * averageUtilization is the target value of the average of the resource metric across all relevant pods, represented as a percentage of the requested value of the resource for the pods. Currently only valid for Resource metric source type
    */
   @JsonProperty("averageUtilization")
-  private Integer averageUtilization;
+  private Number averageUtilization;
 
   @JsonProperty("averageValue")
   private String averageValue;

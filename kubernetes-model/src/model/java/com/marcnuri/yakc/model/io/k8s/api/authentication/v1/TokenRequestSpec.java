@@ -54,7 +54,7 @@ public class TokenRequestSpec implements Model {
    * ExpirationSeconds is the requested duration of validity of the request. The token issuer may return a token with a different validity duration so a client needs to check the 'expiration' field in a response.
    */
   @JsonProperty("expirationSeconds")
-  private Integer expirationSeconds;
+  private Number expirationSeconds;
 
 }
 

@@ -44,7 +44,7 @@ public class PodSpec implements Model {
    * Optional duration in seconds the pod may be active on the node relative to StartTime before the system will actively try to mark it failed and kill associated containers. Value must be a positive integer.
    */
   @JsonProperty("activeDeadlineSeconds")
-  private Integer activeDeadlineSeconds;
+  private Number activeDeadlineSeconds;
 
   @JsonProperty("affinity")
   private Affinity affinity;
@@ -160,7 +160,7 @@ public class PodSpec implements Model {
    * The priority value. Various system components use this field to find the priority of the pod. When Priority Admission Controller is enabled, it prevents users from setting this field. The admission controller populates this field from PriorityClassName. The higher the value, the higher the priority.
    */
   @JsonProperty("priority")
-  private Integer priority;
+  private Number priority;
 
   /**
    * If specified, indicates the pod's priority. "system-node-critical" and "system-cluster-critical" are two special keywords which indicate the highest priorities with the former being the highest priority. Any other name must be defined by creating a PriorityClass object with that name. If not specified, the pod priority will be default or zero if there is no default.
@@ -230,7 +230,7 @@ public class PodSpec implements Model {
    * Optional duration in seconds the pod needs to terminate gracefully. May be decreased in delete request. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period will be used instead. The grace period is the duration in seconds after the processes running in the pod are sent a termination signal and the time when the processes are forcibly halted with a kill signal. Set this value longer than the expected cleanup time for your process. Defaults to 30 seconds.
    */
   @JsonProperty("terminationGracePeriodSeconds")
-  private Integer terminationGracePeriodSeconds;
+  private Number terminationGracePeriodSeconds;
 
   /**
    * If specified, the pod's tolerations.

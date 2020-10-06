@@ -46,7 +46,7 @@ public class PreferredSchedulingTerm implements Model {
    */
   @NonNull
   @JsonProperty("weight")
-  private Integer weight;
+  private Number weight;
 
 }
 

@@ -42,13 +42,13 @@ public class DeploymentStatus implements Model {
    * Total number of available pods (ready for at least minReadySeconds) targeted by this deployment.
    */
   @JsonProperty("availableReplicas")
-  private Integer availableReplicas;
+  private Number availableReplicas;
 
   /**
    * Count of hash collisions for the Deployment. The Deployment controller uses this field as a collision avoidance mechanism when it needs to create the name for the newest ReplicaSet.
    */
   @JsonProperty("collisionCount")
-  private Integer collisionCount;
+  private Number collisionCount;
 
   /**
    * Represents the latest available observations of a deployment's current state.
@@ -61,31 +61,31 @@ public class DeploymentStatus implements Model {
    * The generation observed by the deployment controller.
    */
   @JsonProperty("observedGeneration")
-  private Integer observedGeneration;
+  private Number observedGeneration;
 
   /**
    * Total number of ready pods targeted by this deployment.
    */
   @JsonProperty("readyReplicas")
-  private Integer readyReplicas;
+  private Number readyReplicas;
 
   /**
    * Total number of non-terminated pods targeted by this deployment (their labels match the selector).
    */
   @JsonProperty("replicas")
-  private Integer replicas;
+  private Number replicas;
 
   /**
    * Total number of unavailable pods targeted by this deployment. This is the total number of pods that are still required for the deployment to have 100% available capacity. They may either be pods that are running but not yet available or pods that still have not been created.
    */
   @JsonProperty("unavailableReplicas")
-  private Integer unavailableReplicas;
+  private Number unavailableReplicas;
 
   /**
    * Total number of non-terminated pods targeted by this deployment that have the desired template spec.
    */
   @JsonProperty("updatedReplicas")
-  private Integer updatedReplicas;
+  private Number updatedReplicas;
 
 }
 

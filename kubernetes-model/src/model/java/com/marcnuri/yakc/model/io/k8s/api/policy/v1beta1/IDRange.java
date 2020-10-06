@@ -42,14 +42,14 @@ public class IDRange implements Model {
    */
   @NonNull
   @JsonProperty("max")
-  private Integer max;
+  private Number max;
 
   /**
    * min is the start of the range, inclusive.
    */
   @NonNull
   @JsonProperty("min")
-  private Integer min;
+  private Number min;
 
 }
 

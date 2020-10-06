@@ -51,7 +51,7 @@ public class ContainerImage implements Model {
    * The size of the image in bytes.
    */
   @JsonProperty("sizeBytes")
-  private Integer sizeBytes;
+  private Number sizeBytes;
 
 }
 

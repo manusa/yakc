@@ -54,7 +54,7 @@ public class APIServiceSpec implements Model {
    */
   @NonNull
   @JsonProperty("groupPriorityMinimum")
-  private Integer groupPriorityMinimum;
+  private Number groupPriorityMinimum;
 
   /**
    * InsecureSkipTLSVerify disables TLS certificate verification when communicating with this server. This is strongly discouraged.  You should use the CABundle instead.
@@ -76,7 +76,7 @@ public class APIServiceSpec implements Model {
    */
   @NonNull
   @JsonProperty("versionPriority")
-  private Integer versionPriority;
+  private Number versionPriority;
 
 }
 

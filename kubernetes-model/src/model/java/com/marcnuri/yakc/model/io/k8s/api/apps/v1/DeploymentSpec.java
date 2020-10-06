@@ -43,7 +43,7 @@ public class DeploymentSpec implements Model {
    * Minimum number of seconds for which a newly created pod should be ready without any of its container crashing, for it to be considered available. Defaults to 0 (pod will be considered available as soon as it is ready)
    */
   @JsonProperty("minReadySeconds")
-  private Integer minReadySeconds;
+  private Number minReadySeconds;
 
   /**
    * Indicates that the deployment is paused.
@@ -55,19 +55,19 @@ public class DeploymentSpec implements Model {
    * The maximum time in seconds for a deployment to make progress before it is considered to be failed. The deployment controller will continue to process failed deployments and a condition with a ProgressDeadlineExceeded reason will be surfaced in the deployment status. Note that progress will not be estimated during the time a deployment is paused. Defaults to 600s.
    */
   @JsonProperty("progressDeadlineSeconds")
-  private Integer progressDeadlineSeconds;
+  private Number progressDeadlineSeconds;
 
   /**
    * Number of desired pods. This is a pointer to distinguish between explicit zero and not specified. Defaults to 1.
    */
   @JsonProperty("replicas")
-  private Integer replicas;
+  private Number replicas;
 
   /**
    * The number of old ReplicaSets to retain to allow rollback. This is a pointer to distinguish between explicit zero and not specified. Defaults to 10.
    */
   @JsonProperty("revisionHistoryLimit")
-  private Integer revisionHistoryLimit;
+  private Number revisionHistoryLimit;
 
   @NonNull
   @JsonProperty("selector")

@@ -40,7 +40,7 @@ public class ScaleSpec implements Model {
    * desired number of instances for the scaled object.
    */
   @JsonProperty("replicas")
-  private Integer replicas;
+  private Number replicas;
 
 }
 

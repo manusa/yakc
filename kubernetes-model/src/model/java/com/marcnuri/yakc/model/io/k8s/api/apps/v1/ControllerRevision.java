@@ -62,7 +62,7 @@ public class ControllerRevision implements Model {
    */
   @NonNull
   @JsonProperty("revision")
-  private Integer revision;
+  private Number revision;
 
 }
 

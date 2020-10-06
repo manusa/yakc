@@ -43,7 +43,7 @@ public class JobStatus implements Model {
    * The number of actively running pods.
    */
   @JsonProperty("active")
-  private Integer active;
+  private Number active;
 
   @JsonProperty("completionTime")
   private OffsetDateTime completionTime;
@@ -59,7 +59,7 @@ public class JobStatus implements Model {
    * The number of pods which reached phase Failed.
    */
   @JsonProperty("failed")
-  private Integer failed;
+  private Number failed;
 
   @JsonProperty("startTime")
   private OffsetDateTime startTime;
@@ -68,7 +68,7 @@ public class JobStatus implements Model {
    * The number of pods which reached phase Succeeded.
    */
   @JsonProperty("succeeded")
-  private Integer succeeded;
+  private Number succeeded;
 
 }
 

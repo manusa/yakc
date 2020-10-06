@@ -49,7 +49,7 @@ public class ContainerStateTerminated implements Model {
    */
   @NonNull
   @JsonProperty("exitCode")
-  private Integer exitCode;
+  private Number exitCode;
 
   @JsonProperty("finishedAt")
   private OffsetDateTime finishedAt;
@@ -70,7 +70,7 @@ public class ContainerStateTerminated implements Model {
    * Signal from the last termination of the container
    */
   @JsonProperty("signal")
-  private Integer signal;
+  private Number signal;
 
   @JsonProperty("startedAt")
   private OffsetDateTime startedAt;

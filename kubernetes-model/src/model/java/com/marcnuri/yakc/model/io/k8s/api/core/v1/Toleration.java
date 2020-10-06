@@ -58,7 +58,7 @@ public class Toleration implements Model {
    * TolerationSeconds represents the period of time the toleration (which must be of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default, it is not set, which means tolerate the taint forever (do not evict). Zero and negative values will be treated as 0 (evict immediately) by the system.
    */
   @JsonProperty("tolerationSeconds")
-  private Integer tolerationSeconds;
+  private Number tolerationSeconds;
 
   /**
    * Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.

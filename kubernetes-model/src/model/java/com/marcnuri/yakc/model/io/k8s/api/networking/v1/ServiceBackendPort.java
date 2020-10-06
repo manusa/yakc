@@ -46,7 +46,7 @@ public class ServiceBackendPort implements Model {
    * Number is the numerical port number (e.g. 80) on the Service. This is a mutually exclusive setting with "Name".
    */
   @JsonProperty("number")
-  private Integer number;
+  private Number number;
 
 }
 

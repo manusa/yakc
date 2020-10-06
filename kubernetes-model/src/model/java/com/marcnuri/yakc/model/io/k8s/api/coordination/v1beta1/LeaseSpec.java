@@ -50,13 +50,13 @@ public class LeaseSpec implements Model {
    * leaseDurationSeconds is a duration that candidates for a lease need to wait to force acquire it. This is measure against time of last observed RenewTime.
    */
   @JsonProperty("leaseDurationSeconds")
-  private Integer leaseDurationSeconds;
+  private Number leaseDurationSeconds;
 
   /**
    * leaseTransitions is the number of transitions of a lease between holders.
    */
   @JsonProperty("leaseTransitions")
-  private Integer leaseTransitions;
+  private Number leaseTransitions;
 
   @JsonProperty("renewTime")
   private OffsetDateTime renewTime;

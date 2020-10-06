@@ -55,7 +55,7 @@ public class HPAScalingRules implements Model {
    * StabilizationWindowSeconds is the number of seconds for which past recommendations should be considered while scaling up or scaling down. StabilizationWindowSeconds must be greater than or equal to zero and less than or equal to 3600 (one hour). If not set, use the default values: - For scale up: 0 (i.e. no stabilization is done). - For scale down: 300 (i.e. the stabilization window is 300 seconds long).
    */
   @JsonProperty("stabilizationWindowSeconds")
-  private Integer stabilizationWindowSeconds;
+  private Number stabilizationWindowSeconds;
 
 }
 

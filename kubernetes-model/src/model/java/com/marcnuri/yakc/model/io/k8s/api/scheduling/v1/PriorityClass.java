@@ -76,7 +76,7 @@ public class PriorityClass implements Model {
    */
   @NonNull
   @JsonProperty("value")
-  private Integer value;
+  private Number value;
 
 }
 
