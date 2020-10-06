@@ -32,6 +32,7 @@ public class KubernetesException extends IOException {
 
   private static final Map<Integer, Class<? extends KubernetesException>> EXCEPTIONS = new HashMap<>();
   static {
+    EXCEPTIONS.put(403, ForbiddenException.class);
     EXCEPTIONS.put(404, NotFoundException.class);
   }
 
