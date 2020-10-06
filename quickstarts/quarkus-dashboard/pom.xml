@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.marcnuri.yakc.quickstarts</groupId>
   <artifactId>quarkus-kubernetes-dashboard</artifactId>
-  <version>0.0.8</version>
+  <version>0.0.9</version>
   <name>YAKC :: Quickstarts :: Quarkus Kubernetes Dashboard</name>
 
   <properties>
