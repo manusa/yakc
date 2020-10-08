@@ -53,7 +53,7 @@ const PodsDetailPage = ({pod}) => (
           </Form.Field>
           <Form.Field label='Phase'>
             <podsModule.StatusIcon
-              className='mr-1'
+              className='text-gray-700 mr-1'
               statusPhase={podsModule.selectors.statusPhase(pod)}
             />
             {podsModule.selectors.statusPhase(pod)}

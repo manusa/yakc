@@ -24,7 +24,8 @@ import n from './'
 
 const headers = [
   '',
-  <span><Icon className='fa-id-card' /> Name</span>,
+  <span className='whitespace-no-wrap'><Icon className='fa-id-card' /> Name</span>,
+  <span className='whitespace-no-wrap'><Icon className='fa-server' /> Roles</span>,
   <span><Icon className='fa-tags' /> Labels</span>
 ]
 
@@ -52,7 +53,15 @@ const Rows = ({nodes}) => {
           >{metadata.selectors.name(node)}
           </Link.RouterLink>
         </Table.Cell>
-        <Table.Cell >
+        <Table.Cell className='text-nowrap'>
+          {(roles => {
+            if (roles.length === 0){
+              return '<none>';
+            }
+            return roles.map((role, idx) => <div key={idx}>{role}</div>);
+          })(n.selectors.roles(node))}
+        </Table.Cell>
+        <Table.Cell>
           <metadata.KeyValueList
             keyValues={metadata.selectors.labels(node)}
             maxEntries={2}

@@ -47,8 +47,8 @@ const Rows = ({pods}) => {
       <Table.Row key={metadata.selectors.uid(pod)}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>
           <Icon
-            className={podsModule.selectors.containersReady(pod) ? 'text-green-500' : 'text-red-500'}
-            icon={podsModule.selectors.containersReady(pod) ? 'fa-check' : 'fa-exclamation-circle'}
+            className={podsModule.selectors.succededOrContainersReady(pod) ? 'text-green-500' : 'text-red-500'}
+            icon={podsModule.selectors.succededOrContainersReady(pod) ? 'fa-check' : 'fa-exclamation-circle'}
           />
         </Table.Cell>
         <Table.Cell>

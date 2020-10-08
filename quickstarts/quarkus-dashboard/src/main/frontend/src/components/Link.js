@@ -17,6 +17,7 @@
 import React from 'react';
 import {Link as OriginalRouterLink} from 'react-router-dom';
 import Ingress from './icons/Ingress';
+import Namespace from './icons/Namespace';
 import Node from './icons/Node';
 import Pod from './icons/Pod';
 
@@ -56,6 +57,7 @@ Link.ResourceLink = ({className, Icon, iconClassName, children, ...props}) => (
 );
 
 Link.Ingress = ({...props}) => <Link.ResourceLink Icon={Ingress} {...props} />;
+Link.Namespace = ({...props}) => <Link.ResourceLink Icon={Namespace} {...props} />;
 Link.Node = ({...props}) => <Link.ResourceLink Icon={Node} {...props} />;
 Link.Pod = ({...props}) => <Link.ResourceLink Icon={Pod} {...props} />;
 

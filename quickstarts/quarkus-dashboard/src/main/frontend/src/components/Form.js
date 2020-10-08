@@ -32,7 +32,7 @@ Form.widths = {
 
 Form.Field = ({className, label, labelClassName, children, width = Form.widths.third, ...props}) => (
   <div
-    className={`my-1 ${width} ${className ?? ''}`}
+    className={`my-1 text-gray-900 ${width} ${className ?? ''}`}
     {...props}
   >
     <label

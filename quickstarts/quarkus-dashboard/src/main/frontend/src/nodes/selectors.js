@@ -27,6 +27,10 @@ const statusAddresses = node => node?.status?.addresses ?? [];
 const statusAddressesFirstAddress = node =>
   statusAddresses(node).map(a => a.address ?? '').find(a => a) ?? '';
 
+const roles = node => Object.keys(metadata.selectors.labels(node))
+  .filter(key => key.indexOf('node-role.kubernetes.io/') === 0)
+  .map(key => key.split('/')[1]);
+
 // Selectors for array of Nodes
 
 const readyCount = nodes => nodes.reduce(
@@ -44,6 +48,7 @@ export default {
   isReady,
   statusAddresses,
   statusAddressesFirstAddress,
+  roles,
   readyCount,
   isMinikube
 };

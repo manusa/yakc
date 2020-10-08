@@ -25,7 +25,7 @@ import Icon from '../components/Icon';
 const headers = [
   'Type',
   <span><Icon className='fa-id-card' /> Name</span>,
-  'Time',
+  <span><Icon stylePrefix='far' className='fa-clock' /> Time</span>,
   'Reason',
   'Event'
 ]

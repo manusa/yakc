@@ -17,6 +17,8 @@
 import React from 'react';
 import metadata from './';
 import Form from '../components/Form';
+import Link from '../components/Link';
+import Icon from '../components/Icon';
 
 const LabelsRow = ({labels}) => labels && Object.values(labels).length > 0 && (
   <Form.Field width={Form.widths.full}>
@@ -36,9 +38,17 @@ const Details = ({resource}) => {
   return (
     <>
       <LabelsRow labels={metadata.selectors.labels(resource)} />
-      <Form.Field label='Name'>{metadata.selectors.name(resource)}</Form.Field>
-      {namespace && <Form.Field label='Namespace'>{namespace}</Form.Field>}
+      <Form.Field label='Name'>
+        <Icon className='fa-id-card text-gray-600 mr-2' />
+        {metadata.selectors.name(resource)}
+      </Form.Field>
+      {namespace && <Form.Field label='Namespace'>
+        <Link.Namespace to={`/namespaces/${namespace}`}>
+          {namespace}
+        </Link.Namespace>
+      </Form.Field>}
       <Form.Field label='Creation timestamp'>
+        <Icon stylePrefix='far' className='fa-clock text-gray-600 mr-2' />
         {`${creationTimestamp?.toLocaleDateString()} ${creationTimestamp?.toLocaleTimeString()}`}
       </Form.Field>
       <AnnotationsRow annotations={metadata.selectors.annotations(resource)} />
