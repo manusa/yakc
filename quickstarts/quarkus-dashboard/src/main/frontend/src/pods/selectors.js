@@ -31,8 +31,8 @@ const containersReady = pod => {
   return css.length > 0 && css.every(cs => cs.ready);
 };
 
-const succededOrContainersReady = pod =>
-  statusPhase(pod) === 'Succeded' || containersReady(pod);
+const succeededOrContainersReady = pod =>
+  statusPhase(pod) === 'Succeeded' || containersReady(pod);
 
 const restartCount = pod => containerStatuses(pod).reduce(
   (acc, containerStatus) => acc + containerStatus.restartCount,
@@ -53,7 +53,7 @@ export default {
   restartPolicy,
   containers,
   containersReady,
-  succededOrContainersReady,
+  succeededOrContainersReady,
   restartCount,
   readyCount
 };
