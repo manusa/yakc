@@ -35,7 +35,10 @@ const headers = [
 const sort = (p1, p2) =>
   metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
 
-const Rows = ({ingresses, deleteIngressAction}) => {
+const Rows = ({ingresses, loadedResources, deleteIngressAction}) => {
+  if (!loadedResources['Ingress']) {
+    return <Table.Loading colSpan={headers.length} />;
+  }
   const allIngresses = Object.values(ingresses);
   if (allIngresses.length === 0) {
     return <Table.NoResultsRow colSpan={headers.length} />;
@@ -77,19 +80,20 @@ const Rows = ({ingresses, deleteIngressAction}) => {
     ));
 };
 
-const List = ({ingresses, deleteIngressAction, ...properties}) => (
+const List = ({ingresses, loadedResources, deleteIngressAction, ...properties}) => (
   <Table {...properties}>
     <Table.Head
       columns={headers}
     />
     <Table.Body>
-      <Rows ingresses={ingresses} deleteIngressAction={deleteIngressAction} />
+      <Rows ingresses={ingresses} loadedResources={loadedResources} deleteIngressAction={deleteIngressAction} />
     </Table.Body>
   </Table>
 );
 
-const mapStateToProps = ({ingresses}) => ({
-  ingresses
+const mapStateToProps = ({ingresses, ui: {loadedResources}}) => ({
+  ingresses,
+  loadedResources
 });
 
 const mapDispatchToProps = dispatch =>  bindActionCreators({

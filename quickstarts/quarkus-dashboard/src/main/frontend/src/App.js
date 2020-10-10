@@ -30,25 +30,28 @@ const eventSources = [];
 
 const pollResources = dispatch => {
   const dispatchedPoll = async () => {
-    const crudSetAll = kind => resources => dispatch(redux.actions.crudSetAll({kind, resources}));
+    const handleResourceList = kind => async resources => {
+      await dispatch(redux.actions.crudSetAll({kind, resources}));
+      dispatch(redux.actions.setResourceLoaded({kind, loaded: true}));
+    };
     try {
       await Promise.all([
-        services.api.list().then(crudSetAll('Service')),
-        ingresses.api.list().then(crudSetAll('Ingress'))
+        services.api.list().then(handleResourceList('Service')),
+        ingresses.api.list().then(handleResourceList('Ingress'))
       ]);
     } catch (e) {
       dispatch(redux.actions.setError('Error when polling resources (retrying)'));
     }
-    setTimeout(dispatchedPoll, 5000)
+    setTimeout(dispatchedPoll, 3000)
   };
   return dispatchedPoll;
 };
 
 const onMount = ({dispatch}) => {
-  pollResources(dispatch)();
   eventSources.push(
     watch.api.startEventSource({dispatch})
   );
+  pollResources(dispatch)();
 };
 
 const onUnmount = () => {

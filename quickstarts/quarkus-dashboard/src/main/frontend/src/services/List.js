@@ -35,7 +35,10 @@ const headers = [
 const sort = (p1, p2) =>
   metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
 
-const Rows = ({services, deleteServiceAction}) => {
+const Rows = ({services, loadedResources, deleteServiceAction}) => {
+  if (!loadedResources['Service']) {
+    return <Table.Loading colSpan={headers.length} />;
+  }
   const allServices = Object.values(services);
   if (allServices.length === 0) {
     return <Table.NoResultsRow colSpan={headers.length} />;
@@ -73,19 +76,20 @@ const Rows = ({services, deleteServiceAction}) => {
     ));
 };
 
-const List = ({services, deleteServiceAction, ...properties}) => (
+const List = ({services, loadedResources, deleteServiceAction, ...properties}) => (
   <Table {...properties}>
     <Table.Head
       columns={headers}
     />
     <Table.Body>
-      <Rows services={services} deleteServiceAction={deleteServiceAction} />
+      <Rows services={services} loadedResources={loadedResources} deleteServiceAction={deleteServiceAction} />
     </Table.Body>
   </Table>
 );
 
-const mapStateToProps = ({services}) => ({
-  services
+const mapStateToProps = ({services, ui: {loadedResources}}) => ({
+  services,
+  loadedResources
 });
 
 const mapDispatchToProps = dispatch =>  bindActionCreators({

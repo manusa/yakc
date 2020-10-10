@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import Card from './Card';
+import Spinner from './Spinner';
 
 const Table = ({title, titleVariant, className, children, ...props}) => (
   <Card className={className} {...props}>
@@ -54,11 +55,20 @@ Table.Cell = ({children, textColor = 'text-gray-800', textSize = 'text-sm', clas
     className={`px-3 py-2 ${textColor} ${textSize} ${className}`}
     {...properties}
   >{children}</td>
-)
+);
+
 Table.NoResultsRow = ({colSpan = 1}) => (
   <Table.Row>
     <Table.Cell colSpan={colSpan}>No results found</Table.Cell>
   </Table.Row>
-)
+);
+
+Table.Loading = ({colSpan = 1}) => (
+  <Table.Row>
+    <Table.Cell colSpan={colSpan} className='overflow-hidden'>
+      <Spinner className='my-0 mx-auto' />
+    </Table.Cell>
+  </Table.Row>
+);
 
 export default Table;

@@ -17,7 +17,13 @@
 
 import redux from './index';
 
-const uiReducer = (state = {}, action = {}) => {
+const defaultState = {
+  offline: false,
+  error: '',
+  loadedResources: {}
+};
+
+const uiReducer = (state = defaultState, action = {}) => {
   const {actions: {Types}} = redux;
   switch (action.type) {
     case Types.UI_SET_OFFLINE: {
@@ -26,6 +32,14 @@ const uiReducer = (state = {}, action = {}) => {
     case Types.UI_SET_ERROR: {
       const newState = {...state};
       newState.error = action.payload
+      return newState;
+    }
+    case Types.CLEAR: {
+      return {...state, loadedResources: {}};
+    }
+    case Types.UI_SET_RESOURCE_LOADED: {
+      const newState = {...state};
+      newState.loadedResources[action.payload.kind] = action.payload.loaded;
       return newState;
     }
     case Types.UI_CLEAR_ERROR: {

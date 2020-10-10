@@ -22,7 +22,8 @@ const Types = {
   CRUD_SET_ALL: 'CRUD_SET_ALL',
   UI_SET_OFFLINE: 'UI_SET_OFFLINE',
   UI_SET_ERROR: 'UI_SET_ERROR',
-  UI_CLEAR_ERROR: 'UI_CLEAR_ERROR',
+  UI_SET_RESOURCE_LOADED: 'UI_SET_RESOURCE_LOADED',
+  UI_CLEAR_ERROR: 'UI_CLEAR_ERROR'
 }
 
 const clear = () => ({
@@ -54,6 +55,10 @@ const setError = error => ({
   payload: error
 });
 
+const setResourceLoaded = ({kind, loaded = false}) => ({
+  type: Types.UI_SET_RESOURCE_LOADED,
+  payload: {kind, loaded}
+});
 
 const clearError = () => ({
   type: Types.UI_CLEAR_ERROR
@@ -67,5 +72,6 @@ export default {
   crudSetAll,
   setOffline,
   setError,
+  setResourceLoaded,
   clearError
 };
