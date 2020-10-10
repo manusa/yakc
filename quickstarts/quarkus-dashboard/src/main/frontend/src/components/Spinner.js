@@ -16,17 +16,17 @@
  */
 import React from 'react';
 
-import './Spinner.css';
-
 const Spinner = ({
   size = 12,
   borderSize = 4,
   color = 'blue-600',
+  shadowColor = 'transparent',
   className = ''
 }) => (
   <>
   <div
     className={`w-${size} h-${size} border-${borderSize} border-${color} rounded-full animate-spin yakc-spinner ${className}`}
+    style={{borderRightColor: shadowColor}}
   />
   </>
 );
