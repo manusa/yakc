@@ -25,7 +25,7 @@ import podsModule from './'
 
 const headers = [
   '',
-  <span><Icon className='fa-id-card' /> Name</span>,
+  <span><Icon icon='fa-id-card' /> Name</span>,
   'Namespace',
   'Status',
   'Restarts',

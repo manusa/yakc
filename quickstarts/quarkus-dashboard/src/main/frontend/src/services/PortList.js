@@ -19,7 +19,7 @@ import Icon from '../components/Icon';
 import Table from '../components/Table';
 
 const headers = [
-  <span><Icon className='fa-id-card' /> Name</span>,
+  <span><Icon icon='fa-id-card' /> Name</span>,
   'App Protocol',
   'Node Port',
   'Port',

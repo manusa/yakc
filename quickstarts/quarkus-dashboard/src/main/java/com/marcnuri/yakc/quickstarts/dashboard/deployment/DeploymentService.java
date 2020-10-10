@@ -22,6 +22,7 @@ import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.apps.v1.AppsV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.Deployment;
+import com.marcnuri.yakc.model.io.k8s.api.apps.v1.DeploymentSpec;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import io.reactivex.Observable;
 import javax.inject.Inject;
@@ -51,5 +52,13 @@ public class DeploymentService {
 
   public Status deleteDeployment(String name, String namespace) throws IOException {
     return kubernetesClient.create(AppsV1Api.class).deleteNamespacedDeployment(name, namespace).get();
+  }
+
+  public Deployment updateReplicas(String name, String namespace, Integer replicas) throws IOException {
+    final Deployment toPatch = new Deployment();
+    toPatch.setSpec(new DeploymentSpec());
+    toPatch.getSpec().setReplicas(replicas);
+    return kubernetesClient.create(AppsV1Api.class).patchNamespacedDeployment(name, namespace,
+      toPatch).get();
   }
 }

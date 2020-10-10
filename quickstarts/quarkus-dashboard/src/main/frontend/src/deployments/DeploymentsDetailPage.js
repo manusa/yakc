@@ -17,13 +17,38 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
-import deploymentsModule from './';
+import d from './';
 import pods from '../pods';
-import replicaSets from '../replicasets';
+import rs from '../replicasets';
 import Card from '../components/Card';
 import ContainerList from '../components/ContainerList';
 import DashboardPage from '../components/DashboardPage';
 import Form from '../components/Form';
+import Icon from '../components/Icon';
+
+const ReplicasField = ({deployment}) => {
+  const replicas = d.selectors.specReplicas(deployment);
+  return (
+    <Form.Field label='Replicas'>
+      <div className='flex items-center'>
+        <Icon stylePrefix='far' icon='fa-copy' className='text-gray-600 mr-2' />
+        {replicas}
+        <div className='flex flex-col ml-2 text-blue-600'>
+          <Icon
+            icon='fa-caret-up'
+            className='leading-3 hover:text-blue-800 cursor-pointer'
+            onClick={() => d.api.updateReplicas(deployment, replicas + 1)}
+          />
+          <Icon
+            icon='fa-caret-down'
+            className={`leading-3 ${replicas > 0 ? 'hover:text-blue-800 cursor-pointer' : 'text-gray-600'}`}
+            onClick={() => d.api.updateReplicas(deployment, replicas - 1)}
+          />
+        </div>
+      </div>
+    </Form.Field>
+  );
+}
 
 const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
   <DashboardPage
@@ -36,8 +61,8 @@ const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
       <Card.Body>
         <Form>
           <metadata.Details resource={deployment} />
-          <Form.Field label='Replicas'>{deploymentsModule.selectors.specReplicas(deployment)}</Form.Field>
-          <Form.Field label='Strategy'>{deploymentsModule.selectors.specStrategyType(deployment)}</Form.Field>
+          <ReplicasField deployment={deployment} />
+          <Form.Field label='Strategy'>{d.selectors.specStrategyType(deployment)}</Form.Field>
         </Form>
       </Card.Body>
     </Card>
@@ -45,8 +70,8 @@ const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
       title='Containers'
       titleVariant={Card.titleVariants.medium}
       className='mt-2'
-      containers={deploymentsModule.selectors.containers(deployment)} />
-    <replicaSets.List
+      containers={d.selectors.containers(deployment)} />
+    <rs.List
       title='Replica Sets'
       titleVariant={Card.titleVariants.medium}
       className='mt-2'

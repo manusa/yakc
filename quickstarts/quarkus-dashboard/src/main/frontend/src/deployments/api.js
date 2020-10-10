@@ -22,8 +22,16 @@ const requestDelete = async deployment => {
     `${getApiURL()}/deployments/${metadata.selectors.namespace(deployment)}/${metadata.selectors.name(deployment)}`,
     {method: 'DELETE'}
     );
-}
+};
+
+const updateReplicas = async (deployment, replicas) => {
+  await fetch(
+    `${getApiURL()}/deployments/${metadata.selectors.namespace(deployment)}/${metadata.selectors.name(deployment)}/spec/replicas/${replicas}`,
+    {method: 'PUT'}
+  );
+};
 
 export  default {
-  requestDelete
+  requestDelete,
+  updateReplicas
 };

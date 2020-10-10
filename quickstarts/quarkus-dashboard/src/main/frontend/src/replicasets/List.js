@@ -24,7 +24,7 @@ import Table from '../components/Table';
 
 const headers = [
   '',
-  <span><Icon className='fa-id-card' /> Name</span>,
+  <span><Icon icon='fa-id-card' /> Name</span>,
   'Namespace',
   'Replicas'
 ]

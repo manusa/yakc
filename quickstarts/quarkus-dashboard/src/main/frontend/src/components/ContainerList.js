@@ -19,7 +19,7 @@ import Icon from './Icon';
 import Table from './Table';
 
 const containerHeaders = [
-  <span><Icon className='fa-id-card' /> Name</span>,
+  <span><Icon icon='fa-id-card' /> Name</span>,
   <span><Icon icon='fa-layer-group'/> Image</span>,
   <span><Icon icon='fa-ethernet' /> Ports</span>
 ];

@@ -20,6 +20,7 @@ package com.marcnuri.yakc.quickstarts.dashboard.deployment;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
@@ -42,6 +43,16 @@ public class DeploymentResource {
     throws IOException {
 
     deploymentService.deleteDeployment(name, namespace);
+    return Response.noContent().build();
+  }
+
+  @PUT
+  @Path("/{namespace}/{name}/spec/replicas/{replicas}")
+  public Response updateReplicas(
+    @PathParam("namespace") String namespace, @PathParam("name") String name,
+    @PathParam("replicas") int replicas) throws IOException {
+
+    deploymentService.updateReplicas(name, namespace, replicas);
     return Response.noContent().build();
   }
 }

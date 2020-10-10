@@ -16,8 +16,8 @@
  */
 import React from 'react';
 
-const Icon = ({icon, stylePrefix = 'fas', className = '' }) => (
-  <i className={`${stylePrefix} ${icon} ${className}`} />
+const Icon = ({icon, stylePrefix = 'fas', className = '', ...props}) => (
+  <i className={`${stylePrefix} ${icon} ${className}`} {...props} />
 );
 
 export default Icon;

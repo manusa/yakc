@@ -104,8 +104,8 @@ const SideBar = ({sideBarOpen}) => {
 
 const OfflineIcon = () => (
   <div className='fa-stack text-red-700' title='Watchers stopped (No network)'>
-    <Icon className='fa-wifi fa-stack-1x'/>
-    <Icon className='fa-slash fa-stack-1x'/>
+    <Icon icon='fa-wifi fa-stack-1x'/>
+    <Icon icon='fa-slash fa-stack-1x'/>
   </div>
 );
 
