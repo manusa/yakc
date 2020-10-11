@@ -25,6 +25,7 @@ import ContainerList from '../components/ContainerList';
 import DashboardPage from '../components/DashboardPage';
 import Form from '../components/Form';
 import Icon from '../components/Icon';
+import Link from '../components/Link';
 
 const ReplicasField = ({deployment}) => {
   const replicas = d.selectors.specReplicas(deployment);
@@ -54,9 +55,20 @@ const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
   <DashboardPage
     title={`Deployments - ${metadata.selectors.namespace(deployment)} - ${metadata.selectors.name(deployment)}`}
   >
-    <Card >
-      <Card.Title>
-        {metadata.selectors.namespace(deployment)} - {metadata.selectors.name(deployment)}
+    <Card>
+      <Card.Title className='flex items-center'>
+        <div className='flex-1'>
+          {metadata.selectors.namespace(deployment)} - {metadata.selectors.name(deployment)}
+        </div>
+        <Link
+          variant={Link.variants.outline}
+          className='justify-self-end text-sm font-normal'
+          onClick={() => d.api.restart(deployment)}
+          title='Restart'
+        >
+          <Icon stylePrefix='fas' icon='fa-redo-alt' className='mr-2' />
+          Restart
+        </Link>
       </Card.Title>
       <Card.Body>
         <Form>

@@ -39,6 +39,7 @@ const Rows = ({deployments}) => {
     return <Table.NoResultsRow colSpan={headers.length} />;
   }
   const deleteDeployment = deployment => async () => await deploymentsModule.api.requestDelete(deployment);
+  const restartDeployment = deployment => async () => await deploymentsModule.api.restart(deployment);
   return allDeployments
     .sort(sort)
     .map(deployment => (
@@ -66,7 +67,13 @@ const Rows = ({deployments}) => {
         </Table.Cell>
         <Table.Cell>
           <Link
+            variant={Link.variants.outline}
+            onClick={restartDeployment(deployment)}
+            title='Restart'
+          ><Icon stylePrefix='fas' icon='fa-redo-alt' /></Link>
+          <Link
             variant={Link.variants.outlineDanger}
+            className='ml-1'
             onClick={deleteDeployment(deployment)}
             title='Delete'
           ><Icon stylePrefix='far' icon='fa-trash-alt' /></Link>

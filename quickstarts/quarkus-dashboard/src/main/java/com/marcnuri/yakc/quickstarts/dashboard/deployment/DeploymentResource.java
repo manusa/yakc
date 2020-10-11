@@ -47,6 +47,15 @@ public class DeploymentResource {
   }
 
   @PUT
+  @Path("/{namespace}/{name}/restart")
+  public Response restart(
+    @PathParam("namespace") String namespace, @PathParam("name") String name) throws IOException {
+
+    deploymentService.restart(name, namespace);
+    return Response.noContent().build();
+  }
+
+  @PUT
   @Path("/{namespace}/{name}/spec/replicas/{replicas}")
   public Response updateReplicas(
     @PathParam("namespace") String namespace, @PathParam("name") String name,

@@ -24,6 +24,13 @@ const requestDelete = async deployment => {
     );
 };
 
+const restart = async deployment => {
+  await fetch(
+    `${getApiURL()}/deployments/${metadata.selectors.namespace(deployment)}/${metadata.selectors.name(deployment)}/restart`,
+    {method: 'PUT'}
+  );
+};
+
 const updateReplicas = async (deployment, replicas) => {
   await fetch(
     `${getApiURL()}/deployments/${metadata.selectors.namespace(deployment)}/${metadata.selectors.name(deployment)}/spec/replicas/${replicas}`,
@@ -31,7 +38,8 @@ const updateReplicas = async (deployment, replicas) => {
   );
 };
 
-export  default {
+export default {
   requestDelete,
+  restart,
   updateReplicas
 };

@@ -23,12 +23,15 @@ import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.apps.v1.AppsV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.Deployment;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.DeploymentSpec;
+import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodTemplateSpec;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import java.io.IOException;
+import java.time.Instant;
 
 @Singleton
 public class DeploymentService {
@@ -54,11 +57,28 @@ public class DeploymentService {
     return kubernetesClient.create(AppsV1Api.class).deleteNamespacedDeployment(name, namespace).get();
   }
 
+  public Deployment restart(String name, String namespace) throws IOException {
+    final Deployment toPatch = emptyDeployment();
+    toPatch.getSpec().setTemplate(PodTemplateSpec.builder()
+      .metadata(ObjectMeta.builder()
+        .putInAnnotations("yakc.marcnuri.com/restartedAt", Instant.now().toString())
+        .build())
+      .build());
+    return kubernetesClient.create(AppsV1Api.class)
+      .patchNamespacedDeployment(name, namespace, toPatch)
+      .get();
+  }
+
   public Deployment updateReplicas(String name, String namespace, Integer replicas) throws IOException {
-    final Deployment toPatch = new Deployment();
-    toPatch.setSpec(new DeploymentSpec());
+    final Deployment toPatch = emptyDeployment();
     toPatch.getSpec().setReplicas(replicas);
     return kubernetesClient.create(AppsV1Api.class).patchNamespacedDeployment(name, namespace,
       toPatch).get();
+  }
+
+  private static Deployment emptyDeployment() {
+    final Deployment ret = new Deployment();
+    ret.setSpec(new DeploymentSpec());
+    return ret;
   }
 }
