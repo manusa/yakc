@@ -20,11 +20,11 @@ package com.marcnuri.yakc.quickstarts.dashboard;
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentResource;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
 import com.marcnuri.yakc.quickstarts.dashboard.ingresses.IngressResource;
+import com.marcnuri.yakc.quickstarts.dashboard.namespaces.NamespaceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeResource;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource;
 import com.marcnuri.yakc.quickstarts.dashboard.service.ServiceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.WatchResource;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.Path;
@@ -35,6 +35,7 @@ public class ApiResource {
   private final DeploymentResource deploymentResource;
   private final EventResource eventResource;
   private final IngressResource ingressResource;
+  private final NamespaceResource namespaceResource;
   private final NodeResource nodeResource;
   private final PodResource podResource;
   private final ServiceResource serviceResource;
@@ -45,12 +46,14 @@ public class ApiResource {
     DeploymentResource deploymentResource,
     EventResource eventResource,
     IngressResource ingressResource,
+    NamespaceResource namespaceResource,
     NodeResource nodeResource, PodResource podResource,
     ServiceResource serviceResource,
     WatchResource watchResource) {
     this.deploymentResource = deploymentResource;
     this.eventResource = eventResource;
     this.ingressResource = ingressResource;
+    this.namespaceResource = namespaceResource;
     this.nodeResource = nodeResource;
     this.podResource = podResource;
     this.serviceResource = serviceResource;
@@ -70,6 +73,11 @@ public class ApiResource {
   @Path("/ingresses")
   public IngressResource getIngressResource() {
     return ingressResource;
+  }
+
+  @Path("/namespaces")
+  public NamespaceResource getNamespaceResource() {
+    return namespaceResource;
   }
 
   @Path("/nodes")

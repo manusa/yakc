@@ -20,14 +20,12 @@ import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 import SimpleBar from 'simplebar-react';
 import redux from '../redux';
-import icons from '../icons';
+import i from './icons';
 import nm from '../nodes';
 import Alert from './Alert';
 import Icon from './Icon';
 import Link from './Link';
 import Tooltip from './Tooltip';
-import YAKCLogo from './icons/YAKCLogo';
-import Minikube from './icons/Minikube';
 
 import './DashboardPage.css';
 
@@ -46,12 +44,9 @@ const DashboardNavLink = ({match: {path}, to, staticContext, className = '', ...
 
 const RoutedLink = withRouter(DashboardNavLink);
 
-const NavItem = ({to, icon, children}) => (
+const NavItem = ({to, Icon: ComponentIcon, children}) => (
   <RoutedLink to={to}>
-    <img
-      className='h-4 mr-2 md:mr-3 md:h-5 lg:h-8 lg:mr-4' src={icon}
-      alt='Navigation item icon'
-    />
+    <ComponentIcon className='h-4 mr-2 md:mr-3 md:h-5 lg:h-8 lg:mr-4'/>
     {children}
   </RoutedLink>
 );
@@ -78,7 +73,7 @@ const SideBar = ({sideBarOpen}) => {
           <Link.RouterLink
             to='/' variant={Link.variants.none} className='flex flex-col items-center'
           >
-            <YAKCLogo kubernetesColor='#FFFFFF' className='block h-8 lg:h-12' />
+            <i.YAKCLogo kubernetesColor='#FFFFFF' className='block h-8 lg:h-12' />
             <div className='text-white text-lg lg:text-xl mt-2 mx-2 font-semibold'>
               Kubernetes Dashboard
             </div>
@@ -86,12 +81,13 @@ const SideBar = ({sideBarOpen}) => {
         </div>
       <SimpleBar className='mt-4 lg:mt-6 flex-1 h-1 overflow-x-hidden'>
         <nav>
-          <NavItem to='/' icon={icons.k8s}>Home</NavItem>
-          <NavItem to='/nodes' icon={icons.node}>Nodes</NavItem>
-          <NavItem to='/pods' icon={icons.pod}>Pods</NavItem>
-          <NavItem to='/deployments' icon={icons.deployment}>Deployments</NavItem>
-          <NavItem to='/services' icon={icons.svc}>Services</NavItem>
-          <NavItem to='/ingresses' icon={icons.ing}>Ingresses</NavItem>
+          <NavItem to='/' Icon={i.Kubernetes}>Home</NavItem>
+          <NavItem to='/nodes' Icon={i.Node}>Nodes</NavItem>
+          <NavItem to='/namespaces' Icon={i.Namespace}>Namespaces</NavItem>
+          <NavItem to='/pods' Icon={i.Pod}>Pods</NavItem>
+          <NavItem to='/deployments' Icon={i.Deployment}>Deployments</NavItem>
+          <NavItem to='/services' Icon={i.Service}>Services</NavItem>
+          <NavItem to='/ingresses' Icon={i.Ingress}>Ingresses</NavItem>
           <h2 className='mt-6 mb-2 px-6 text-gray-100 text-xl'>About</h2>
           <ExtNavItem href='https://github.com/manusa/yakc/tree/master/quickstarts/quarkus-dashboard'>
             Quarkus Kubernetes Dashboard</ExtNavItem>
@@ -121,11 +117,11 @@ const Header = ({isMinikube, offline, setSideBarOpen, title}) => {
             <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" strokeWidth="2" strokeLinecap="round"
                   strokeLinejoin="round"/>
           </svg>
-          <YAKCLogo className='block ml-2 h-6' />
+          <i.YAKCLogo className='block ml-2 h-6' />
         </button>
         <div className='flex relative items-center mx-4 lg:text-xl lg:mx-0 flex-1 truncate'>
           {isMinikube && <Tooltip content='Minikube cluster detected'>
-            <Minikube className='h-6 mr-2' />
+            <i.Minikube className='h-6 mr-2' />
           </Tooltip>}
           {title}
         </div>

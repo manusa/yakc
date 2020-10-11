@@ -16,7 +16,7 @@
  */
 import React from 'react';
 import {useHistory} from 'react-router-dom';
-import icons from '../icons';
+import icons from '../components/icons';
 
 const Progress = ({bg = 'bg-grey-light', fg = 'bg-blue-700', progress = 0}) => (
   <div className='self-stretch mx-6'>
@@ -28,7 +28,7 @@ const Progress = ({bg = 'bg-grey-light', fg = 'bg-blue-700', progress = 0}) => (
 
 const StatusCard = ({
   header,
-  icon = icons.k8s,
+  Icon = icons.k8s,
   ready = 0,
   total = 0,
   progressWidth = 0,
@@ -49,10 +49,9 @@ const StatusCard = ({
         ${className}
       `}>
         <h2 className='font-semibold text-lg mb-2'>{header}</h2>
-        <img
-          src={icon}
+        <Icon
           onClick={onClick}
-          className='cursor-pointer'
+          className='cursor-pointer w-20'
           alt={`Icon for ${header} status`}
         />
         <h3 className='text-lg my-2'>{ready} / {total}</h3>

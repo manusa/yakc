@@ -17,7 +17,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import StatusCard from '../components/StatusCard';
-import icons from '../icons';
+import icons from '../components/icons';
 import deploymentsModule from './';
 
 const DeploymentsCard = ({deployments, ...properties}) => {
@@ -28,7 +28,7 @@ const DeploymentsCard = ({deployments, ...properties}) => {
     <StatusCard
       header='Deployments'
       to={'/deployments'}
-      icon={icons.deployment}
+      Icon={icons.Deployment}
       ready={ready}
       total={total}
       progressWidth={Math.round(ready/total*100)}

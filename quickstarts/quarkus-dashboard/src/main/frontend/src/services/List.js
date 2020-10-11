@@ -51,13 +51,15 @@ const Rows = ({services, loadedResources, deleteServiceAction}) => {
     .sort(sort)
     .map(service => (
         <Table.Row key={metadata.selectors.uid(service)}>
-          <Table.Cell className='text-nowrap'>
+          <Table.Cell>
             <Link.RouterLink to={`/services/${metadata.selectors.uid(service)}`}>
               {metadata.selectors.name(service)}
             </Link.RouterLink>
           </Table.Cell>
-          <Table.Cell className='text-nowrap'>
-            {metadata.selectors.namespace(service)}
+          <Table.Cell className='whitespace-no-wrap'>
+            <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(service)}`}>
+              {metadata.selectors.namespace(service)}
+            </Link.Namespace>
           </Table.Cell>
           <Table.Cell>
             <svc.Type service={service} />

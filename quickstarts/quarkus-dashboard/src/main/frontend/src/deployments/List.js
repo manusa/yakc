@@ -55,9 +55,11 @@ const Rows = ({deployments}) => {
           </Link.RouterLink>
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
-          {metadata.selectors.namespace(deployment)}
+          <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(deployment)}`}>
+            {metadata.selectors.namespace(deployment)}
+          </Link.Namespace>
         </Table.Cell>
-        <Table.Cell >
+        <Table.Cell>
           {deploymentsModule.selectors.images(deployment).map((image, idx) =>
             <div key={idx}>{image}</div>
           )}

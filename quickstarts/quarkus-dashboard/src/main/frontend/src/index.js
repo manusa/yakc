@@ -21,6 +21,7 @@ import {combineReducers, createStore} from 'redux';
 import deployments from './deployments';
 import events from './events';
 import ing from './ingresses';
+import ns from './namespaces';
 import nodes from './nodes';
 import pods from './pods';
 import replicaSets from './replicasets';
@@ -43,6 +44,7 @@ const store = createStore(combineReducers({
   deployments: deployments.reducer,
   events: events.reducer,
   ingresses: ing.reducer,
+  namespaces: ns.reducer,
   nodes: nodes.reducer,
   pods: pods.reducer,
   replicaSets: replicaSets.reducer,

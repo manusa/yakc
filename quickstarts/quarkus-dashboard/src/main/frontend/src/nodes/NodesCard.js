@@ -17,7 +17,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import StatusCard from '../components/StatusCard';
-import icons from '../icons';
+import icons from '../components/icons';
 import nodesModule from './'
 
 const NodesCard = ({nodes, ...properties}) => {
@@ -28,7 +28,7 @@ const NodesCard = ({nodes, ...properties}) => {
     <StatusCard
       header='Nodes'
       to={'/nodes'}
-      icon={icons.node}
+      Icon={icons.Node}
       ready={ready}
       total={total}
       progressWidth={Math.round(ready/total*100)}

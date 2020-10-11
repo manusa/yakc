@@ -51,13 +51,15 @@ const Rows = ({ingresses, loadedResources, deleteIngressAction}) => {
     .sort(sort)
     .map(ingress => (
         <Table.Row key={metadata.selectors.uid(ingress)}>
-          <Table.Cell className='text-nowrap'>
+          <Table.Cell>
             <Link.Ingress to={`/ingresses/${metadata.selectors.uid(ingress)}`}>
               {metadata.selectors.name(ingress)}
             </Link.Ingress>
           </Table.Cell>
-          <Table.Cell className='text-nowrap'>
-            {metadata.selectors.namespace(ingress)}
+          <Table.Cell className='whitespace-no-wrap'>
+            <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(ingress)}`}>
+              {metadata.selectors.namespace(ingress)}
+            </Link.Namespace>
           </Table.Cell>
           <Table.Cell>
             {ing.selectors.allHosts(ingress).map((host, idx) =>

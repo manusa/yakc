@@ -34,6 +34,15 @@ const uid = object => object?.metadata?.uid ?? '';
 const ownerReferencesUids = object => (object?.metadata?.ownerReferences ?? [])
   .map(or => or.uid);
 
+// Selectors for Map<uid, resource> of Metadata Resources
+
+const byUidOrName = (metadataResources, uidOrName) => {
+  if (metadataResources[uidOrName]) {
+    return metadataResources[uidOrName];
+  }
+  return Object.values(metadataResources)
+  .find(resource => name(resource) === uidOrName);
+}
 export default {
   creationTimestamp,
   annotations,
@@ -41,5 +50,6 @@ export default {
   name,
   namespace,
   uid,
-  ownerReferencesUids
+  ownerReferencesUids,
+  byUidOrName
 };

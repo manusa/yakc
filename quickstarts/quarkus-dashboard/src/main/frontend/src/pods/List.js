@@ -57,7 +57,9 @@ const Rows = ({pods}) => {
           </Link.Pod>
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
-          {metadata.selectors.namespace(pod)}
+          <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(pod)}`}>
+            {metadata.selectors.namespace(pod)}
+          </Link.Namespace>
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
           <podsModule.StatusIcon

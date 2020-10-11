@@ -20,6 +20,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import deployments from './deployments';
 import ingresses from './ingresses';
 import nodes from './nodes';
+import ns from './namespaces';
 import pods from './pods';
 import services from './services';
 import watch from './watch';
@@ -36,8 +37,9 @@ const pollResources = dispatch => {
     };
     try {
       await Promise.all([
-        services.api.list().then(handleResourceList('Service')),
-        ingresses.api.list().then(handleResourceList('Ingress'))
+        ingresses.api.list().then(handleResourceList('Ingress')),
+        ns.api.list().then(handleResourceList('Namespace')),
+        services.api.list().then(handleResourceList('Service'))
       ]);
     } catch (e) {
       dispatch(redux.actions.setError('Error when polling resources (retrying)'));
@@ -75,6 +77,8 @@ const App = ({dispatch}) => {
           <Route exact path='/deployments/:uid' component={deployments.DeploymentsDetailPage} />
           <Route exact path='/ingresses' component={ingresses.IngressesPage} />
           <Route exact path='/ingresses/:uid' component={ingresses.IngressesDetailPage} />
+          <Route exact path='/namespaces' component={ns.NamespacesPage} />
+          <Route exact path='/namespaces/:uid' component={ns.NamespacesDetailPage} />
           <Route exact path='/nodes' component={nodes.NodesPage} />
           <Route exact path='/nodes/:name' component={nodes.NodesDetailPage} />
           <Route exact path='/pods' component={pods.PodsPage} />
