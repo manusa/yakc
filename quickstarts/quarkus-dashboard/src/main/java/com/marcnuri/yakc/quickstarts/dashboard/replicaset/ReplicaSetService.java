@@ -23,6 +23,7 @@ import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.apps.v1.AppsV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.ReplicaSet;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -47,6 +48,10 @@ public class ReplicaSetService {
     } catch (ClientErrorException ex) {
       return apps.listNamespacedReplicaSet(kubernetesClient.getConfiguration().getNamespace()).watch();
     }
+  }
+
+  public Status deleteReplicaSet(String name, String namespace) throws IOException {
+    return kubernetesClient.create(AppsV1Api.class).deleteNamespacedReplicaSet(name, namespace).get();
   }
 
 }

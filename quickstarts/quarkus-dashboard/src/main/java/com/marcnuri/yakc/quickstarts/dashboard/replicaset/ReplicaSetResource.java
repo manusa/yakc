@@ -13,38 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Created on 2020-10-04, 7:43
+ * Created on 2020-10-12, 11:05
  */
-package com.marcnuri.yakc.quickstarts.dashboard.ingresses;
+package com.marcnuri.yakc.quickstarts.dashboard.replicaset;
 
-import com.marcnuri.yakc.model.io.k8s.api.networking.v1.Ingress;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import java.io.IOException;
-import java.util.List;
 
 @Singleton
-public class IngressResource {
+public class ReplicaSetResource {
 
-  private final IngressService ingressService;
+  private final ReplicaSetService replicaSetService;
 
   @Inject
-  public IngressResource(IngressService ingressService) {
-    this.ingressService = ingressService;
-  }
-
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public List<Ingress> get() throws IOException {
-    return ingressService.get();
+  public ReplicaSetResource(ReplicaSetService replicaSetService) {
+    this.replicaSetService = replicaSetService;
   }
 
   @DELETE
@@ -52,7 +41,7 @@ public class IngressResource {
   public Response delete(@PathParam("namespace") String namespace, @PathParam("name") String name)
     throws IOException {
 
-    ingressService.deleteIngress(name, namespace);
+    replicaSetService.deleteReplicaSet(name, namespace);
     return Response.noContent().build();
   }
 }

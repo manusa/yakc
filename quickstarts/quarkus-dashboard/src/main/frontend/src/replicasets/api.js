@@ -14,16 +14,16 @@
  * limitations under the License.
  *
  */
-import api from './api';
-import reducer from './reducer';
-import selectors from './selectors';
-import List from './List';
+import {getApiURL} from '../env';
+import metadata from '../metadata';
 
-const replicasets = {};
+const api = {};
 
-replicasets.api = api;
-replicasets.reducer = reducer;
-replicasets.selectors = selectors;
-replicasets.List = List;
+api.requestDelete = async ingress => {
+  await fetch(
+    `${getApiURL()}/replicasets/${metadata.selectors.namespace(ingress)}/${metadata.selectors.name(ingress)}`,
+    {method: 'DELETE'}
+  );
+};
 
-export default replicasets;
+export default api;

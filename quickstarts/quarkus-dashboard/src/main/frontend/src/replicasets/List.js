@@ -21,12 +21,14 @@ import metadata from '../metadata';
 import rs from './';
 import Icon from '../components/Icon';
 import Table from '../components/Table';
+import Link from '../components/Link';
 
 const headers = [
   '',
   <span><Icon icon='fa-id-card' /> Name</span>,
   'Namespace',
-  'Replicas'
+  'Replicas',
+  ''
 ]
 
 const sort = (p1, p2) =>
@@ -37,6 +39,7 @@ const Rows = ({replicaSets}) => {
   if (allRS.length === 0) {
     return <Table.NoResultsRow colSpan={headers.length} />;
   }
+  const deleteReplicaSet = replicaSet => async () => await rs.api.requestDelete(replicaSet);
   return allRS
     .sort(sort)
     .map(replicaSet => (
@@ -55,6 +58,13 @@ const Rows = ({replicaSets}) => {
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
           {rs.selectors.specReplicas(replicaSet)}
+        </Table.Cell>
+        <Table.Cell className='whitespace-no-wrap text-center'>
+          <Link
+            variant={Link.variants.outlineDanger}
+            onClick={deleteReplicaSet(replicaSet)}
+            title='Delete'
+          ><Icon stylePrefix='far' icon='fa-trash-alt' /></Link>
         </Table.Cell>
       </Table.Row>
     ));

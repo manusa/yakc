@@ -23,6 +23,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.ingresses.IngressResource;
 import com.marcnuri.yakc.quickstarts.dashboard.namespaces.NamespaceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeResource;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource;
+import com.marcnuri.yakc.quickstarts.dashboard.replicaset.ReplicaSetResource;
 import com.marcnuri.yakc.quickstarts.dashboard.service.ServiceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.WatchResource;
 import javax.inject.Inject;
@@ -38,6 +39,7 @@ public class ApiResource {
   private final NamespaceResource namespaceResource;
   private final NodeResource nodeResource;
   private final PodResource podResource;
+  private final ReplicaSetResource replicaSetResource;
   private final ServiceResource serviceResource;
   private final WatchResource watchResource;
 
@@ -48,6 +50,7 @@ public class ApiResource {
     IngressResource ingressResource,
     NamespaceResource namespaceResource,
     NodeResource nodeResource, PodResource podResource,
+    ReplicaSetResource replicaSetResource,
     ServiceResource serviceResource,
     WatchResource watchResource) {
     this.deploymentResource = deploymentResource;
@@ -56,6 +59,7 @@ public class ApiResource {
     this.namespaceResource = namespaceResource;
     this.nodeResource = nodeResource;
     this.podResource = podResource;
+    this.replicaSetResource = replicaSetResource;
     this.serviceResource = serviceResource;
     this.watchResource = watchResource;
   }
@@ -88,6 +92,11 @@ public class ApiResource {
   @Path("/pods")
   public PodResource getPodResource() {
     return podResource;
+  }
+
+  @Path("/replicasets")
+  public ReplicaSetResource getReplicaSetResource() {
+    return replicaSetResource;
   }
 
   @Path("/services")
