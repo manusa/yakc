@@ -48,10 +48,10 @@ const Rows = ({nodes}) => {
           />
         </Table.Cell>
         <Table.Cell className='text-nowrap'>
-          <Link.RouterLink
+          <Link.Node
             to={`/nodes/${metadata.selectors.name(node)}`}
           >{metadata.selectors.name(node)}
-          </Link.RouterLink>
+          </Link.Node>
         </Table.Cell>
         <Table.Cell className='text-nowrap'>
           {(roles => {

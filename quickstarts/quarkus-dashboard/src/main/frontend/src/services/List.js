@@ -52,9 +52,9 @@ const Rows = ({services, loadedResources, deleteServiceAction}) => {
     .map(service => (
         <Table.Row key={metadata.selectors.uid(service)}>
           <Table.Cell>
-            <Link.RouterLink to={`/services/${metadata.selectors.uid(service)}`}>
+            <Link.Service to={`/services/${metadata.selectors.uid(service)}`}>
               {metadata.selectors.name(service)}
-            </Link.RouterLink>
+            </Link.Service>
           </Table.Cell>
           <Table.Cell className='whitespace-no-wrap'>
             <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(service)}`}>

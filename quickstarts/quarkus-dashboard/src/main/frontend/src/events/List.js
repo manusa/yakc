@@ -35,6 +35,7 @@ const EventName = ({event}) => {
   let url;
   switch (event.involvedObject.kind) {
     case 'Deployment':
+      Component = Link.Deployment;
       url = `/deployments/${event.involvedObject.uid}`;
       break;
     case 'Ingress':

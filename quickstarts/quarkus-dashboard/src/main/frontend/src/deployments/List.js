@@ -51,9 +51,9 @@ const Rows = ({deployments}) => {
           />
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
-          <Link.RouterLink to={`/deployments/${metadata.selectors.uid(deployment)}`}>
+          <Link.Deployment to={`/deployments/${metadata.selectors.uid(deployment)}`}>
             {metadata.selectors.name(deployment)}
-          </Link.RouterLink>
+          </Link.Deployment>
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
           <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(deployment)}`}>
