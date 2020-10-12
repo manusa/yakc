@@ -14,16 +14,15 @@
  * limitations under the License.
  *
  */
-const specRules = ingress => ingress?.spec?.rules ?? [];
+const selectors = {};
 
-const allHosts = ingress => specRules(ingress)
+selectors.specRules = ingress => ingress?.spec?.rules ?? [];
+
+selectors.allHosts = ingress => selectors.specRules(ingress)
   .map(r => r.host);
 
-const allPaths = ingress => specRules(ingress)
+selectors.allPaths = ingress => selectors.specRules(ingress)
   .flatMap(r => r.http.paths)
   .map(p => p.path);
 
-export default {
-  allHosts,
-  allPaths
-};
+export default selectors;

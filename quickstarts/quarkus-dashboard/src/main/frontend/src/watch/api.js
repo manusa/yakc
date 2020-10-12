@@ -18,7 +18,9 @@ import {getApiURL} from '../env';
 import {bindActionCreators} from 'redux';
 import redux from '../redux';
 
-const startEventSource =
+const api = {};
+
+api.startEventSource =
   ({dispatch}) => {
     const actions = bindActionCreators({
       ...redux.actions
@@ -54,6 +56,4 @@ const startEventSource =
     return eventSource;
   };
 
-export default {
-  startEventSource,
-};
+export default api;

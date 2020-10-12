@@ -16,39 +16,34 @@
  */
 import metadata from '../metadata';
 
-const isReady = node => {
+const selectors = {};
+
+selectors.isReady = node => {
   const ready = (node?.status?.conditions ?? [])
     .find(condition => condition.type === 'Ready');
   return ready && ready.status;
 };
 
-const statusAddresses = node => node?.status?.addresses ?? [];
+selectors.statusAddresses = node => node?.status?.addresses ?? [];
 
-const statusAddressesFirstAddress = node =>
-  statusAddresses(node).map(a => a.address ?? '').find(a => a) ?? '';
+selectors.statusAddressesFirstAddress = node =>
+  selectors.statusAddresses(node).map(a => a.address ?? '').find(a => a) ?? '';
 
-const roles = node => Object.keys(metadata.selectors.labels(node))
+selectors.roles = node => Object.keys(metadata.selectors.labels(node))
   .filter(key => key.indexOf('node-role.kubernetes.io/') === 0)
   .map(key => key.split('/')[1]);
 
 // Selectors for array of Nodes
 
-const readyCount = nodes => nodes.reduce(
-  (count, node) => isReady(node) ? ++count : count,
+selectors.readyCount = nodes => nodes.reduce(
+  (count, node) => selectors.isReady(node) ? ++count : count,
   0
 );
 
-const isMinikube = nodes => Object.values(nodes).length === 1 && Object.values(nodes)
+selectors.isMinikube = nodes => Object.values(nodes).length === 1 && Object.values(nodes)
   .filter(node => metadata.selectors.name(node) === 'minikube')
   .filter(node => metadata.selectors.labels(node)['minikube.k8s.io/name'] === 'minikube')
   .filter(node => metadata.selectors.labels(node).hasOwnProperty('node-role.kubernetes.io/master'))
   .length === 1;
 
-export default {
-  isReady,
-  statusAddresses,
-  statusAddressesFirstAddress,
-  roles,
-  readyCount,
-  isMinikube
-};
+export default selectors;

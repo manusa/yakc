@@ -14,46 +14,38 @@
  * limitations under the License.
  *
  */
-const statusPhase = pod => pod?.status?.phase ?? '';
+const selectors = {};
 
-const statusPodIP = pod => pod?.status?.podIP ?? '';
+selectors.statusPhase = pod => pod?.status?.phase ?? '';
 
-const nodeName = pod => pod?.spec?.nodeName ?? '';
+selectors.statusPodIP = pod => pod?.status?.podIP ?? '';
 
-const restartPolicy = pod => pod?.spec?.restartPolicy ?? '';
+selectors.nodeName = pod => pod?.spec?.nodeName ?? '';
 
-const containers = pod => (pod?.spec?.containers ?? []);
+selectors.restartPolicy = pod => pod?.spec?.restartPolicy ?? '';
 
-const containerStatuses = pod => (pod?.status?.containerStatuses ?? []);
+selectors.containers = pod => (pod?.spec?.containers ?? []);
 
-const containersReady = pod => {
-  const css = containerStatuses(pod);
+selectors.containerStatuses = pod => (pod?.status?.containerStatuses ?? []);
+
+selectors.containersReady = pod => {
+  const css = selectors.containerStatuses(pod);
   return css.length > 0 && css.every(cs => cs.ready);
 };
 
-const succeededOrContainersReady = pod =>
-  statusPhase(pod) === 'Succeeded' || containersReady(pod);
+selectors.succeededOrContainersReady = pod =>
+  selectors.statusPhase(pod) === 'Succeeded' || selectors.containersReady(pod);
 
-const restartCount = pod => containerStatuses(pod).reduce(
+selectors.restartCount = pod => selectors.containerStatuses(pod).reduce(
   (acc, containerStatus) => acc + containerStatus.restartCount,
   0
 );
 
 // Selectors for array of Pods
 
-const readyCount = pods => pods.reduce(
-  (count, pod) => containersReady(pod) ? ++count : count,
+selectors.readyCount = pods => pods.reduce(
+  (count, pod) => selectors.containersReady(pod) ? count + 1 : count,
   0
 );
 
-export default {
-  statusPhase,
-  statusPodIP,
-  nodeName,
-  restartPolicy,
-  containers,
-  containersReady,
-  succeededOrContainersReady,
-  restartCount,
-  readyCount
-};
+export default selectors;

@@ -16,7 +16,6 @@
  */
 import redux from './';
 
-
 const belongsToThisReducer = (kind, action) =>
   (action.payload.kind ?? undefined) === kind;
 

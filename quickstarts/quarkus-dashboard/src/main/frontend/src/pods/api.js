@@ -17,18 +17,17 @@
 import {getApiURL} from '../env';
 import metadata from '../metadata';
 
-const logs = (namespace, name) => new EventSource(
+const api = {};
+
+api.logs = (namespace, name) => new EventSource(
   `${getApiURL()}/pods/${namespace}/${name}/logs`
 );
 
-const requestDelete = async pod => {
+api.requestDelete = async pod => {
   await fetch(
     `${getApiURL()}/pods/${metadata.selectors.namespace(pod)}/${metadata.selectors.name(pod)}`,
     {method: 'DELETE'}
     );
 }
 
-export default {
-  logs,
-  requestDelete
-};
+export default api;

@@ -24,14 +24,16 @@ import PodsLogsPage from './PodsLogsPage';
 import PodsPage from './PodsPage';
 import StatusIcon from './StatusIcon';
 
-export default {
-  api,
-  reducer,
-  selectors,
-  List,
-  PodsCard,
-  PodsDetailPage,
-  PodsLogsPage,
-  PodsPage,
-  StatusIcon
-};
+const pods = {};
+
+pods.api = api;
+pods.reducer = reducer;
+pods.selectors = selectors;
+pods.List = List;
+pods.PodsCard = PodsCard;
+pods.PodsDetailPage = PodsDetailPage;
+pods.PodsLogsPage = PodsLogsPage;
+pods.PodsPage = PodsPage;
+pods.StatusIcon = StatusIcon;
+
+export default pods;

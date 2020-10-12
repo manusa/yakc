@@ -17,29 +17,27 @@
 import {getApiURL} from '../env';
 import metadata from '../metadata';
 
-const requestDelete = async deployment => {
+const api = {};
+
+api.requestDelete = async deployment => {
   await fetch(
     `${getApiURL()}/deployments/${metadata.selectors.namespace(deployment)}/${metadata.selectors.name(deployment)}`,
     {method: 'DELETE'}
     );
 };
 
-const restart = async deployment => {
+api.restart = async deployment => {
   await fetch(
     `${getApiURL()}/deployments/${metadata.selectors.namespace(deployment)}/${metadata.selectors.name(deployment)}/restart`,
     {method: 'PUT'}
   );
 };
 
-const updateReplicas = async (deployment, replicas) => {
+api.updateReplicas = async (deployment, replicas) => {
   await fetch(
     `${getApiURL()}/deployments/${metadata.selectors.namespace(deployment)}/${metadata.selectors.name(deployment)}/spec/replicas/${replicas}`,
     {method: 'PUT'}
   );
 };
 
-export default {
-  requestDelete,
-  restart,
-  updateReplicas
-};
+export default api;

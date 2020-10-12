@@ -18,7 +18,9 @@ import {getApiURL} from '../env';
 import {fixKind, toJson} from '../fetch';
 import metadata from '../metadata';
 
-const list = async () => {
+const api = {};
+
+api.list = async () => {
   const response = await fetch(
     `${getApiURL()}/services`
   );
@@ -26,14 +28,11 @@ const list = async () => {
   return fixKind('Service')(rawList);
 };
 
-const requestDelete = async service => {
+api.requestDelete = async service => {
   await fetch(
     `${getApiURL()}/services/${metadata.selectors.namespace(service)}/${metadata.selectors.name(service)}`,
     {method: 'DELETE'}
   );
 };
 
-export default {
-  list,
-  requestDelete
-};
+export default api;

@@ -65,7 +65,7 @@ const Rows = ({deployments}) => {
             <div key={idx}>{image}</div>
           )}
         </Table.Cell>
-        <Table.Cell>
+        <Table.Cell className='whitespace-no-wrap text-center'>
           <Link
             variant={Link.variants.outline}
             onClick={restartDeployment(deployment)}

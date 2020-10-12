@@ -18,8 +18,10 @@ import reducer from './reducer';
 import selectors from './selectors';
 import List from './List';
 
-export default {
-  reducer,
-  selectors,
-  List
-};
+const replicasets = {};
+
+replicasets.reducer = reducer;
+replicasets.selectors = selectors;
+replicasets.List = List;
+
+export default replicasets;

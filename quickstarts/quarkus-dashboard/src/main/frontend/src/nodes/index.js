@@ -19,13 +19,15 @@ import selectors from './selectors';
 import List from './List';
 import NodesCard from './NodesCard';
 import NodesDetailPage from './NodesDetailPage';
-import NodesPage from './NodesPage'
+import NodesPage from './NodesPage';
 
-export default {
-  reducer,
-  selectors,
-  List,
-  NodesCard,
-  NodesDetailPage,
-  NodesPage
-};
+const nodes = {};
+
+nodes.reducer = reducer;
+nodes.selectors = selectors;
+nodes.List = List;
+nodes.NodesCard = NodesCard;
+nodes.NodesDetailPage = NodesDetailPage;
+nodes.NodesPage = NodesPage;
+
+export default nodes;

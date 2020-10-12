@@ -17,7 +17,9 @@
 import {getApiURL} from '../env';
 import {fixKind, toJson} from '../fetch';
 
-const list = async () => {
+const api = {};
+
+api.list = async () => {
   const response = await fetch(
     `${getApiURL()}/namespaces`
   );
@@ -25,6 +27,4 @@ const list = async () => {
   return fixKind('Namespace')(rawList);
 };
 
-export default {
-  list
-};
+export default api;

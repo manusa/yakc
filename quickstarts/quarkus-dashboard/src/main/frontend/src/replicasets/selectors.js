@@ -14,25 +14,22 @@
  * limitations under the License.
  *
  */
-const statusReplicas = replicaSet => replicaSet?.status?.replicas ?? 0;
+const selectors = {};
 
-const statusReadyReplicas = replicaSet => replicaSet?.status?.readyReplicas ?? 0;
+selectors.statusReplicas = replicaSet => replicaSet?.status?.replicas ?? 0;
 
-const isReady = replicaSet => statusReplicas(replicaSet) === statusReadyReplicas(replicaSet);
+selectors.statusReadyReplicas = replicaSet => replicaSet?.status?.readyReplicas ?? 0;
 
-const specReplicas = replicaSet => replicaSet?.spec?.replicas ?? 0;
+selectors.isReady = replicaSet =>
+  selectors.statusReplicas(replicaSet) === selectors.statusReadyReplicas(replicaSet);
+
+selectors.specReplicas = replicaSet => replicaSet?.spec?.replicas ?? 0;
 
 // Selectors for array of Deployments
 
-const readyCount = replicaSets => replicaSets.reduce(
-  (count, replicaSet) => isReady(replicaSet) ? count + 1 : count,
+selectors.readyCount = replicaSets => replicaSets.reduce(
+  (count, replicaSet) => selectors.isReady(replicaSet) ? count + 1 : count,
   0
 );
 
-export default {
-  statusReplicas,
-  statusReadyReplicas,
-  isReady,
-  specReplicas,
-  readyCount
-};
+export default selectors;

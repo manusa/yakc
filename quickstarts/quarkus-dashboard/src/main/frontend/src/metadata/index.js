@@ -18,8 +18,10 @@ import selectors from './selectors';
 import KeyValueList from './KeyValueList';
 import Details from './Details';
 
-export default {
-  selectors,
-  KeyValueList,
-  Details
-};
+const metadata = {};
+
+metadata.selectors = selectors;
+metadata.KeyValueList = KeyValueList;
+metadata.Details = Details;
+
+export default metadata;

@@ -23,13 +23,15 @@ import ServicesDetailPage from './ServicesDetailPage';
 import ServicesPage from './ServicesPage';
 import Type from './Type';
 
-export default {
-  api,
-  reducer,
-  selectors,
-  List,
-  PortList,
-  ServicesDetailPage,
-  ServicesPage,
-  Type
-};
+const services = {};
+
+services.api = api;
+services.reducer = reducer;
+services.selectors = selectors;
+services.List = List;
+services.PortList = PortList;
+services.ServicesDetailPage = ServicesDetailPage;
+services.ServicesPage = ServicesPage;
+services.Type = Type;
+
+export default services;

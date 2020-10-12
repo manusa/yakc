@@ -14,7 +14,9 @@
  * limitations under the License.
  *
  */
-const Types = {
+const actions = {};
+
+actions.Types = {
   CLEAR: 'CLEAR',
   CRUD_CLEAR: 'CRUD_CLEAR',
   CRUD_ADD_OR_REPLACE: 'CRUD_ADD_OR_REPLACE',
@@ -26,52 +28,42 @@ const Types = {
   UI_CLEAR_ERROR: 'UI_CLEAR_ERROR'
 }
 
-const clear = () => ({
-  type: Types.CLEAR
+actions.clear = () => ({
+  type: actions.Types.CLEAR
 });
 
-const crudAddOrReplace = object => ({
-  type: Types.CRUD_ADD_OR_REPLACE,
+actions.crudAddOrReplace = object => ({
+  type: actions.Types.CRUD_ADD_OR_REPLACE,
   payload: object
 });
 
-const crudDelete = object => ({
-  type: Types.CRUD_DELETE,
+actions.crudDelete = object => ({
+  type: actions.Types.CRUD_DELETE,
   payload: object
 });
 
-const crudSetAll = ({kind, resources}) => ({
-  type: Types.CRUD_SET_ALL,
+actions.crudSetAll = ({kind, resources}) => ({
+  type: actions.Types.CRUD_SET_ALL,
   payload: {kind, resources}
 });
 
-const setOffline = (offline = false) => ({
-  type: Types.UI_SET_OFFLINE,
+actions.setOffline = (offline = false) => ({
+  type: actions.Types.UI_SET_OFFLINE,
   payload: offline
 });
 
-const setError = error => ({
-  type: Types.UI_SET_ERROR,
+actions.setError = error => ({
+  type: actions.Types.UI_SET_ERROR,
   payload: error
 });
 
-const setResourceLoaded = ({kind, loaded = false}) => ({
-  type: Types.UI_SET_RESOURCE_LOADED,
+actions.setResourceLoaded = ({kind, loaded = false}) => ({
+  type: actions.Types.UI_SET_RESOURCE_LOADED,
   payload: {kind, loaded}
 });
 
-const clearError = () => ({
-  type: Types.UI_CLEAR_ERROR
+actions.clearError = () => ({
+  type: actions.Types.UI_CLEAR_ERROR
 });
 
-export default {
-  Types,
-  clear,
-  crudAddOrReplace,
-  crudDelete,
-  crudSetAll,
-  setOffline,
-  setError,
-  setResourceLoaded,
-  clearError
-};
+export default actions;

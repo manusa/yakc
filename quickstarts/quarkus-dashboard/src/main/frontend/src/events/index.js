@@ -17,7 +17,9 @@
 import reducer from './reducer';
 import List from './List'
 
-export default {
-  reducer,
-  List
-};
+const events = {};
+
+events.reducer = reducer;
+events.List = List;
+
+export default events;

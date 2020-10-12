@@ -16,6 +16,8 @@
  */
 import api from './api';
 
-export default {
-  api
-};
+const watch = {};
+
+watch.api = api;
+
+export default watch;

@@ -18,8 +18,10 @@ import actions from './actions';
 import reducer from './reducer';
 import uiReducer from './ui-reducer';
 
-export default {
-  actions,
-  reducer,
-  uiReducer
-};
+const redux = {};
+
+redux.actions = actions;
+redux.reducer = reducer;
+redux.uiReducer = uiReducer;
+
+export default redux;

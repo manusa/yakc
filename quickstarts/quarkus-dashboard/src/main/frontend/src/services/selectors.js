@@ -14,24 +14,19 @@
  * limitations under the License.
  *
  */
-const specClusterIP = service => service?.spec?.clusterIP ?? '';
+const selectors = {};
 
-const specExternalIPs = service => service?.spec?.externalIPs ?? [];
+selectors.specClusterIP = service => service?.spec?.clusterIP ?? '';
 
-const specSelector = service => service?.spec?.selector ?? {};
+selectors.specExternalIPs = service => service?.spec?.externalIPs ?? [];
 
-const specPorts = service => service?.spec?.ports ?? [];
+selectors.specSelector = service => service?.spec?.selector ?? {};
 
-const specPortsFirstNodePort = service => specPorts(service)
+selectors.specPorts = service => service?.spec?.ports ?? [];
+
+selectors.specPortsFirstNodePort = service => selectors.specPorts(service)
   .map(p => p.nodePort).find(np => np) ?? 0;
 
-const specType = service => service?.spec?.type ?? '';
+selectors.specType = service => service?.spec?.type ?? '';
 
-export default {
-  specClusterIP,
-  specExternalIPs,
-  specSelector,
-  specPorts,
-  specPortsFirstNodePort,
-  specType
-};
+export default selectors;

@@ -18,7 +18,9 @@ import {getApiURL} from '../env';
 import {fixKind, toJson} from '../fetch';
 import metadata from '../metadata';
 
-const list = async () => {
+const api = {};
+
+api.list = async () => {
   const response = await fetch(
     `${getApiURL()}/ingresses`
   );
@@ -26,14 +28,11 @@ const list = async () => {
   return fixKind('Ingress')(rawList);
 };
 
-const requestDelete = async ingress => {
+api.requestDelete = async ingress => {
   await fetch(
     `${getApiURL()}/ingresses/${metadata.selectors.namespace(ingress)}/${metadata.selectors.name(ingress)}`,
     {method: 'DELETE'}
   );
 };
 
-export default {
-  list,
-  requestDelete
-};
+export default api;

@@ -22,13 +22,14 @@ import DeploymentsCard from './DeploymentsCard';
 import DeploymentsDetailPage from './DeploymentsDetailPage';
 import DeploymentsPage from './DeploymentsPage';
 
+const deployments = {};
 
-export default {
-  api,
-  reducer,
-  selectors,
-  List,
-  DeploymentsCard,
-  DeploymentsDetailPage,
-  DeploymentsPage
-};
+deployments.api = api;
+deployments.reducer = reducer;
+deployments.selectors = selectors;
+deployments.List = List;
+deployments.DeploymentsCard = DeploymentsCard;
+deployments.DeploymentsDetailPage = DeploymentsDetailPage;
+deployments.DeploymentsPage = DeploymentsPage;
+
+export default deployments;

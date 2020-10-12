@@ -21,11 +21,13 @@ import List from './List';
 import IngressesDetailPage from './IngressesDetailPage';
 import IngressesPage from './IngressesPage';
 
-export default {
-  api,
-  reducer,
-  selectors,
-  List,
-  IngressesDetailPage,
-  IngressesPage
-};
+const ingresses = {};
+
+ingresses.api = api;
+ingresses.reducer = reducer;
+ingresses.selectors = selectors;
+ingresses.List = List;
+ingresses.IngressesDetailPage = IngressesDetailPage;
+ingresses.IngressesPage = IngressesPage;
+
+export default ingresses;

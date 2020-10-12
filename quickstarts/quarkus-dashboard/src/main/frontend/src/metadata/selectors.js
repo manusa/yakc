@@ -14,42 +14,36 @@
  * limitations under the License.
  *
  */
-const creationTimestamp = object => {
+const selectors = {};
+
+selectors.creationTimestamp = object => {
   const ct = object?.metadata?.creationTimestamp;
   if (ct) {
     return new Date(ct);
   }
 }
 
-const annotations = object => object?.metadata?.annotations ?? {};
+selectors.annotations = object => object?.metadata?.annotations ?? {};
 
-const labels = object => object?.metadata?.labels ?? {};
+selectors.labels = object => object?.metadata?.labels ?? {};
 
-const name = object => object?.metadata?.name ?? '';
+selectors.name = object => object?.metadata?.name ?? '';
 
-const namespace = object => object?.metadata?.namespace ?? '';
+selectors.namespace = object => object?.metadata?.namespace ?? '';
 
-const uid = object => object?.metadata?.uid ?? '';
+selectors.uid = object => object?.metadata?.uid ?? '';
 
-const ownerReferencesUids = object => (object?.metadata?.ownerReferences ?? [])
+selectors.ownerReferencesUids = object => (object?.metadata?.ownerReferences ?? [])
   .map(or => or.uid);
 
 // Selectors for Map<uid, resource> of Metadata Resources
 
-const byUidOrName = (metadataResources, uidOrName) => {
+selectors.byUidOrName = (metadataResources, uidOrName) => {
   if (metadataResources[uidOrName]) {
     return metadataResources[uidOrName];
   }
   return Object.values(metadataResources)
-  .find(resource => name(resource) === uidOrName);
-}
-export default {
-  creationTimestamp,
-  annotations,
-  labels,
-  name,
-  namespace,
-  uid,
-  ownerReferencesUids,
-  byUidOrName
+  .find(resource => selectors.name(resource) === uidOrName);
 };
+
+export default selectors;
