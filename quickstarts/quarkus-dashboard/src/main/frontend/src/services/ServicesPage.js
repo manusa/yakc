@@ -15,13 +15,20 @@
  *
  */
 import React from 'react';
-import DashboardPage from '../components/DashboardPage';
+import {connect} from 'react-redux';
 import services from './';
+import DashboardPage from '../components/DashboardPage';
+import FilterBar from '../components/FilterBar';
 
-const ServicesPage = () => (
+const ServicesPage = ({selectedNamespace}) => (
   <DashboardPage title='Services'>
-    <services.List />
+    <FilterBar />
+    <services.List className='mt-4' namespace={selectedNamespace} />
   </DashboardPage>
 );
 
-export default ServicesPage;
+const mapStateToProps = ({ui: {selectedNamespace}}) => ({
+  selectedNamespace
+});
+
+export default connect(mapStateToProps)(ServicesPage);

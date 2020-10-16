@@ -15,14 +15,21 @@
  *
  */
 import React from 'react';
-import DashboardPage from '../components/DashboardPage';
+import {connect} from 'react-redux';
 import pods from './';
+import DashboardPage from '../components/DashboardPage';
+import FilterBar from '../components/FilterBar';
 
-const PodsPage = () => (
+const PodsPage = ({selectedNamespace}) => (
   <DashboardPage title='Pods'>
     <pods.PodsCard className='w-full' />
-    <pods.List className='mt-4' />
+    <FilterBar className='mt-4' />
+    <pods.List className='mt-4' namespace={selectedNamespace} />
   </DashboardPage>
 );
 
-export default PodsPage;
+const mapStateToProps = ({ui: {selectedNamespace}}) => ({
+  selectedNamespace
+});
+
+export default connect(mapStateToProps)(PodsPage);

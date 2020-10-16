@@ -89,6 +89,20 @@ const List = ({services, loadedResources, deleteServiceAction, ...properties}) =
   </Table>
 );
 
+const filterServices = (services = [], {
+  namespace
+} = undefined) => Object.entries(services)
+.filter(([, service]) => {
+  if (namespace) {
+    return metadata.selectors.namespace(service) === namespace;
+  }
+  return true;
+})
+.reduce((acc, [key, service]) => {
+  acc[key] = service;
+  return acc;
+}, {});
+
 const mapStateToProps = ({services, ui: {loadedResources}}) => ({
   services,
   loadedResources
@@ -98,5 +112,12 @@ const mapDispatchToProps = dispatch =>  bindActionCreators({
   deleteServiceAction: redux.actions.crudDelete
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  ...ownProps,
+  services: filterServices(stateProps.services, ownProps)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(List);
 

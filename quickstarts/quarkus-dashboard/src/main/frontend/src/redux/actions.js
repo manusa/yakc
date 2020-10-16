@@ -24,8 +24,9 @@ actions.Types = {
   CRUD_SET_ALL: 'CRUD_SET_ALL',
   UI_SET_OFFLINE: 'UI_SET_OFFLINE',
   UI_SET_ERROR: 'UI_SET_ERROR',
+  UI_CLEAR_ERROR: 'UI_CLEAR_ERROR',
   UI_SET_RESOURCE_LOADED: 'UI_SET_RESOURCE_LOADED',
-  UI_CLEAR_ERROR: 'UI_CLEAR_ERROR'
+  UI_SELECT_NAMESPACE: 'SELECT_NAMESPACE'
 }
 
 actions.clear = () => ({
@@ -57,13 +58,20 @@ actions.setError = error => ({
   payload: error
 });
 
+actions.clearError = () => ({
+  type: actions.Types.UI_CLEAR_ERROR
+});
+
 actions.setResourceLoaded = ({kind, loaded = false}) => ({
   type: actions.Types.UI_SET_RESOURCE_LOADED,
   payload: {kind, loaded}
 });
 
-actions.clearError = () => ({
-  type: actions.Types.UI_CLEAR_ERROR
+actions.selectNamespace = namespace => ({
+  type: actions.Types.UI_SELECT_NAMESPACE,
+  payload: namespace
 });
+
+actions.clearSelectedNamespace = () => actions.selectNamespace(null);
 
 export default actions;

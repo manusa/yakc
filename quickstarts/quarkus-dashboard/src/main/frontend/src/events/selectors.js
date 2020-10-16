@@ -14,21 +14,11 @@
  * limitations under the License.
  *
  */
-import React from 'react';
-import {connect} from 'react-redux';
-import ing from './';
-import DashboardPage from '../components/DashboardPage';
-import FilterBar from '../components/FilterBar';
+const selectors = {};
 
-const IngressesPage = ({selectedNamespace}) => (
-  <DashboardPage title='Ingresses'>
-    <FilterBar />
-    <ing.List className='mt-4' namespace={selectedNamespace} />
-  </DashboardPage>
-);
+selectors.involvedObjectKind = event => event?.involvedObject?.kind ?? '';
+selectors.involvedObjectName = event => event?.involvedObject?.name ?? '';
+selectors.involvedObjectNamespace = event => event?.involvedObject?.namespace ?? '';
+selectors.involvedObjectUid = event => event?.involvedObject?.uid ?? '';
 
-const mapStateToProps = ({ui: {selectedNamespace}}) => ({
-  selectedNamespace
-});
-
-export default connect(mapStateToProps)(IngressesPage);
+export default selectors;

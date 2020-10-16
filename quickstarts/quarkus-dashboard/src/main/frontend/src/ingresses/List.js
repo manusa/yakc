@@ -82,6 +82,20 @@ const Rows = ({ingresses, loadedResources, deleteIngressAction}) => {
     ));
 };
 
+const filterIngresses = (ingresses = [], {
+  namespace
+} = undefined) => Object.entries(ingresses)
+.filter(([, ingress]) => {
+  if (namespace) {
+    return metadata.selectors.namespace(ingress) === namespace;
+  }
+  return true;
+})
+.reduce((acc, [key, ingress]) => {
+  acc[key] = ingress;
+  return acc;
+}, {});
+
 const List = ({ingresses, loadedResources, deleteIngressAction, ...properties}) => (
   <Table {...properties}>
     <Table.Head
@@ -102,5 +116,12 @@ const mapDispatchToProps = dispatch =>  bindActionCreators({
   deleteIngressAction: redux.actions.crudDelete
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  ...ownProps,
+  ingresses: filterIngresses(stateProps.ingresses, ownProps)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(List);
 

@@ -15,11 +15,12 @@
  *
  */
 import React from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import metadata from '../metadata';
+import ev from './'
 import Link from '../components/Link';
 import Table from '../components/Table';
 import Tooltip from '../components/Tooltip';
-import metadata from "../metadata";
 import Icon from '../components/Icon';
 
 const headers = [
@@ -33,26 +34,28 @@ const headers = [
 const EventName = ({event}) => {
   let Component = Link.RouterLink;
   let url;
-  switch (event.involvedObject.kind) {
+  const uid = ev.selectors.involvedObjectUid(event);
+  const name = ev.selectors.involvedObjectName(event);
+  switch (ev.selectors.involvedObjectKind(event)) {
     case 'Deployment':
       Component = Link.Deployment;
-      url = `/deployments/${event.involvedObject.uid}`;
+      url = `/deployments/${uid}`;
       break;
     case 'Ingress':
       Component = Link.Ingress;
-      url = `/ingresses/${event.involvedObject.uid}`;
+      url = `/ingresses/${uid}`;
       break;
     case 'Pod':
       Component = Link.Pod;
-      url = `/pods/${event.involvedObject.uid}`;
+      url = `/pods/${uid}`;
       break;
     default:
       url = null;
   }
   if (url) {
-    return <Component to={url}>{event.involvedObject.name}</Component>;
+    return <Component to={url}>{name}</Component>;
   }
-  return event.involvedObject.name;
+  return name;
 }
 
 const sort = (ev1, ev2) =>
@@ -71,7 +74,7 @@ const Rows = ({events}) => {
       return (
         <Table.Row key={metadata.selectors.uid(event)}>
           <Table.Cell className='whitespace-no-wrap'>
-            {event.involvedObject.kind}
+            {ev.selectors.involvedObjectKind(event)}
           </Table.Cell>
           <Table.Cell>
             <EventName event={event}/>
@@ -107,9 +110,30 @@ const List = ({events, ...properties}) => (
   </Table>
 );
 
+const filterEvents = (events = [], {
+  namespace
+} = undefined) => Object.entries(events)
+.filter(([, event]) => {
+  if (namespace) {
+    return ev.selectors.involvedObjectNamespace(event) === namespace;
+  }
+  return true;
+})
+.reduce((acc, [key, event]) => {
+  acc[key] = event;
+  return acc;
+}, {});
+
 const mapStateToProps = ({events}) => ({
   events
 });
 
-export default connect(mapStateToProps)(List);
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  ...ownProps,
+  events: filterEvents(stateProps.events, ownProps)
+});
+
+export default connect(mapStateToProps, null, mergeProps)(List);
 

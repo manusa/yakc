@@ -93,9 +93,30 @@ const List = ({deployments, ...properties}) => (
   </Table>
 );
 
+const filterDeployments = (deployments = [], {
+  namespace
+} = undefined) => Object.entries(deployments)
+.filter(([, deployment]) => {
+  if (namespace) {
+    return metadata.selectors.namespace(deployment) === namespace;
+  }
+  return true;
+})
+.reduce((acc, [key, deployment]) => {
+  acc[key] = deployment;
+  return acc;
+}, {});
+
 const mapStateToProps = ({deployments}) => ({
   deployments
 });
 
-export default connect(mapStateToProps, null, null)(List);
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  ...ownProps,
+  deployments: filterDeployments(stateProps.deployments, ownProps)
+});
+
+export default connect(mapStateToProps, null, mergeProps)(List);
 

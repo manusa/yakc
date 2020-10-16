@@ -15,11 +15,13 @@
  *
  */
 import reducer from './reducer';
+import selectors from './selectors';
 import List from './List'
 
 const events = {};
 
 events.reducer = reducer;
+events.selectors = selectors;
 events.List = List;
 
 export default events;

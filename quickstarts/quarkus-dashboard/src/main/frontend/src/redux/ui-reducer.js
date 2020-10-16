@@ -20,7 +20,8 @@ import redux from './index';
 const defaultState = {
   offline: false,
   error: '',
-  loadedResources: {}
+  loadedResources: {},
+  selectedNamespace: null
 };
 
 const uiReducer = (state = defaultState, action = {}) => {
@@ -34,6 +35,11 @@ const uiReducer = (state = defaultState, action = {}) => {
       newState.error = action.payload
       return newState;
     }
+    case Types.UI_CLEAR_ERROR: {
+      const newState = {...state};
+      delete newState.error;
+      return newState;
+    }
     case Types.CLEAR: {
       return {...state, loadedResources: {}};
     }
@@ -42,10 +48,8 @@ const uiReducer = (state = defaultState, action = {}) => {
       newState.loadedResources[action.payload.kind] = action.payload.loaded;
       return newState;
     }
-    case Types.UI_CLEAR_ERROR: {
-      const newState = {...state};
-      delete newState.error;
-      return newState;
+    case Types.UI_SELECT_NAMESPACE: {
+      return {...state, selectedNamespace: action.payload};
     }
     default:
       return {...state};
