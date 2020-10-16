@@ -169,6 +169,8 @@
           -H:EnableURLProtocols=https,
           -H:EnableURLProtocols=http,
           --enable-all-security-services,
+          -J-Djavax.net.ssl.trustStore=../../ssl/cacerts,
+          -J-Djavax.net.ssl.trustStorePassword=changeit,
           -H:+JNI,
           -H:ReflectionConfigurationFiles=../../reflection-config.json,
           -H:ResourceConfigurationFiles=resources-config.json,

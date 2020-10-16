@@ -1,4 +1,6 @@
 [
   ["com.marcnuri.yakc.api.core.v1.CoreV1Api"],
-  ["com.marcnuri.yakc.api.apps.v1.AppsV1Api"]
+  ["com.marcnuri.yakc.api.apps.v1.AppsV1Api"],
+  ["com.marcnuri.yakc.api.extensions.v1beta1.ExtensionsV1beta1Api"],
+  ["com.marcnuri.yakc.api.networking.v1.NetworkingV1Api"]
 ]

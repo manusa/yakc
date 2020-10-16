@@ -2,6 +2,19 @@
 const fs = require('fs')
 
 const reflectionClasses = [
+  'com.marcnuri.yakc.quickstarts.dashboard.ApiResource',
+  'com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentResource',
+  'com.marcnuri.yakc.quickstarts.dashboard.events.EventResource',
+  'com.marcnuri.yakc.quickstarts.dashboard.node.NodeResource',
+  'com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource',
+  'com.marcnuri.yakc.quickstarts.dashboard.service.ServiceResource',
+  'com.marcnuri.yakc.quickstarts.dashboard.watch.WatchResource',
+  'org.bouncycastle.jcajce.provider.asymmetric.rsa.KeyFactorySpi',
+  'org.bouncycastle.jcajce.provider.asymmetric.RSA$Mappings',
+  'org.bouncycastle.jcajce.provider.asymmetric.x509.KeyFactorySpi',
+  'org.bouncycastle.jcajce.provider.asymmetric.X509$Mappings',
+  'org.bouncycastle.jcajce.provider.keystore.pkcs12.PKCS12KeyStoreSpi',
+  'org.bouncycastle.jcajce.provider.keystore.PKCS12$Mappings',
   'com.marcnuri.yakc.config.KubeConfig',
   'com.marcnuri.yakc.config.KubeConfig$NamedCluster',
   'com.marcnuri.yakc.config.KubeConfig$Cluster',
