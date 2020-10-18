@@ -31,19 +31,33 @@ const variants = ({
   outlineDanger: 'text-red-600 border-red-600 border rounded py-1 px-3 hover:bg-red-600 hover:text-white'
 });
 
-const Link = ({className, children, href = '#', variant = variants.default, ...props}) => (
+const sizes = ({
+  normal: '',
+  small: 'text-sm font-normal'
+});
+
+const Link = ({
+  className, children, href = '#',
+  variant = variants.default, size = sizes.normal,
+  ...props
+}) => (
   <a
-    className={`${variant} ${className ?? ''}`}
+    className={`${variant} ${size} ${className ?? ''}`}
     href={href}
     {...props}
   >{children}</a>
 );
 
 Link.variants = variants;
+Link.sizes = sizes;
 
-Link.RouterLink = ({className, children, variant = variants.default, ...props}) => (
+Link.RouterLink = ({
+  className, children, href = '#',
+  variant = variants.default, size = sizes.normal,
+  ...props
+}) => (
   <OriginalRouterLink
-    className={`${variant} ${className ?? ''}`}
+    className={`${variant} ${size} ${className ?? ''}`}
     {...props}
   >{children}</OriginalRouterLink>
 );

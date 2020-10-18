@@ -14,12 +14,28 @@
  * limitations under the License.
  *
  */
-export const toJson = response => {
-  if (!response.ok) {
-    throw Error(`${response.status}`);
+const processErroredResponse = async response => {
+  const responseBody = await response.text();
+  let  error = `${response.status} ${response.statusText}: ${responseBody}`;
+  try {
+    const responseObject = JSON.parse(responseBody);
+    if (responseObject.message) {
+      error = `${response.status} ${response.statusText}: ${responseObject.message}`;
+    }
+  } catch (e) {
+    // Do nothing - Fallback to default Error
   }
-  return response.json();
+  throw Error(error);
 };
+
+export const processResponse = async response => {
+  if (!response.ok) {
+    await processErroredResponse(response);
+  }
+  return response;
+};
+
+export const toJson = async response => (await processResponse(response)).json();
 
 export const fixKind = kind => resources =>
   resources.map(resource => ({kind, ...resource}));

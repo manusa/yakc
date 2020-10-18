@@ -16,6 +16,7 @@
  */
 import {getApiURL} from '../env';
 import metadata from '../metadata';
+import {toJson} from '../fetch';
 
 const api = {};
 
@@ -28,6 +29,20 @@ api.requestDelete = async pod => {
     `${getApiURL()}/pods/${metadata.selectors.namespace(pod)}/${metadata.selectors.name(pod)}`,
     {method: 'DELETE'}
     );
-}
+};
+
+api.update = async pod => {
+  const headers = new Headers();
+  headers.set('Content-Type', 'application/json');
+  const response = await fetch(
+    `${getApiURL()}/pods/${metadata.selectors.namespace(pod)}/${metadata.selectors.name(pod)}`,
+    {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify(pod)
+    }
+  );
+  return await toJson(response);
+};
 
 export default api;

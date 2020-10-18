@@ -35,7 +35,16 @@ const PodsDetailPage = ({pod}) => (
           {metadata.selectors.namespace(pod)} - {metadata.selectors.name(pod)}
         </div>
         <Link.RouterLink
-          className='justify-self-end text-sm font-normal'
+          size={Link.sizes.small}
+          variant={Link.variants.outline}
+          to={`/pods/${metadata.selectors.uid(pod)}/edit`}
+          title='Edit'
+        >
+          <Icon icon='fa-pen' className='mr-2'/>Edit
+        </Link.RouterLink>
+        <Link.RouterLink
+          className='ml-2'
+          size={Link.sizes.small}
           variant={Link.variants.outline}
           to={`/pods/${metadata.selectors.uid(pod)}/logs`}
           title='Logs'

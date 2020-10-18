@@ -70,6 +70,10 @@ public class PodService {
     return kubernetesClient.create(CoreV1Api.class).deleteNamespacedPod(name, namespace).get();
   }
 
+  public Pod updatePod(String name, String namespace, Pod pod) throws IOException {
+    return kubernetesClient.create(CoreV1Api.class).replaceNamespacedPod(name, namespace, pod).get();
+  }
+
   public Observable<String> getPodLog(String name, String namespace) {
     final KubernetesCall<String> podLogCall = kubernetesClient.create(CoreV1Api.class)
       .readNamespacedPodLog(name, namespace, new ReadNamespacedPodLog()

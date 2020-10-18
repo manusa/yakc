@@ -83,6 +83,7 @@ const App = ({dispatch}) => {
           <Route exact path='/nodes/:name' component={nodes.NodesDetailPage} />
           <Route exact path='/pods' component={pods.PodsPage} />
           <Route exact path='/pods/:uid' component={pods.PodsDetailPage} />
+          <Route exact path='/pods/:uid/edit' component={pods.PodsEditPage} />
           <Route exact path='/pods/:uid/logs' component={pods.PodsLogsPage} />
           <Route exact path='/services' component={services.ServicesPage} />
           <Route exact path='/services/:uid' component={services.ServicesDetailPage} />

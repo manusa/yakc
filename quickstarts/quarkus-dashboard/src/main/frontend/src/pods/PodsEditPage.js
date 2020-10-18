@@ -15,23 +15,19 @@
  *
  */
 import React from 'react';
+import md from '../metadata';
+import p from './';
+import ResourceEditPage from '../components/ResourceEditPage';
+import Link from '../components/Link';
 
-const Alert = ({
-  clearError,
-  visible = true,
-  margin = 'm-2',
-  children}) => (
-  <div
-    className={`
-      ${children ? `block translate-y-0 ${margin} py-1` : '-translate-y-full py-0'}
-      ${visible ? '' : 'invisible'}
-      border rounded bg-red-200 border-red-300 p-2
-      cursor-pointer text-red-500 text-sm select-none
-      transform transition-transform duration-200
-      `}
-    onClick={clearError}
-  >
-    {children}
-  </div>
+const PodsEditPage = ({match: {params: {uid}}}) => (
+  <ResourceEditPage
+    cardTitle={resource =>
+      <Link.RouterLink to={`/pods/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
+    }
+    save={async resource => await p.api.update(resource)}
+    resourceFromState={state => state.pods[uid]}
+  />
 );
-export default Alert;
+
+export default PodsEditPage;

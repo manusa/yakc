@@ -20,6 +20,7 @@ import selectors from './selectors';
 import List from './List'
 import PodsCard from './PodsCard';
 import PodsDetailPage from './PodsDetailPage';
+import PodsEditPage from './PodsEditPage';
 import PodsLogsPage from './PodsLogsPage';
 import PodsPage from './PodsPage';
 import StatusIcon from './StatusIcon';
@@ -32,6 +33,7 @@ pods.selectors = selectors;
 pods.List = List;
 pods.PodsCard = PodsCard;
 pods.PodsDetailPage = PodsDetailPage;
+pods.PodsEditPage = PodsEditPage;
 pods.PodsLogsPage = PodsLogsPage;
 pods.PodsPage = PodsPage;
 pods.StatusIcon = StatusIcon;
