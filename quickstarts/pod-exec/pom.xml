@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.marcnuri.yakc.quickstarts</groupId>
   <artifactId>pod-exec</artifactId>
-  <version>0.0.9</version>
+  <version>0.0.10</version>
   <name>YAKC :: Quickstarts :: Pod Exec</name>
 
   <properties>
