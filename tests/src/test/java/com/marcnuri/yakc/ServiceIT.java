@@ -99,7 +99,7 @@ class ServiceIT {
   void listNamespacedServiceStream() throws IOException {
     // When
     final boolean result = KC.create(CoreV1Api.class).listNamespacedService(NAMESPACE).stream()
-      .anyMatch(pod -> pod.getMetadata().getName().equals(serviceName));
+      .anyMatch(svc -> svc.getMetadata().getName().equals(serviceName));
     // Then
     assertThat(result).as("Created Service was not found").isTrue();
   }
@@ -182,7 +182,7 @@ class ServiceIT {
   private void deleteServiceForTest() throws IOException {
     try {
       KC.create(CoreV1Api.class)
-        .deleteNamespacedPod(serviceName, NAMESPACE, DeleteOptions.builder().gracePeriodSeconds(0).build()).get();
+        .deleteNamespacedService(serviceName, NAMESPACE, DeleteOptions.builder().gracePeriodSeconds(0).build()).get();
     } catch (NotFoundException ex) {
       // Ignore, this is only clean up. Resource may have been deleted by delete test
     }
