@@ -17,6 +17,7 @@
 package com.marcnuri.yakc.model.io.k8s.api.networking.v1beta1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.marcnuri.yakc.model.Model;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.TypedLocalObjectReference;
 import lombok.AllArgsConstructor;
@@ -47,6 +48,7 @@ public class IngressBackend implements Model {
   private String serviceName;
 
   @JsonProperty("servicePort")
+  @JsonSerialize(using = com.marcnuri.yakc.model.serialization.IntOrStringSerializer.class)
   private String servicePort;
 
 }

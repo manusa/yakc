@@ -17,6 +17,7 @@
 package com.marcnuri.yakc.model.io.k8s.api.policy.v1beta1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.marcnuri.yakc.model.Model;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.LabelSelector;
 import lombok.AllArgsConstructor;
@@ -38,9 +39,11 @@ public class PodDisruptionBudgetSpec implements Model {
 
 
   @JsonProperty("maxUnavailable")
+  @JsonSerialize(using = com.marcnuri.yakc.model.serialization.IntOrStringSerializer.class)
   private String maxUnavailable;
 
   @JsonProperty("minAvailable")
+  @JsonSerialize(using = com.marcnuri.yakc.model.serialization.IntOrStringSerializer.class)
   private String minAvailable;
 
   @JsonProperty("selector")

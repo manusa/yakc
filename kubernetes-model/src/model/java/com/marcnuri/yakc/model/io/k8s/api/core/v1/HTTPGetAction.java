@@ -17,6 +17,7 @@
 package com.marcnuri.yakc.model.io.k8s.api.core.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.marcnuri.yakc.model.Model;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -60,6 +61,7 @@ public class HTTPGetAction implements Model {
 
   @NonNull
   @JsonProperty("port")
+  @JsonSerialize(using = com.marcnuri.yakc.model.serialization.IntOrStringSerializer.class)
   private String port;
 
   /**

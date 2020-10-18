@@ -17,6 +17,7 @@
 package com.marcnuri.yakc.model.io.k8s.api.networking.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.marcnuri.yakc.model.Model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,6 +38,7 @@ public class NetworkPolicyPort implements Model {
 
 
   @JsonProperty("port")
+  @JsonSerialize(using = com.marcnuri.yakc.model.serialization.IntOrStringSerializer.class)
   private String port;
 
   /**

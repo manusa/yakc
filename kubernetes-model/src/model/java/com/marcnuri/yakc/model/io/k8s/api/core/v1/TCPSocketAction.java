@@ -17,6 +17,7 @@
 package com.marcnuri.yakc.model.io.k8s.api.core.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.marcnuri.yakc.model.Model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,6 +46,7 @@ public class TCPSocketAction implements Model {
 
   @NonNull
   @JsonProperty("port")
+  @JsonSerialize(using = com.marcnuri.yakc.model.serialization.IntOrStringSerializer.class)
   private String port;
 
 }

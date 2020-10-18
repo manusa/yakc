@@ -50,6 +50,10 @@ public class SchemaUtils {
     "#/components/schemas/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON", OBJECT_PRIMITIVE
   );
 
+  private static final Map<String, String> REF_SERIALIZER_MAP = Map.of(
+    "#/components/schemas/io.k8s.apimachinery.pkg.util.intstr.IntOrString", "com.marcnuri.yakc.model.serialization.IntOrStringSerializer.class"
+  );
+
   private static final Map<String, String> TYPE_MAP = Map.of(
       "boolean", "Boolean",
       "integer", "Number",
@@ -237,5 +241,12 @@ public class SchemaUtils {
     return imports.stream()
         .filter(s -> !s.substring(0, s.lastIndexOf('.')).equals(packageName))
         .collect(Collectors.toCollection(TreeSet::new));
+  }
+
+  public static String serializerForSchema(Schema schema) {
+    return Optional.ofNullable(schema)
+      .map(Schema::get$ref)
+      .map(REF_SERIALIZER_MAP::get)
+      .orElse(null);
   }
 }

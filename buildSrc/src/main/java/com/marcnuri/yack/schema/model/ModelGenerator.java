@@ -53,6 +53,7 @@ import static com.marcnuri.yack.schema.SchemaUtils.removeUnnecessaryImports;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizeDescription;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizePackageName;
 import static com.marcnuri.yack.schema.SchemaUtils.sanitizeVariable;
+import static com.marcnuri.yack.schema.SchemaUtils.serializerForSchema;
 import static java.util.function.Predicate.not;
 
 /**
@@ -151,6 +152,11 @@ class ModelGenerator {
       if (isMap(propertySchema)) {
         imports.add("lombok.Singular");
         templateProp.put("singular", "putIn".concat(StringUtils.capitalize(variableName)));
+      }
+      final String serializeUsing = serializerForSchema(propertySchema);
+      if(serializeUsing != null) {
+        imports.add("com.fasterxml.jackson.databind.annotation.JsonSerialize");
+        templateProp.put("serializeUsing", serializeUsing);
       }
       templateProp.put("type", utils.schemaToClassName(imports, propertySchema));
       templateProp.put("name", variableName);
