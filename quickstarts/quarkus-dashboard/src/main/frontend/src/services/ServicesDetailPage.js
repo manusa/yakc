@@ -22,7 +22,6 @@ import Card from '../components/Card';
 import DashboardPage from '../components/DashboardPage';
 import Form from '../components/Form';
 import Link from '../components/Link';
-import Icon from '../components/Icon';
 
 const Selectors = ({selectors}) => (
   <Form.Field label='Selectors' width={Form.widths.full}>
@@ -49,14 +48,7 @@ const ServicesDetailPage = ({service}) => (
         <div className='flex-1'>
           {metadata.selectors.namespace(service)} - {metadata.selectors.name(service)}
         </div>
-        <Link.RouterLink
-          size={Link.sizes.small}
-          variant={Link.variants.outline}
-          to={`/services/${metadata.selectors.uid(service)}/edit`}
-          title='Edit'
-        >
-          <Icon icon='fa-pen' className='mr-2'/>Edit
-        </Link.RouterLink>
+        <Link.EditLink path='services' resource={service} />
       </Card.Title>
       <Card.Body>
         <Form>

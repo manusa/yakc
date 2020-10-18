@@ -60,9 +60,11 @@ const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
         <div className='flex-1'>
           {metadata.selectors.namespace(deployment)} - {metadata.selectors.name(deployment)}
         </div>
+        <Link.EditLink path='deployments' resource={deployment} />
         <Link
+          className='ml-2'
+          size={Link.sizes.small}
           variant={Link.variants.outline}
-          className='justify-self-end text-sm font-normal'
           onClick={() => d.api.restart(deployment)}
           title='Restart'
         >

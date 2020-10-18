@@ -15,7 +15,7 @@
  *
  */
 import {getApiURL} from '../env';
-import {fixKind, toJson} from '../fetch';
+import {fixKind, toJson, updateNamespacedResource} from '../fetch';
 import metadata from '../metadata';
 
 const api = {};
@@ -35,18 +35,6 @@ api.requestDelete = async service => {
   );
 };
 
-api.update = async service => {
-  const headers = new Headers();
-  headers.set('Content-Type', 'application/json');
-  const response = await fetch(
-    `${getApiURL()}/services/${metadata.selectors.namespace(service)}/${metadata.selectors.name(service)}`,
-    {
-      method: 'PUT',
-      headers,
-      body: JSON.stringify(service)
-    }
-  );
-  return await toJson(response);
-};
+api.update = updateNamespacedResource('services');
 
 export default api;

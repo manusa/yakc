@@ -57,6 +57,10 @@ public class DeploymentService {
     return kubernetesClient.create(AppsV1Api.class).deleteNamespacedDeployment(name, namespace).get();
   }
 
+  public Deployment updateDeployment(String name, String namespace, Deployment deployment) throws IOException {
+    return kubernetesClient.create(AppsV1Api.class).replaceNamespacedDeployment(name, namespace, deployment).get();
+  }
+
   public Deployment restart(String name, String namespace) throws IOException {
     final Deployment toPatch = emptyDeployment();
     toPatch.getSpec().setTemplate(PodTemplateSpec.builder()

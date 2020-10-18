@@ -14,23 +14,20 @@
  * limitations under the License.
  *
  */
-import {getApiURL} from '../env';
-import metadata from '../metadata';
-import {updateNamespacedResource} from '../fetch';
+import React from 'react';
+import md from '../metadata';
+import d from './';
+import ResourceEditPage from '../components/ResourceEditPage';
+import Link from '../components/Link';
 
-const api = {};
-
-api.logs = (namespace, name) => new EventSource(
-  `${getApiURL()}/pods/${namespace}/${name}/logs`
+const DeploymentsEditPage = ({match: {params: {uid}}}) => (
+  <ResourceEditPage
+    cardTitle={resource =>
+      <Link.RouterLink to={`/deployments/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
+    }
+    save={async resource => await d.api.update(resource)}
+    resourceFromState={state => state.deployments[uid]}
+  />
 );
 
-api.requestDelete = async pod => {
-  await fetch(
-    `${getApiURL()}/pods/${metadata.selectors.namespace(pod)}/${metadata.selectors.name(pod)}`,
-    {method: 'DELETE'}
-    );
-};
-
-api.update = updateNamespacedResource('pods');
-
-export default api;
+export default DeploymentsEditPage;

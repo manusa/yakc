@@ -16,6 +16,7 @@
  */
 import {getApiURL} from '../env';
 import metadata from '../metadata';
+import {updateNamespacedResource} from '../fetch';
 
 const api = {};
 
@@ -25,6 +26,8 @@ api.requestDelete = async deployment => {
     {method: 'DELETE'}
     );
 };
+
+api.update = updateNamespacedResource('deployments');
 
 api.restart = async deployment => {
   await fetch(

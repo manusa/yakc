@@ -34,14 +34,7 @@ const PodsDetailPage = ({pod}) => (
         <div className='flex-1'>
           {metadata.selectors.namespace(pod)} - {metadata.selectors.name(pod)}
         </div>
-        <Link.RouterLink
-          size={Link.sizes.small}
-          variant={Link.variants.outline}
-          to={`/pods/${metadata.selectors.uid(pod)}/edit`}
-          title='Edit'
-        >
-          <Icon icon='fa-pen' className='mr-2'/>Edit
-        </Link.RouterLink>
+        <Link.EditLink path='pods' resource={pod} />
         <Link.RouterLink
           className='ml-2'
           size={Link.sizes.small}

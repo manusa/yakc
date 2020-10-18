@@ -14,6 +14,9 @@
  * limitations under the License.
  *
  */
+import {getApiURL} from './env';
+import metadata from './metadata';
+
 const processErroredResponse = async response => {
   const responseBody = await response.text();
   let  error = `${response.status} ${response.statusText}: ${responseBody}`;
@@ -39,5 +42,19 @@ export const toJson = async response => (await processResponse(response)).json()
 
 export const fixKind = kind => resources =>
   resources.map(resource => ({kind, ...resource}));
+
+export const updateNamespacedResource = path => async resource => {
+  const headers = new Headers();
+  headers.set('Content-Type', 'application/json');
+  const response = await fetch(
+    `${getApiURL()}/${path}/${metadata.selectors.namespace(resource)}/${metadata.selectors.name(resource)}`,
+    {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify(resource)
+    }
+  );
+  return await toJson(response);
+};
 
 export default {};

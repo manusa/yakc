@@ -75,6 +75,7 @@ const App = ({dispatch}) => {
           <Route exact path='/' component={Home} />
           <Route exact path='/deployments' component={deployments.DeploymentsPage} />
           <Route exact path='/deployments/:uid' component={deployments.DeploymentsDetailPage} />
+          <Route exact path='/deployments/:uid/edit' component={deployments.DeploymentsEditPage} />
           <Route exact path='/ingresses' component={ingresses.IngressesPage} />
           <Route exact path='/ingresses/:uid' component={ingresses.IngressesDetailPage} />
           <Route exact path='/namespaces' component={ns.NamespacesPage} />

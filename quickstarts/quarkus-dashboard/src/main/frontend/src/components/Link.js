@@ -22,6 +22,8 @@ import Namespace from './icons/Namespace';
 import Node from './icons/Node';
 import Pod from './icons/Pod';
 import Service from './icons/Service';
+import metadata from '../metadata';
+import Icon from './Icon';
 
 const variants = ({
   none: '',
@@ -78,5 +80,18 @@ Link.Namespace = ({...props}) => <Link.ResourceLink Icon={Namespace} {...props} 
 Link.Node = ({...props}) => <Link.ResourceLink Icon={Node} {...props} />;
 Link.Pod = ({...props}) => <Link.ResourceLink Icon={Pod} {...props} />;
 Link.Service = ({...props}) => <Link.ResourceLink Icon={Service} {...props} />;
+
+
+Link.EditLink = ({path, resource, ...props}) => (
+  <Link.RouterLink
+    size={Link.sizes.small}
+    variant={Link.variants.outline}
+    to={`/${path}/${metadata.selectors.uid(resource)}/edit`}
+    title='Edit'
+    {...props}
+  >
+    <Icon icon='fa-pen' className='mr-2'/>Edit
+  </Link.RouterLink>
+);
 
 export default Link;

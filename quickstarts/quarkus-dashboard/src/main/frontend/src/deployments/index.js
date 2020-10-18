@@ -20,6 +20,7 @@ import selectors from './selectors';
 import List from './List';
 import DeploymentsCard from './DeploymentsCard';
 import DeploymentsDetailPage from './DeploymentsDetailPage';
+import DeploymentsEditPage from './DeploymentsEditPage';
 import DeploymentsPage from './DeploymentsPage';
 
 const deployments = {};
@@ -30,6 +31,7 @@ deployments.selectors = selectors;
 deployments.List = List;
 deployments.DeploymentsCard = DeploymentsCard;
 deployments.DeploymentsDetailPage = DeploymentsDetailPage;
+deployments.DeploymentsEditPage = DeploymentsEditPage;
 deployments.DeploymentsPage = DeploymentsPage;
 
 export default deployments;

@@ -17,12 +17,16 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.deployment;
 
+import com.marcnuri.yakc.model.io.k8s.api.apps.v1.Deployment;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import java.io.IOException;
@@ -44,6 +48,16 @@ public class DeploymentResource {
 
     deploymentService.deleteDeployment(name, namespace);
     return Response.noContent().build();
+  }
+
+  @PUT
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/{namespace}/{name}")
+  public Deployment update(@PathParam("namespace") String namespace, @PathParam("name") String name, Deployment deployment)
+    throws IOException {
+
+    return deploymentService.updateDeployment(name, namespace, deployment);
   }
 
   @PUT
