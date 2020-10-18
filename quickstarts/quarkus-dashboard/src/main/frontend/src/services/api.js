@@ -35,4 +35,18 @@ api.requestDelete = async service => {
   );
 };
 
+api.update = async service => {
+  const headers = new Headers();
+  headers.set('Content-Type', 'application/json');
+  const response = await fetch(
+    `${getApiURL()}/services/${metadata.selectors.namespace(service)}/${metadata.selectors.name(service)}`,
+    {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify(service)
+    }
+  );
+  return await toJson(response);
+};
+
 export default api;

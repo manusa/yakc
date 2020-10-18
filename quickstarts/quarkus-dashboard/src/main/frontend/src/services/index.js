@@ -20,6 +20,7 @@ import selectors from './selectors';
 import List from './List';
 import PortList from './PortList';
 import ServicesDetailPage from './ServicesDetailPage';
+import ServicesEditPage from './ServicesEditPage';
 import ServicesPage from './ServicesPage';
 import Type from './Type';
 
@@ -31,6 +32,7 @@ services.selectors = selectors;
 services.List = List;
 services.PortList = PortList;
 services.ServicesDetailPage = ServicesDetailPage;
+services.ServicesEditPage = ServicesEditPage;
 services.ServicesPage = ServicesPage;
 services.Type = Type;
 

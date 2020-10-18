@@ -87,6 +87,7 @@ const App = ({dispatch}) => {
           <Route exact path='/pods/:uid/logs' component={pods.PodsLogsPage} />
           <Route exact path='/services' component={services.ServicesPage} />
           <Route exact path='/services/:uid' component={services.ServicesDetailPage} />
+          <Route exact path='/services/:uid/edit' component={services.ServicesEditPage} />
           {/*<Route component={Error404Page} />*/}
         </Switch>
       </Router>
