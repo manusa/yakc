@@ -16,6 +16,7 @@
  */
 import {getApiURL} from '../env';
 import {fixKind, toJson} from '../fetch';
+import metadata from '../metadata';
 
 const api = {};
 
@@ -25,6 +26,14 @@ api.list = async () => {
   );
   const rawList =  await toJson(response);
   return fixKind('Namespace')(rawList);
+};
+
+api.delete = async namespace => {
+  const response = await fetch(
+    `${getApiURL()}/namespaces/${metadata.selectors.name(namespace)}`,
+    {method: 'DELETE'}
+  );
+  return await toJson(response);
 };
 
 export default api;

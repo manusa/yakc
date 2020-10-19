@@ -71,12 +71,8 @@ const Rows = ({deployments}) => {
             onClick={restartDeployment(deployment)}
             title='Restart'
           ><Icon stylePrefix='fas' icon='fa-redo-alt' /></Link>
-          <Link
-            variant={Link.variants.outlineDanger}
-            className='ml-1'
-            onClick={deleteDeployment(deployment)}
-            title='Delete'
-          ><Icon stylePrefix='far' icon='fa-trash-alt' /></Link>
+          <Table.DeleteButton
+            className='ml-1'onClick={deleteDeployment(deployment)} />
         </Table.Cell>
       </Table.Row>
     ));

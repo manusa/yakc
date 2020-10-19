@@ -17,6 +17,8 @@
 import React from 'react';
 import Card from './Card';
 import Spinner from './Spinner';
+import Link from './Link';
+import Icon from './Icon';
 
 const Table = ({title, titleVariant, className, children, ...props}) => (
   <Card className={className} {...props}>
@@ -70,5 +72,22 @@ Table.Loading = ({colSpan = 1}) => (
     </Table.Cell>
   </Table.Row>
 );
+
+Table.CellButton = ({
+  title, variant, icon, iconStylePrefix,  onClick, ...props
+}) => (
+  <Link
+    variant={variant}
+    onClick={onClick}
+    title={title}
+    {...props}
+  ><Icon stylePrefix={iconStylePrefix} icon={icon} /></Link>
+);
+
+Table.DeleteButton = ({...props}) => <Table.CellButton
+  variant={Link.variants.outlineDanger}
+  title='Delete' iconStylePrefix='far' icon='fa-trash-alt'
+  {...props}
+/>;
 
 export default Table;

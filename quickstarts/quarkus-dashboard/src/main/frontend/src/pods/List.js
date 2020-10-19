@@ -77,12 +77,8 @@ const Rows = ({pods}) => {
             to={`/pods/${metadata.selectors.uid(pod)}/logs`}
             title='Logs'
           ><Icon stylePrefix='far' icon='fa-file-alt' /></Link.RouterLink>
-          <Link
-            variant={Link.variants.outlineDanger}
-            className='ml-1'
-            onClick={deletePod(pod)}
-            title='Delete'
-          ><Icon stylePrefix='far' icon='fa-trash-alt' /></Link>
+          <Table.DeleteButton
+            className='ml-1' onClick={deletePod(pod)} />
         </Table.Cell>
       </Table.Row>
     ));

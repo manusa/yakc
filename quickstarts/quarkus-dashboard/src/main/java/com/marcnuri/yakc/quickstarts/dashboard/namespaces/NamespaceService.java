@@ -39,4 +39,8 @@ public class NamespaceService {
   public List<Namespace> get() throws IOException {
     return kubernetesClient.create(CoreV1Api.class).listNamespace().get().getItems();
   }
+
+  public Namespace deleteNamespace(String name) throws IOException {
+    return kubernetesClient.create(CoreV1Api.class).deleteNamespace(name).get(Namespace.class);
+  }
 }

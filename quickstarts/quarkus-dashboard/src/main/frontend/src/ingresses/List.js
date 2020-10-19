@@ -72,11 +72,7 @@ const Rows = ({ingresses, loadedResources, deleteIngressAction}) => {
             )}
           </Table.Cell>
           <Table.Cell>
-            <Link
-              variant={Link.variants.outlineDanger}
-              onClick={deleteIngress(ingress)}
-              title='Delete'
-            ><Icon stylePrefix='far' icon='fa-trash-alt' /></Link>
+            <Table.DeleteButton onClick={deleteIngress(ingress)} />
           </Table.Cell>
         </Table.Row>
     ));

@@ -19,7 +19,10 @@ package com.marcnuri.yakc.quickstarts.dashboard.namespaces;
 
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Namespace;
 import javax.inject.Singleton;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -39,5 +42,12 @@ public class NamespaceResource {
   @Produces(MediaType.APPLICATION_JSON)
   public List<Namespace> get() throws IOException {
     return namespaceService.get();
+  }
+
+  @DELETE
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/{name}")
+  public Namespace delete(@PathParam("name") String name) throws IOException {
+    return namespaceService.deleteNamespace(name);
   }
 }

@@ -68,11 +68,7 @@ const Rows = ({services, loadedResources, deleteServiceAction}) => {
             {svc.selectors.specClusterIP(service)}
           </Table.Cell>
           <Table.Cell>
-            <Link
-              variant={Link.variants.outlineDanger}
-              onClick={deleteService(service)}
-              title='Delete'
-            ><Icon stylePrefix='far' icon='fa-trash-alt' /></Link>
+            <Table.DeleteButton onClick={deleteService(service)} />
           </Table.Cell>
         </Table.Row>
     ));

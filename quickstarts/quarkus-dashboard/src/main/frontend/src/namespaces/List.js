@@ -21,18 +21,21 @@ import Table from '../components/Table';
 import metadata from '../metadata';
 import ns from './';
 import Icon from '../components/Icon';
+import {bindActionCreators} from 'redux';
+import redux from '../redux';
 
 const headers = [
   '',
   <span><Icon icon='fa-id-card' /> Name</span>,
   'Phase',
-  <span><Icon icon='fa-tags' /> Labels</span>
+  <span><Icon icon='fa-tags' /> Labels</span>,
+  ''
 ];
 
 const sort = (p1, p2) =>
   metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
 
-const Rows = ({namespaces, loadedResources}) => {
+const Rows = ({namespaces, addOrReplace, loadedResources}) => {
   if (!loadedResources['Namespace']) {
     return <Table.Loading colSpan={headers.length} />;
   }
@@ -40,6 +43,10 @@ const Rows = ({namespaces, loadedResources}) => {
   if (namespaces.length === 0) {
     return <Table.NoResultsRow colSpan={headers.length} />;
   }
+  const deleteNamespace = namespace => async () => {
+    const deletedNamespace = await ns.api.delete(namespace);
+    addOrReplace(deletedNamespace);
+  };
   return allNamespaces
     .sort(sort)
     .map(namespace => (
@@ -64,17 +71,20 @@ const Rows = ({namespaces, loadedResources}) => {
               maxEntries={2}
             />
           </Table.Cell>
+          <Table.Cell className='whitespace-no-wrap text-center'>
+            <Table.DeleteButton onClick={deleteNamespace(namespace)} />
+          </Table.Cell>
         </Table.Row>
     ));
 };
 
-const List = ({namespaces, loadedResources, deleteIngressAction, ...properties}) => (
+const List = ({namespaces, addOrReplace, loadedResources, deleteIngressAction, ...properties}) => (
   <Table {...properties}>
     <Table.Head
       columns={headers}
     />
     <Table.Body>
-      <Rows namespaces={namespaces} loadedResources={loadedResources} />
+      <Rows namespaces={namespaces} addOrReplace={addOrReplace} loadedResources={loadedResources} />
     </Table.Body>
   </Table>
 );
@@ -84,5 +94,9 @@ const mapStateToProps = ({namespaces, ui: {loadedResources}}) => ({
   loadedResources
 });
 
-export default connect(mapStateToProps)(List);
+const mapDispatchToProps = dispatch =>  bindActionCreators({
+  addOrReplace: redux.actions.crudAddOrReplace
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(List);
 
