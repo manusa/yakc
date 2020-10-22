@@ -14,16 +14,22 @@
  * limitations under the License.
  *
  */
-import actions from './actions';
+import api from './api';
 import reducer from './reducer';
 import selectors from './selectors';
-import uiReducer from './ui-reducer';
+import List from './List';
+import ConfigMapsDetailPage from './ConfigMapsDetailPage';
+import ConfigMapsEditPage from './ConfigMapsEditPage';
+import ConfigMapsPage from './ConfigMapsPage';
 
-const redux = {};
+const configmaps = {};
 
-redux.actions = actions;
-redux.reducer = reducer;
-redux.selectors = selectors;
-redux.uiReducer = uiReducer;
+configmaps.api = api;
+configmaps.reducer = reducer;
+configmaps.selectors = selectors;
+configmaps.List = List;
+configmaps.ConfigMapsDetailPage = ConfigMapsDetailPage;
+configmaps.ConfigMapsEditPage = ConfigMapsEditPage;
+configmaps.ConfigMapsPage = ConfigMapsPage;
 
-export default redux;
+export default configmaps;

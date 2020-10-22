@@ -14,16 +14,28 @@
  * limitations under the License.
  *
  */
-import actions from './actions';
-import reducer from './reducer';
-import selectors from './selectors';
-import uiReducer from './ui-reducer';
+import md from '../metadata';
 
-const redux = {};
+const selectors = {};
 
-redux.actions = actions;
-redux.reducer = reducer;
-redux.selectors = selectors;
-redux.uiReducer = uiReducer;
+const toObjectReducer = (acc, [key, configMap]) => {
+  acc[key] = configMap;
+  return acc;
+};
 
-export default redux;
+selectors.resourcesBy = (resources = [], {
+  namespace,
+  ownerId
+} = undefined) => Object.entries(resources)
+.filter(([, resource]) => {
+  if (namespace && md.selectors.namespace(resource) !== namespace) {
+    return false;
+  }
+  if (ownerId && !md.selectors.ownerReferencesUids(resource).includes(ownerId)) {
+    return false;
+  }
+  return true;
+})
+.reduce(toObjectReducer, {});
+
+export default selectors;

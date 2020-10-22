@@ -14,16 +14,21 @@
  * limitations under the License.
  *
  */
-import actions from './actions';
-import reducer from './reducer';
-import selectors from './selectors';
-import uiReducer from './ui-reducer';
+import React from 'react';
+import {connect} from 'react-redux';
+import cm from './';
+import DashboardPage from '../components/DashboardPage';
+import FilterBar from '../components/FilterBar';
 
-const redux = {};
+const ConfigMapsPage = ({selectedNamespace}) => (
+  <DashboardPage title='ConfigMaps'>
+    <FilterBar />
+    <cm.List className='mt-4' namespace={selectedNamespace} />
+  </DashboardPage>
+);
 
-redux.actions = actions;
-redux.reducer = reducer;
-redux.selectors = selectors;
-redux.uiReducer = uiReducer;
+const mapStateToProps = ({ui: {selectedNamespace}}) => ({
+  selectedNamespace
+});
 
-export default redux;
+export default connect(mapStateToProps)(ConfigMapsPage);

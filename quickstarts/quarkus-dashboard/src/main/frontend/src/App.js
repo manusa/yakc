@@ -17,6 +17,7 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import configMaps from './configmaps';
 import deployments from './deployments';
 import ingresses from './ingresses';
 import nodes from './nodes';
@@ -37,6 +38,7 @@ const pollResources = dispatch => {
     };
     try {
       await Promise.all([
+        configMaps.api.list().then(handleResourceList('ConfigMap')),
         ingresses.api.list().then(handleResourceList('Ingress')),
         ns.api.list().then(handleResourceList('Namespace')),
         services.api.list().then(handleResourceList('Service'))
@@ -73,6 +75,9 @@ const App = ({dispatch}) => {
       <Router>
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route exact path='/configmaps' component={configMaps.ConfigMapsPage} />
+          <Route exact path='/configmaps/:uid' component={configMaps.ConfigMapsDetailPage} />
+          <Route exact path='/configmaps/:uid/edit' component={configMaps.ConfigMapsEditPage} />
           <Route exact path='/deployments' component={deployments.DeploymentsPage} />
           <Route exact path='/deployments/:uid' component={deployments.DeploymentsDetailPage} />
           <Route exact path='/deployments/:uid/edit' component={deployments.DeploymentsEditPage} />

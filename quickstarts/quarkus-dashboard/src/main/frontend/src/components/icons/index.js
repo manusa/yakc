@@ -14,6 +14,7 @@
  * limitations under the License.
  *
  */
+import ConfigMap from './ConfigMap';
 import Deployment from './Deployment';
 import Ingress from './Ingress';
 import Kubernetes from './Kubernetes';
@@ -26,6 +27,7 @@ import YAKCLogo from './YAKCLogo';
 
 const icons = {};
 
+icons.ConfigMap = ConfigMap;
 icons.Deployment = Deployment
 icons.Ingress = Ingress;
 icons.Kubernetes = Kubernetes;

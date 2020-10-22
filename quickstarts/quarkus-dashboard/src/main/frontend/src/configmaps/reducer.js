@@ -14,16 +14,8 @@
  * limitations under the License.
  *
  */
-import actions from './actions';
-import reducer from './reducer';
-import selectors from './selectors';
-import uiReducer from './ui-reducer';
+import redux from '../redux';
 
-const redux = {};
+const reducer = redux.reducer('ConfigMap');
 
-redux.actions = actions;
-redux.reducer = reducer;
-redux.selectors = selectors;
-redux.uiReducer = uiReducer;
-
-export default redux;
+export default reducer;

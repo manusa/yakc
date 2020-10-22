@@ -19,90 +19,78 @@ import {connect} from 'react-redux'
 import Link from '../components/Link';
 import Table from '../components/Table';
 import metadata from '../metadata';
-import ing from './';
+import cm from './';
 import Icon from '../components/Icon';
 import {bindActionCreators} from 'redux';
 import redux from '../redux';
 
 const headers = [
-  <span><Icon icon='fa-id-card' /> Name</span>,
+  <span><Icon className='fa-id-card' /> Name</span>,
   'Namespace',
-  'Hosts',
-  'Paths',
   ''
 ];
 
 const sort = (p1, p2) =>
   metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
 
-const Rows = ({ingresses, loadedResources, deleteIngressAction}) => {
-  if (!loadedResources['Ingress']) {
+const Rows = ({configMaps, loadedResources, crudDelete}) => {
+  if (!loadedResources['ConfigMap']) {
     return <Table.Loading colSpan={headers.length} />;
   }
-  const allIngresses = Object.values(ingresses);
-  if (allIngresses.length === 0) {
+  const allConfigMaps = Object.values(configMaps);
+  if (allConfigMaps.length === 0) {
     return <Table.NoResultsRow colSpan={headers.length} />;
   }
-  const deleteIngress = ingress => async () => {
-    await ing.api.requestDelete(ingress);
-    deleteIngressAction(ingress);
+  const deleteConfigMap = configMap => async () => {
+    await cm.api.requestDelete(configMap);
+    crudDelete(configMap);
   };
-  return allIngresses
+  return allConfigMaps
     .sort(sort)
-    .map(ingress => (
-        <Table.Row key={metadata.selectors.uid(ingress)}>
+    .map(configMap => (
+        <Table.Row key={metadata.selectors.uid(configMap)}>
           <Table.Cell>
-            <Link.Ingress to={`/ingresses/${metadata.selectors.uid(ingress)}`}>
-              {metadata.selectors.name(ingress)}
-            </Link.Ingress>
+            <Link.Service to={`/configmaps/${metadata.selectors.uid(configMap)}`}>
+              {metadata.selectors.name(configMap)}
+            </Link.Service>
           </Table.Cell>
           <Table.Cell className='whitespace-no-wrap'>
-            <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(ingress)}`}>
-              {metadata.selectors.namespace(ingress)}
+            <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(configMap)}`}>
+              {metadata.selectors.namespace(configMap)}
             </Link.Namespace>
           </Table.Cell>
           <Table.Cell>
-            {ing.selectors.allHosts(ingress).map((host, idx) =>
-              <div key={idx}><a href={`http://${host}`}>{host}</a></div>
-            )}
-          </Table.Cell>
-          <Table.Cell>
-            {ing.selectors.allPaths(ingress).map((path, idx) =>
-              <div key={idx}>{path}</div>
-            )}
-          </Table.Cell>
-          <Table.Cell>
-            <Table.DeleteButton onClick={deleteIngress(ingress)} />
+            <Table.DeleteButton onClick={deleteConfigMap(configMap)} />
           </Table.Cell>
         </Table.Row>
     ));
 };
 
-const List = ({ingresses, loadedResources, deleteIngressAction, ...properties}) => (
+const List = ({configMaps, loadedResources, crudDelete, ...properties}) => (
   <Table {...properties}>
     <Table.Head
       columns={headers}
     />
     <Table.Body>
-      <Rows ingresses={ingresses} loadedResources={loadedResources} deleteIngressAction={deleteIngressAction} />
+      <Rows configMaps={configMaps} loadedResources={loadedResources} crudDelete={crudDelete} />
     </Table.Body>
   </Table>
 );
 
-const mapStateToProps = ({ingresses, ui: {loadedResources}}) => ({
-  ingresses,
+const mapStateToProps = ({configMaps, ui: {loadedResources}}) => ({
+  configMaps,
   loadedResources
 });
 
 const mapDispatchToProps = dispatch =>  bindActionCreators({
-  deleteIngressAction: redux.actions.crudDelete
+  crudDelete: redux.actions.crudDelete
 }, dispatch);
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  ingresses: redux.selectors.resourcesBy(stateProps.ingresses, ownProps)
+  configMaps: redux.selectors.resourcesBy(stateProps.configMaps, ownProps)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(List);

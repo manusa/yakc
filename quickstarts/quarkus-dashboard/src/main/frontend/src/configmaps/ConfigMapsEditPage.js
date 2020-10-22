@@ -14,16 +14,20 @@
  * limitations under the License.
  *
  */
-import actions from './actions';
-import reducer from './reducer';
-import selectors from './selectors';
-import uiReducer from './ui-reducer';
+import React from 'react';
+import md from '../metadata';
+import cm from './';
+import ResourceEditPage from '../components/ResourceEditPage';
+import Link from '../components/Link';
 
-const redux = {};
+const ConfigMapsEditPage = ({match: {params: {uid}}}) => (
+  <ResourceEditPage
+    cardTitle={resource =>
+      <Link.RouterLink to={`/configmaps/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
+    }
+    save={async resource => await cm.api.update(resource)}
+    resourceFromState={state => state.configMaps[uid]}
+  />
+);
 
-redux.actions = actions;
-redux.reducer = reducer;
-redux.selectors = selectors;
-redux.uiReducer = uiReducer;
-
-export default redux;
+export default ConfigMapsEditPage;

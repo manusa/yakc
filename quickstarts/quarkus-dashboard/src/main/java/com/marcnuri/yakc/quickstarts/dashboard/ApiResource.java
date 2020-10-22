@@ -17,6 +17,7 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard;
 
+import com.marcnuri.yakc.quickstarts.dashboard.configmaps.ConfigMapResource;
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentResource;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
 import com.marcnuri.yakc.quickstarts.dashboard.ingresses.IngressResource;
@@ -33,6 +34,7 @@ import javax.ws.rs.Path;
 @Singleton
 public class ApiResource {
 
+  private final ConfigMapResource configMapResource;
   private final DeploymentResource deploymentResource;
   private final EventResource eventResource;
   private final IngressResource ingressResource;
@@ -45,6 +47,7 @@ public class ApiResource {
 
   @Inject
   public ApiResource(
+    ConfigMapResource configMapResource,
     DeploymentResource deploymentResource,
     EventResource eventResource,
     IngressResource ingressResource,
@@ -53,6 +56,7 @@ public class ApiResource {
     ReplicaSetResource replicaSetResource,
     ServiceResource serviceResource,
     WatchResource watchResource) {
+    this.configMapResource = configMapResource;
     this.deploymentResource = deploymentResource;
     this.eventResource = eventResource;
     this.ingressResource = ingressResource;
@@ -62,6 +66,11 @@ public class ApiResource {
     this.replicaSetResource = replicaSetResource;
     this.serviceResource = serviceResource;
     this.watchResource = watchResource;
+  }
+
+  @Path("/configmaps")
+  public ConfigMapResource getConfigMapResource() {
+    return configMapResource;
   }
 
   @Path("/deployments")

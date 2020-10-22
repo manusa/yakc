@@ -18,6 +18,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {combineReducers, createStore} from 'redux';
+import configMaps from './configmaps';
 import deployments from './deployments';
 import events from './events';
 import ing from './ingresses';
@@ -41,6 +42,7 @@ const storeEnhancer = () => {
 };
 
 const store = createStore(combineReducers({
+  configMaps: configMaps.reducer,
   deployments: deployments.reducer,
   events: events.reducer,
   ingresses: ing.reducer,

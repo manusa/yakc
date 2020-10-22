@@ -21,6 +21,7 @@ import metadata from '../metadata';
 import rs from './';
 import Icon from '../components/Icon';
 import Table from '../components/Table';
+import redux from '../redux';
 
 const headers = [
   '',
@@ -80,23 +81,11 @@ const mapStateToProps = ({replicaSets}) => ({
   replicaSets
 });
 
-const filterReplicaSet = (replicaSets = [], {ownerId} = undefined) => Object.entries(replicaSets)
-  .filter(([, replicaSet]) => {
-    if (ownerId) {
-      return metadata.selectors.ownerReferencesUids(replicaSet).includes(ownerId);
-    }
-    return true;
-  })
-  .reduce((acc, [key, replicaSet]) => {
-    acc[key] = replicaSet;
-    return acc;
-  }, {});
-
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  replicaSets: filterReplicaSet(stateProps.replicaSets, ownProps)
+  replicaSets: redux.selectors.resourcesBy(stateProps.replicaSets, ownProps)
 });
 
 List.propTypes = {
