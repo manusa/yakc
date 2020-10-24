@@ -43,8 +43,10 @@ Card.Title = ({className, children,
   </div>
 );
 
-Card.Body = ({className, children}) => (
-  <div className={`p-3 ${className ?? ''}`}>
+Card.Body = ({
+  padding = 'p-3',
+  className, children}) => (
+  <div className={`${padding} ${className ?? ''}`}>
     {children}
   </div>
 );

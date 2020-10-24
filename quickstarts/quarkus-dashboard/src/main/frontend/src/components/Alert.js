@@ -20,6 +20,7 @@ const Alert = ({
   clearError,
   visible = true,
   margin = 'm-2',
+  className = '',
   children}) => (
   <div
     className={`
@@ -28,6 +29,7 @@ const Alert = ({
       border rounded bg-red-200 border-red-300 p-2
       cursor-pointer text-red-500 text-sm select-none
       transform transition-transform duration-200
+      ${className}
       `}
     onClick={clearError}
   >

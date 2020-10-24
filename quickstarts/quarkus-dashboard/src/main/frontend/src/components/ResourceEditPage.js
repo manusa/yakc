@@ -19,20 +19,30 @@ import {useStore} from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 import YAML from 'yaml';
 import md from '../metadata';
+import AceEditor from 'react-ace';
 import DashboardPage from '../components/DashboardPage';
 import Card from '../components/Card';
 import Link from './Link';
 import Icon from './Icon';
 import Alert from './Alert';
 
+import 'ace-builds/src-noconflict/mode-yaml';
+import 'ace-builds/src-noconflict/theme-gruvbox'
+
 const Editor = ({
   onChange = () => {},
   value = ''
 }) => (
-  <textarea
-    className='bg-transparent w-full h-full outline-none resize-none'
+  <AceEditor
+    className='relative w-full h-full outline-none'
+    mode='yaml'
+    theme='gruvbox'
     onChange={onChange}
     value={value}
+    fontSize='0.9rem'
+    width='100%'
+    height='100%'
+    tabSize={2}
   />
 );
 
@@ -88,15 +98,19 @@ const ResourceEditPage = ({
               </Link>
             </div>
           </Card.Title>
-          <Card.Body className='flex-1 flex flex-col bg-black text-white font-mono text-sm'>
+          <Card.Body
+            className='relative flex-1 flex flex-col bg-black text-white font-mono text-sm'
+            padding='p-0'
+          >
+            <div className='flex-1'>
+              <Editor value={resourceYaml} onChange={value => setResourceYaml(value)} />
+            </div>
             <Alert
-              visible={error != null} margin='mb-2'
+              className='absolute left-0 right-0 z-10'
+              visible={error != null} margin='m-2'
               clearError={() => setError(null)}>
               {error}
             </Alert>
-            <div className='flex-1'>
-              <Editor value={resourceYaml} onChange={({target: {value}}) => setResourceYaml(value)} />
-            </div>
           </Card.Body>
         </Card>
       </div>
