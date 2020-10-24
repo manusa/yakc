@@ -31,10 +31,7 @@ const headers = [
   'Status',
   'Restarts',
   ''
-]
-
-const sort = (p1, p2) =>
-  metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
+];
 
 const Rows = ({pods}) => {
   const allPods = Object.values(pods);
@@ -43,7 +40,7 @@ const Rows = ({pods}) => {
   }
   const deletePod = pod => async () => await podsModule.api.requestDelete(pod);
   return allPods
-    .sort(sort)
+    .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(pod => (
       <Table.Row key={metadata.selectors.uid(pod)}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>

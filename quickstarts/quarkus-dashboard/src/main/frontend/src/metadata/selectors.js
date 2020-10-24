@@ -36,6 +36,9 @@ selectors.uid = object => object?.metadata?.uid ?? '';
 selectors.ownerReferencesUids = object => (object?.metadata?.ownerReferences ?? [])
   .map(or => or.uid);
 
+selectors.sortByCreationTimeStamp = (r1, r2) =>
+  selectors.creationTimestamp(r2) - selectors.creationTimestamp(r1)
+
 // Selectors for Map<uid, resource> of Metadata Resources
 
 selectors.byUidOrName = (metadataResources, uidOrName) => {

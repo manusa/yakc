@@ -30,10 +30,7 @@ const headers = [
   'Namespace',
   <span><Icon icon='fa-layer-group'/> Images</span>,
   ''
-]
-
-const sort = (p1, p2) =>
-  metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
+];
 
 const Rows = ({deployments}) => {
   const allDeployments = Object.values(deployments);
@@ -43,7 +40,7 @@ const Rows = ({deployments}) => {
   const deleteDeployment = deployment => async () => await deploymentsModule.api.requestDelete(deployment);
   const restartDeployment = deployment => async () => await deploymentsModule.api.restart(deployment);
   return allDeployments
-    .sort(sort)
+    .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(deployment => (
       <Table.Row key={metadata.selectors.uid(deployment)}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>

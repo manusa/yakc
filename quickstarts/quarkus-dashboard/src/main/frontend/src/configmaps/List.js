@@ -31,9 +31,6 @@ const headers = [
   ''
 ];
 
-const sort = (p1, p2) =>
-  metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
-
 const Rows = ({configMaps, loadedResources, crudDelete}) => {
   if (!loadedResources['ConfigMap']) {
     return <Table.Loading colSpan={headers.length} />;
@@ -47,7 +44,7 @@ const Rows = ({configMaps, loadedResources, crudDelete}) => {
     crudDelete(configMap);
   };
   return allConfigMaps
-    .sort(sort)
+    .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(configMap => (
         <Table.Row key={metadata.selectors.uid(configMap)}>
           <Table.Cell>

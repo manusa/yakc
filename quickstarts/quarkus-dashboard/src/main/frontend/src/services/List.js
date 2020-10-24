@@ -33,9 +33,6 @@ const headers = [
   ''
 ];
 
-const sort = (p1, p2) =>
-  metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
-
 const Rows = ({services, loadedResources, deleteServiceAction}) => {
   if (!loadedResources['Service']) {
     return <Table.Loading colSpan={headers.length} />;
@@ -49,7 +46,7 @@ const Rows = ({services, loadedResources, deleteServiceAction}) => {
     deleteServiceAction(service);
   };
   return allServices
-    .sort(sort)
+    .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(service => (
         <Table.Row key={metadata.selectors.uid(service)}>
           <Table.Cell>

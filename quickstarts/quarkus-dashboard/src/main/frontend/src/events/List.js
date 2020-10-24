@@ -30,7 +30,7 @@ const headers = [
   <span><Icon stylePrefix='far' icon='fa-clock' /> Time</span>,
   'Reason',
   'Event'
-]
+];
 
 const EventName = ({event}) => {
   let Component = Link.RouterLink;

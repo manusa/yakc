@@ -28,10 +28,7 @@ const headers = [
   <span className='whitespace-no-wrap'><Icon icon='fa-id-card' /> Name</span>,
   <span className='whitespace-no-wrap'><Icon icon='fa-server' /> Roles</span>,
   <span><Icon icon='fa-tags' /> Labels</span>
-]
-
-const sort = (n1, n2) =>
-  metadata.selectors.creationTimestamp(n1) - metadata.selectors.creationTimestamp(n2);
+];
 
 const Rows = ({nodes}) => {
   const allNodes = Object.values(nodes);
@@ -39,7 +36,7 @@ const Rows = ({nodes}) => {
     return <Table.NoResultsRow colSpan={headers.length} />;
   }
   return allNodes
-    .sort(sort)
+    .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(node => (
       <Table.Row key={metadata.selectors.uid(node)}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>

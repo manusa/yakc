@@ -33,9 +33,6 @@ const headers = [
   ''
 ];
 
-const sort = (p1, p2) =>
-  metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
-
 const Rows = ({namespaces, addOrReplace, loadedResources}) => {
   if (!loadedResources['Namespace']) {
     return <Table.Loading colSpan={headers.length} />;
@@ -49,7 +46,7 @@ const Rows = ({namespaces, addOrReplace, loadedResources}) => {
     addOrReplace(deletedNamespace);
   };
   return allNamespaces
-    .sort(sort)
+    .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(namespace => (
         <Table.Row key={metadata.selectors.uid(namespace)}>
           <Table.Cell className='whitespace-no-wrap w-3 text-center'>

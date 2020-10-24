@@ -30,10 +30,7 @@ const headers = [
   'Namespace',
   'Replicas',
   ''
-]
-
-const sort = (p1, p2) =>
-  metadata.selectors.creationTimestamp(p2) - metadata.selectors.creationTimestamp(p1);
+];
 
 const Rows = ({replicaSets}) => {
   const allRS = Object.values(replicaSets);
@@ -42,7 +39,7 @@ const Rows = ({replicaSets}) => {
   }
   const deleteReplicaSet = replicaSet => async () => await rs.api.requestDelete(replicaSet);
   return allRS
-    .sort(sort)
+    .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(replicaSet => (
       <Table.Row key={metadata.selectors.uid(replicaSet)}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>
