@@ -83,6 +83,7 @@ const App = ({dispatch}) => {
           <Route exact path='/deployments/:uid/edit' component={deployments.DeploymentsEditPage} />
           <Route exact path='/ingresses' component={ingresses.IngressesPage} />
           <Route exact path='/ingresses/:uid' component={ingresses.IngressesDetailPage} />
+          <Route exact path='/ingresses/:uid/edit' component={ingresses.IngressEditPage} />
           <Route exact path='/namespaces' component={ns.NamespacesPage} />
           <Route exact path='/namespaces/:uid' component={ns.NamespacesDetailPage} />
           <Route exact path='/nodes' component={nodes.NodesPage} />

@@ -59,6 +59,10 @@ public class IngressService {
     return kubernetesClient.create(NetworkingV1Api.class).deleteNamespacedIngress(name, namespace).get();
   }
 
+  public Ingress updateIngress(String name, String namespace, Ingress ingress) throws IOException {
+    return kubernetesClient.create(NetworkingV1Api.class).replaceNamespacedIngress(name, namespace, ingress).get();
+  }
+
   static Ingress to(com.marcnuri.yakc.model.io.k8s.api.extensions.v1beta1.Ingress from) {
     return Ingress.builder()
       .apiVersion(from.getApiVersion())

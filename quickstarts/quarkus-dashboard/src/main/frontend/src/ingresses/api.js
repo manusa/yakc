@@ -15,7 +15,7 @@
  *
  */
 import {getApiURL} from '../env';
-import {fixKind, toJson} from '../fetch';
+import {fixKind, toJson, updateNamespacedResource} from '../fetch';
 import metadata from '../metadata';
 
 const api = {};
@@ -34,5 +34,7 @@ api.requestDelete = async ingress => {
     {method: 'DELETE'}
   );
 };
+
+api.update = updateNamespacedResource('ingresses');
 
 export default api;

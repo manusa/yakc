@@ -14,22 +14,20 @@
  * limitations under the License.
  *
  */
-import api from './api';
-import reducer from './reducer';
-import selectors from './selectors';
-import List from './List';
-import IngressesDetailPage from './IngressesDetailPage';
-import IngressesEditPage from './IngressesEditPage';
-import IngressesPage from './IngressesPage';
+import React from 'react';
+import md from '../metadata';
+import i from './';
+import ResourceEditPage from '../components/ResourceEditPage';
+import Link from '../components/Link';
 
-const ingresses = {};
+const IngressesEditPage = ({match: {params: {uid}}}) => (
+  <ResourceEditPage
+    cardTitle={resource =>
+      <Link.RouterLink to={`/ingresses/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
+    }
+    save={async resource => await i.api.update(resource)}
+    resourceFromState={state => state.ingresses[uid]}
+  />
+);
 
-ingresses.api = api;
-ingresses.reducer = reducer;
-ingresses.selectors = selectors;
-ingresses.List = List;
-ingresses.IngressesDetailPage = IngressesDetailPage;
-ingresses.IngressEditPage = IngressesEditPage;
-ingresses.IngressesPage = IngressesPage;
-
-export default ingresses;
+export default IngressesEditPage;
