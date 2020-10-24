@@ -22,6 +22,7 @@ import Link from '../components/Link';
 import Table from '../components/Table';
 import Tooltip from '../components/Tooltip';
 import Icon from '../components/Icon';
+import ResourceList from '../components/ResourceList';
 
 const headers = [
   'Type',
@@ -100,14 +101,9 @@ const Rows = ({events}) => {
 }
 
 const List = ({events, ...properties}) => (
-  <Table title='Latest Events' {...properties}>
-    <Table.Head
-      columns={headers}
-    />
-    <Table.Body>
-      <Rows events={events} />
-    </Table.Body>
-  </Table>
+  <ResourceList title='Latest Events' headers={headers} {...properties}>
+    <Rows events={events} />
+  </ResourceList>
 );
 
 const filterEvents = (events = [], {

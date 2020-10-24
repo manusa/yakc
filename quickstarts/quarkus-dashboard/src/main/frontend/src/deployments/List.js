@@ -18,10 +18,11 @@ import React from 'react';
 import {connect} from 'react-redux'
 import metadata from '../metadata';
 import deploymentsModule from './';
+import redux from '../redux';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
+import ResourceList from '../components/ResourceList';
 import Table from '../components/Table';
-import redux from '../redux';
 
 const headers = [
   '',
@@ -80,14 +81,9 @@ const Rows = ({deployments}) => {
 }
 
 const List = ({deployments, ...properties}) => (
-  <Table {...properties}>
-    <Table.Head
-      columns={headers}
-    />
-    <Table.Body>
-      <Rows deployments={deployments} />
-    </Table.Body>
-  </Table>
+  <ResourceList headers={headers} {...properties}>
+    <Rows deployments={deployments} />
+  </ResourceList>
 );
 
 const mapStateToProps = ({deployments}) => ({

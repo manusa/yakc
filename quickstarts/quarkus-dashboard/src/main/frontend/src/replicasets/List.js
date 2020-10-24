@@ -18,10 +18,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import metadata from '../metadata';
+import redux from '../redux';
 import rs from './';
 import Icon from '../components/Icon';
+import ResourceList from '../components/ResourceList';
 import Table from '../components/Table';
-import redux from '../redux';
 
 const headers = [
   '',
@@ -67,14 +68,9 @@ const Rows = ({replicaSets}) => {
 }
 
 const List = ({replicaSets, ownerId, ...properties}) => (
-  <Table {...properties}>
-    <Table.Head
-      columns={headers}
-    />
-    <Table.Body>
-      <Rows replicaSets={replicaSets} />
-    </Table.Body>
-  </Table>
+  <ResourceList headers={headers} {...properties}>
+    <Rows replicaSets={replicaSets} />
+  </ResourceList>
 );
 
 const mapStateToProps = ({replicaSets}) => ({

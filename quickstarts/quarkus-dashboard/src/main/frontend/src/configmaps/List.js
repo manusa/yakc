@@ -16,13 +16,14 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
-import Link from '../components/Link';
-import Table from '../components/Table';
+import {bindActionCreators} from 'redux';
 import metadata from '../metadata';
 import cm from './';
-import Icon from '../components/Icon';
-import {bindActionCreators} from 'redux';
 import redux from '../redux';
+import Icon from '../components/Icon';
+import Link from '../components/Link';
+import ResourceList from '../components/ResourceList';
+import Table from '../components/Table';
 
 const headers = [
   <span><Icon className='fa-id-card' /> Name</span>,
@@ -67,14 +68,9 @@ const Rows = ({configMaps, loadedResources, crudDelete}) => {
 };
 
 const List = ({configMaps, loadedResources, crudDelete, ...properties}) => (
-  <Table {...properties}>
-    <Table.Head
-      columns={headers}
-    />
-    <Table.Body>
-      <Rows configMaps={configMaps} loadedResources={loadedResources} crudDelete={crudDelete} />
-    </Table.Body>
-  </Table>
+  <ResourceList headers={headers} {...properties}>
+    <Rows configMaps={configMaps} loadedResources={loadedResources} crudDelete={crudDelete} />
+  </ResourceList>
 );
 
 const mapStateToProps = ({configMaps, ui: {loadedResources}}) => ({

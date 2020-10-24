@@ -16,13 +16,14 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
-import Link from '../components/Link';
-import Table from '../components/Table';
+import {bindActionCreators} from 'redux';
 import metadata from '../metadata';
 import ns from './';
-import Icon from '../components/Icon';
-import {bindActionCreators} from 'redux';
 import redux from '../redux';
+import Icon from '../components/Icon';
+import Link from '../components/Link';
+import ResourceList from '../components/ResourceList';
+import Table from '../components/Table';
 
 const headers = [
   '',
@@ -79,14 +80,9 @@ const Rows = ({namespaces, addOrReplace, loadedResources}) => {
 };
 
 const List = ({namespaces, addOrReplace, loadedResources, deleteIngressAction, ...properties}) => (
-  <Table {...properties}>
-    <Table.Head
-      columns={headers}
-    />
-    <Table.Body>
-      <Rows namespaces={namespaces} addOrReplace={addOrReplace} loadedResources={loadedResources} />
-    </Table.Body>
-  </Table>
+  <ResourceList headers={headers} {...properties}>
+    <Rows namespaces={namespaces} loadedResources={loadedResources} addOrReplace={addOrReplace} />
+  </ResourceList>
 );
 
 const mapStateToProps = ({namespaces, ui: {loadedResources}}) => ({

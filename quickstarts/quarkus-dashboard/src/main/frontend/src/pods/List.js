@@ -17,11 +17,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
-import Icon from '../components/Icon';
-import Link from '../components/Link';
-import Table from '../components/Table';
 import metadata from '../metadata';
 import podsModule from './'
+import Icon from '../components/Icon';
+import Link from '../components/Link';
+import ResourceList from '../components/ResourceList';
+import Table from '../components/Table';
 
 const headers = [
   '',
@@ -85,14 +86,9 @@ const Rows = ({pods}) => {
 }
 
 const List = ({pods, nodeName, ownerUids, ...properties}) => (
-  <Table {...properties}>
-    <Table.Head
-      columns={headers}
-    />
-    <Table.Body>
-      <Rows pods={pods} />
-    </Table.Body>
-  </Table>
+  <ResourceList headers={headers} {...properties}>
+    <Rows pods={pods} />
+  </ResourceList>
 );
 
 const mapStateToProps = ({pods}) => ({

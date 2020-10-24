@@ -16,13 +16,14 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
-import Link from '../components/Link';
-import Table from '../components/Table';
+import {bindActionCreators} from 'redux';
 import metadata from '../metadata';
+import redux from '../redux';
 import svc from './';
 import Icon from '../components/Icon';
-import {bindActionCreators} from 'redux';
-import redux from '../redux';
+import Link from '../components/Link';
+import ResourceList from '../components/ResourceList';
+import Table from '../components/Table';
 
 const headers = [
   <span><Icon className='fa-id-card' /> Name</span>,
@@ -75,14 +76,9 @@ const Rows = ({services, loadedResources, deleteServiceAction}) => {
 };
 
 const List = ({services, loadedResources, deleteServiceAction, ...properties}) => (
-  <Table {...properties}>
-    <Table.Head
-      columns={headers}
-    />
-    <Table.Body>
-      <Rows services={services} loadedResources={loadedResources} deleteServiceAction={deleteServiceAction} />
-    </Table.Body>
-  </Table>
+  <ResourceList headers={headers} {...properties}>
+    <Rows services={services} loadedResources={loadedResources} deleteServiceAction={deleteServiceAction} />
+  </ResourceList>
 );
 
 const mapStateToProps = ({services, ui: {loadedResources}}) => ({
