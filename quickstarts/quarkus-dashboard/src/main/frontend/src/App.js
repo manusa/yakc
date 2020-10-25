@@ -23,6 +23,7 @@ import ingresses from './ingresses';
 import nodes from './nodes';
 import ns from './namespaces';
 import pods from './pods';
+import secrets from './secrets';
 import services from './services';
 import watch from './watch';
 import redux from './redux';
@@ -41,6 +42,7 @@ const pollResources = dispatch => {
         configMaps.api.list().then(handleResourceList('ConfigMap')),
         ingresses.api.list().then(handleResourceList('Ingress')),
         ns.api.list().then(handleResourceList('Namespace')),
+        secrets.api.list().then(handleResourceList('Secret')),
         services.api.list().then(handleResourceList('Service'))
       ]);
     } catch (e) {
@@ -92,6 +94,9 @@ const App = ({dispatch}) => {
           <Route exact path='/pods/:uid' component={pods.PodsDetailPage} />
           <Route exact path='/pods/:uid/edit' component={pods.PodsEditPage} />
           <Route exact path='/pods/:uid/logs' component={pods.PodsLogsPage} />
+          <Route exact path='/secrets' component={secrets.SecretsPage} />
+          <Route exact path='/secrets/:uid' component={secrets.SecretsDetailPage} />
+          <Route exact path='/secrets/:uid/edit' component={secrets.SecretsEditPage} />
           <Route exact path='/services' component={services.ServicesPage} />
           <Route exact path='/services/:uid' component={services.ServicesDetailPage} />
           <Route exact path='/services/:uid/edit' component={services.ServicesEditPage} />

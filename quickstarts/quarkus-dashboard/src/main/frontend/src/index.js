@@ -27,6 +27,7 @@ import nodes from './nodes';
 import pods from './pods';
 import replicaSets from './replicasets';
 import redux from './redux';
+import secrets from './secrets';
 import services from './services';
 import App from './App';
 
@@ -50,6 +51,7 @@ const store = createStore(combineReducers({
   nodes: nodes.reducer,
   pods: pods.reducer,
   replicaSets: replicaSets.reducer,
+  secrets: secrets.reducer,
   services: services.reducer,
   ui: redux.uiReducer
 }), storeEnhancer());

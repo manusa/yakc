@@ -14,12 +14,8 @@
  * limitations under the License.
  *
  */
-import {deleteNamespacedResource, listResource} from '../fetch';
+import redux from '../redux';
 
-const api = {};
+const reducer = redux.reducer('Secret');
 
-api.list = listResource('namespaces', 'Namespace');
-
-api.requestDelete = deleteNamespacedResource('namespaces');
-
-export default api;
+export default reducer;

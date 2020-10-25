@@ -22,6 +22,7 @@ import Minikube from './Minikube';
 import Namespace from './Namespace';
 import Node from './Node';
 import Pod from './Pod';
+import Secret from './Secret';
 import Service from './Service';
 import YAKCLogo from './YAKCLogo';
 
@@ -35,6 +36,7 @@ icons.Minikube = Minikube;
 icons.Namespace = Namespace;
 icons.Node = Node;
 icons.Pod = Pod;
+icons.Secret = Secret;
 icons.Service = Service;
 icons.YAKCLogo = YAKCLogo;
 

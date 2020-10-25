@@ -43,6 +43,21 @@ export const toJson = async response => (await processResponse(response)).json()
 export const fixKind = kind => resources =>
   resources.map(resource => ({kind, ...resource}));
 
+export const listResource = (path, kind) => async () => {
+  const response = await fetch(
+    `${getApiURL()}/${path}`
+  );
+  const rawList =  await toJson(response);
+  return fixKind(kind)(rawList);
+};
+
+export const deleteNamespacedResource = path => async resource => {
+  await fetch(
+    `${getApiURL()}/${path}/${metadata.selectors.namespace(resource)}/${metadata.selectors.name(resource)}`,
+    {method: 'DELETE'}
+  );
+};
+
 export const updateNamespacedResource = path => async resource => {
   const headers = new Headers();
   headers.set('Content-Type', 'application/json');

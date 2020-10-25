@@ -14,12 +14,18 @@
  * limitations under the License.
  *
  */
-import {deleteNamespacedResource, listResource} from '../fetch';
+import {
+  deleteNamespacedResource,
+  listResource,
+  updateNamespacedResource
+} from '../fetch';
 
 const api = {};
 
-api.list = listResource('namespaces', 'Namespace');
+api.list = listResource('secrets', 'Secret');
 
-api.requestDelete = deleteNamespacedResource('namespaces');
+api.requestDelete = deleteNamespacedResource('secrets');
+
+api.update = updateNamespacedResource('secrets');
 
 export default api;

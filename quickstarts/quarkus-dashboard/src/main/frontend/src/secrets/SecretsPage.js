@@ -14,12 +14,21 @@
  * limitations under the License.
  *
  */
-import {deleteNamespacedResource, listResource} from '../fetch';
+import React from 'react';
+import {connect} from 'react-redux';
+import s from './';
+import DashboardPage from '../components/DashboardPage';
+import FilterBar from '../components/FilterBar';
 
-const api = {};
+const SecretsPage = ({selectedNamespace}) => (
+  <DashboardPage title='Secrets'>
+    <FilterBar />
+    <s.List className='mt-4' namespace={selectedNamespace} />
+  </DashboardPage>
+);
 
-api.list = listResource('namespaces', 'Namespace');
+const mapStateToProps = ({ui: {selectedNamespace}}) => ({
+  selectedNamespace
+});
 
-api.requestDelete = deleteNamespacedResource('namespaces');
-
-export default api;
+export default connect(mapStateToProps)(SecretsPage);

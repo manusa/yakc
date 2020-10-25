@@ -18,7 +18,7 @@ import React from 'react';
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
 import metadata from '../metadata';
-import cm from './';
+import s from './';
 import redux from '../redux';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
@@ -31,47 +31,47 @@ const headers = [
   ''
 ];
 
-const Rows = ({configMaps, loadedResources, crudDelete}) => {
-  if (!loadedResources['ConfigMap']) {
+const Rows = ({secrets, loadedResources, crudDelete}) => {
+  if (!loadedResources['Secret']) {
     return <Table.Loading colSpan={headers.length} />;
   }
-  const allConfigMaps = Object.values(configMaps);
-  if (allConfigMaps.length === 0) {
+  const allSecrets = Object.values(secrets);
+  if (allSecrets.length === 0) {
     return <Table.NoResultsRow colSpan={headers.length} />;
   }
-  const deleteConfigMap = configMap => async () => {
-    await cm.api.requestDelete(configMap);
-    crudDelete(configMap);
+  const deleteSecret = secret => async () => {
+    await s.api.requestDelete(secret);
+    crudDelete(secret);
   };
-  return allConfigMaps
+  return allSecrets
     .sort(metadata.selectors.sortByCreationTimeStamp)
-    .map(configMap => (
-        <Table.Row key={metadata.selectors.uid(configMap)}>
+    .map(secret => (
+        <Table.Row key={metadata.selectors.uid(secret)}>
           <Table.Cell>
-            <Link.ConfigMap to={`/configmaps/${metadata.selectors.uid(configMap)}`}>
-              {metadata.selectors.name(configMap)}
-            </Link.ConfigMap>
+            <Link.Secret to={`/secrets/${metadata.selectors.uid(secret)}`}>
+              {metadata.selectors.name(secret)}
+            </Link.Secret>
           </Table.Cell>
           <Table.Cell className='whitespace-no-wrap'>
-            <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(configMap)}`}>
-              {metadata.selectors.namespace(configMap)}
+            <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(secret)}`}>
+              {metadata.selectors.namespace(secret)}
             </Link.Namespace>
           </Table.Cell>
           <Table.Cell>
-            <Table.DeleteButton onClick={deleteConfigMap(configMap)} />
+            <Table.DeleteButton onClick={deleteSecret(secret)} />
           </Table.Cell>
         </Table.Row>
     ));
 };
 
-const List = ({configMaps, loadedResources, crudDelete, ...properties}) => (
+const List = ({secrets, loadedResources, crudDelete, ...properties}) => (
   <ResourceList headers={headers} {...properties}>
-    <Rows configMaps={configMaps} loadedResources={loadedResources} crudDelete={crudDelete} />
+    <Rows secrets={secrets} loadedResources={loadedResources} crudDelete={crudDelete} />
   </ResourceList>
 );
 
-const mapStateToProps = ({configMaps, ui: {loadedResources}}) => ({
-  configMaps,
+const mapStateToProps = ({secrets, ui: {loadedResources}}) => ({
+  secrets,
   loadedResources
 });
 
@@ -83,7 +83,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  configMaps: redux.selectors.resourcesBy(stateProps.configMaps, ownProps)
+  secrets: redux.selectors.resourcesBy(stateProps.secrets, ownProps)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(List);

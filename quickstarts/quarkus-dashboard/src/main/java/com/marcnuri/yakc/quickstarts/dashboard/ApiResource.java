@@ -25,6 +25,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.namespaces.NamespaceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeResource;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource;
 import com.marcnuri.yakc.quickstarts.dashboard.replicaset.ReplicaSetResource;
+import com.marcnuri.yakc.quickstarts.dashboard.secrets.SecretResource;
 import com.marcnuri.yakc.quickstarts.dashboard.service.ServiceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.WatchResource;
 import javax.inject.Inject;
@@ -42,9 +43,11 @@ public class ApiResource {
   private final NodeResource nodeResource;
   private final PodResource podResource;
   private final ReplicaSetResource replicaSetResource;
+  private final SecretResource secretResource;
   private final ServiceResource serviceResource;
   private final WatchResource watchResource;
 
+  @SuppressWarnings("java:S107")
   @Inject
   public ApiResource(
     ConfigMapResource configMapResource,
@@ -54,6 +57,7 @@ public class ApiResource {
     NamespaceResource namespaceResource,
     NodeResource nodeResource, PodResource podResource,
     ReplicaSetResource replicaSetResource,
+    SecretResource secretResource,
     ServiceResource serviceResource,
     WatchResource watchResource) {
     this.configMapResource = configMapResource;
@@ -64,6 +68,7 @@ public class ApiResource {
     this.nodeResource = nodeResource;
     this.podResource = podResource;
     this.replicaSetResource = replicaSetResource;
+    this.secretResource = secretResource;
     this.serviceResource = serviceResource;
     this.watchResource = watchResource;
   }
@@ -106,6 +111,11 @@ public class ApiResource {
   @Path("/replicasets")
   public ReplicaSetResource getReplicaSetResource() {
     return replicaSetResource;
+  }
+
+  @Path("/secrets")
+  public SecretResource getSecretResource() {
+    return secretResource;
   }
 
   @Path("/services")

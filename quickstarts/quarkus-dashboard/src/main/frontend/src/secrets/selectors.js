@@ -14,12 +14,8 @@
  * limitations under the License.
  *
  */
-import {deleteNamespacedResource, listResource} from '../fetch';
+const selectors = {};
 
-const api = {};
+selectors.data = secret => secret?.data ?? {};
 
-api.list = listResource('namespaces', 'Namespace');
-
-api.requestDelete = deleteNamespacedResource('namespaces');
-
-export default api;
+export default selectors;

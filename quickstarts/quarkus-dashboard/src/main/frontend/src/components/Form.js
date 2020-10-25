@@ -17,7 +17,7 @@
 import React from 'react';
 
 const Form = ({formClassName, className, children}) => (
-  <form className={`w-full ${formClassName ?? ''}`}>
+  <form className={`w-full ${formClassName ?? ''}`} onSubmit={e => e.preventDefault()}>
     <div className={`flex flex-wrap -px-2 ${className ?? ''}`}>
       {children}
     </div>

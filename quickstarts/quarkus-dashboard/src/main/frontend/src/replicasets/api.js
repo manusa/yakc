@@ -14,16 +14,10 @@
  * limitations under the License.
  *
  */
-import {getApiURL} from '../env';
-import metadata from '../metadata';
+import {deleteNamespacedResource} from '../fetch';
 
 const api = {};
 
-api.requestDelete = async ingress => {
-  await fetch(
-    `${getApiURL()}/replicasets/${metadata.selectors.namespace(ingress)}/${metadata.selectors.name(ingress)}`,
-    {method: 'DELETE'}
-  );
-};
+api.requestDelete = deleteNamespacedResource('replicasets');
 
 export default api;

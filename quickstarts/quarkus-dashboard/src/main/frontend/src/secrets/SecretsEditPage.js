@@ -14,12 +14,20 @@
  * limitations under the License.
  *
  */
-import {deleteNamespacedResource, listResource} from '../fetch';
+import React from 'react';
+import md from '../metadata';
+import s from './';
+import ResourceEditPage from '../components/ResourceEditPage';
+import Link from '../components/Link';
 
-const api = {};
+const SecretsEditPage = ({match: {params: {uid}}}) => (
+  <ResourceEditPage
+    cardTitle={resource =>
+      <Link.RouterLink to={`/secrets/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
+    }
+    save={async resource => await s.api.update(resource)}
+    resourceFromState={state => state.secrets[uid]}
+  />
+);
 
-api.list = listResource('namespaces', 'Namespace');
-
-api.requestDelete = deleteNamespacedResource('namespaces');
-
-export default api;
+export default SecretsEditPage;

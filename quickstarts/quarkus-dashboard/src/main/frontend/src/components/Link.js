@@ -16,14 +16,9 @@
  */
 import React from 'react';
 import {Link as OriginalRouterLink} from 'react-router-dom';
-import Deployment from './icons/Deployment';
-import Ingress from './icons/Ingress';
-import Namespace from './icons/Namespace';
-import Node from './icons/Node';
-import Pod from './icons/Pod';
-import Service from './icons/Service';
 import metadata from '../metadata';
 import Icon from './Icon';
+import i from './icons';
 
 const variants = ({
   none: '',
@@ -74,12 +69,14 @@ Link.ResourceLink = ({className, Icon: IconComponent, iconClassName, children, .
   </Link.RouterLink>
 );
 
-Link.Deployment = ({...props}) => <Link.ResourceLink Icon={Deployment} {...props} />;
-Link.Ingress = ({...props}) => <Link.ResourceLink Icon={Ingress} {...props} />;
-Link.Namespace = ({...props}) => <Link.ResourceLink Icon={Namespace} {...props} />;
-Link.Node = ({...props}) => <Link.ResourceLink Icon={Node} {...props} />;
-Link.Pod = ({...props}) => <Link.ResourceLink Icon={Pod} {...props} />;
-Link.Service = ({...props}) => <Link.ResourceLink Icon={Service} {...props} />;
+Link.ConfigMap = ({...props}) => <Link.ResourceLink Icon={i.ConfigMap} {...props} />;
+Link.Deployment = ({...props}) => <Link.ResourceLink Icon={i.Deployment} {...props} />;
+Link.Ingress = ({...props}) => <Link.ResourceLink Icon={i.Ingress} {...props} />;
+Link.Namespace = ({...props}) => <Link.ResourceLink Icon={i.Namespace} {...props} />;
+Link.Node = ({...props}) => <Link.ResourceLink Icon={i.Node} {...props} />;
+Link.Pod = ({...props}) => <Link.ResourceLink Icon={i.Pod} {...props} />;
+Link.Secret = ({...props}) => <Link.ResourceLink Icon={i.Secret} {...props} />;
+Link.Service = ({...props}) => <Link.ResourceLink Icon={i.Service} {...props} />;
 
 
 Link.EditLink = ({path, resource, ...props}) => (

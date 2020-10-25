@@ -16,16 +16,11 @@
  */
 import {getApiURL} from '../env';
 import metadata from '../metadata';
-import {updateNamespacedResource} from '../fetch';
+import {deleteNamespacedResource, updateNamespacedResource} from '../fetch';
 
 const api = {};
 
-api.requestDelete = async deployment => {
-  await fetch(
-    `${getApiURL()}/deployments/${metadata.selectors.namespace(deployment)}/${metadata.selectors.name(deployment)}`,
-    {method: 'DELETE'}
-    );
-};
+api.requestDelete = deleteNamespacedResource('deployments');
 
 api.update = updateNamespacedResource('deployments');
 

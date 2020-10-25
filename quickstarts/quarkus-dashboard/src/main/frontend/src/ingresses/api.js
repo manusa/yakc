@@ -15,18 +15,18 @@
  *
  */
 import {getApiURL} from '../env';
-import {fixKind, toJson, updateNamespacedResource} from '../fetch';
+import {
+  deleteNamespacedResource,
+  listResource,
+  updateNamespacedResource
+} from '../fetch';
 import metadata from '../metadata';
 
 const api = {};
 
-api.list = async () => {
-  const response = await fetch(
-    `${getApiURL()}/ingresses`
-  );
-  const rawList =  await toJson(response);
-  return fixKind('Ingress')(rawList);
-};
+api.requestDelete = deleteNamespacedResource('ingresses');
+
+api.list = listResource('ingresses', 'Ingress');
 
 api.requestDelete = async ingress => {
   await fetch(

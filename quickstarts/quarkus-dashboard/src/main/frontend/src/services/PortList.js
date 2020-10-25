@@ -27,8 +27,8 @@ const headers = [
   'Target Port'
 ];
 
-const Rows = ({ports}) => ports.map(port => (
-  <Table.Row key={port.name}>
+const Rows = ({ports}) => ports.map((port, idx) => (
+  <Table.Row key={`${idx}-${port.name}`}>
     <Table.Cell>{port.name}</Table.Cell>
     <Table.Cell>{port.appProtocol}</Table.Cell>
     <Table.Cell>{port.nodePort}</Table.Cell>

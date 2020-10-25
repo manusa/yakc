@@ -14,12 +14,22 @@
  * limitations under the License.
  *
  */
-import {deleteNamespacedResource, listResource} from '../fetch';
+import api from './api';
+import reducer from './reducer';
+import selectors from './selectors';
+import List from './List';
+import SecretsDetailPage from './SecretsDetailPage';
+import SecretsEditPage from './SecretsEditPage';
+import SecretsPage from './SecretsPage';
 
-const api = {};
+const secrets = {};
 
-api.list = listResource('namespaces', 'Namespace');
+secrets.api = api;
+secrets.reducer = reducer;
+secrets.selectors = selectors;
+secrets.List = List;
+secrets.SecretsDetailPage = SecretsDetailPage;
+secrets.SecretsEditPage = SecretsEditPage;
+secrets.SecretsPage = SecretsPage;
 
-api.requestDelete = deleteNamespacedResource('namespaces');
-
-export default api;
+export default secrets;

@@ -15,8 +15,7 @@
  *
  */
 import {getApiURL} from '../env';
-import metadata from '../metadata';
-import {updateNamespacedResource} from '../fetch';
+import {deleteNamespacedResource, updateNamespacedResource} from '../fetch';
 
 const api = {};
 
@@ -24,12 +23,7 @@ api.logs = (namespace, name) => new EventSource(
   `${getApiURL()}/pods/${namespace}/${name}/logs`
 );
 
-api.requestDelete = async pod => {
-  await fetch(
-    `${getApiURL()}/pods/${metadata.selectors.namespace(pod)}/${metadata.selectors.name(pod)}`,
-    {method: 'DELETE'}
-    );
-};
+api.requestDelete = deleteNamespacedResource('pods');
 
 api.update = updateNamespacedResource('pods');
 

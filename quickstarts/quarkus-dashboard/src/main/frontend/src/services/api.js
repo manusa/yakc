@@ -14,26 +14,17 @@
  * limitations under the License.
  *
  */
-import {getApiURL} from '../env';
-import {fixKind, toJson, updateNamespacedResource} from '../fetch';
-import metadata from '../metadata';
+import {
+  deleteNamespacedResource,
+  listResource,
+  updateNamespacedResource
+} from '../fetch';
 
 const api = {};
 
-api.list = async () => {
-  const response = await fetch(
-    `${getApiURL()}/services`
-  );
-  const rawList =  await toJson(response);
-  return fixKind('Service')(rawList);
-};
+api.list = listResource('services', 'Service');
 
-api.requestDelete = async service => {
-  await fetch(
-    `${getApiURL()}/services/${metadata.selectors.namespace(service)}/${metadata.selectors.name(service)}`,
-    {method: 'DELETE'}
-  );
-};
+api.requestDelete = deleteNamespacedResource('services');
 
 api.update = updateNamespacedResource('services');
 
