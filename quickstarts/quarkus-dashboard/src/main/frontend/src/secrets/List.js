@@ -28,6 +28,7 @@ import Table from '../components/Table';
 const headers = [
   <span><Icon className='fa-id-card' /> Name</span>,
   'Namespace',
+  'Type',
   ''
 ];
 
@@ -57,6 +58,7 @@ const Rows = ({secrets, loadedResources, crudDelete}) => {
               {metadata.selectors.namespace(secret)}
             </Link.Namespace>
           </Table.Cell>
+          <Table.Cell>{s.selectors.type(secret)}</Table.Cell>
           <Table.Cell>
             <Table.DeleteButton onClick={deleteSecret(secret)} />
           </Table.Cell>

@@ -66,6 +66,7 @@ const SecretsDetailPage = ({secret}) => (
     body={
       <Form>
         <metadata.Details resource={secret} />
+        <Form.Field label='Type'>x{s.selectors.type(secret)}</Form.Field>
         {Object.entries(s.selectors.data(secret)).map(([key, value]) =>
           <DataField key={key} label={key} value={value} />)}
       </Form>

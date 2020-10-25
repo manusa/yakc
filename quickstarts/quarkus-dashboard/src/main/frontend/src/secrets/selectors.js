@@ -16,6 +16,7 @@
  */
 const selectors = {};
 
+selectors.type = secret => secret?.type ?? '';
 selectors.data = secret => secret?.data ?? {};
 
 export default selectors;
