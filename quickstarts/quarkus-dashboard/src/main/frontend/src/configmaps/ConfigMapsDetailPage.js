@@ -18,10 +18,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import cm from './';
 import metadata from '../metadata';
-import Card from '../components/Card';
-import DashboardPage from '../components/DashboardPage';
 import Form from '../components/Form';
-import Link from '../components/Link';
+import ResourceDetailPage from '../components/ResourceDetailPage';
 
 const DataField = ({label, value}) => (
   <Form.Field width={Form.widths.full} label={label}>
@@ -34,25 +32,17 @@ const DataField = ({label, value}) => (
   </Form.Field>
 )
 const ConfigMapsDetailPage = ({configMap}) => (
-  <DashboardPage
-    title={`ConfigMaps - ${metadata.selectors.namespace(configMap)} - ${metadata.selectors.name(configMap)}`}
-  >
-    <Card>
-      <Card.Title className='flex items-center'>
-        <div className='flex-1'>
-          {metadata.selectors.namespace(configMap)} - {metadata.selectors.name(configMap)}
-        </div>
-        <Link.EditLink path='configmaps' resource={configMap} />
-      </Card.Title>
-      <Card.Body>
-        <Form>
-          <metadata.Details resource={configMap} />
-          {Object.entries(cm.selectors.data(configMap)).map(([key, value]) =>
-            <DataField key={key} label={key} value={value} />)}
-        </Form>
-      </Card.Body>
-    </Card>
-  </DashboardPage>
+  <ResourceDetailPage
+    name='ConfigMaps'
+    path='configmaps'
+    resource={configMap}
+    body={
+      <Form>
+        <metadata.Details resource={configMap} />
+        {Object.entries(cm.selectors.data(configMap)).map(([key, value]) =>
+          <DataField key={key} label={key} value={value} />)}
+      </Form>
+    } />
 );
 
 const mapStateToProps = ({configMaps}) => ({

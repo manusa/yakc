@@ -22,10 +22,10 @@ import pods from '../pods';
 import rs from '../replicasets';
 import Card from '../components/Card';
 import ContainerList from '../components/ContainerList';
-import DashboardPage from '../components/DashboardPage';
 import Form from '../components/Form';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
+import ResourceDetailPage from '../components/ResourceDetailPage';
 
 const ReplicasField = ({deployment}) => {
   const replicas = d.selectors.specReplicas(deployment);
@@ -52,34 +52,30 @@ const ReplicasField = ({deployment}) => {
 }
 
 const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
-  <DashboardPage
-    title={`Deployments - ${metadata.selectors.namespace(deployment)} - ${metadata.selectors.name(deployment)}`}
+  <ResourceDetailPage
+    name='Deployments'
+    path='deployments'
+    resource={deployment}
+    actions={
+      <Link
+        className='ml-2'
+        size={Link.sizes.small}
+        variant={Link.variants.outline}
+        onClick={() => d.api.restart(deployment)}
+        title='Restart'
+      >
+        <Icon stylePrefix='fas' icon='fa-redo-alt' className='mr-2'/>
+        Restart
+      </Link>
+    }
+    body={
+      <Form>
+        <metadata.Details resource={deployment} />
+        <ReplicasField deployment={deployment} />
+        <Form.Field label='Strategy'>{d.selectors.specStrategyType(deployment)}</Form.Field>
+      </Form>
+    }
   >
-    <Card>
-      <Card.Title className='flex items-center'>
-        <div className='flex-1'>
-          {metadata.selectors.namespace(deployment)} - {metadata.selectors.name(deployment)}
-        </div>
-        <Link.EditLink path='deployments' resource={deployment} />
-        <Link
-          className='ml-2'
-          size={Link.sizes.small}
-          variant={Link.variants.outline}
-          onClick={() => d.api.restart(deployment)}
-          title='Restart'
-        >
-          <Icon stylePrefix='fas' icon='fa-redo-alt' className='mr-2' />
-          Restart
-        </Link>
-      </Card.Title>
-      <Card.Body>
-        <Form>
-          <metadata.Details resource={deployment} />
-          <ReplicasField deployment={deployment} />
-          <Form.Field label='Strategy'>{d.selectors.specStrategyType(deployment)}</Form.Field>
-        </Form>
-      </Card.Body>
-    </Card>
     <ContainerList
       title='Containers'
       titleVariant={Card.titleVariants.medium}
@@ -95,7 +91,7 @@ const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
       titleVariant={Card.titleVariants.medium}
       className='mt-2'
       ownerUids={replicaSetsUids} />
-  </DashboardPage>
+  </ResourceDetailPage>
 );
 
 const mapStateToProps = ({deployments, replicaSets}) => ({

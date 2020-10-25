@@ -19,9 +19,8 @@ import {connect} from 'react-redux';
 import metadata from '../metadata';
 import svc from './';
 import Card from '../components/Card';
-import DashboardPage from '../components/DashboardPage';
 import Form from '../components/Form';
-import Link from '../components/Link';
+import ResourceDetailPage from '../components/ResourceDetailPage';
 
 const Selectors = ({selectors}) => (
   <Form.Field label='Selectors' width={Form.widths.full}>
@@ -40,35 +39,29 @@ const ExternalIps = ({ips}) => (
 );
 
 const ServicesDetailPage = ({service}) => (
-  <DashboardPage
-    title={`Services - ${metadata.selectors.namespace(service)} - ${metadata.selectors.name(service)}`}
+  <ResourceDetailPage
+    name='Services'
+    path='services'
+    resource={service}
+    body={
+      <Form>
+        <metadata.Details resource={service} />
+        <Selectors selectors={svc.selectors.specSelector(service)} />
+        <Form.Field label='Type'>
+          <svc.Type service={service} />
+        </Form.Field>
+        <Form.Field label='Cluster IP'>{svc.selectors.specClusterIP(service)}</Form.Field>
+        <ExternalIps ips={svc.selectors.specExternalIPs(service)} />
+      </Form>
+    }
   >
-    <Card>
-      <Card.Title className='flex items-center'>
-        <div className='flex-1'>
-          {metadata.selectors.namespace(service)} - {metadata.selectors.name(service)}
-        </div>
-        <Link.EditLink path='services' resource={service} />
-      </Card.Title>
-      <Card.Body>
-        <Form>
-          <metadata.Details resource={service} />
-          <Selectors selectors={svc.selectors.specSelector(service)} />
-          <Form.Field label='Type'>
-            <svc.Type service={service} />
-          </Form.Field>
-          <Form.Field label='Cluster IP'>{svc.selectors.specClusterIP(service)}</Form.Field>
-          <ExternalIps ips={svc.selectors.specExternalIPs(service)} />
-        </Form>
-      </Card.Body>
-    </Card>
     <svc.PortList
       title='Service Ports'
       titleVariant={Card.titleVariants.medium}
       className='mt-2'
       ports={svc.selectors.specPorts(service)}
     />
-  </DashboardPage>
+  </ResourceDetailPage>
 );
 
 const mapStateToProps = ({services}) => ({

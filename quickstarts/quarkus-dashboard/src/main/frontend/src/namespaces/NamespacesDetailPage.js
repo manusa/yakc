@@ -18,28 +18,23 @@ import React from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
 import ns from './';
-import Card from '../components/Card';
-import DashboardPage from '../components/DashboardPage';
 import Form from '../components/Form';
+import ResourceDetailPage from '../components/ResourceDetailPage';
 
 const NamespacesDetailPage = ({namespace}) => (
-  <DashboardPage
-    title={`Namespaces - ${metadata.selectors.name(namespace)}`}
-  >
-    <Card>
-      <Card.Title>
-        {metadata.selectors.name(namespace)}
-      </Card.Title>
-      <Card.Body>
-        <Form>
-          <metadata.Details resource={namespace} />
-          <Form.Field label='Status'>
-            {ns.selectors.statusPhase(namespace)}
-          </Form.Field>
-        </Form>
-      </Card.Body>
-    </Card>
-  </DashboardPage>
+  <ResourceDetailPage
+    name='Namespaces'
+    path='namespaces'
+    resource={namespace}
+    editable={false}
+    body={
+      <Form>
+        <metadata.Details resource={namespace} />
+        <Form.Field label='Status'>
+          {ns.selectors.statusPhase(namespace)}
+        </Form.Field>
+      </Form>
+    } />
 );
 
 const mapStateToProps = ({namespaces}) => ({

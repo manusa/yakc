@@ -16,34 +16,34 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import DashboardPage from '../components/DashboardPage';
 import metadata from '../metadata';
 import nm from './';
 import pods from '../pods';
 import Card from '../components/Card';
 import Form from '../components/Form';
 import Minikube from '../components/icons/Minikube';
+import ResourceDetailPage from '../components/ResourceDetailPage';
 
 const NodesDetailPage = ({node, isMinikube}) => (
-  <DashboardPage title={`Nodes - ${metadata.selectors.name(node)}`}>
-    <Card>
-      <Card.Title className='flex items-center'>
-        {isMinikube && <Minikube className='h-6 mr-2' />}
-        {`${metadata.selectors.name(node)}`}
-      </Card.Title>
-      <Card.Body>
-        <Form>
-          <metadata.Details resource={node} />
-        </Form>
-      </Card.Body>
-    </Card>
+  <ResourceDetailPage
+    name='Nodes'
+    path='nodes'
+    resource={node}
+    actions={isMinikube && <Minikube className='h-6' />}
+    editable={false}
+    body={
+      <Form>
+        <metadata.Details resource={node} />
+      </Form>
+    }
+  >
     <pods.List
       title='Pods'
       titleVariant={Card.titleVariants.medium}
       className='mt-2'
       nodeName={metadata.selectors.name(node)}
     />
-  </DashboardPage>
+  </ResourceDetailPage>
 );
 
 const mapStateToProps = ({nodes}) => ({

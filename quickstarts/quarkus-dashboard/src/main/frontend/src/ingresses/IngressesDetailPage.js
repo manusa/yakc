@@ -17,25 +17,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
-import Card from '../components/Card';
-import DashboardPage from '../components/DashboardPage';
 import Form from '../components/Form';
+import ResourceDetailPage from '../components/ResourceDetailPage';
 
 const IngressesDetailPage = ({ingress}) => (
-  <DashboardPage
-    title={`Ingresses - ${metadata.selectors.namespace(ingress)} - ${metadata.selectors.name(ingress)}`}
-  >
-    <Card>
-      <Card.Title>
-        {metadata.selectors.namespace(ingress)} - {metadata.selectors.name(ingress)}
-      </Card.Title>
-      <Card.Body>
-        <Form>
-          <metadata.Details resource={ingress} />
-        </Form>
-      </Card.Body>
-    </Card>
-  </DashboardPage>
+  <ResourceDetailPage
+    name='Ingresses'
+    path='ingresses'
+    resource={ingress}
+    body={
+      <Form>
+        <metadata.Details resource={ingress} />
+      </Form>
+    } />
 );
 
 const mapStateToProps = ({ingresses}) => ({
