@@ -14,21 +14,21 @@
  * limitations under the License.
  *
  */
-import {
-  deleteNamespacedResource,
-  restartNamespacedResource,
-  updateNamespacedResource,
-  updateReplicasInNamespacedResource
-} from '../fetch';
+import React from 'react';
+import {connect} from 'react-redux';
+import sts from './';
+import DashboardPage from '../components/DashboardPage';
+import FilterBar from '../components/FilterBar';
 
-const api = {};
+const StatefulSetsPage = ({selectedNamespace}) => (
+  <DashboardPage title='StatefulSets'>
+    <FilterBar className='mt-4' />
+    <sts.List className='mt-4' namespace={selectedNamespace} />
+  </DashboardPage>
+);
 
-api.requestDelete = deleteNamespacedResource('deployments');
+const mapStateToProps = ({ui: {selectedNamespace}}) => ({
+  selectedNamespace
+});
 
-api.update = updateNamespacedResource('deployments');
-
-api.restart = restartNamespacedResource('deployments');
-
-api.updateReplicas = updateReplicasInNamespacedResource('deployments');
-
-export default api;
+export default connect(mapStateToProps)(StatefulSetsPage);

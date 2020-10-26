@@ -25,6 +25,7 @@ import ns from './namespaces';
 import pods from './pods';
 import secrets from './secrets';
 import services from './services';
+import sts from './statefulsets';
 import watch from './watch';
 import redux from './redux';
 import Home from './Home';
@@ -100,6 +101,9 @@ const App = ({dispatch}) => {
           <Route exact path='/services' component={services.ServicesPage} />
           <Route exact path='/services/:uid' component={services.ServicesDetailPage} />
           <Route exact path='/services/:uid/edit' component={services.ServicesEditPage} />
+          <Route exact path='/statefulsets' component={sts.StatefulSetsPage} />
+          <Route exact path='/statefulsets/:uid' component={sts.StatefulSetsDetailPage} />
+          <Route exact path='/statefulsets/:uid/edit' component={sts.StatefulSetsEditPage} />
           {/*<Route component={Error404Page} />*/}
         </Switch>
       </Router>

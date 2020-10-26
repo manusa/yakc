@@ -14,21 +14,20 @@
  * limitations under the License.
  *
  */
-import {
-  deleteNamespacedResource,
-  restartNamespacedResource,
-  updateNamespacedResource,
-  updateReplicasInNamespacedResource
-} from '../fetch';
+import React from 'react';
+import md from '../metadata';
+import sts from './';
+import ResourceEditPage from '../components/ResourceEditPage';
+import Link from '../components/Link';
 
-const api = {};
+const StatefulSetsEditPage = ({match: {params: {uid}}}) => (
+  <ResourceEditPage
+    cardTitle={resource =>
+      <Link.RouterLink to={`/statefulsets/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
+    }
+    save={async resource => await sts.api.update(resource)}
+    resourceFromState={state => state.statefulSets[uid]}
+  />
+);
 
-api.requestDelete = deleteNamespacedResource('deployments');
-
-api.update = updateNamespacedResource('deployments');
-
-api.restart = restartNamespacedResource('deployments');
-
-api.updateReplicas = updateReplicasInNamespacedResource('deployments');
-
-export default api;
+export default StatefulSetsEditPage;

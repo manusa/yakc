@@ -23,12 +23,12 @@ import {
 
 const api = {};
 
-api.requestDelete = deleteNamespacedResource('deployments');
+api.requestDelete = deleteNamespacedResource('statefulsets');
 
-api.update = updateNamespacedResource('deployments');
+api.update = updateNamespacedResource('statefulsets');
 
-api.restart = restartNamespacedResource('deployments');
+api.restart = restartNamespacedResource('statefulsets');
 
-api.updateReplicas = updateReplicasInNamespacedResource('deployments');
+api.updateReplicas = updateReplicasInNamespacedResource('statefulsets');
 
 export default api;

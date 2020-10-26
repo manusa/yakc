@@ -17,7 +17,7 @@
 import React from 'react';
 import {connect} from 'react-redux'
 import metadata from '../metadata';
-import deploymentsModule from './';
+import sts from './';
 import redux from '../redux';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
@@ -32,66 +32,66 @@ const headers = [
   ''
 ];
 
-const Rows = ({deployments}) => {
-  const allDeployments = Object.values(deployments);
-  if (allDeployments.length === 0) {
+const Rows = ({statefulSets}) => {
+  const allStatefulSets = Object.values(statefulSets);
+  if (allStatefulSets.length === 0) {
     return <Table.NoResultsRow colSpan={headers.length} />;
   }
-  const deleteDeployment = deployment => async () => await deploymentsModule.api.requestDelete(deployment);
-  const restartDeployment = deployment => async () => await deploymentsModule.api.restart(deployment);
-  return allDeployments
+  const deleteStatefulSet = statefulSet => async () => await sts.api.requestDelete(statefulSet);
+  const restartStatefulSet = statefulSet => async () => await sts.api.restart(statefulSet);
+  return allStatefulSets
     .sort(metadata.selectors.sortByCreationTimeStamp)
-    .map(deployment => (
-      <Table.Row key={metadata.selectors.uid(deployment)}>
+    .map(statefulSet => (
+      <Table.Row key={metadata.selectors.uid(statefulSet)}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>
           <Icon
-            className={deploymentsModule.selectors.isReady(deployment) ? 'text-green-500' : 'text-red-500'}
-            icon={deploymentsModule.selectors.isReady(deployment) ? 'fa-check' : 'fa-exclamation-circle'}
+            className={sts.selectors.isReady(statefulSet) ? 'text-green-500' : 'text-red-500'}
+            icon={sts.selectors.isReady(statefulSet) ? 'fa-check' : 'fa-exclamation-circle'}
           />
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
-          <Link.Deployment to={`/deployments/${metadata.selectors.uid(deployment)}`}>
-            {metadata.selectors.name(deployment)}
-          </Link.Deployment>
+          <Link.StatefulSet to={`/statefulsets/${metadata.selectors.uid(statefulSet)}`}>
+            {metadata.selectors.name(statefulSet)}
+          </Link.StatefulSet>
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
-          <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(deployment)}`}>
-            {metadata.selectors.namespace(deployment)}
+          <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(statefulSet)}`}>
+            {metadata.selectors.namespace(statefulSet)}
           </Link.Namespace>
         </Table.Cell>
         <Table.Cell>
-          {deploymentsModule.selectors.images(deployment).map((image, idx) =>
+          {sts.selectors.images(statefulSet).map((image, idx) =>
             <div key={idx}>{image}</div>
           )}
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap text-center'>
           <Link
             variant={Link.variants.outline}
-            onClick={restartDeployment(deployment)}
+            onClick={restartStatefulSet(statefulSet)}
             title='Restart'
           ><Icon stylePrefix='fas' icon='fa-redo-alt' /></Link>
           <Table.DeleteButton
-            className='ml-1' onClick={deleteDeployment(deployment)} />
+            className='ml-1' onClick={deleteStatefulSet(statefulSet)} />
         </Table.Cell>
       </Table.Row>
     ));
 }
 
-const List = ({deployments, ...properties}) => (
+const List = ({statefulSets, ...properties}) => (
   <ResourceList headers={headers} {...properties}>
-    <Rows deployments={deployments} />
+    <Rows statefulSets={statefulSets} />
   </ResourceList>
 );
 
-const mapStateToProps = ({deployments}) => ({
-  deployments
+const mapStateToProps = ({statefulSets}) => ({
+  statefulSets
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  deployments: redux.selectors.resourcesBy(stateProps.deployments, ownProps)
+  statefulSets: redux.selectors.resourcesBy(stateProps.statefulSets, ownProps)
 });
 
 export default connect(mapStateToProps, null, mergeProps)(List);

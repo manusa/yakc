@@ -18,14 +18,18 @@ import api from './api';
 import reducer from './reducer';
 import selectors from './selectors';
 import List from './List';
-import ReplicasField from './ReplicasField';
+import StatefulSetsDetailPage from './StatefulSetsDetailPage';
+import StatefulSetsEditPage from './StatefulSetsEditPage';
+import StatefulSetsPage from './StatefulSetsPage';
 
-const replicaSets = {};
+const statefulSets = {};
 
-replicaSets.api = api;
-replicaSets.reducer = reducer;
-replicaSets.selectors = selectors;
-replicaSets.List = List;
-replicaSets.ReplicasField = ReplicasField;
+statefulSets.api = api;
+statefulSets.reducer = reducer;
+statefulSets.selectors = selectors;
+statefulSets.List = List;
+statefulSets.StatefulSetsDetailPage = StatefulSetsDetailPage;
+statefulSets.StatefulSetsEditPage = StatefulSetsEditPage;
+statefulSets.StatefulSetsPage = StatefulSetsPage;
 
-export default replicaSets;
+export default statefulSets;

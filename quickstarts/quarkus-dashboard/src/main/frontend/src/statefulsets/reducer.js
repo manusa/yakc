@@ -14,21 +14,8 @@
  * limitations under the License.
  *
  */
-import {
-  deleteNamespacedResource,
-  restartNamespacedResource,
-  updateNamespacedResource,
-  updateReplicasInNamespacedResource
-} from '../fetch';
+import redux from '../redux';
 
-const api = {};
+const reducer = redux.reducer('StatefulSet');
 
-api.requestDelete = deleteNamespacedResource('deployments');
-
-api.update = updateNamespacedResource('deployments');
-
-api.restart = restartNamespacedResource('deployments');
-
-api.updateReplicas = updateReplicasInNamespacedResource('deployments');
-
-export default api;
+export default reducer;

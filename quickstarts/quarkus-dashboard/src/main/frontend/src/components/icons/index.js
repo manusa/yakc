@@ -24,6 +24,7 @@ import Node from './Node';
 import Pod from './Pod';
 import Secret from './Secret';
 import Service from './Service';
+import StatefulSet from './StatefulSet';
 import YAKCLogo from './YAKCLogo';
 
 const icons = {};
@@ -38,6 +39,7 @@ icons.Node = Node;
 icons.Pod = Pod;
 icons.Secret = Secret;
 icons.Service = Service;
+icons.StatefulSet = StatefulSet;
 icons.YAKCLogo = YAKCLogo;
 
 export default icons;

@@ -29,6 +29,7 @@ import replicaSets from './replicasets';
 import redux from './redux';
 import secrets from './secrets';
 import services from './services';
+import statefulSets from './statefulsets';
 import App from './App';
 
 import 'typeface-open-sans/index.css';
@@ -53,6 +54,7 @@ const store = createStore(combineReducers({
   replicaSets: replicaSets.reducer,
   secrets: secrets.reducer,
   services: services.reducer,
+  statefulSets: statefulSets.reducer,
   ui: redux.uiReducer
 }), storeEnhancer());
 

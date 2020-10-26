@@ -86,6 +86,7 @@ const SideBar = ({sideBarOpen}) => {
           <NavItem to='/namespaces' Icon={i.Namespace}>Namespaces</NavItem>
           <NavItem to='/pods' Icon={i.Pod}>Pods</NavItem>
           <NavItem to='/deployments' Icon={i.Deployment}>Deployments</NavItem>
+          <NavItem to='/statefulsets' Icon={i.StatefulSet}>StatefulSets</NavItem>
           <NavItem to='/services' Icon={i.Service}>Services</NavItem>
           <NavItem to='/ingresses' Icon={i.Ingress}>Ingresses</NavItem>
           <NavItem to='/configmaps' Icon={i.ConfigMap}>ConfigMaps</NavItem>

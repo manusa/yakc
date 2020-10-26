@@ -38,6 +38,10 @@ const EventName = ({event}) => {
   const uid = ev.selectors.involvedObjectUid(event);
   const name = ev.selectors.involvedObjectName(event);
   switch (ev.selectors.involvedObjectKind(event)) {
+    case 'ConfigMap':
+      Component = Link.ConfigMap;
+      url = `/configmaps/${uid}`;
+      break;
     case 'Deployment':
       Component = Link.Deployment;
       url = `/deployments/${uid}`;
@@ -46,9 +50,17 @@ const EventName = ({event}) => {
       Component = Link.Ingress;
       url = `/ingresses/${uid}`;
       break;
+    case 'Node':
+      Component = Link.Node;
+      url = `/nodes/${uid}`;
+      break;
     case 'Pod':
       Component = Link.Pod;
       url = `/pods/${uid}`;
+      break;
+    case 'StatefulSet':
+      Component = Link.StatefulSet;
+      url = `/statefulsets/${uid}`;
       break;
     default:
       url = null;

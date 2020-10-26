@@ -17,7 +17,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
-import d from './';
+import sts from './';
 import pods from '../pods';
 import rs from '../replicasets';
 import Card from '../components/Card';
@@ -27,17 +27,17 @@ import Icon from '../components/Icon';
 import Link from '../components/Link';
 import ResourceDetailPage from '../components/ResourceDetailPage';
 
-const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
+const StatefulSetsDetailPage = ({statefulSet}) => (
   <ResourceDetailPage
-    name='Deployments'
-    path='deployments'
-    resource={deployment}
+    name='StatefulSets'
+    path='statefulsets'
+    resource={statefulSet}
     actions={
       <Link
         className='ml-2'
         size={Link.sizes.small}
         variant={Link.variants.outline}
-        onClick={() => d.api.restart(deployment)}
+        onClick={() => sts.api.restart(statefulSet)}
         title='Restart'
       >
         <Icon stylePrefix='fas' icon='fa-redo-alt' className='mr-2'/>
@@ -46,13 +46,12 @@ const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
     }
     body={
       <Form>
-        <metadata.Details resource={deployment} />
+        <metadata.Details resource={statefulSet} />
         <rs.ReplicasField
-          resource={deployment}
-          replicas={d.selectors.specReplicas(deployment)}
-          updateReplicas={d.api.updateReplicas}
+          resource={statefulSet}
+          replicas={sts.selectors.specReplicas(statefulSet)}
+          updateReplicas={sts.api.updateReplicas}
         />
-        <Form.Field label='Strategy'>{d.selectors.specStrategyType(deployment)}</Form.Field>
       </Form>
     }
   >
@@ -60,34 +59,24 @@ const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
       title='Containers'
       titleVariant={Card.titleVariants.medium}
       className='mt-2'
-      containers={d.selectors.containers(deployment)} />
-    <rs.List
-      title='Replica Sets'
-      titleVariant={Card.titleVariants.medium}
-      className='mt-2'
-      ownerId={metadata.selectors.uid(deployment)} />
+      containers={sts.selectors.containers(statefulSet)} />
     <pods.List
       title='Pods'
       titleVariant={Card.titleVariants.medium}
       className='mt-2'
-      ownerUids={replicaSetsUids} />
+      ownerUids={[metadata.selectors.uid(statefulSet)]} />
   </ResourceDetailPage>
 );
 
-const mapStateToProps = ({deployments, replicaSets}) => ({
-  deployments,
-  replicaSets
+const mapStateToProps = ({statefulSets}) => ({
+  statefulSets,
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  deployment: stateProps.deployments[ownProps.match.params.uid],
-  replicaSetsUids: Object.values(stateProps.replicaSets)
-    .filter(replicaSet => metadata.selectors.ownerReferencesUids(replicaSet)
-      .includes(metadata.selectors.uid(stateProps.deployments[ownProps.match.params.uid])))
-    .map(replicaSet => metadata.selectors.uid(replicaSet))
+  statefulSet: stateProps.statefulSets[ownProps.match.params.uid],
 });
 
-export default connect(mapStateToProps, null, mergeProps)(DeploymentsDetailPage);
+export default connect(mapStateToProps, null, mergeProps)(StatefulSetsDetailPage);

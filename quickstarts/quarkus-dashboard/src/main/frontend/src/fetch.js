@@ -72,4 +72,18 @@ export const updateNamespacedResource = path => async resource => {
   return await toJson(response);
 };
 
+export const restartNamespacedResource = path => async resource => {
+  await fetch(
+    `${getApiURL()}/${path}/${metadata.selectors.namespace(resource)}/${metadata.selectors.name(resource)}/restart`,
+    {method: 'PUT'}
+  );
+};
+
+export const updateReplicasInNamespacedResource = path => async (resource, replicas) => {
+  await fetch(
+    `${getApiURL()}/${path}/${metadata.selectors.namespace(resource)}/${metadata.selectors.name(resource)}/spec/replicas/${replicas}`,
+    {method: 'PUT'}
+  );
+};
+
 export default {};

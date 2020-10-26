@@ -27,6 +27,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource;
 import com.marcnuri.yakc.quickstarts.dashboard.replicaset.ReplicaSetResource;
 import com.marcnuri.yakc.quickstarts.dashboard.secrets.SecretResource;
 import com.marcnuri.yakc.quickstarts.dashboard.service.ServiceResource;
+import com.marcnuri.yakc.quickstarts.dashboard.statefulsets.StatefulSetResource;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.WatchResource;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -45,6 +46,7 @@ public class ApiResource {
   private final ReplicaSetResource replicaSetResource;
   private final SecretResource secretResource;
   private final ServiceResource serviceResource;
+  private final StatefulSetResource statefulSetResource;
   private final WatchResource watchResource;
 
   @SuppressWarnings("java:S107")
@@ -59,6 +61,7 @@ public class ApiResource {
     ReplicaSetResource replicaSetResource,
     SecretResource secretResource,
     ServiceResource serviceResource,
+    StatefulSetResource statefulSetResource,
     WatchResource watchResource) {
     this.configMapResource = configMapResource;
     this.deploymentResource = deploymentResource;
@@ -70,6 +73,7 @@ public class ApiResource {
     this.replicaSetResource = replicaSetResource;
     this.secretResource = secretResource;
     this.serviceResource = serviceResource;
+    this.statefulSetResource = statefulSetResource;
     this.watchResource = watchResource;
   }
 
@@ -121,6 +125,11 @@ public class ApiResource {
   @Path("/services")
   public ServiceResource getServiceResource() {
     return serviceResource;
+  }
+
+  @Path("/statefulsets")
+  public StatefulSetResource getStatefulSetResource() {
+    return statefulSetResource;
   }
 
   @Path("/watch")

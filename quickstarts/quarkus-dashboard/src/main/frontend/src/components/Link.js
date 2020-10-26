@@ -77,7 +77,7 @@ Link.Node = ({...props}) => <Link.ResourceLink Icon={i.Node} {...props} />;
 Link.Pod = ({...props}) => <Link.ResourceLink Icon={i.Pod} {...props} />;
 Link.Secret = ({...props}) => <Link.ResourceLink Icon={i.Secret} {...props} />;
 Link.Service = ({...props}) => <Link.ResourceLink Icon={i.Service} {...props} />;
-
+Link.StatefulSet = ({...props}) => <Link.ResourceLink Icon={i.StatefulSet} {...props} />;
 
 Link.EditLink = ({path, resource, ...props}) => (
   <Link.RouterLink
