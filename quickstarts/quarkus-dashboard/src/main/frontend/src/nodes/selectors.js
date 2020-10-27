@@ -26,6 +26,10 @@ selectors.isReady = node => {
 
 selectors.statusAddresses = node => node?.status?.addresses ?? [];
 
+selectors.statusAddressExternalIPOrFirst = node =>
+  selectors.statusAddresses(node).filter(a => a.type === 'ExternalIP')
+    .map(a => a.address).find(a => a) ?? selectors.statusAddressesFirstAddress(node);
+
 selectors.statusAddressesFirstAddress = node =>
   selectors.statusAddresses(node).map(a => a.address ?? '').find(a => a) ?? '';
 

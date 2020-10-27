@@ -22,7 +22,7 @@ import n from '../nodes';
 
 const Type = ({service, firstNode}) => {
   const type = svc.selectors.specType(service);
-  const nodeExternalIP = n.selectors.statusAddressesFirstAddress(firstNode);
+  const nodeExternalIP = n.selectors.statusAddressExternalIPOrFirst(firstNode);
   const nodePort = svc.selectors.specPortsFirstNodePort(service);
   if (type !== 'NodePort') {
     return <>{type}</>;
