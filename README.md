@@ -35,8 +35,8 @@ dependencies {
 ```java
 try (KubernetesClient kc = new KubernetesClient()) {
   kc.create(CoreV1Api.class).listPodForAllNamespaces().stream().forEach(p ->
-    System.out.printf("%-15s %s%n", p.getMetadata().getNamespace(), p.getMetadata().getName()
-  )
+    System.out.printf("%-15s %s%n", p.getMetadata().getNamespace(), p.getMetadata().getName())
+  );
 }
 ```
 
