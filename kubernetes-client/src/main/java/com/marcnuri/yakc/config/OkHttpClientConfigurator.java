@@ -18,19 +18,19 @@
 package com.marcnuri.yakc.config;
 
 import com.marcnuri.yakc.ssl.SSLResolver;
-
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.java.Log;
 import okhttp3.Credentials;
 import okhttp3.OkHttpClient;
 
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import java.security.SecureRandom;
 import java.util.Optional;
+import java.util.logging.Level;
 
 import static com.marcnuri.yakc.config.Defaults.getConnectTimeout;
 import static com.marcnuri.yakc.config.Defaults.getReadTimeout;
@@ -69,7 +69,7 @@ public class OkHttpClientConfigurator {
       sslContext.init(keyManagers, trustManagers, new SecureRandom());
       builder.sslSocketFactory(sslContext.getSocketFactory(), (X509TrustManager) trustManagers[0]);
     } catch (Exception e) {
-      log.warning(String.format("Error while loading certificates: %s", e.getMessage()));
+      log.log(Level.WARNING, String.format("Error while loading certificates: %s", e.getMessage()), e);
     }
     if (configuration.getUsername() != null) {
       builder.addInterceptor(c -> c.proceed(

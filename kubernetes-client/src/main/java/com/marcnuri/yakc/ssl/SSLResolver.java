@@ -18,16 +18,20 @@
 package com.marcnuri.yakc.ssl;
 
 import com.marcnuri.yakc.config.Configuration;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+import lombok.extern.java.Log;
+import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.openssl.PEMKeyPair;
+import org.bouncycastle.openssl.PEMParser;
+import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter;
+
 import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 import javax.security.auth.x500.X500Principal;
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.util.io.pem.PemReader;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,14 +39,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
-import java.security.KeyFactory;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.Security;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
-import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.Collection;
 import java.util.Objects;
 import java.util.Optional;
@@ -51,16 +53,13 @@ import java.util.stream.Collectors;
 
 import static okio.ByteString.decodeBase64;
 
-/**
- * Created by Marc Nuri on 2020-04-17.
- */
+@Log
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class SSLResolver {
 
   public static final String TLS_V_1_2 = "TLSv1.2";
   private static final String JKS_TYPE = "JKS";
   private static final String X509_TYPE = "X509";
-  private static final String RSA_ALGO = "RSA";
   private static final String DEFAULT_JAVA_TRUSTSTORE_P455W0RD = "changeit";
 
   public static boolean isTrustAllCertificates(Configuration configuration) {
@@ -102,18 +101,18 @@ public class SSLResolver {
     ) {
       Security.addProvider(new BouncyCastleProvider());
       final Collection<? extends Certificate> certs = certFactory.generateCertificates(certIS);
-      final KeyFactory keyFactory = KeyFactory.getInstance(RSA_ALGO);
-      final byte[] decodedPem = new PemReader(keyISR).readPemObject().getContent();
-      final PKCS8EncodedKeySpec spec = new PKCS8EncodedKeySpec(decodedPem);
-      final PrivateKey privateKey = keyFactory.generatePrivate(spec);
       final KeyStore keyStore = KeyStore.getInstance("JKS");
-      keyStore.load(javaIS, DEFAULT_JAVA_TRUSTSTORE_P455W0RD.toCharArray());
+      if (javaIS != null) {
+        keyStore.load(javaIS, DEFAULT_JAVA_TRUSTSTORE_P455W0RD.toCharArray());
+      } else {
+        keyStore.load(null);
+      }
       final String alias = certs.stream()
         .map(X509Certificate.class::cast)
         .map(X509Certificate::getIssuerX500Principal)
         .map(X500Principal::getName)
         .collect(Collectors.joining("_"));
-      keyStore.setKeyEntry(alias, privateKey, DEFAULT_JAVA_TRUSTSTORE_P455W0RD.toCharArray(),
+      keyStore.setKeyEntry(alias, decodePrivateKey(keyISR), DEFAULT_JAVA_TRUSTSTORE_P455W0RD.toCharArray(),
         certs.toArray(new Certificate[0]));
       kmf.init(keyStore, DEFAULT_JAVA_TRUSTSTORE_P455W0RD.toCharArray());
     }
@@ -126,7 +125,11 @@ public class SSLResolver {
         InputStream caIS = certInputStream(configuration.getCertificateAuthorityData(), configuration.getCertificateAuthority());
         InputStream javaTrustStoreIS = loadJavaTrustStore()
     ) {
-      trustStore.load(javaTrustStoreIS, DEFAULT_JAVA_TRUSTSTORE_P455W0RD.toCharArray());
+      if (javaTrustStoreIS != null) {
+        trustStore.load(javaTrustStoreIS, DEFAULT_JAVA_TRUSTSTORE_P455W0RD.toCharArray());
+      } else {
+        trustStore.load(null);
+      }
       if (hasCertificateAuthority(configuration)) {
         CertificateFactory certFactory = CertificateFactory.getInstance(X509_TYPE);
         final X509Certificate caCert = (X509Certificate)certFactory.generateCertificate(caIS);
@@ -137,13 +140,31 @@ public class SSLResolver {
   }
 
   private static InputStream loadJavaTrustStore() throws IOException {
-    final File javaTrustStore = new File(System.getProperty("java.home")).toPath()
-        .resolve("lib").resolve("security").resolve("cacerts").toFile();
-    if (javaTrustStore.exists() && javaTrustStore.length() > 0) {
+    final File javaTrustStore = Optional.ofNullable(System.getProperty("java.home"))
+      .map(File::new)
+      .map(f -> f.toPath().resolve("lib").resolve("security").resolve("cacerts").toFile())
+      .filter(File::exists)
+      .filter(f -> f.length() > 0)
+      .orElse(null);
+    if (javaTrustStore != null) {
       return new FileInputStream(javaTrustStore);
     }
-    throw new IOException(
-        String.format("Java System trust store was not found: '%s'", javaTrustStore.getAbsolutePath()));
+    log.warning("Java System trust store was not found");
+    return null;
+  }
+
+  private static PrivateKey decodePrivateKey(InputStreamReader keyISR) throws IOException {
+    PrivateKey privateKey;
+    final Object readKey = new PEMParser(keyISR).readObject();
+    final JcaPEMKeyConverter jcaConverter = new JcaPEMKeyConverter();
+    if (readKey instanceof PEMKeyPair) {
+      privateKey = jcaConverter.getPrivateKey(((PEMKeyPair)readKey).getPrivateKeyInfo());
+    } else if (readKey instanceof PrivateKeyInfo) {
+      privateKey = jcaConverter.getPrivateKey(((PrivateKeyInfo)readKey));
+    } else {
+      throw new IOException("Invalid private key");
+    }
+    return privateKey;
   }
 
   private static InputStream certInputStream(String certData, File certFile) throws IOException {
