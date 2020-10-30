@@ -31,4 +31,4 @@ content += reflectionClasses.map(c =>
 ).join(',');
 content += ']';
 
-fs.writeFileSync(`${__dirname}/../reflection-config.json`, content);
+fs.writeFileSync(`${__dirname}/../src/main/resources/reflection-config.json`, content);

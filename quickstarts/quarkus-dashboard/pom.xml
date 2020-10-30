@@ -162,7 +162,7 @@
         <jkube.generator.quarkus.nativeImage>true</jkube.generator.quarkus.nativeImage>
         <!-- allow-incomplete-classpath Option required for OkHTTP -->
         <quarkus.native.additional-build-args>
-          -H:ReflectionConfigurationFiles=../../reflection-config.json,
+          -H:ReflectionConfigurationFiles=reflection-config.json,
           -H:ResourceConfigurationFiles=resources-config.json,
           --allow-incomplete-classpath,
           --report-unsupported-elements-at-runtime,
