@@ -19,11 +19,13 @@ public class ClientUtil {
   public static <T> T tryWithFallback(RetryFunction<T>... functions) throws IOException {
     IOException exception = new IOException(
       "This exception should be replaced if caught and finally thrown");
-    for(RetryFunction<T> func : functions) {
+    for (RetryFunction<T> func : functions) {
       try {
         return func.call();
-      } catch(ClientErrorException ex) {
+      } catch (ClientErrorException ex) {
         exception = ex;
+      } catch (IllegalArgumentException invalidRetrofitCallSuchAsNullNamespace) {
+        // TODO: improve overall behavior
       }
     }
     throw exception;

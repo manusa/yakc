@@ -10,7 +10,7 @@
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
-    <version.quarkus>1.8.1.Final</version.quarkus>
+    <version.quarkus>1.9.1.Final</version.quarkus>
     <version.smallrye.reactive>0.7.0</version.smallrye.reactive>
     <version.jkube>1.0.1</version.jkube>
     <version.exec-maven-plugin>3.0.0</version.exec-maven-plugin>
@@ -49,13 +49,8 @@
     </dependency>
     <dependency>
       <groupId>com.marcnuri.yakc</groupId>
-      <artifactId>kubernetes-api</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.marcnuri.yakc</groupId>
-      <artifactId>kubernetes-client</artifactId>
-      <version>${project.version}</version>
+      <artifactId>quarkues-yakc-extension</artifactId>
+      <version>0.0.0</version>
     </dependency>
   </dependencies>
   <build>
@@ -163,20 +158,14 @@
         </property>
       </activation>
       <properties>
-        <!-- allow-incomplete-classpath Option required for OkHTTP -->
         <quarkus.package.type>native</quarkus.package.type>
+        <jkube.generator.quarkus.nativeImage>true</jkube.generator.quarkus.nativeImage>
+        <!-- allow-incomplete-classpath Option required for OkHTTP -->
         <quarkus.native.additional-build-args>
-          -H:EnableURLProtocols=https,
-          -H:EnableURLProtocols=http,
-          --enable-all-security-services,
-          -J-Djavax.net.ssl.trustStore=../../ssl/cacerts,
-          -J-Djavax.net.ssl.trustStorePassword=changeit,
-          -H:+JNI,
           -H:ReflectionConfigurationFiles=../../reflection-config.json,
           -H:ResourceConfigurationFiles=resources-config.json,
-          -H:DynamicProxyConfigurationFiles=dynamic-proxy-classes-config.json,
           --allow-incomplete-classpath,
-          --report-unsupported-elements-at-runtime
+          --report-unsupported-elements-at-runtime,
         </quarkus.native.additional-build-args>
       </properties>
     </profile>

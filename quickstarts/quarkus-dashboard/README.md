@@ -54,8 +54,6 @@ $ mvn clean package -Pbuild-frontend
 
 ### Native image
 
-**WIP**
-
 The first step is building the `reflection-config.json` file that will be used by GraalVM to register
 classes for [reflection](https://www.graalvm.org/reference-manual/native-image/Reflection/.
 ```shell script
@@ -68,27 +66,6 @@ Next we can build the application
 $ "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat" && mvn clean install -Pnative
 # To build (You can combine with the front-end build profiles)
 $ mvn clean package -Dnative
-```
-
-#### CA Certs (Root Certificates)
-
-See [The TrustStore path](https://quarkus.io/guides/native-and-ssl#the-truststore-path) in Quarkus
-native and SSL guides.
-
-There's a copy of `$JDK_PATH/lib/security/cacerts` from AdoptOpenJDK 11.0.5 in `./ssl/cacerts` (It should
-be updated regularly).
-
-This bakes the standard CA root certificates into the native image. So connecting to a cluster with an
-SSL cert signed by any of the standard root CAs may work.
-
-**Pending Issues** Many clusters expose their own ROOT CAs which cannot be loaded at runtime. This translates into:
-```
-Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
-```
-
-WIP Running;
-```shell script
-
 ```
 
 ## Build & Deploy to Minikube using Maven
