@@ -90,8 +90,8 @@ const NodesDetailPage = ({node, isMinikube, pods}) => {
             <Dial
               title='CPU'
               description='Requested vs. allocatable'
-              partial={requestedCpu}
-              total={quantityToScalar(n.selectors.statusAllocatableCpu(node))}
+              partial={requestedCpu.toFixed(3)}
+              total={quantityToScalar(n.selectors.statusAllocatableCpu(node)).toFixed(3)}
             />
             <Dial
               title='Memory'
