@@ -18,7 +18,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux'
 import metadata from '../metadata';
-import podsModule from './'
+import p from './'
 import Icon from '../components/Icon';
 import Link from '../components/Link';
 import ResourceList from '../components/ResourceList';
@@ -38,15 +38,15 @@ const Rows = ({pods}) => {
   if (allPods.length === 0) {
     return <Table.NoResultsRow colSpan={headers.length} />;
   }
-  const deletePod = pod => async () => await podsModule.api.requestDelete(pod);
+  const deletePod = pod => async () => await p.api.requestDelete(pod);
   return allPods
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(pod => (
       <Table.Row key={metadata.selectors.uid(pod)}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>
           <Icon
-            className={podsModule.selectors.succeededOrContainersReady(pod) ? 'text-green-500' : 'text-red-500'}
-            icon={podsModule.selectors.succeededOrContainersReady(pod) ? 'fa-check' : 'fa-exclamation-circle'}
+            className={p.selectors.succeededOrContainersReady(pod) ? 'text-green-500' : 'text-red-500'}
+            icon={p.selectors.succeededOrContainersReady(pod) ? 'fa-check' : 'fa-exclamation-circle'}
           />
         </Table.Cell>
         <Table.Cell>
@@ -60,14 +60,14 @@ const Rows = ({pods}) => {
           </Link.Namespace>
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
-          <podsModule.StatusIcon
+          <p.StatusIcon
             className='mr-1'
-            statusPhase={podsModule.selectors.statusPhase(pod)}
+            statusPhase={p.selectors.statusPhase(pod)}
           />
-          {podsModule.selectors.statusPhase(pod)}
+          {p.selectors.statusPhase(pod)}
         </Table.Cell>
         <Table.Cell >
-          {podsModule.selectors.restartCount(pod)}
+          {p.selectors.restartCount(pod)}
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap text-center'>
           <Link.RouterLink
@@ -92,34 +92,11 @@ const mapStateToProps = ({pods}) => ({
   pods
 });
 
-const filterPods = (pods = [], replicaSets = [], {
-  nodeName,
-  ownerUids,
-  namespace
-} = undefined) => Object.entries(pods)
-  .filter(([, pod]) => {
-    if (nodeName) {
-      return podsModule.selectors.nodeName(pod) === nodeName;
-    }
-    if (ownerUids) {
-      return metadata.selectors.ownerReferencesUids(pod)
-        .some(ownerUid => ownerUids.includes(ownerUid));
-    }
-    if (namespace) {
-      return metadata.selectors.namespace(pod) === namespace;
-    }
-    return true;
-  })
-  .reduce((acc, [key, pod]) => {
-    acc[key] = pod;
-    return acc;
-  }, {});
-
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  pods: filterPods(stateProps.pods, stateProps.replicaSets, ownProps)
+  pods: p.selectors.podsBy(stateProps.pods, ownProps)
 });
 
 List.propTypes = {

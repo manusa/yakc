@@ -16,38 +16,50 @@
  */
 import metadata from '../metadata';
 
-const selectors = {};
+const s = {};
 
-selectors.isReady = node => {
+s.isReady = node => {
   const ready = (node?.status?.conditions ?? [])
     .find(condition => condition.type === 'Ready');
   return ready && ready.status;
 };
 
-selectors.statusAddresses = node => node?.status?.addresses ?? [];
+s.statusAllocatable = node => node?.status?.allocatable ?? {};
+s.statusAllocatablePods = node => s.statusAllocatable(node).pods ?? 0;
+s.statusAllocatableCpu = node => s.statusAllocatable(node).cpu ?? 0;
+s.statusAllocatableMemory = node => s.statusAllocatable(node).memory ?? 0;
 
-selectors.statusAddressExternalIPOrFirst = node =>
-  selectors.statusAddresses(node).filter(a => a.type === 'ExternalIP')
-    .map(a => a.address).find(a => a) ?? selectors.statusAddressesFirstAddress(node);
+s.statusNodeInfo = node => node?.status?.nodeInfo ?? {};
+s.statusNodeInfoArchitecture = node => s.statusNodeInfo(node).architecture ?? '';
+s.statusNodeInfoContainerRuntimeVersion = node => s.statusNodeInfo(node).containerRuntimeVersion ?? '';
+s.statusNodeInfoKernelVersion = node => s.statusNodeInfo(node).kernelVersion ?? '';
+s.statusNodeInfoKubeletVersion = node => s.statusNodeInfo(node).kubeletVersion ?? '';
+s.statusNodeInfoOS = node => s.statusNodeInfo(node).operatingSystem ?? '';
 
-selectors.statusAddressesFirstAddress = node =>
-  selectors.statusAddresses(node).map(a => a.address ?? '').find(a => a) ?? '';
+s.statusAddresses = node => node?.status?.addresses ?? [];
 
-selectors.roles = node => Object.keys(metadata.selectors.labels(node))
+s.statusAddressExternalIPOrFirst = node =>
+  s.statusAddresses(node).filter(a => a.type === 'ExternalIP')
+    .map(a => a.address).find(a => a) ?? s.statusAddressesFirstAddress(node);
+
+s.statusAddressesFirstAddress = node =>
+  s.statusAddresses(node).map(a => a.address ?? '').find(a => a) ?? '';
+
+s.roles = node => Object.keys(metadata.selectors.labels(node))
   .filter(key => key.indexOf('node-role.kubernetes.io/') === 0)
   .map(key => key.split('/')[1]);
 
 // Selectors for array of Nodes
 
-selectors.readyCount = nodes => nodes.reduce(
-  (count, node) => selectors.isReady(node) ? ++count : count,
+s.readyCount = nodes => nodes.reduce(
+  (count, node) => s.isReady(node) ? count + 1 : count,
   0
 );
 
-selectors.isMinikube = nodes => Object.values(nodes).length === 1 && Object.values(nodes)
+s.isMinikube = nodes => Object.values(nodes).length === 1 && Object.values(nodes)
   .filter(node => metadata.selectors.name(node) === 'minikube')
   .filter(node => metadata.selectors.labels(node)['minikube.k8s.io/name'] === 'minikube')
   .filter(node => metadata.selectors.labels(node).hasOwnProperty('node-role.kubernetes.io/master'))
   .length === 1;
 
-export default selectors;
+export default s;

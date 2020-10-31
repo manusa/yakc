@@ -14,6 +14,8 @@
  * limitations under the License.
  *
  */
+import redux from '../redux';
+
 const selectors = {};
 
 selectors.statusPhase = pod => pod?.status?.phase ?? '';
@@ -47,5 +49,18 @@ selectors.readyCount = pods => pods.reduce(
   (count, pod) => selectors.containersReady(pod) ? count + 1 : count,
   0
 );
+
+selectors.podsBy = (pods = [], {
+  nodeName,
+  ...filters
+} = undefined) =>
+  Object.entries(redux.selectors.resourcesBy(pods, filters))
+  .filter(([, pod]) => {
+    if (nodeName) {
+      return selectors.nodeName(pod) === nodeName;
+    }
+    return true;
+  })
+  .reduce(redux.selectors.toObjectReducer, {});
 
 export default selectors;

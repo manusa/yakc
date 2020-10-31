@@ -18,24 +18,29 @@ import md from '../metadata';
 
 const selectors = {};
 
-const toObjectReducer = (acc, [key, configMap]) => {
+selectors.toObjectReducer = (acc, [key, configMap]) => {
   acc[key] = configMap;
   return acc;
 };
 
 selectors.resourcesBy = (resources = [], {
   namespace,
-  ownerId
+  ownerId,
+  ownerUids
 } = undefined) => Object.entries(resources)
 .filter(([, resource]) => {
   if (namespace && md.selectors.namespace(resource) !== namespace) {
     return false;
   }
-  if (ownerId && !md.selectors.ownerReferencesUids(resource).includes(ownerId)) {
+  const ownerRefs = md.selectors.ownerReferencesUids(resource);
+  if (ownerId && !ownerRefs.includes(ownerId)) {
+    return false;
+  }
+  if (ownerUids && !ownerRefs.some(ownerUid => ownerUids.includes(ownerUid))) {
     return false;
   }
   return true;
 })
-.reduce(toObjectReducer, {});
+.reduce(selectors.toObjectReducer, {});
 
 export default selectors;

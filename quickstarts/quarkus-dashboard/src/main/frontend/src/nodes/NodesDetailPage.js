@@ -17,44 +17,133 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
-import nm from './';
-import pods from '../pods';
+import n from './';
+import p from '../pods';
 import Card from '../components/Card';
 import Form from '../components/Form';
 import Minikube from '../components/icons/Minikube';
 import ResourceDetailPage from '../components/ResourceDetailPage';
+import DonutChart from '../components/DonutChart';
 
-const NodesDetailPage = ({node, isMinikube}) => (
-  <ResourceDetailPage
-    name='Nodes'
-    path='nodes'
-    resource={node}
-    actions={isMinikube && <Minikube className='h-6' />}
-    editable={false}
-    body={
-      <Form>
-        <metadata.Details resource={node} />
-      </Form>
-    }
-  >
-    <pods.List
-      title='Pods'
-      titleVariant={Card.titleVariants.medium}
-      className='mt-2'
-      nodeName={metadata.selectors.name(node)}
-    />
-  </ResourceDetailPage>
+const quantityToScalar = (quantity = 0) => {
+  const quantityString = quantity.toString();
+  if (quantityString.endsWith("m")) {
+    return quantityString.substring(0, quantityString.length - 1) / 1000;
+  }
+  if (quantityString.endsWith("Ki")) {
+    return quantityString.substring(0, quantityString.length - 2) * 1024;
+  }
+  if (quantityString.endsWith("Mi")) {
+    return quantityString.substring(0, quantityString.length - 2) * Math.pow(1024, 2);
+  }
+  return parseFloat(quantityString);
+};
+
+const bytesToHumanReadable = (bytes = 0) => {
+  if (bytes > Math.pow(1024, 3)) {
+    return `${(bytes / Math.pow(1024, 3)).toFixed(3)} GiB`;
+  } else if (bytes > Math.pow(1024, 2)) {
+    return `${(bytes / Math.pow(1024, 2)).toFixed(0)} MiB`;
+  } else if (bytes > 1024) {
+    return `${(bytes / 1024).toFixed(0)}KiB`;
+  }
+  return bytes;
+}
+
+const Dial = ({title, description, partial, total, percent = partial / total * 100}) => (
+  <div>
+    <div className='font-semibold text-center text-lg'>{title}</div>
+    <DonutChart className='w-40 h-40 mx-auto' percent={percent}>
+      <div className='flex flex-col items-center'>
+        <div className='font-semibold'>{partial}</div>
+        <div>of</div>
+        <div className='font-semibold'>{total}</div>
+      </div>
+    </DonutChart>
+    <div className='text-center text-sm'>{description}</div>
+  </div>
 );
 
-const mapStateToProps = ({nodes}) => ({
-  nodes
+const NodesDetailPage = ({node, isMinikube, pods}) => {
+  const nodeName = metadata.selectors.name(node);
+  const podsForNode = Object.values(p.selectors.podsBy(pods, {nodeName}));
+  const requests = podsForNode
+    .flatMap(p.selectors.containers)
+    .map(c => c.resources.requests ?? {});
+  const requestedCpu = requests
+    .map(r => r.cpu ?? 0)
+    .reduce((acc, c) => acc + quantityToScalar(c), 0);
+  const allocatableMemory = quantityToScalar(n.selectors.statusAllocatableMemory(node));
+  const requestedMemory = requests
+    .map(r => r.memory ?? 0)
+    .reduce((acc, c) => acc + quantityToScalar(c), 0);
+  return (
+    <ResourceDetailPage
+      name='Nodes'
+      path='nodes'
+      resource={node}
+      actions={isMinikube && <Minikube className='h-6' />}
+      editable={false}
+      body={
+        <Form>
+          <div className='w-full mb-4 flex flex-wrap justify-around'>
+            <Dial
+              title='CPU'
+              description='Requested vs. allocatable'
+              partial={requestedCpu}
+              total={quantityToScalar(n.selectors.statusAllocatableCpu(node))}
+            />
+            <Dial
+              title='Memory'
+              description='Requested vs. allocatable'
+              percent={(requestedMemory / allocatableMemory * 100)}
+              partial={bytesToHumanReadable(requestedMemory)}
+              total={bytesToHumanReadable(allocatableMemory)}
+            />
+            <Dial
+              title='Pods'
+              description='Allocated vs. allocatable'
+              partial={podsForNode.length}
+              total={n.selectors.statusAllocatablePods(node)}
+            />
+          </div>
+
+          <metadata.Details resource={node} />
+          <Form.Field label='OS'>
+            {n.selectors.statusNodeInfoOS(node)} ({n.selectors.statusNodeInfoArchitecture(node)})
+          </Form.Field>
+          <Form.Field label='Kernel Version'>
+            {n.selectors.statusNodeInfoKernelVersion(node)}
+          </Form.Field>
+          <Form.Field label='Container Runtime'>
+            {n.selectors.statusNodeInfoContainerRuntimeVersion(node)}
+          </Form.Field>
+          <Form.Field label='Kubelet Version'>
+            {n.selectors.statusNodeInfoKubeletVersion(node)}
+          </Form.Field>
+        </Form>
+      }
+    >
+      <p.List
+        title='Pods'
+        titleVariant={Card.titleVariants.medium}
+        className='mt-2'
+        nodeName={nodeName}
+      />
+    </ResourceDetailPage>
+  );
+}
+
+const mapStateToProps = ({nodes, pods}) => ({
+  nodes,
+  pods
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  isMinikube: nm.selectors.isMinikube(stateProps.nodes),
+  isMinikube: n.selectors.isMinikube(stateProps.nodes),
   node: Object.values(stateProps.nodes).find(node =>
     metadata.selectors.name(node) === ownProps.match.params.name)
 });
