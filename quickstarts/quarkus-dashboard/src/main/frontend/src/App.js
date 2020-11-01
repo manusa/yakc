@@ -40,7 +40,6 @@ const pollResources = dispatch => {
     };
     try {
       await Promise.all([
-        configMaps.api.list().then(handleResourceList('ConfigMap')),
         ingresses.api.list().then(handleResourceList('Ingress')),
         ns.api.list().then(handleResourceList('Namespace')),
         secrets.api.list().then(handleResourceList('Secret')),

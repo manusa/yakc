@@ -31,18 +31,12 @@ const headers = [
   ''
 ];
 
-const Rows = ({configMaps, loadedResources, crudDelete}) => {
-  if (!loadedResources['ConfigMap']) {
-    return <Table.Loading colSpan={headers.length} />;
-  }
+const Rows = ({configMaps, crudDelete}) => {
   const allConfigMaps = Object.values(configMaps);
   if (allConfigMaps.length === 0) {
     return <Table.NoResultsRow colSpan={headers.length} />;
   }
-  const deleteConfigMap = configMap => async () => {
-    await cm.api.requestDelete(configMap);
-    crudDelete(configMap);
-  };
+  const deleteConfigMap = configMap => async () => await cm.api.requestDelete(configMap);
   return allConfigMaps
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(configMap => (
@@ -64,15 +58,14 @@ const Rows = ({configMaps, loadedResources, crudDelete}) => {
     ));
 };
 
-const List = ({configMaps, loadedResources, crudDelete, ...properties}) => (
+const List = ({configMaps,  crudDelete, ...properties}) => (
   <ResourceList headers={headers} {...properties}>
-    <Rows configMaps={configMaps} loadedResources={loadedResources} crudDelete={crudDelete} />
+    <Rows configMaps={configMaps} crudDelete={crudDelete} />
   </ResourceList>
 );
 
-const mapStateToProps = ({configMaps, ui: {loadedResources}}) => ({
-  configMaps,
-  loadedResources
+const mapStateToProps = ({configMaps}) => ({
+  configMaps
 });
 
 const mapDispatchToProps = dispatch =>  bindActionCreators({

@@ -16,9 +16,9 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.watch;
 
-import com.marcnuri.yakc.api.KubernetesException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.model.Model;
+import com.marcnuri.yakc.quickstarts.dashboard.configmaps.ConfigMapService;
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentService;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventService;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeService;
@@ -40,6 +40,7 @@ public class WatchService {
 
   private static final Logger LOG = LoggerFactory.getLogger(WatchService.class);
 
+  private final ConfigMapService configMapService;
   private final DeploymentService deploymentService;
   private final EventService eventService;
   private final NodeService nodeService;
@@ -49,11 +50,13 @@ public class WatchService {
 
   @Inject
   public WatchService(
+    ConfigMapService configMapService,
     DeploymentService deploymentService,
     EventService eventService, NodeService nodeService,
     PodService podService,
     ReplicaSetService replicaSetService,
     StatefulSetService statefulSetService) {
+    this.configMapService = configMapService;
     this.deploymentService = deploymentService;
     this.eventService = eventService;
     this.nodeService = nodeService;
@@ -65,6 +68,7 @@ public class WatchService {
   public Observable<WatchEvent<? extends Model>> getWatch() throws IOException {
     return Observable.merge(Arrays.asList(
       eventService.getEvents().subscribeOn(Schedulers.newThread()),
+      configMapService.watch().subscribeOn(Schedulers.newThread()),
       deploymentService.getDeployments().subscribeOn(Schedulers.newThread()),
       nodeService.getNodes().subscribeOn(Schedulers.newThread()),
       podService.getPods().subscribeOn(Schedulers.newThread()),
