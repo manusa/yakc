@@ -3,6 +3,11 @@
 PoC to show how to build a Kubernetes dashboard with YAKC,
 [Quarkus](https://quarkus.io) and [React](https://www.reactjs.org).
 
+## Click the video to see a demo of the Dashboard
+
+[![Thumbnail of video of a demo for YAKC - Kubernetes Dashboard](https://img.youtube.com/vi/Dum84fwA8_g/maxresdefault.jpg)](https://www.youtube.com/watch?v=Dum84fwA8_g)
+
+
 ## Getting started
 
 ### Minikube
