@@ -22,6 +22,7 @@ import deployments from './deployments';
 import ingresses from './ingresses';
 import nodes from './nodes';
 import ns from './namespaces';
+import pv from './persistentvolumes';
 import pods from './pods';
 import secrets from './secrets';
 import services from './services';
@@ -42,6 +43,7 @@ const pollResources = dispatch => {
       await Promise.all([
         ingresses.api.list().then(handleResourceList('Ingress')),
         ns.api.list().then(handleResourceList('Namespace')),
+        pv.api.list().then(handleResourceList('PersistentVolume')),
         secrets.api.list().then(handleResourceList('Secret')),
         services.api.list().then(handleResourceList('Service'))
       ]);
@@ -90,6 +92,9 @@ const App = ({dispatch}) => {
           <Route exact path='/namespaces/:uid' component={ns.NamespacesDetailPage} />
           <Route exact path='/nodes' component={nodes.NodesPage} />
           <Route exact path='/nodes/:name' component={nodes.NodesDetailPage} />
+          <Route exact path='/persistentvolumes' component={pv.PersistentVolumesPage} />
+          <Route exact path='/persistentvolumes/:uid' component={pv.PersistentVolumesDetailPage} />
+          <Route exact path='/persistentvolumes/:uid/edit' component={pv.PersistentVolumesEditPage} />
           <Route exact path='/pods' component={pods.PodsPage} />
           <Route exact path='/pods/:uid' component={pods.PodsDetailPage} />
           <Route exact path='/pods/:uid/edit' component={pods.PodsEditPage} />

@@ -74,6 +74,8 @@ Link.Deployment = ({...props}) => <Link.ResourceLink Icon={i.Deployment} {...pro
 Link.Ingress = ({...props}) => <Link.ResourceLink Icon={i.Ingress} {...props} />;
 Link.Namespace = ({...props}) => <Link.ResourceLink Icon={i.Namespace} {...props} />;
 Link.Node = ({...props}) => <Link.ResourceLink Icon={i.Node} {...props} />;
+Link.PersistentVolume = ({...props}) => <Link.ResourceLink Icon={i.PersistentVolume} {...props} />;
+Link.PersistentVolumeClaim = ({...props}) => <Link.ResourceLink Icon={i.PersistentVolumeClaim} {...props} />;
 Link.Pod = ({...props}) => <Link.ResourceLink Icon={i.Pod} {...props} />;
 Link.Secret = ({...props}) => <Link.ResourceLink Icon={i.Secret} {...props} />;
 Link.Service = ({...props}) => <Link.ResourceLink Icon={i.Service} {...props} />;

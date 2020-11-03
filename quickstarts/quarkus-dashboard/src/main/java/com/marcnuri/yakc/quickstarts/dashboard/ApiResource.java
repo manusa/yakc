@@ -23,6 +23,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
 import com.marcnuri.yakc.quickstarts.dashboard.ingresses.IngressResource;
 import com.marcnuri.yakc.quickstarts.dashboard.namespaces.NamespaceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeResource;
+import com.marcnuri.yakc.quickstarts.dashboard.persistentvolumes.PersistentVolumeResource;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource;
 import com.marcnuri.yakc.quickstarts.dashboard.replicaset.ReplicaSetResource;
 import com.marcnuri.yakc.quickstarts.dashboard.secrets.SecretResource;
@@ -43,6 +44,7 @@ public class ApiResource {
   private final IngressResource ingressResource;
   private final NamespaceResource namespaceResource;
   private final NodeResource nodeResource;
+  private final PersistentVolumeResource persistentVolumeResource;
   private final PodResource podResource;
   private final ReplicaSetResource replicaSetResource;
   private final SecretResource secretResource;
@@ -58,7 +60,9 @@ public class ApiResource {
     EventResource eventResource,
     IngressResource ingressResource,
     NamespaceResource namespaceResource,
-    NodeResource nodeResource, PodResource podResource,
+    NodeResource nodeResource,
+    PersistentVolumeResource persistentVolumeResource,
+    PodResource podResource,
     ReplicaSetResource replicaSetResource,
     SecretResource secretResource,
     ServiceResource serviceResource,
@@ -70,6 +74,7 @@ public class ApiResource {
     this.ingressResource = ingressResource;
     this.namespaceResource = namespaceResource;
     this.nodeResource = nodeResource;
+    this.persistentVolumeResource = persistentVolumeResource;
     this.podResource = podResource;
     this.replicaSetResource = replicaSetResource;
     this.secretResource = secretResource;
@@ -106,6 +111,11 @@ public class ApiResource {
   @Path("/nodes")
   public NodeResource getNodeResource() {
     return nodeResource;
+  }
+
+  @Path("/persistentvolumes")
+  public PersistentVolumeResource getPersistentVolumeResource() {
+    return persistentVolumeResource;
   }
 
   @Path("/pods")
