@@ -24,6 +24,7 @@ import events from './events';
 import ing from './ingresses';
 import ns from './namespaces';
 import nodes from './nodes';
+import pvc from './persistentvolumeclaims';
 import pv from './persistentvolumes';
 import pods from './pods';
 import replicaSets from './replicasets';
@@ -51,6 +52,7 @@ const store = createStore(combineReducers({
   ingresses: ing.reducer,
   namespaces: ns.reducer,
   nodes: nodes.reducer,
+  persistentVolumeClaims: pvc.reducer,
   persistentVolumes: pv.reducer,
   pods: pods.reducer,
   replicaSets: replicaSets.reducer,

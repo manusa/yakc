@@ -22,6 +22,7 @@ selectors.specCapacityStorage = persistentVolume => persistentVolume?.spec?.capa
 
 selectors.specClaim = persistentVolume => persistentVolume?.spec?.claimRef ?? {};
 selectors.specClaimKind = persistentVolume => selectors.specClaim(persistentVolume).kind ?? '';
+selectors.specClaimUid = persistentVolume => selectors.specClaim(persistentVolume).uid ?? '';
 selectors.specClaimName = persistentVolume => selectors.specClaim(persistentVolume).name ?? '';
 selectors.specClaimNamespace = persistentVolume => selectors.specClaim(persistentVolume).namespace ?? '';
 

@@ -23,6 +23,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
 import com.marcnuri.yakc.quickstarts.dashboard.ingresses.IngressResource;
 import com.marcnuri.yakc.quickstarts.dashboard.namespaces.NamespaceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeResource;
+import com.marcnuri.yakc.quickstarts.dashboard.persistentvolumeclaims.PersistentVolumeClaimResource;
 import com.marcnuri.yakc.quickstarts.dashboard.persistentvolumes.PersistentVolumeResource;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource;
 import com.marcnuri.yakc.quickstarts.dashboard.replicaset.ReplicaSetResource;
@@ -44,6 +45,7 @@ public class ApiResource {
   private final IngressResource ingressResource;
   private final NamespaceResource namespaceResource;
   private final NodeResource nodeResource;
+  private final PersistentVolumeClaimResource persistentVolumeClaimResource;
   private final PersistentVolumeResource persistentVolumeResource;
   private final PodResource podResource;
   private final ReplicaSetResource replicaSetResource;
@@ -61,6 +63,7 @@ public class ApiResource {
     IngressResource ingressResource,
     NamespaceResource namespaceResource,
     NodeResource nodeResource,
+    PersistentVolumeClaimResource persistentVolumeClaimResource,
     PersistentVolumeResource persistentVolumeResource,
     PodResource podResource,
     ReplicaSetResource replicaSetResource,
@@ -74,6 +77,7 @@ public class ApiResource {
     this.ingressResource = ingressResource;
     this.namespaceResource = namespaceResource;
     this.nodeResource = nodeResource;
+    this.persistentVolumeClaimResource = persistentVolumeClaimResource;
     this.persistentVolumeResource = persistentVolumeResource;
     this.podResource = podResource;
     this.replicaSetResource = replicaSetResource;
@@ -111,6 +115,11 @@ public class ApiResource {
   @Path("/nodes")
   public NodeResource getNodeResource() {
     return nodeResource;
+  }
+
+  @Path("/persistentvolumeclaims")
+  public PersistentVolumeClaimResource getPer() {
+    return persistentVolumeClaimResource;
   }
 
   @Path("/persistentvolumes")

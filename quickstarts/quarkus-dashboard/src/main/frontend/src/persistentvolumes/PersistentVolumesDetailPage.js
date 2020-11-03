@@ -21,6 +21,7 @@ import pv from './';
 import Form from '../components/Form';
 import ResourceDetailPage from '../components/ResourceDetailPage';
 import Card from '../components/Card';
+import Link from '../components/Link';
 
 const PersistentVolumesDetailPage = ({persistentVolume}) => (
   <ResourceDetailPage
@@ -56,10 +57,14 @@ const PersistentVolumesDetailPage = ({persistentVolume}) => (
             {pv.selectors.specClaimKind(persistentVolume)}
           </Form.Field>
           <Form.Field label='Name'>
-            {pv.selectors.specClaimName(persistentVolume)}
+            <Link.PersistentVolume to={`/persistentvolumeclaims/${pv.selectors.specClaimUid(persistentVolume)}`}>
+              {pv.selectors.specClaimName(persistentVolume)}
+            </Link.PersistentVolume>
           </Form.Field>
           <Form.Field label='Namespace'>
-            {pv.selectors.specClaimNamespace(persistentVolume)}
+            <Link.Namespace to={`/namespaces/${pv.selectors.specClaimNamespace(persistentVolume)}`}>
+              {pv.selectors.specClaimNamespace(persistentVolume)}
+            </Link.Namespace>
           </Form.Field>
         </Form>
       </>
