@@ -9,7 +9,7 @@ const reflectionClasses = [
   'com.marcnuri.yakc.quickstarts.dashboard.ingresses.IngressResource',
   'com.marcnuri.yakc.quickstarts.dashboard.namespaces.NamespaceResource',
   'com.marcnuri.yakc.quickstarts.dashboard.node.NodeResource',
-  'com.marcnuri.yakc.quickstarts.dashboard.pod.PersistentVolumeResource',
+  'com.marcnuri.yakc.quickstarts.dashboard.persistentvolumes.PersistentVolumeResource',
   'com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource',
   'com.marcnuri.yakc.quickstarts.dashboard.replicaset.ReplicaSetResource',
   'com.marcnuri.yakc.quickstarts.dashboard.secrets.SecretResource',
