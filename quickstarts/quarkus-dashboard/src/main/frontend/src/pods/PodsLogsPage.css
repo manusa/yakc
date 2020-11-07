@@ -6,8 +6,3 @@
 .pods-logs-page .ReactVirtualized__Grid__innerScrollContainer {
   overflow: visible !important;
 }
-
-.pods-logs-page .simplebar-scrollbar::before {
-  background-color: white;
-  cursor: pointer;
-}

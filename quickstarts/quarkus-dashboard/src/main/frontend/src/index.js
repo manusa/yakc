@@ -31,13 +31,14 @@ import replicaSets from './replicasets';
 import redux from './redux';
 import secrets from './secrets';
 import services from './services';
+import sidebar from './sidebar';
 import statefulSets from './statefulsets';
 import App from './App';
 
 import 'typeface-open-sans/index.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './assets/tailwind.css';
-import 'simplebar/dist/simplebar.min.css';
+import './assets/scroll.css';
 
 const storeEnhancer = () => {
   if (process.env.NODE_ENV === 'development' && window.__REDUX_DEVTOOLS_EXTENSION__) {
@@ -59,6 +60,7 @@ const store = createStore(combineReducers({
   secrets: secrets.reducer,
   services: services.reducer,
   statefulSets: statefulSets.reducer,
+  sidebar: sidebar.reducer,
   ui: redux.uiReducer
 }), storeEnhancer());
 

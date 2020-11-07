@@ -18,9 +18,8 @@ import React, {useEffect, useRef, useState} from 'react';
 import {connect} from 'react-redux';
 import throttle from 'lodash/throttle';
 import {AutoSizer, List} from 'react-virtualized';
-import SimpleBar from 'simplebar-react';
 import metadata from '../metadata';
-import pods from '../pods';
+import p from '../pods';
 import Card from '../components/Card';
 import DashboardPage from '../components/DashboardPage';
 import Link from '../components/Link';
@@ -32,12 +31,11 @@ const PodsLogsPage = ({uid, namespace, name}) => {
   const [log, setLog] = useState(['Loading logs...']);
   const [follow, setFollow] = useState(true);
   const throttledSetLog = throttle(setLog, 100, {trailing: true});
-  const barRef = useRef();
   const listRef = useRef();
   const [eventSource, setEventSource] = useState();
   useEffect(() => {
     if (!eventSource && namespace && name) {
-      const es = pods.api.logs(namespace, name);
+      const es = p.api.logs(namespace, name);
       es.onopen = () => {
         es.currentLog = [];
       }
@@ -50,8 +48,8 @@ const PodsLogsPage = ({uid, namespace, name}) => {
   }, [eventSource, namespace, name, throttledSetLog]);
   useEffect(() => {
         if (follow) {
-          const scrollElement = barRef.current.getScrollElement();
-          scrollElement.scrollTo(0, scrollElement.scrollHeight);
+          const {current} = listRef;
+          current.scrollToRow(current.props.rowCount);
         }
       },
     [log, follow]);
@@ -75,23 +73,16 @@ const PodsLogsPage = ({uid, namespace, name}) => {
           <Card.Body className='flex-1 bg-black text-white font-mono text-sm'>
             <AutoSizer>
               {({ height, width }) => (
-                <SimpleBar
-                  ref={barRef}
-                  onScroll={({target: {scrollTop, scrollLeft}}) => {
-                    listRef.current.Grid.handleScrollEvent({scrollTop, scrollLeft});
-                  }}
-                  style={{height, width}}
-                >
-                  <List
-                    ref={listRef}
-                    height={height}
-                    width={width}
-                    rowCount={log.length}
-                    rowHeight={19}
-                    rowRenderer={rowRenderer}
-                    style={{overflowX: false, overflowY: false}}
-                  />
-                </SimpleBar>
+                <List
+                  ref={listRef}
+                  height={height}
+                  width={width}
+                  rowCount={log.length}
+                  rowHeight={19}
+                  rowRenderer={rowRenderer}
+                  className='custom-scroll-dark'
+                  // style={{'--scrollbar-color': 'rgba(255,255,255, 0.5)'}}
+                />
               )}
             </AutoSizer>
           </Card.Body>

@@ -14,14 +14,13 @@
     "react-scripts": "3.4.3",
     "react-virtualized": "^9.22.2",
     "redux": "^4.0.5",
-    "simplebar-react": "^2.3.0",
     "yaml": "^1.10.0"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
     "autoprefixer": "^9.8.6",
     "postcss-cli": "^8.0.0",
-    "tailwindcss": "^1.8.10",
+    "tailwindcss": "^1.9.6",
     "typeface-open-sans": "0.0.75"
   },
   "scripts": {

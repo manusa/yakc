@@ -22,6 +22,8 @@ actions.Types = {
   CRUD_ADD_OR_REPLACE: 'CRUD_ADD_OR_REPLACE',
   CRUD_DELETE: 'CRUD_DELETE',
   CRUD_SET_ALL: 'CRUD_SET_ALL',
+  SIDEBAR_SCROLL: 'SIDEBAR_SCROLL',
+  SIDEBAR_TOGGLE_ITEM: 'SIDEBAR_TOGGLE_ITEM',
   UI_SET_OFFLINE: 'UI_SET_OFFLINE',
   UI_SET_ERROR: 'UI_SET_ERROR',
   UI_CLEAR_ERROR: 'UI_CLEAR_ERROR',
@@ -73,5 +75,15 @@ actions.selectNamespace = namespace => ({
 });
 
 actions.clearSelectedNamespace = () => actions.selectNamespace(null);
+
+actions.sideBarScroll = ({scrollTop = 0, scrollLeft = 0}) => ({
+  type: actions.Types.SIDEBAR_SCROLL,
+  payload: {scrollTop, scrollLeft}
+});
+
+actions.sideBarToggleItem = item => ({
+  type: actions.Types.SIDEBAR_TOGGLE_ITEM,
+  payload: item
+});
 
 export default actions;

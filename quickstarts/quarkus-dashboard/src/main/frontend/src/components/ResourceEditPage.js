@@ -35,6 +35,7 @@ const Editor = ({
 }) => (
   <AceEditor
     className='relative w-full h-full outline-none'
+    style={{'--scrollbar-color': 'rgba(235, 218, 180, 0.4)'}}
     mode='yaml'
     theme='gruvbox'
     onChange={onChange}

@@ -24,7 +24,7 @@ import ResourceDetailPage from '../components/ResourceDetailPage';
 const DataField = ({label, value}) => (
   <Form.Field width={Form.widths.full} label={label}>
     <div
-      className='bg-black text-white font-mono text-sm p-2 overflow-auto'
+      className='bg-black text-white font-mono text-sm p-2 overflow-auto custom-scroll-dark'
       style={{maxHeight: '10rem'}}
     >
       <pre>{value}</pre>

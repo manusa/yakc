@@ -49,7 +49,7 @@ const DataField = ({label, value}) => {
       }
     >
       <div
-        className='bg-black text-white font-mono text-sm p-2 overflow-auto'
+        className='bg-black text-white font-mono text-sm p-2 overflow-auto custom-scroll-dark'
         style={style}
       >
         <pre>{atob(value)}</pre>
