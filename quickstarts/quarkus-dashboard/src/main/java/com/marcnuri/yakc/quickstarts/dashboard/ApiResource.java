@@ -17,6 +17,7 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard;
 
+import com.marcnuri.yakc.quickstarts.dashboard.clusterroles.ClusterRoleResource;
 import com.marcnuri.yakc.quickstarts.dashboard.configmaps.ConfigMapResource;
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentResource;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
@@ -39,6 +40,7 @@ import javax.ws.rs.Path;
 @Singleton
 public class ApiResource {
 
+  private final ClusterRoleResource clusterRoleResource;
   private final ConfigMapResource configMapResource;
   private final DeploymentResource deploymentResource;
   private final EventResource eventResource;
@@ -57,6 +59,7 @@ public class ApiResource {
   @SuppressWarnings("java:S107")
   @Inject
   public ApiResource(
+    ClusterRoleResource clusterRoleResource,
     ConfigMapResource configMapResource,
     DeploymentResource deploymentResource,
     EventResource eventResource,
@@ -71,6 +74,7 @@ public class ApiResource {
     ServiceResource serviceResource,
     StatefulSetResource statefulSetResource,
     WatchResource watchResource) {
+    this.clusterRoleResource = clusterRoleResource;
     this.configMapResource = configMapResource;
     this.deploymentResource = deploymentResource;
     this.eventResource = eventResource;
@@ -85,6 +89,11 @@ public class ApiResource {
     this.serviceResource = serviceResource;
     this.statefulSetResource = statefulSetResource;
     this.watchResource = watchResource;
+  }
+
+  @Path("/clusterroles")
+  public ClusterRoleResource getClusterRoleResource() {
+    return clusterRoleResource;
   }
 
   @Path("/configmaps")

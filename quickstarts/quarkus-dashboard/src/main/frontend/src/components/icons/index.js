@@ -14,6 +14,7 @@
  * limitations under the License.
  *
  */
+import ClusterRole from './ClusterRole';
 import ConfigMap from './ConfigMap';
 import Deployment from './Deployment';
 import Ingress from './Ingress';
@@ -31,6 +32,7 @@ import YAKCLogo from './YAKCLogo';
 
 const icons = {};
 
+icons.ClusterRole = ClusterRole;
 icons.ConfigMap = ConfigMap;
 icons.Deployment = Deployment
 icons.Ingress = Ingress;

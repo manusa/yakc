@@ -18,6 +18,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {combineReducers, createStore} from 'redux';
+import cRoles from './clusterroles';
 import configMaps from './configmaps';
 import deployments from './deployments';
 import events from './events';
@@ -47,6 +48,7 @@ const storeEnhancer = () => {
 };
 
 const store = createStore(combineReducers({
+  clusterRoles: cRoles.reducer,
   configMaps: configMaps.reducer,
   deployments: deployments.reducer,
   events: events.reducer,

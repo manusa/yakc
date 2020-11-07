@@ -16,6 +16,7 @@
  */
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
+import cRoles from '../clusterroles';
 import cm from '../configmaps';
 import d from '../deployments';
 import i from '../ingresses';
@@ -67,6 +68,8 @@ const Results = ({query, selectedNamespace}) => {
         title='PersistentVolumes' nameLike={query} namespace={selectedNamespace} />
       <pvc.List {...commonProps}
         title='PersistentVolumeClaims' nameLike={query} namespace={selectedNamespace} />
+      <cRoles.List {...commonProps}
+        title='ClusterRoles' nameLike={query} namespace={selectedNamespace} />
     </>
   )
 };

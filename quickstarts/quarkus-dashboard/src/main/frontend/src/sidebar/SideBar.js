@@ -117,6 +117,10 @@ const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem}) => {
           <K8sNavItem to='/persistentvolumes' Icon={i.PersistentVolume}>PersistentVolumes</K8sNavItem>
           <K8sNavItem to='/persistentvolumeclaims' Icon={i.PersistentVolumeClaim}>PersistentVolume Claims</K8sNavItem>
         </NavGroup>
+        <NavGroup expandedItems={expandedItems} toggleItem={toggleItem}
+                  label='Access Control' icon='fa-shield-alt'>
+          <K8sNavItem to='/clusterroles' Icon={i.ClusterRole}>ClusterRoles</K8sNavItem>
+        </NavGroup>
       </div>
       <h2 className='mt-6 mb-2 px-6 text-gray-100 text-xl'>About</h2>
       <ExtNavItem href='https://github.com/manusa/yakc/tree/master/quickstarts/quarkus-dashboard'>

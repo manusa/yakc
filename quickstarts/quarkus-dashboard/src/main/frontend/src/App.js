@@ -17,6 +17,7 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import cRoles from './clusterroles';
 import configMaps from './configmaps';
 import deployments from './deployments';
 import ingresses from './ingresses';
@@ -43,6 +44,7 @@ const pollResources = dispatch => {
     };
     try {
       await Promise.all([
+        cRoles.api.list().then(handleResourceList('ClusterRole')),
         ingresses.api.list().then(handleResourceList('Ingress')),
         ns.api.list().then(handleResourceList('Namespace')),
         pvc.api.list().then(handleResourceList('PersistentVolumeClaim')),
@@ -71,7 +73,7 @@ const onUnmount = () => {
       eventSource.close();
     }
   });
-}
+};
 
 const App = ({dispatch}) => {
   useEffect(() => {
@@ -82,6 +84,9 @@ const App = ({dispatch}) => {
       <Router>
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route exact path='/clusterroles' component={cRoles.ClusterRolesPage} />
+          <Route exact path='/clusterroles/:uid' component={cRoles.ClusterRolesDetailPage} />
+          <Route exact path='/clusterroles/:uid/edit' component={cRoles.ClusterRolesEditPage} />
           <Route exact path='/configmaps' component={configMaps.ConfigMapsPage} />
           <Route exact path='/configmaps/:uid' component={configMaps.ConfigMapsDetailPage} />
           <Route exact path='/configmaps/:uid/edit' component={configMaps.ConfigMapsEditPage} />

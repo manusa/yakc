@@ -69,6 +69,7 @@ Link.ResourceLink = ({className, Icon: IconComponent, iconClassName, children, .
   </Link.RouterLink>
 );
 
+Link.ClusterRole = ({...props}) => <Link.ResourceLink Icon={i.ClusterRole} {...props} />;
 Link.ConfigMap = ({...props}) => <Link.ResourceLink Icon={i.ConfigMap} {...props} />;
 Link.Deployment = ({...props}) => <Link.ResourceLink Icon={i.Deployment} {...props} />;
 Link.Ingress = ({...props}) => <Link.ResourceLink Icon={i.Ingress} {...props} />;

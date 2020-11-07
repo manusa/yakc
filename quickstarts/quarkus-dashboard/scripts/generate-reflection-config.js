@@ -3,6 +3,7 @@ const fs = require('fs')
 
 const reflectionClasses = [
   'com.marcnuri.yakc.quickstarts.dashboard.ApiResource',
+  'com.marcnuri.yakc.quickstarts.dashboard.clusterroles.ClusterRoleResource',
   'com.marcnuri.yakc.quickstarts.dashboard.configmaps.ConfigMapResource',
   'com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentResource',
   'com.marcnuri.yakc.quickstarts.dashboard.events.EventResource',

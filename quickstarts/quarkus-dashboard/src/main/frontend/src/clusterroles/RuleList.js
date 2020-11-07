@@ -15,38 +15,34 @@
  *
  */
 import React from 'react';
-import Icon from '../components/Icon';
+import cRoles from './';
 import Table from '../components/Table';
 
 const headers = [
-  <span><Icon icon='fa-id-card' /> Name</span>,
-  'App Protocol',
-  'Node Port',
-  'Port',
-  'Protocol',
-  'Target Port'
+  'Resources',
+  'Non-resource URL',
+  'Resource Names',
+  'Verbs',
+  'API Groups'
 ];
 
-const Rows = ({ports}) => ports.map((port, idx) => (
-  <Table.Row key={`${idx}-${port.name}`}>
-    <Table.Cell>{port.name}</Table.Cell>
-    <Table.Cell>{port.appProtocol}</Table.Cell>
-    <Table.Cell>{port.nodePort}</Table.Cell>
-    <Table.Cell>{port.port}</Table.Cell>
-    <Table.Cell>{port.protocol}</Table.Cell>
-    <Table.Cell>{port.targetPort}</Table.Cell>
+const Rows = ({rules}) => rules.map((rule, idx) => (
+  <Table.Row key={idx}>
+    <Table.Cell>{cRoles.selectors.rules.resources(rule).join(', ')}</Table.Cell>
+    <Table.Cell>{cRoles.selectors.rules.nonResourceURLs(rule).join(', ')}</Table.Cell>
+    <Table.Cell>{cRoles.selectors.rules.resourceNames(rule).join(', ')}</Table.Cell>
+    <Table.Cell>{cRoles.selectors.rules.verbs(rule).join(', ')}</Table.Cell>
+    <Table.Cell>{cRoles.selectors.rules.apiGroups(rule)}</Table.Cell>
   </Table.Row>
 ));
 
-const PortList = ({ports, ...properties}) => (
+const RuleList = ({rules, ...properties}) => (
   <Table {...properties}>
-    <Table.Head
-      columns={headers}
-    />
+    <Table.Head columns={headers} />
     <Table.Body>
-      <Rows ports={ports} />
+      <Rows rules={rules} />
     </Table.Body>
   </Table>
 );
 
-export default PortList;
+export default RuleList;
