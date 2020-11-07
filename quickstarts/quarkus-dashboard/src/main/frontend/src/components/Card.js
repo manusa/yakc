@@ -27,7 +27,8 @@ const Card = ({className, dispatch, children, ...props}) => (
 
 Card.titleVariants = {
   large: 'p-3 text-gray-700 font-medium text-lg',
-  medium: 'px-3 py-2 text-gray-700 font-medium text-md'
+  medium: 'px-3 py-2 text-gray-700 font-medium text-md',
+  small: 'px-3 py-1 text-gray-700 font-semibold text-gray-600'
 }
 
 Card.Title = ({className, children,

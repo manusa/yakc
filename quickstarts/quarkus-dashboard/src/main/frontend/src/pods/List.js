@@ -34,12 +34,8 @@ const headers = [
 ];
 
 const Rows = ({pods}) => {
-  const allPods = Object.values(pods);
-  if (allPods.length === 0) {
-    return <Table.NoResultsRow colSpan={headers.length} />;
-  }
   const deletePod = pod => async () => await p.api.requestDelete(pod);
-  return allPods
+  return pods
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(pod => (
       <Table.Row key={metadata.selectors.uid(pod)}>
@@ -83,7 +79,7 @@ const Rows = ({pods}) => {
 }
 
 const List = ({pods, nodeName, ownerUids, ...properties}) => (
-  <ResourceList headers={headers} {...properties}>
+  <ResourceList headers={headers} resources={pods} {...properties}>
     <Rows pods={pods} />
   </ResourceList>
 );
@@ -96,7 +92,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  pods: p.selectors.podsBy(stateProps.pods, ownProps)
+  pods: Object.values(p.selectors.podsBy(stateProps.pods, ownProps))
 });
 
 List.propTypes = {

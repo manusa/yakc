@@ -16,14 +16,54 @@
  */
 import React from 'react';
 import Table from './Table';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import redux from '../redux';
 
-const ResourceList = ({headers, title, children, ...properties}) => (
-  <Table title={title} {...properties}>
-    <Table.Head columns={headers} />
-    <Table.Body>
-      {children}
-    </Table.Body>
-  </Table>
+const Content = ({headers, resources, loading, children}) => {
+  if (resources.length > 0) {
+    return children;
+  }
+  if (loading) {
+    return <Table.Loading colSpan={headers.length} />
+  }
+  return <Table.NoResultsRow colSpan={headers.length} />
+};
+
+const ResourceList = ({
+  headers, title, resources, children,
+  loading = false,
+  hideWhenNoResults = false,
+  ...properties
+}) => {
+  if (hideWhenNoResults && resources.length === 0) {
+    return null;
+  }
+  return (
+    <Table title={title} {...properties}>
+      <Table.Head columns={headers} />
+      <Table.Body>
+        <Content headers={headers} resources={resources} loading={loading}>
+          {children}
+        </Content>
+      </Table.Body>
+    </Table>
+  );
+};
+
+ResourceList.polledConnect = resource => connect(
+  ({ui: {loadedResources}, ...state}) => {
+    return {resources: state[resource], loadedResources}
+  },
+  dispatch =>  bindActionCreators({
+    crudDelete: redux.actions.crudDelete
+  }, dispatch),
+  (stateProps, dispatchProps, ownProps) => ({
+    ...stateProps,
+    ...dispatchProps,
+    ...ownProps,
+    resources: Object.values(redux.selectors.resourcesBy(stateProps.resources, ownProps))
+  })
 );
 
 export default ResourceList;

@@ -33,12 +33,8 @@ const headers = [
 ];
 
 const Rows = ({replicaSets}) => {
-  const allRS = Object.values(replicaSets);
-  if (allRS.length === 0) {
-    return <Table.NoResultsRow colSpan={headers.length} />;
-  }
   const deleteReplicaSet = replicaSet => async () => await rs.api.requestDelete(replicaSet);
-  return allRS
+  return replicaSets
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(replicaSet => (
       <Table.Row key={metadata.selectors.uid(replicaSet)}>
@@ -65,7 +61,7 @@ const Rows = ({replicaSets}) => {
 }
 
 const List = ({replicaSets, ownerId, ...properties}) => (
-  <ResourceList headers={headers} {...properties}>
+  <ResourceList headers={headers} resources={replicaSets} {...properties}>
     <Rows replicaSets={replicaSets} />
   </ResourceList>
 );
@@ -78,7 +74,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  replicaSets: redux.selectors.resourcesBy(stateProps.replicaSets, ownProps)
+  replicaSets: Object.values(redux.selectors.resourcesBy(stateProps.replicaSets, ownProps))
 });
 
 List.propTypes = {

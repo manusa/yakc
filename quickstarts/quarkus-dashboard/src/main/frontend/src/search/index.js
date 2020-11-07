@@ -14,18 +14,10 @@
  * limitations under the License.
  *
  */
-import {
-  deleteNamespacedResource,
-  listResource,
-  updateNamespacedResource
-} from '../fetch';
+import SearchPage from './SearchPage';
 
-const api = {};
+const search = {};
 
-api.list = listResource('persistentvolumeclaims', 'PersistentVolumeClaim');
+search.SearchPage = SearchPage;
 
-api.delete = deleteNamespacedResource('persistentvolumeclaims');
-
-api.update = updateNamespacedResource('persistentvolumeclaims');
-
-export default api;
+export default search;

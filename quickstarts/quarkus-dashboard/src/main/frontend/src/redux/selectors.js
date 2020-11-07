@@ -25,11 +25,15 @@ selectors.toObjectReducer = (acc, [key, configMap]) => {
 
 selectors.resourcesBy = (resources = [], {
   namespace,
+  nameLike,
   ownerId,
   ownerUids
 } = undefined) => Object.entries(resources)
 .filter(([, resource]) => {
   if (namespace && md.selectors.namespace(resource) !== namespace) {
+    return false;
+  }
+  if (nameLike && !md.selectors.name(resource).toUpperCase().includes(nameLike.toUpperCase())) {
     return false;
   }
   const ownerRefs = md.selectors.ownerReferencesUids(resource);

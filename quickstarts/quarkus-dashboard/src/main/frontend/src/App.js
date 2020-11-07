@@ -25,6 +25,7 @@ import ns from './namespaces';
 import pvc from './persistentvolumeclaims';
 import pv from './persistentvolumes';
 import pods from './pods';
+import search from './search';
 import secrets from './secrets';
 import services from './services';
 import sts from './statefulsets';
@@ -104,6 +105,7 @@ const App = ({dispatch}) => {
           <Route exact path='/pods/:uid' component={pods.PodsDetailPage} />
           <Route exact path='/pods/:uid/edit' component={pods.PodsEditPage} />
           <Route exact path='/pods/:uid/logs' component={pods.PodsLogsPage} />
+          <Route exact path='/search' component={search.SearchPage} />
           <Route exact path='/secrets' component={secrets.SecretsPage} />
           <Route exact path='/secrets/:uid' component={secrets.SecretsDetailPage} />
           <Route exact path='/secrets/:uid/edit' component={secrets.SecretsEditPage} />

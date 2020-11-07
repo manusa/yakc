@@ -15,10 +15,7 @@
  *
  */
 import React from 'react';
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux';
 import metadata from '../metadata';
-import redux from '../redux';
 import svc from './';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
@@ -33,19 +30,12 @@ const headers = [
   ''
 ];
 
-const Rows = ({services, loadedResources, deleteServiceAction}) => {
-  if (!loadedResources['Service']) {
-    return <Table.Loading colSpan={headers.length} />;
-  }
-  const allServices = Object.values(services);
-  if (allServices.length === 0) {
-    return <Table.NoResultsRow colSpan={headers.length} />;
-  }
+const Rows = ({services, crudDelete}) => {
   const deleteService = service => async () => {
     await svc.api.requestDelete(service);
-    deleteServiceAction(service);
+    crudDelete(service);
   };
-  return allServices
+  return services
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(service => (
         <Table.Row key={metadata.selectors.uid(service)}>
@@ -72,27 +62,11 @@ const Rows = ({services, loadedResources, deleteServiceAction}) => {
     ));
 };
 
-const List = ({services, loadedResources, deleteServiceAction, ...properties}) => (
-  <ResourceList headers={headers} {...properties}>
-    <Rows services={services} loadedResources={loadedResources} deleteServiceAction={deleteServiceAction} />
+const List = ({resources, loadedResources, crudDelete, ...properties}) => (
+  <ResourceList headers={headers} resources={resources} loading={!loadedResources['Service']} {...properties}>
+    <Rows services={resources} crudDelete={crudDelete} />
   </ResourceList>
 );
 
-const mapStateToProps = ({services, ui: {loadedResources}}) => ({
-  services,
-  loadedResources
-});
-
-const mapDispatchToProps = dispatch =>  bindActionCreators({
-  deleteServiceAction: redux.actions.crudDelete
-}, dispatch);
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  ...stateProps,
-  ...dispatchProps,
-  ...ownProps,
-  services: redux.selectors.resourcesBy(stateProps.services, ownProps)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(List);
+export default ResourceList.polledConnect('services')(List);
 

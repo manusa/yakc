@@ -75,11 +75,7 @@ const sort = (ev1, ev2) =>
   new Date(ev2.lastTimestamp) - new Date(ev1.lastTimestamp);
 
 const Rows = ({events}) => {
-  const allEvents = Object.values(events);
-  if (allEvents.length === 0) {
-    return <Table.NoResultsRow colSpan={headers.length} />;
-  }
-  return allEvents
+  return events
     .sort(sort)
     .slice(0, 10)
     .map(event => {
@@ -113,7 +109,7 @@ const Rows = ({events}) => {
 }
 
 const List = ({events, ...properties}) => (
-  <ResourceList title='Latest Events' headers={headers} {...properties}>
+  <ResourceList title='Latest Events' headers={headers} resources={events} {...properties}>
     <Rows events={events} />
   </ResourceList>
 );
@@ -140,7 +136,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  events: filterEvents(stateProps.events, ownProps)
+  events: Object.values(filterEvents(stateProps.events, ownProps))
 });
 
 export default connect(mapStateToProps, null, mergeProps)(List);

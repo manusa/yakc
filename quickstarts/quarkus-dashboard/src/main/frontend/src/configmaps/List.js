@@ -16,7 +16,6 @@
  */
 import React from 'react';
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux';
 import metadata from '../metadata';
 import cm from './';
 import redux from '../redux';
@@ -31,13 +30,9 @@ const headers = [
   ''
 ];
 
-const Rows = ({configMaps, crudDelete}) => {
-  const allConfigMaps = Object.values(configMaps);
-  if (allConfigMaps.length === 0) {
-    return <Table.NoResultsRow colSpan={headers.length} />;
-  }
+const Rows = ({configMaps}) => {
   const deleteConfigMap = configMap => async () => await cm.api.requestDelete(configMap);
-  return allConfigMaps
+  return configMaps
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(configMap => (
         <Table.Row key={metadata.selectors.uid(configMap)}>
@@ -58,9 +53,9 @@ const Rows = ({configMaps, crudDelete}) => {
     ));
 };
 
-const List = ({configMaps,  crudDelete, ...properties}) => (
-  <ResourceList headers={headers} {...properties}>
-    <Rows configMaps={configMaps} crudDelete={crudDelete} />
+const List = ({configMaps, ...properties}) => (
+  <ResourceList headers={headers} resources={configMaps} {...properties}>
+    <Rows configMaps={configMaps} />
   </ResourceList>
 );
 
@@ -68,16 +63,12 @@ const mapStateToProps = ({configMaps}) => ({
   configMaps
 });
 
-const mapDispatchToProps = dispatch =>  bindActionCreators({
-  crudDelete: redux.actions.crudDelete
-}, dispatch);
-
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  configMaps: redux.selectors.resourcesBy(stateProps.configMaps, ownProps)
+  configMaps: Object.values(redux.selectors.resourcesBy(stateProps.configMaps, ownProps))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(List);
+export default connect(mapStateToProps, null, mergeProps)(List);
 

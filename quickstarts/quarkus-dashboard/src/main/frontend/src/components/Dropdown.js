@@ -76,7 +76,7 @@ const Dropdown = ({
       style={{minWidth, maxWidth}}
       {...props}
     >
-      <DropdownMain text={text} onClick={togglePanel} />
+      <DropdownMain borderColor={borderColor} text={text} onClick={togglePanel} />
       <DropdownPanel
         visible={panelVisible} items={children}
         onClick={() => closeOnPanelClick && togglePanel()}

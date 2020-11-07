@@ -33,13 +33,9 @@ const headers = [
 ];
 
 const Rows = ({deployments}) => {
-  const allDeployments = Object.values(deployments);
-  if (allDeployments.length === 0) {
-    return <Table.NoResultsRow colSpan={headers.length} />;
-  }
   const deleteDeployment = deployment => async () => await deploymentsModule.api.requestDelete(deployment);
   const restartDeployment = deployment => async () => await deploymentsModule.api.restart(deployment);
-  return allDeployments
+  return deployments
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(deployment => (
       <Table.Row key={metadata.selectors.uid(deployment)}>
@@ -78,7 +74,7 @@ const Rows = ({deployments}) => {
 }
 
 const List = ({deployments, ...properties}) => (
-  <ResourceList headers={headers} {...properties}>
+  <ResourceList headers={headers} resources={deployments} {...properties}>
     <Rows deployments={deployments} />
   </ResourceList>
 );
@@ -91,7 +87,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  deployments: redux.selectors.resourcesBy(stateProps.deployments, ownProps)
+  deployments: Object.values(redux.selectors.resourcesBy(stateProps.deployments, ownProps))
 });
 
 export default connect(mapStateToProps, null, mergeProps)(List);

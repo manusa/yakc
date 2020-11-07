@@ -14,18 +14,30 @@
  * limitations under the License.
  *
  */
-import {
-  deleteNamespacedResource,
-  listResource,
-  updateNamespacedResource
-} from '../fetch';
+import React from 'react';
+import Icon from './Icon';
 
-const api = {};
+const Textfield = ({
+  className,
+  value,
+  onChange,
+  placeholder,
+  icon,
+  borderColor = 'border-gray-300',
+}) => (
+  <div className={`
+    inline-block px-4 py-2 rounded-md shadow-sm bg-white text-gray-700 text-sm leading-5
+    flex items-center
+    border ${borderColor}
+    ${className ?? ''}
+  `}>
+    {icon && <Icon icon={icon} className='mr-2' />}
+    <input
+      type='text' className='flex-1 outline-none'
+      placeholder={placeholder}
+      value={value} onChange={onChange}
+    />
+  </div>
+);
 
-api.list = listResource('persistentvolumeclaims', 'PersistentVolumeClaim');
-
-api.delete = deleteNamespacedResource('persistentvolumeclaims');
-
-api.update = updateNamespacedResource('persistentvolumeclaims');
-
-export default api;
+export default Textfield;

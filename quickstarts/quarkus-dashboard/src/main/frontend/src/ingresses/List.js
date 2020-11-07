@@ -15,11 +15,8 @@
  *
  */
 import React from 'react';
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux';
 import metadata from '../metadata';
 import ing from './';
-import redux from '../redux';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
 import ResourceList from '../components/ResourceList';
@@ -33,19 +30,12 @@ const headers = [
   ''
 ];
 
-const Rows = ({ingresses, loadedResources, deleteIngressAction}) => {
-  if (!loadedResources['Ingress']) {
-    return <Table.Loading colSpan={headers.length} />;
-  }
-  const allIngresses = Object.values(ingresses);
-  if (allIngresses.length === 0) {
-    return <Table.NoResultsRow colSpan={headers.length} />;
-  }
+const Rows = ({ingresses, crudDelete}) => {
   const deleteIngress = ingress => async () => {
     await ing.api.requestDelete(ingress);
-    deleteIngressAction(ingress);
+    crudDelete(ingress);
   };
-  return allIngresses
+  return ingresses
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(ingress => (
         <Table.Row key={metadata.selectors.uid(ingress)}>
@@ -76,27 +66,12 @@ const Rows = ({ingresses, loadedResources, deleteIngressAction}) => {
     ));
 };
 
-const List = ({ingresses, loadedResources, deleteIngressAction, ...properties}) => (
-  <ResourceList headers={headers} {...properties}>
-    <Rows ingresses={ingresses} loadedResources={loadedResources} deleteIngressAction={deleteIngressAction} />
+const List = ({resources, loadedResources, crudDelete, ...properties}) => (
+  <ResourceList
+    headers={headers} resources={resources} loading={!loadedResources['Ingress']} {...properties}>
+    <Rows ingresses={resources} loadedResources={loadedResources} crudDelete={crudDelete} />
   </ResourceList>
 );
 
-const mapStateToProps = ({ingresses, ui: {loadedResources}}) => ({
-  ingresses,
-  loadedResources
-});
-
-const mapDispatchToProps = dispatch =>  bindActionCreators({
-  deleteIngressAction: redux.actions.crudDelete
-}, dispatch);
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  ...stateProps,
-  ...dispatchProps,
-  ...ownProps,
-  ingresses: redux.selectors.resourcesBy(stateProps.ingresses, ownProps)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(List);
+export default ResourceList.polledConnect('ingresses')(List);
 

@@ -47,7 +47,7 @@ const NavGroup = ({expandedItems, toggleItem, label, icon, children}) => {
         className='flex items-center border-l-4 border-transparent px-6 py-1 md:py-2 lg:py-3 text-gray-300 hover:bg-gray-600 hover:bg-opacity-25 cursor-pointer'
         onClick={onClick}
       >
-        <Icon className='text-center w-4 mr-2 md:mr-3 md:h-5 md:text-lg lg:w-8 lg:mr-4' icon={icon} />
+        <Icon className='text-center w-4 mr-2 md:mr-3 md:h-5 md:text-lg lg:w-8 lg:mr-4 lg:text-xl' icon={icon} />
         <span className='flex-1'>{label}</span>
         <Icon className='' icon={expanded ? 'fa-chevron-down' : 'fa-chevron-right'} />
       </div>
@@ -61,9 +61,16 @@ const NavGroup = ({expandedItems, toggleItem, label, icon, children}) => {
   );
 };
 
-const NavItem = ({to, Icon: ComponentIcon, children}) => (
+const K8sNavItem = ({to, Icon: ComponentIcon, children}) => (
   <RoutedLink to={to}>
     <ComponentIcon className='h-4 mr-2 md:mr-3 md:h-5 lg:h-8 lg:mr-4'/>
+    {children}
+  </RoutedLink>
+);
+
+const IconNavItem = ({to, icon, children}) => (
+  <RoutedLink to={to}>
+    <Icon className='text-center w-4 mr-2 md:mr-3 md:h-5 md:text-lg lg:w-8 lg:mr-4 lg:text-xl' icon={icon} />
     {children}
   </RoutedLink>
 );
@@ -87,27 +94,28 @@ const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem}) => {
       ref={ref} onScroll={({target: {scrollTop}}) => scroll({scrollTop})}
       className='mt-4 lg:mt-6 flex-1 h-1 overflow-x-hidden overflow-y-auto custom-scroll-dark'
     >
-      <NavItem to='/' Icon={i.Kubernetes}>Home</NavItem>
-      <NavItem to='/nodes' Icon={i.Node}>Nodes</NavItem>
-      <NavItem to='/namespaces' Icon={i.Namespace}>Namespaces</NavItem>
-      <NavItem to='/pods' Icon={i.Pod}>Pods</NavItem>
-      <NavItem to='/deployments' Icon={i.Deployment}>Deployments</NavItem>
-      <NavItem to='/statefulsets' Icon={i.StatefulSet}>StatefulSets</NavItem>
+      <K8sNavItem to='/' Icon={i.Kubernetes}>Home</K8sNavItem>
+      <IconNavItem to='/search' icon='fa-search'>Search</IconNavItem>
+      <K8sNavItem to='/nodes' Icon={i.Node}>Nodes</K8sNavItem>
+      <K8sNavItem to='/namespaces' Icon={i.Namespace}>Namespaces</K8sNavItem>
+      <K8sNavItem to='/pods' Icon={i.Pod}>Pods</K8sNavItem>
+      <K8sNavItem to='/deployments' Icon={i.Deployment}>Deployments</K8sNavItem>
+      <K8sNavItem to='/statefulsets' Icon={i.StatefulSet}>StatefulSets</K8sNavItem>
       <div>
         <NavGroup expandedItems={expandedItems} toggleItem={toggleItem}
                   label='Network' icon='fa-network-wired'>
-          <NavItem to='/services' Icon={i.Service}>Services</NavItem>
-          <NavItem to='/ingresses' Icon={i.Ingress}>Ingresses</NavItem>
+          <K8sNavItem to='/services' Icon={i.Service}>Services</K8sNavItem>
+          <K8sNavItem to='/ingresses' Icon={i.Ingress}>Ingresses</K8sNavItem>
         </NavGroup>
         <NavGroup expandedItems={expandedItems} toggleItem={toggleItem}
                   label='Configuration' icon='fa-list'>
-          <NavItem to='/configmaps' Icon={i.ConfigMap}>ConfigMaps</NavItem>
-          <NavItem to='/secrets' Icon={i.Secret}>Secrets</NavItem>
+          <K8sNavItem to='/configmaps' Icon={i.ConfigMap}>ConfigMaps</K8sNavItem>
+          <K8sNavItem to='/secrets' Icon={i.Secret}>Secrets</K8sNavItem>
         </NavGroup>
         <NavGroup expandedItems={expandedItems} toggleItem={toggleItem}
                   label='Storage' icon='fa-database'>
-          <NavItem to='/persistentvolumes' Icon={i.PersistentVolume}>PersistentVolumes</NavItem>
-          <NavItem to='/persistentvolumeclaims' Icon={i.PersistentVolumeClaim}>PersistentVolume Claims</NavItem>
+          <K8sNavItem to='/persistentvolumes' Icon={i.PersistentVolume}>PersistentVolumes</K8sNavItem>
+          <K8sNavItem to='/persistentvolumeclaims' Icon={i.PersistentVolumeClaim}>PersistentVolume Claims</K8sNavItem>
         </NavGroup>
       </div>
       <h2 className='mt-6 mb-2 px-6 text-gray-100 text-xl'>About</h2>

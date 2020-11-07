@@ -33,13 +33,9 @@ const headers = [
 ];
 
 const Rows = ({statefulSets}) => {
-  const allStatefulSets = Object.values(statefulSets);
-  if (allStatefulSets.length === 0) {
-    return <Table.NoResultsRow colSpan={headers.length} />;
-  }
   const deleteStatefulSet = statefulSet => async () => await sts.api.requestDelete(statefulSet);
   const restartStatefulSet = statefulSet => async () => await sts.api.restart(statefulSet);
-  return allStatefulSets
+  return statefulSets
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(statefulSet => (
       <Table.Row key={metadata.selectors.uid(statefulSet)}>
@@ -78,7 +74,7 @@ const Rows = ({statefulSets}) => {
 }
 
 const List = ({statefulSets, ...properties}) => (
-  <ResourceList headers={headers} {...properties}>
+  <ResourceList headers={headers} resources={statefulSets} {...properties}>
     <Rows statefulSets={statefulSets} />
   </ResourceList>
 );
@@ -91,7 +87,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  statefulSets: redux.selectors.resourcesBy(stateProps.statefulSets, ownProps)
+  statefulSets: Object.values(redux.selectors.resourcesBy(stateProps.statefulSets, ownProps))
 });
 
 export default connect(mapStateToProps, null, mergeProps)(List);

@@ -33,19 +33,12 @@ const headers = [
   ''
 ];
 
-const Rows = ({namespaces, addOrReplace, loadedResources}) => {
-  if (!loadedResources['Namespace']) {
-    return <Table.Loading colSpan={headers.length} />;
-  }
-  const allNamespaces = Object.values(namespaces);
-  if (namespaces.length === 0) {
-    return <Table.NoResultsRow colSpan={headers.length} />;
-  }
+const Rows = ({namespaces, addOrReplace}) => {
   const deleteNamespace = namespace => async () => {
     const deletedNamespace = await ns.api.delete(namespace);
     addOrReplace(deletedNamespace);
   };
-  return allNamespaces
+  return namespaces
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(namespace => (
         <Table.Row key={metadata.selectors.uid(namespace)}>
@@ -77,13 +70,13 @@ const Rows = ({namespaces, addOrReplace, loadedResources}) => {
 };
 
 const List = ({namespaces, addOrReplace, loadedResources, deleteIngressAction, ...properties}) => (
-  <ResourceList headers={headers} {...properties}>
+  <ResourceList headers={headers} resources={namespaces} loading={!loadedResources['Namespace']} {...properties}>
     <Rows namespaces={namespaces} loadedResources={loadedResources} addOrReplace={addOrReplace} />
   </ResourceList>
 );
 
 const mapStateToProps = ({namespaces, ui: {loadedResources}}) => ({
-  namespaces,
+  namespaces: Object.values(namespaces),
   loadedResources
 });
 

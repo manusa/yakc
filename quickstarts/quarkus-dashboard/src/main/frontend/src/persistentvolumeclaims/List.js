@@ -15,10 +15,7 @@
  *
  */
 import React from 'react';
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux';
 import metadata from '../metadata';
-import redux from '../redux';
 import pvc from './';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
@@ -34,19 +31,12 @@ const headers = [
   ''
 ];
 
-const Rows = ({persistentVolumeClaims, loadedResources, deleteAction}) => {
-  if (!loadedResources['PersistentVolumeClaim']) {
-    return <Table.Loading colSpan={headers.length} />;
-  }
-  const allPVC = Object.values(persistentVolumeClaims);
-  if (allPVC.length === 0) {
-    return <Table.NoResultsRow colSpan={headers.length} />;
-  }
+const Rows = ({persistentVolumeClaims, crudDelete}) => {
   const deletePersistentVolumeClaim = persistentVolumeClaim => async () => {
     await pvc.api.delete(persistentVolumeClaim);
-    deleteAction(persistentVolumeClaim);
+    crudDelete(persistentVolumeClaim);
   };
-  return allPVC
+  return persistentVolumeClaims
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(persistentVolumeClaim => (
         <Table.Row key={metadata.selectors.uid(persistentVolumeClaim)}>
@@ -76,26 +66,10 @@ const Rows = ({persistentVolumeClaims, loadedResources, deleteAction}) => {
     ));
 };
 
-const List = ({persistentVolumeClaims, loadedResources, deleteAction, ...properties}) => (
-  <ResourceList headers={headers} {...properties}>
-    <Rows persistentVolumeClaims={persistentVolumeClaims} loadedResources={loadedResources} deleteAction={deleteAction} />
+const List = ({resources, loadedResources, crudDelete, ...properties}) => (
+  <ResourceList headers={headers} resources={resources} loading={!loadedResources['PersistentVolumeClaim']} {...properties}>
+    <Rows persistentVolumeClaims={resources} crudDelete={crudDelete} />
   </ResourceList>
 );
 
-const mapStateToProps = ({persistentVolumeClaims, ui: {loadedResources}}) => ({
-  persistentVolumeClaims,
-  loadedResources
-});
-
-const mapDispatchToProps = dispatch =>  bindActionCreators({
-  deleteAction: redux.actions.crudDelete
-}, dispatch);
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  ...stateProps,
-  ...dispatchProps,
-  ...ownProps,
-  persistentVolumeClaims: redux.selectors.resourcesBy(stateProps.persistentVolumeClaims, ownProps)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(List);
+export default ResourceList.polledConnect('persistentVolumeClaims')(List);

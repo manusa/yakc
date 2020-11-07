@@ -31,11 +31,7 @@ const headers = [
 ];
 
 const Rows = ({nodes}) => {
-  const allNodes = Object.values(nodes);
-  if (allNodes.length === 0) {
-    return <Table.NoResultsRow colSpan={headers.length} />;
-  }
-  return allNodes
+  return nodes
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(node => (
       <Table.Row key={metadata.selectors.uid(node)}>
@@ -70,13 +66,13 @@ const Rows = ({nodes}) => {
 }
 
 const List = ({nodes, ...properties}) => (
-  <ResourceList headers={headers} {...properties}>
+  <ResourceList headers={headers} resources={nodes} {...properties}>
     <Rows nodes={nodes} />
   </ResourceList>
 );
 
 const mapStateToProps = ({nodes}) => ({
-  nodes
+  nodes: Object.values(nodes)
 });
 
 export default connect(mapStateToProps)(List);
