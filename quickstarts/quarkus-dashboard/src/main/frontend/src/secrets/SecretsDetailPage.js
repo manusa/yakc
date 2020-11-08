@@ -38,9 +38,9 @@ const DataField = ({label, value}) => {
       width={Form.widths.full}
       label={
         <>
-          <a
+          <a  href='#ignore'
             className='inline-block mr-2 focus:outline-none'
-            onClick={() => setHidden(!hidden)} href='#'
+            onClick={() => setHidden(!hidden)}
           >
             <Icon icon={hidden ? 'fa-lock' : 'fa-lock-open'}/>
           </a>
