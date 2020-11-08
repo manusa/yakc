@@ -21,6 +21,7 @@ import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.apps.v1.AppsV1Api;
+import com.marcnuri.yakc.api.apps.v1.AppsV1Api.ListStatefulSetForAllNamespaces;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.StatefulSet;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.StatefulSetSpec;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodTemplateSpec;
@@ -43,10 +44,10 @@ public class StatefulSetService {
     this.kubernetesClient = kubernetesClient;
   }
 
-  public Observable<WatchEvent<StatefulSet>> getStatefulSets() throws IOException {
+  public Observable<WatchEvent<StatefulSet>> watch() throws IOException {
     final AppsV1Api apps = kubernetesClient.create(AppsV1Api.class);
     try {
-      apps.listStatefulSetForAllNamespaces().get();
+      apps.listStatefulSetForAllNamespaces(new ListStatefulSetForAllNamespaces().limit(1)).get();
       return apps.listStatefulSetForAllNamespaces().watch();
     } catch (ClientErrorException ex) {
       return apps.listNamespacedStatefulSet(kubernetesClient.getConfiguration().getNamespace()).watch();

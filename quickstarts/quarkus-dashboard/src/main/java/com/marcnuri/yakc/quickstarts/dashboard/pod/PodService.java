@@ -23,6 +23,7 @@ import com.marcnuri.yakc.api.KubernetesCall;
 import com.marcnuri.yakc.api.KubernetesException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
+import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListPodForAllNamespaces;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api.ReadNamespacedPodLog;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
 import io.reactivex.Observable;
@@ -52,10 +53,10 @@ public class PodService {
     this.kubernetesClient = kubernetesClient;
   }
 
-  public Observable<WatchEvent<Pod>> getPods() throws IOException {
+  public Observable<WatchEvent<Pod>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
     try {
-      core.listPodForAllNamespaces().get();
+      core.listPodForAllNamespaces(new ListPodForAllNamespaces().limit(1)).get();
       return core.listPodForAllNamespaces().watch();
     } catch (ClientErrorException ex) {
       return core.listNamespacedPod(kubernetesClient.getConfiguration().getNamespace()).watch();

@@ -49,9 +49,9 @@ public class PodResource {
   @GET
   @Produces(MediaType.SERVER_SENT_EVENTS)
   @SseElementType(MediaType.APPLICATION_JSON)
-  public Multi<WatchEvent<Pod>> get() throws IOException {
+  public Multi<WatchEvent<Pod>> watch() throws IOException {
     return Multi.createFrom().converter(MultiRxConverters.fromObservable(),
-      podService.getPods());
+      podService.watch());
   }
 
   @GET

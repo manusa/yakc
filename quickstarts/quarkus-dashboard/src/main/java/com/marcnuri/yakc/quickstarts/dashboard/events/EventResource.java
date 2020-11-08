@@ -43,8 +43,8 @@ public class EventResource {
   @GET
   @Produces(MediaType.SERVER_SENT_EVENTS)
   @SseElementType(MediaType.APPLICATION_JSON)
-  public Multi<WatchEvent<Event>> get() throws IOException {
+  public Multi<WatchEvent<Event>> watch() throws IOException {
     return Multi.createFrom().converter(MultiRxConverters.fromObservable(),
-      eventService.getEvents());
+      eventService.watch());
   }
 }

@@ -43,8 +43,8 @@ public class NodeResource {
   @GET
   @Produces(MediaType.SERVER_SENT_EVENTS)
   @SseElementType(MediaType.APPLICATION_JSON)
-  public Multi<WatchEvent<Node>> get() throws IOException {
+  public Multi<WatchEvent<Node>> watch() throws IOException {
     return Multi.createFrom().converter(MultiRxConverters.fromObservable(),
-      nodeService.getNodes());
+      nodeService.watch());
   }
 }

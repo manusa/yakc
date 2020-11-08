@@ -44,12 +44,10 @@ const pollResources = dispatch => {
     };
     try {
       await Promise.all([
-        cRoles.api.list().then(handleResourceList('ClusterRole')),
         ingresses.api.list().then(handleResourceList('Ingress')),
         ns.api.list().then(handleResourceList('Namespace')),
         pvc.api.list().then(handleResourceList('PersistentVolumeClaim')),
         pv.api.list().then(handleResourceList('PersistentVolume')),
-        secrets.api.list().then(handleResourceList('Secret')),
         services.api.list().then(handleResourceList('Service'))
       ]);
     } catch (e) {

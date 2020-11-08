@@ -21,6 +21,7 @@ import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.apps.v1.AppsV1Api;
+import com.marcnuri.yakc.api.apps.v1.AppsV1Api.ListDeploymentForAllNamespaces;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.Deployment;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.DeploymentSpec;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodTemplateSpec;
@@ -43,10 +44,10 @@ public class DeploymentService {
     this.kubernetesClient = kubernetesClient;
   }
 
-  public Observable<WatchEvent<Deployment>> getDeployments() throws IOException {
+  public Observable<WatchEvent<Deployment>> watch() throws IOException {
     final AppsV1Api apps = kubernetesClient.create(AppsV1Api.class);
     try {
-      apps.listDeploymentForAllNamespaces().get();
+      apps.listDeploymentForAllNamespaces(new ListDeploymentForAllNamespaces().limit(1)).get();
       return apps.listDeploymentForAllNamespaces().watch();
     } catch (ClientErrorException ex) {
       return apps.listNamespacedDeployment(kubernetesClient.getConfiguration().getNamespace()).watch();

@@ -21,6 +21,7 @@ import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
+import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListNode;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Node;
 import io.reactivex.Observable;
 import javax.inject.Inject;
@@ -42,10 +43,10 @@ public class NodeService {
     this.kubernetesClient = kubernetesClient;
   }
 
-  public  Observable<WatchEvent<Node>> getNodes() throws IOException {
+  public  Observable<WatchEvent<Node>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
     try {
-      core.listNode().get();
+      core.listNode(new ListNode().limit(1)).get();
       return core.listNode().watch();
     } catch (ClientErrorException ex) {
       if (ex.getCode() == 403) {

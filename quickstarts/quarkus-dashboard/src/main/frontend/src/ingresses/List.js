@@ -73,5 +73,5 @@ const List = ({resources, loadedResources, crudDelete, ...properties}) => (
   </ResourceList>
 );
 
-export default ResourceList.polledConnect('ingresses')(List);
+export default ResourceList.resourceListConnect('ingresses')(List);
 

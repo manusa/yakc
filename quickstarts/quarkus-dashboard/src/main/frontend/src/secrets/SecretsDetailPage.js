@@ -37,15 +37,15 @@ const DataField = ({label, value}) => {
     <Form.Field
       width={Form.widths.full}
       label={
-        <span>
-          <button
-            className='cursor-pointer mr-2 focus:outline-none'
-            onClick={() => setHidden(!hidden)}
+        <>
+          <a
+            className='inline-block mr-2 focus:outline-none'
+            onClick={() => setHidden(!hidden)} href='#'
           >
             <Icon icon={hidden ? 'fa-lock' : 'fa-lock-open'}/>
-          </button>
+          </a>
           {label}
-        </span>
+        </>
       }
     >
       <div

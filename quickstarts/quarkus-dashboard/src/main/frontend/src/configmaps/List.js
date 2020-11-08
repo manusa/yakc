@@ -15,10 +15,8 @@
  *
  */
 import React from 'react';
-import {connect} from 'react-redux'
 import metadata from '../metadata';
 import cm from './';
-import redux from '../redux';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
 import ResourceList from '../components/ResourceList';
@@ -53,22 +51,12 @@ const Rows = ({configMaps}) => {
     ));
 };
 
-const List = ({configMaps, ...properties}) => (
-  <ResourceList headers={headers} resources={configMaps} {...properties}>
-    <Rows configMaps={configMaps} />
+const List = ({resources, loadedResources, crudDelete, ...properties}) => (
+  <ResourceList headers={headers} resources={resources} loading={!loadedResources['ConfigMap']} {...properties}>
+    <Rows configMaps={resources} />
   </ResourceList>
 );
 
-const mapStateToProps = ({configMaps}) => ({
-  configMaps
-});
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  ...stateProps,
-  ...dispatchProps,
-  ...ownProps,
-  configMaps: Object.values(redux.selectors.resourcesBy(stateProps.configMaps, ownProps))
-});
-
-export default connect(mapStateToProps, null, mergeProps)(List);
+export default ResourceList.resourceListConnect('configMaps')(List);
 

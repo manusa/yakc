@@ -18,12 +18,15 @@
 package com.marcnuri.yakc.quickstarts.dashboard.clusterroles;
 
 import com.marcnuri.yakc.KubernetesClient;
+import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.rbacauthorization.v1.RbacAuthorizationV1Api;
+import com.marcnuri.yakc.api.rbacauthorization.v1.RbacAuthorizationV1Api.ListClusterRole;
 import com.marcnuri.yakc.api.rbacauthorization.v1beta1.RbacAuthorizationV1beta1Api;
 import com.marcnuri.yakc.model.io.k8s.api.rbac.v1.AggregationRule;
 import com.marcnuri.yakc.model.io.k8s.api.rbac.v1.ClusterRole;
 import com.marcnuri.yakc.model.io.k8s.api.rbac.v1.PolicyRule;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
+import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -43,6 +46,21 @@ public class ClusterRoleService {
     this.kubernetesClient = kubernetesClient;
   }
 
+  public Observable<WatchEvent<ClusterRole>> watch() throws IOException {
+    return tryWithFallback(
+      () -> {
+        kubernetesClient.create(RbacAuthorizationV1Api.class).listClusterRole(new ListClusterRole().limit(1)).get();
+        return kubernetesClient.create(RbacAuthorizationV1Api.class).listClusterRole().watch();
+      },
+      () -> {
+        kubernetesClient.create(RbacAuthorizationV1beta1Api.class)
+          .listClusterRole(new RbacAuthorizationV1beta1Api.ListClusterRole().limit(1)).get();
+        return kubernetesClient.create(RbacAuthorizationV1beta1Api.class).listClusterRole().watch()
+          .map(ClusterRoleService::to);
+      }
+    );
+  }
+
   public List<ClusterRole> get() throws IOException {
     return tryWithFallback(
       () -> kubernetesClient.create(RbacAuthorizationV1Api.class).listClusterRole().get().getItems(),
@@ -57,6 +75,10 @@ public class ClusterRoleService {
 
   public ClusterRole update(String name, ClusterRole clusterRole) throws IOException {
     return kubernetesClient.create(RbacAuthorizationV1Api.class).replaceClusterRole(name, clusterRole).get();
+  }
+
+  static WatchEvent<ClusterRole> to(WatchEvent<com.marcnuri.yakc.model.io.k8s.api.rbac.v1beta1.ClusterRole> from) {
+    return new WatchEvent<>(from.getType(), to(from.getObject()));
   }
 
   static ClusterRole to(com.marcnuri.yakc.model.io.k8s.api.rbac.v1beta1.ClusterRole from) {

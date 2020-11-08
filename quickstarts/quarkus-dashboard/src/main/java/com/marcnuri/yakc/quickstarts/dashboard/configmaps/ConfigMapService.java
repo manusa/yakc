@@ -21,6 +21,7 @@ import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
+import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListConfigMapForAllNamespaces;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.ConfigMap;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import io.reactivex.Observable;
@@ -53,7 +54,7 @@ public class ConfigMapService {
   public Observable<WatchEvent<ConfigMap>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
     try {
-      core.listConfigMapForAllNamespaces().get();
+      core.listConfigMapForAllNamespaces(new ListConfigMapForAllNamespaces().limit(1)).get();
       return core.listConfigMapForAllNamespaces().watch();
     } catch (ClientErrorException ex) {
       return core.listNamespacedConfigMap(kubernetesClient.getConfiguration().getNamespace()).watch();

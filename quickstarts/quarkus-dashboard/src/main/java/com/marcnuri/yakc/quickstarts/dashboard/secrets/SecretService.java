@@ -18,9 +18,13 @@
 package com.marcnuri.yakc.quickstarts.dashboard.secrets;
 
 import com.marcnuri.yakc.KubernetesClient;
+import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
+import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListNamespacedSecret;
+import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListSecretForAllNamespaces;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Secret;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
+import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -37,6 +41,21 @@ public class SecretService {
   @Inject
   public SecretService(KubernetesClient kubernetesClient) {
     this.kubernetesClient = kubernetesClient;
+  }
+
+  public Observable<WatchEvent<Secret>> watch() throws IOException {
+    final CoreV1Api api = kubernetesClient.create(CoreV1Api.class);
+    return tryWithFallback(
+      () -> {
+        api.listSecretForAllNamespaces(new ListSecretForAllNamespaces().limit(1)).get();
+        return api.listSecretForAllNamespaces().watch();
+      },
+      () -> {
+        final String ns = kubernetesClient.getConfiguration().getNamespace();
+        api.listNamespacedSecret(ns, new ListNamespacedSecret().limit(1)).get();
+        return api.listNamespacedSecret(ns).watch();
+      }
+    );
   }
 
   public List<Secret> get() throws IOException {

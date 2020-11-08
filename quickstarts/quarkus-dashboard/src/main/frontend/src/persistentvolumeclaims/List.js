@@ -72,4 +72,4 @@ const List = ({resources, loadedResources, crudDelete, ...properties}) => (
   </ResourceList>
 );
 
-export default ResourceList.polledConnect('persistentVolumeClaims')(List);
+export default ResourceList.resourceListConnect('persistentVolumeClaims')(List);

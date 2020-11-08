@@ -29,11 +29,8 @@ const headers = [
   ''
 ];
 
-const Rows = ({secrets, crudDelete}) => {
-  const deleteSecret = secret => async () => {
-    await s.api.requestDelete(secret);
-    crudDelete(secret);
-  };
+const Rows = ({secrets}) => {
+  const deleteSecret = secret => async () => await s.api.requestDelete(secret);
   return secrets
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(secret => (
@@ -58,9 +55,9 @@ const Rows = ({secrets, crudDelete}) => {
 
 const List = ({resources, loadedResources, crudDelete, ...properties}) => (
   <ResourceList headers={headers} resources={resources} loading={!loadedResources['Secret']} {...properties}>
-    <Rows secrets={resources} crudDelete={crudDelete} />
+    <Rows secrets={resources} />
   </ResourceList>
 );
 
-export default ResourceList.polledConnect('secrets')(List);
+export default ResourceList.resourceListConnect('secrets')(List);
 

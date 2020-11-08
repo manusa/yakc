@@ -29,11 +29,8 @@ const headers = [
   ''
 ];
 
-const Rows = ({clusterRoles, crudDelete}) => {
-  const deleteClusterRole = clusterRole => async () => {
-    await cRoles.api.delete(clusterRole);
-    crudDelete(clusterRole);
-  };
+const Rows = ({clusterRoles}) => {
+  const deleteClusterRole = clusterRole => async () => await cRoles.api.delete(clusterRole);
   return clusterRoles
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(clusterRole => (
@@ -61,9 +58,9 @@ const Rows = ({clusterRoles, crudDelete}) => {
 
 const List = ({resources, loadedResources, crudDelete, ...properties}) => (
   <ResourceList headers={headers} resources={resources} loading={!loadedResources['ClusterRole']} {...properties}>
-    <Rows clusterRoles={resources} crudDelete={crudDelete} />
+    <Rows clusterRoles={resources} />
   </ResourceList>
 );
 
-export default ResourceList.polledConnect('clusterRoles')(List);
+export default ResourceList.resourceListConnect('clusterRoles')(List);
 

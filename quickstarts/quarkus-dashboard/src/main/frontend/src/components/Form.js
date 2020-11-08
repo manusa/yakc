@@ -36,7 +36,7 @@ Form.Field = ({className, label, labelClassName, children, width = Form.widths.t
     {...props}
   >
     <label
-      className={`block uppercase tracking-wide text-gray-700 text-xs font-bold mb-1
+      className={`block relative uppercase tracking-wide text-gray-700 text-xs font-bold mb-1
         ${labelClassName ?? ''}`}
     >
       {label}

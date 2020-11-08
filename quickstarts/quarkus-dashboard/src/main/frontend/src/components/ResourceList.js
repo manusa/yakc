@@ -51,7 +51,7 @@ const ResourceList = ({
   );
 };
 
-ResourceList.polledConnect = resource => connect(
+ResourceList.resourceListConnect = resource => connect(
   ({ui: {loadedResources}, ...state}) => {
     return {resources: state[resource], loadedResources}
   },
