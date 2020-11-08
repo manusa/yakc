@@ -24,6 +24,7 @@ import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListNamespacedSecret;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListSecretForAllNamespaces;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Secret;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
+import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -34,7 +35,7 @@ import java.util.List;
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 @Singleton
-public class SecretService {
+public class SecretService implements Watchable<Secret> {
 
   private final KubernetesClient kubernetesClient;
 
@@ -43,6 +44,7 @@ public class SecretService {
     this.kubernetesClient = kubernetesClient;
   }
 
+  @Override
   public Observable<WatchEvent<Secret>> watch() throws IOException {
     final CoreV1Api api = kubernetesClient.create(CoreV1Api.class);
     return tryWithFallback(

@@ -26,6 +26,7 @@ import com.marcnuri.yakc.model.io.k8s.api.rbac.v1.AggregationRule;
 import com.marcnuri.yakc.model.io.k8s.api.rbac.v1.ClusterRole;
 import com.marcnuri.yakc.model.io.k8s.api.rbac.v1.PolicyRule;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
+import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -37,7 +38,7 @@ import java.util.stream.Collectors;
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 @Singleton
-public class ClusterRoleService {
+public class ClusterRoleService implements Watchable<ClusterRole> {
 
   private final KubernetesClient kubernetesClient;
 
@@ -46,6 +47,7 @@ public class ClusterRoleService {
     this.kubernetesClient = kubernetesClient;
   }
 
+  @Override
   public Observable<WatchEvent<ClusterRole>> watch() throws IOException {
     return tryWithFallback(
       () -> {

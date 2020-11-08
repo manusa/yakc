@@ -23,6 +23,7 @@ import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListEventForAllNamespaces;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Event;
+import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -30,7 +31,7 @@ import javax.inject.Singleton;
 import java.io.IOException;
 
 @Singleton
-public class EventService {
+public class EventService implements Watchable<Event> {
 
   private final KubernetesClient kubernetesClient;
 
@@ -39,6 +40,7 @@ public class EventService {
     this.kubernetesClient = kubernetesClient;
   }
 
+  @Override
   public Observable<WatchEvent<Event>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
     try {

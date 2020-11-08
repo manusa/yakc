@@ -25,6 +25,7 @@ import com.marcnuri.yakc.api.apps.v1.AppsV1Api;
 import com.marcnuri.yakc.api.apps.v1.AppsV1Api.ListReplicaSetForAllNamespaces;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.ReplicaSet;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
+import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -32,7 +33,7 @@ import javax.inject.Singleton;
 import java.io.IOException;
 
 @Singleton
-public class ReplicaSetService {
+public class ReplicaSetService implements Watchable<ReplicaSet> {
 
   private final KubernetesClient kubernetesClient;
 
@@ -41,6 +42,7 @@ public class ReplicaSetService {
     this.kubernetesClient = kubernetesClient;
   }
 
+  @Override
   public Observable<WatchEvent<ReplicaSet>> watch() throws IOException {
     final AppsV1Api apps = kubernetesClient.create(AppsV1Api.class);
     try {

@@ -26,6 +26,7 @@ import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListPodForAllNamespaces;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api.ReadNamespacedPodLog;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
+import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -42,7 +43,7 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 
 @Singleton
-public class PodService {
+public class PodService implements Watchable<Pod> {
 
   private static final Logger LOG = LoggerFactory.getLogger(PodService.class);
 
@@ -53,6 +54,7 @@ public class PodService {
     this.kubernetesClient = kubernetesClient;
   }
 
+  @Override
   public Observable<WatchEvent<Pod>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
     try {

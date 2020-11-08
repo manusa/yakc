@@ -35,23 +35,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Singleton
 public class WatchService {
 
   private static final Logger LOG = LoggerFactory.getLogger(WatchService.class);
 
-  private final ClusterRoleService clusterRoleService;
-  private final ConfigMapService configMapService;
-  private final DeploymentService deploymentService;
-  private final EventService eventService;
-  private final NodeService nodeService;
-  private final PodService podService;
-  private final ReplicaSetService replicaSetService;
-  private final SecretService secretService;
-  private final StatefulSetService statefulSetService;
+  private final List<Watchable<? extends Model>> watchables;
 
+  @SuppressWarnings("java:S107")
   @Inject
   public WatchService(
     ClusterRoleService clusterRoleService,
@@ -62,29 +57,25 @@ public class WatchService {
     ReplicaSetService replicaSetService,
     SecretService secretService,
     StatefulSetService statefulSetService) {
-    this.clusterRoleService = clusterRoleService;
-    this.configMapService = configMapService;
-    this.deploymentService = deploymentService;
-    this.eventService = eventService;
-    this.nodeService = nodeService;
-    this.podService = podService;
-    this.replicaSetService = replicaSetService;
-    this.secretService = secretService;
-    this.statefulSetService = statefulSetService;
+    this.watchables = Arrays.asList(
+      clusterRoleService,
+      configMapService,
+      deploymentService,
+      eventService,
+      nodeService,
+      podService,
+      replicaSetService,
+      secretService,
+      statefulSetService
+    );
   }
 
   public Observable<WatchEvent<? extends Model>> getWatch() throws IOException {
-    return Observable.merge(Arrays.asList(
-      eventService.watch().subscribeOn(Schedulers.newThread()),
-      clusterRoleService.watch().subscribeOn(Schedulers.newThread()),
-      configMapService.watch().subscribeOn(Schedulers.newThread()),
-      deploymentService.watch().subscribeOn(Schedulers.newThread()),
-      nodeService.watch().subscribeOn(Schedulers.newThread()),
-      podService.watch().subscribeOn(Schedulers.newThread()),
-      replicaSetService.watch().subscribeOn(Schedulers.newThread()),
-      secretService.watch().subscribeOn(Schedulers.newThread()),
-      statefulSetService.watch().subscribeOn(Schedulers.newThread())
-    ))
+    final List<Observable<? extends WatchEvent<? extends Model>>> watchers = new ArrayList<>();
+    for (Watchable<? extends Model> watchable : watchables) {
+      watchers.add(watchable.watch().subscribeOn(Schedulers.newThread()));
+    }
+    return Observable.merge(watchers)
       .doOnError(e -> LOG.error("Exception on Watcher", e))
       .onErrorReturn(DashboardError::watchEvent);
   }

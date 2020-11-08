@@ -23,6 +23,7 @@ import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListNode;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Node;
+import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -32,7 +33,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 @Singleton
-public class NodeService {
+public class NodeService implements Watchable<Node> {
 
   private static final Logger LOG = LoggerFactory.getLogger(NodeService.class);
 
@@ -43,6 +44,7 @@ public class NodeService {
     this.kubernetesClient = kubernetesClient;
   }
 
+  @Override
   public  Observable<WatchEvent<Node>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
     try {

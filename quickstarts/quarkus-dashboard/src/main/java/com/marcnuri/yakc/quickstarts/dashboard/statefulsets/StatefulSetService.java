@@ -27,6 +27,7 @@ import com.marcnuri.yakc.model.io.k8s.api.apps.v1.StatefulSetSpec;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodTemplateSpec;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
+import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -35,7 +36,7 @@ import java.io.IOException;
 import java.time.Instant;
 
 @Singleton
-public class StatefulSetService {
+public class StatefulSetService implements Watchable<StatefulSet> {
 
   private final KubernetesClient kubernetesClient;
 
@@ -44,6 +45,7 @@ public class StatefulSetService {
     this.kubernetesClient = kubernetesClient;
   }
 
+  @Override
   public Observable<WatchEvent<StatefulSet>> watch() throws IOException {
     final AppsV1Api apps = kubernetesClient.create(AppsV1Api.class);
     try {
