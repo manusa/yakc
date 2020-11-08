@@ -26,12 +26,13 @@ import ns from './namespaces';
 import pvc from './persistentvolumeclaims';
 import pv from './persistentvolumes';
 import pods from './pods';
+import redux from './redux';
+import roles from './roles';
 import search from './search';
 import secrets from './secrets';
 import services from './services';
 import sts from './statefulsets';
 import watch from './watch';
-import redux from './redux';
 import Home from './Home';
 
 const eventSources = [];
@@ -107,6 +108,9 @@ const App = ({dispatch}) => {
           <Route exact path='/pods/:uid' component={pods.PodsDetailPage} />
           <Route exact path='/pods/:uid/edit' component={pods.PodsEditPage} />
           <Route exact path='/pods/:uid/logs' component={pods.PodsLogsPage} />
+          <Route exact path='/roles' component={roles.RolesPage} />
+          <Route exact path='/roles/:uid' component={roles.RolesDetailPage} />
+          <Route exact path='/roles/:uid/edit' component={roles.RolesEditPage} />
           <Route exact path='/search' component={search.SearchPage} />
           <Route exact path='/secrets' component={secrets.SecretsPage} />
           <Route exact path='/secrets/:uid' component={secrets.SecretsDetailPage} />

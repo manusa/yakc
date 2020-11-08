@@ -16,7 +16,7 @@
  */
 import React from 'react';
 import metadata from '../metadata';
-import cRoles from './';
+import r from './';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
 import ResourceList from '../components/ResourceList';
@@ -25,32 +25,38 @@ import Tooltip from '../components/Tooltip';
 
 const headers = [
   <span><Icon className='fa-id-card' /> Name</span>,
+  'Namespace',
   <span><Icon stylePrefix='far' icon='fa-clock' /> Time</span>,
   ''
 ];
 
-const Rows = ({clusterRoles}) => {
-  const deleteClusterRole = clusterRole => async () => await cRoles.api.delete(clusterRole);
-  return clusterRoles
+const Rows = ({roles}) => {
+  const deleteRole = role => async () => await r.api.delete(role);
+  return roles
     .sort(metadata.selectors.sortByCreationTimeStamp)
-    .map(clusterRole => (
-        <Table.Row key={metadata.selectors.uid(clusterRole)}>
+    .map(role => (
+        <Table.Row key={metadata.selectors.uid(role)}>
           <Table.Cell>
-            <Link.ClusterRole to={`/clusterroles/${metadata.selectors.uid(clusterRole)}`}>
-              {metadata.selectors.name(clusterRole)}
-            </Link.ClusterRole>
+            <Link.Role to={`/roles/${metadata.selectors.uid(role)}`}>
+              {metadata.selectors.name(role)}
+            </Link.Role>
+          </Table.Cell>
+          <Table.Cell className='whitespace-no-wrap'>
+            <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(role)}`}>
+              {metadata.selectors.namespace(role)}
+            </Link.Namespace>
           </Table.Cell>
           <Table.Cell>
             <Tooltip
-              content={`${metadata.selectors.creationTimestamp(clusterRole).toLocaleDateString()}
-                ${metadata.selectors.creationTimestamp(clusterRole).toLocaleTimeString()}`}
+              content={`${metadata.selectors.creationTimestamp(role).toLocaleDateString()}
+                ${metadata.selectors.creationTimestamp(role).toLocaleTimeString()}`}
               className='cursor-default'
             >
-              <span>{metadata.selectors.creationTimestamp(clusterRole).toLocaleDateString()}</span>
+              <span>{metadata.selectors.creationTimestamp(role).toLocaleDateString()}</span>
             </Tooltip>
           </Table.Cell>
           <Table.Cell>
-            <Table.DeleteButton onClick={deleteClusterRole(clusterRole)} />
+            <Table.DeleteButton onClick={deleteRole(role)} />
           </Table.Cell>
         </Table.Row>
     ));
@@ -58,9 +64,9 @@ const Rows = ({clusterRoles}) => {
 
 const List = ({resources, loadedResources, crudDelete, ...properties}) => (
   <ResourceList headers={headers} resources={resources} {...properties}>
-    <Rows clusterRoles={resources} />
+    <Rows roles={resources} />
   </ResourceList>
 );
 
-export default ResourceList.resourceListConnect('clusterRoles')(List);
+export default ResourceList.resourceListConnect('roles')(List);
 

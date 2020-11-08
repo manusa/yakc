@@ -15,30 +15,19 @@
  *
  */
 import React from 'react';
-import Icon from './Icon';
+import md from '../metadata';
+import r from './';
+import ResourceEditPage from '../components/ResourceEditPage';
+import Link from '../components/Link';
 
-const Textfield = ({
-  className,
-  value,
-  onChange,
-  placeholder,
-  icon,
-  inputRef,
-  borderColor = 'border-gray-300',
-}) => (
-  <div className={`
-    inline-block px-4 py-2 rounded-md shadow-sm bg-white text-gray-700 text-sm leading-5
-    flex items-center
-    border ${borderColor}
-    ${className ?? ''}
-  `}>
-    {icon && <Icon icon={icon} className='mr-2' />}
-    <input
-      ref={inputRef} type='text' className='flex-1 outline-none'
-      placeholder={placeholder}
-      value={value} onChange={onChange}
-    />
-  </div>
+const RolesEditPage = ({match: {params: {uid}}}) => (
+  <ResourceEditPage
+    cardTitle={resource =>
+      <Link.RouterLink to={`/roles/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
+    }
+    save={async resource => await r.api.update(resource)}
+    resourceFromState={state => state.roles[uid]}
+  />
 );
 
-export default Textfield;
+export default RolesEditPage;

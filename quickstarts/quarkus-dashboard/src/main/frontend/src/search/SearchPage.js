@@ -14,7 +14,7 @@
  * limitations under the License.
  *
  */
-import React, {useState} from 'react';
+import React, {useState, useLayoutEffect, useRef} from 'react';
 import {connect} from 'react-redux';
 import cRoles from '../clusterroles';
 import cm from '../configmaps';
@@ -27,6 +27,7 @@ import s from '../secrets';
 import ss from '../statefulsets';
 import svc from '../services';
 import rs from '../replicasets';
+import roles from '../roles';
 import Card from '../components/Card';
 import DashboardPage from '../components/DashboardPage';
 import FilterBar from '../components/FilterBar';
@@ -70,17 +71,23 @@ const Results = ({query, selectedNamespace}) => {
         title='PersistentVolumeClaims' nameLike={query} namespace={selectedNamespace} />
       <cRoles.List {...commonProps}
         title='ClusterRoles' nameLike={query} namespace={selectedNamespace} />
+      <roles.List {...commonProps}
+        title='Roles' nameLike={query} namespace={selectedNamespace} />
     </>
   )
 };
 
 const SearchPage = ({selectedNamespace}) => {
   const [query, setQuery] = useState('');
+  const inputRef = useRef(null);
+  useLayoutEffect(() => {
+    inputRef.current.focus();
+  }, [inputRef]);
   return (
     <DashboardPage title='Query cluster resources'>
       <div className='flex mb-4'>
         <Textfield
-          className='flex-1  mr-2'
+          className='flex-1  mr-2' inputRef={inputRef}
           placeholder='Search' icon='fa-search'
           value={query} onChange={({target: {value}}) => setQuery(value)}
         />

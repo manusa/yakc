@@ -32,6 +32,7 @@ const Content = ({headers, resources, loading, children}) => {
 
 const ResourceList = ({
   headers, title, resources, children,
+  nameLike /* don't propagate */,
   loading = false,
   hideWhenNoResults = false,
   ...properties

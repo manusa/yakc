@@ -94,8 +94,8 @@ const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem}) => {
       ref={ref} onScroll={({target: {scrollTop}}) => scroll({scrollTop})}
       className='mt-4 lg:mt-6 flex-1 h-1 overflow-x-hidden overflow-y-auto custom-scroll-dark'
     >
-      <K8sNavItem to='/' Icon={i.Kubernetes}>Home</K8sNavItem>
       <IconNavItem to='/search' icon='fa-search'>Search</IconNavItem>
+      <K8sNavItem to='/' Icon={i.Kubernetes}>Home</K8sNavItem>
       <K8sNavItem to='/nodes' Icon={i.Node}>Nodes</K8sNavItem>
       <K8sNavItem to='/namespaces' Icon={i.Namespace}>Namespaces</K8sNavItem>
       <K8sNavItem to='/pods' Icon={i.Pod}>Pods</K8sNavItem>
@@ -120,6 +120,7 @@ const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem}) => {
         <NavGroup expandedItems={expandedItems} toggleItem={toggleItem}
                   label='Access Control' icon='fa-shield-alt'>
           <K8sNavItem to='/clusterroles' Icon={i.ClusterRole}>ClusterRoles</K8sNavItem>
+          <K8sNavItem to='/roles' Icon={i.Role}>Roles</K8sNavItem>
         </NavGroup>
       </div>
       <h2 className='mt-6 mb-2 px-6 text-gray-100 text-xl'>About</h2>

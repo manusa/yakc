@@ -28,6 +28,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.persistentvolumeclaims.Persistent
 import com.marcnuri.yakc.quickstarts.dashboard.persistentvolumes.PersistentVolumeResource;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource;
 import com.marcnuri.yakc.quickstarts.dashboard.replicaset.ReplicaSetResource;
+import com.marcnuri.yakc.quickstarts.dashboard.roles.RoleResource;
 import com.marcnuri.yakc.quickstarts.dashboard.secrets.SecretResource;
 import com.marcnuri.yakc.quickstarts.dashboard.service.ServiceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.statefulsets.StatefulSetResource;
@@ -51,6 +52,7 @@ public class ApiResource {
   private final PersistentVolumeResource persistentVolumeResource;
   private final PodResource podResource;
   private final ReplicaSetResource replicaSetResource;
+  private final RoleResource roleResource;
   private final SecretResource secretResource;
   private final ServiceResource serviceResource;
   private final StatefulSetResource statefulSetResource;
@@ -70,6 +72,7 @@ public class ApiResource {
     PersistentVolumeResource persistentVolumeResource,
     PodResource podResource,
     ReplicaSetResource replicaSetResource,
+    RoleResource roleResource,
     SecretResource secretResource,
     ServiceResource serviceResource,
     StatefulSetResource statefulSetResource,
@@ -85,6 +88,7 @@ public class ApiResource {
     this.persistentVolumeResource = persistentVolumeResource;
     this.podResource = podResource;
     this.replicaSetResource = replicaSetResource;
+    this.roleResource = roleResource;
     this.secretResource = secretResource;
     this.serviceResource = serviceResource;
     this.statefulSetResource = statefulSetResource;
@@ -144,6 +148,11 @@ public class ApiResource {
   @Path("/replicasets")
   public ReplicaSetResource getReplicaSetResource() {
     return replicaSetResource;
+  }
+
+  @Path("/roles")
+  public RoleResource getRoleResource() {
+    return roleResource;
   }
 
   @Path("/secrets")

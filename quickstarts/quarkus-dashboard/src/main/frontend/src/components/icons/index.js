@@ -25,6 +25,7 @@ import Node from './Node';
 import PersistentVolume from './PersistentVolume';
 import PersistentVolumeClaim from './PersistentVolumeClaim';
 import Pod from './Pod';
+import Role from './Role';
 import Secret from './Secret';
 import Service from './Service';
 import StatefulSet from './StatefulSet';
@@ -43,6 +44,7 @@ icons.Node = Node;
 icons.PersistentVolume = PersistentVolume;
 icons.PersistentVolumeClaim = PersistentVolumeClaim;
 icons.Pod = Pod;
+icons.Role = Role
 icons.Secret = Secret;
 icons.Service = Service;
 icons.StatefulSet = StatefulSet;

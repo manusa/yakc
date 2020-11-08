@@ -99,7 +99,7 @@ public class ClusterRoleService implements Watchable<ClusterRole> {
       .build();
   }
 
-  static PolicyRule to(com.marcnuri.yakc.model.io.k8s.api.rbac.v1beta1.PolicyRule from) {
+  public static PolicyRule to(com.marcnuri.yakc.model.io.k8s.api.rbac.v1beta1.PolicyRule from) {
     return PolicyRule.builder()
       .apiGroups(from.getApiGroups())
       .nonResourceURLs(from.getNonResourceURLs())

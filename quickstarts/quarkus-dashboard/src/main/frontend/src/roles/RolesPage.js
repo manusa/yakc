@@ -15,30 +15,20 @@
  *
  */
 import React from 'react';
-import Icon from './Icon';
+import {connect} from 'react-redux';
+import r from './';
+import DashboardPage from '../components/DashboardPage';
+import FilterBar from '../components/FilterBar';
 
-const Textfield = ({
-  className,
-  value,
-  onChange,
-  placeholder,
-  icon,
-  inputRef,
-  borderColor = 'border-gray-300',
-}) => (
-  <div className={`
-    inline-block px-4 py-2 rounded-md shadow-sm bg-white text-gray-700 text-sm leading-5
-    flex items-center
-    border ${borderColor}
-    ${className ?? ''}
-  `}>
-    {icon && <Icon icon={icon} className='mr-2' />}
-    <input
-      ref={inputRef} type='text' className='flex-1 outline-none'
-      placeholder={placeholder}
-      value={value} onChange={onChange}
-    />
-  </div>
+const RolesPage = ({selectedNamespace}) => (
+  <DashboardPage title='Roles'>
+    <FilterBar />
+    <r.List className='mt-4' namespace={selectedNamespace} />
+  </DashboardPage>
 );
 
-export default Textfield;
+const mapStateToProps = ({ui: {selectedNamespace}}) => ({
+  selectedNamespace
+});
+
+export default connect(mapStateToProps)(RolesPage);

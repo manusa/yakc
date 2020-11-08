@@ -14,6 +14,7 @@ const reflectionClasses = [
   'com.marcnuri.yakc.quickstarts.dashboard.persistentvolumes.PersistentVolumeResource',
   'com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource',
   'com.marcnuri.yakc.quickstarts.dashboard.replicaset.ReplicaSetResource',
+  'com.marcnuri.yakc.quickstarts.dashboard.roles.RoleResource',
   'com.marcnuri.yakc.quickstarts.dashboard.secrets.SecretResource',
   'com.marcnuri.yakc.quickstarts.dashboard.service.ServiceResource',
   'com.marcnuri.yakc.quickstarts.dashboard.statefulsets.StatefulSetResource',
