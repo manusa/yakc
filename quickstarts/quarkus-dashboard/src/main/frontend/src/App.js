@@ -47,8 +47,7 @@ const pollResources = dispatch => {
         ingresses.api.list().then(handleResourceList('Ingress')),
         ns.api.list().then(handleResourceList('Namespace')),
         pvc.api.list().then(handleResourceList('PersistentVolumeClaim')),
-        pv.api.list().then(handleResourceList('PersistentVolume')),
-        services.api.list().then(handleResourceList('Service'))
+        pv.api.list().then(handleResourceList('PersistentVolume'))
       ]);
     } catch (e) {
       dispatch(redux.actions.setError('Error when polling resources (retrying)'));

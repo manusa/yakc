@@ -30,11 +30,8 @@ const headers = [
   ''
 ];
 
-const Rows = ({services, crudDelete}) => {
-  const deleteService = service => async () => {
-    await svc.api.requestDelete(service);
-    crudDelete(service);
-  };
+const Rows = ({services}) => {
+  const deleteService = service => async () => await svc.api.requestDelete(service);
   return services
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(service => (
@@ -64,7 +61,7 @@ const Rows = ({services, crudDelete}) => {
 
 const List = ({resources, loadedResources, crudDelete, ...properties}) => (
   <ResourceList headers={headers} resources={resources} loading={!loadedResources['Service']} {...properties}>
-    <Rows services={resources} crudDelete={crudDelete} />
+    <Rows services={resources} />
   </ResourceList>
 );
 

@@ -26,6 +26,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.node.NodeService;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodService;
 import com.marcnuri.yakc.quickstarts.dashboard.replicaset.ReplicaSetService;
 import com.marcnuri.yakc.quickstarts.dashboard.secrets.SecretService;
+import com.marcnuri.yakc.quickstarts.dashboard.service.ServiceService;
 import com.marcnuri.yakc.quickstarts.dashboard.statefulsets.StatefulSetService;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
@@ -56,6 +57,7 @@ public class WatchService {
     PodService podService,
     ReplicaSetService replicaSetService,
     SecretService secretService,
+    ServiceService serviceService,
     StatefulSetService statefulSetService) {
     this.watchables = Arrays.asList(
       clusterRoleService,
@@ -66,6 +68,7 @@ public class WatchService {
       podService,
       replicaSetService,
       secretService,
+      serviceService,
       statefulSetService
     );
   }
