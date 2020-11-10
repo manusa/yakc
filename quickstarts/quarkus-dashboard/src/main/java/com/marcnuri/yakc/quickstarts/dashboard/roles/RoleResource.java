@@ -18,6 +18,8 @@
 package com.marcnuri.yakc.quickstarts.dashboard.roles;
 
 import com.marcnuri.yakc.model.io.k8s.api.rbac.v1.Role;
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
@@ -32,6 +34,7 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 
 @Singleton
+@RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
 public class RoleResource {
 
   private final RoleService roleService;

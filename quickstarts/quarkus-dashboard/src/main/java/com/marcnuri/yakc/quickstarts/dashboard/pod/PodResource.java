@@ -19,6 +19,7 @@ package com.marcnuri.yakc.quickstarts.dashboard.pod;
 
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.converters.multi.MultiRxConverters;
 import javax.inject.Inject;
@@ -37,6 +38,7 @@ import org.jboss.resteasy.annotations.SseElementType;
 import java.io.IOException;
 
 @Singleton
+@RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
 public class PodResource {
 
   private final PodService podService;

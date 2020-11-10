@@ -18,6 +18,8 @@
 package com.marcnuri.yakc.quickstarts.dashboard.clusterroles;
 
 import com.marcnuri.yakc.model.io.k8s.api.rbac.v1.ClusterRole;
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
@@ -34,6 +36,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Singleton
+@RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
 public class ClusterRoleResource {
 
   private final ClusterRoleService clusterRoleService;

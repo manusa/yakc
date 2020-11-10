@@ -161,7 +161,6 @@
         <quarkus.package.type>native</quarkus.package.type>
         <jkube.generator.quarkus.nativeImage>true</jkube.generator.quarkus.nativeImage>
         <quarkus.native.additional-build-args>
-          -H:ReflectionConfigurationFiles=reflection-config.json,
           -H:ResourceConfigurationFiles=resources-config.json,
         </quarkus.native.additional-build-args>
       </properties>

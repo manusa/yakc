@@ -17,6 +17,8 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.replicaset;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.DELETE;
@@ -27,6 +29,7 @@ import javax.ws.rs.core.Response;
 import java.io.IOException;
 
 @Singleton
+@RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
 public class ReplicaSetResource {
 
   private final ReplicaSetService replicaSetService;

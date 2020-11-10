@@ -33,12 +33,14 @@ import com.marcnuri.yakc.quickstarts.dashboard.secrets.SecretResource;
 import com.marcnuri.yakc.quickstarts.dashboard.service.ServiceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.statefulsets.StatefulSetResource;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.WatchResource;
+import io.quarkus.runtime.annotations.RegisterForReflection;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.Path;
 
 @Singleton
+@RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
 public class ApiResource {
 
   private final ClusterRoleResource clusterRoleResource;

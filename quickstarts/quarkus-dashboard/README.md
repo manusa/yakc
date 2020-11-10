@@ -59,13 +59,7 @@ $ mvn clean package -Pbuild-frontend
 
 ### Native image
 
-The first step is building the `reflection-config.json` file that will be used by GraalVM to register
-classes for [reflection](https://www.graalvm.org/reference-manual/native-image/Reflection/.
-```shell script
-$ node scripts/generate-reflection-config.js
-```
-
-Next we can build the application
+Build the application using the `native` property.
 ```shell script
 # On Windows first you need to run this
 $ "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat" && mvn clean install -Pnative

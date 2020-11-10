@@ -18,6 +18,8 @@
 package com.marcnuri.yakc.quickstarts.dashboard.namespaces;
 
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Namespace;
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 import javax.inject.Singleton;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -30,6 +32,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Singleton
+@RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
 public class NamespaceResource {
 
   private final NamespaceService namespaceService;

@@ -18,6 +18,8 @@
 package com.marcnuri.yakc.quickstarts.dashboard.ingresses;
 
 import com.marcnuri.yakc.model.io.k8s.api.networking.v1.Ingress;
+import io.quarkus.runtime.annotations.RegisterForReflection;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
@@ -34,6 +36,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Singleton
+@RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
 public class IngressResource {
 
   private final IngressService ingressService;

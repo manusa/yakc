@@ -18,10 +18,6 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '11'
-      - name: Generate reflection config
-        working-directory: ./quickstarts/quarkus-dashboard
-        run: |
-          node scripts/generate-reflection-config.js
       - name: Build and Push
         working-directory: ./quickstarts/quarkus-dashboard
         run: |
