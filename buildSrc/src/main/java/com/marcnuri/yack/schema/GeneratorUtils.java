@@ -13,31 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Created on 2020-04-12, 8:58
+ * Created on 2020-11-11, 19:16
  */
 package com.marcnuri.yack.schema;
 
-import io.swagger.v3.oas.models.OpenAPI;
-import lombok.Builder;
-import lombok.Data;
-import org.gradle.api.logging.Logger;
+import io.swagger.v3.oas.models.media.Schema;
 
-import java.nio.file.Path;
-import java.util.Set;
+import java.util.Map;
+import java.util.function.Predicate;
 
 /**
- * Created by Marc Nuri on 2020-04-12.
+ * Created by Marc Nuri on 2020-11-11.
  */
-@Builder
-@Data
-public class GeneratorSettings {
-  private final Logger logger;
-  private final String packageName;
-  private final Path schema;
-  private final Path templatesDir;
-  private final Path outputDirectory;
-  private final Path sourceDirectory;
-  private final Path overridesDirectory;
-  private final OpenAPI openAPI;
-  private final Set<String> skipGenerationRegexes;
+public class GeneratorUtils {
+
+  private GeneratorUtils() {}
+
+  public static Predicate<? super Map.Entry<String, Schema>> filter(GeneratorSettings gs) {
+    return e -> {
+      for (String regex : gs.getSkipGenerationRegexes()) {
+        if (e.getKey().matches(regex)){
+           return false;
+        }
+      }
+      return true;
+    };
+  }
 }

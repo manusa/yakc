@@ -25,6 +25,12 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -40,6 +46,8 @@ public class ModelGeneratorTask extends DefaultTask {
   public File templatesDir;
   @Input
   public File outputDirectory;
+  @Input
+  public String[] skipGenerationRegexes;
 
   @TaskAction
   public void run() {
@@ -59,6 +67,8 @@ public class ModelGeneratorTask extends DefaultTask {
       .outputDirectory(outputDirectory.toPath())
       .sourceDirectory(outputDirectory.toPath().resolve("src").resolve("model").resolve("java"))
       .overridesDirectory(outputDirectory.toPath().resolve("src").resolve("main").resolve("java"))
+      .skipGenerationRegexes(Optional.ofNullable(skipGenerationRegexes).map(Arrays::asList).map(HashSet::new)
+        .orElse(new HashSet<>()))
       .build();
     new ModelGenerator(settings, openAPI).generate();
   }
