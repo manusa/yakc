@@ -5,8 +5,8 @@ apply from: rootDir.toPath().resolve('shared.gradle').toFile()
 
 ext {
   isPublishable = true
-  pomName = 'Tekton API & Model'
-  pomDescription = 'Retrofit2 based Java interfaces to create a declarative REST API client and model files for Tekton.'
+  pomName = 'Metrics Server Model & API'
+  pomDescription = 'Retrofit2 based Java interfaces to create a declarative REST API client and model files for the Metrics Server.'
 }
 
 dependencies {
@@ -20,7 +20,7 @@ sourceSets.main.java.srcDirs = ['src/api/java', 'src/main/java', 'src/model/java
 def templatesDirs = new File(rootProject.projectDir, "schema/templates")
 def schemaDir = new File(projectDir, "schema")
 def availableSchemaNames = Arrays.asList(
-  "tekton-0.17.2.json"
+  "metrics-server-0.4.0.json"
 )
 def availableSchemas = availableSchemaNames.stream()
     .map { s -> new File(schemaDir, s) }
