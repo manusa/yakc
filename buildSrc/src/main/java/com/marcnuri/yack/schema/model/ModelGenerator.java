@@ -19,6 +19,7 @@ package com.marcnuri.yack.schema.model;
 
 import com.marcnuri.yack.schema.GeneratorException;
 import com.marcnuri.yack.schema.GeneratorSettings;
+import com.marcnuri.yack.schema.GeneratorUtils;
 import com.marcnuri.yack.schema.SchemaUtils;
 import com.samskivert.mustache.Escapers;
 import com.samskivert.mustache.Mustache;
@@ -81,6 +82,7 @@ class ModelGenerator {
     final Map<String, Schema> schemas = ModelExtractor.extractSchemas(settings.getOpenAPI());
     settings.getLogger().lifecycle("Found {} schemas", schemas.size());
     schemas.entrySet().stream()
+      .filter(GeneratorUtils.filter(settings))
       .filter(entry -> entry.getValue() instanceof ObjectSchema)
       .filter(not(this::hasOverride))
       .map(this::mkPackageDirectories)
