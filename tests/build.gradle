@@ -1,7 +1,7 @@
 apply from: rootDir.toPath().resolve('shared.gradle').toFile()
 
 dependencies {
-  testImplementation project(':kubernetes-api'), project(':kubernetes-client')
+  testImplementation project(':kubernetes-api'), project(':kubernetes-client'), project(':apis:metrics-server')
   testImplementation "org.junit.jupiter:junit-jupiter-api:$version_junit"
   testImplementation "org.assertj:assertj-core:$version_assertj"
   testImplementation "org.awaitility:awaitility:$version_awaitility"

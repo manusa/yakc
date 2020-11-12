@@ -25,6 +25,9 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 /**
@@ -39,6 +42,8 @@ public class ApiGeneratorTask extends DefaultTask {
   public File templatesDir;
   @Input
   public File outputDirectory;
+  @Input
+  public String[] skipGenerationRegexes;
 
   @TaskAction
   public void run() {
@@ -58,6 +63,8 @@ public class ApiGeneratorTask extends DefaultTask {
       .outputDirectory(outputDirectory.toPath())
       .sourceDirectory(outputDirectory.toPath().resolve("src").resolve("api").resolve("java"))
       .overridesDirectory(outputDirectory.toPath().resolve("src").resolve("main").resolve("java"))
+      .skipGenerationRegexes(Optional.ofNullable(skipGenerationRegexes).map(Arrays::asList).map(HashSet::new)
+        .orElse(new HashSet<>()))
       .build();
     new ApiGenerator(settings).generate();
   }
