@@ -12,30 +12,28 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- * Created on 2020-11-11, 19:16
  */
-package com.marcnuri.yack.schema;
 
-import java.util.Map;
-import java.util.function.Predicate;
+package com.marcnuri.yakc.api.metrics;
 
-/**
- * Created by Marc Nuri on 2020-11-11.
- */
-public class GeneratorUtils {
+import com.marcnuri.yakc.api.Api;
+import com.marcnuri.yakc.api.KubernetesCall;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.APIGroup;
+import retrofit2.http.HTTP;
+import retrofit2.http.Headers;
 
-  private GeneratorUtils() {}
-
-  public static Predicate<? super Map.Entry<String, ?>> filter(GeneratorSettings gs) {
-    return e -> {
-      for (String regex : gs.getSkipGenerationRegexes()) {
-        if (e.getKey().matches(regex)){
-           return false;
-        }
-      }
-      return true;
-    };
-  }
+@SuppressWarnings({"squid:S1192", "unused"})
+public interface MetricsApi extends Api {
+  /**
+   * get information of a group
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/metrics.k8s.io/"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<APIGroup> getAPIGroup();
 
 }

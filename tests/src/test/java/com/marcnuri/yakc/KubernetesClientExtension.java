@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.extension.ExtensionContext.Namespace.GLOBAL;
  */
 public class KubernetesClientExtension implements BeforeAllCallback, CloseableResource {
 
-  static KubernetesClient KC;
+  public static KubernetesClient KC;
 
   @Override
   public synchronized void beforeAll(ExtensionContext context) {

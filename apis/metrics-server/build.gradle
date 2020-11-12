@@ -5,6 +5,7 @@ apply from: rootDir.toPath().resolve('shared.gradle').toFile()
 
 ext {
   isPublishable = true
+  project.group = project.group + ".apis"
   pomName = 'Metrics Server Model & API'
   pomDescription = 'Retrofit2 based Java interfaces to create a declarative REST API client and model files for the Metrics Server.'
 }
@@ -39,4 +40,5 @@ task generateApi(type: ApiGeneratorTask) {
   schemas = availableSchemas
   templatesDir = templatesDirs
   outputDirectory = projectDir
+  skipGenerationRegexes = ['^apis$', '^version$']
 }

@@ -19,6 +19,7 @@ package com.marcnuri.yack.schema.api;
 
 import com.marcnuri.yack.schema.GeneratorException;
 import com.marcnuri.yack.schema.GeneratorSettings;
+import com.marcnuri.yack.schema.GeneratorUtils;
 import com.marcnuri.yack.schema.SchemaUtils;
 import com.samskivert.mustache.Escapers;
 import com.samskivert.mustache.Mustache;
@@ -70,6 +71,7 @@ class ApiGenerator {
     final Map<String, List<ApiOperation>> operationTags = ApiExtractor.extractOperationTags(settings);
     settings.getLogger().lifecycle("Found {} operation tags", operationTags.size());
     operationTags.entrySet().stream()
+        .filter(GeneratorUtils.filter(settings))
         .map(this::mkPackageDirectories)
         .forEach(entry -> {
           final String tag = entry.getKey();
