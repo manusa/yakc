@@ -1,0 +1,68 @@
+/*
+ * Copyright 2020 Marc Nuri
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.marcnuri.yakc.model.io.k8s.api.apps.v1beta1;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.marcnuri.yakc.model.Model;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.runtime.RawExtension;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.ToString;
+
+/**
+ * DEPRECATED - This group version of ControllerRevision is deprecated by apps/v1beta2/ControllerRevision. See the release notes for more information. ControllerRevision implements an immutable snapshot of state data. Clients are responsible for serializing and deserializing the objects that contain their internal state. Once a ControllerRevision has been successfully created, it can not be updated. The API Server will fail validation of all requests that attempt to mutate the Data field. ControllerRevisions may, however, be deleted. Note that, due to its use by both the DaemonSet and StatefulSet controllers for update and rollback, this object is beta. However, it may be subject to name and representation changes in future releases, and clients should not depend on its stability. It is primarily for internal use by controllers.
+ */
+@SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@ToString
+public class ControllerRevision implements Model {
+
+
+  /**
+   * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources
+   */
+  @JsonProperty("apiVersion")
+  private String apiVersion;
+
+  @JsonProperty("data")
+  private RawExtension data;
+
+  /**
+   * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds
+   */
+  @JsonProperty("kind")
+  private String kind;
+
+  @JsonProperty("metadata")
+  private ObjectMeta metadata;
+
+  /**
+   * Revision indicates the revision of the state represented by Data.
+   */
+  @NonNull
+  @JsonProperty("revision")
+  private Number revision;
+
+}
+

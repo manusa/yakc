@@ -40,4 +40,5 @@ public class GeneratorSettings {
   private final Path overridesDirectory;
   private final OpenAPI openAPI;
   private final Set<String> skipGenerationRegexes;
+  private final Set<String> includeGenerationRegexes;
 }
