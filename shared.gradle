@@ -39,6 +39,7 @@ ext.configurePublishing = { Project evaluatedProject ->
       sign configurations.archives
     }
   }
+  apply plugin: 'org.kordamp.gradle.jandex'
   apply plugin: 'maven'
   def delombokedSourceDir = "$buildDir/delombok";
   task delombok(dependsOn: classes) {
