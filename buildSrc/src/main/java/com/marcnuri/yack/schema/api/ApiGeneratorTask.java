@@ -44,6 +44,8 @@ public class ApiGeneratorTask extends DefaultTask {
   public File outputDirectory;
   @Input
   public String[] skipGenerationRegexes;
+  @Input
+  public String[] includeGenerationRegexes;
 
   @TaskAction
   public void run() {
@@ -64,6 +66,8 @@ public class ApiGeneratorTask extends DefaultTask {
       .sourceDirectory(outputDirectory.toPath().resolve("src").resolve("api").resolve("java"))
       .overridesDirectory(outputDirectory.toPath().resolve("src").resolve("main").resolve("java"))
       .skipGenerationRegexes(Optional.ofNullable(skipGenerationRegexes).map(Arrays::asList).map(HashSet::new)
+        .orElse(new HashSet<>()))
+      .includeGenerationRegexes(Optional.ofNullable(includeGenerationRegexes).map(Arrays::asList).map(HashSet::new)
         .orElse(new HashSet<>()))
       .build();
     new ApiGenerator(settings).generate();

@@ -34,7 +34,15 @@ public class GeneratorUtils {
            return false;
         }
       }
-      return true;
+      if (gs.getIncludeGenerationRegexes().isEmpty()) {
+        return true;
+      }
+      for (String regex : gs.getIncludeGenerationRegexes()) {
+        if (e.getKey().matches(regex)){
+          return true;
+        }
+      }
+      return false;
     };
   }
 

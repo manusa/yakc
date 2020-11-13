@@ -66,7 +66,8 @@ public class SchemaUtils {
       "continue", "continues",
       "default", "defaults",
       "enum", "enumeration",
-      "class", "clazz"
+      "class", "clazz",
+      "import", "imports"
   );
 
   private final GeneratorSettings settings;

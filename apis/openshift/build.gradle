@@ -1,0 +1,52 @@
+import com.marcnuri.yack.schema.api.ApiGeneratorTask
+import com.marcnuri.yack.schema.model.ModelGeneratorTask
+
+apply from: rootDir.toPath().resolve('shared.gradle').toFile()
+
+ext {
+  isPublishable = true
+  project.group = project.group + ".apis"
+  pomName = 'OpenShift Model & API'
+  pomDescription = 'Retrofit2 based Java interfaces to create a declarative REST API client and model files for OpenShift.'
+}
+
+dependencies {
+  compile  project(':kubernetes-model')
+  compileOnly "org.projectlombok:lombok:$version_projectlombok"
+  annotationProcessor "org.projectlombok:lombok:$version_projectlombok"
+}
+sourceSets.main.java.srcDirs = ['src/api/java', 'src/main/java', 'src/model/java']
+
+
+def templatesDirs = new File(rootProject.projectDir, "schema/templates")
+def schemaDir = new File(projectDir, "schema")
+//
+def availableSchemaNames = Arrays.asList(
+  "openshift-4.4.8.json"
+  // Can easily download spec from Katacoda by: oc get --raw /openapi/v2 && https://bashupload.com/
+)
+def availableSchemas = availableSchemaNames.stream()
+    .map { s -> new File(schemaDir, s) }
+    .toArray{ i -> new File[i]}
+task generateModel(type: ModelGeneratorTask) {
+  group = 'generators'
+  packageName = 'com.marcnuri.yakc'
+  schemas = availableSchemas
+  templatesDir = templatesDirs
+  outputDirectory = projectDir
+  skipGenerationRegexes = ['^io\\.k8s\\..*']
+}
+task generateApi(type: ApiGeneratorTask) {
+  group = 'generators'
+  packageName = 'com.marcnuri.yakc'
+  schemas = availableSchemas
+  templatesDir = templatesDirs
+  outputDirectory = projectDir
+  includeGenerationRegexes = [
+    '^[a-zA-Z]+OpenshiftIo\\..*$',
+    '^[a-zA-Z]+OpenshiftIo$',
+    '^[a-zA-Z]+CoreosCom\\..*$',
+    '^[a-zA-Z]+CoreosCom$',
+    '^metal3Io\\..*$'
+  ]
+}
