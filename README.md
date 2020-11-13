@@ -78,7 +78,9 @@ setup Maven to use YAKC](https://www.katacoda.com/marcnuri/courses/yakc/maven-qu
 
 ## Modules
 
-### kubernetes-client-api
+### Core
+
+#### kubernetes-client-api
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc/kubernetes-client-api)
 ](https://search.maven.org/search?q=g:com.marcnuri.yakc%20a:kubernetes-client-api)
 [![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc/kubernetes-client-api/javadoc.svg)
@@ -86,7 +88,7 @@ setup Maven to use YAKC](https://www.katacoda.com/marcnuri/courses/yakc/maven-qu
 
 Provides the basic interfaces and Exception types to be used across the different modules.
 
-### kubernetes-model
+#### kubernetes-model
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc/kubernetes-model)
 ](https://search.maven.org/search?q=g:com.marcnuri.yakc%20a:kubernetes-model)
 [![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc/kubernetes-model/javadoc.svg)
@@ -94,7 +96,7 @@ Provides the basic interfaces and Exception types to be used across the differen
 
 Kubernetes model objects to be used for REST API serialization/deserialization.
 
-### kubernetes-api
+#### kubernetes-api
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc/kubernetes-api)
 ](https://search.maven.org/search?q=g:com.marcnuri.yakc%20a:kubernetes-api)
 [![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc/kubernetes-api/javadoc.svg)
@@ -104,11 +106,34 @@ Kubernetes model objects to be used for REST API serialization/deserialization.
 [Kubernetes JSON](https://github.com/kubernetes/kubernetes/blob/master/api/openapi-spec/swagger.json)
 [OpenAPI](https://swagger.io/specification/) schema.
 
-### kubernetes-client
+#### kubernetes-client
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc/kubernetes-client)
 ](https://search.maven.org/search?q=g:com.marcnuri.yakc%20a:kubernetes-client)
 [![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc/kubernetes-client/javadoc.svg)
 ](https://javadoc.io/doc/com.marcnuri.yakc/kubernetes-client)
 
-Kubernetes Retrofit2 based Java client to be used with kubernetes-api.
+Kubernetes Retrofit2 based Java client to be used with kubernetes-api or any of the provided [apis](#apis).
 
+### Apis
+
+#### metrics-server
+[![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/metrics-server)
+](https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:metrics-server)
+[![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc.apis/metrics-server/javadoc.svg)
+](https://javadoc.io/doc/com.marcnuri.yakc.apis/metrics-server)
+
+[Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
+[Kubernetes Metrics Server](https://github.com/kubernetes-sigs/metrics-server)
+
+### Extensions
+
+#### YAKC Quarkus Extension
+[![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc/quarkus-yakc-extension)
+](https://search.maven.org/search?q=g:com.marcnuri.yakc%20a:quarkus-yakc-extension)
+[![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc/quarkus-yakc-extension/javadoc.svg)
+](https://javadoc.io/doc/com.marcnuri.yakc/quarkus-yakc-extension)
+
+This [extension](https://github.com/manusa/yakc-quarkus-extension) provides the requirements to be able to produce
+[Quarkus](https://quarkus.io) native images for your application running with YAKC.
+
+The extension is hosted in a separate [repository](https://github.com/manusa/yakc-quarkus-extension).
