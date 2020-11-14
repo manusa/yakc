@@ -14,24 +14,10 @@
  * limitations under the License.
  *
  */
-import {getApiURL} from '../env';
-import {deleteNamespacedResource, toJson, updateNamespacedResource} from '../fetch';
-import metadata from "../metadata";
+import selectors from './selectors';
 
-const api = {};
+const metrics = {};
 
-api.metrics = async pod => {
-  const response = await fetch(
-    `${getApiURL()}/pods/${metadata.selectors.namespace(pod)}/${metadata.selectors.name(pod)}/metrics`);
-  return await toJson(response);
-};
+metrics.selectors = selectors;
 
-api.logs = (namespace, name) => new EventSource(
-  `${getApiURL()}/pods/${namespace}/${name}/logs`
-);
-
-api.requestDelete = deleteNamespacedResource('pods');
-
-api.update = updateNamespacedResource('pods');
-
-export default api;
+export default metrics;

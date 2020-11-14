@@ -15,16 +15,19 @@
  *
  */
 import React from 'react';
+import metrics from '../metrics';
 import Icon from './Icon';
 import Table from './Table';
 
 const containerHeaders = [
   <span><Icon icon='fa-id-card' /> Name</span>,
   <span><Icon icon='fa-layer-group'/> Image</span>,
-  <span><Icon icon='fa-ethernet' /> Ports</span>
+  <span><Icon icon='fa-ethernet' /> Ports</span>,
+  <span><Icon icon='fa-microchip' /> CPU</span>,
+  <span><Icon icon='fa-memory' /> Memory</span>
 ];
 
-const ContainerList = ({containers, ...properties}) => (
+const ContainerList = ({containers, podMetrics, ...properties}) => (
   <Table {...properties}>
     <Table.Head
       columns={containerHeaders}
@@ -38,6 +41,12 @@ const ContainerList = ({containers, ...properties}) => (
             {(c.ports ?? []).map((p, idx) => (
               <div key={idx}>{p.name} {p.containerPort} {p.protocol}</div>
             ))}
+          </Table.Cell>
+          <Table.Cell>
+            {podMetrics && podMetrics.containerCpu(c.name)}
+          </Table.Cell>
+          <Table.Cell>
+            {podMetrics && metrics.selectors.bytesToHumanReadable(podMetrics.containerMemory(c.name))}
           </Table.Cell>
         </Table.Row>
       ))}

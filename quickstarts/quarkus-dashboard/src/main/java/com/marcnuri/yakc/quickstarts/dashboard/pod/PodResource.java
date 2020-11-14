@@ -19,6 +19,7 @@ package com.marcnuri.yakc.quickstarts.dashboard.pod;
 
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
+import com.marcnuri.yakc.model.io.k8s.metrics.pkg.apis.metrics.v1beta1.PodMetrics;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.converters.multi.MultiRxConverters;
@@ -62,6 +63,14 @@ public class PodResource {
   public Pod get(@PathParam("namespace") String namespace, @PathParam("name") String name)
     throws IOException {
     return podService.getPod(name, namespace);
+  }
+
+  @GET
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/{namespace}/{name}/metrics")
+  public PodMetrics getPodMetrics(@PathParam("namespace") String namespace, @PathParam("name") String name)
+    throws IOException {
+    return podService.getPodMetrics(name, namespace);
   }
 
   @DELETE

@@ -17,6 +17,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
+import metrics from '../metrics';
 import n from './';
 import p from '../pods';
 import Card from '../components/Card';
@@ -24,31 +25,6 @@ import Form from '../components/Form';
 import Minikube from '../components/icons/Minikube';
 import ResourceDetailPage from '../components/ResourceDetailPage';
 import DonutChart from '../components/DonutChart';
-
-const quantityToScalar = (quantity = 0) => {
-  const quantityString = quantity.toString();
-  if (quantityString.endsWith("m")) {
-    return quantityString.substring(0, quantityString.length - 1) / 1000;
-  }
-  if (quantityString.endsWith("Ki")) {
-    return quantityString.substring(0, quantityString.length - 2) * 1024;
-  }
-  if (quantityString.endsWith("Mi")) {
-    return quantityString.substring(0, quantityString.length - 2) * Math.pow(1024, 2);
-  }
-  return parseFloat(quantityString);
-};
-
-const bytesToHumanReadable = (bytes = 0) => {
-  if (bytes > Math.pow(1024, 3)) {
-    return `${(bytes / Math.pow(1024, 3)).toFixed(3)} GiB`;
-  } else if (bytes > Math.pow(1024, 2)) {
-    return `${(bytes / Math.pow(1024, 2)).toFixed(0)} MiB`;
-  } else if (bytes > 1024) {
-    return `${(bytes / 1024).toFixed(0)}KiB`;
-  }
-  return bytes;
-}
 
 const Dial = ({title, description, partial, total, percent = partial / total * 100}) => (
   <div>
@@ -72,11 +48,11 @@ const NodesDetailPage = ({node, isMinikube, pods}) => {
     .map(c => c.resources.requests ?? {});
   const requestedCpu = requests
     .map(r => r.cpu ?? 0)
-    .reduce((acc, c) => acc + quantityToScalar(c), 0);
-  const allocatableMemory = quantityToScalar(n.selectors.statusAllocatableMemory(node));
+    .reduce((acc, c) => acc + metrics.selectors.quantityToScalar(c), 0);
+  const allocatableMemory = metrics.selectors.quantityToScalar(n.selectors.statusAllocatableMemory(node));
   const requestedMemory = requests
     .map(r => r.memory ?? 0)
-    .reduce((acc, c) => acc + quantityToScalar(c), 0);
+    .reduce((acc, c) => acc + metrics.selectors.quantityToScalar(c), 0);
   return (
     <ResourceDetailPage
       name='Nodes'
@@ -91,14 +67,14 @@ const NodesDetailPage = ({node, isMinikube, pods}) => {
               title='CPU'
               description='Requested vs. allocatable'
               partial={requestedCpu.toFixed(3)}
-              total={quantityToScalar(n.selectors.statusAllocatableCpu(node)).toFixed(3)}
+              total={metrics.selectors.quantityToScalar(n.selectors.statusAllocatableCpu(node)).toFixed(3)}
             />
             <Dial
               title='Memory'
               description='Requested vs. allocatable'
               percent={(requestedMemory / allocatableMemory * 100)}
-              partial={bytesToHumanReadable(requestedMemory)}
-              total={bytesToHumanReadable(allocatableMemory)}
+              partial={metrics.selectors.bytesToHumanReadable(requestedMemory)}
+              total={metrics.selectors.bytesToHumanReadable(allocatableMemory)}
             />
             <Dial
               title='Pods'

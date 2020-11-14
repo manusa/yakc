@@ -25,7 +25,9 @@ import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListPodForAllNamespaces;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api.ReadNamespacedPodLog;
+import com.marcnuri.yakc.api.metrics.v1beta1.MetricsV1beta1Api;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
+import com.marcnuri.yakc.model.io.k8s.metrics.pkg.apis.metrics.v1beta1.PodMetrics;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
@@ -67,6 +69,10 @@ public class PodService implements Watchable<Pod> {
 
   public Pod getPod(String name, String namespace) throws IOException {
     return kubernetesClient.create(CoreV1Api.class).readNamespacedPod(name, namespace).get();
+  }
+
+  public PodMetrics getPodMetrics(String name, String namespace) throws IOException {
+    return kubernetesClient.create(MetricsV1beta1Api.class).readNamespacedPodMetrics(name, namespace).get();
   }
 
   public Pod deletePod(String name, String namespace) throws IOException {
