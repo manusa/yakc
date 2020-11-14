@@ -50,13 +50,7 @@
     <dependency>
       <groupId>com.marcnuri.yakc</groupId>
       <artifactId>quarkus-yakc-extension</artifactId>
-      <version>0.0.4</version>
-    </dependency>
-<!--    TODO REMOVE-->
-    <dependency>
-      <groupId>com.marcnuri.yakc</groupId>
-      <artifactId>quarkus-yakc-extension-deployment</artifactId>
-      <version>0.0.4</version>
+      <version>0.0.5</version>
     </dependency>
   </dependencies>
   <build>
