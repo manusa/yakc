@@ -62,9 +62,15 @@ $ mvn clean package -Pbuild-frontend
 Build the application using the `native` property.
 ```shell script
 # On Windows first you need to run this
-$ "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\VC\Auxiliary\Build\vcvars64.bat" && mvn clean install -Pnative
+$ "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat" && mvn clean install -Pnative
 # To build (You can combine with the front-end build profiles)
 $ mvn clean package -Dnative
+```
+
+#### (Windows) Install vc build tools
+
+```shell script
+$ choco install -y visualstudio2017community --no-progress --package-parameters "--add Microsoft.VisualStudio.Component.VC.Tools.ARM64 --add Microsoft.VisualStudio.Component.VC.CMake.Project"
 ```
 
 ## Build & Deploy to Minikube using Maven
