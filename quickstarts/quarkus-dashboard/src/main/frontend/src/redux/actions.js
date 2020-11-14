@@ -28,7 +28,8 @@ actions.Types = {
   UI_SET_ERROR: 'UI_SET_ERROR',
   UI_CLEAR_ERROR: 'UI_CLEAR_ERROR',
   UI_SET_RESOURCE_LOADED: 'UI_SET_RESOURCE_LOADED',
-  UI_SELECT_NAMESPACE: 'SELECT_NAMESPACE'
+  UI_SELECT_NAMESPACE: 'SELECT_NAMESPACE',
+  UI_SET_QUERY: 'UI_SET_QUERY'
 }
 
 actions.clear = () => ({
@@ -72,6 +73,11 @@ actions.setResourceLoaded = ({kind, loaded = false}) => ({
 actions.selectNamespace = namespace => ({
   type: actions.Types.UI_SELECT_NAMESPACE,
   payload: namespace
+});
+
+actions.setQuery = query => ({
+  type: actions.Types.UI_SET_QUERY,
+  payload: query
 });
 
 actions.clearSelectedNamespace = () => actions.selectNamespace(null);

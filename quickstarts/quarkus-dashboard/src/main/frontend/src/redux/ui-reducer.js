@@ -21,7 +21,8 @@ const defaultState = {
   offline: false,
   error: '',
   loadedResources: {},
-  selectedNamespace: null
+  selectedNamespace: null,
+  query: ''
 };
 
 const uiReducer = (state = defaultState, action = {}) => {
@@ -50,6 +51,9 @@ const uiReducer = (state = defaultState, action = {}) => {
     }
     case Types.UI_SELECT_NAMESPACE: {
       return {...state, selectedNamespace: action.payload};
+    }
+    case Types.UI_SET_QUERY: {
+      return {...state, query: action.payload};
     }
     default:
       return {...state};

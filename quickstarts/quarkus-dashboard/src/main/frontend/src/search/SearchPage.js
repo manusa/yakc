@@ -14,7 +14,8 @@
  * limitations under the License.
  *
  */
-import React, {useState, useLayoutEffect, useRef} from 'react';
+import React, {useLayoutEffect, useRef} from 'react';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import cRoles from '../clusterroles';
 import cm from '../configmaps';
@@ -26,6 +27,7 @@ import pv from '../persistentvolumes';
 import s from '../secrets';
 import ss from '../statefulsets';
 import svc from '../services';
+import redux from '../redux';
 import rs from '../replicasets';
 import roles from '../roles';
 import Card from '../components/Card';
@@ -77,8 +79,7 @@ const Results = ({query, selectedNamespace}) => {
   )
 };
 
-const SearchPage = ({selectedNamespace}) => {
-  const [query, setQuery] = useState('');
+const SearchPage = ({selectedNamespace, query, setQuery}) => {
   const inputRef = useRef(null);
   useLayoutEffect(() => {
     inputRef.current.focus();
@@ -101,8 +102,12 @@ const SearchPage = ({selectedNamespace}) => {
   );
 };
 
-const mapStateToProps = ({ui: {selectedNamespace}}) => ({
-  selectedNamespace
+const mapStateToProps = ({ui: {selectedNamespace, query}}) => ({
+  selectedNamespace, query
 });
 
-export default connect(mapStateToProps)(SearchPage);
+const mapDispatchToProps = dispatch => bindActionCreators({
+  setQuery: redux.actions.setQuery
+}, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPage);
