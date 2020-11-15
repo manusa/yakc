@@ -85,7 +85,7 @@ const ExtNavItem = ({href, children}) => (
   >{children}</Link>
 );
 
-const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem}) => {
+const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem, isOpenShift}) => {
   const ref = useRef(null);
   useLayoutEffect(() => {
     ref.current.scroll(0, currentScrollTop);
@@ -104,7 +104,7 @@ const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem}) => {
                   label='Workloads' icon='fa-cubes'>
           <K8sNavItem to='/pods' Icon={i.Pod}>Pods</K8sNavItem>
           <K8sNavItem to='/deployments' Icon={i.Deployment}>Deployments</K8sNavItem>
-          <K8sNavItem to='/deploymentconfigs' Icon={i.DeploymentConfig}>Deployment Configs</K8sNavItem>
+          {isOpenShift && <K8sNavItem to='/deploymentconfigs' Icon={i.DeploymentConfig}>Deployment Configs</K8sNavItem>}
           <K8sNavItem to='/statefulsets' Icon={i.StatefulSet}>StatefulSets</K8sNavItem>
         </NavGroup>
         <NavGroup expandedItems={expandedItems} toggleItem={toggleItem}
@@ -136,7 +136,7 @@ const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem}) => {
   );
 }
 
-const SideBar = ({sideBarOpen, scroll, currentScrollTop, expandedItems, toggleItem}) => {
+const SideBar = ({sideBarOpen, scroll, currentScrollTop, expandedItems, toggleItem, isOpenShift}) => {
   return (
     <div
       className={`${sideBarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'}
@@ -157,6 +157,7 @@ const SideBar = ({sideBarOpen, scroll, currentScrollTop, expandedItems, toggleIt
       <NavSection
         currentScrollTop={currentScrollTop} scroll={scroll}
         expandedItems={expandedItems} toggleItem={toggleItem}
+        isOpenShift={isOpenShift}
       />
     </div>
   );

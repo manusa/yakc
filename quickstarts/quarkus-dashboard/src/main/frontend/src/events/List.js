@@ -46,6 +46,10 @@ const EventName = ({event}) => {
       Component = Link.Deployment;
       url = `/deployments/${uid}`;
       break;
+    case 'DeploymentConfig':
+      Component = Link.DeploymentConfig;
+      url = `/deploymentconfigs/${uid}`;
+      break;
     case 'Ingress':
       Component = Link.Ingress;
       url = `/ingresses/${uid}`;

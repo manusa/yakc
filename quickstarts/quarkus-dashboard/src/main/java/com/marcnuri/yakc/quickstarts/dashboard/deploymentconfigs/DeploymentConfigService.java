@@ -33,6 +33,8 @@ import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 
 import io.reactivex.Observable;
 
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
+
 @Singleton
 public class DeploymentConfigService implements Watchable<DeploymentConfig> {
 
@@ -52,13 +54,15 @@ public class DeploymentConfigService implements Watchable<DeploymentConfig> {
   @Override
   public Observable<WatchEvent<DeploymentConfig>> watch() throws IOException {
     final AppsOpenshiftIoV1Api apps = kubernetesClient.create(AppsOpenshiftIoV1Api.class);
-    try {
-      apps.listDeploymentConfigForAllNamespaces(new AppsOpenshiftIoV1Api.ListDeploymentConfigForAllNamespaces().limit(1))
-        .get();
-      return apps.listDeploymentConfigForAllNamespaces().watch();
-    } catch (ClientErrorException ex) {
-      return apps.listNamespacedDeploymentConfig(kubernetesClient.getConfiguration().getNamespace()).watch();
-    }
+    return tryWithFallback(
+      () -> {
+        apps.listDeploymentConfigForAllNamespaces(new AppsOpenshiftIoV1Api.ListDeploymentConfigForAllNamespaces().limit(1))
+          .get();
+        return apps.listDeploymentConfigForAllNamespaces().watch();
+      },
+      () -> apps.listNamespacedDeploymentConfig(kubernetesClient.getConfiguration().getNamespace()).watch(),
+      () -> Observable.empty()
+    );
   }
 
   public Status delete(String name, String namespace) throws IOException {
