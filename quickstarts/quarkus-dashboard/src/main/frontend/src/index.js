@@ -18,6 +18,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {combineReducers, createStore} from 'redux';
+import apis from './apis';
 import cRoles from './clusterroles';
 import configMaps from './configmaps';
 import deployments from './deployments';
@@ -49,6 +50,7 @@ const storeEnhancer = () => {
 };
 
 const store = createStore(combineReducers({
+  apiGroups: apis.apiGroupsReducer,
   clusterRoles: cRoles.reducer,
   configMaps: configMaps.reducer,
   deployments: deployments.reducer,

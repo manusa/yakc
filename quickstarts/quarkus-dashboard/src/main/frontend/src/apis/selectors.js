@@ -14,13 +14,8 @@
  * limitations under the License.
  *
  */
-import {deleteResource, listResource, toJson} from '../fetch';
+const selectors = {};
 
-const api = {};
+selectors.isOpenShift = apiGroups => apiGroups.some(g => g.endsWith('.openshift.io'));
 
-api.list = listResource('namespaces', 'Namespace');
-
-const deleteFunc = deleteResource('namespaces');
-api.delete = async namespace => await toJson(await deleteFunc(namespace));
-
-export default api;
+export default selectors;

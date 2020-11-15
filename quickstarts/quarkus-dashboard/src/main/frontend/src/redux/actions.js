@@ -22,6 +22,7 @@ actions.Types = {
   CRUD_ADD_OR_REPLACE: 'CRUD_ADD_OR_REPLACE',
   CRUD_DELETE: 'CRUD_DELETE',
   CRUD_SET_ALL: 'CRUD_SET_ALL',
+  API_GROUPS_SET: 'API_GROUPS_SET',
   SIDEBAR_SCROLL: 'SIDEBAR_SCROLL',
   SIDEBAR_TOGGLE_ITEM: 'SIDEBAR_TOGGLE_ITEM',
   UI_SET_OFFLINE: 'UI_SET_OFFLINE',
@@ -49,6 +50,11 @@ actions.crudDelete = object => ({
 actions.crudSetAll = ({kind, resources}) => ({
   type: actions.Types.CRUD_SET_ALL,
   payload: {kind, resources}
+});
+
+actions.apiGroupsSet = apiGroups => ({
+  type: actions.Types.API_GROUPS_SET,
+  payload: apiGroups
 });
 
 actions.setOffline = (offline = false) => ({

@@ -14,13 +14,16 @@
  * limitations under the License.
  *
  */
-import {deleteResource, listResource, toJson} from '../fetch';
+import redux from '../redux';
 
-const api = {};
+const {actions: {Types}} = redux;
+const defaultState = [];
 
-api.list = listResource('namespaces', 'Namespace');
+const apiGroupsReducer =  (state = defaultState, action = {}) => {
+  if (action.type === Types.API_GROUPS_SET) {
+    return [...action.payload];
+  }
+  return [...state];
+};
 
-const deleteFunc = deleteResource('namespaces');
-api.delete = async namespace => await toJson(await deleteFunc(namespace));
-
-export default api;
+export default apiGroupsReducer;

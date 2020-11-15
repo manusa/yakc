@@ -14,13 +14,14 @@
  * limitations under the License.
  *
  */
-import {deleteResource, listResource, toJson} from '../fetch';
+import api from './api';
+import apiGroupsReducer from './apiGroupsReducer';
+import selectors from './selectors';
 
-const api = {};
+const apis = {};
 
-api.list = listResource('namespaces', 'Namespace');
+apis.api = api;
+apis.apiGroupsReducer = apiGroupsReducer;
+apis.selectors = selectors;
 
-const deleteFunc = deleteResource('namespaces');
-api.delete = async namespace => await toJson(await deleteFunc(namespace));
-
-export default api;
+export default apis;

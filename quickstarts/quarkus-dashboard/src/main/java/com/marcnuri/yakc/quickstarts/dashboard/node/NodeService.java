@@ -18,7 +18,6 @@
 package com.marcnuri.yakc.quickstarts.dashboard.node;
 
 import com.marcnuri.yakc.KubernetesClient;
-import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListNode;
@@ -27,15 +26,13 @@ import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.ignoreForbidden;
+
 @Singleton
 public class NodeService implements Watchable<Node> {
-
-  private static final Logger LOG = LoggerFactory.getLogger(NodeService.class);
 
   private final KubernetesClient kubernetesClient;
 
@@ -47,16 +44,13 @@ public class NodeService implements Watchable<Node> {
   @Override
   public  Observable<WatchEvent<Node>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
-    try {
-      core.listNode(new ListNode().limit(1)).get();
-      return core.listNode().watch();
-    } catch (ClientErrorException ex) {
-      if (ex.getCode() == 403) {
-        LOG.warn("Access to Node information is forbidden: {}", ex.getMessage());
-        return Observable.empty();
-      }
-      throw ex;
-    }
+    return ignoreForbidden(
+      () -> {
+        core.listNode(new ListNode().limit(1)).get();
+        return core.listNode().watch();
+      },
+      Observable.empty()
+    );
   }
 
 }

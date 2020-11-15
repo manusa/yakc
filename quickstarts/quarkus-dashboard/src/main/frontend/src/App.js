@@ -17,6 +17,7 @@
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import apis from './apis';
 import cRoles from './clusterroles';
 import configMaps from './configmaps';
 import deployments from './deployments';
@@ -45,6 +46,7 @@ const pollResources = dispatch => {
     };
     try {
       await Promise.all([
+        apis.api.listGroups().then(apiGroups => dispatch(redux.actions.apiGroupsSet(apiGroups))),
         ingresses.api.list().then(handleResourceList('Ingress')),
         ns.api.list().then(handleResourceList('Namespace')),
         pvc.api.list().then(handleResourceList('PersistentVolumeClaim')),

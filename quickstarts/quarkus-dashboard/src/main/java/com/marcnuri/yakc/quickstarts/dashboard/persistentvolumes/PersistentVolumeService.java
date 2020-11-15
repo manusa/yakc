@@ -24,7 +24,10 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
+
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.ignoreForbidden;
 
 @Singleton
 public class PersistentVolumeService {
@@ -37,7 +40,10 @@ public class PersistentVolumeService {
   }
 
   public List<PersistentVolume> get() throws IOException {
-    return kubernetesClient.create(CoreV1Api.class).listPersistentVolume().get().getItems();
+    return ignoreForbidden(
+      () -> kubernetesClient.create(CoreV1Api.class).listPersistentVolume().get().getItems(),
+      Collections.emptyList()
+    );
   }
 
   public PersistentVolume deletePersistentVolume(String name) throws IOException {

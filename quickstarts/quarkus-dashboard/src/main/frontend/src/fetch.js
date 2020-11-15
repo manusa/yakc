@@ -44,9 +44,7 @@ export const fixKind = kind => resources =>
   resources.map(resource => ({kind, ...resource}));
 
 export const listResource = (path, kind) => async () => {
-  const response = await fetch(
-    `${getApiURL()}/${path}`
-  );
+  const response = await fetch(`${getApiURL()}/${path}`);
   const rawList =  await toJson(response);
   return fixKind(kind)(rawList);
 };
@@ -54,7 +52,7 @@ export const listResource = (path, kind) => async () => {
 const deleteRequest = async url => await fetch(url,{method: 'DELETE'});
 
 export const deleteResource = path => async resource => {
-  await deleteRequest(`${getApiURL()}/${path}/${metadata.selectors.name(resource)}`);
+  return deleteRequest(`${getApiURL()}/${path}/${metadata.selectors.name(resource)}`);
 };
 
 export const deleteNamespacedResource = path => async resource => {

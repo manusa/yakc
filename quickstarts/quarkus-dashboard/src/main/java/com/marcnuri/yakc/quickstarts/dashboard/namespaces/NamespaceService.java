@@ -24,7 +24,10 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
+
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 @Singleton
 public class NamespaceService {
@@ -37,7 +40,16 @@ public class NamespaceService {
   }
 
   public List<Namespace> get() throws IOException {
-    return kubernetesClient.create(CoreV1Api.class).listNamespace().get().getItems();
+    return tryWithFallback(
+      () -> kubernetesClient.create(CoreV1Api.class).listNamespace().get().getItems(),
+      () -> {
+        final String configNamespace = kubernetesClient.getConfiguration().getNamespace();
+        if (configNamespace != null) {
+          return Collections.singletonList(kubernetesClient.create(CoreV1Api.class).readNamespace(configNamespace).get());
+        }
+        return Collections.emptyList();
+      }
+    );
   }
 
   public Namespace deleteNamespace(String name) throws IOException {

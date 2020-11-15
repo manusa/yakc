@@ -6,20 +6,26 @@
 package com.marcnuri.yakc.quickstarts.dashboard;
 
 
-import com.marcnuri.yakc.api.ClientErrorException;
-
 import java.io.IOException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.marcnuri.yakc.api.ClientErrorException;
+import com.marcnuri.yakc.api.ForbiddenException;
 
 /**
  * Created by Marc Nuri on 2020-10-05.
  */
 public class ClientUtil {
 
+  private static final Logger LOG = LoggerFactory.getLogger(ClientUtil.class);
+
   @SafeVarargs
-  public static <T> T tryWithFallback(RetryFunction<T>... functions) throws IOException {
+  public static <T> T tryWithFallback(ClientFunction<T>... functions) throws IOException {
     IOException exception = new IOException(
       "This exception should be replaced if caught and finally thrown");
-    for (RetryFunction<T> func : functions) {
+    for (ClientFunction<T> func : functions) {
       try {
         return func.call();
       } catch (ClientErrorException ex) {
@@ -31,8 +37,17 @@ public class ClientUtil {
     throw exception;
   }
 
+  public static <T> T ignoreForbidden(ClientFunction<T> function, T defaultIfForbidden) throws IOException {
+    try {
+      return function.call();
+    } catch (ForbiddenException ex) {
+      LOG.debug("Access to resource is forbidden, ignoring:\n{}", ex.getMessage());
+      return defaultIfForbidden;
+    }
+  }
+
   @FunctionalInterface
-  public interface RetryFunction<T> {
+  public interface ClientFunction<T> {
     T call() throws IOException;
   }
 }

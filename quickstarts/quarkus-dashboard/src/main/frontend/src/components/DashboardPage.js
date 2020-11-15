@@ -18,6 +18,7 @@ import React, {useState} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import redux from '../redux';
+import apis from "../apis";
 import i from './icons';
 import nm from '../nodes';
 import sidebar from '../sidebar';
@@ -33,7 +34,7 @@ const OfflineIcon = () => (
   </div>
 );
 
-const Header = ({isMinikube, offline, setSideBarOpen, title}) => {
+const Header = ({isMinikube, isOpenShift, offline, setSideBarOpen, title}) => {
   return (
     <header className='flex justify-between items-center py-4 px-6 bg-white border-b-2 border-blue-700 border-opacity-75'>
       <div className='flex w-full items-center'>
@@ -50,6 +51,9 @@ const Header = ({isMinikube, offline, setSideBarOpen, title}) => {
         <div className='flex relative items-center mx-4 lg:text-xl lg:mx-0 flex-1 truncate'>
           {isMinikube && <Tooltip content='Minikube cluster detected'>
             <i.Minikube className='h-6 mr-2' />
+          </Tooltip>}
+          {isOpenShift && <Tooltip content='OpenShift cluster detected'>
+            <i.OpenShift className='h-6 mr-2' />
           </Tooltip>}
           {title}
         </div>
@@ -70,7 +74,7 @@ const Footer = () => (
 );
 
 const DashboardPage = ({
-  className, isMinikube, offline, error, clearError, title, children
+  className, isMinikube, isOpenShift, offline, error, clearError, title, children
 }) => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
   return (
@@ -82,7 +86,7 @@ const DashboardPage = ({
       <sidebar.SideBar sideBarOpen={sideBarOpen} />
       <div className='flex-1 flex flex-col overflow-hidden'>
         <Header
-          isMinikube={isMinikube} offline={offline} setSideBarOpen={setSideBarOpen}
+          isMinikube={isMinikube} isOpenShift={isOpenShift} offline={offline} setSideBarOpen={setSideBarOpen}
           title={title}
         />
         <main className='flex-1 flex flex-col overflow-x-hidden overflow-y-auto bg-gray-200'>
@@ -98,8 +102,9 @@ const DashboardPage = ({
 };
 
 
-const mapStateToProps = ({nodes, ui: {offline, error}}) => ({
+const mapStateToProps = ({apiGroups, nodes, ui: {offline, error}}) => ({
   isMinikube: nm.selectors.isMinikube(nodes),
+  isOpenShift: apis.selectors.isOpenShift(apiGroups),
   offline,
   error
 });

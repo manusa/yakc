@@ -17,6 +17,7 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard;
 
+import com.marcnuri.yakc.quickstarts.dashboard.apis.ApisResource;
 import com.marcnuri.yakc.quickstarts.dashboard.clusterroles.ClusterRoleResource;
 import com.marcnuri.yakc.quickstarts.dashboard.configmaps.ConfigMapResource;
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentResource;
@@ -43,6 +44,7 @@ import javax.ws.rs.Path;
 @RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
 public class ApiResource {
 
+  private final ApisResource apisResource;
   private final ClusterRoleResource clusterRoleResource;
   private final ConfigMapResource configMapResource;
   private final DeploymentResource deploymentResource;
@@ -63,6 +65,7 @@ public class ApiResource {
   @SuppressWarnings("java:S107")
   @Inject
   public ApiResource(
+    ApisResource apisResource,
     ClusterRoleResource clusterRoleResource,
     ConfigMapResource configMapResource,
     DeploymentResource deploymentResource,
@@ -79,6 +82,7 @@ public class ApiResource {
     ServiceResource serviceResource,
     StatefulSetResource statefulSetResource,
     WatchResource watchResource) {
+    this.apisResource = apisResource;
     this.clusterRoleResource = clusterRoleResource;
     this.configMapResource = configMapResource;
     this.deploymentResource = deploymentResource;
@@ -95,6 +99,11 @@ public class ApiResource {
     this.serviceResource = serviceResource;
     this.statefulSetResource = statefulSetResource;
     this.watchResource = watchResource;
+  }
+
+  @Path("/apis")
+  public ApisResource getApisResource() {
+    return apisResource;
   }
 
   @Path("/clusterroles")
@@ -133,7 +142,7 @@ public class ApiResource {
   }
 
   @Path("/persistentvolumeclaims")
-  public PersistentVolumeClaimResource getPer() {
+  public PersistentVolumeClaimResource getPersistentVolumeClaimResource() {
     return persistentVolumeClaimResource;
   }
 

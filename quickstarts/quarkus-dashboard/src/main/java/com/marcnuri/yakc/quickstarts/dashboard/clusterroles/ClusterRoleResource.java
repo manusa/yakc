@@ -42,8 +42,7 @@ public class ClusterRoleResource {
   private final ClusterRoleService clusterRoleService;
 
   @Inject
-  public ClusterRoleResource(
-    ClusterRoleService clusterRoleService) {
+  public ClusterRoleResource(ClusterRoleService clusterRoleService) {
     this.clusterRoleService = clusterRoleService;
   }
 

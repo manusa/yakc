@@ -14,13 +14,11 @@
  * limitations under the License.
  *
  */
-import {deleteResource, listResource, toJson} from '../fetch';
+import {toJson} from '../fetch';
+import {getApiURL} from '../env';
 
 const api = {};
 
-api.list = listResource('namespaces', 'Namespace');
-
-const deleteFunc = deleteResource('namespaces');
-api.delete = async namespace => await toJson(await deleteFunc(namespace));
+api.listGroups = async () => await toJson(await fetch(`${getApiURL()}/apis/groups`));
 
 export default api;
