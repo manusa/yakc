@@ -19,6 +19,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import cRoles from '../clusterroles';
 import cm from '../configmaps';
+import dc from '../deploymentconfigs';
 import d from '../deployments';
 import i from '../ingresses';
 import p from '../pods';
@@ -55,6 +56,8 @@ const Results = ({query, selectedNamespace}) => {
         title='Pods' nameLike={query} namespace={selectedNamespace} />
       <d.List {...commonProps}
         title='Deployments' nameLike={query} namespace={selectedNamespace} />
+      <dc.List {...commonProps}
+        title='DeploymentConfigs' nameLike={query} namespace={selectedNamespace} />
       <ss.List {...commonProps}
         title='StatefulSets' nameLike={query} namespace={selectedNamespace} />
       <rs.List {...commonProps}

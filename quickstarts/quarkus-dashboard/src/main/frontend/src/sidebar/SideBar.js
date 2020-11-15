@@ -18,6 +18,7 @@ import React, {useRef, useLayoutEffect} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {withRouter} from 'react-router-dom';
+import apis from "../apis";
 import i from '../components/icons';
 import redux from '../redux';
 import Icon from '../components/Icon';
@@ -34,7 +35,7 @@ const SideBarNavLink = ({match: {path}, to, staticContext, className = '', ...pr
       'border-transparent text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100'}`}
     {...props}
   />
-)
+);
 
 const RoutedLink = withRouter(SideBarNavLink);
 
@@ -98,10 +99,14 @@ const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem}) => {
       <K8sNavItem to='/' Icon={i.Kubernetes}>Home</K8sNavItem>
       <K8sNavItem to='/nodes' Icon={i.Node}>Nodes</K8sNavItem>
       <K8sNavItem to='/namespaces' Icon={i.Namespace}>Namespaces</K8sNavItem>
-      <K8sNavItem to='/pods' Icon={i.Pod}>Pods</K8sNavItem>
-      <K8sNavItem to='/deployments' Icon={i.Deployment}>Deployments</K8sNavItem>
-      <K8sNavItem to='/statefulsets' Icon={i.StatefulSet}>StatefulSets</K8sNavItem>
       <div>
+        <NavGroup expandedItems={expandedItems} toggleItem={toggleItem}
+                  label='Workloads' icon='fa-cubes'>
+          <K8sNavItem to='/pods' Icon={i.Pod}>Pods</K8sNavItem>
+          <K8sNavItem to='/deployments' Icon={i.Deployment}>Deployments</K8sNavItem>
+          <K8sNavItem to='/deploymentconfigs' Icon={i.DeploymentConfig}>Deployment Configs</K8sNavItem>
+          <K8sNavItem to='/statefulsets' Icon={i.StatefulSet}>StatefulSets</K8sNavItem>
+        </NavGroup>
         <NavGroup expandedItems={expandedItems} toggleItem={toggleItem}
                   label='Network' icon='fa-network-wired'>
           <K8sNavItem to='/services' Icon={i.Service}>Services</K8sNavItem>
@@ -157,8 +162,9 @@ const SideBar = ({sideBarOpen, scroll, currentScrollTop, expandedItems, toggleIt
   );
 };
 
-const mapStateToProps = ({sidebar: {expandedItems, scroll: {scrollTop: currentScrollTop}}}) => ({
-  expandedItems, currentScrollTop
+const mapStateToProps = ({apiGroups, sidebar: {expandedItems, scroll: {scrollTop: currentScrollTop}}}) => ({
+  expandedItems, currentScrollTop,
+  isOpenShift: apis.selectors.isOpenShift(apiGroups)
 });
 
 const mapDispatchToProps = dispatch =>  bindActionCreators({

@@ -21,6 +21,7 @@ import com.marcnuri.yakc.model.Model;
 import com.marcnuri.yakc.quickstarts.dashboard.clusterroles.ClusterRoleService;
 import com.marcnuri.yakc.quickstarts.dashboard.configmaps.ConfigMapService;
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentService;
+import com.marcnuri.yakc.quickstarts.dashboard.deploymentconfigs.DeploymentConfigService;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventService;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeService;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodService;
@@ -53,6 +54,7 @@ public class WatchService {
   public WatchService(
     ClusterRoleService clusterRoleService,
     ConfigMapService configMapService,
+    DeploymentConfigService deploymentConfigService,
     DeploymentService deploymentService,
     EventService eventService, NodeService nodeService,
     PodService podService,
@@ -64,6 +66,7 @@ public class WatchService {
     this.watchables = Arrays.asList(
       clusterRoleService,
       configMapService,
+      deploymentConfigService,
       deploymentService,
       eventService,
       nodeService,

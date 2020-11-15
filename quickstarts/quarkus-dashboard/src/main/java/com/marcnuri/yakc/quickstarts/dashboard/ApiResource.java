@@ -21,6 +21,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.apis.ApisResource;
 import com.marcnuri.yakc.quickstarts.dashboard.clusterroles.ClusterRoleResource;
 import com.marcnuri.yakc.quickstarts.dashboard.configmaps.ConfigMapResource;
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentResource;
+import com.marcnuri.yakc.quickstarts.dashboard.deploymentconfigs.DeploymentConfigResource;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
 import com.marcnuri.yakc.quickstarts.dashboard.ingresses.IngressResource;
 import com.marcnuri.yakc.quickstarts.dashboard.namespaces.NamespaceResource;
@@ -47,6 +48,7 @@ public class ApiResource {
   private final ApisResource apisResource;
   private final ClusterRoleResource clusterRoleResource;
   private final ConfigMapResource configMapResource;
+  private final DeploymentConfigResource deploymentConfigResource;
   private final DeploymentResource deploymentResource;
   private final EventResource eventResource;
   private final IngressResource ingressResource;
@@ -68,6 +70,7 @@ public class ApiResource {
     ApisResource apisResource,
     ClusterRoleResource clusterRoleResource,
     ConfigMapResource configMapResource,
+    DeploymentConfigResource deploymentConfigResource,
     DeploymentResource deploymentResource,
     EventResource eventResource,
     IngressResource ingressResource,
@@ -85,6 +88,7 @@ public class ApiResource {
     this.apisResource = apisResource;
     this.clusterRoleResource = clusterRoleResource;
     this.configMapResource = configMapResource;
+    this.deploymentConfigResource = deploymentConfigResource;
     this.deploymentResource = deploymentResource;
     this.eventResource = eventResource;
     this.ingressResource = ingressResource;
@@ -114,6 +118,11 @@ public class ApiResource {
   @Path("/configmaps")
   public ConfigMapResource getConfigMapResource() {
     return configMapResource;
+  }
+
+  @Path("/deploymentconfigs")
+  public DeploymentConfigResource getDeploymentConfigResource() {
+    return deploymentConfigResource;
   }
 
   @Path("/deployments")

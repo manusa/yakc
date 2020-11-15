@@ -14,6 +14,7 @@
  * limitations under the License.
  *
  */
+import React from 'react';
 import ClusterRole from './ClusterRole';
 import ConfigMap from './ConfigMap';
 import Deployment from './Deployment';
@@ -36,6 +37,7 @@ const icons = {};
 
 icons.ClusterRole = ClusterRole;
 icons.ConfigMap = ConfigMap;
+icons.DeploymentConfig = ({...props}) => <Deployment kubernetesColor='#db212e' {...props} />;
 icons.Deployment = Deployment
 icons.Ingress = Ingress;
 icons.Kubernetes = Kubernetes;

@@ -53,6 +53,11 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>com.marcnuri.yakc.apis</groupId>
+      <artifactId>openshift</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>com.marcnuri.yakc</groupId>
       <artifactId>quarkus-yakc-extension</artifactId>
       <version>0.0.5</version>

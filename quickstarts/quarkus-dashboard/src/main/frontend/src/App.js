@@ -20,6 +20,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import apis from './apis';
 import cRoles from './clusterroles';
 import configMaps from './configmaps';
+import dc from './deploymentconfigs';
 import deployments from './deployments';
 import ingresses from './ingresses';
 import nodes from './nodes';
@@ -90,6 +91,9 @@ const App = ({dispatch}) => {
           <Route exact path='/configmaps' component={configMaps.ConfigMapsPage} />
           <Route exact path='/configmaps/:uid' component={configMaps.ConfigMapsDetailPage} />
           <Route exact path='/configmaps/:uid/edit' component={configMaps.ConfigMapsEditPage} />
+          <Route exact path='/deploymentconfigs' component={dc.DeploymentConfigsPage} />
+          <Route exact path='/deploymentconfigs/:uid' component={dc.DeploymentConfigsDetailPage} />
+          <Route exact path='/deploymentconfigs/:uid/edit' component={dc.DeploymentConfigsEditPage} />
           <Route exact path='/deployments' component={deployments.DeploymentsPage} />
           <Route exact path='/deployments/:uid' component={deployments.DeploymentsDetailPage} />
           <Route exact path='/deployments/:uid/edit' component={deployments.DeploymentsEditPage} />
