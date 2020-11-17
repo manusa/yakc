@@ -51,7 +51,7 @@ public class PrometheusRuleSpecRules implements Model {
   private Object expr;
 
   @JsonProperty("for")
-  private String for;
+  private String fors;
 
   @JsonProperty("labels")
   @Singular(value = "putInLabels", ignoreNullCollections = true)
