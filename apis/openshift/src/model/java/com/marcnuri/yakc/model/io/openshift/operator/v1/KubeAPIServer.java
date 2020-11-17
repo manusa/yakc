@@ -53,18 +53,12 @@ public class KubeAPIServer implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * spec is the specification of the desired behavior of the Kubernetes API Server
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private KubeAPIServerSpec spec;
 
-  /**
-   * status is the most recently observed status of the Kubernetes API Server
-   */
   @JsonProperty("status")
-  private Object status;
+  private KubeAPIServerStatus status;
 
 }
 

@@ -54,18 +54,12 @@ public class ImagePruner implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * ImagePrunerSpec defines the specs for the running image pruner.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ImagePrunerSpec spec;
 
-  /**
-   * ImagePrunerStatus reports image pruner operational status.
-   */
   @JsonProperty("status")
-  private Object status;
+  private ImagePrunerStatus status;
 
 }
 

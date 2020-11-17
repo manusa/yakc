@@ -53,18 +53,12 @@ public class Console implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * spec holds user settable values for configuration
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ConsoleSpec spec;
 
-  /**
-   * status holds observed values from the cluster. They may not be overridden.
-   */
   @JsonProperty("status")
-  private Object status;
+  private ConsoleStatus status;
 
 }
 

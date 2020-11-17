@@ -53,12 +53,9 @@ public class PodMonitor implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * Specification of desired Pod selection for target discovery by Prometheus.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private PodMonitorSpec spec;
 
 }
 

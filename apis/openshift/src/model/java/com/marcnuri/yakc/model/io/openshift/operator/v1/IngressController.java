@@ -52,17 +52,11 @@ public class IngressController implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * spec is the specification of the desired behavior of the IngressController.
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private IngressControllerSpec spec;
 
-  /**
-   * status is the most recently observed status of the IngressController.
-   */
   @JsonProperty("status")
-  private Object status;
+  private IngressControllerStatus status;
 
 }
 

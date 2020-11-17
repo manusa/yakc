@@ -54,15 +54,12 @@ public class Subscription implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * SubscriptionSpec defines an Application that can be installed
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private SubscriptionSpec spec;
 
   @JsonProperty("status")
-  private Object status;
+  private SubscriptionStatus status;
 
 }
 

@@ -54,18 +54,12 @@ public class Config implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * ConfigSpec contains the desired configuration and state for the Samples Operator, controlling various behavior around the imagestreams and templates it creates/updates in the openshift namespace.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ConfigSpec spec;
 
-  /**
-   * ConfigStatus contains the actual configuration in effect, as well as various details that describe the state of the Samples Operator.
-   */
   @JsonProperty("status")
-  private Object status;
+  private ConfigStatus status;
 
 }
 

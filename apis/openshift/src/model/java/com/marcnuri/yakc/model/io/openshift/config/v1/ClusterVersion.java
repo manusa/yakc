@@ -53,18 +53,12 @@ public class ClusterVersion implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * spec is the desired state of the cluster version - the operator will work to ensure that the desired version is applied to the cluster.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ClusterVersionSpec spec;
 
-  /**
-   * status contains information about the available updates and any in-progress updates.
-   */
   @JsonProperty("status")
-  private Object status;
+  private ClusterVersionStatus status;
 
 }
 

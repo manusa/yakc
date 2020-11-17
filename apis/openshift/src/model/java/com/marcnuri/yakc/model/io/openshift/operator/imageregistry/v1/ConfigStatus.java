@@ -1,0 +1,86 @@
+/*
+ * Copyright 2020 Marc Nuri
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.marcnuri.yakc.model.io.openshift.operator.imageregistry.v1;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.marcnuri.yakc.model.Model;
+import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Singular;
+import lombok.ToString;
+
+/**
+ * ImageRegistryStatus reports image registry operational status.
+ */
+@SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@ToString
+public class ConfigStatus implements Model {
+
+
+  /**
+   * conditions is a list of conditions and their status
+   */
+  @JsonProperty("conditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
+  private List<ConfigStatusConditions> conditions;
+
+  /**
+   * generations are used to determine when an item needs to be reconciled or has changed in a way that needs a reaction.
+   */
+  @JsonProperty("generations")
+  @Singular(value = "addToGenerations", ignoreNullCollections = true)
+  private List<ConfigStatusGenerations> generations;
+
+  /**
+   * observedGeneration is the last generation change you've dealt with
+   */
+  @JsonProperty("observedGeneration")
+  private Number observedGeneration;
+
+  /**
+   * readyReplicas indicates how many replicas are ready and at the desired state
+   */
+  @JsonProperty("readyReplicas")
+  private Number readyReplicas;
+
+  @NonNull
+  @JsonProperty("storage")
+  private ConfigStatusStorage storage;
+
+  /**
+   * storageManaged is a boolean which denotes whether or not we created the registry storage medium (such as an S3 bucket).
+   */
+  @NonNull
+  @JsonProperty("storageManaged")
+  private Boolean storageManaged;
+
+  /**
+   * version is the level this availability applies to
+   */
+  @JsonProperty("version")
+  private String version;
+
+}
+

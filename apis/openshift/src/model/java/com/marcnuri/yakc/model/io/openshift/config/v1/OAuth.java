@@ -53,12 +53,9 @@ public class OAuth implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * OAuthSpec contains desired cluster auth configuration
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private OAuthSpec spec;
 
   /**
    * OAuthStatus shows current known state of OAuth server in the cluster

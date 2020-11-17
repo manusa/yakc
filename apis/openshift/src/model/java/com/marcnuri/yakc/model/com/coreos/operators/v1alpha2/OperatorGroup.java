@@ -18,6 +18,8 @@ package com.marcnuri.yakc.model.com.coreos.operators.v1alpha2;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import com.marcnuri.yakc.model.com.coreos.operators.v1.OperatorGroupSpec;
+import com.marcnuri.yakc.model.com.coreos.operators.v1.OperatorGroupStatus;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -54,17 +56,11 @@ public class OperatorGroup implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * OperatorGroupSpec is the spec for an OperatorGroup resource.
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private OperatorGroupSpec spec;
 
-  /**
-   * OperatorGroupStatus is the status for an OperatorGroupResource.
-   */
   @JsonProperty("status")
-  private Object status;
+  private OperatorGroupStatus status;
 
 }
 

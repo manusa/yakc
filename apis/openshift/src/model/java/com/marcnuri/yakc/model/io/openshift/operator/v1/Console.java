@@ -53,18 +53,12 @@ public class Console implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * ConsoleSpec is the specification of the desired behavior of the Console.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ConsoleSpec spec;
 
-  /**
-   * ConsoleStatus defines the observed status of the Console.
-   */
   @JsonProperty("status")
-  private Object status;
+  private ConsoleStatus status;
 
 }
 

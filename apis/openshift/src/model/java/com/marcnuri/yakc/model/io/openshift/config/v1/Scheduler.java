@@ -53,12 +53,9 @@ public class Scheduler implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * spec holds user settable values for configuration
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private SchedulerSpec spec;
 
   /**
    * status holds observed values from the cluster. They may not be overridden.

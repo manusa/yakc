@@ -52,11 +52,8 @@ public class Network implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * NetworkSpec is the top-level network configuration object.
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private NetworkSpec spec;
 
   /**
    * NetworkStatus is currently unused. Instead, status is reported in the Network.config.openshift.io object.

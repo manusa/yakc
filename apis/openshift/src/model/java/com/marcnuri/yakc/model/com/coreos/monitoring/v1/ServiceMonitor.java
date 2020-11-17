@@ -53,12 +53,9 @@ public class ServiceMonitor implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * Specification of desired Service selection for target discovery by Prometheus.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ServiceMonitorSpec spec;
 
 }
 

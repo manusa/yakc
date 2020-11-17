@@ -52,17 +52,11 @@ public class ControllerConfig implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * ControllerConfigSpec is the spec for ControllerConfig resource.
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private ControllerConfigSpec spec;
 
-  /**
-   * ControllerConfigStatus is the status for ControllerConfig
-   */
   @JsonProperty("status")
-  private Object status;
+  private ControllerConfigStatus status;
 
 }
 

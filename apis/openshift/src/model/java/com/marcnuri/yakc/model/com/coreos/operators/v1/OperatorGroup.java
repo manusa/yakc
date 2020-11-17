@@ -54,17 +54,11 @@ public class OperatorGroup implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * OperatorGroupSpec is the spec for an OperatorGroup resource.
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private OperatorGroupSpec spec;
 
-  /**
-   * OperatorGroupStatus is the status for an OperatorGroupResource.
-   */
   @JsonProperty("status")
-  private Object status;
+  private OperatorGroupStatus status;
 
 }
 

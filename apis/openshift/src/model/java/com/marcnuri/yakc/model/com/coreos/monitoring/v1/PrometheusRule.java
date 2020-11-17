@@ -53,12 +53,9 @@ public class PrometheusRule implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * Specification of desired alerting rule definitions for Prometheus.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private PrometheusRuleSpec spec;
 
 }
 

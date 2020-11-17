@@ -54,12 +54,9 @@ public class ConsoleYAMLSample implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * ConsoleYAMLSampleSpec is the desired YAML sample configuration. Samples will appear with their descriptions in a samples sidebar when creating a resources in the web console.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ConsoleYAMLSampleSpec spec;
 
 }
 

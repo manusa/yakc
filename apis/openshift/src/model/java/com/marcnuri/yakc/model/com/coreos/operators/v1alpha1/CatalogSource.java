@@ -56,10 +56,10 @@ public class CatalogSource implements Model {
 
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private CatalogSourceSpec spec;
 
   @JsonProperty("status")
-  private Object status;
+  private CatalogSourceStatus status;
 
 }
 

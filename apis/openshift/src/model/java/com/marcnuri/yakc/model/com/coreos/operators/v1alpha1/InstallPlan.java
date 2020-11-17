@@ -54,18 +54,12 @@ public class InstallPlan implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * InstallPlanSpec defines a set of Application resources to be installed
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private InstallPlanSpec spec;
 
-  /**
-   * InstallPlanStatus represents the information about the status of steps required to complete installation. <br><p>  Status may trail the actual state of a system.
-   */
   @JsonProperty("status")
-  private Object status;
+  private InstallPlanStatus status;
 
 }
 

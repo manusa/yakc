@@ -54,18 +54,12 @@ public class ClusterServiceVersion implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * ClusterServiceVersionSpec declarations tell OLM how to install an operator that can manage apps for a given version.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ClusterServiceVersionSpec spec;
 
-  /**
-   * ClusterServiceVersionStatus represents information about the status of a pod. Status may trail the actual state of a system.
-   */
   @JsonProperty("status")
-  private Object status;
+  private ClusterServiceVersionStatus status;
 
 }
 

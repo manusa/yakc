@@ -55,7 +55,7 @@ public class APIServer implements Model {
 
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private APIServerSpec spec;
 
   @JsonProperty("status")
   private Object status;

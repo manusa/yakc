@@ -52,17 +52,11 @@ public class OperatorSource implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * OperatorSourceSpec defines the desired state of OperatorSource
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private OperatorSourceSpec spec;
 
-  /**
-   * OperatorSourceStatus defines the observed state of OperatorSource
-   */
   @JsonProperty("status")
-  private Object status;
+  private OperatorSourceStatus status;
 
 }
 

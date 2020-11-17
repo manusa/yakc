@@ -53,18 +53,12 @@ public class Network implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * spec holds user settable values for configuration. As a general rule, this SHOULD NOT be read directly. Instead, you should consume the NetworkStatus, as it indicates the currently deployed configuration. Currently, most spec fields are immutable after installation. Please view the individual ones for further details on each.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private NetworkSpec spec;
 
-  /**
-   * status holds observed values from the cluster. They may not be overridden.
-   */
   @JsonProperty("status")
-  private Object status;
+  private NetworkStatus status;
 
 }
 

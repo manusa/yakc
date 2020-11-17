@@ -52,11 +52,8 @@ public class Tuned implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * spec is the specification of the desired behavior of Tuned. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#spec-and-status
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private TunedSpec spec;
 
   /**
    * Status is the current state of Tuned. This cannot be overriden.

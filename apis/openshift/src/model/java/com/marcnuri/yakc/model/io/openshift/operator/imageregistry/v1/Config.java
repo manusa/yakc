@@ -54,18 +54,12 @@ public class Config implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * ImageRegistrySpec defines the specs for the running registry.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ConfigSpec spec;
 
-  /**
-   * ImageRegistryStatus reports image registry operational status.
-   */
   @JsonProperty("status")
-  private Object status;
+  private ConfigStatus status;
 
 }
 

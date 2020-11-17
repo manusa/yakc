@@ -53,12 +53,9 @@ public class ConsoleCLIDownload implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * ConsoleCLIDownloadSpec is the desired cli download configuration.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ConsoleCLIDownloadSpec spec;
 
 }
 

@@ -53,18 +53,12 @@ public class Proxy implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * Spec holds user-settable values for the proxy configuration
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ProxySpec spec;
 
-  /**
-   * status holds observed values from the cluster. They may not be overridden.
-   */
   @JsonProperty("status")
-  private Object status;
+  private ProxyStatus status;
 
 }
 

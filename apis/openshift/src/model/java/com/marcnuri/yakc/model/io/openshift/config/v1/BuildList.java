@@ -19,6 +19,7 @@ package com.marcnuri.yakc.model.io.openshift.config.v1;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.ListModel;
 import com.marcnuri.yakc.model.Model;
+import com.marcnuri.yakc.model.com.coreos.monitoring.v1.AlertmanagerListMetadata;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -60,11 +61,8 @@ public class BuildList implements Model, ListModel<Build> {
   @JsonProperty("kind")
   private String kind;
 
-  /**
-   * ListMeta describes metadata that synthetic resources must have, including lists and various status objects. A resource may have only one of {ObjectMeta, ListMeta}.
-   */
   @JsonProperty("metadata")
-  private Object metadata;
+  private AlertmanagerListMetadata metadata;
 
 }
 

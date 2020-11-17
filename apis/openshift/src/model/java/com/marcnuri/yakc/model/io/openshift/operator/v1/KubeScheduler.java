@@ -53,18 +53,12 @@ public class KubeScheduler implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * spec is the specification of the desired behavior of the Kubernetes Scheduler
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private KubeSchedulerSpec spec;
 
-  /**
-   * status is the most recently observed status of the Kubernetes Scheduler
-   */
   @JsonProperty("status")
-  private Object status;
+  private KubeSchedulerStatus status;
 
 }
 

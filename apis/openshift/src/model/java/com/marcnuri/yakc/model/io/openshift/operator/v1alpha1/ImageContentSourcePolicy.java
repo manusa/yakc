@@ -53,12 +53,9 @@ public class ImageContentSourcePolicy implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * spec holds user settable values for configuration
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ImageContentSourcePolicySpec spec;
 
 }
 

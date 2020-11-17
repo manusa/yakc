@@ -60,11 +60,8 @@ public class ServiceMonitorList implements Model, ListModel<ServiceMonitor> {
   @JsonProperty("kind")
   private String kind;
 
-  /**
-   * ListMeta describes metadata that synthetic resources must have, including lists and various status objects. A resource may have only one of {ObjectMeta, ListMeta}.
-   */
   @JsonProperty("metadata")
-  private Object metadata;
+  private AlertmanagerListMetadata metadata;
 
 }
 

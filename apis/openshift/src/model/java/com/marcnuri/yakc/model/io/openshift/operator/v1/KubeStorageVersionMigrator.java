@@ -55,10 +55,10 @@ public class KubeStorageVersionMigrator implements Model {
 
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private AuthenticationSpec spec;
 
   @JsonProperty("status")
-  private Object status;
+  private KubeStorageVersionMigratorStatus status;
 
 }
 

@@ -52,11 +52,8 @@ public class MachineConfig implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * MachineConfigSpec is the spec for MachineConfig
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private MachineConfigSpec spec;
 
 }
 

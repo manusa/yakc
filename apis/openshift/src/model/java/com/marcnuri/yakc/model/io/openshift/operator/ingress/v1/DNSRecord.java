@@ -52,17 +52,11 @@ public class DNSRecord implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * spec is the specification of the desired behavior of the dnsecord.
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private DNSRecordSpec spec;
 
-  /**
-   * status is the most recently observed status of the dnsRecord.
-   */
   @JsonProperty("status")
-  private Object status;
+  private DNSRecordStatus status;
 
 }
 

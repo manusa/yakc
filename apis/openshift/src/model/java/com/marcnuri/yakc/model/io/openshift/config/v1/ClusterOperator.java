@@ -60,11 +60,8 @@ public class ClusterOperator implements Model {
   @JsonProperty("spec")
   private Object spec;
 
-  /**
-   * status holds the information about the state of an operator.  It is consistent with status information across the kube ecosystem.
-   */
   @JsonProperty("status")
-  private Object status;
+  private ClusterOperatorStatus status;
 
 }
 

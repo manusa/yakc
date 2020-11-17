@@ -54,18 +54,12 @@ public class ClusterResourceQuota implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * Spec defines the desired quota
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ClusterResourceQuotaSpec spec;
 
-  /**
-   * Status defines the actual enforced quota and its current usage
-   */
   @JsonProperty("status")
-  private Object status;
+  private ClusterResourceQuotaStatus status;
 
 }
 

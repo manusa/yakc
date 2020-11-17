@@ -53,12 +53,9 @@ public class ConsoleLink implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * ConsoleLinkSpec is the desired console link configuration.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ConsoleLinkSpec spec;
 
 }
 

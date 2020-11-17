@@ -53,12 +53,9 @@ public class ConsoleNotification implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * ConsoleNotificationSpec is the desired console notification configuration.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ConsoleNotificationSpec spec;
 
 }
 

@@ -52,17 +52,11 @@ public class ContainerRuntimeConfig implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * ContainerRuntimeConfigSpec defines the desired state of ContainerRuntimeConfig
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private ContainerRuntimeConfigSpec spec;
 
-  /**
-   * ContainerRuntimeConfigStatus defines the observed state of a ContainerRuntimeConfig
-   */
   @JsonProperty("status")
-  private Object status;
+  private ContainerRuntimeConfigStatus status;
 
 }
 

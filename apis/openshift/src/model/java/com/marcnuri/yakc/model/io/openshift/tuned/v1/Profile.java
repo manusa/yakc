@@ -53,7 +53,7 @@ public class Profile implements Model {
   private ObjectMeta metadata;
 
   @JsonProperty("spec")
-  private Object spec;
+  private ProfileSpec spec;
 
   /**
    * ProfileStatus is the status for a Profile resource

@@ -52,11 +52,8 @@ public class RoleBindingRestriction implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * Spec defines the matcher.
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private RoleBindingRestrictionSpec spec;
 
 }
 

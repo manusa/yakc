@@ -53,12 +53,9 @@ public class EgressNetworkPolicy implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * spec is the specification of the current egress network policy
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private EgressNetworkPolicySpec spec;
 
 }
 

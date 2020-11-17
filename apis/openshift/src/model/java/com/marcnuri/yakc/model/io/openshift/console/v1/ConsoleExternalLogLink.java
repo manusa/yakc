@@ -53,12 +53,9 @@ public class ConsoleExternalLogLink implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * ConsoleExternalLogLinkSpec is the desired log link configuration. The log link will appear on the logs tab of the pod details page.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private ConsoleExternalLogLinkSpec spec;
 
 }
 

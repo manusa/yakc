@@ -18,6 +18,8 @@ package com.marcnuri.yakc.model.com.coreos.operators.v2;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import com.marcnuri.yakc.model.com.coreos.operators.v1.CatalogSourceConfigSpec;
+import com.marcnuri.yakc.model.com.coreos.operators.v1.CatalogSourceConfigStatus;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -52,17 +54,11 @@ public class CatalogSourceConfig implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * CatalogSourceConfigSpec defines the desired state of CatalogSourceConfig
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private CatalogSourceConfigSpec spec;
 
-  /**
-   * CatalogSourceConfigStatus defines the observed state of CatalogSourceConfig
-   */
   @JsonProperty("status")
-  private Object status;
+  private CatalogSourceConfigStatus status;
 
 }
 

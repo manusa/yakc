@@ -53,18 +53,12 @@ public class Prometheus implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * Specification of the desired behavior of the Prometheus cluster. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private PrometheusSpec spec;
 
-  /**
-   * Most recent observed status of the Prometheus cluster. Read-only. Not included when requesting from the apiserver, only from the Prometheus Operator API itself. More info: https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md#spec-and-status
-   */
   @JsonProperty("status")
-  private Object status;
+  private PrometheusStatus status;
 
 }
 

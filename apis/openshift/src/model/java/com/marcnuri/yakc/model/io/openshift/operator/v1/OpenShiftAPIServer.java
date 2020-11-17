@@ -53,18 +53,12 @@ public class OpenShiftAPIServer implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * spec is the specification of the desired behavior of the OpenShift API Server.
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private OpenShiftAPIServerSpec spec;
 
-  /**
-   * status defines the observed status of the OpenShift API Server.
-   */
   @JsonProperty("status")
-  private Object status;
+  private OpenShiftAPIServerStatus status;
 
 }
 

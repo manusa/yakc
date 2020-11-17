@@ -52,17 +52,11 @@ public class OperatorHub implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * OperatorHubSpec defines the desired state of OperatorHub
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private OperatorHubSpec spec;
 
-  /**
-   * OperatorHubStatus defines the observed state of OperatorHub. The current state of the default hub sources will always be reflected here.
-   */
   @JsonProperty("status")
-  private Object status;
+  private OperatorHubStatus status;
 
 }
 

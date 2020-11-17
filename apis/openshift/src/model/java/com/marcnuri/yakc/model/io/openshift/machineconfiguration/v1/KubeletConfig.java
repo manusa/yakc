@@ -52,17 +52,11 @@ public class KubeletConfig implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * KubeletConfigSpec defines the desired state of KubeletConfig
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private KubeletConfigSpec spec;
 
-  /**
-   * KubeletConfigStatus defines the observed state of a KubeletConfig
-   */
   @JsonProperty("status")
-  private Object status;
+  private KubeletConfigStatus status;
 
 }
 

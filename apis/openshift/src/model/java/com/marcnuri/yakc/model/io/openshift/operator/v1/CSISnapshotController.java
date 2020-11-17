@@ -52,17 +52,11 @@ public class CSISnapshotController implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * CSISnapshotControllerSpec is the specification of the desired behavior of the CSISnapshotController operator.
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private CSISnapshotControllerSpec spec;
 
-  /**
-   * CSISnapshotControllerStatus defines the observed status of the CSISnapshotController operator.
-   */
   @JsonProperty("status")
-  private Object status;
+  private CSISnapshotControllerStatus status;
 
 }
 

@@ -52,7 +52,7 @@ public class ClusterNetwork implements Model {
   @NonNull
   @JsonProperty("clusterNetworks")
   @Singular(value = "addToClusterNetworks", ignoreNullCollections = true)
-  private List<Object> clusterNetworks;
+  private List<ClusterNetworkClusterNetworks> clusterNetworks;
 
   /**
    * HostSubnetLength is the number of bits of network to allocate to each node. eg, 8 would mean that each node would have a /24 slice of the overlay network for its pods

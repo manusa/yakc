@@ -52,17 +52,11 @@ public class MachineConfigPool implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * MachineConfigPoolSpec is the spec for MachineConfigPool resource.
-   */
   @JsonProperty("spec")
-  private Object spec;
+  private MachineConfigPoolSpec spec;
 
-  /**
-   * MachineConfigPoolStatus is the status for MachineConfigPool resource.
-   */
   @JsonProperty("status")
-  private Object status;
+  private MachineConfigPoolStatus status;
 
 }
 

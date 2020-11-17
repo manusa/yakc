@@ -53,18 +53,12 @@ public class KubeControllerManager implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * spec is the specification of the desired behavior of the Kubernetes Controller Manager
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private KubeControllerManagerSpec spec;
 
-  /**
-   * status is the most recently observed status of the Kubernetes Controller Manager
-   */
   @JsonProperty("status")
-  private Object status;
+  private KubeControllerManagerStatus status;
 
 }
 

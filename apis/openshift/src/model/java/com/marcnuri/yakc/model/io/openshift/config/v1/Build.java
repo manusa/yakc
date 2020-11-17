@@ -53,12 +53,9 @@ public class Build implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  /**
-   * Spec holds user-settable values for the build controller configuration
-   */
   @NonNull
   @JsonProperty("spec")
-  private Object spec;
+  private BuildSpec spec;
 
 }
 
