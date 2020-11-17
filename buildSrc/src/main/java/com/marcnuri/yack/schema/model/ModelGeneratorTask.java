@@ -18,6 +18,7 @@
 package com.marcnuri.yack.schema.model;
 
 import com.marcnuri.yack.schema.GeneratorSettings;
+import com.marcnuri.yack.schema.InlineModelResolver;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.parser.OpenAPIV3Parser;
 import org.gradle.api.DefaultTask;
@@ -57,6 +58,7 @@ public class ModelGeneratorTask extends DefaultTask {
   private void generateModel(File schema) {
     getLogger().lifecycle("Generating Model for schema {}", schema.getName());
     final OpenAPI openAPI = new OpenAPIV3Parser().read(schema.getAbsolutePath());
+    new InlineModelResolver().flatten(openAPI);
     final GeneratorSettings settings = GeneratorSettings.builder()
       .openAPI(openAPI)
       .logger(getLogger())

@@ -20,6 +20,7 @@ package com.marcnuri.yack.schema.api;
 import com.marcnuri.yack.schema.GeneratorSettings;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.parser.OpenAPIV3Parser;
+import io.swagger.v3.parser.util.InlineModelResolver;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
@@ -56,6 +57,7 @@ public class ApiGeneratorTask extends DefaultTask {
   private void generateApi(File schema) {
     getLogger().lifecycle("Generating API for schema {}", schema.getName());
     final OpenAPI openAPI = new OpenAPIV3Parser().read(schema.getAbsolutePath());
+    new InlineModelResolver().flatten(openAPI);
     final GeneratorSettings settings = GeneratorSettings.builder()
       .openAPI(openAPI)
       .logger(getLogger())

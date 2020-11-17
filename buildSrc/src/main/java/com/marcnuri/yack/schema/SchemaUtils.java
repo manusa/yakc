@@ -18,6 +18,7 @@
 package com.marcnuri.yack.schema;
 
 import io.swagger.v3.oas.models.media.ArraySchema;
+import io.swagger.v3.oas.models.media.ComposedSchema;
 import io.swagger.v3.oas.models.media.DateTimeSchema;
 import io.swagger.v3.oas.models.media.MapSchema;
 import io.swagger.v3.oas.models.media.Schema;
@@ -136,9 +137,22 @@ public class SchemaUtils {
   }
 
   public static boolean isMap(Schema schema) {
-    return schema instanceof MapSchema;
+    if (schema instanceof MapSchema) {
+      return true;
+    }
+    if (schema != null && schema.getAdditionalProperties() instanceof Schema) {
+      return true;
+    }
+    if (schema != null && schema.getAdditionalProperties() instanceof Boolean
+      && (Boolean) schema.getAdditionalProperties()) {
+      return true;
+    }
+    return false;
   }
 
+  public static final boolean isComposed(Schema schema) {
+    return schema instanceof ComposedSchema;
+  }
   public boolean isRefInstanceOf(String ref, Class clazz) {
     if (ref == null) {
       return false;
