@@ -44,7 +44,37 @@ import java.util.concurrent.ExecutorService;
 import static com.marcnuri.yakc.config.OkHttpClientConfigurator.initOkHttpClient;
 
 /**
- * Created by Marc Nuri on 2020-04-11.
+ * The KubernetesClient class is the main entry point to use YAKC.
+ *
+ * <p> An instance of this class will take care of the cluster access configuration and creating the
+ * API specific Retrofit2 clients.
+ *
+ * <p> You can use the client as follows:
+ * <pre>{@code
+ *   try (KubernetesClient kc = new KubernetesClient()) {
+ *    kc.create(CoreV1Api.class).listPodForAllNamespaces().stream().forEach(p ->
+ *       System.out.printf("%-15s %s%n", p.getMetadata().getNamespace(), p.getMetadata().getName())
+ *     );
+ *   }
+ * }</pre>
+ *
+ * <p> In order to take advantage of this class you'll need to include any of the
+ * <a href="https://github.com/manusa/yakc#apis">provided API modules</a>,
+ * or build your own.
+ * <ul>
+ *   <li><a href="https://search.maven.org/search?q=g:com.marcnuri.yakc%20a:kubernetes-api">
+ *     com.marcnuri.yakc:kubernetes-api</a>
+*    </li>
+ *   <li><a href="https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:cert-manager">
+ *     com.marcnuri.yakc.apis:cert-manager</a>
+ *   </li>
+ *   <li><a href="https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:metrics-server">
+ *     com.marcnuri.yakc.apis:metrics-server</a>
+ *   </li>
+ *   <li><a href="https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:openshift">
+ *     com.marcnuri.yakc.apis:openshift</a>
+ *   </li>
+ * </ul>
  */
 @Log
 public class KubernetesClient implements Closeable {

@@ -123,7 +123,19 @@ Kubernetes Retrofit2 based Java client to be used with kubernetes-api or any of 
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/metrics-server)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[Kubernetes Metrics Server](https://github.com/kubernetes-sigs/metrics-server)
+[Kubernetes Metrics Server](https://github.com/kubernetes-sigs/metrics-server).
+
+#### OpenShift
+[![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/openshift)
+](https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:openshift)
+[![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc.apis/openshift/javadoc.svg)
+](https://javadoc.io/doc/com.marcnuri.yakc.apis/openshift)
+
+[Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
+[OpenShift](https://github.com/openshift/origin).
+
+This module contains models for OpenShift specific Kubernetes resources and the Retrofit APIs to
+access them.  
 
 ### Extensions
 
