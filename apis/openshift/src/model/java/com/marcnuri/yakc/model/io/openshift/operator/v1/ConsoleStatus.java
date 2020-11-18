@@ -32,7 +32,7 @@ import lombok.ToString;
  * ConsoleStatus defines the observed status of the Console.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

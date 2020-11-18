@@ -28,7 +28,7 @@ import lombok.ToString;
  * LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

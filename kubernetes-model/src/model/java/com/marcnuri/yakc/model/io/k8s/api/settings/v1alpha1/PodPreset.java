@@ -29,7 +29,7 @@ import lombok.ToString;
  * PodPreset is a policy resource that defines additional runtime requirements for a Pod.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

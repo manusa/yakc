@@ -31,7 +31,7 @@ import lombok.ToString;
  * nodePlacement enables explicit control over the scheduling of the ingress controller. <br><p>  If unset, defaults are used. See NodePlacement for more details.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

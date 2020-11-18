@@ -31,7 +31,7 @@ import lombok.ToString;
  * InstallPlanStatus represents the information about the status of steps required to complete installation. <br><p>  Status may trail the actual state of a system.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

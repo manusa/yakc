@@ -28,7 +28,7 @@ import lombok.ToString;
  * BoundObjectReference is a reference to an object that a token is bound to.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

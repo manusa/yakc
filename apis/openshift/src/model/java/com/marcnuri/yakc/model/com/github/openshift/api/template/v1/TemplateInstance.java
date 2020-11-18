@@ -30,7 +30,7 @@ import lombok.ToString;
  * TemplateInstance requests and records the instantiation of a Template. TemplateInstance is part of an experimental API.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

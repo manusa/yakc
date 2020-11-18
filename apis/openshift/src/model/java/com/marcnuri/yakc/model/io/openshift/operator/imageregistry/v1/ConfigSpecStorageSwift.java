@@ -28,7 +28,7 @@ import lombok.ToString;
  * swift represents configuration that uses OpenStack Object Storage.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

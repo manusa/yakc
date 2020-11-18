@@ -28,7 +28,7 @@ import lombok.ToString;
  * BuildStatusOutputTo describes the status of the built image with regards to image registry to which it was supposed to be pushed.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -31,7 +31,7 @@ import lombok.ToString;
  * LimitRangeSpec defines a min/max usage limit for resources that match on kind.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

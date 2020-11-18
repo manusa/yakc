@@ -29,7 +29,7 @@ import lombok.ToString;
  * Network describes the cluster's desired network configuration. It is consumed by the cluster-network-operator.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

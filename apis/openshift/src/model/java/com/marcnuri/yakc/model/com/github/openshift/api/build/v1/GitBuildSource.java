@@ -29,7 +29,7 @@ import lombok.ToString;
  * GitBuildSource defines the parameters of a Git SCM
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

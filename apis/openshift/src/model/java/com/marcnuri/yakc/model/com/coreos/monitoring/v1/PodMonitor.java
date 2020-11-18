@@ -30,7 +30,7 @@ import lombok.ToString;
  * PodMonitor defines monitoring for a set of pods.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

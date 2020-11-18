@@ -30,7 +30,7 @@ import lombok.ToString;
  * ReplicaSetCondition describes the state of a replica set at a certain point.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

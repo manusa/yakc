@@ -28,7 +28,7 @@ import lombok.ToString;
  * StatusCause provides more information about an api.Status failure, including cases when multiple errors are encountered.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

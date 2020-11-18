@@ -29,7 +29,7 @@ import lombok.ToString;
  * HTTPHeader describes a custom header to be used in HTTP probes
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

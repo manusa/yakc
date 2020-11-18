@@ -32,7 +32,7 @@ import lombok.ToString;
  * DeploymentTriggerImageChangeParams represents the parameters to the ImageChange trigger.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

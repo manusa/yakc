@@ -30,7 +30,7 @@ import lombok.ToString;
  * SecretSpec specifies a secret to be included in a build pod and its corresponding mount point
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

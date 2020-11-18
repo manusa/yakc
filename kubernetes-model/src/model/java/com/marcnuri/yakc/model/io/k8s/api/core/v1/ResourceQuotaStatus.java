@@ -30,7 +30,7 @@ import lombok.ToString;
  * ResourceQuotaStatus defines the enforced hard limits and observed use.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

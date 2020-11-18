@@ -32,7 +32,7 @@ import lombok.ToString;
  * SubjectAccessReview is an object for requesting information about whether a user or group can perform an action
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

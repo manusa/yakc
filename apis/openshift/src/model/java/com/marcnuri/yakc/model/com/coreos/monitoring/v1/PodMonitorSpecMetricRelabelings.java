@@ -30,7 +30,7 @@ import lombok.ToString;
  * RelabelConfig allows dynamic rewriting of the label set, being applied to samples before ingestion. It defines `&lt;metric_relabel_configs&gt;`-section of Prometheus configuration. More info: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#metric_relabel_configs
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

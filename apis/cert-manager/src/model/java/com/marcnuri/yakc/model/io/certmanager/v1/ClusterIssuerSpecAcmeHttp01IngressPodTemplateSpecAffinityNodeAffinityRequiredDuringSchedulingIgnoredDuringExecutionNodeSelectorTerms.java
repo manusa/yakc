@@ -26,16 +26,6 @@ import lombok.NoArgsConstructor;
 import lombok.Singular;
 import lombok.ToString;
 
-/*
- *
- *
- * FILE OVERRIDDEN DUE TO A TOO LONG CLASS NAME
- *
- * This causes problems with Lombok's default builder name
- *
- *
- */
-
 /**
  * A null or empty node selector term matches no objects. The requirements of them are ANDed. The TopologySelectorTerm type implements a subset of the NodeSelectorTerm.
  */

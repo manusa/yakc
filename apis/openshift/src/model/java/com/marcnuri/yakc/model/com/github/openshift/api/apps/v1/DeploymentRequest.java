@@ -31,7 +31,7 @@ import lombok.ToString;
  * DeploymentRequest is a request to a deployment config for a new deployment.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

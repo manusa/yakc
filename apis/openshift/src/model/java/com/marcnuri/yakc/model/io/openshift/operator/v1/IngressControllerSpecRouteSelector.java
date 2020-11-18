@@ -32,7 +32,7 @@ import lombok.ToString;
  * routeSelector is used to filter the set of Routes serviced by the ingress controller. This is useful for implementing shards. <br><p>  If unset, the default is no filtering.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

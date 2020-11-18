@@ -33,7 +33,7 @@ import lombok.ToString;
  * ConsoleCLIDownloadList is a list of ConsoleCLIDownload
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

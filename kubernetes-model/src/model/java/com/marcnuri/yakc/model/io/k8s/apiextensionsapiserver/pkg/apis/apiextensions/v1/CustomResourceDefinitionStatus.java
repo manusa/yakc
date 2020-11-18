@@ -30,7 +30,7 @@ import lombok.ToString;
  * CustomResourceDefinitionStatus indicates the state of the CustomResourceDefinition
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

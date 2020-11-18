@@ -31,7 +31,7 @@ import lombok.ToString;
  * Endpoint defines a scrapeable endpoint serving Prometheus metrics.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

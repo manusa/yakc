@@ -31,7 +31,7 @@ import lombok.ToString;
  * AggregationRule describes how to locate ClusterRoles to aggregate into the ClusterRole
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

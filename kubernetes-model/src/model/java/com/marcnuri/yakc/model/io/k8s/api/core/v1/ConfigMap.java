@@ -31,7 +31,7 @@ import lombok.ToString;
  * ConfigMap holds configuration data for pods to consume.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

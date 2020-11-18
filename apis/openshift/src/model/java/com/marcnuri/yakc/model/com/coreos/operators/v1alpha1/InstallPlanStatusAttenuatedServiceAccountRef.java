@@ -28,7 +28,7 @@ import lombok.ToString;
  * AttenuatedServiceAccountRef references the service account that is used to do scoped operator install.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

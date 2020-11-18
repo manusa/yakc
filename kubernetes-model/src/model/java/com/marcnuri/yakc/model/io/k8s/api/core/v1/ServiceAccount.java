@@ -31,7 +31,7 @@ import lombok.ToString;
  * ServiceAccount binds together: &#42; a name, understood by users, and perhaps by peripheral systems, for an identity &#42; a principal that can be authenticated and authorized &#42; a set of secrets
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

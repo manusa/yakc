@@ -33,7 +33,7 @@ import lombok.ToString;
  * ImageContentSourcePolicyList is a list of ImageContentSourcePolicy
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -29,7 +29,7 @@ import lombok.ToString;
  * Parameter defines a name/value variable that is to be processed during the Template to Config transformation.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

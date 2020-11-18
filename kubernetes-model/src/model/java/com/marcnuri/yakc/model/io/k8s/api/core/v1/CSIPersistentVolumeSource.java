@@ -31,7 +31,7 @@ import lombok.ToString;
  * Represents storage that is managed by an external CSI volume driver (Beta feature)
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

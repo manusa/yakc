@@ -30,7 +30,7 @@ import lombok.ToString;
  * Resources defines the resource requirements for the Thanos sidecar. If not provided, no requests/limits will be set
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

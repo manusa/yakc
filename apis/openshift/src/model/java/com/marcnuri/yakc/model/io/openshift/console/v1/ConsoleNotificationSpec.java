@@ -29,7 +29,7 @@ import lombok.ToString;
  * ConsoleNotificationSpec is the desired console notification configuration.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

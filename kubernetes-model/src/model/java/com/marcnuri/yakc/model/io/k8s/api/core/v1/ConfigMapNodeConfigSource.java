@@ -29,7 +29,7 @@ import lombok.ToString;
  * ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the Node.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

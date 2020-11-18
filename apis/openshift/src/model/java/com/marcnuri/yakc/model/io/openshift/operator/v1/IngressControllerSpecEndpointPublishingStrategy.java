@@ -29,7 +29,7 @@ import lombok.ToString;
  * endpointPublishingStrategy is used to publish the ingress controller endpoints to other networks, enable load balancer integrations, etc. <br><p>  If unset, the default is based on infrastructure.config.openshift.io/cluster .status.platform: <br><p>    AWS:      LoadBalancerService (with External scope)   Azure:    LoadBalancerService (with External scope)   GCP:      LoadBalancerService (with External scope)   IBMCloud: LoadBalancerService (with External scope)   Libvirt:  HostNetwork <br><p>  Any other platform types (including None) default to HostNetwork. <br><p>  endpointPublishingStrategy cannot be updated.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

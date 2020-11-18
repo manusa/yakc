@@ -32,7 +32,7 @@ import lombok.ToString;
  * ServiceMonitorList is a list of ServiceMonitor
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -30,7 +30,7 @@ import lombok.ToString;
  * ServiceCatalogControllerManager provides information to configure an operator to manage Service Catalog Controller Manager
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

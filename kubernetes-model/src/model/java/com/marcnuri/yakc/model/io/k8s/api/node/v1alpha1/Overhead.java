@@ -30,7 +30,7 @@ import lombok.ToString;
  * Overhead structure represents the resource overhead associated with running a pod.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

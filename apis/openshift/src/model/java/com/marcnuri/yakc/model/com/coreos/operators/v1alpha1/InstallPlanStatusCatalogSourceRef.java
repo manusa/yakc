@@ -28,7 +28,7 @@ import lombok.ToString;
  * CatalogSourceRef is a reference to the CatalogSource the bundle path was resolved from.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

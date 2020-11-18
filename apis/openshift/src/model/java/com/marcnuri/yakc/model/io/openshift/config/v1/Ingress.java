@@ -30,7 +30,7 @@ import lombok.ToString;
  * Ingress holds cluster-wide information about ingress, including the default ingress domain used for routes. The canonical name is `cluster`.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

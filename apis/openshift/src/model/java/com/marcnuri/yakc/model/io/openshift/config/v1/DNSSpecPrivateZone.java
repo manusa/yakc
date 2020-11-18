@@ -30,7 +30,7 @@ import lombok.ToString;
  * privateZone is the location where all the DNS records that are only available internally to the cluster exist. <br><p>  If this field is nil, no private records should be created. <br><p>  Once set, this field cannot be changed.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

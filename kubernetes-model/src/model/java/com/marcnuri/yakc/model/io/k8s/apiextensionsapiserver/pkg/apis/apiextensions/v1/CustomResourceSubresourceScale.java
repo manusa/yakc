@@ -29,7 +29,7 @@ import lombok.ToString;
  * CustomResourceSubresourceScale defines how to serve the scale subresource for CustomResources.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -29,7 +29,7 @@ import lombok.ToString;
  * Conditions appear in the status as a record of state transitions on the ClusterServiceVersion
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

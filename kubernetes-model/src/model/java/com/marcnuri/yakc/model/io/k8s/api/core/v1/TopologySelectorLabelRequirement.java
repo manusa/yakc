@@ -31,7 +31,7 @@ import lombok.ToString;
  * A topology selector requirement is a selector that matches given label. This is an alpha feature and may change in the future.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

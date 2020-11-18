@@ -29,7 +29,7 @@ import lombok.ToString;
  * PodSecurityPolicy governs the ability to make requests that affect the Security Context that will be applied to a pod and container.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

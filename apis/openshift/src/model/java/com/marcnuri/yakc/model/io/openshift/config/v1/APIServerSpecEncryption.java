@@ -28,7 +28,7 @@ import lombok.ToString;
  * encryption allows the configuration of encryption of resources at the datastore layer.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

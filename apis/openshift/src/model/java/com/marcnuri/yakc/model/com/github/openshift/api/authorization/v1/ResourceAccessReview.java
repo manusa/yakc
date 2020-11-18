@@ -30,7 +30,7 @@ import lombok.ToString;
  * ResourceAccessReview is a means to request a list of which users and groups are authorized to perform the action specified by spec
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

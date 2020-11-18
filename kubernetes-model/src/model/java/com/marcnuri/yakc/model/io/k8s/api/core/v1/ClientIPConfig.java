@@ -28,7 +28,7 @@ import lombok.ToString;
  * ClientIPConfig represents the configurations of Client IP based session affinity.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -32,7 +32,7 @@ import lombok.ToString;
  * LocalSubjectAccessReview is an object for requesting information about whether a user or group can perform an action in a particular namespace
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

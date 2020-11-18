@@ -30,7 +30,7 @@ import lombok.ToString;
  * APIServerNamedServingCert maps a server DNS name, as understood by a client, to a certificate.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

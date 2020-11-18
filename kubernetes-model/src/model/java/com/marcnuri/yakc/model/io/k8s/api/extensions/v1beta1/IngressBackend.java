@@ -30,7 +30,7 @@ import lombok.ToString;
  * IngressBackend describes all endpoints for a given service and port.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

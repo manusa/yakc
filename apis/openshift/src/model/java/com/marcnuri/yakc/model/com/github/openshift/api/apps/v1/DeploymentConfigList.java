@@ -33,7 +33,7 @@ import lombok.ToString;
  * DeploymentConfigList is a collection of deployment configs.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

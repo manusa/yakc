@@ -28,7 +28,7 @@ import lombok.ToString;
  * IPAMConfig configures IPAM module will be used for IP Address Management (IPAM).
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

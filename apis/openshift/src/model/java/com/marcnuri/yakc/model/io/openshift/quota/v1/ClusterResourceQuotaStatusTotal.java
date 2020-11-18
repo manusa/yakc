@@ -30,7 +30,7 @@ import lombok.ToString;
  * Total defines the actual enforced quota and its current usage across all projects
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

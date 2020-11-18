@@ -30,7 +30,7 @@ import lombok.ToString;
  * ConsoleExternalLogLink is an extension for customizing OpenShift web console log links.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

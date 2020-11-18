@@ -29,7 +29,7 @@ import lombok.ToString;
  * EgressNetworkPolicyRule contains a single egress network policy rule
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

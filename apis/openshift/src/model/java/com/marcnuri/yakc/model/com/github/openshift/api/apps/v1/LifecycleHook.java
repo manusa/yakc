@@ -31,7 +31,7 @@ import lombok.ToString;
  * LifecycleHook defines a specific deployment lifecycle action. Only one type of action may be specified at any time.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

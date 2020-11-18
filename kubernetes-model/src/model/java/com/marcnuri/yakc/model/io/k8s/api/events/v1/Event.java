@@ -33,7 +33,7 @@ import lombok.ToString;
  * Event is a report of an event somewhere in the cluster. It generally denotes some state change in the system.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

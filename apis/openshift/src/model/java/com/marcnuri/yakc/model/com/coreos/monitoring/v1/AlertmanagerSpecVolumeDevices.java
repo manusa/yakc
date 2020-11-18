@@ -29,7 +29,7 @@ import lombok.ToString;
  * volumeDevice describes a mapping of a raw block device within a container.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -29,7 +29,7 @@ import lombok.ToString;
  * ProjecRequest is the set of options necessary to fully qualify a project request
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

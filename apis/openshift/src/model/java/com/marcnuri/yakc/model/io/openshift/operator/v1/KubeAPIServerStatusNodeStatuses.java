@@ -30,7 +30,7 @@ import lombok.ToString;
  * NodeStatus provides information about the current state of a particular node managed by this operator.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

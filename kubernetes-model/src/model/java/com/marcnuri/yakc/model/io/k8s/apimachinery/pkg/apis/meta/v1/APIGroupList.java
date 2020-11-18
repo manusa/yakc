@@ -31,7 +31,7 @@ import lombok.ToString;
  * APIGroupList is a list of APIGroup, to allow clients to discover the API at /apis.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

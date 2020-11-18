@@ -31,7 +31,7 @@ import lombok.ToString;
  * OAuthAccessToken describes an OAuth access token
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

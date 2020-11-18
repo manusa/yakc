@@ -29,7 +29,7 @@ import lombok.ToString;
  * TokenSecretRef authenticates with Vault by presenting a token.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

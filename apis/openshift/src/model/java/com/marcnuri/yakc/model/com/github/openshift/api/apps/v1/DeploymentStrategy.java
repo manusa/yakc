@@ -31,7 +31,7 @@ import lombok.ToString;
  * DeploymentStrategy describes how to perform a deployment.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

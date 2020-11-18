@@ -29,7 +29,7 @@ import lombok.ToString;
  * DependentStatus is the status for a dependent requirement (to prevent infinite nesting)
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

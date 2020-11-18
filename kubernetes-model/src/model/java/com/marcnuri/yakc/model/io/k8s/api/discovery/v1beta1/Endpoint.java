@@ -33,7 +33,7 @@ import lombok.ToString;
  * Endpoint represents a single logical "backend" implementing a service.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

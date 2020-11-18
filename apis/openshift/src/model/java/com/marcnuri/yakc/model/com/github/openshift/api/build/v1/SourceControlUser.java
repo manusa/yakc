@@ -28,7 +28,7 @@ import lombok.ToString;
  * SourceControlUser defines the identity of a user of source control
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

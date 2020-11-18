@@ -29,7 +29,7 @@ import lombok.ToString;
  * MachineConfigPool describes a pool of MachineConfigs.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

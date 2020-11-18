@@ -28,7 +28,7 @@ import lombok.ToString;
  * s3 represents configuration that uses Amazon Simple Storage Service.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

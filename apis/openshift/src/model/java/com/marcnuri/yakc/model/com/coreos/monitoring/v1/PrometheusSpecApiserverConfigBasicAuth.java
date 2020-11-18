@@ -28,7 +28,7 @@ import lombok.ToString;
  * BasicAuth allow an endpoint to authenticate over basic authentication
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

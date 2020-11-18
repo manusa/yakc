@@ -32,7 +32,7 @@ import lombok.ToString;
  * nodeSelector is the node selector applied to ingress controller deployments. <br><p>  If unset, the default is: <br><p>    beta.kubernetes.io/os: linux   node-role.kubernetes.io/worker: '' <br><p>  If set, the specified selector is used and replaces the default.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

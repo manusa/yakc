@@ -30,7 +30,7 @@ import lombok.ToString;
  * tlsProfile is the TLS connection configuration that is in effect.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

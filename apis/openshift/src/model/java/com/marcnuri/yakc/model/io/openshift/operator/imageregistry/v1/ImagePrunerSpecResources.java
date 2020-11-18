@@ -30,7 +30,7 @@ import lombok.ToString;
  * resources defines the resource requests and limits for the image pruner pod.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

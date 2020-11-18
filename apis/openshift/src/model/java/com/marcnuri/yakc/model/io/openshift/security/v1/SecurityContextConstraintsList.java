@@ -33,7 +33,7 @@ import lombok.ToString;
  * SecurityContextConstraintsList is a list of SecurityContextConstraints
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

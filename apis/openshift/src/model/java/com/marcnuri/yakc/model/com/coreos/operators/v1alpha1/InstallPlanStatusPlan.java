@@ -29,7 +29,7 @@ import lombok.ToString;
  * Step represents the status of an individual step in an InstallPlan.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

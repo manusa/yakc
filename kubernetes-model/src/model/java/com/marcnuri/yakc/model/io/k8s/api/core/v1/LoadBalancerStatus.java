@@ -30,7 +30,7 @@ import lombok.ToString;
  * LoadBalancerStatus represents the status of a load-balancer.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

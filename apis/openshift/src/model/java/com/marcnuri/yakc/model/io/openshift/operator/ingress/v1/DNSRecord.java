@@ -29,7 +29,7 @@ import lombok.ToString;
  * DNSRecord is a DNS record managed in the zones defined by dns.config.openshift.io/cluster .spec.publicZone and .spec.privateZone. <br><p>  Cluster admin manipulation of this resource is not supported. This resource is only for internal communication of OpenShift operators.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

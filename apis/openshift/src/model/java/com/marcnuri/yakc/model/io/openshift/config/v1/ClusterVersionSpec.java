@@ -31,7 +31,7 @@ import lombok.ToString;
  * spec is the desired state of the cluster version - the operator will work to ensure that the desired version is applied to the cluster.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -29,7 +29,7 @@ import lombok.ToString;
  * OperatorSource is used to define the external datastore we are using to store operator bundles.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

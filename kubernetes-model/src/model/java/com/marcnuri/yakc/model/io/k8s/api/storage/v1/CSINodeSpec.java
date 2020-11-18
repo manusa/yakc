@@ -31,7 +31,7 @@ import lombok.ToString;
  * CSINodeSpec holds information about the specification of all CSI drivers installed on a node
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -28,7 +28,7 @@ import lombok.ToString;
  * EndpointPort represents a Port used by an EndpointSlice
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

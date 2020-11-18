@@ -34,7 +34,7 @@ import lombok.ToString;
  * A StatefulSetSpec is the specification of a StatefulSet.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

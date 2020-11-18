@@ -28,7 +28,7 @@ import lombok.ToString;
  * defaultCertificate is a reference to a secret containing the default certificate served by the ingress controller. When Routes don't specify their own certificate, defaultCertificate is used. <br><p>  The secret must contain the following keys and data: <br><p>    tls.crt: certificate file contents   tls.key: key file contents <br><p>  If unset, a wildcard certificate is automatically generated and used. The certificate is valid for the ingress controller domain (and subdomains) and the generated certificate's CA will be automatically integrated with the cluster's trust store. <br><p>  The in-use certificate (whether generated or user-specified) will be automatically integrated with OpenShift's built-in OAuth server.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

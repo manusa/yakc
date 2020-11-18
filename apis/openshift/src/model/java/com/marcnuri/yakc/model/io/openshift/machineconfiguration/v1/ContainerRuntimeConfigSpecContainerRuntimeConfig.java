@@ -28,7 +28,7 @@ import lombok.ToString;
  * ContainerRuntimeConfiguration defines the tuneables of the container runtime
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

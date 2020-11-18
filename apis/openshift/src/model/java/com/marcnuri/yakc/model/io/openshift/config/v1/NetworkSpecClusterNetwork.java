@@ -28,7 +28,7 @@ import lombok.ToString;
  * ClusterNetworkEntry is a contiguous block of IP addresses from which pod IPs are allocated.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

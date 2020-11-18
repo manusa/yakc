@@ -29,7 +29,7 @@ import lombok.ToString;
  * MetricSpec specifies how to scale based on a single metric (only `type` and one other matching field should be set at once).
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

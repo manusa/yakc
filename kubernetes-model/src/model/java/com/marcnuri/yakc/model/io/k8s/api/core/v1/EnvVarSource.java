@@ -28,7 +28,7 @@ import lombok.ToString;
  * EnvVarSource represents a source for the value of an EnvVar.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

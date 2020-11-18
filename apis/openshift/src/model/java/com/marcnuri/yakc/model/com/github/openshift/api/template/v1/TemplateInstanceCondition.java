@@ -30,7 +30,7 @@ import lombok.ToString;
  * TemplateInstanceCondition contains condition information for a TemplateInstance.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

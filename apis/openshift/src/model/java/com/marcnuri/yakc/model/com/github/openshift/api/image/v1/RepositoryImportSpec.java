@@ -30,7 +30,7 @@ import lombok.ToString;
  * RepositoryImportSpec describes a request to import images from a container image repository.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

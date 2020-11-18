@@ -28,7 +28,7 @@ import lombok.ToString;
  * WebhookClientConfig contains the information to make a TLS connection with the webhook.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

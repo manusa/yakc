@@ -33,7 +33,7 @@ import lombok.ToString;
  * ImageRegistrySpec defines the specs for the running registry.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

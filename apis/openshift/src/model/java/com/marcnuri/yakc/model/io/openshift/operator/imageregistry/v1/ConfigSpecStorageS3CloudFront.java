@@ -29,7 +29,7 @@ import lombok.ToString;
  * cloudFront configures Amazon Cloudfront as the storage middleware in a registry.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

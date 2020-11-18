@@ -30,7 +30,7 @@ import lombok.ToString;
  * RangeAllocation is used so we can easily expose a RangeAllocation typed for security group
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

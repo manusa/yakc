@@ -28,7 +28,7 @@ import lombok.ToString;
  * KubeletConfigSpec defines the desired state of KubeletConfig
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

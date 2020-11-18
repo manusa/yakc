@@ -29,7 +29,7 @@ import lombok.ToString;
  * ImageLayer represents a single layer of the image. Some images may have multiple layers. Some may have none.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

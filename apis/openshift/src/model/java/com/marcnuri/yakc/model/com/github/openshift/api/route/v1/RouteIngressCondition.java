@@ -30,7 +30,7 @@ import lombok.ToString;
  * RouteIngressCondition contains details for the current condition of this route on a particular router.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

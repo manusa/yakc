@@ -32,7 +32,7 @@ import lombok.ToString;
  * ValidatingWebhook describes an admission webhook and the resources and operations it applies to.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -30,7 +30,7 @@ import lombok.ToString;
  * One and only one of the following should be specified. Exec specifies the action to take.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -30,7 +30,7 @@ import lombok.ToString;
  * ContainerStateTerminated is a terminated state of a container.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -31,7 +31,7 @@ import lombok.ToString;
  * DockerStrategyOptions contains extra strategy options for container image builds
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

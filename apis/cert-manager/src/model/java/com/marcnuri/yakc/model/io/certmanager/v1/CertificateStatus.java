@@ -31,7 +31,7 @@ import lombok.ToString;
  * Status of the Certificate. This is set and managed automatically.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

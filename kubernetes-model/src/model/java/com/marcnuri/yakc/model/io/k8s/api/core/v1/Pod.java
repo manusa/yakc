@@ -29,7 +29,7 @@ import lombok.ToString;
  * Pod is a collection of containers that can run on a host. This resource is created by clients and scheduled onto hosts.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

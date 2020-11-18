@@ -29,7 +29,7 @@ import lombok.ToString;
  * Venafi configures this issuer to sign certificates using a Venafi TPP or Venafi Cloud policy zone.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

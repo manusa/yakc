@@ -29,7 +29,7 @@ import lombok.ToString;
  * GroupVersion contains the "group/version" and "version" string of a version. It is made a struct to keep extensibility.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

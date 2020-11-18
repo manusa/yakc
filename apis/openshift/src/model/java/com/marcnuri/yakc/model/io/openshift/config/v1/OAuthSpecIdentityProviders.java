@@ -28,7 +28,7 @@ import lombok.ToString;
  * IdentityProvider provides identities for users authenticating using credentials
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

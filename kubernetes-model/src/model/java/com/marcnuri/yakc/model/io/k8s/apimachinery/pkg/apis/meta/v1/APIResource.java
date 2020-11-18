@@ -31,7 +31,7 @@ import lombok.ToString;
  * APIResource specifies the name of a resource and whether it is namespaced.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

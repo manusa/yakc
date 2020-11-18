@@ -30,7 +30,7 @@ import lombok.ToString;
  * TemplateInstanceStatus describes the current state of a TemplateInstance.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -31,7 +31,7 @@ import lombok.ToString;
  * Represents a source location of a volume to mount, managed by an external CSI driver
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

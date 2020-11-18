@@ -30,7 +30,7 @@ import lombok.ToString;
  * PodDisruptionBudgetSpec is a description of a PodDisruptionBudget.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -29,7 +29,7 @@ import lombok.ToString;
  * CSISnapshotController provides information to configure an operator to manage the CSISnapshotController.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

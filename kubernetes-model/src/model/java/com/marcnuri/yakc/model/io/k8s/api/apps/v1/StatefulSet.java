@@ -29,7 +29,7 @@ import lombok.ToString;
  * StatefulSet represents a set of pods with consistent identities. Identities are defined as:<br><p>  - Network: A single stable DNS and hostname.<br><p>  - Storage: As many VolumeClaims as requested.<br><p> The StatefulSet guarantees that a given network identity will always map to the same storage identity.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

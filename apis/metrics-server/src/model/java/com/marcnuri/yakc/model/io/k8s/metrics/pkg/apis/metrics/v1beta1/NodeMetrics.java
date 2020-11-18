@@ -33,7 +33,7 @@ import lombok.ToString;
  * NodeMetrics sets resource usage metrics of a node.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

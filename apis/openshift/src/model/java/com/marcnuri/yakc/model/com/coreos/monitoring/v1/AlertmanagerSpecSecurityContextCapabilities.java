@@ -30,7 +30,7 @@ import lombok.ToString;
  * The capabilities to add/drop when running containers. Defaults to the default set of capabilities granted by the container runtime.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

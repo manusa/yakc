@@ -31,7 +31,7 @@ import lombok.ToString;
  * StatefulSetStatus represents the current state of a StatefulSet.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

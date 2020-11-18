@@ -28,7 +28,7 @@ import lombok.ToString;
  * SecretEnvSource selects a Secret to populate the environment variables with.<br><p> <br><p> The contents of the target Secret's Data field will represent the key-value pairs as environment variables.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

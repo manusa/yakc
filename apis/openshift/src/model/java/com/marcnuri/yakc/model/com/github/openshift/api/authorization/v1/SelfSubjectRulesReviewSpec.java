@@ -31,7 +31,7 @@ import lombok.ToString;
  * SelfSubjectRulesReviewSpec adds information about how to conduct the check
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -29,7 +29,7 @@ import lombok.ToString;
  * Namespace provides a scope for Names. Use of multiple namespaces is optional.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

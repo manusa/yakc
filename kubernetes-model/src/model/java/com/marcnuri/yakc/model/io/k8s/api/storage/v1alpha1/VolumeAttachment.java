@@ -30,7 +30,7 @@ import lombok.ToString;
  * VolumeAttachment captures the intent to attach or detach the specified volume to/from the specified node.<br><p> <br><p> VolumeAttachment objects are non-namespaced.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

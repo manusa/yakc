@@ -30,7 +30,7 @@ import lombok.ToString;
  * GitProxy contains the proxy settings for git operations only. If set, this will override any Proxy settings for all git commands, such as git clone. <br><p>  Values that are not set here will be inherited from DefaultProxy.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -30,7 +30,7 @@ import lombok.ToString;
  * TokenReviewSpec is a description of the token authentication request.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

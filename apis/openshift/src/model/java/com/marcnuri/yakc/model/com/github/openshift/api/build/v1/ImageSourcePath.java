@@ -29,7 +29,7 @@ import lombok.ToString;
  * ImageSourcePath describes a path to be copied from a source image and its destination within the build directory.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

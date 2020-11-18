@@ -29,7 +29,7 @@ import lombok.ToString;
  * RoleBindingRestrictionSpec defines a rolebinding restriction.  Exactly one field must be non-nil.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

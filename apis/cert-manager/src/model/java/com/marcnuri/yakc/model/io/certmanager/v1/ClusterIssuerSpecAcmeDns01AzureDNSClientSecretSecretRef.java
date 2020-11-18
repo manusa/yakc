@@ -29,7 +29,7 @@ import lombok.ToString;
  * if both this and ClientID are left unset MSI will be used
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

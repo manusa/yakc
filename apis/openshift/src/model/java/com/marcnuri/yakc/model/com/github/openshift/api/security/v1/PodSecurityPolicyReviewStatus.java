@@ -31,7 +31,7 @@ import lombok.ToString;
  * PodSecurityPolicyReviewStatus represents the status of PodSecurityPolicyReview.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

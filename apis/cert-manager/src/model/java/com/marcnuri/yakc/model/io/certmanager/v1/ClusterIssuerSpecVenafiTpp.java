@@ -29,7 +29,7 @@ import lombok.ToString;
  * TPP specifies Trust Protection Platform configuration settings. Only one of TPP or Cloud may be specified.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

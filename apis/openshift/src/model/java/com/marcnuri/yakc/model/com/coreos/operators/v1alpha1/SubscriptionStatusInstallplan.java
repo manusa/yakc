@@ -29,7 +29,7 @@ import lombok.ToString;
  * Install is a reference to the latest InstallPlan generated for the Subscription. DEPRECATED: InstallPlanRef
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

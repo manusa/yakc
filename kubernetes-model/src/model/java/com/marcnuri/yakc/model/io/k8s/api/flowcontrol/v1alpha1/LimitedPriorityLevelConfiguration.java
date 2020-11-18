@@ -28,7 +28,7 @@ import lombok.ToString;
  * LimitedPriorityLevelConfiguration specifies how to handle requests that are subject to limits. It addresses two issues:<br><p>  &#42; How are requests for this priority level limited?<br><p>  &#42; What should be done with requests that exceed the limit?
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

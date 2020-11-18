@@ -30,7 +30,7 @@ import lombok.ToString;
  * JobTemplateSpec describes the data a Job should have when created from a template
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

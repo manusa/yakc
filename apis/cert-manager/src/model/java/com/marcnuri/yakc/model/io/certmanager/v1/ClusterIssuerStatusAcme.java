@@ -28,7 +28,7 @@ import lombok.ToString;
  * ACME specific status options. This field should only be set if the Issuer is configured to use an ACME server to issue certificates.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

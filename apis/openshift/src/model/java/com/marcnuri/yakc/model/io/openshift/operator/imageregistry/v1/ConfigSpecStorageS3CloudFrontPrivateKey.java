@@ -29,7 +29,7 @@ import lombok.ToString;
  * privateKey points to secret containing the private key, provided by AWS.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

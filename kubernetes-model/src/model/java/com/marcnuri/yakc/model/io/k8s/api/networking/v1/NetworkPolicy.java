@@ -29,7 +29,7 @@ import lombok.ToString;
  * NetworkPolicy describes what network traffic is allowed for a set of Pods
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

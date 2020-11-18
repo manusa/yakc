@@ -28,7 +28,7 @@ import lombok.ToString;
  * HubSourceStatus is used to reflect the current state of applying the configuration to a default source
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

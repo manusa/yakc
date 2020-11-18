@@ -30,7 +30,7 @@ import lombok.ToString;
  * Adds and removes POSIX capabilities from running containers.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -28,7 +28,7 @@ import lombok.ToString;
  * NonResourceAttributes includes the authorization attributes available for non-resource requests to the Authorizer interface
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

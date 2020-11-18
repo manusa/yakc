@@ -29,7 +29,7 @@ import lombok.ToString;
  * TypedLocalObjectReference contains enough information to let you locate the typed referenced object inside the same namespace.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

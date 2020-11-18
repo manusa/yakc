@@ -30,7 +30,7 @@ import lombok.ToString;
  * ClusterServiceVersion is a Custom Resource of type `ClusterServiceVersionSpec`.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

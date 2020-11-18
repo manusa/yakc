@@ -28,7 +28,7 @@ import lombok.ToString;
  * DeploymentTriggerPolicy describes a policy for a single trigger that results in a new deployment.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

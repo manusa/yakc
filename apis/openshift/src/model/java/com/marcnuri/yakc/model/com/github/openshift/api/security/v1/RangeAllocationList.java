@@ -33,7 +33,7 @@ import lombok.ToString;
  * RangeAllocationList is a list of RangeAllocations objects
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

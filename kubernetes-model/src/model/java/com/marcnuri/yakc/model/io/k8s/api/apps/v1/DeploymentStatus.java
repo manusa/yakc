@@ -30,7 +30,7 @@ import lombok.ToString;
  * DeploymentStatus is the most recently observed status of the Deployment.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

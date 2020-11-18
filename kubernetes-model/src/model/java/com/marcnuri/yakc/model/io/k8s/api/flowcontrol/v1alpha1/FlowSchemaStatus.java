@@ -30,7 +30,7 @@ import lombok.ToString;
  * FlowSchemaStatus represents the current state of a FlowSchema.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

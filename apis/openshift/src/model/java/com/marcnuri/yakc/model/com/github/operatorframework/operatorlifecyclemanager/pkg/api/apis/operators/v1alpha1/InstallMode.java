@@ -29,7 +29,7 @@ import lombok.ToString;
  * InstallMode associates an InstallModeType with a flag representing if the CSV supports it
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

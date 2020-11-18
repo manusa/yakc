@@ -30,7 +30,7 @@ import lombok.ToString;
  * Subscription keeps operators up to date by tracking changes to Catalogs.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -30,7 +30,7 @@ import lombok.ToString;
  * status holds the information about the state of an operator.  It is consistent with status information across the kube ecosystem.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

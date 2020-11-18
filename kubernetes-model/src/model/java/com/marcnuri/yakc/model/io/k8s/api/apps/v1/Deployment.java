@@ -29,7 +29,7 @@ import lombok.ToString;
  * Deployment enables declarative updates for Pods and ReplicaSets.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -30,7 +30,7 @@ import lombok.ToString;
  * CSIDriverSpec is the specification of a CSIDriver.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

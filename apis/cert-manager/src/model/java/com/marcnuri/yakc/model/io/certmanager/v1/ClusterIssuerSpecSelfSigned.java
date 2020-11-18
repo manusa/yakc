@@ -30,7 +30,7 @@ import lombok.ToString;
  * SelfSigned configures this issuer to 'self sign' certificates using the private key used to create the CertificateRequest object.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

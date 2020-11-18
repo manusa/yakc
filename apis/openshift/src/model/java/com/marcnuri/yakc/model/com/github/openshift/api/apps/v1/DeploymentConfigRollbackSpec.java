@@ -30,7 +30,7 @@ import lombok.ToString;
  * DeploymentConfigRollbackSpec represents the options for rollback generation.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

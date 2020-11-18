@@ -28,7 +28,7 @@ import lombok.ToString;
  * targetResource contains apiVersion and kind of the resource YAML sample is representating.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

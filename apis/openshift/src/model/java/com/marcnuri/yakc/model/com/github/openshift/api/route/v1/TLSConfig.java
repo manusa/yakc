@@ -29,7 +29,7 @@ import lombok.ToString;
  * TLSConfig defines config used to secure a route and provide termination
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

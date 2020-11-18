@@ -29,7 +29,7 @@ import lombok.ToString;
  * The name of the secret containing the TSIG value. If ``tsigKeyName`` is defined, this field is required.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

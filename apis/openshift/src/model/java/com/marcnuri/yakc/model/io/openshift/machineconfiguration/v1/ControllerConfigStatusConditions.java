@@ -28,7 +28,7 @@ import lombok.ToString;
  * ControllerConfigStatusCondition contains condition information for ControllerConfigStatus
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

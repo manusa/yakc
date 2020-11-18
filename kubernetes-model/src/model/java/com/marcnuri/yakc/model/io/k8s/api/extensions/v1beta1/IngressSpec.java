@@ -30,7 +30,7 @@ import lombok.ToString;
  * IngressSpec describes the Ingress the user wishes to exist.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -30,7 +30,7 @@ import lombok.ToString;
  * UpdateHistory is a single attempted update to the cluster.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

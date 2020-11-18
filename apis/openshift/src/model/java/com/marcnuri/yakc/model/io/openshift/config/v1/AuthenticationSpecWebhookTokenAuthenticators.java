@@ -28,7 +28,7 @@ import lombok.ToString;
  * webhookTokenAuthenticator holds the necessary configuration options for a remote token authenticator
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

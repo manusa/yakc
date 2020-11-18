@@ -30,7 +30,7 @@ import lombok.ToString;
  * EndpointSubset is a group of addresses with a common set of ports. The expanded set of endpoints is the Cartesian product of Addresses x Ports. For example, given:<br><p>   {<br><p>     Addresses: [{"ip": "10.10.1.1"}, {"ip": "10.10.2.2"}],<br><p>     Ports:     [{"name": "a", "port": 8675}, {"name": "b", "port": 309}]<br><p>   }<br><p> The resulting set of endpoints can be viewed as:<br><p>     a: [ 10.10.1.1:8675, 10.10.2.2:8675 ],<br><p>     b: [ 10.10.1.1:309, 10.10.2.2:309 ]
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

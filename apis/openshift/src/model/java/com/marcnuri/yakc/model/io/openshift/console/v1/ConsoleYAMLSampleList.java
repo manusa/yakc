@@ -33,7 +33,7 @@ import lombok.ToString;
  * ConsoleYAMLSampleList is a list of ConsoleYAMLSample
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

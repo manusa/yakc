@@ -33,7 +33,7 @@ import lombok.ToString;
  * BuildSpec has the information to represent a build and also additional information about a build
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -29,7 +29,7 @@ import lombok.ToString;
  * SELinuxContextStrategyOptions defines the strategy type and any options used to create the strategy.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

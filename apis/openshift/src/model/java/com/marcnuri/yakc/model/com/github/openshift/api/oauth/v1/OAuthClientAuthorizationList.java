@@ -33,7 +33,7 @@ import lombok.ToString;
  * OAuthClientAuthorizationList is a collection of OAuth client authorizations
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

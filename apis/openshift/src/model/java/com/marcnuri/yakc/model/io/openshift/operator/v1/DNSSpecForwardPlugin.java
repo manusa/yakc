@@ -30,7 +30,7 @@ import lombok.ToString;
  * forwardPlugin defines a schema for configuring CoreDNS to proxy DNS messages to upstream resolvers.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -29,7 +29,7 @@ import lombok.ToString;
  * PackageChannel defines a single channel under a package, pointing to a version of that package.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

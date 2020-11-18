@@ -31,7 +31,7 @@ import lombok.ToString;
  * ServiceAccountRestriction matches a service account by a string match on either the service-account name or the name of the service account's namespace.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

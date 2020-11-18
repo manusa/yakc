@@ -31,7 +31,7 @@ import lombok.ToString;
  * BundleLookup is a request to pull and unpackage the content of a bundle to the cluster.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

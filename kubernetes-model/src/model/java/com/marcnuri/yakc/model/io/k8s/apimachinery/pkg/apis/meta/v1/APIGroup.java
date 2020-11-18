@@ -31,7 +31,7 @@ import lombok.ToString;
  * APIGroup contains the name, the supported versions, and the preferred version of a group.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

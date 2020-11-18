@@ -30,7 +30,7 @@ import lombok.ToString;
  * StaticIPAMConfig configures the static IP address in case of type:IPAMTypeStatic
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

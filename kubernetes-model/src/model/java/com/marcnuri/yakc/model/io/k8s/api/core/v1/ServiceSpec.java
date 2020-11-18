@@ -31,7 +31,7 @@ import lombok.ToString;
  * ServiceSpec describes the attributes that a user creates on a service.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

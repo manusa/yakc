@@ -31,7 +31,7 @@ import lombok.ToString;
  * CustomResourceDefinitionSpec describes how a user wants their resource to appear
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

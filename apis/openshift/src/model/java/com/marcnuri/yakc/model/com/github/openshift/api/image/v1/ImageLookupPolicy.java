@@ -29,7 +29,7 @@ import lombok.ToString;
  * ImageLookupPolicy describes how an image stream can be used to override the image references used by pods, builds, and other resources in a namespace.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

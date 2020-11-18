@@ -29,7 +29,7 @@ import lombok.ToString;
  * ServiceAccountReference specifies a service account and namespace by their names.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

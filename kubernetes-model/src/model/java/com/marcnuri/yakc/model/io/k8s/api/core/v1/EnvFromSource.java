@@ -28,7 +28,7 @@ import lombok.ToString;
  * EnvFromSource represents the source of a set of ConfigMaps
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

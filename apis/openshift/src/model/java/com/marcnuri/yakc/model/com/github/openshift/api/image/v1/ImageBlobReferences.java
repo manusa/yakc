@@ -30,7 +30,7 @@ import lombok.ToString;
  * ImageBlobReferences describes the blob references within an image.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

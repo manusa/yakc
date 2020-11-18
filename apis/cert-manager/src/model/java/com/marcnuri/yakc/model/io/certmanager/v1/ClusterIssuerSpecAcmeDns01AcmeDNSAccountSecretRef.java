@@ -29,7 +29,7 @@ import lombok.ToString;
  * A reference to a specific 'key' within a Secret resource. In some instances, `key` is a required field.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -31,7 +31,7 @@ import lombok.ToString;
  * CSI (Container Storage Interface) represents storage that is handled by an external CSI driver (Alpha feature).
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

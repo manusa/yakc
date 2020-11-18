@@ -29,7 +29,7 @@ import lombok.ToString;
  * GroupSubject holds detailed information for group-kind subject.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

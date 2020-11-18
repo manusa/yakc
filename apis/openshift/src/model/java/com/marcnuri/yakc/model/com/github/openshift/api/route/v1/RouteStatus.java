@@ -31,7 +31,7 @@ import lombok.ToString;
  * RouteStatus provides relevant info about the status of a route, including which routers acknowledge it.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

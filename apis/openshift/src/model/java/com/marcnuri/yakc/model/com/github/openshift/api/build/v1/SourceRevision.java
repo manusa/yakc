@@ -29,7 +29,7 @@ import lombok.ToString;
  * SourceRevision is the revision or commit information from the source for the build
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

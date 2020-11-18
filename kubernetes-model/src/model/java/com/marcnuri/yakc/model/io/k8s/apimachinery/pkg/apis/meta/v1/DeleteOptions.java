@@ -30,7 +30,7 @@ import lombok.ToString;
  * DeleteOptions may be provided when deleting an API object.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

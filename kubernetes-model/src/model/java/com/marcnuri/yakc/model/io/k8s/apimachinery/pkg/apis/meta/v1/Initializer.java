@@ -29,7 +29,7 @@ import lombok.ToString;
  * Initializer is information about an initializer that has not yet completed.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

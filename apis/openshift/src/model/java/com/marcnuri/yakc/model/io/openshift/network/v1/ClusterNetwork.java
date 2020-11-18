@@ -32,7 +32,7 @@ import lombok.ToString;
  * ClusterNetwork describes the cluster network. There is normally only one object of this type, named "default", which is created by the SDN network plugin based on the master configuration when the cluster is brought up for the first time.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

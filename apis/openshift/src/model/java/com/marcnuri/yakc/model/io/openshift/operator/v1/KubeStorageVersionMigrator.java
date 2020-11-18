@@ -30,7 +30,7 @@ import lombok.ToString;
  * KubeStorageVersionMigrator provides information to configure an operator to manage kube-storage-version-migrator.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

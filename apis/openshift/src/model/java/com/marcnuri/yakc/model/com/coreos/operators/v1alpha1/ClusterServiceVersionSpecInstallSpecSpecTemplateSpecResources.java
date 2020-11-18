@@ -30,7 +30,7 @@ import lombok.ToString;
  * Resources are not allowed for ephemeral containers. Ephemeral containers use spare resources already allocated to the pod.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

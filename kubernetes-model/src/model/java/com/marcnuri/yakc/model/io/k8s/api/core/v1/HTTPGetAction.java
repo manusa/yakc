@@ -32,7 +32,7 @@ import lombok.ToString;
  * HTTPGetAction describes an action based on HTTP Get requests.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

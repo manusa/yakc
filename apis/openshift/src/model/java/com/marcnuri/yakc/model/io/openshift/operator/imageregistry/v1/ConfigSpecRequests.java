@@ -28,7 +28,7 @@ import lombok.ToString;
  * requests controls how many parallel requests a given registry instance will handle before queuing additional requests.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

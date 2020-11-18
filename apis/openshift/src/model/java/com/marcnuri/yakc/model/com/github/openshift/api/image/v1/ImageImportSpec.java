@@ -31,7 +31,7 @@ import lombok.ToString;
  * ImageImportSpec describes a request to import a specific image.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

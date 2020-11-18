@@ -28,7 +28,7 @@ import lombok.ToString;
  * proxy defines the proxy to be used when calling master api, upstream registries, etc.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

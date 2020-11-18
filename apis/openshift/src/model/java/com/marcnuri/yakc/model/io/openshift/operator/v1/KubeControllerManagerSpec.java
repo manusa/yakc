@@ -28,7 +28,7 @@ import lombok.ToString;
  * spec is the specification of the desired behavior of the Kubernetes Controller Manager
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

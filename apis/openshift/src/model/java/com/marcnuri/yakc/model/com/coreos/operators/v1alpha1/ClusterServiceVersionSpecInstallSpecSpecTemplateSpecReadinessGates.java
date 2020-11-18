@@ -29,7 +29,7 @@ import lombok.ToString;
  * PodReadinessGate contains the reference to a pod condition
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

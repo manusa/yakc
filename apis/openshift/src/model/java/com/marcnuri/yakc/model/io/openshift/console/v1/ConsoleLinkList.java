@@ -33,7 +33,7 @@ import lombok.ToString;
  * ConsoleLinkList is a list of ConsoleLink
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

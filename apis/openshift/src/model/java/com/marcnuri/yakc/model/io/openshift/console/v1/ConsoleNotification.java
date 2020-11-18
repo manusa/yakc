@@ -30,7 +30,7 @@ import lombok.ToString;
  * ConsoleNotification is the extension for configuring openshift web console notifications.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

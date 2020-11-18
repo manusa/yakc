@@ -28,7 +28,7 @@ import lombok.ToString;
  * Configures an issuer to solve challenges using the specified options. Only one of HTTP01 or DNS01 may be provided.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

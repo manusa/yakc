@@ -26,7 +26,7 @@ import lombok.ToString;
  * Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @Data
 @ToString

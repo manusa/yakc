@@ -31,7 +31,7 @@ import lombok.ToString;
  * CRDDescription provides details to OLM about the CRDs
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

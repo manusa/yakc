@@ -29,7 +29,7 @@ import lombok.ToString;
  * LimitResponse defines how to handle requests that can not be executed right now.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

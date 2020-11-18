@@ -31,7 +31,7 @@ import lombok.ToString;
  * ResourceQuotaSpec defines the desired hard limits to enforce for Quota.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

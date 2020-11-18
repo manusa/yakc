@@ -33,7 +33,7 @@ import lombok.ToString;
  * RoleBindingList is a collection of RoleBindings
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -30,7 +30,7 @@ import lombok.ToString;
  * HybridOverlayConfig configures an additional overlay network for peers that are not using OVN.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

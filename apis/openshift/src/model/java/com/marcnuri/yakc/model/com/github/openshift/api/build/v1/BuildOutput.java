@@ -32,7 +32,7 @@ import lombok.ToString;
  * BuildOutput is input to a build strategy and describes the container image that the strategy should produce.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

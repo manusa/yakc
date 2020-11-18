@@ -29,7 +29,7 @@ import lombok.ToString;
  * JKS configures options for storing a JKS keystore in the `spec.secretName` Secret resource.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

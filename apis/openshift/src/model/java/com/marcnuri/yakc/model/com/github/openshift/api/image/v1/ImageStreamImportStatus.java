@@ -30,7 +30,7 @@ import lombok.ToString;
  * ImageStreamImportStatus contains information about the status of an image stream import.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

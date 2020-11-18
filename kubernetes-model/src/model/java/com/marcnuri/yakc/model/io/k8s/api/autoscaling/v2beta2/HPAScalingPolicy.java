@@ -29,7 +29,7 @@ import lombok.ToString;
  * HPAScalingPolicy is a single policy which must hold true for a specified past interval.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

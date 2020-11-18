@@ -30,7 +30,7 @@ import lombok.ToString;
  * ConfigCondition captures various conditions of the Config as entries are processed.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

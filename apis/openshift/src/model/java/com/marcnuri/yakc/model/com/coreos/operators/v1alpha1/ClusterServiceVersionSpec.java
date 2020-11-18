@@ -32,7 +32,7 @@ import lombok.ToString;
  * ClusterServiceVersionSpec declarations tell OLM how to install an operator that can manage apps for a given version.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

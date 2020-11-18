@@ -32,7 +32,7 @@ import lombok.ToString;
  * GroupRestriction matches a group either by a string match on the group name or a label selector applied to group labels.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

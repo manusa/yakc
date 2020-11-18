@@ -31,7 +31,7 @@ import lombok.ToString;
  * Specification of desired Service selection for target discovery by Prometheus.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -30,7 +30,7 @@ import lombok.ToString;
  * OperatorHubStatus defines the observed state of OperatorHub. The current state of the default hub sources will always be reflected here.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

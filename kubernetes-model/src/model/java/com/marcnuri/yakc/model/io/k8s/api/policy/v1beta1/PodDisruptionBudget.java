@@ -29,7 +29,7 @@ import lombok.ToString;
  * PodDisruptionBudget is an object to define the max disruption that can be caused to a collection of pods
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

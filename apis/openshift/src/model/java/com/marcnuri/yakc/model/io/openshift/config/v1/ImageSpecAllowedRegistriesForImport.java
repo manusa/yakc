@@ -28,7 +28,7 @@ import lombok.ToString;
  * RegistryLocation contains a location of the registry specified by the registry domain name. The domain name might include wildcards, like '&#42;' or '??'.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

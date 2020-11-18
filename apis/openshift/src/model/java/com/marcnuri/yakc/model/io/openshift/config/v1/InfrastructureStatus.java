@@ -28,7 +28,7 @@ import lombok.ToString;
  * status holds observed values from the cluster. They may not be overridden.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

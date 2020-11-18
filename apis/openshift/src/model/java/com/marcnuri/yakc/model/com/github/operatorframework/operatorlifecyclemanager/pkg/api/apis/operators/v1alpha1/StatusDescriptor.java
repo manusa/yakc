@@ -31,7 +31,7 @@ import lombok.ToString;
  * StatusDescriptor describes a field in a status block of a CRD so that OLM can consume it
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

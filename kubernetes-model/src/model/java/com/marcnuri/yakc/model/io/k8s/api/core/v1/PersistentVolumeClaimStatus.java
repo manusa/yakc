@@ -31,7 +31,7 @@ import lombok.ToString;
  * PersistentVolumeClaimStatus is the current status of a persistent volume claim.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -29,7 +29,7 @@ import lombok.ToString;
  * AuditSinkSpec holds the spec for the audit sink
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

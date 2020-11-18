@@ -28,7 +28,7 @@ import lombok.ToString;
  * NodeConfigStatus describes the status of the config assigned by Node.Spec.ConfigSource.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -29,7 +29,7 @@ import lombok.ToString;
  * SignatureSubject holds information about a person or entity who created the signature.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

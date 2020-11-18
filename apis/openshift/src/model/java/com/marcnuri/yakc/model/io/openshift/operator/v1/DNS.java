@@ -29,7 +29,7 @@ import lombok.ToString;
  * DNS manages the CoreDNS component to provide a name resolution service for pods and services in the cluster. <br><p>  This supports the DNS-based service discovery specification: https://github.com/kubernetes/dns/blob/master/docs/specification.md <br><p>  More details: https://kubernetes.io/docs/tasks/administer-cluster/coredns
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

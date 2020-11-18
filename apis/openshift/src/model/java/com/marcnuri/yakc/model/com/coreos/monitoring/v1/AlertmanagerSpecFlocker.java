@@ -28,7 +28,7 @@ import lombok.ToString;
  * Flocker represents a Flocker volume attached to a kubelet's host machine. This depends on the Flocker control service being running
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

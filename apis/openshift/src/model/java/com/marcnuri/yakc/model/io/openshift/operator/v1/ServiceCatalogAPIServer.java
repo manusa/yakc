@@ -30,7 +30,7 @@ import lombok.ToString;
  * ServiceCatalogAPIServer provides information to configure an operator to manage Service Catalog API Server
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -29,7 +29,7 @@ import lombok.ToString;
  * PodSecurityPolicySubjectReview checks whether a particular user/SA tuple can create the PodTemplateSpec.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

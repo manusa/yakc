@@ -29,7 +29,7 @@ import lombok.ToString;
  * FlowDistinguisherMethod specifies the method of a flow distinguisher.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

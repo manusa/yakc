@@ -30,7 +30,7 @@ import lombok.ToString;
  * Config is the configuration object for a registry instance managed by the registry operator
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

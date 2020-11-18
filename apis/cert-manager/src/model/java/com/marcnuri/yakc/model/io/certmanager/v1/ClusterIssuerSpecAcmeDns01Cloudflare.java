@@ -28,7 +28,7 @@ import lombok.ToString;
  * Use the Cloudflare API to manage DNS01 challenge records.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

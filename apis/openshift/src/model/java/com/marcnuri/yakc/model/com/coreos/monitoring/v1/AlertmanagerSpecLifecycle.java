@@ -28,7 +28,7 @@ import lombok.ToString;
  * Actions that the management system should take in response to container lifecycle events. Cannot be updated.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

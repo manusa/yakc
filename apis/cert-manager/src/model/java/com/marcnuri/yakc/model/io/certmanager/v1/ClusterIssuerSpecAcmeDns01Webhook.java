@@ -29,7 +29,7 @@ import lombok.ToString;
  * Configure an external webhook based DNS01 challenge solver to manage DNS01 challenge records.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

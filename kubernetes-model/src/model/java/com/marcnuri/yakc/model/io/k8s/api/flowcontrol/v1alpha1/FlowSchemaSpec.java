@@ -31,7 +31,7 @@ import lombok.ToString;
  * FlowSchemaSpec describes how the FlowSchema's specification looks like.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

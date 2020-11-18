@@ -28,7 +28,7 @@ import lombok.ToString;
  * SecretRef references to the secret for ScaleIO user and other sensitive information. If this is not provided, Login operation will fail.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -28,7 +28,7 @@ import lombok.ToString;
  * Preconditions must be fulfilled before an operation (update, delete, etc.) is carried out.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

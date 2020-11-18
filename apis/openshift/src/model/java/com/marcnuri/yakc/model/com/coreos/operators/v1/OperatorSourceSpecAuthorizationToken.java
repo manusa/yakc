@@ -28,7 +28,7 @@ import lombok.ToString;
  * AuthorizationToken is the authorization token used to access private repositories in remote registry associated with the operator source.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -28,7 +28,7 @@ import lombok.ToString;
  * pullSecret is the default pull secret that needs to be installed on all machines.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

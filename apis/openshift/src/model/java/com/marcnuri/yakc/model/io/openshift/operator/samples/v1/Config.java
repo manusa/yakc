@@ -30,7 +30,7 @@ import lombok.ToString;
  * Config contains the configuration and detailed condition status for the Samples Operator.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

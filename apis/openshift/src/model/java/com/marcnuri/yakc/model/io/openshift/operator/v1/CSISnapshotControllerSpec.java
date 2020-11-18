@@ -28,7 +28,7 @@ import lombok.ToString;
  * CSISnapshotControllerSpec is the specification of the desired behavior of the CSISnapshotController operator.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

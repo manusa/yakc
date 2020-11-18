@@ -28,7 +28,7 @@ import lombok.ToString;
  * GenerationStatus keeps track of the generation for a given resource so that decisions about forced updates can be made.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -26,7 +26,7 @@ import lombok.ToString;
  * RawExtension is used to hold extensions in external versions.<br><p> <br><p> To use this, make a field which has RawExtension as its type in your external, versioned struct, and Object in your internal struct. You also need to register your various plugin types.<br><p> <br><p> // Internal package: type MyAPIObject struct {<br><p> 	runtime.TypeMeta `json:",inline"`<br><p> 	MyPlugin runtime.Object `json:"myPlugin"`<br><p> } type PluginA struct {<br><p> 	AOption string `json:"aOption"`<br><p> }<br><p> <br><p> // External package: type MyAPIObject struct {<br><p> 	runtime.TypeMeta `json:",inline"`<br><p> 	MyPlugin runtime.RawExtension `json:"myPlugin"`<br><p> } type PluginA struct {<br><p> 	AOption string `json:"aOption"`<br><p> }<br><p> <br><p> // On the wire, the JSON will look something like this: {<br><p> 	"kind":"MyAPIObject",<br><p> 	"apiVersion":"v1",<br><p> 	"myPlugin": {<br><p> 		"kind":"PluginA",<br><p> 		"aOption":"foo",<br><p> 	},<br><p> }<br><p> <br><p> So what happens? Decode first uses json or yaml to unmarshal the serialized data into your external MyAPIObject. That causes the raw JSON to be stored, but not unpacked. The next step is to copy (using pkg/conversion) into the internal struct. The runtime package's DefaultScheme has conversion functions installed which will unpack the JSON stored in RawExtension, turning it into the correct object type, and storing it in the Object. (TODO: In the case where the object is of an unknown type, a runtime.Unknown object will be created and stored.)
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @Data
 @ToString

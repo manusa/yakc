@@ -33,7 +33,7 @@ import lombok.ToString;
  * EgressNetworkPolicyList is a list of EgressNetworkPolicy
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

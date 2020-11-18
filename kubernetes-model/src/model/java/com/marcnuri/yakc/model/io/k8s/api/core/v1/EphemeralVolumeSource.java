@@ -28,7 +28,7 @@ import lombok.ToString;
  * Represents an ephemeral volume that is handled by a normal storage driver.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

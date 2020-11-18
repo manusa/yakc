@@ -31,7 +31,7 @@ import lombok.ToString;
  * DEPRECATED. DeploymentRollback stores the information required to rollback a deployment.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

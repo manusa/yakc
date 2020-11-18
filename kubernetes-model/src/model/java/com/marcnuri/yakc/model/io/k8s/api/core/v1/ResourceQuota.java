@@ -29,7 +29,7 @@ import lombok.ToString;
  * ResourceQuota sets aggregate quota restrictions enforced per namespace
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

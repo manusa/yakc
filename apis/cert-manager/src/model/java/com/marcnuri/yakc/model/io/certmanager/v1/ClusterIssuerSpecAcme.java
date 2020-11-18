@@ -31,7 +31,7 @@ import lombok.ToString;
  * ACME configures this issuer to communicate with a RFC8555 (ACME) server to obtain signed x509 certificates.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -28,7 +28,7 @@ import lombok.ToString;
  * PersistentVolumeStatus is the current status of a persistent volume.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -32,7 +32,7 @@ import lombok.ToString;
  * HostSubnet describes the container subnet network on a node. The HostSubnet object must have the same name as the Node object it corresponds to.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

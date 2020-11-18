@@ -29,7 +29,7 @@ import lombok.ToString;
  * SeccompProfile defines a pod/container's seccomp profile settings. Only one profile source may be set.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -28,7 +28,7 @@ import lombok.ToString;
  * Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

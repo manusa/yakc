@@ -31,7 +31,7 @@ import lombok.ToString;
  * ActionDescriptor describes a declarative action that can be performed on a custom resource instance
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

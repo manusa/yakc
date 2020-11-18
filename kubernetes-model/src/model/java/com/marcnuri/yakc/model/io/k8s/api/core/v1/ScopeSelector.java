@@ -30,7 +30,7 @@ import lombok.ToString;
  * A scope selector represents the AND of the selectors represented by the scoped-resource selector requirements.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

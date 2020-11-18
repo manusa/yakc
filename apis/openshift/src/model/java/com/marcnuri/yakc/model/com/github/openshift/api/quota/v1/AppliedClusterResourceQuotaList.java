@@ -33,7 +33,7 @@ import lombok.ToString;
  * AppliedClusterResourceQuotaList is a collection of AppliedClusterResourceQuotas
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

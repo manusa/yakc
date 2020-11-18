@@ -29,7 +29,7 @@ import lombok.ToString;
  * APITokenSecretRef is a secret key selector for the Venafi Cloud API token.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -33,7 +33,7 @@ import lombok.ToString;
  * OAuthAccessTokenList is a collection of OAuth access tokens
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

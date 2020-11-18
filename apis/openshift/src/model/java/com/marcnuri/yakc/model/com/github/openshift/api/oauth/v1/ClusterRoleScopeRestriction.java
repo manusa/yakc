@@ -31,7 +31,7 @@ import lombok.ToString;
  * ClusterRoleScopeRestriction describes restrictions on cluster role scopes
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

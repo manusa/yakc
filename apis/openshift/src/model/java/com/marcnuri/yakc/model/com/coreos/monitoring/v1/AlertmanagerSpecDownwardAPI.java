@@ -31,7 +31,7 @@ import lombok.ToString;
  * DownwardAPI represents downward API about the pod that should populate this volume
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

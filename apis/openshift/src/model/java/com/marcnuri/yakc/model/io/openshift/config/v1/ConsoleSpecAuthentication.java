@@ -28,7 +28,7 @@ import lombok.ToString;
  * ConsoleAuthentication defines a list of optional configuration for console authentication.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

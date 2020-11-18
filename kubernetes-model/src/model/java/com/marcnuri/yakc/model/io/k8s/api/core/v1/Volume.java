@@ -29,7 +29,7 @@ import lombok.ToString;
  * Volume represents a named volume in a pod that may be accessed by any container in the pod.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -28,7 +28,7 @@ import lombok.ToString;
  * azure represents configuration that uses Azure Blob Storage.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

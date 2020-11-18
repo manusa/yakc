@@ -29,7 +29,7 @@ import lombok.ToString;
  * MetricTarget defines the target value, average value, or average utilization of a specific metric
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

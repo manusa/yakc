@@ -30,7 +30,7 @@ import lombok.ToString;
  * SecurityContext holds pod-level security attributes and common container settings. This defaults to the default PodSecurityContext.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

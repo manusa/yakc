@@ -30,7 +30,7 @@ import lombok.ToString;
  * APIServiceDefinitions declares all of the extension apis managed or required by an operator being ran by ClusterServiceVersion.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

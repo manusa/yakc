@@ -30,7 +30,7 @@ import lombok.ToString;
  * CustomResourceDefinitions declares all of the CRDs managed or required by an operator being ran by ClusterServiceVersion.<br><p> <br><p> If the CRD is present in the Owned list, it is implicitly required.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

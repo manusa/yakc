@@ -28,7 +28,7 @@ import lombok.ToString;
  * DaemonSetUpdateStrategy is a struct used to control the update strategy for a DaemonSet.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

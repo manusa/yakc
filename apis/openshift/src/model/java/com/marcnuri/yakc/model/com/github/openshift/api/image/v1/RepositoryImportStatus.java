@@ -31,7 +31,7 @@ import lombok.ToString;
  * RepositoryImportStatus describes the result of an image repository import
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

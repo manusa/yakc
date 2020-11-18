@@ -28,7 +28,7 @@ import lombok.ToString;
  * Thanos configuration allows configuring various aspects of a Prometheus server in a Thanos environment. <br><p>  This section is experimental, it may change significantly without deprecation notice in any release. <br><p>  This is experimental and may change significantly without backward compatibility in any release.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

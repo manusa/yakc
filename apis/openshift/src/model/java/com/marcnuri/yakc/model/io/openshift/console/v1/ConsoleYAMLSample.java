@@ -30,7 +30,7 @@ import lombok.ToString;
  * ConsoleYAMLSample is an extension for customizing OpenShift web console YAML samples.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

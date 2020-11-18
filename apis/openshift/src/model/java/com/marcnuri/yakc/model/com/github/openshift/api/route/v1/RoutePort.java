@@ -30,7 +30,7 @@ import lombok.ToString;
  * RoutePort defines a port mapping from a router to an endpoint in the service endpoints.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

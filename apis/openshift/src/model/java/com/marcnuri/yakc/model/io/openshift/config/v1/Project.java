@@ -30,7 +30,7 @@ import lombok.ToString;
  * Project holds cluster-wide information about Project.  The canonical name is `cluster`
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

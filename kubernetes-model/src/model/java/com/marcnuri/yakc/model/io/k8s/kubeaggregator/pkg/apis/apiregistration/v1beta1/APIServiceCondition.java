@@ -30,7 +30,7 @@ import lombok.ToString;
  * APIServiceCondition describes the state of an APIService at a particular point
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

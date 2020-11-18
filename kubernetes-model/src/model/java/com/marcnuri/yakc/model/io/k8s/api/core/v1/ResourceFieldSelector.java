@@ -29,7 +29,7 @@ import lombok.ToString;
  * ResourceFieldSelector represents container resources (cpu, memory) and their output format
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

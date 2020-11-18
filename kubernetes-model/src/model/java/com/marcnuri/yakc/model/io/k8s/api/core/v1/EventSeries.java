@@ -29,7 +29,7 @@ import lombok.ToString;
  * EventSeries contain information on series of events, i.e. thing that was/is happening continuously for some time.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

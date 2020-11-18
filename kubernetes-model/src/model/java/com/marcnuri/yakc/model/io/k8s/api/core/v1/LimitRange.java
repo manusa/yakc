@@ -29,7 +29,7 @@ import lombok.ToString;
  * LimitRange sets resource usage limits for each kind of resource in a Namespace.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

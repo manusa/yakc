@@ -32,7 +32,7 @@ import lombok.ToString;
  * PrometheusRuleList is a list of PrometheusRule
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

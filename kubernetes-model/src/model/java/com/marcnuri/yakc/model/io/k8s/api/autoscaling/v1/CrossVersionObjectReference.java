@@ -29,7 +29,7 @@ import lombok.ToString;
  * CrossVersionObjectReference contains enough information to let you identify the referred resource.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

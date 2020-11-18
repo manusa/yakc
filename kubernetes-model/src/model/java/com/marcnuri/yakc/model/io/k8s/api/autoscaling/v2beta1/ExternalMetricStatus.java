@@ -30,7 +30,7 @@ import lombok.ToString;
  * ExternalMetricStatus indicates the current value of a global metric not associated with any Kubernetes object.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -28,7 +28,7 @@ import lombok.ToString;
  * customization is used to optionally provide a small set of customization options to the web console.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -29,7 +29,7 @@ import lombok.ToString;
  * AzureDisk represents an Azure Data Disk mount on the host and bind mount to the pod.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

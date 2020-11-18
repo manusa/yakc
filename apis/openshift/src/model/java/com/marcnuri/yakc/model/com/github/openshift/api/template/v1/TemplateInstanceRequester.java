@@ -31,7 +31,7 @@ import lombok.ToString;
  * TemplateInstanceRequester holds the identity of an agent requesting a template instantiation.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

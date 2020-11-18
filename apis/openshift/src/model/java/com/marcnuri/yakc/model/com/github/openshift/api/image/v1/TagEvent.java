@@ -30,7 +30,7 @@ import lombok.ToString;
  * TagEvent is used by ImageStreamStatus to keep a historical record of images associated with a tag.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -28,7 +28,7 @@ import lombok.ToString;
  * QuerySpec defines the query command line flags when starting Prometheus.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

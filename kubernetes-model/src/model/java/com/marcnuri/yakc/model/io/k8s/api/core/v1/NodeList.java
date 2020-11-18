@@ -33,7 +33,7 @@ import lombok.ToString;
  * NodeList is the whole list of all Nodes which have been registered with master.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

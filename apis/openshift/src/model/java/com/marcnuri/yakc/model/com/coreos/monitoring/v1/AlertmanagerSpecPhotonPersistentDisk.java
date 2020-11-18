@@ -29,7 +29,7 @@ import lombok.ToString;
  * PhotonPersistentDisk represents a PhotonController persistent disk attached and mounted on kubelets host machine
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -30,7 +30,7 @@ import lombok.ToString;
  * ClusterVersion is the configuration for the ClusterVersionOperator. This is where parameters related to automatic updates can be set.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

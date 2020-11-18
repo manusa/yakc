@@ -29,7 +29,7 @@ import lombok.ToString;
  * CronJobSpec describes how the job execution will look like and when it will actually run.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

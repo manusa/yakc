@@ -28,7 +28,7 @@ import lombok.ToString;
  * RecreateDeploymentStrategyParams are the input to the Recreate deployment strategy.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

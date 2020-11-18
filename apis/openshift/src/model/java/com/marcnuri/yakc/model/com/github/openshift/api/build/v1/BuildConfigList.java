@@ -33,7 +33,7 @@ import lombok.ToString;
  * BuildConfigList is a collection of BuildConfigs.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

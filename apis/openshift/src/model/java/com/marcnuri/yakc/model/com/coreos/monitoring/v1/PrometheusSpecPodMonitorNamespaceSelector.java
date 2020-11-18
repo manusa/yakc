@@ -31,7 +31,7 @@ import lombok.ToString;
  * Namespaces to be selected for PodMonitor discovery. If nil, only check own namespace.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

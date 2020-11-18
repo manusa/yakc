@@ -30,7 +30,7 @@ import lombok.ToString;
  * publicZone is the location where all the DNS records that are publicly accessible to the internet exist. <br><p>  If this field is nil, no public records should be created. <br><p>  Once set, this field cannot be changed.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

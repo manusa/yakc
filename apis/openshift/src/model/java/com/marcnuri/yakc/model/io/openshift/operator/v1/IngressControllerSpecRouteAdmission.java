@@ -28,7 +28,7 @@ import lombok.ToString;
  * routeAdmission defines a policy for handling new route claims (for example, to allow or deny claims across namespaces). <br><p>  If empty, defaults will be applied. See specific routeAdmission fields for details about their defaults.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

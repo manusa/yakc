@@ -29,7 +29,7 @@ import lombok.ToString;
  * ReplicaSet ensures that a specified number of pod replicas are running at any given time.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

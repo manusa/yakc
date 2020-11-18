@@ -28,7 +28,7 @@ import lombok.ToString;
  * BareMetal contains settings specific to the BareMetal platform.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -32,7 +32,7 @@ import lombok.ToString;
  * ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

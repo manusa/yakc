@@ -29,7 +29,7 @@ import lombok.ToString;
  * Vault configures this issuer to sign certificates using a HashiCorp Vault PKI backend.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

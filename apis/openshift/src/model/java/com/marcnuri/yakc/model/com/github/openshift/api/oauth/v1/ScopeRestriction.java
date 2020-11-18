@@ -30,7 +30,7 @@ import lombok.ToString;
  * ScopeRestriction describe one restriction on scopes.  Exactly one option must be non-nil.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -29,7 +29,7 @@ import lombok.ToString;
  * ImageChangeTrigger allows builds to be triggered when an ImageStream changes
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

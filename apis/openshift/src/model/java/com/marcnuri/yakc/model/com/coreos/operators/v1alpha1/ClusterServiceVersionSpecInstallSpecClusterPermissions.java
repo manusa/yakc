@@ -31,7 +31,7 @@ import lombok.ToString;
  * StrategyDeploymentPermissions describe the rbac rules and service account needed by the install strategy
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

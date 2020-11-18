@@ -29,7 +29,7 @@ import lombok.ToString;
  * AllowedFlexVolume represents a single Flexvolume that is allowed to be used.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -30,7 +30,7 @@ import lombok.ToString;
  * DeploymentCauseImageTrigger represents details about the cause of a deployment originating from an image change trigger
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

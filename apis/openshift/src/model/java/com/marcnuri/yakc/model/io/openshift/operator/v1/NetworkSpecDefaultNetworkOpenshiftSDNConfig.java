@@ -28,7 +28,7 @@ import lombok.ToString;
  * openShiftSDNConfig configures the openshift-sdn plugin
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

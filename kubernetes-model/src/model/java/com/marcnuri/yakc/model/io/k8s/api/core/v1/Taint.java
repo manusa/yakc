@@ -30,7 +30,7 @@ import lombok.ToString;
  * The node this Taint is attached to has the "effect" on any pod that does not tolerate the Taint.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

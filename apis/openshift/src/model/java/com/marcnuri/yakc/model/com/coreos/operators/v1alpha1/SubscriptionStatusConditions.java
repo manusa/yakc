@@ -30,7 +30,7 @@ import lombok.ToString;
  * SubscriptionCondition represents the latest available observations of a Subscription's state.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

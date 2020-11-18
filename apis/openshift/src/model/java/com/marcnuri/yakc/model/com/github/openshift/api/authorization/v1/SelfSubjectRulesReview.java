@@ -29,7 +29,7 @@ import lombok.ToString;
  * SelfSubjectRulesReview is a resource you can create to determine which actions you can perform in a namespace
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

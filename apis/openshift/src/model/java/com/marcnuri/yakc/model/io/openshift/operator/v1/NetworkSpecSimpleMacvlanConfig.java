@@ -28,7 +28,7 @@ import lombok.ToString;
  * SimpleMacvlanConfig configures the macvlan interface in case of type:NetworkTypeSimpleMacvlan
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

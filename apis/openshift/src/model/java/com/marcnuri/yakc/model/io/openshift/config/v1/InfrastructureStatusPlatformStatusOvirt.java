@@ -28,7 +28,7 @@ import lombok.ToString;
  * Ovirt contains settings specific to the oVirt infrastructure provider.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

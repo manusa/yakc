@@ -29,7 +29,7 @@ import lombok.ToString;
  * DownwardAPIVolumeFile represents information to create the file containing the pod field
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

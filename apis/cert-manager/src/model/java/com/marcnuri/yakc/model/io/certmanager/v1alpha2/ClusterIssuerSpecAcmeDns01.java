@@ -37,7 +37,7 @@ import lombok.ToString;
  * Configures cert-manager to attempt to complete authorizations by performing the DNS01 challenge flow.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

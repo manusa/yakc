@@ -29,7 +29,7 @@ import lombok.ToString;
  * defaultNetwork is the "default" network that all pods will receive
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

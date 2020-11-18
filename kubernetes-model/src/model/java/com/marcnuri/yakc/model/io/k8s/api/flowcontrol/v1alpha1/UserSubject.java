@@ -29,7 +29,7 @@ import lombok.ToString;
  * UserSubject holds detailed information for user-kind subject.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

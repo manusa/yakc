@@ -32,7 +32,7 @@ import lombok.ToString;
  * Role is a logical grouping of PolicyRules that can be referenced as a unit by RoleBindings.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

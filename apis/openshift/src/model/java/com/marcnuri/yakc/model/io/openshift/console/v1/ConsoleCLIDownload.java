@@ -30,7 +30,7 @@ import lombok.ToString;
  * ConsoleCLIDownload is an extension for configuring openshift web console command line interface (CLI) downloads.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

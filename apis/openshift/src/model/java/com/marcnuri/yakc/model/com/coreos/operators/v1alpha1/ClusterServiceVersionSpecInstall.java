@@ -29,7 +29,7 @@ import lombok.ToString;
  * NamedInstallStrategy represents the block of an ClusterServiceVersion resource where the install strategy is specified.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

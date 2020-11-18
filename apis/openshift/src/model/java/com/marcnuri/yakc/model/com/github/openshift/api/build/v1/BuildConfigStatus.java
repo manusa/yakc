@@ -29,7 +29,7 @@ import lombok.ToString;
  * BuildConfigStatus contains current state of the build config object.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
-@Builder(toBuilder = true)
+@Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
