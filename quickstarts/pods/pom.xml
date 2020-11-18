@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.marcnuri.yakc.quickstarts</groupId>
   <artifactId>pods</artifactId>
-  <version>0.0.14</version>
+  <version>0.0.15</version>
   <name>YAKC :: Quickstarts :: Pods</name>
 
   <properties>
