@@ -18,6 +18,8 @@ import React, {useEffect, useRef, useState} from 'react';
 import {connect} from 'react-redux';
 import throttle from 'lodash/throttle';
 import {AutoSizer, List} from 'react-virtualized';
+import Convert from 'ansi-to-html';
+import dompurify from 'dompurify';
 import metadata from '../metadata';
 import p from '../pods';
 import Card from '../components/Card';
@@ -26,6 +28,8 @@ import Link from '../components/Link';
 import Switch from '../components/Switch';
 
 import './PodsLogsPage.css';
+
+const ansi = new Convert();
 
 const PodsLogsPage = ({uid, namespace, name}) => {
   const [log, setLog] = useState(['Loading logs...']);
@@ -55,7 +59,8 @@ const PodsLogsPage = ({uid, namespace, name}) => {
     [log, follow]);
   useEffect(() => () =>  eventSource && eventSource.close(), [eventSource]);
   const rowRenderer = ({key, index, style}) => (
-    <div key={key} className='whitespace-no-wrap' style={{...style, width: 'auto'}}>{log[index]}</div>
+    <div key={key} className='whitespace-no-wrap' style={{...style, width: 'auto'}}
+         dangerouslySetInnerHTML={{__html: dompurify.sanitize(ansi.toHtml(log[index]))}} />
   );
   return (
     <DashboardPage
