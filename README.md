@@ -116,6 +116,15 @@ Kubernetes Retrofit2 based Java client to be used with kubernetes-api or any of 
 
 ### Apis
 
+#### cert-manager
+[![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/cert-manager)
+](https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:cert-manager)
+[![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc.apis/cert-manager/javadoc.svg)
+](https://javadoc.io/doc/com.marcnuri.yakc.apis/cert-manager)
+
+[Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
+[Kubernetes cert-manager](https://cert-manager.io/).
+
 #### metrics-server
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/metrics-server)
 ](https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:metrics-server)
