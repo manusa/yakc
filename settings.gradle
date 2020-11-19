@@ -1,4 +1,4 @@
 rootProject.name = 'yakc'
 
 include 'kubernetes-client-api', 'kubernetes-model', 'kubernetes-api', 'kubernetes-client', 'tests',
-  'apis:cert-manager', 'apis:knative', 'apis:metrics-server', 'apis:openshift'
+  'apis:cert-manager', 'apis:istio', 'apis:knative', 'apis:metrics-server', 'apis:openshift'

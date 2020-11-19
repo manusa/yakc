@@ -193,7 +193,7 @@ class ModelGenerator {
   }
 
   private String resolveClassName(String key){
-    return key.substring(key.lastIndexOf('.') + 1);
+    return SchemaUtils.refToClassName(key);
   }
 
   private void writeFile(String key, String fileContents) {

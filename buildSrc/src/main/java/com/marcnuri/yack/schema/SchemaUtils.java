@@ -79,13 +79,13 @@ public class SchemaUtils {
     this.settings = settings;
   }
 
-  private static String refToClassName(String ref) {
-    return ref.substring(ref.lastIndexOf('.') + 1);
+  public static String refToClassName(String ref) {
+    return StringUtils.capitalize(ref.substring(ref.lastIndexOf('.') + 1));
   }
 
   private String refToModelPackage(String ref) {
     final String packageName = ref.substring(ref.lastIndexOf('/') + 1, ref.lastIndexOf('.'));
-    return toModelPackage(packageName).concat(ref.substring(ref.lastIndexOf('.')));
+    return toModelPackage(packageName).concat(".").concat(refToClassName(ref));
   }
 
   public String toModelPackage(String packageName) {
