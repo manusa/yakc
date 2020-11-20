@@ -18,7 +18,6 @@ package com.marcnuri.yakc.model.io.istio.networking.v1alpha3;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.io.istio.config.v1alpha2.QuotaSpecSpecClause;
 import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
@@ -41,7 +40,7 @@ public class VirtualServiceSpecMatch implements Model {
 
 
   @JsonProperty("authority")
-  private QuotaSpecSpecClause authority;
+  private VirtualServiceSpecCorsPolicyAllowOrigins authority;
 
   /**
    * Names of gateways where the rule should be applied.
@@ -52,7 +51,7 @@ public class VirtualServiceSpecMatch implements Model {
 
   @JsonProperty("headers")
   @Singular(value = "putInHeaders", ignoreNullCollections = true)
-  private Map<String, QuotaSpecSpecClause> headers;
+  private Map<String, VirtualServiceSpecCorsPolicyAllowOrigins> headers;
 
   /**
    * Flag to specify whether the URI matching should be case-insensitive.
@@ -61,7 +60,7 @@ public class VirtualServiceSpecMatch implements Model {
   private Boolean ignoreUriCase;
 
   @JsonProperty("method")
-  private QuotaSpecSpecClause method;
+  private VirtualServiceSpecCorsPolicyAllowOrigins method;
 
   /**
    * The name assigned to a match.
@@ -80,10 +79,10 @@ public class VirtualServiceSpecMatch implements Model {
    */
   @JsonProperty("queryParams")
   @Singular(value = "putInQueryParams", ignoreNullCollections = true)
-  private Map<String, QuotaSpecSpecClause> queryParams;
+  private Map<String, VirtualServiceSpecCorsPolicyAllowOrigins> queryParams;
 
   @JsonProperty("scheme")
-  private QuotaSpecSpecClause scheme;
+  private VirtualServiceSpecCorsPolicyAllowOrigins scheme;
 
   @JsonProperty("sourceLabels")
   @Singular(value = "putInSourceLabels", ignoreNullCollections = true)
@@ -96,14 +95,14 @@ public class VirtualServiceSpecMatch implements Model {
   private String sourceNamespace;
 
   @JsonProperty("uri")
-  private QuotaSpecSpecClause uri;
+  private VirtualServiceSpecCorsPolicyAllowOrigins uri;
 
   /**
    * withoutHeader has the same syntax with the header, but has opposite meaning.
    */
   @JsonProperty("withoutHeaders")
   @Singular(value = "putInWithoutHeaders", ignoreNullCollections = true)
-  private Map<String, QuotaSpecSpecClause> withoutHeaders;
+  private Map<String, VirtualServiceSpecCorsPolicyAllowOrigins> withoutHeaders;
 
 }
 

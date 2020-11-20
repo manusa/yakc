@@ -19,7 +19,7 @@ package com.marcnuri.yakc.model.io.istio.networking.v1beta1;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.ListModel;
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.io.istio.config.v1alpha2.HTTPAPISpecBindingListMetadata;
+import com.marcnuri.yakc.model.io.istio.networking.v1alpha3.DestinationRuleListMetadata;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -62,7 +62,7 @@ public class WorkloadEntryList implements Model, ListModel<WorkloadEntry> {
   private String kind;
 
   @JsonProperty("metadata")
-  private HTTPAPISpecBindingListMetadata metadata;
+  private DestinationRuleListMetadata metadata;
 
 }
 

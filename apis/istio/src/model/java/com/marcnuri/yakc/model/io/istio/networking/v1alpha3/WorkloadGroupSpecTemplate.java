@@ -18,7 +18,7 @@ package com.marcnuri.yakc.model.io.istio.networking.v1alpha3;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,7 +27,7 @@ import lombok.Singular;
 import lombok.ToString;
 
 /**
- * Configuration affecting network reachability of a sidecar. See more details at: https://istio.io/docs/reference/config/networking/sidecar.html
+ * Template to be used for the generation of `WorkloadEntry` resources that belong to this `WorkloadGroup`.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -35,22 +35,43 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class SidecarSpec implements Model {
+public class WorkloadGroupSpecTemplate implements Model {
 
 
-  @JsonProperty("egress")
-  @Singular(value = "addToEgress", ignoreNullCollections = true)
-  private List<SidecarSpecEgress> egress;
+  @JsonProperty("address")
+  private String address;
 
-  @JsonProperty("ingress")
-  @Singular(value = "addToIngress", ignoreNullCollections = true)
-  private List<SidecarSpecIngress> ingress;
+  /**
+   * One or more labels associated with the endpoint.
+   */
+  @JsonProperty("labels")
+  @Singular(value = "putInLabels", ignoreNullCollections = true)
+  private Map<String, String> labels;
 
-  @JsonProperty("outboundTrafficPolicy")
-  private SidecarSpecOutboundTrafficPolicy outboundTrafficPolicy;
+  /**
+   * The locality associated with the endpoint.
+   */
+  @JsonProperty("locality")
+  private String locality;
 
-  @JsonProperty("workloadSelector")
-  private SidecarSpecWorkloadSelector workloadSelector;
+  @JsonProperty("network")
+  private String network;
+
+  /**
+   * Set of ports associated with the endpoint.
+   */
+  @JsonProperty("ports")
+  @Singular(value = "putInPorts", ignoreNullCollections = true)
+  private Map<String, Number> ports;
+
+  @JsonProperty("serviceAccount")
+  private String serviceAccount;
+
+  /**
+   * The load balancing weight associated with the endpoint.
+   */
+  @JsonProperty("weight")
+  private Number weight;
 
 }
 

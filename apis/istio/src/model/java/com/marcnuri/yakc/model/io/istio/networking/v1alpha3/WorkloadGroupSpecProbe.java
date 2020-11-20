@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * HTTP connection pool settings.
+ * `ReadinessProbe` describes the configuration the user must provide for healthchecking on their workload.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -33,47 +33,47 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class DestinationRuleSpecTrafficPolicyConnectionPoolHttp implements Model {
+public class WorkloadGroupSpecProbe implements Model {
 
 
-  /**
-   * Specify if http1.1 connection should be upgraded to http2 for the associated destination.
-   */
-  @JsonProperty("h2UpgradePolicy")
-  private String h2UpgradePolicy;
+  @JsonProperty("exec")
+  private WorkloadGroupSpecProbeExec exec;
 
   /**
-   * Maximum number of pending HTTP requests to a destination.
+   * Minimum consecutive failures for the probe to be considered failed after having succeeded.
    */
-  @JsonProperty("http1MaxPendingRequests")
-  private Number http1MaxPendingRequests;
+  @JsonProperty("failureThreshold")
+  private Number failureThreshold;
+
+  @JsonProperty("httpGet")
+  private WorkloadGroupSpecProbeHttpGet httpGet;
 
   /**
-   * Maximum number of requests to a backend.
+   * Number of seconds after the container has started before readiness probes are initiated.
    */
-  @JsonProperty("http2MaxRequests")
-  private Number http2MaxRequests;
+  @JsonProperty("initialDelaySeconds")
+  private Number initialDelaySeconds;
 
   /**
-   * The idle timeout for upstream connection pool connections.
+   * How often (in seconds) to perform the probe.
    */
-  @JsonProperty("idleTimeout")
-  private String idleTimeout;
+  @JsonProperty("periodSeconds")
+  private Number periodSeconds;
 
   /**
-   * Maximum number of requests per connection to a backend.
+   * Minimum consecutive successes for the probe to be considered successful after having failed.
    */
-  @JsonProperty("maxRequestsPerConnection")
-  private Number maxRequestsPerConnection;
+  @JsonProperty("successThreshold")
+  private Number successThreshold;
 
-  @JsonProperty("maxRetries")
-  private Number maxRetries;
+  @JsonProperty("tcpSocket")
+  private WorkloadGroupSpecProbeTcpSocket tcpSocket;
 
   /**
-   * If set to true, client protocol will be preserved while initiating connection to backend.
+   * Number of seconds after which the probe times out.
    */
-  @JsonProperty("useClientProtocol")
-  private Boolean useClientProtocol;
+  @JsonProperty("timeoutSeconds")
+  private Number timeoutSeconds;
 
 }
 

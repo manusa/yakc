@@ -14,24 +14,33 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.istio.networking.v1alpha3;
+package com.marcnuri.yakc.model.io.istio.security.v1beta1;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * 
+ * Specifies detailed configuration of the CUSTOM action.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @ToString
-public class EnvoyFilter implements Model {
+public class AuthorizationPolicySpecProvider implements Model {
 
+
+  /**
+   * Specifies the name of the extension provider.
+   */
+  @JsonProperty("name")
+  private String name;
 
 }
 

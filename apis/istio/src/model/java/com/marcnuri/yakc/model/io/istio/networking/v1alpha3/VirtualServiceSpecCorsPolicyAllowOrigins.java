@@ -16,10 +16,12 @@
 
 package com.marcnuri.yakc.model.io.istio.networking.v1alpha3;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -28,10 +30,23 @@ import lombok.ToString;
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @ToString
-public class EnvoyFilter implements Model {
+public class VirtualServiceSpecCorsPolicyAllowOrigins implements Model {
 
+
+  @JsonProperty("exact")
+  private String exact;
+
+  @JsonProperty("prefix")
+  private String prefix;
+
+  /**
+   * RE2 style regex-based match (https://github.com/google/re2/wiki/Syntax).
+   */
+  @JsonProperty("regex")
+  private String regex;
 
 }
 

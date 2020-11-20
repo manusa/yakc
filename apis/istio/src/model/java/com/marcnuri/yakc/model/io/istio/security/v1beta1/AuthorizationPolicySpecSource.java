@@ -76,6 +76,13 @@ public class AuthorizationPolicySpecSource implements Model {
   /**
    * Optional.
    */
+  @JsonProperty("notRemoteIpBlocks")
+  @Singular(value = "addToNotRemoteIpBlocks", ignoreNullCollections = true)
+  private List<String> notRemoteIpBlocks;
+
+  /**
+   * Optional.
+   */
   @JsonProperty("notRequestPrincipals")
   @Singular(value = "addToNotRequestPrincipals", ignoreNullCollections = true)
   private List<String> notRequestPrincipals;
@@ -86,6 +93,13 @@ public class AuthorizationPolicySpecSource implements Model {
   @JsonProperty("principals")
   @Singular(value = "addToPrincipals", ignoreNullCollections = true)
   private List<String> principals;
+
+  /**
+   * Optional.
+   */
+  @JsonProperty("remoteIpBlocks")
+  @Singular(value = "addToRemoteIpBlocks", ignoreNullCollections = true)
+  private List<String> remoteIpBlocks;
 
   /**
    * Optional.

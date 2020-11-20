@@ -16,22 +16,31 @@
 
 package com.marcnuri.yakc.model.io.istio.networking.v1alpha3;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * 
+ * health is determined by if the proxy is able to connect.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @ToString
-public class EnvoyFilter implements Model {
+public class WorkloadGroupSpecProbeTcpSocket implements Model {
 
+
+  @JsonProperty("host")
+  private String host;
+
+  @JsonProperty("port")
+  private Number port;
 
 }
 

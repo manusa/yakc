@@ -44,6 +44,9 @@ public class AuthorizationPolicySpec implements Model {
   @JsonProperty("action")
   private String action;
 
+  @JsonProperty("provider")
+  private AuthorizationPolicySpecProvider provider;
+
   /**
    * Optional.
    */

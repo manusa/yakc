@@ -29,7 +29,7 @@ import lombok.Singular;
 import lombok.ToString;
 
 /**
- * DestinationRuleList is a list of DestinationRule
+ * WorkloadGroupList is a list of WorkloadGroup
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -37,7 +37,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class DestinationRuleList implements Model, ListModel<DestinationRule> {
+public class WorkloadGroupList implements Model, ListModel<WorkloadGroup> {
 
 
   /**
@@ -47,12 +47,12 @@ public class DestinationRuleList implements Model, ListModel<DestinationRule> {
   private String apiVersion;
 
   /**
-   * List of destinationrules. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md
+   * List of workloadgroups. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md
    */
   @NonNull
   @JsonProperty("items")
   @Singular(value = "addToItems", ignoreNullCollections = true)
-  private List<DestinationRule> items;
+  private List<WorkloadGroup> items;
 
   /**
    * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds

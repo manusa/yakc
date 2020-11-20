@@ -18,7 +18,6 @@ package com.marcnuri.yakc.model.io.istio.networking.v1alpha3;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.io.istio.config.v1alpha2.QuotaSpecSpecClause;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -65,7 +64,7 @@ public class VirtualServiceSpecCorsPolicy implements Model {
    */
   @JsonProperty("allowOrigins")
   @Singular(value = "addToAllowOrigins", ignoreNullCollections = true)
-  private List<QuotaSpecSpecClause> allowOrigins;
+  private List<VirtualServiceSpecCorsPolicyAllowOrigins> allowOrigins;
 
   @JsonProperty("exposeHeaders")
   @Singular(value = "addToExposeHeaders", ignoreNullCollections = true)

@@ -16,22 +16,35 @@
 
 package com.marcnuri.yakc.model.io.istio.networking.v1alpha3;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Singular;
 import lombok.ToString;
 
 /**
- * 
+ * Metadata that will be used for all corresponding `WorkloadEntries`.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @ToString
-public class EnvoyFilter implements Model {
+public class WorkloadGroupSpecMetadata implements Model {
 
+
+  @JsonProperty("annotations")
+  @Singular(value = "putInAnnotations", ignoreNullCollections = true)
+  private Map<String, String> annotations;
+
+  @JsonProperty("labels")
+  @Singular(value = "putInLabels", ignoreNullCollections = true)
+  private Map<String, String> labels;
 
 }
 
