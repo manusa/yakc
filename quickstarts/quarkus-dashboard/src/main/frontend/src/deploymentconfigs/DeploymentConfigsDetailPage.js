@@ -18,17 +18,33 @@ import React from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
 import dc from './';
+import pods from '../pods';
 import rs from '../replicasets';
+import rc from '../replicationcontrollers';
 import Card from '../components/Card';
 import ContainerList from '../components/ContainerList';
 import Form from '../components/Form';
 import ResourceDetailPage from '../components/ResourceDetailPage';
+import Link from '../components/Link';
+import Icon from '../components/Icon';
 
-const DeploymentConfigsDetailPage = ({deploymentConfig}) => (
+const DeploymentConfigsDetailPage = ({deploymentConfig, replicationControllersUids}) => (
   <ResourceDetailPage
     name='DeploymentConfigs'
     path='deploymentconfigs'
     resource={deploymentConfig}
+    actions={
+      <Link
+        className='ml-2'
+        size={Link.sizes.small}
+        variant={Link.variants.outline}
+        onClick={() => dc.api.restart(deploymentConfig)}
+        title='Restart'
+      >
+        <Icon stylePrefix='fas' icon='fa-redo-alt' className='mr-2'/>
+        Restart
+      </Link>
+    }
     body={
       <Form>
         <metadata.Details resource={deploymentConfig} />
@@ -46,12 +62,22 @@ const DeploymentConfigsDetailPage = ({deploymentConfig}) => (
       titleVariant={Card.titleVariants.medium}
       className='mt-2'
       containers={dc.selectors.containers(deploymentConfig)} />
+    <rc.List
+      title='Replication Controller'
+      titleVariant={Card.titleVariants.medium}
+      className='mt-2'
+      ownerId={metadata.selectors.uid(deploymentConfig)} />
+    <pods.List
+      title='Pods'
+      titleVariant={Card.titleVariants.medium}
+      className='mt-2'
+      ownerUids={replicationControllersUids} />
   </ResourceDetailPage>
 );
 
-const mapStateToProps = ({deploymentConfigs, replicaSets}) => ({
+const mapStateToProps = ({deploymentConfigs, replicationControllers}) => ({
   deploymentConfigs,
-  replicaSets
+  replicationControllers
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
@@ -59,6 +85,10 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...dispatchProps,
   ...ownProps,
   deploymentConfig: stateProps.deploymentConfigs[ownProps.match.params.uid],
+  replicationControllersUids: Object.values(stateProps.replicationControllers)
+    .filter(replicationController => metadata.selectors.ownerReferencesUids(replicationController)
+      .includes(metadata.selectors.uid(stateProps.deploymentConfigs[ownProps.match.params.uid])))
+    .map(replicationController => metadata.selectors.uid(replicationController))
 });
 
 export default connect(mapStateToProps, null, mergeProps)(DeploymentConfigsDetailPage);

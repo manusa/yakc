@@ -33,7 +33,7 @@ const headers = [
 ];
 
 const Rows = ({deployments}) => {
-  const deleteDeployment = deployment => async () => await deploymentsModule.api.requestDelete(deployment);
+  const deleteDeployment = deployment => async () => await deploymentsModule.api.delete(deployment);
   const restartDeployment = deployment => async () => await deploymentsModule.api.restart(deployment);
   return deployments
     .sort(metadata.selectors.sortByCreationTimeStamp)

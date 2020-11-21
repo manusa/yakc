@@ -55,6 +55,13 @@ public class DeploymentConfigResource {
   }
 
   @PUT
+  @Path("/{namespace}/{name}/restart")
+  public Response restart(@PathParam("namespace") String namespace, @PathParam("name") String name) throws IOException {
+    deploymentConfigService.restart(name, namespace);
+    return Response.noContent().build();
+  }
+
+  @PUT
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   @Path("/{namespace}/{name}")

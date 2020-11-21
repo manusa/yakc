@@ -26,6 +26,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.events.EventService;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeService;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodService;
 import com.marcnuri.yakc.quickstarts.dashboard.replicaset.ReplicaSetService;
+import com.marcnuri.yakc.quickstarts.dashboard.replicationcontrollers.ReplicationControllerService;
 import com.marcnuri.yakc.quickstarts.dashboard.roles.RoleService;
 import com.marcnuri.yakc.quickstarts.dashboard.secrets.SecretService;
 import com.marcnuri.yakc.quickstarts.dashboard.service.ServiceService;
@@ -59,6 +60,7 @@ public class WatchService {
     EventService eventService, NodeService nodeService,
     PodService podService,
     ReplicaSetService replicaSetService,
+    ReplicationControllerService replicationControllerService,
     RoleService roleService,
     SecretService secretService,
     ServiceService serviceService,
@@ -72,6 +74,7 @@ public class WatchService {
       nodeService,
       podService,
       replicaSetService,
+      replicationControllerService,
       roleService,
       secretService,
       serviceService,

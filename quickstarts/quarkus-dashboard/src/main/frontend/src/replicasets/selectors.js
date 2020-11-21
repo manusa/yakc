@@ -25,7 +25,7 @@ selectors.isReady = replicaSet =>
 
 selectors.specReplicas = replicaSet => replicaSet?.spec?.replicas ?? 0;
 
-// Selectors for array of Deployments
+// Selectors for array of ReplicaSets
 
 selectors.readyCount = replicaSets => replicaSets.reduce(
   (count, replicaSet) => selectors.isReady(replicaSet) ? count + 1 : count,

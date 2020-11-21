@@ -16,6 +16,7 @@
  */
 import {
   deleteNamespacedResource,
+  restartNamespacedResource,
   updateNamespacedResource,
   updateReplicasInNamespacedResource
 } from '../fetch';
@@ -23,6 +24,8 @@ import {
 const api = {};
 
 api.delete = deleteNamespacedResource('deploymentconfigs');
+
+api.restart = restartNamespacedResource('deploymentconfigs');
 
 api.update = updateNamespacedResource('deploymentconfigs');
 

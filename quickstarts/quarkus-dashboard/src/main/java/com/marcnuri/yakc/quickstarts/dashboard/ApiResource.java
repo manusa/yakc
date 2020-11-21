@@ -30,6 +30,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.persistentvolumeclaims.Persistent
 import com.marcnuri.yakc.quickstarts.dashboard.persistentvolumes.PersistentVolumeResource;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource;
 import com.marcnuri.yakc.quickstarts.dashboard.replicaset.ReplicaSetResource;
+import com.marcnuri.yakc.quickstarts.dashboard.replicationcontrollers.ReplicationControllerResource;
 import com.marcnuri.yakc.quickstarts.dashboard.roles.RoleResource;
 import com.marcnuri.yakc.quickstarts.dashboard.secrets.SecretResource;
 import com.marcnuri.yakc.quickstarts.dashboard.service.ServiceResource;
@@ -45,65 +46,26 @@ import javax.ws.rs.Path;
 @RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
 public class ApiResource {
 
-  private final ApisResource apisResource;
-  private final ClusterRoleResource clusterRoleResource;
-  private final ConfigMapResource configMapResource;
-  private final DeploymentConfigResource deploymentConfigResource;
-  private final DeploymentResource deploymentResource;
-  private final EventResource eventResource;
-  private final IngressResource ingressResource;
-  private final NamespaceResource namespaceResource;
-  private final NodeResource nodeResource;
-  private final PersistentVolumeClaimResource persistentVolumeClaimResource;
-  private final PersistentVolumeResource persistentVolumeResource;
-  private final PodResource podResource;
-  private final ReplicaSetResource replicaSetResource;
-  private final RoleResource roleResource;
-  private final SecretResource secretResource;
-  private final ServiceResource serviceResource;
-  private final StatefulSetResource statefulSetResource;
-  private final WatchResource watchResource;
 
-  @SuppressWarnings("java:S107")
-  @Inject
-  public ApiResource(
-    ApisResource apisResource,
-    ClusterRoleResource clusterRoleResource,
-    ConfigMapResource configMapResource,
-    DeploymentConfigResource deploymentConfigResource,
-    DeploymentResource deploymentResource,
-    EventResource eventResource,
-    IngressResource ingressResource,
-    NamespaceResource namespaceResource,
-    NodeResource nodeResource,
-    PersistentVolumeClaimResource persistentVolumeClaimResource,
-    PersistentVolumeResource persistentVolumeResource,
-    PodResource podResource,
-    ReplicaSetResource replicaSetResource,
-    RoleResource roleResource,
-    SecretResource secretResource,
-    ServiceResource serviceResource,
-    StatefulSetResource statefulSetResource,
-    WatchResource watchResource) {
-    this.apisResource = apisResource;
-    this.clusterRoleResource = clusterRoleResource;
-    this.configMapResource = configMapResource;
-    this.deploymentConfigResource = deploymentConfigResource;
-    this.deploymentResource = deploymentResource;
-    this.eventResource = eventResource;
-    this.ingressResource = ingressResource;
-    this.namespaceResource = namespaceResource;
-    this.nodeResource = nodeResource;
-    this.persistentVolumeClaimResource = persistentVolumeClaimResource;
-    this.persistentVolumeResource = persistentVolumeResource;
-    this.podResource = podResource;
-    this.replicaSetResource = replicaSetResource;
-    this.roleResource = roleResource;
-    this.secretResource = secretResource;
-    this.serviceResource = serviceResource;
-    this.statefulSetResource = statefulSetResource;
-    this.watchResource = watchResource;
-  }
+  @Inject ApisResource apisResource;
+  @Inject ClusterRoleResource clusterRoleResource;
+  @Inject ConfigMapResource configMapResource;
+  @Inject DeploymentConfigResource deploymentConfigResource;
+  @Inject DeploymentResource deploymentResource;
+  @Inject EventResource eventResource;
+  @Inject IngressResource ingressResource;
+  @Inject NamespaceResource namespaceResource;
+  @Inject NodeResource nodeResource;
+  @Inject PersistentVolumeClaimResource persistentVolumeClaimResource;
+  @Inject PersistentVolumeResource persistentVolumeResource;
+  @Inject PodResource podResource;
+  @Inject ReplicaSetResource replicaSetResource;
+  @Inject ReplicationControllerResource replicationControllerResource;
+  @Inject RoleResource roleResource;
+  @Inject SecretResource secretResource;
+  @Inject ServiceResource serviceResource;
+  @Inject StatefulSetResource statefulSetResource;
+  @Inject WatchResource watchResource;
 
   @Path("/apis")
   public ApisResource getApisResource() {
@@ -168,6 +130,11 @@ public class ApiResource {
   @Path("/replicasets")
   public ReplicaSetResource getReplicaSetResource() {
     return replicaSetResource;
+  }
+
+  @Path("/replicationcontrollers")
+  public ReplicationControllerResource getReplicationControllerResource() {
+    return replicationControllerResource;
   }
 
   @Path("/roles")

@@ -17,23 +17,25 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.deploymentconfigs;
 
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
+
 import java.io.IOException;
+import java.time.Instant;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import com.marcnuri.yakc.KubernetesClient;
-import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.appsopenshiftio.v1.AppsOpenshiftIoV1Api;
 import com.marcnuri.yakc.model.com.github.openshift.api.apps.v1.DeploymentConfig;
 import com.marcnuri.yakc.model.com.github.openshift.api.apps.v1.DeploymentConfigSpec;
+import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodTemplateSpec;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 
 import io.reactivex.Observable;
-
-import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 @Singleton
 public class DeploymentConfigService implements Watchable<DeploymentConfig> {
@@ -67,6 +69,18 @@ public class DeploymentConfigService implements Watchable<DeploymentConfig> {
 
   public Status delete(String name, String namespace) throws IOException {
     return kubernetesClient.create(AppsOpenshiftIoV1Api.class).deleteNamespacedDeploymentConfig(name, namespace).get();
+  }
+
+  public DeploymentConfig restart(String name, String namespace) throws IOException {
+    final DeploymentConfig toPatch = emptyDeploymentConfig();
+    toPatch.getSpec().setTemplate(PodTemplateSpec.builder()
+      .metadata(ObjectMeta.builder()
+        .putInAnnotations("yakc.marcnuri.com/restartedAt", Instant.now().toString())
+        .build())
+      .build());
+    return kubernetesClient.create(AppsOpenshiftIoV1Api.class)
+      .patchNamespacedDeploymentConfig(name, namespace, toPatch)
+      .get();
   }
 
   public DeploymentConfig update(String name, String namespace, DeploymentConfig deploymentConfig) throws IOException {

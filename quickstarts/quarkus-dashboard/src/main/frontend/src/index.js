@@ -31,6 +31,7 @@ import pvc from './persistentvolumeclaims';
 import pv from './persistentvolumes';
 import pods from './pods';
 import replicaSets from './replicasets';
+import rc from './replicationcontrollers';
 import redux from './redux';
 import roles from './roles';
 import secrets from './secrets';
@@ -64,6 +65,7 @@ const store = createStore(combineReducers({
   persistentVolumes: pv.reducer,
   pods: pods.reducer,
   replicaSets: replicaSets.reducer,
+  replicationControllers: rc.reducer,
   roles: roles.reducer,
   secrets: secrets.reducer,
   services: services.reducer,

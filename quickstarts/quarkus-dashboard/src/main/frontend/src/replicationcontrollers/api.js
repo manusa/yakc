@@ -14,21 +14,10 @@
  * limitations under the License.
  *
  */
-import {
-  deleteNamespacedResource,
-  restartNamespacedResource,
-  updateNamespacedResource,
-  updateReplicasInNamespacedResource
-} from '../fetch';
+import {deleteNamespacedResource} from '../fetch';
 
 const api = {};
 
-api.delete = deleteNamespacedResource('deployments');
-
-api.restart = restartNamespacedResource('deployments');
-
-api.update = updateNamespacedResource('deployments');
-
-api.updateReplicas = updateReplicasInNamespacedResource('deployments');
+api.delete = deleteNamespacedResource('replicationcontrollers');
 
 export default api;

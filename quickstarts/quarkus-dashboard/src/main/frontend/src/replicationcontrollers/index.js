@@ -14,21 +14,16 @@
  * limitations under the License.
  *
  */
-import {
-  deleteNamespacedResource,
-  restartNamespacedResource,
-  updateNamespacedResource,
-  updateReplicasInNamespacedResource
-} from '../fetch';
+import api from './api';
+import reducer from './reducer';
+import selectors from './selectors';
+import List from './List';
 
-const api = {};
+const replicationControllers = {};
 
-api.delete = deleteNamespacedResource('deployments');
+replicationControllers.api = api;
+replicationControllers.reducer = reducer;
+replicationControllers.selectors = selectors;
+replicationControllers.List = List;
 
-api.restart = restartNamespacedResource('deployments');
-
-api.update = updateNamespacedResource('deployments');
-
-api.updateReplicas = updateReplicasInNamespacedResource('deployments');
-
-export default api;
+export default replicationControllers;

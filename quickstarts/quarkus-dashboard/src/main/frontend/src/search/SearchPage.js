@@ -30,6 +30,7 @@ import ss from '../statefulsets';
 import svc from '../services';
 import redux from '../redux';
 import rs from '../replicasets';
+import rc from '../replicationcontrollers';
 import roles from '../roles';
 import Card from '../components/Card';
 import DashboardPage from '../components/DashboardPage';
@@ -62,6 +63,8 @@ const Results = ({query, selectedNamespace}) => {
         title='StatefulSets' nameLike={query} namespace={selectedNamespace} />
       <rs.List {...commonProps}
         title='ReplicaSets' nameLike={query} namespace={selectedNamespace} />
+      <rc.List {...commonProps}
+        title='ReplicationControllers' nameLike={query} namespace={selectedNamespace} />
       <svc.List {...commonProps}
         title='Services' nameLike={query} namespace={selectedNamespace} />
       <i.List {...commonProps}

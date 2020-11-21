@@ -33,7 +33,8 @@ const headers = [
 ];
 
 const Rows = ({deploymentConfigs}) => {
-  const deleteDeployment = deploymentConfig => async () => await dc.api.delete(deploymentConfig);
+  const deleteDC = deploymentConfig => async () => await dc.api.delete(deploymentConfig);
+  const restartDC = deploymentConfig => async () => await dc.api.restart(deploymentConfig);
   return deploymentConfigs
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(deploymentConfig => (
@@ -60,8 +61,13 @@ const Rows = ({deploymentConfigs}) => {
           )}
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap text-center'>
+          <Link
+            variant={Link.variants.outline}
+            onClick={restartDC(deploymentConfig)}
+            title='Restart'
+          ><Icon stylePrefix='fas' icon='fa-redo-alt' /></Link>
           <Table.DeleteButton
-            className='ml-1' onClick={deleteDeployment(deploymentConfig)} />
+            className='ml-1' onClick={deleteDC(deploymentConfig)} />
         </Table.Cell>
       </Table.Row>
     ));
