@@ -34,6 +34,7 @@ import replicaSets from './replicasets';
 import rc from './replicationcontrollers';
 import redux from './redux';
 import roles from './roles';
+import routes from './routes';
 import secrets from './secrets';
 import services from './services';
 import sidebar from './sidebar';
@@ -67,6 +68,7 @@ const store = createStore(combineReducers({
   replicaSets: replicaSets.reducer,
   replicationControllers: rc.reducer,
   roles: roles.reducer,
+  routes: routes.reducer,
   secrets: secrets.reducer,
   services: services.reducer,
   statefulSets: statefulSets.reducer,

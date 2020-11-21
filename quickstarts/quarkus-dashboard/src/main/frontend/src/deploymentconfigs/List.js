@@ -33,8 +33,8 @@ const headers = [
 ];
 
 const Rows = ({deploymentConfigs}) => {
-  const deleteDC = deploymentConfig => async () => await dc.api.delete(deploymentConfig);
-  const restartDC = deploymentConfig => async () => await dc.api.restart(deploymentConfig);
+  const deleteDC = deploymentConfig => () => dc.api.delete(deploymentConfig);
+  const restartDC = deploymentConfig => () => dc.api.restart(deploymentConfig);
   return deploymentConfigs
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(deploymentConfig => (

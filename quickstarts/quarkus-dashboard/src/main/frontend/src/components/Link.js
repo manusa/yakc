@@ -80,6 +80,7 @@ Link.PersistentVolume = ({...props}) => <Link.ResourceLink Icon={i.PersistentVol
 Link.PersistentVolumeClaim = ({...props}) => <Link.ResourceLink Icon={i.PersistentVolumeClaim} {...props} />;
 Link.Pod = ({...props}) => <Link.ResourceLink Icon={i.Pod} {...props} />;
 Link.Role = ({...props}) => <Link.ResourceLink Icon={i.Role} {...props} />;
+Link.Route = ({...props}) => <Link.ResourceLink Icon={i.Route} {...props} />;
 Link.Secret = ({...props}) => <Link.ResourceLink Icon={i.Secret} {...props} />;
 Link.Service = ({...props}) => <Link.ResourceLink Icon={i.Service} {...props} />;
 Link.StatefulSet = ({...props}) => <Link.ResourceLink Icon={i.StatefulSet} {...props} />;

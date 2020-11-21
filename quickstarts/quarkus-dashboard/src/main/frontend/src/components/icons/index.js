@@ -48,7 +48,8 @@ icons.OpenShift = OpenShift;
 icons.PersistentVolume = PersistentVolume;
 icons.PersistentVolumeClaim = PersistentVolumeClaim;
 icons.Pod = Pod;
-icons.Role = Role
+icons.Role = Role;
+icons.Route = ({...props}) => <Ingress kubernetesColor='#db212e' {...props} />;
 icons.Secret = Secret;
 icons.Service = Service;
 icons.StatefulSet = StatefulSet;

@@ -14,18 +14,22 @@
  * limitations under the License.
  *
  */
-import {
-  deleteNamespacedResource,
-  listResource,
-  updateNamespacedResource
-} from '../fetch';
+import api from './api';
+import reducer from './reducer';
+import selectors from './selectors';
+import Host from './Host';
+import List from './List';
+import RoutesDetailPage from './RoutesDetailPage';
+import RoutesEditPage from './RoutesEditPage';
+import RoutesPage from './RoutesPage';
 
-const api = {};
-
-api.requestDelete = deleteNamespacedResource('ingresses');
-
-api.list = listResource('ingresses', 'Ingress');
-
-api.update = updateNamespacedResource('ingresses');
-
-export default api;
+export default {
+  api,
+  reducer,
+  selectors,
+  Host,
+  List,
+  RoutesDetailPage,
+  RoutesEditPage,
+  RoutesPage
+};

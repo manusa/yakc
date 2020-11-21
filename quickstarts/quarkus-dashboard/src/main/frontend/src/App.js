@@ -30,6 +30,7 @@ import pv from './persistentvolumes';
 import pods from './pods';
 import redux from './redux';
 import roles from './roles';
+import routes from './routes';
 import search from './search';
 import secrets from './secrets';
 import services from './services';
@@ -117,6 +118,9 @@ const App = ({dispatch}) => {
           <Route exact path='/roles' component={roles.RolesPage} />
           <Route exact path='/roles/:uid' component={roles.RolesDetailPage} />
           <Route exact path='/roles/:uid/edit' component={roles.RolesEditPage} />
+          <Route exact path='/routes' component={routes.RoutesPage} />
+          <Route exact path='/routes/:uid' component={routes.RoutesDetailPage} />
+          <Route exact path='/routes/:uid/edit' component={routes.RoutesEditPage} />
           <Route exact path='/search' component={search.SearchPage} />
           <Route exact path='/secrets' component={secrets.SecretsPage} />
           <Route exact path='/secrets/:uid' component={secrets.SecretsDetailPage} />

@@ -14,18 +14,12 @@
  * limitations under the License.
  *
  */
-import {
-  deleteNamespacedResource,
-  listResource,
-  updateNamespacedResource
-} from '../fetch';
+const selectors = {};
 
-const api = {};
+selectors.specHost = route => route?.spec?.host ?? '';
 
-api.requestDelete = deleteNamespacedResource('ingresses');
+selectors.specPath = route => route?.spec?.path ?? '';
 
-api.list = listResource('ingresses', 'Ingress');
+selectors.specTls = route => route?.spec?.tls;
 
-api.update = updateNamespacedResource('ingresses');
-
-export default api;
+export default selectors;

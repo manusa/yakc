@@ -14,18 +14,20 @@
  * limitations under the License.
  *
  */
-import {
-  deleteNamespacedResource,
-  listResource,
-  updateNamespacedResource
-} from '../fetch';
+import React from 'react';
+import md from '../metadata';
+import r from './';
+import ResourceEditPage from '../components/ResourceEditPage';
+import Link from '../components/Link';
 
-const api = {};
+const RoutesEditPage = ({match: {params: {uid}}}) => (
+  <ResourceEditPage
+    cardTitle={resource =>
+      <Link.RouterLink to={`/routes/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
+    }
+    save={async resource => await r.api.update(resource)}
+    resourceFromState={state => state.routes[uid]}
+  />
+);
 
-api.requestDelete = deleteNamespacedResource('ingresses');
-
-api.list = listResource('ingresses', 'Ingress');
-
-api.update = updateNamespacedResource('ingresses');
-
-export default api;
+export default RoutesEditPage;

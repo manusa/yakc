@@ -32,6 +32,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.pod.PodResource;
 import com.marcnuri.yakc.quickstarts.dashboard.replicaset.ReplicaSetResource;
 import com.marcnuri.yakc.quickstarts.dashboard.replicationcontrollers.ReplicationControllerResource;
 import com.marcnuri.yakc.quickstarts.dashboard.roles.RoleResource;
+import com.marcnuri.yakc.quickstarts.dashboard.routes.RouteResource;
 import com.marcnuri.yakc.quickstarts.dashboard.secrets.SecretResource;
 import com.marcnuri.yakc.quickstarts.dashboard.service.ServiceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.statefulsets.StatefulSetResource;
@@ -62,6 +63,7 @@ public class ApiResource {
   @Inject ReplicaSetResource replicaSetResource;
   @Inject ReplicationControllerResource replicationControllerResource;
   @Inject RoleResource roleResource;
+  @Inject RouteResource routeResource;
   @Inject SecretResource secretResource;
   @Inject ServiceResource serviceResource;
   @Inject StatefulSetResource statefulSetResource;
@@ -140,6 +142,11 @@ public class ApiResource {
   @Path("/roles")
   public RoleResource getRoleResource() {
     return roleResource;
+  }
+
+  @Path("/routes")
+  public RouteResource getRouteResource() {
+    return routeResource;
   }
 
   @Path("/secrets")

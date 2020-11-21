@@ -32,6 +32,7 @@ import redux from '../redux';
 import rs from '../replicasets';
 import rc from '../replicationcontrollers';
 import roles from '../roles';
+import routes from '../routes';
 import Card from '../components/Card';
 import DashboardPage from '../components/DashboardPage';
 import FilterBar from '../components/FilterBar';
@@ -69,6 +70,8 @@ const Results = ({query, selectedNamespace}) => {
         title='Services' nameLike={query} namespace={selectedNamespace} />
       <i.List {...commonProps}
         title='Ingresses' nameLike={query} namespace={selectedNamespace} />
+      <routes.List {...commonProps}
+        title='Routes' nameLike={query} namespace={selectedNamespace} />
       <cm.List {...commonProps}
         title='ConfigMaps' nameLike={query} namespace={selectedNamespace} />
       <s.List {...commonProps}

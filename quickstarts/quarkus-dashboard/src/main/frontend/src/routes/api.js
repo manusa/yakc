@@ -16,16 +16,10 @@
  */
 import {
   deleteNamespacedResource,
-  listResource,
   updateNamespacedResource
 } from '../fetch';
 
-const api = {};
-
-api.requestDelete = deleteNamespacedResource('ingresses');
-
-api.list = listResource('ingresses', 'Ingress');
-
-api.update = updateNamespacedResource('ingresses');
-
-export default api;
+export default {
+  delete:  deleteNamespacedResource('routes'),
+  update: updateNamespacedResource('routes')
+};

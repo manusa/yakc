@@ -111,6 +111,7 @@ const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem, isOpen
                   label='Network' icon='fa-network-wired'>
           <K8sNavItem to='/services' Icon={i.Service}>Services</K8sNavItem>
           <K8sNavItem to='/ingresses' Icon={i.Ingress}>Ingresses</K8sNavItem>
+          {isOpenShift && <K8sNavItem to='/routes' Icon={i.Route}>Routes</K8sNavItem>}
         </NavGroup>
         <NavGroup expandedItems={expandedItems} toggleItem={toggleItem}
                   label='Configuration' icon='fa-list'>

@@ -14,18 +14,19 @@
  * limitations under the License.
  *
  */
-import {
-  deleteNamespacedResource,
-  listResource,
-  updateNamespacedResource
-} from '../fetch';
+import React from 'react';
+import r from './';
+import Link from "../components/Link";
+import Icon from "../components/Icon";
 
-const api = {};
+const Host = ({route}) => {
+  const url = `http${r.selectors.specTls(route) ? 's' : ''}://${r.selectors.specHost(route)}${r.selectors.specPath(route)}`;
+  return (
+    <Link href={url} target='_blank'>
+      {r.selectors.specHost(route)}
+      <Icon className='ml-1 text-xs' icon='fa-external-link-alt' stylePrefix='fas' />
+    </Link>
+  );
+};
 
-api.requestDelete = deleteNamespacedResource('ingresses');
-
-api.list = listResource('ingresses', 'Ingress');
-
-api.update = updateNamespacedResource('ingresses');
-
-export default api;
+export default Host;

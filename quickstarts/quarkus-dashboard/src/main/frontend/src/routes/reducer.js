@@ -14,18 +14,8 @@
  * limitations under the License.
  *
  */
-import {
-  deleteNamespacedResource,
-  listResource,
-  updateNamespacedResource
-} from '../fetch';
+import redux from '../redux';
 
-const api = {};
+const reducer = redux.reducer('Route');
 
-api.requestDelete = deleteNamespacedResource('ingresses');
-
-api.list = listResource('ingresses', 'Ingress');
-
-api.update = updateNamespacedResource('ingresses');
-
-export default api;
+export default reducer;
