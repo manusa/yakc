@@ -34,15 +34,24 @@ const DropdownPanel = ({visible, items, onClick}) => (
   </div>
 );
 
-const DropdownMain = ({text, borderColor, onClick, ...props}) => (
+const DropdownMain = ({
+  text, textColor, textColorActive, borderColor, onClick, showInput, filter, setFilter
+}) => (
   <div className='z-10'>
     <span className='rounded-md shadow-sm'>
       <button
         type='button' aria-haspopup='true' aria-expanded='true' onClick={onClick}
         className={`inline-flex justify-center items-center w-full rounded-md
-          border ${borderColor} px-4 py-2 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition ease-in-out duration-150`}
+          border ${borderColor} px-4 py-2 bg-white text-sm leading-5 font-medium ${textColor} hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:${textColorActive} transition ease-in-out duration-150`}
       >
-        <span className='flex-1 text-left'>{text}</span>
+        {showInput ?
+          <input
+            className='outline-none p-0 m-0' autoFocus value={filter}
+            onChange={({target: {value}}) => setFilter(value)}
+            onClick={event => {event.stopPropagation()}}
+          /> :
+          <span className='flex-1 text-left'>{text}</span>
+        }
         <Icon icon='fa-chevron-down' className='ml-3'/>
       </button>
     </span>
@@ -53,6 +62,8 @@ const Dropdown = ({
   children,
   className = '',
   text = 'Options',
+  textColor = 'text-gray-700',
+  textColorActive = 'text-gray-800',
   borderColor = 'border-gray-300',
   minWidth = '14rem',
   maxWidth = '30rem',
@@ -60,9 +71,14 @@ const Dropdown = ({
   ...props}) => {
   const ddRef = useRef(null);
   const [panelVisible, setPanelVisible] = useState(false);
-  const togglePanel = () => children.length > 0 && setPanelVisible(!panelVisible);
+  const [filter, setFilter] = useState('');
+  const togglePanel = () => {
+    children.length > 0 && setPanelVisible(!panelVisible);
+    setFilter('');
+  }
   useLayoutEffect(() => {
     const handleOutsideClick = event => {
+      debugger
       if (ddRef.current && !ddRef.current.contains(event.target)) {
         setPanelVisible(false);
       }
@@ -70,15 +86,26 @@ const Dropdown = ({
     document.addEventListener('mousedown', handleOutsideClick);
     return () => document.removeEventListener('mousedown', handleOutsideClick);
   }, [ddRef]);
+  const visibleItems = React.Children.toArray(children).filter(item => {
+    if (typeof item.props?.children === 'string' ){
+      return item.props.children.toLowerCase().includes(filter.toLowerCase());
+    }
+    return true;
+  });
   return (
     <div
       ref={ddRef} className={`relative inline-block text-left ${className}`}
       style={{minWidth, maxWidth}}
       {...props}
     >
-      <DropdownMain borderColor={borderColor} text={text} onClick={togglePanel} />
+      <DropdownMain
+        borderColor={borderColor} text={text} textColor={textColor} textColorActive={textColorActive}
+        onClick={togglePanel} showInput={panelVisible} filter={filter} setFilter={setFilter}
+      />
       <DropdownPanel
-        visible={panelVisible} items={children}
+        visible={panelVisible}
+        items={visibleItems.length > 0 ? visibleItems : <Dropdown.Item>No options</Dropdown.Item>}
+        filter={filter}
         onClick={() => closeOnPanelClick && togglePanel()}
       />
     </div>

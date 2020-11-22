@@ -22,27 +22,36 @@ import Dropdown from './Dropdown';
 import {bindActionCreators} from 'redux';
 import Spinner from './Spinner';
 
-const FilterBar = ({
+const NamespaceDropdown = ({
   namespaces,
   loadedResources,
   selectedNamespace,
   selectNamespace,
   clearSelectedNamespace,
-  className = ''
+}) => (
+  <Dropdown
+    closeOnPanelClick={true} text={selectedNamespace ?? 'Namespace'}
+    textColor={selectedNamespace ? 'text-blue-700' : 'text-gray-500'} textColorActive={selectedNamespace ? 'text-blue-800' : null}
+  >
+    <Dropdown.Item onClick={clearSelectedNamespace}>All namespaces</Dropdown.Item>
+    {!loadedResources['Namespace'] &&
+    <Dropdown.Item><Spinner size={4} borderSize={2} className='my-0 mx-auto' /></Dropdown.Item>
+    }
+    {Object.values(namespaces).map(ns => metadata.selectors.name(ns)).map(namespace => (
+      <Dropdown.Item
+        key={namespace}
+        onClick={() => selectNamespace(namespace)}
+      >{namespace}</Dropdown.Item>
+    ))}
+  </Dropdown>
+);
+
+const FilterBar = ({
+  className = '',
+  ...props
 }) => (
   <div className={`flex justify-end ${className}`}>
-    <Dropdown text={selectedNamespace ?? 'Namespace'} closeOnPanelClick={true}>
-      <Dropdown.Item onClick={clearSelectedNamespace}>All namespaces</Dropdown.Item>
-      {!loadedResources['Namespace'] &&
-        <Dropdown.Item><Spinner size={4} borderSize={2} className='my-0 mx-auto' /></Dropdown.Item>
-      }
-      {Object.values(namespaces).map(ns => metadata.selectors.name(ns)).map(namespace => (
-        <Dropdown.Item
-          key={namespace}
-          onClick={() => selectNamespace(namespace)}
-        >{namespace}</Dropdown.Item>
-      ))}
-    </Dropdown>
+    <NamespaceDropdown {...props} />
   </div>
 );
 
