@@ -19,7 +19,7 @@ package com.marcnuri.yakc.model.io.istio.security.v1beta1;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.ListModel;
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.io.istio.networking.v1alpha3.DestinationRuleListMetadata;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -62,7 +62,7 @@ public class AuthorizationPolicyList implements Model, ListModel<AuthorizationPo
   private String kind;
 
   @JsonProperty("metadata")
-  private DestinationRuleListMetadata metadata;
+  private ListMeta metadata;
 
 }
 
