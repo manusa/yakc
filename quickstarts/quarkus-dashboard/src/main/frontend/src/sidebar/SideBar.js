@@ -24,12 +24,14 @@ import redux from '../redux';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
 
+import './SideBar.css';
+
 const SideBarNavLink = ({match: {path}, to, staticContext, className = '', ...props}) => (
   <Link.RouterLink
     variant={Link.variants.none}
     to={to}
     className={`${className}
-      flex items-center border-l-4 px-6 py-1 md:py-2 lg:py-3
+      flex items-center border-l-4 px-4 py-2 lg:py-3
       ${path === to ?
       'bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100' :
       'border-transparent text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100'}`}
@@ -45,10 +47,10 @@ const NavGroup = ({expandedItems, toggleItem, label, icon, children}) => {
   return (
     <div className={`border-t last:border-b border-black`}>
       <div
-        className='flex items-center border-l-4 border-transparent px-6 py-1 md:py-2 lg:py-3 text-gray-300 hover:bg-gray-600 hover:bg-opacity-25 cursor-pointer'
+        className='flex items-center border-l-4 border-transparent px-4 py-2 lg:py-3 text-gray-300 hover:bg-gray-600 hover:bg-opacity-25 cursor-pointer'
         onClick={onClick}
       >
-        <Icon className='text-center w-4 mr-2 md:mr-3 md:h-5 md:text-lg lg:w-8 lg:mr-4 lg:text-xl' icon={icon} />
+        <Icon className='side-bar__nav-group-icon' icon={icon} />
         <span className='flex-1'>{label}</span>
         <Icon className='' icon={expanded ? 'fa-chevron-down' : 'fa-chevron-right'} />
       </div>
@@ -64,14 +66,14 @@ const NavGroup = ({expandedItems, toggleItem, label, icon, children}) => {
 
 const K8sNavItem = ({to, Icon: ComponentIcon, children}) => (
   <RoutedLink to={to}>
-    <ComponentIcon className='h-4 mr-2 md:mr-3 md:h-5 lg:h-8 lg:mr-4'/>
+    <ComponentIcon className='side-bar__nav-item-icon'/>
     {children}
   </RoutedLink>
 );
 
 const IconNavItem = ({to, icon, children}) => (
   <RoutedLink to={to}>
-    <Icon className='text-center w-4 mr-2 md:mr-3 md:h-5 md:text-lg lg:w-8 lg:mr-4 lg:text-xl' icon={icon} />
+    <Icon className='side-bar__nav-item-icon' icon={icon} />
     {children}
   </RoutedLink>
 );
@@ -80,7 +82,7 @@ const ExtNavItem = ({href, children}) => (
   <Link
     variant={Link.variants.none}
     href={href}
-    className={`flex items-center border-l-4 px-6 py-1 md:py-2 lg:py-3
+    className={`flex items-center border-l-4 px-4 py-2 lg:py-3
       border-transparent text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100`}
   >{children}</Link>
 );
@@ -133,7 +135,7 @@ const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem, isOpen
           <K8sNavItem to='/customresourcedefinitions' Icon={i.CustomResourceDefinition}>Definitions</K8sNavItem>
         </NavGroup>
       </div>
-      <h2 className='mt-6 mb-2 px-6 text-gray-100 text-xl'>About</h2>
+      <h2 className='mt-6 mb-2 px-4 text-gray-100 text-xl'>About</h2>
       <ExtNavItem href='https://github.com/manusa/yakc/tree/master/quickstarts/quarkus-dashboard'>
         Quarkus Kubernetes Dashboard</ExtNavItem>
       <ExtNavItem href='https://github.com/manusa/yakc'>YAKC</ExtNavItem>
