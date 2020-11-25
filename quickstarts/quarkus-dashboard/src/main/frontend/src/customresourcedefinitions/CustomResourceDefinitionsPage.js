@@ -16,12 +16,12 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import cRoles from './';
+import crd from './';
 import DashboardPage from '../components/DashboardPage';
 
-const ClusterRolesPage = ({selectedNamespace}) => (
-  <DashboardPage title='ClusterRoles'>
-    <cRoles.List className='mt-4' namespace={selectedNamespace} />
+const CustomResourceDefinitionsPage = ({selectedNamespace}) => (
+  <DashboardPage title='CustomResourceDefinitions'>
+    <crd.List className='mt-4' namespace={selectedNamespace} />
   </DashboardPage>
 );
 
@@ -29,4 +29,4 @@ const mapStateToProps = ({ui: {selectedNamespace}}) => ({
   selectedNamespace
 });
 
-export default connect(mapStateToProps)(ClusterRolesPage);
+export default connect(mapStateToProps)(CustomResourceDefinitionsPage);

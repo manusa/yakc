@@ -29,6 +29,9 @@ selectors.bytesToHumanReadable = (bytes = 0) => {
 
 selectors.quantityToScalar = (quantity = 0) => {
   const quantityString = quantity.toString();
+  if (quantityString.endsWith("n")) {
+    return quantityString.substring(0, quantityString.length - 1) / 1000_000_000;
+  }
   if (quantityString.endsWith("m")) {
     return quantityString.substring(0, quantityString.length - 1) / 1000;
   }

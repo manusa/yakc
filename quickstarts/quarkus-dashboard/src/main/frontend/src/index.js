@@ -21,6 +21,7 @@ import {combineReducers, createStore} from 'redux';
 import apis from './apis';
 import cRoles from './clusterroles';
 import configMaps from './configmaps';
+import crd from './customresourcedefinitions'
 import dc from './deploymentconfigs'
 import deployments from './deployments';
 import events from './events';
@@ -56,6 +57,7 @@ const store = createStore(combineReducers({
   apiGroups: apis.apiGroupsReducer,
   clusterRoles: cRoles.reducer,
   configMaps: configMaps.reducer,
+  customResourceDefinitions: crd.reducer,
   deploymentConfigs: dc.reducer,
   deployments: deployments.reducer,
   events: events.reducer,

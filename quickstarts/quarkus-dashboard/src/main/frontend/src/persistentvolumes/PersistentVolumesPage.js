@@ -18,11 +18,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import pv from './';
 import DashboardPage from '../components/DashboardPage';
-import FilterBar from '../components/FilterBar';
 
 const PersistentVolumesPage = ({selectedNamespace}) => (
   <DashboardPage title='PersistentVolumes'>
-    <FilterBar />
     <pv.List className='mt-4' namespace={selectedNamespace} />
   </DashboardPage>
 );

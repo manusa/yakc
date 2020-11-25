@@ -13,18 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Created on 2020-10-04, 7:43
+ * Created on 2020-11-22, 20:06
  */
-package com.marcnuri.yakc.quickstarts.dashboard.ingresses;
+package com.marcnuri.yakc.quickstarts.dashboard.customresourcedefinitions;
 
-import com.marcnuri.yakc.model.io.k8s.api.networking.v1.Ingress;
-import io.quarkus.runtime.annotations.RegisterForReflection;
+import java.io.IOException;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -32,42 +30,35 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import java.io.IOException;
-import java.util.List;
+import com.marcnuri.yakc.model.io.k8s.apiextensionsapiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition;
+
+import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @Singleton
 @RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
-public class IngressResource {
+public class CustomResourceDefinitionResource {
 
-  private final IngressService ingressService;
+  private final CustomResourceDefinitionService customResourceDefinitionService;
 
   @Inject
-  public IngressResource(IngressService ingressService) {
-    this.ingressService = ingressService;
-  }
-
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  public List<Ingress> get() throws IOException {
-    return ingressService.get();
+  public CustomResourceDefinitionResource(CustomResourceDefinitionService customResourceDefinitionService) {
+    this.customResourceDefinitionService = customResourceDefinitionService;
   }
 
   @DELETE
-  @Path("/{namespace}/{name}")
-  public Response delete(@PathParam("namespace") String namespace, @PathParam("name") String name)
-    throws IOException {
-
-    ingressService.delete(name, namespace);
+  @Path("/{name}")
+  public Response delete(@PathParam("name") String name) throws IOException {
+    customResourceDefinitionService.delete(name);
     return Response.noContent().build();
   }
 
   @PUT
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Path("/{namespace}/{name}")
-  public Ingress update(@PathParam("namespace") String namespace, @PathParam("name") String name, Ingress ingress)
+  @Path("/{name}")
+  public CustomResourceDefinition update(@PathParam("name") String name, CustomResourceDefinition customResourceDefinition)
     throws IOException {
 
-    return ingressService.updateIngress(name, namespace, ingress);
+    return customResourceDefinitionService.update(name, customResourceDefinition);
   }
 }

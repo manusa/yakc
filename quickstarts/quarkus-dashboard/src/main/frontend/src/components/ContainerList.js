@@ -43,7 +43,7 @@ const ContainerList = ({containers, podMetrics, ...properties}) => (
             ))}
           </Table.Cell>
           <Table.Cell>
-            {podMetrics && podMetrics.containerCpu(c.name)}
+            {podMetrics && podMetrics.containerCpu(c.name).toFixed(3)}
           </Table.Cell>
           <Table.Cell>
             {podMetrics && metrics.selectors.bytesToHumanReadable(podMetrics.containerMemory(c.name))}

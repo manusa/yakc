@@ -78,7 +78,6 @@ const Dropdown = ({
   }
   useLayoutEffect(() => {
     const handleOutsideClick = event => {
-      debugger
       if (ddRef.current && !ddRef.current.contains(event.target)) {
         setPanelVisible(false);
       }

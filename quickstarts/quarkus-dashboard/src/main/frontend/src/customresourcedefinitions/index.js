@@ -14,19 +14,20 @@
  * limitations under the License.
  *
  */
-import React from 'react';
-import {connect} from 'react-redux';
-import cRoles from './';
-import DashboardPage from '../components/DashboardPage';
+import api from './api';
+import reducer from './reducer';
+import selectors from './selectors';
+import List from './List';
+import CustomResourceDefinitionsDetailPage from './CustomResourceDefinitionsDetailPage';
+import CustomResourceDefinitionsEditPage from './CustomResourceDefinitionsEditPage';
+import CustomResourceDefinitionsPage from './CustomResourceDefinitionsPage';
 
-const ClusterRolesPage = ({selectedNamespace}) => (
-  <DashboardPage title='ClusterRoles'>
-    <cRoles.List className='mt-4' namespace={selectedNamespace} />
-  </DashboardPage>
-);
-
-const mapStateToProps = ({ui: {selectedNamespace}}) => ({
-  selectedNamespace
-});
-
-export default connect(mapStateToProps)(ClusterRolesPage);
+export default {
+  api,
+  reducer,
+  selectors,
+  List,
+  CustomResourceDefinitionsDetailPage,
+  CustomResourceDefinitionsEditPage,
+  CustomResourceDefinitionsPage
+};

@@ -14,19 +14,10 @@
  * limitations under the License.
  *
  */
-import React from 'react';
-import {connect} from 'react-redux';
-import cRoles from './';
-import DashboardPage from '../components/DashboardPage';
+const selectors = {};
 
-const ClusterRolesPage = ({selectedNamespace}) => (
-  <DashboardPage title='ClusterRoles'>
-    <cRoles.List className='mt-4' namespace={selectedNamespace} />
-  </DashboardPage>
-);
+selectors.specGroup = crd => crd?.spec?.group ?? '';
+selectors.specVersions = crd => (crd?.spec?.versions ?? []).map(v => v.name);
+selectors.specScope = crd => crd?.spec?.scope ?? '';
 
-const mapStateToProps = ({ui: {selectedNamespace}}) => ({
-  selectedNamespace
-});
-
-export default connect(mapStateToProps)(ClusterRolesPage);
+export default selectors;

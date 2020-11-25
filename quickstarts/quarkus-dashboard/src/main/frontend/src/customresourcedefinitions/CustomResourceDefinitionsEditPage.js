@@ -15,18 +15,19 @@
  *
  */
 import React from 'react';
-import {connect} from 'react-redux';
-import cRoles from './';
-import DashboardPage from '../components/DashboardPage';
+import md from '../metadata';
+import crd from './';
+import ResourceEditPage from '../components/ResourceEditPage';
+import Link from '../components/Link';
 
-const ClusterRolesPage = ({selectedNamespace}) => (
-  <DashboardPage title='ClusterRoles'>
-    <cRoles.List className='mt-4' namespace={selectedNamespace} />
-  </DashboardPage>
+const CustomResourceDefinitionsEditPage = ({match: {params: {uid}}}) => (
+  <ResourceEditPage
+    cardTitle={resource =>
+      <Link.RouterLink to={`/customresourcedefinitions/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
+    }
+    save={async resource => await crd.api.update(resource)}
+    resourceFromState={state => state.customResourceDefinitions[uid]}
+  />
 );
 
-const mapStateToProps = ({ui: {selectedNamespace}}) => ({
-  selectedNamespace
-});
-
-export default connect(mapStateToProps)(ClusterRolesPage);
+export default CustomResourceDefinitionsEditPage;

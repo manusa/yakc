@@ -93,7 +93,7 @@ const PodsDetailPage = ({pod}) => {
             <>
               <Form.Field label='Used CPU'>
                 <Icon icon='fa-microchip' className='text-gray-600 mr-2' />
-                {podMetrics.totalCpu()}
+                {podMetrics.totalCpu().toFixed(3)}
               </Form.Field>
               <Form.Field label='Used Memory'>
                 <Icon icon='fa-memory' className='text-gray-600 mr-2' />

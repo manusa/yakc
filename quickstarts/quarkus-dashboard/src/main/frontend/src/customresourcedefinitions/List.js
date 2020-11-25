@@ -16,7 +16,7 @@
  */
 import React from 'react';
 import metadata from '../metadata';
-import cm from './';
+import crd from './';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
 import ResourceList from '../components/ResourceList';
@@ -24,39 +24,46 @@ import Table from '../components/Table';
 
 const headers = [
   <span><Icon className='fa-id-card' /> Name</span>,
-  'Namespace',
+  'Group',
+  'Version(s)',
+  'Scope',
   ''
 ];
 
-const Rows = ({configMaps}) => {
-  const deleteConfigMap = configMap => async () => await cm.api.requestDelete(configMap);
-  return configMaps
+const Rows = ({customResourceDefinitions}) => {
+  const deleteCrd = customResourceDefinition => async () => await crd.api.delete(customResourceDefinition);
+  return customResourceDefinitions
     .sort(metadata.selectors.sortByCreationTimeStamp)
-    .map(configMap => (
-        <Table.Row key={metadata.selectors.uid(configMap)}>
+    .map(customResourceDefinition => (
+        <Table.Row key={metadata.selectors.uid(customResourceDefinition)}>
           <Table.Cell>
-            <Link.ConfigMap to={`/configmaps/${metadata.selectors.uid(configMap)}`}>
-              {metadata.selectors.name(configMap)}
+            <Link.ConfigMap to={`/customresourcedefinitions/${metadata.selectors.uid(customResourceDefinition)}`}>
+              {metadata.selectors.name(customResourceDefinition)}
             </Link.ConfigMap>
           </Table.Cell>
-          <Table.Cell className='whitespace-no-wrap'>
-            <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(configMap)}`}>
-              {metadata.selectors.namespace(configMap)}
-            </Link.Namespace>
+          <Table.Cell>
+            {crd.selectors.specGroup(customResourceDefinition)}
           </Table.Cell>
           <Table.Cell>
-            <Table.DeleteButton onClick={deleteConfigMap(configMap)} />
+            {crd.selectors.specVersions(customResourceDefinition).map(v => (
+              <div key={v}>{v}</div>
+            ))}
+          </Table.Cell>
+          <Table.Cell>
+            {crd.selectors.specScope(customResourceDefinition)}
+          </Table.Cell>
+          <Table.Cell>
+            <Table.DeleteButton onClick={deleteCrd(customResourceDefinition)} />
           </Table.Cell>
         </Table.Row>
     ));
 };
 
-const List = ({resources, loadedResources, crudDelete, ...properties}) => (
+const List = ({resources, crudDelete, loadedResources, ...properties}) => (
   <ResourceList headers={headers} resources={resources} {...properties}>
-    <Rows configMaps={resources} />
+    <Rows customResourceDefinitions={resources} />
   </ResourceList>
 );
 
-
-export default ResourceList.resourceListConnect('configMaps')(List);
+export default ResourceList.resourceListConnect('customResourceDefinitions')(List);
 

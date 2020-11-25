@@ -128,6 +128,10 @@ const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem, isOpen
           <K8sNavItem to='/clusterroles' Icon={i.ClusterRole}>ClusterRoles</K8sNavItem>
           <K8sNavItem to='/roles' Icon={i.Role}>Roles</K8sNavItem>
         </NavGroup>
+        <NavGroup expandedItems={expandedItems} toggleItem={toggleItem}
+                  label='Custom Resources' icon='fa-puzzle-piece'>
+          <K8sNavItem to='/customresourcedefinitions' Icon={i.CustomResourceDefinition}>Definitions</K8sNavItem>
+        </NavGroup>
       </div>
       <h2 className='mt-6 mb-2 px-6 text-gray-100 text-xl'>About</h2>
       <ExtNavItem href='https://github.com/manusa/yakc/tree/master/quickstarts/quarkus-dashboard'>
