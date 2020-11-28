@@ -21,6 +21,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.apis.ApisResource;
 import com.marcnuri.yakc.quickstarts.dashboard.clusterroles.ClusterRoleResource;
 import com.marcnuri.yakc.quickstarts.dashboard.configmaps.ConfigMapResource;
 import com.marcnuri.yakc.quickstarts.dashboard.customresourcedefinitions.CustomResourceDefinitionResource;
+import com.marcnuri.yakc.quickstarts.dashboard.customresources.CustomResourceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentResource;
 import com.marcnuri.yakc.quickstarts.dashboard.deploymentconfigs.DeploymentConfigResource;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
@@ -53,6 +54,7 @@ public class ApiResource {
   @Inject ClusterRoleResource clusterRoleResource;
   @Inject ConfigMapResource configMapResource;
   @Inject CustomResourceDefinitionResource customResourceDefinitionResource;
+  @Inject CustomResourceResource customResourceResource;
   @Inject DeploymentConfigResource deploymentConfigResource;
   @Inject DeploymentResource deploymentResource;
   @Inject EventResource eventResource;
@@ -89,6 +91,11 @@ public class ApiResource {
   @Path("/customresourcedefinitions")
   public CustomResourceDefinitionResource getCustomResourceDefinitionResource() {
     return customResourceDefinitionResource;
+  }
+
+  @Path("/customresources")
+  public CustomResourceResource getCustomResourceResource() {
+    return customResourceResource;
   }
 
   @Path("/deploymentconfigs")

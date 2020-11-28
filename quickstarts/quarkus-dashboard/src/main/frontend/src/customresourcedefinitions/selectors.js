@@ -16,8 +16,19 @@
  */
 const selectors = {};
 
-selectors.specGroup = crd => crd?.spec?.group ?? '';
-selectors.specVersions = crd => (crd?.spec?.versions ?? []).map(v => v.name);
 selectors.specScope = crd => crd?.spec?.scope ?? '';
+
+selectors.specGroup = crd => crd?.spec?.group ?? '';
+
+selectors.specVersions = crd => (crd?.spec?.versions ?? []).map(v => v.name);
+selectors.specVersionsLatest = crd => {
+  const sorted = selectors.specVersions(crd).sort((a, b) => b.localeCompare(a));
+  return sorted.length > 0 ? sorted[0] : '';
+};
+
+selectors.specNames = crd => crd?.spec?.names ?? {};
+selectors.specNamesKind = crd => selectors.specNames(crd)?.kind ?? '';
+selectors.specNamesPlural = crd => selectors.specNames(crd)?.plural ?? '';
+
 
 export default selectors;

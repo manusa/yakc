@@ -27,6 +27,7 @@ const headers = [
   'Group',
   'Version(s)',
   'Scope',
+  'Kind',
   ''
 ];
 
@@ -37,9 +38,9 @@ const Rows = ({customResourceDefinitions}) => {
     .map(customResourceDefinition => (
         <Table.Row key={metadata.selectors.uid(customResourceDefinition)}>
           <Table.Cell>
-            <Link.ConfigMap to={`/customresourcedefinitions/${metadata.selectors.uid(customResourceDefinition)}`}>
+            <Link.CustomResourceDefinition to={`/customresourcedefinitions/${metadata.selectors.uid(customResourceDefinition)}`}>
               {metadata.selectors.name(customResourceDefinition)}
-            </Link.ConfigMap>
+            </Link.CustomResourceDefinition>
           </Table.Cell>
           <Table.Cell>
             {crd.selectors.specGroup(customResourceDefinition)}
@@ -51,6 +52,9 @@ const Rows = ({customResourceDefinitions}) => {
           </Table.Cell>
           <Table.Cell>
             {crd.selectors.specScope(customResourceDefinition)}
+          </Table.Cell>
+          <Table.Cell>
+            {crd.selectors.specNamesKind(customResourceDefinition)}
           </Table.Cell>
           <Table.Cell>
             <Table.DeleteButton onClick={deleteCrd(customResourceDefinition)} />

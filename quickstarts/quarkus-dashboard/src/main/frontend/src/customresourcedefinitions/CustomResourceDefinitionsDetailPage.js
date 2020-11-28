@@ -14,31 +14,71 @@
  * limitations under the License.
  *
  */
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
 import crd from './';
+import cr from '../customresources'
+import Card from '../components/Card';
 import Form from '../components/Form';
 import ResourceDetailPage from '../components/ResourceDetailPage';
 
-const CustomResourceDefinitionsDetailPage = ({customResourceDefinition}) => (
-  <ResourceDetailPage
-    name='CustomResourceDefinitions'
-    path='customresourcedefinitions'
-    resource={customResourceDefinition}
-    body={
-      <Form>
-        <metadata.Details resource={customResourceDefinition} />
-        <Form.Field label='Group'>{crd.selectors.specGroup(customResourceDefinition)}</Form.Field>
-        <Form.Field label='Scope'>{crd.selectors.specScope(customResourceDefinition)}</Form.Field>
-        <Form.Field label='Versions'>
-          {crd.selectors.specVersions(customResourceDefinition).map(v => (
-            <div key={v}>{v}</div>
-          ))}
-        </Form.Field>
-      </Form>
-    } />
-);
+const useCustomResourceList = customResourceDefinition => {
+  const [customResourceList, setCustomResourceList] = useState([]);
+  const [timeoutHandle, setTimeoutHandle] = useState(null);
+  useEffect(() => {
+    if (!timeoutHandle && customResourceDefinition) {
+      const updateCustomResources = async () => {
+        try {
+          const customResources = await cr.api.list(customResourceDefinition)();
+          setCustomResourceList(customResources);
+        } catch (e) {
+          setCustomResourceList(null);
+        }
+        setTimeoutHandle(setTimeout(updateCustomResources, 5000));
+      }
+      updateCustomResources().then(() => {});
+    }
+  }, [timeoutHandle, setTimeoutHandle, setCustomResourceList, customResourceDefinition]);
+  useEffect(() => () => {
+    clearTimeout(timeoutHandle)
+  }, [timeoutHandle]);
+  return [customResourceList, setCustomResourceList];
+};
+
+const CustomResourceDefinitionsDetailPage = ({customResourceDefinition}) => {
+  const [customResourceList, setCustomResourceList] = useCustomResourceList(customResourceDefinition);
+  return (
+    <ResourceDetailPage
+      name='CustomResourceDefinitions'
+      path='customresourcedefinitions'
+      resource={customResourceDefinition}
+      body={
+        <Form>
+          <metadata.Details resource={customResourceDefinition} />
+          <Form.Field label='Group'>{crd.selectors.specGroup(customResourceDefinition)}</Form.Field>
+          <Form.Field label='Versions'>
+            {crd.selectors.specVersions(customResourceDefinition).map(v => (
+              <div key={v}>{v}</div>
+            ))}
+          </Form.Field>
+          <Form.Field label='Scope'>{crd.selectors.specScope(customResourceDefinition)}</Form.Field>
+          <Form.Field label='Kind'>{crd.selectors.specNamesKind(customResourceDefinition)}</Form.Field>
+        </Form>
+      }>
+      <cr.List
+        customResourceDefinition={customResourceDefinition}
+        customResources={customResourceList}
+        deleteResourceCallback={customResource => {
+          setCustomResourceList(customResourceList.filter(c => c !== customResource));
+        }}
+        title={crd.selectors.specVersionsLatest(customResourceDefinition)}
+        titleVariant={Card.titleVariants.small}
+        className='mt-2'
+      />
+    </ResourceDetailPage>
+  );
+}
 
 const mapStateToProps = ({customResourceDefinitions}) => ({
   customResourceDefinitions

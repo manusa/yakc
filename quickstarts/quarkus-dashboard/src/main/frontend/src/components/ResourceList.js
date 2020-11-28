@@ -15,10 +15,10 @@
  *
  */
 import React from 'react';
-import Table from './Table';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import redux from '../redux';
+import Table from './Table';
 
 const Content = ({headers, resources, loading, children}) => {
   if (resources.length > 0) {
