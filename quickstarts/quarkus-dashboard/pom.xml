@@ -173,6 +173,7 @@
         <jkube.generator.quarkus.nativeImage>true</jkube.generator.quarkus.nativeImage>
         <quarkus.native.additional-build-args>
           -H:ResourceConfigurationFiles=resources-config.json,
+          -H:DynamicProxyConfigurationFiles=dynamic-proxy-classes-config.json,
           -J-Djavax.net.ssl.trustStore=${java.home}/lib/security/cacerts,
           -J-Djavax.net.ssl.trustAnchors=${java.home}/lib/security/cacerts,
           -J-Djavax.net.ssl.trustStorePassword=changeit,
