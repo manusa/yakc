@@ -15,18 +15,13 @@
  *
  */
 import React from 'react';
-import {connect} from 'react-redux';
 import pv from './';
 import DashboardPage from '../components/DashboardPage';
 
-const PersistentVolumesPage = ({selectedNamespace}) => (
+const PersistentVolumesPage = () => (
   <DashboardPage title='PersistentVolumes'>
-    <pv.List className='mt-4' namespace={selectedNamespace} />
+    <pv.List className='mt-4' />
   </DashboardPage>
 );
 
-const mapStateToProps = ({ui: {selectedNamespace}}) => ({
-  selectedNamespace
-});
-
-export default connect(mapStateToProps)(PersistentVolumesPage);
+export default PersistentVolumesPage;

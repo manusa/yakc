@@ -14,12 +14,12 @@
  * limitations under the License.
  *
  */
-import api from './api';
-import selectors from './selectors';
-import List from './List';
+import useEditor from './useEditor';
+import ResourceEditModal from './ResourceEditModal';
+import YamlEditor from './YamlEditor';
 
 export default {
-  api,
-  selectors,
-  List
+  useEditor,
+  ResourceEditModal,
+  YamlEditor
 };

@@ -21,16 +21,23 @@ import crd from './';
 import cr from '../customresources'
 import Card from '../components/Card';
 import Form from '../components/Form';
+import Link from '../components/Link';
 import ResourceDetailPage from '../components/ResourceDetailPage';
 
 const useCustomResourceList = customResourceDefinition => {
   const [customResourceList, setCustomResourceList] = useState([]);
+  const [version, setVersion] = useState(undefined)
   const [timeoutHandle, setTimeoutHandle] = useState(null);
+  const changeVersion = newVersion => {
+    clearTimeout(timeoutHandle);
+    setTimeoutHandle(null);
+    setVersion(newVersion);
+  }
   useEffect(() => {
     if (!timeoutHandle && customResourceDefinition) {
       const updateCustomResources = async () => {
         try {
-          const customResources = await cr.api.list(customResourceDefinition)();
+          const customResources = await cr.api.list(customResourceDefinition, version)();
           setCustomResourceList(customResources);
         } catch (e) {
           setCustomResourceList(null);
@@ -39,15 +46,17 @@ const useCustomResourceList = customResourceDefinition => {
       }
       updateCustomResources().then(() => {});
     }
-  }, [timeoutHandle, setTimeoutHandle, setCustomResourceList, customResourceDefinition]);
+  }, [timeoutHandle, setTimeoutHandle, setCustomResourceList, customResourceDefinition, version]);
   useEffect(() => () => {
     clearTimeout(timeoutHandle)
-  }, [timeoutHandle]);
-  return [customResourceList, setCustomResourceList];
+  }, [timeoutHandle, version]);
+  return [customResourceList, setCustomResourceList, version, changeVersion];
 };
 
 const CustomResourceDefinitionsDetailPage = ({customResourceDefinition}) => {
-  const [customResourceList, setCustomResourceList] = useCustomResourceList(customResourceDefinition);
+  const [customResourceList, setCustomResourceList, version, changeVersion] =
+    useCustomResourceList(customResourceDefinition);
+  const applicableVersion = version ? version : crd.selectors.specVersionsLatest(customResourceDefinition);
   return (
     <ResourceDetailPage
       name='CustomResourceDefinitions'
@@ -59,7 +68,12 @@ const CustomResourceDefinitionsDetailPage = ({customResourceDefinition}) => {
           <Form.Field label='Group'>{crd.selectors.specGroup(customResourceDefinition)}</Form.Field>
           <Form.Field label='Versions'>
             {crd.selectors.specVersions(customResourceDefinition).map(v => (
-              <div key={v}>{v}</div>
+              <div key={v}>
+                {v === applicableVersion ?
+                  <span>{v}</span> :
+                  <Link disabled onClick={() => changeVersion(v)}>{v}</Link>
+                }
+              </div>
             ))}
           </Form.Field>
           <Form.Field label='Scope'>{crd.selectors.specScope(customResourceDefinition)}</Form.Field>
@@ -68,11 +82,12 @@ const CustomResourceDefinitionsDetailPage = ({customResourceDefinition}) => {
       }>
       <cr.List
         customResourceDefinition={customResourceDefinition}
+        version={applicableVersion}
         customResources={customResourceList}
         deleteResourceCallback={customResource => {
           setCustomResourceList(customResourceList.filter(c => c !== customResource));
         }}
-        title={crd.selectors.specVersionsLatest(customResourceDefinition)}
+        title={applicableVersion}
         titleVariant={Card.titleVariants.small}
         className='mt-2'
       />

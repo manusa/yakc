@@ -18,34 +18,14 @@ import React, {useState} from 'react';
 import {useStore} from 'react-redux';
 import cloneDeep from 'lodash/cloneDeep';
 import YAML from 'yaml';
+import editor from './editor';
 import md from '../metadata';
-import AceEditor from 'react-ace';
 import DashboardPage from '../components/DashboardPage';
 import Card from '../components/Card';
 import Link from './Link';
 import Icon from './Icon';
 import Alert from './Alert';
-
-import 'ace-builds/src-noconflict/mode-yaml';
-import 'ace-builds/src-noconflict/theme-gruvbox'
-
-const Editor = ({
-  onChange = () => {},
-  value = ''
-}) => (
-  <AceEditor
-    className='relative w-full h-full outline-none'
-    style={{'--scrollbar-color': 'rgba(235, 218, 180, 0.4)'}}
-    mode='yaml'
-    theme='gruvbox'
-    onChange={onChange}
-    value={value}
-    fontSize='0.9rem'
-    width='100%'
-    height='100%'
-    tabSize={2}
-  />
-);
+import useEditor from "./editor/useEditor";
 
 const ResourceEditPage = ({
   cardTitle = () => 'Edit - Resource',
@@ -53,10 +33,9 @@ const ResourceEditPage = ({
   resourceFromState
 }) => {
   const [currentAttempt, setForceReload] = useState(1);
-  const [error, setError] = useState();
   const store = useStore();
   const [resource, setResource] = useState();
-  const [resourceYaml, setResourceYaml] = useState('');
+  const {resourceYaml, setResourceYaml, error, setError, save: handleSave} = useEditor(save);
   if (resource === undefined) {
     const stateResource = cloneDeep(resourceFromState(store.getState()));
     if (stateResource !== undefined) {
@@ -66,18 +45,6 @@ const ResourceEditPage = ({
       setTimeout(() => setForceReload(currentAttempt + 1), 100);
     }
   }
-  const handleSave = async () => {
-    if (!save) {
-      return;
-    }
-    try {
-      setError(null);
-      const updatedResource = await save(YAML.parse(resourceYaml));
-      setResourceYaml(YAML.stringify(updatedResource));
-    } catch (e) {
-      setError(e.message);
-    }
-  };
   const namespace = md.selectors.namespace(resource);
   const name = md.selectors.name(resource);
   return (
@@ -104,7 +71,7 @@ const ResourceEditPage = ({
             padding='p-0'
           >
             <div className='flex-1'>
-              <Editor value={resourceYaml} onChange={value => setResourceYaml(value)} />
+              <editor.YamlEditor value={resourceYaml} onChange={value => setResourceYaml(value)} />
             </div>
             <Alert
               className='absolute left-0 right-0 z-10'

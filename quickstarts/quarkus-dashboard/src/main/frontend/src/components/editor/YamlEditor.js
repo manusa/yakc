@@ -14,12 +14,28 @@
  * limitations under the License.
  *
  */
-import api from './api';
-import selectors from './selectors';
-import List from './List';
+import React from 'react';
+import AceEditor from 'react-ace';
 
-export default {
-  api,
-  selectors,
-  List
-};
+import 'ace-builds/src-noconflict/mode-yaml';
+import 'ace-builds/src-noconflict/theme-gruvbox'
+
+const YamlEditor = ({
+                  onChange = () => {},
+                  value = ''
+                }) => (
+  <AceEditor
+    className='relative w-full h-full outline-none'
+    style={{'--scrollbar-color': 'rgba(235, 218, 180, 0.4)'}}
+    mode='yaml'
+    theme='gruvbox'
+    onChange={onChange}
+    value={value}
+    fontSize='0.9rem'
+    width='100%'
+    height='100%'
+    tabSize={2}
+  />
+);
+
+export default YamlEditor;

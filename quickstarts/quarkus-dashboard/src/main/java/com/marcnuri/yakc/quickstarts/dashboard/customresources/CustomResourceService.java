@@ -56,4 +56,19 @@ public class CustomResourceService {
     return kubernetesClient.create(CustomResourceApi.class)
       .deleteNamespacedCustomResource(group, version, namespace, plural, name).get();
   }
+
+  public UntypedResource replaceCustomResource(
+    String group, String version, String plural, String name, UntypedResource customResource) throws IOException {
+
+    return kubernetesClient.create(CustomResourceApi.class)
+      .replaceCustomResource(group, version, plural, name, customResource).get();
+  }
+
+  public UntypedResource replaceNamespacedCustomResource(
+    String group, String version, String namespace, String plural, String name, UntypedResource customResource)
+    throws IOException {
+
+    return kubernetesClient.create(CustomResourceApi.class)
+      .replaceNamespacedCustomResource(group, version, namespace, plural, name, customResource).get();
+  }
 }

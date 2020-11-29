@@ -14,9 +14,12 @@
  * limitations under the License.
  *
  */
+import _ from './index';
+
 const selectors = {};
 
 selectors.specScope = crd => crd?.spec?.scope ?? '';
+selectors.isNamespaced = crd => _.selectors.specScope(crd) === 'Namespaced';
 
 selectors.specGroup = crd => crd?.spec?.group ?? '';
 

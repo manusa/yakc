@@ -15,18 +15,13 @@
  *
  */
 import React from 'react';
-import {connect} from 'react-redux';
 import crd from './';
 import DashboardPage from '../components/DashboardPage';
 
-const CustomResourceDefinitionsPage = ({selectedNamespace}) => (
+const CustomResourceDefinitionsPage = () => (
   <DashboardPage title='CustomResourceDefinitions'>
-    <crd.List className='mt-4' namespace={selectedNamespace} />
+    <crd.List className='mt-4' />
   </DashboardPage>
 );
 
-const mapStateToProps = ({ui: {selectedNamespace}}) => ({
-  selectedNamespace
-});
-
-export default connect(mapStateToProps)(CustomResourceDefinitionsPage);
+export default CustomResourceDefinitionsPage;

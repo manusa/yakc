@@ -19,18 +19,21 @@ package com.marcnuri.yakc.quickstarts.dashboard.customresources;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RegisterForReflection
+@JsonIgnoreProperties(ignoreUnknown = false)
 public class UntypedResource {
 
   private String apiVersion;
   private String kind;
   private ObjectMeta metadata;
-  private Map<String, String> extraProperties;
+  private Map<String, Object> extraProperties;
 
   public String getApiVersion() {
     return apiVersion;
@@ -57,12 +60,15 @@ public class UntypedResource {
   }
 
   @JsonAnyGetter
-  public Map<String, String> getExtraProperties() {
+  public Map<String, Object> getExtraProperties() {
     return extraProperties;
   }
 
   @JsonAnySetter
-  public void setExtraProperties(Map<String, String> extraProperties) {
-    this.extraProperties = extraProperties;
+  public void setExtraProperties(String key, Object value) {
+    if (extraProperties == null) {
+      extraProperties = new HashMap<>();
+    }
+    extraProperties.put(key, value);
   }
 }

@@ -14,12 +14,8 @@
  * limitations under the License.
  *
  */
-import api from './api';
-import selectors from './selectors';
-import List from './List';
+const selectors = {};
 
-export default {
-  api,
-  selectors,
-  List
-};
+selectors.apiVersion = cr => cr?.apiVersion ?? '';
+
+export default selectors;

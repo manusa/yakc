@@ -14,26 +14,31 @@
  * limitations under the License.
  *
  */
-import React from 'react';
+import React, {useState} from 'react';
 import redux from '../redux';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import editor from '../components/editor';
 import metadata from '../metadata';
 import cr from './';
+import crd from '../customresourcedefinitions';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
 import ResourceList from '../components/ResourceList';
 import Table from '../components/Table';
 
-const headers = [
-  <span><Icon className='fa-id-card' /> Name</span>,
-  'Namespace',
-  ''
-];
+const headers = customResourceDefinition => {
+  const ret = [<span><Icon className='fa-id-card' /> Name</span>];
+  if (crd.selectors.isNamespaced(customResourceDefinition)) {
+    ret.push('Namespace');
+  }
+  ret.push('');
+  return ret;
+};
 
-const Rows = ({customResources, customResourceDefinition, deleteResourceCallback}) => {
+const Rows = ({customResources, customResourceDefinition, version, editResource, deleteResourceCallback}) => {
   const deleteCustomResource = customResource => {
-    const deleteFunc = cr.api.delete(customResourceDefinition);
+    const deleteFunc = cr.api.delete(customResourceDefinition, version);
     return async () => {
       await deleteFunc(customResource);
       deleteResourceCallback(customResource);
@@ -44,15 +49,17 @@ const Rows = ({customResources, customResourceDefinition, deleteResourceCallback
     .map(customResource => (
         <Table.Row key={metadata.selectors.uid(customResource)}>
           <Table.Cell>
-            {/*<Link to={`/customresources/${metadata.selectors.uid(customResource)}/edit`}>*/}
+            <Link onClick={() => editResource(customResource)} >
               {metadata.selectors.name(customResource)}
-            {/*</Link>*/}
+            </Link>
           </Table.Cell>
-          <Table.Cell className='whitespace-no-wrap'>
-            <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(customResource)}`}>
-              {metadata.selectors.namespace(customResource)}
-            </Link.Namespace>
-          </Table.Cell>
+          {crd.selectors.isNamespaced(customResourceDefinition) &&
+            <Table.Cell className='whitespace-no-wrap'>
+              <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(customResource)}`}>
+                {metadata.selectors.namespace(customResource)}
+              </Link.Namespace>
+            </Table.Cell>
+          }
           <Table.Cell>
             <Table.DeleteButton onClick={deleteCustomResource(customResource)} />
           </Table.Cell>
@@ -60,15 +67,31 @@ const Rows = ({customResources, customResourceDefinition, deleteResourceCallback
     ));
 };
 
-const List = ({customResources, customResourceDefinition, deleteResourceCallback, crudDelete, ...properties}) => (
-  <ResourceList headers={headers} resources={customResources} {...properties}>
-    <Rows
-      customResources={customResources}
-      customResourceDefinition={customResourceDefinition}
-      deleteResourceCallback={deleteResourceCallback}
-    />
-  </ResourceList>
-);
+const List = ({customResources, customResourceDefinition, version, deleteResourceCallback, crudDelete, ...properties}) => {
+  const [editedResource, editResource] = useState(null);
+  return (
+    <>
+      <ResourceList headers={headers(customResourceDefinition)} resources={customResources} {...properties}>
+        <Rows
+          customResources={customResources}
+          customResourceDefinition={customResourceDefinition}
+          version={version}
+          editResource={editResource}
+          deleteResourceCallback={deleteResourceCallback}
+        />
+      </ResourceList>
+      <editor.ResourceEditModal
+        resource={editedResource}
+        title={`${cr.selectors.apiVersion(editedResource)} - ${
+          crd.selectors.isNamespaced(customResourceDefinition) ? `${metadata.selectors.namespace(editedResource)} - ` : ''}${
+          metadata.selectors.name(editedResource)
+        }`}
+        save={toSave => cr.api.update(customResourceDefinition, version)(toSave)}
+        close={() => editResource(null)}
+      />
+    </>
+  );
+};
 
 const mapDispatchToProps = dispatch =>  bindActionCreators({
   crudDelete: redux.actions.crudDelete

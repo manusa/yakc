@@ -57,6 +57,5 @@ const List = ({resources, loadedResources, crudDelete, ...properties}) => (
   </ResourceList>
 );
 
-
 export default ResourceList.resourceListConnect('configMaps')(List);
 

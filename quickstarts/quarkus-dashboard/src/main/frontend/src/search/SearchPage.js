@@ -19,6 +19,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import cRoles from '../clusterroles';
 import cm from '../configmaps';
+import crd from '../customresourcedefinitions';
 import dc from '../deploymentconfigs';
 import d from '../deployments';
 import i from '../ingresses';
@@ -54,36 +55,22 @@ const Results = ({query, selectedNamespace}) => {
   };
   return (
     <>
-      <p.List {...commonProps}
-        title='Pods' nameLike={query} namespace={selectedNamespace} />
-      <d.List {...commonProps}
-        title='Deployments' nameLike={query} namespace={selectedNamespace} />
-      <dc.List {...commonProps}
-        title='DeploymentConfigs' nameLike={query} namespace={selectedNamespace} />
-      <ss.List {...commonProps}
-        title='StatefulSets' nameLike={query} namespace={selectedNamespace} />
-      <rs.List {...commonProps}
-        title='ReplicaSets' nameLike={query} namespace={selectedNamespace} />
-      <rc.List {...commonProps}
-        title='ReplicationControllers' nameLike={query} namespace={selectedNamespace} />
-      <svc.List {...commonProps}
-        title='Services' nameLike={query} namespace={selectedNamespace} />
-      <i.List {...commonProps}
-        title='Ingresses' nameLike={query} namespace={selectedNamespace} />
-      <routes.List {...commonProps}
-        title='Routes' nameLike={query} namespace={selectedNamespace} />
-      <cm.List {...commonProps}
-        title='ConfigMaps' nameLike={query} namespace={selectedNamespace} />
-      <s.List {...commonProps}
-        title='Secrets' nameLike={query} namespace={selectedNamespace} />
-      <pv.List {...commonProps}
-        title='PersistentVolumes' nameLike={query} namespace={selectedNamespace} />
-      <pvc.List {...commonProps}
-        title='PersistentVolumeClaims' nameLike={query} namespace={selectedNamespace} />
-      <cRoles.List {...commonProps}
-        title='ClusterRoles' nameLike={query} namespace={selectedNamespace} />
-      <roles.List {...commonProps}
-        title='Roles' nameLike={query} namespace={selectedNamespace} />
+      <p.List {...commonProps} title='Pods' nameLike={query} namespace={selectedNamespace} />
+      <d.List {...commonProps} title='Deployments' nameLike={query} namespace={selectedNamespace} />
+      <dc.List {...commonProps} title='DeploymentConfigs' nameLike={query} namespace={selectedNamespace} />
+      <ss.List {...commonProps} title='StatefulSets' nameLike={query} namespace={selectedNamespace} />
+      <rs.List {...commonProps} title='ReplicaSets' nameLike={query} namespace={selectedNamespace} />
+      <rc.List {...commonProps} title='ReplicationControllers' nameLike={query} namespace={selectedNamespace} />
+      <svc.List {...commonProps} title='Services' nameLike={query} namespace={selectedNamespace} />
+      <i.List {...commonProps} title='Ingresses' nameLike={query} namespace={selectedNamespace} />
+      <routes.List {...commonProps} title='Routes' nameLike={query} namespace={selectedNamespace} />
+      <cm.List {...commonProps} title='ConfigMaps' nameLike={query} namespace={selectedNamespace} />
+      <s.List {...commonProps} title='Secrets' nameLike={query} namespace={selectedNamespace} />
+      <pv.List {...commonProps} title='PersistentVolumes' nameLike={query} namespace={selectedNamespace} />
+      <pvc.List {...commonProps} title='PersistentVolumeClaims' nameLike={query} namespace={selectedNamespace} />
+      <crd.List {...commonProps} title='CustomResourceDefinitions' nameLike={query} namespace={selectedNamespace} />
+      <cRoles.List {...commonProps} title='ClusterRoles' nameLike={query} namespace={selectedNamespace} />
+      <roles.List {...commonProps} title='Roles' nameLike={query} namespace={selectedNamespace} />
     </>
   )
 };

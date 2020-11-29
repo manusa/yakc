@@ -22,8 +22,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -77,5 +79,34 @@ public class CustomResourceResource {
   ) throws IOException {
     customResourceService.deleteNamespacedCustomResource(group, version, namespace, plural, name);
     return Response.noContent().build();
+  }
+
+  @PUT
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/{group}/{version}/{plural}/{name}")
+  public UntypedResource update(
+    @PathParam("group") String group,
+    @PathParam("version") String version,
+    @PathParam("plural") String plural,
+    @PathParam("name") String name,
+    UntypedResource customResource
+  ) throws IOException {
+    return customResourceService.replaceCustomResource(group, version, plural, name, customResource);
+  }
+
+  @PUT
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/{group}/{version}/{plural}/namespaces/{namespace}/{name}")
+  public UntypedResource updateNamespaced(
+    @PathParam("group") String group,
+    @PathParam("version") String version,
+    @PathParam("namespace") String namespace,
+    @PathParam("plural") String plural,
+    @PathParam("name") String name,
+    UntypedResource customResource
+  ) throws IOException {
+    return customResourceService.replaceNamespacedCustomResource(group, version, namespace, plural, name, customResource);
   }
 }

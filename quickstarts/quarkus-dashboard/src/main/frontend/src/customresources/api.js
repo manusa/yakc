@@ -14,31 +14,42 @@
  * limitations under the License.
  *
  */
-import {listResource, deleteResource, deleteNamespacedResource} from '../fetch';
+import {
+  listResource,
+  deleteResource,
+  deleteNamespacedResource,
+  updateNamespacedResource,
+  updateResource
+} from '../fetch';
 import crds from '../customresourcedefinitions';
 
+const basePath = (crd, version = crds.selectors.specVersionsLatest(crd)) =>
+  `customresources/${crds.selectors.specGroup(crd)}/${version}/${crds.selectors.specNamesPlural(crd)}`;
+
 export default {
-  list: crd => listResource(
+  list: (crd, version) => listResource(
     `customresources/${
       crds.selectors.specGroup(crd)
     }/${
-      crds.selectors.specVersionsLatest(crd)
+      version ? version : crds.selectors.specVersionsLatest(crd)
     }/${
       crds.selectors.specNamesPlural(crd)
     }`,
     crds.selectors.specNamesKind(crd)
   ),
-  delete: crd => {
-    const basePath = `customresources/${
-      crds.selectors.specGroup(crd)}/${
-      crds.selectors.specVersionsLatest(crd)}/${
-      crds.selectors.specNamesPlural(crd)
-    }`;
-    const namespaced = crds.selectors.specScope(crd) === 'Namespaced';
-    if (namespaced) {
-      return deleteNamespacedResource(`${basePath}/namespaces`);
+  delete: (crd, version) => {
+    const path = basePath(crd, version);
+    if (crds.selectors.isNamespaced(crd)) {
+      return deleteNamespacedResource(`${path}/namespaces`);
     }
-    return deleteResource(basePath);
+    return deleteResource(path);
+  },
+  update: (crd, version) => {
+    const path = basePath(crd, version);
+    if (crds.selectors.isNamespaced(crd)) {
+      return updateNamespacedResource(`${path}/namespaces`);
+    }
+    return updateResource(path);
   }
 };
 

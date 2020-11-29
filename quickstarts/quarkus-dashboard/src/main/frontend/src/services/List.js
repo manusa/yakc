@@ -60,7 +60,7 @@ const Rows = ({services}) => {
 };
 
 const List = ({resources, loadedResources, crudDelete, ...properties}) => (
-  <ResourceList headers={headers} resources={resources} loading={!loadedResources['Service']} {...properties}>
+  <ResourceList headers={headers} resources={resources} {...properties}>
     <Rows services={resources} />
   </ResourceList>
 );
