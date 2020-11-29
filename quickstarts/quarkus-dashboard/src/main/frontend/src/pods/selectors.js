@@ -50,7 +50,7 @@ selectors.readyCount = pods => pods.reduce(
   0
 );
 
-selectors.podsBy = (pods = [], {
+selectors.podsBy = (pods = {}, {
   nodeName,
   ...filters
 } = undefined) =>

@@ -23,7 +23,7 @@ selectors.toObjectReducer = (acc, [key, configMap]) => {
   return acc;
 };
 
-selectors.resourcesBy = (resources = [], {
+selectors.resourcesBy = (resources = {}, {
   namespace,
   nameLike,
   ownerId,

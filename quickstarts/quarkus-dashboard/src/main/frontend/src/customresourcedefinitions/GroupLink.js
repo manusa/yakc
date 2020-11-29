@@ -14,22 +14,14 @@
  * limitations under the License.
  *
  */
-import api from './api';
-import reducer from './reducer';
-import selectors from './selectors';
-import List from './List';
-import CustomResourceDefinitionsDetailPage from './CustomResourceDefinitionsDetailPage';
-import CustomResourceDefinitionsEditPage from './CustomResourceDefinitionsEditPage';
-import CustomResourceDefinitionsPage from './CustomResourceDefinitionsPage';
-import GroupLink from './GroupLink';
+import React from 'react';
+import Link from '../components/Link';
+import crd from './index';
 
-export default {
-  api,
-  reducer,
-  selectors,
-  List,
-  CustomResourceDefinitionsDetailPage,
-  CustomResourceDefinitionsEditPage,
-  CustomResourceDefinitionsPage,
-  GroupLink
-};
+const GroupLink = ({customResourceDefinition}) => (
+  <Link.ResourceLink to={`/customresourcedefinitions?group=${crd.selectors.specGroup(customResourceDefinition)}`}>
+    {crd.selectors.specGroup(customResourceDefinition)}
+  </Link.ResourceLink>
+);
+
+export default GroupLink;

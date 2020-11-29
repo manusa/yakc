@@ -15,6 +15,7 @@
  *
  */
 import React from 'react';
+import {connect} from 'react-redux';
 import metadata from '../metadata';
 import crd from './';
 import Icon from '../components/Icon';
@@ -43,7 +44,7 @@ const Rows = ({customResourceDefinitions}) => {
             </Link.CustomResourceDefinition>
           </Table.Cell>
           <Table.Cell>
-            {crd.selectors.specGroup(customResourceDefinition)}
+            <crd.GroupLink customResourceDefinition={customResourceDefinition} />
           </Table.Cell>
           <Table.Cell>
             {crd.selectors.specVersions(customResourceDefinition).map(v => (
@@ -63,11 +64,21 @@ const Rows = ({customResourceDefinitions}) => {
     ));
 };
 
-const List = ({resources, crudDelete, loadedResources, ...properties}) => (
-  <ResourceList headers={headers} resources={resources} {...properties}>
-    <Rows customResourceDefinitions={resources} />
+const List = ({customResourceDefinitions, group, ...properties}) => (
+  <ResourceList headers={headers} resources={customResourceDefinitions} {...properties}>
+    <Rows customResourceDefinitions={customResourceDefinitions} />
   </ResourceList>
 );
+const mapStateToProps = ({customResourceDefinitions}) => ({
+  customResourceDefinitions
+});
 
-export default ResourceList.resourceListConnect('customResourceDefinitions')(List);
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  ...ownProps,
+  customResourceDefinitions: Object.values(crd.selectors.crdsBy(stateProps.customResourceDefinitions, ownProps))
+});
+
+export default connect(mapStateToProps, null, mergeProps)(List);
 

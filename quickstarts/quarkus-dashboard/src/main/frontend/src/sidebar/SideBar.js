@@ -21,6 +21,7 @@ import {withRouter} from 'react-router-dom';
 import apis from "../apis";
 import i from '../components/icons';
 import redux from '../redux';
+import crd from '../customresourcedefinitions';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
 
@@ -87,7 +88,7 @@ const ExtNavItem = ({href, children}) => (
   >{children}</Link>
 );
 
-const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem, isOpenShift}) => {
+const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem, isOpenShift, crdGroups}) => {
   const ref = useRef(null);
   useLayoutEffect(() => {
     ref.current.scroll(0, currentScrollTop);
@@ -133,6 +134,12 @@ const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem, isOpen
         <NavGroup expandedItems={expandedItems} toggleItem={toggleItem}
                   label='Custom Resources' icon='fa-puzzle-piece'>
           <K8sNavItem to='/customresourcedefinitions' Icon={i.CustomResourceDefinition}>Definitions</K8sNavItem>
+          {crdGroups.map(g =>
+            <RoutedLink
+              key={g} to={`/customresourcedefinitions?group=${g}`}
+              className='pl-8 text-sm truncate max-w-full'
+            >{g}</RoutedLink>
+          )}
         </NavGroup>
       </div>
       <h2 className='mt-6 mb-2 px-4 text-gray-100 text-xl'>About</h2>
@@ -143,7 +150,7 @@ const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem, isOpen
   );
 }
 
-const SideBar = ({sideBarOpen, scroll, currentScrollTop, expandedItems, toggleItem, isOpenShift}) => {
+const SideBar = ({sideBarOpen, scroll, currentScrollTop, expandedItems, toggleItem, isOpenShift, crdGroups}) => {
   return (
     <div
       className={`${sideBarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'}
@@ -165,14 +172,18 @@ const SideBar = ({sideBarOpen, scroll, currentScrollTop, expandedItems, toggleIt
         currentScrollTop={currentScrollTop} scroll={scroll}
         expandedItems={expandedItems} toggleItem={toggleItem}
         isOpenShift={isOpenShift}
+        crdGroups={crdGroups}
       />
     </div>
   );
 };
 
-const mapStateToProps = ({apiGroups, sidebar: {expandedItems, scroll: {scrollTop: currentScrollTop}}}) => ({
+const mapStateToProps = ({
+  apiGroups, sidebar: {expandedItems, scroll: {scrollTop: currentScrollTop}}, customResourceDefinitions
+}) => ({
   expandedItems, currentScrollTop,
-  isOpenShift: apis.selectors.isOpenShift(apiGroups)
+  isOpenShift: apis.selectors.isOpenShift(apiGroups),
+  crdGroups: crd.selectors.groups(customResourceDefinitions)
 });
 
 const mapDispatchToProps = dispatch =>  bindActionCreators({

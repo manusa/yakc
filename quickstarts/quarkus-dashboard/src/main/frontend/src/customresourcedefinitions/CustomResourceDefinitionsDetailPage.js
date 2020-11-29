@@ -65,7 +65,9 @@ const CustomResourceDefinitionsDetailPage = ({customResourceDefinition}) => {
       body={
         <Form>
           <metadata.Details resource={customResourceDefinition} />
-          <Form.Field label='Group'>{crd.selectors.specGroup(customResourceDefinition)}</Form.Field>
+          <Form.Field label='Group'>
+            <crd.GroupLink customResourceDefinition={customResourceDefinition} />
+          </Form.Field>
           <Form.Field label='Versions'>
             {crd.selectors.specVersions(customResourceDefinition).map(v => (
               <div key={v}>

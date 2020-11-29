@@ -15,13 +15,24 @@
  *
  */
 import React from 'react';
+import {useLocation} from 'react-router-dom';
 import crd from './';
 import DashboardPage from '../components/DashboardPage';
+import Link from '../components/Link';
 
-const CustomResourceDefinitionsPage = () => (
-  <DashboardPage title='CustomResourceDefinitions'>
-    <crd.List className='mt-4' />
-  </DashboardPage>
-);
+const CustomResourceDefinitionsPage = () => {
+  const queryParams = new URLSearchParams(useLocation().search);
+  const group = queryParams.get('group');
+  return (
+    <DashboardPage title={
+      <>
+        <Link.ResourceLink to='/customresourcedefinitions'>CustomResourceDefinitions</Link.ResourceLink>
+        {group ? <span>&nbsp;- {group}</span> : ''}
+      </>
+    }>
+      <crd.List className='mt-4' group={group} />
+    </DashboardPage>
+  );
+};
 
 export default CustomResourceDefinitionsPage;
