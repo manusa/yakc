@@ -17,9 +17,12 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.marcnuri.yakc.serialization.GoCompatibleTimeModule;
 import io.quarkus.jackson.ObjectMapperCustomizer;
 
 import javax.inject.Singleton;
@@ -29,6 +32,12 @@ public class JacksonConfiguration  implements ObjectMapperCustomizer {
 
   public void customize(ObjectMapper mapper) {
     mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+    mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    mapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, false);
+    mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+    mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+    mapper.registerModule(new JavaTimeModule());
+    mapper.registerModule(new GoCompatibleTimeModule());
   }
 }
