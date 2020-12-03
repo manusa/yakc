@@ -39,7 +39,8 @@ import sts from './statefulsets';
 import watch from './watch';
 import Home from './Home';
 
-const eventSources = [];
+let eventSource;
+let pollResourcesTimeout;
 
 const pollResources = dispatch => {
   const dispatchedPoll = async () => {
@@ -58,24 +59,27 @@ const pollResources = dispatch => {
     } catch (e) {
       dispatch(redux.actions.setError('Error when polling resources (retrying)'));
     }
-    setTimeout(dispatchedPoll, 3000)
+    if (eventSource.readyState === EventSource.CLOSED) {
+      console.error('EventSource connection was lost, reconnecting');
+      redux.actions.setOffline(true);
+      eventSource.close();
+      eventSource = watch.api.startEventSource({dispatch});
+    }
+    pollResourcesTimeout = setTimeout(dispatchedPoll, 3000)
   };
   return dispatchedPoll;
 };
 
 const onMount = ({dispatch}) => {
-  eventSources.push(
-    watch.api.startEventSource({dispatch})
-  );
+  eventSource = watch.api.startEventSource({dispatch});
   pollResources(dispatch)();
 };
 
 const onUnmount = () => {
-  eventSources.forEach(eventSource => {
-    if (eventSource.close) {
-      eventSource.close();
-    }
-  });
+  clearTimeout(pollResourcesTimeout);
+  if (eventSource.close) {
+    eventSource.close();
+  }
 };
 
 const App = ({dispatch}) => {
