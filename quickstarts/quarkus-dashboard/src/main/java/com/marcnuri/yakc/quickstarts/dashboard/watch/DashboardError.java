@@ -37,6 +37,11 @@ public class DashboardError implements Model {
       code = kubernetesException.getCode();
     }
   }
+
+  public String getDashboardError() {
+    return getClass().getSimpleName();
+  }
+
   public String getMessage() {
     return message;
   }

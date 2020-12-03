@@ -42,7 +42,12 @@ api.startEventSource =
             actions.crudDelete(message.object);
             break;
           case 'ERROR':
-            actions.setError(`${message.object.code ?? ''} ${message.object.message}`);
+            if (message.object.dashboardError === 'RequestRestartError') {
+              // Self-healing observable will restart eventually, clear state for resource
+              actions.crudClear(message.object.type);
+            } else {
+              actions.setError(`${message.object.code ?? ''} ${message.object.message}`);
+            }
             break;
           default:
             // NOOP

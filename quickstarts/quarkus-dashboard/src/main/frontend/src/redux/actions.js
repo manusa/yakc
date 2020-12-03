@@ -37,6 +37,11 @@ actions.clear = () => ({
   type: actions.Types.CLEAR
 });
 
+actions.crudClear = kind => ({
+  type: actions.Types.CRUD_CLEAR,
+  payload: kind,
+});
+
 actions.crudAddOrReplace = object => ({
   type: actions.Types.CRUD_ADD_OR_REPLACE,
   payload: object

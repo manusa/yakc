@@ -13,30 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Created on 2020-11-08, 8:13
+ * Created on 2020-12-03, 9:19
  */
 package com.marcnuri.yakc.quickstarts.dashboard.watch;
 
-import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.model.Model;
-import io.reactivex.Observable;
 
-import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.util.Arrays;
+public class RequestRestartError<T extends Model> extends DashboardError {
 
-public interface Watchable<T extends Model> {
+  private final String type;
 
-  Observable<WatchEvent<T>> watch() throws IOException;
+  public RequestRestartError(Watchable<T> watchable, Throwable throwable) {
+    super(throwable);
+    this.type = watchable.getType();
+  }
 
-  default String getType() {
-    return Arrays.stream(getClass().getGenericInterfaces())
-      .filter(gi -> gi instanceof ParameterizedType)
-      .map(ParameterizedType.class::cast)
-      .map(pt -> pt.getActualTypeArguments()[0])
-      .map(Class.class::cast)
-      .map(c -> c.getSimpleName())
-      .findFirst()
-      .orElse("");
+  public String getType() {
+    return type;
   }
 }

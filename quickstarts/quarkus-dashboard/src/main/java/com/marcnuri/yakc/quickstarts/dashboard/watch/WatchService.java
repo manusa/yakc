@@ -35,15 +35,16 @@ import com.marcnuri.yakc.quickstarts.dashboard.service.ServiceService;
 import com.marcnuri.yakc.quickstarts.dashboard.statefulsets.StatefulSetService;
 import io.reactivex.Observable;
 import io.reactivex.schedulers.Schedulers;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.selfHealingObservable;
 
 @Singleton
 public class WatchService {
@@ -88,10 +89,10 @@ public class WatchService {
     );
   }
 
-  public Observable<WatchEvent<? extends Model>> getWatch() throws IOException {
+  public Observable<WatchEvent<? extends Model>> getWatch() {
     final List<Observable<? extends WatchEvent<? extends Model>>> watchers = new ArrayList<>();
     for (Watchable<? extends Model> watchable : watchables) {
-      watchers.add(watchable.watch().subscribeOn(Schedulers.newThread()));
+      watchers.add(selfHealingObservable(watchable).subscribeOn(Schedulers.newThread()));
     }
     return Observable.merge(watchers)
       .doOnError(e -> LOG.error("Exception on Watcher", e))

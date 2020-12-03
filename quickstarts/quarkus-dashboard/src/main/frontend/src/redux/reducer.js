@@ -47,8 +47,13 @@ const reducer = kind => (state = {}, action = {}) => {
         return acc;
       }, {});
     }
-    case Types.CLEAR:
     case Types.CRUD_CLEAR: {
+      if (kind === action.payload) {
+        return {};
+      }
+      return {...state};
+    }
+    case Types.CLEAR: {
       return {};
     }
     default:
