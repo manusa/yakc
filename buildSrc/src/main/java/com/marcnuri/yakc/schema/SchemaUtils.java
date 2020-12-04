@@ -70,7 +70,8 @@ public class SchemaUtils {
       "class", "clazz",
       "import", "imports",
       "private", "privates",
-      "for", "fors"
+      "for", "fors",
+      "return", "returns"
   );
 
   private final GeneratorSettings settings;

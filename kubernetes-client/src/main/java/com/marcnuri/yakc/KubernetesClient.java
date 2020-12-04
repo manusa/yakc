@@ -68,6 +68,9 @@ import static com.marcnuri.yakc.config.OkHttpClientConfigurator.initOkHttpClient
  *   <li><a href="https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:cert-manager">
  *     com.marcnuri.yakc.apis:cert-manager</a>
  *   </li>
+ *   <li><a href="https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:chaos-mesh">
+ *     com.marcnuri.yakc.apis:chaos-mesh</a>
+ *   </li>
  *   <li><a href="https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:istio">
  *     com.marcnuri.yakc.apis:istio</a>
  *   </li>
