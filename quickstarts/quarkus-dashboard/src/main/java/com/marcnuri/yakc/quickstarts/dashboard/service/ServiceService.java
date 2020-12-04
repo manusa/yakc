@@ -31,6 +31,7 @@ import javax.inject.Singleton;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
@@ -45,17 +46,17 @@ public class ServiceService implements Watchable<Service> {
   }
 
   @Override
-  public Observable<WatchEvent<Service>> watch() throws IOException {
+  public Optional<Observable<WatchEvent<Service>>> watch() throws IOException {
     final CoreV1Api api = kubernetesClient.create(CoreV1Api.class);
     return tryWithFallback(
       () -> {
         api.listServiceForAllNamespaces(new ListServiceForAllNamespaces().limit(1)).get();
-        return api.listServiceForAllNamespaces().watch();
+        return Optional.of(api.listServiceForAllNamespaces().watch());
       },
       () -> {
         final String ns = kubernetesClient.getConfiguration().getNamespace();
         api.listNamespacedService(ns, new ListNamespacedService().limit(1)).get();
-        return api.listNamespacedService(ns).watch();
+        return Optional.of(api.listNamespacedService(ns).watch());
       }
     );
   }

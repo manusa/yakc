@@ -34,6 +34,7 @@ import javax.inject.Singleton;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Optional;
 
 @Singleton
 public class StatefulSetService implements Watchable<StatefulSet> {
@@ -46,13 +47,13 @@ public class StatefulSetService implements Watchable<StatefulSet> {
   }
 
   @Override
-  public Observable<WatchEvent<StatefulSet>> watch() throws IOException {
+  public Optional<Observable<WatchEvent<StatefulSet>>> watch() throws IOException {
     final AppsV1Api apps = kubernetesClient.create(AppsV1Api.class);
     try {
       apps.listStatefulSetForAllNamespaces(new ListStatefulSetForAllNamespaces().limit(1)).get();
-      return apps.listStatefulSetForAllNamespaces().watch();
+      return Optional.of(apps.listStatefulSetForAllNamespaces().watch());
     } catch (ClientErrorException ex) {
-      return apps.listNamespacedStatefulSet(kubernetesClient.getConfiguration().getNamespace()).watch();
+      return Optional.of(apps.listNamespacedStatefulSet(kubernetesClient.getConfiguration().getNamespace()).watch());
     }
   }
 

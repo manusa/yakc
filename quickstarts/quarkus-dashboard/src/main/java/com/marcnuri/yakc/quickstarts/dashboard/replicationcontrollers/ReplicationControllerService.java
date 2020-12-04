@@ -18,6 +18,7 @@
 package com.marcnuri.yakc.quickstarts.dashboard.replicationcontrollers;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -43,13 +44,13 @@ public class ReplicationControllerService implements Watchable<ReplicationContro
   }
 
   @Override
-  public Observable<WatchEvent<ReplicationController>> watch() throws IOException {
+  public Optional<Observable<WatchEvent<ReplicationController>>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
     try {
       core.listReplicationControllerForAllNamespaces(new CoreV1Api.ListReplicationControllerForAllNamespaces().limit(1)).get();
-      return core.listReplicationControllerForAllNamespaces().watch();
+      return Optional.of(core.listReplicationControllerForAllNamespaces().watch());
     } catch (ClientErrorException ex) {
-      return core.listNamespacedReplicationController(kubernetesClient.getConfiguration().getNamespace()).watch();
+      return Optional.of(core.listNamespacedReplicationController(kubernetesClient.getConfiguration().getNamespace()).watch());
     }
   }
 

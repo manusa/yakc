@@ -33,6 +33,7 @@ import javax.inject.Singleton;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
@@ -48,17 +49,17 @@ public class ClusterRoleService implements Watchable<ClusterRole> {
   }
 
   @Override
-  public Observable<WatchEvent<ClusterRole>> watch() throws IOException {
+  public Optional<Observable<WatchEvent<ClusterRole>>> watch() throws IOException {
     return tryWithFallback(
       () -> {
         kubernetesClient.create(RbacAuthorizationV1Api.class).listClusterRole(new ListClusterRole().limit(1)).get();
-        return kubernetesClient.create(RbacAuthorizationV1Api.class).listClusterRole().watch();
+        return Optional.of(kubernetesClient.create(RbacAuthorizationV1Api.class).listClusterRole().watch());
       },
       () -> {
         kubernetesClient.create(RbacAuthorizationV1beta1Api.class)
           .listClusterRole(new RbacAuthorizationV1beta1Api.ListClusterRole().limit(1)).get();
-        return kubernetesClient.create(RbacAuthorizationV1beta1Api.class).listClusterRole().watch()
-          .map(ClusterRoleService::to);
+        return Optional.of(kubernetesClient.create(RbacAuthorizationV1beta1Api.class).listClusterRole().watch()
+          .map(ClusterRoleService::to));
       }
     );
   }

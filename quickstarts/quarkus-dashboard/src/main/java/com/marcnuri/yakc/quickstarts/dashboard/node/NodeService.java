@@ -28,6 +28,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.ignoreForbidden;
 
@@ -42,20 +43,15 @@ public class NodeService implements Watchable<Node> {
   }
 
   @Override
-  public  Observable<WatchEvent<Node>> watch() throws IOException {
+  public Optional<Observable<WatchEvent<Node>>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
     return ignoreForbidden(
       () -> {
         core.listNode(new ListNode().limit(1)).get();
-        return core.listNode().watch();
+        return Optional.of(core.listNode().watch());
       },
-      Observable.empty()
+      Optional.empty()
     );
-  }
-
-  @Override
-  public boolean retryOnComplete() {
-    return false;
   }
 
 }

@@ -29,6 +29,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Singleton
 public class EventService implements Watchable<Event> {
@@ -41,13 +42,13 @@ public class EventService implements Watchable<Event> {
   }
 
   @Override
-  public Observable<WatchEvent<Event>> watch() throws IOException {
+  public Optional<Observable<WatchEvent<Event>>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
     try {
       core.listEventForAllNamespaces(new ListEventForAllNamespaces().limit(1)).get();
-      return core.listEventForAllNamespaces().watch();
+      return Optional.of(core.listEventForAllNamespaces().watch());
     } catch (ClientErrorException ex) {
-      return core.listNamespacedEvent(kubernetesClient.getConfiguration().getNamespace()).watch();
+      return Optional.of(core.listNamespacedEvent(kubernetesClient.getConfiguration().getNamespace()).watch());
     }
   }
 

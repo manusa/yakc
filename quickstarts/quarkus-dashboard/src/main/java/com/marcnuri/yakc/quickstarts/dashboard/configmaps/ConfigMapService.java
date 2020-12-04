@@ -31,6 +31,7 @@ import javax.inject.Singleton;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
@@ -53,13 +54,13 @@ public class ConfigMapService implements Watchable<ConfigMap> {
   }
 
   @Override
-  public Observable<WatchEvent<ConfigMap>> watch() throws IOException {
+  public Optional<Observable<WatchEvent<ConfigMap>>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
     try {
       core.listConfigMapForAllNamespaces(new ListConfigMapForAllNamespaces().limit(1)).get();
-      return core.listConfigMapForAllNamespaces().watch();
+      return Optional.of(core.listConfigMapForAllNamespaces().watch());
     } catch (ClientErrorException ex) {
-      return core.listNamespacedConfigMap(kubernetesClient.getConfiguration().getNamespace()).watch();
+      return Optional.of(core.listNamespacedConfigMap(kubernetesClient.getConfiguration().getNamespace()).watch());
     }
   }
 

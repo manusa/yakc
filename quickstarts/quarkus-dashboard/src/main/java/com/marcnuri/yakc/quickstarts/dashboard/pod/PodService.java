@@ -43,6 +43,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
+import java.util.Optional;
 
 @Singleton
 public class PodService implements Watchable<Pod> {
@@ -57,13 +58,13 @@ public class PodService implements Watchable<Pod> {
   }
 
   @Override
-  public Observable<WatchEvent<Pod>> watch() throws IOException {
+  public Optional<Observable<WatchEvent<Pod>>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
     try {
       core.listPodForAllNamespaces(new ListPodForAllNamespaces().limit(1)).get();
-      return core.listPodForAllNamespaces().watch();
+      return Optional.of(core.listPodForAllNamespaces().watch());
     } catch (ClientErrorException ex) {
-      return core.listNamespacedPod(kubernetesClient.getConfiguration().getNamespace()).watch();
+      return Optional.of(core.listNamespacedPod(kubernetesClient.getConfiguration().getNamespace()).watch());
     }
   }
 

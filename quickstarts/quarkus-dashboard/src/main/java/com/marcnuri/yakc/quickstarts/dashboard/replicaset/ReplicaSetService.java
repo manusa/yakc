@@ -31,6 +31,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import java.io.IOException;
+import java.util.Optional;
 
 @Singleton
 public class ReplicaSetService implements Watchable<ReplicaSet> {
@@ -43,13 +44,13 @@ public class ReplicaSetService implements Watchable<ReplicaSet> {
   }
 
   @Override
-  public Observable<WatchEvent<ReplicaSet>> watch() throws IOException {
+  public Optional<Observable<WatchEvent<ReplicaSet>>> watch() throws IOException {
     final AppsV1Api apps = kubernetesClient.create(AppsV1Api.class);
     try {
       apps.listReplicaSetForAllNamespaces(new ListReplicaSetForAllNamespaces().limit(1)).get();
-      return apps.listReplicaSetForAllNamespaces().watch();
+      return Optional.of(apps.listReplicaSetForAllNamespaces().watch());
     } catch (ClientErrorException ex) {
-      return apps.listNamespacedReplicaSet(kubernetesClient.getConfiguration().getNamespace()).watch();
+      return Optional.of(apps.listNamespacedReplicaSet(kubernetesClient.getConfiguration().getNamespace()).watch());
     }
   }
 

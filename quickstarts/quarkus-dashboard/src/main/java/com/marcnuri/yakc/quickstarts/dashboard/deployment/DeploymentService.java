@@ -34,6 +34,7 @@ import javax.inject.Singleton;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Optional;
 
 @Singleton
 public class DeploymentService implements Watchable<Deployment> {
@@ -46,13 +47,13 @@ public class DeploymentService implements Watchable<Deployment> {
   }
 
   @Override
-  public Observable<WatchEvent<Deployment>> watch() throws IOException {
+  public Optional<Observable<WatchEvent<Deployment>>> watch() throws IOException {
     final AppsV1Api apps = kubernetesClient.create(AppsV1Api.class);
     try {
       apps.listDeploymentForAllNamespaces(new ListDeploymentForAllNamespaces().limit(1)).get();
-      return apps.listDeploymentForAllNamespaces().watch();
+      return Optional.of(apps.listDeploymentForAllNamespaces().watch());
     } catch (ClientErrorException ex) {
-      return apps.listNamespacedDeployment(kubernetesClient.getConfiguration().getNamespace()).watch();
+      return Optional.of(apps.listNamespacedDeployment(kubernetesClient.getConfiguration().getNamespace()).watch());
     }
   }
 

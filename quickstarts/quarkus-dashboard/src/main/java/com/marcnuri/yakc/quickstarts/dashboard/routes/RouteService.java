@@ -20,6 +20,7 @@ package com.marcnuri.yakc.quickstarts.dashboard.routes;
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -44,22 +45,17 @@ public class RouteService implements Watchable<Route> {
   }
 
   @Override
-  public Observable<WatchEvent<Route>> watch() throws IOException {
+  public Optional<Observable<WatchEvent<Route>>> watch() throws IOException {
     final RouteOpenshiftIoV1Api routes = kubernetesClient.create(RouteOpenshiftIoV1Api.class);
     return tryWithFallback(
       () -> {
         routes.listRouteForAllNamespaces(new RouteOpenshiftIoV1Api.ListRouteForAllNamespaces().limit(1))
           .get();
-        return routes.listRouteForAllNamespaces().watch();
+        return Optional.of(routes.listRouteForAllNamespaces().watch());
       },
-      () -> routes.listNamespacedRoute(kubernetesClient.getConfiguration().getNamespace()).watch(),
-      Observable::empty
+      () -> Optional.of(routes.listNamespacedRoute(kubernetesClient.getConfiguration().getNamespace()).watch()),
+      Optional::empty
     );
-  }
-
-  @Override
-  public boolean retryOnComplete() {
-    return false;
   }
 
   public Status delete(String name, String namespace) throws IOException {

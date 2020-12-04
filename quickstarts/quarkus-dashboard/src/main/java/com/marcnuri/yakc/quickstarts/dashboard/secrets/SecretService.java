@@ -31,6 +31,7 @@ import javax.inject.Singleton;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
@@ -45,9 +46,9 @@ public class SecretService implements Watchable<Secret> {
   }
 
   @Override
-  public Observable<WatchEvent<Secret>> watch() throws IOException {
+  public Optional<Observable<WatchEvent<Secret>>> watch() throws IOException {
     final CoreV1Api api = kubernetesClient.create(CoreV1Api.class);
-    return tryWithFallback(
+    return Optional.of(tryWithFallback(
       () -> {
         api.listSecretForAllNamespaces(new ListSecretForAllNamespaces().limit(1)).get();
         return api.listSecretForAllNamespaces().watch();
@@ -57,7 +58,7 @@ public class SecretService implements Watchable<Secret> {
         api.listNamespacedSecret(ns, new ListNamespacedSecret().limit(1)).get();
         return api.listNamespacedSecret(ns).watch();
       }
-    );
+    ));
   }
 
   public List<Secret> get() throws IOException {

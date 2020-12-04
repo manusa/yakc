@@ -50,14 +50,6 @@ public class PodResource {
   }
 
   @GET
-  @Produces(MediaType.SERVER_SENT_EVENTS)
-  @SseElementType(MediaType.APPLICATION_JSON)
-  public Multi<WatchEvent<Pod>> watch() throws IOException {
-    return Multi.createFrom().converter(MultiRxConverters.fromObservable(),
-      podService.watch());
-  }
-
-  @GET
   @Produces(MediaType.APPLICATION_JSON)
   @Path("/{namespace}/{name}")
   public Pod get(@PathParam("namespace") String namespace, @PathParam("name") String name)

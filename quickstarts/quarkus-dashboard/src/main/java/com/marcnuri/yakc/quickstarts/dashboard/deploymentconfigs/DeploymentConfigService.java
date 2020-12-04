@@ -21,6 +21,7 @@ import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -54,22 +55,17 @@ public class DeploymentConfigService implements Watchable<DeploymentConfig> {
   }
 
   @Override
-  public Observable<WatchEvent<DeploymentConfig>> watch() throws IOException {
+  public Optional<Observable<WatchEvent<DeploymentConfig>>> watch() throws IOException {
     final AppsOpenshiftIoV1Api apps = kubernetesClient.create(AppsOpenshiftIoV1Api.class);
     return tryWithFallback(
       () -> {
         apps.listDeploymentConfigForAllNamespaces(new AppsOpenshiftIoV1Api.ListDeploymentConfigForAllNamespaces().limit(1))
           .get();
-        return apps.listDeploymentConfigForAllNamespaces().watch();
+        return Optional.of(apps.listDeploymentConfigForAllNamespaces().watch());
       },
-      () -> apps.listNamespacedDeploymentConfig(kubernetesClient.getConfiguration().getNamespace()).watch(),
-      Observable::empty
+      () -> Optional.of(apps.listNamespacedDeploymentConfig(kubernetesClient.getConfiguration().getNamespace()).watch()),
+      Optional::empty
     );
-  }
-
-  @Override
-  public boolean retryOnComplete() {
-    return false;
   }
 
   public Status delete(String name, String namespace) throws IOException {

@@ -24,14 +24,11 @@ import io.reactivex.Observable;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.util.Arrays;
+import java.util.Optional;
 
 public interface Watchable<T extends Model> {
 
-  Observable<WatchEvent<T>> watch() throws IOException;
-
-  default boolean retryOnComplete() {
-    return true;
-  }
+  Optional<Observable<WatchEvent<T>>> watch() throws IOException;
 
   default String getType() {
     return Arrays.stream(getClass().getGenericInterfaces())
@@ -39,7 +36,7 @@ public interface Watchable<T extends Model> {
       .map(ParameterizedType.class::cast)
       .map(pt -> pt.getActualTypeArguments()[0])
       .map(Class.class::cast)
-      .map(c -> c.getSimpleName())
+      .map(Class::getSimpleName)
       .findFirst()
       .orElse("");
   }
