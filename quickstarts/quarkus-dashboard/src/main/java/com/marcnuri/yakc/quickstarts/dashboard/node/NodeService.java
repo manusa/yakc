@@ -53,4 +53,9 @@ public class NodeService implements Watchable<Node> {
     );
   }
 
+  @Override
+  public boolean retryOnComplete() {
+    return false;
+  }
+
 }

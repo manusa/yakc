@@ -30,8 +30,13 @@ public class DashboardError implements Model {
   private int code;
 
   public DashboardError(Throwable throwable) {
-    message = throwable.getMessage();
-    cause = throwable.getCause() != null ? throwable.getCause().getMessage() : "";
+    if (throwable != null) {
+      message = throwable.getMessage();
+      cause = throwable.getCause() != null ? throwable.getCause().getMessage() : "";
+    } else {
+      message = null;
+      cause = null;
+    }
     if (throwable instanceof KubernetesException) {
       final KubernetesException kubernetesException = (KubernetesException)throwable;
       code = kubernetesException.getCode();

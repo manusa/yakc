@@ -53,8 +53,13 @@ public class RouteService implements Watchable<Route> {
         return routes.listRouteForAllNamespaces().watch();
       },
       () -> routes.listNamespacedRoute(kubernetesClient.getConfiguration().getNamespace()).watch(),
-      () -> Observable.empty()
+      Observable::empty
     );
+  }
+
+  @Override
+  public boolean retryOnComplete() {
+    return false;
   }
 
   public Status delete(String name, String namespace) throws IOException {

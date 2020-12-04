@@ -63,8 +63,13 @@ public class DeploymentConfigService implements Watchable<DeploymentConfig> {
         return apps.listDeploymentConfigForAllNamespaces().watch();
       },
       () -> apps.listNamespacedDeploymentConfig(kubernetesClient.getConfiguration().getNamespace()).watch(),
-      () -> Observable.empty()
+      Observable::empty
     );
+  }
+
+  @Override
+  public boolean retryOnComplete() {
+    return false;
   }
 
   public Status delete(String name, String namespace) throws IOException {

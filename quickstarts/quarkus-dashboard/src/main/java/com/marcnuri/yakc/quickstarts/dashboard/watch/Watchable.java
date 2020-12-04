@@ -29,6 +29,10 @@ public interface Watchable<T extends Model> {
 
   Observable<WatchEvent<T>> watch() throws IOException;
 
+  default boolean retryOnComplete() {
+    return true;
+  }
+
   default String getType() {
     return Arrays.stream(getClass().getGenericInterfaces())
       .filter(gi -> gi instanceof ParameterizedType)

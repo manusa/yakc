@@ -53,12 +53,24 @@ public class ClientUtil {
   private static void subscribe(
     ObservableEmitter<WatchEvent<? extends Model>> selfHealingEmitter, Watchable<? extends Model> watchable)
     throws IOException {
-    watchable.watch().subscribe(selfHealingEmitter::onNext, error -> {
-      LOG.error("Subscription error for watchable {}: {}", watchable.getClass(), error.getMessage());
-      TimeUnit.SECONDS.sleep(OBSERVABLE_HEAL_DELAY_SECONDS);
-      selfHealingEmitter.onNext(new WatchEvent<>(WatchEvent.Type.ERROR, new RequestRestartError(watchable, error)));
-      subscribe(selfHealingEmitter, watchable);
-    });
+    watchable.watch().subscribe(
+      selfHealingEmitter::onNext,
+      error -> {
+        LOG.error("Subscription error for watchable {}: {}", watchable.getClass(), error.getMessage());
+        TimeUnit.SECONDS.sleep(OBSERVABLE_HEAL_DELAY_SECONDS);
+        selfHealingEmitter.onNext(new WatchEvent<>(WatchEvent.Type.ERROR, new RequestRestartError(watchable, error)));
+        subscribe(selfHealingEmitter, watchable);
+      },
+      () -> {
+        LOG.warn("Subscription complete for watchable {}", watchable.getClass());
+        if (watchable.retryOnComplete()) {
+          LOG.warn("Reconnecting {}", watchable.getClass());
+          TimeUnit.SECONDS.sleep(OBSERVABLE_HEAL_DELAY_SECONDS);
+          selfHealingEmitter.onNext(new WatchEvent<>(WatchEvent.Type.ERROR, new RequestRestartError(watchable, null)));
+          subscribe(selfHealingEmitter, watchable);
+        }
+      }
+    );
   }
 
   public static <T> T ignoreForbidden(ClientFunction<T> function, T defaultIfForbidden) throws IOException {
