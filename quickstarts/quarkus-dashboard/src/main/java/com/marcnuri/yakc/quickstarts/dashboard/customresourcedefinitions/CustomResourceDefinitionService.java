@@ -47,8 +47,8 @@ public class CustomResourceDefinitionService implements Watchable<CustomResource
     return Optional.of(kubernetesClient.create(ApiextensionsV1Api.class).listCustomResourceDefinition().watch());
   }
 
-  public Status delete(String name) throws IOException {
-    return kubernetesClient.create(ApiextensionsV1Api.class).deleteCustomResourceDefinition(name).get();
+  public CustomResourceDefinition delete(String name) throws IOException {
+    return kubernetesClient.create(ApiextensionsV1Api.class).deleteCustomResourceDefinition(name).get(CustomResourceDefinition.class);
   }
 
   public CustomResourceDefinition update(String name, CustomResourceDefinition customResourceDefinition) throws IOException {
