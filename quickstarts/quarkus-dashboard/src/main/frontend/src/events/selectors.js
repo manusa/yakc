@@ -21,4 +21,7 @@ selectors.involvedObjectName = event => event?.involvedObject?.name ?? '';
 selectors.involvedObjectNamespace = event => event?.involvedObject?.namespace ?? '';
 selectors.involvedObjectUid = event => event?.involvedObject?.uid ?? '';
 
+selectors.type = event => event?.type ?? '';
+selectors.typeIsNormal = event => selectors.type(event) === 'Normal';
+
 export default selectors;

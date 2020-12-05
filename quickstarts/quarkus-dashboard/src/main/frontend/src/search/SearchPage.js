@@ -23,6 +23,7 @@ import crd from '../customresourcedefinitions';
 import dc from '../deploymentconfigs';
 import d from '../deployments';
 import i from '../ingresses';
+import ns from '../namespaces';
 import p from '../pods';
 import pvc from '../persistentvolumeclaims';
 import pv from '../persistentvolumes';
@@ -64,6 +65,7 @@ const Results = ({query, selectedNamespace}) => {
       <svc.List {...commonProps} title='Services' nameLike={query} namespace={selectedNamespace} />
       <i.List {...commonProps} title='Ingresses' nameLike={query} namespace={selectedNamespace} />
       <routes.List {...commonProps} title='Routes' nameLike={query} namespace={selectedNamespace} />
+      <ns.List {...commonProps} title='Namespaces' nameLike={query} namespace={selectedNamespace} />
       <cm.List {...commonProps} title='ConfigMaps' nameLike={query} namespace={selectedNamespace} />
       <s.List {...commonProps} title='Secrets' nameLike={query} namespace={selectedNamespace} />
       <pv.List {...commonProps} title='PersistentVolumes' nameLike={query} namespace={selectedNamespace} />

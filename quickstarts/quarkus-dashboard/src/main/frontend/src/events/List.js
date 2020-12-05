@@ -25,6 +25,7 @@ import Icon from '../components/Icon';
 import ResourceList from '../components/ResourceList';
 
 const headers = [
+  '',
   'Type',
   <span><Icon icon='fa-id-card' /> Name</span>,
   <span><Icon stylePrefix='far' icon='fa-clock' /> Time</span>,
@@ -86,6 +87,12 @@ const Rows = ({events}) => {
       const lastTimestamp = new Date(event.lastTimestamp);
       return (
         <Table.Row key={metadata.selectors.uid(event)}>
+          <Table.Cell className='whitespace-no-wrap w-3 text-center'>
+            <Icon
+              className={ev.selectors.typeIsNormal(event) ? 'text-green-500' : 'text-red-500'}
+              icon={ev.selectors.typeIsNormal(event) ? 'fa-check' : 'fa-exclamation-circle'}
+            />
+          </Table.Cell>
           <Table.Cell className='whitespace-no-wrap'>
             {ev.selectors.involvedObjectKind(event)}
           </Table.Cell>
