@@ -14,24 +14,20 @@
  * limitations under the License.
  *
  */
-import api from './api';
-import reducer from './reducer';
-import selectors from './selectors';
-import List from './List';
-import NodesCard from './NodesCard';
-import NodesDetailPage from './NodesDetailPage';
-import NodesEditPage from './NodesEditPage';
-import NodesPage from './NodesPage';
+import React from 'react';
+import md from '../metadata';
+import n from './';
+import ResourceEditPage from '../components/ResourceEditPage';
+import Link from '../components/Link';
 
-const nodes = {};
+const NodesEditPage = ({match: {params: {uid}}}) => (
+  <ResourceEditPage
+    cardTitle={resource =>
+      <Link.RouterLink to={`/nodes/${md.selectors.name(resource)}`}>{md.selectors.name(resource)}</Link.RouterLink>
+    }
+    save={async resource => await n.api.update(resource)}
+    resourceFromState={state => state.nodes[uid]}
+  />
+);
 
-nodes.api = api;
-nodes.reducer = reducer;
-nodes.selectors = selectors;
-nodes.List = List;
-nodes.NodesCard = NodesCard;
-nodes.NodesDetailPage = NodesDetailPage;
-nodes.NodesEditPage = NodesEditPage
-nodes.NodesPage = NodesPage;
-
-export default nodes;
+export default NodesEditPage;

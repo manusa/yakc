@@ -59,7 +59,6 @@ const NodesDetailPage = ({node, isMinikube, pods}) => {
       path='nodes'
       resource={node}
       actions={isMinikube && <Minikube className='h-6' />}
-      editable={false}
       body={
         <Form>
           <div className='w-full mb-4 flex flex-wrap justify-around'>

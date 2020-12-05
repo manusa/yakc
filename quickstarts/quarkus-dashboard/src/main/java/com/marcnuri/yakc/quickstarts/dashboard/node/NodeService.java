@@ -17,20 +17,22 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.node;
 
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.ignoreForbidden;
+
+import java.io.IOException;
+import java.util.Optional;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListNode;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Node;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
+
 import io.reactivex.Observable;
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import java.io.IOException;
-import java.util.Optional;
-
-import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.ignoreForbidden;
 
 @Singleton
 public class NodeService implements Watchable<Node> {
@@ -54,4 +56,7 @@ public class NodeService implements Watchable<Node> {
     );
   }
 
+  public Node update(String name, Node node) throws IOException {
+    return kubernetesClient.create(CoreV1Api.class).replaceNode(name, node).get();
+  }
 }

@@ -49,7 +49,7 @@ const ResourceEditPage = ({
   const name = md.selectors.name(resource);
   return (
     <DashboardPage
-      title={`Edit - ${resource?.kind ?? ''} - ${namespace} - ${name}`}
+      title={`Edit ${resource?.kind ? ` - ${resource.kind}` : ''} ${namespace ? ` - ${namespace}` : ''} - ${name}`}
     >
       <div className='absolute inset-0 md:p-4 flex flex-col'>
         <Card className='flex-1 flex flex-col'>

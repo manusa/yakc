@@ -17,19 +17,20 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.node;
 
-import com.marcnuri.yakc.api.WatchEvent;
-import com.marcnuri.yakc.model.io.k8s.api.core.v1.Node;
-import io.quarkus.runtime.annotations.RegisterForReflection;
-import io.smallrye.mutiny.Multi;
-import io.smallrye.mutiny.converters.multi.MultiRxConverters;
+import java.io.IOException;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.ws.rs.GET;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import org.jboss.resteasy.annotations.SseElementType;
 
-import java.io.IOException;
+import com.marcnuri.yakc.model.io.k8s.api.core.v1.Node;
+
+import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @Singleton
 @RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
@@ -42,11 +43,11 @@ public class NodeResource {
     this.nodeService = nodeService;
   }
 
-  @GET
-  @Produces(MediaType.SERVER_SENT_EVENTS)
-  @SseElementType(MediaType.APPLICATION_JSON)
-  public Multi<WatchEvent<Node>> watch() throws IOException {
-    return Multi.createFrom().converter(MultiRxConverters.fromObservable(),
-      nodeService.watch().get());
+  @PUT
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  @Path("/{name}")
+  public Node update(@PathParam("name") String name, Node node) throws IOException {
+    return nodeService.update(name, node);
   }
 }

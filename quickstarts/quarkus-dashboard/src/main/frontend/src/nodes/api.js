@@ -14,24 +14,8 @@
  * limitations under the License.
  *
  */
-import api from './api';
-import reducer from './reducer';
-import selectors from './selectors';
-import List from './List';
-import NodesCard from './NodesCard';
-import NodesDetailPage from './NodesDetailPage';
-import NodesEditPage from './NodesEditPage';
-import NodesPage from './NodesPage';
+import {updateResource} from '../fetch';
 
-const nodes = {};
-
-nodes.api = api;
-nodes.reducer = reducer;
-nodes.selectors = selectors;
-nodes.List = List;
-nodes.NodesCard = NodesCard;
-nodes.NodesDetailPage = NodesDetailPage;
-nodes.NodesEditPage = NodesEditPage
-nodes.NodesPage = NodesPage;
-
-export default nodes;
+export default {
+  update: updateResource('nodes')
+};

@@ -112,6 +112,7 @@ const App = ({dispatch}) => {
           <Route exact path='/namespaces/:uid' component={ns.NamespacesDetailPage} />
           <Route exact path='/nodes' component={nodes.NodesPage} />
           <Route exact path='/nodes/:name' component={nodes.NodesDetailPage} />
+          <Route exact path='/nodes/:uid/edit' component={nodes.NodesEditPage} />
           <Route exact path='/persistentvolumeclaims' component={pvc.PersistentVolumeClaimsPage} />
           <Route exact path='/persistentvolumeclaims/:uid' component={pvc.PersistentVolumeClaimsDetailPage} />
           <Route exact path='/persistentvolumeclaims/:uid/edit' component={pvc.PersistentVolumeClaimsEditPage} />
