@@ -17,6 +17,7 @@
 import api from './api';
 import reducer from './reducer';
 import selectors from './selectors';
+import useLogs from './useLogs';
 import List from './List'
 import PodsCard from './PodsCard';
 import PodsDetailPage from './PodsDetailPage';
@@ -30,6 +31,7 @@ const pods = {};
 pods.api = api;
 pods.reducer = reducer;
 pods.selectors = selectors;
+pods.useLogs = useLogs;
 pods.List = List;
 pods.PodsCard = PodsCard;
 pods.PodsDetailPage = PodsDetailPage;

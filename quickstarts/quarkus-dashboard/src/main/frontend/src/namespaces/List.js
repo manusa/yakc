@@ -15,11 +15,8 @@
  *
  */
 import React from 'react';
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux';
 import metadata from '../metadata';
 import ns from './';
-import redux from '../redux';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
 import ResourceList from '../components/ResourceList';

@@ -82,7 +82,7 @@ public class KubernetesException extends IOException {
         throw new IllegalArgumentException("Problem when generating KuberentesException", e);
       }
     }
-    if (statusCode >= 400 && statusCode <500) {
+    if (statusCode >= 400 && statusCode < 500) {
       return new ClientErrorException(message, rawResponse);
     }
     return new KubernetesException(message, rawResponse);

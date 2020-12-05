@@ -26,8 +26,8 @@ api.metrics = async pod => {
   return await toJson(response);
 };
 
-api.logs = (namespace, name) => new EventSource(
-  `${getApiURL()}/pods/${namespace}/${name}/logs`
+api.logs = (namespace, name, container) => new EventSource(
+  `${getApiURL()}/pods/${namespace}/${name}/logs/${container}`
 );
 
 api.requestDelete = deleteNamespacedResource('pods');

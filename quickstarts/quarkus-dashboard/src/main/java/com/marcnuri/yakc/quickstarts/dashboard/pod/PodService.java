@@ -84,10 +84,10 @@ public class PodService implements Watchable<Pod> {
     return kubernetesClient.create(CoreV1Api.class).replaceNamespacedPod(name, namespace, pod).get();
   }
 
-  public Observable<String> getPodLog(String name, String namespace) {
+  public Observable<String> getPodContainerLog(String container, String name, String namespace) {
     final KubernetesCall<String> podLogCall = kubernetesClient.create(CoreV1Api.class)
       .readNamespacedPodLog(name, namespace, new ReadNamespacedPodLog()
-        .follow(true).pretty("true").timestamps(true));
+        .follow(true).pretty("true").timestamps(true).container(container));
     return Observable.create(new LogReader(podLogCall))
       .doOnError(ex -> LOG.error("Error when reading Pod logs {} - {}", namespace, name, ex));
   }

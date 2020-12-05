@@ -87,11 +87,11 @@ public class PodResource {
   @GET
   @Produces(MediaType.SERVER_SENT_EVENTS)
   @SseElementType(MediaType.APPLICATION_JSON)
-  @Path("/{namespace}/{name}/logs")
+  @Path("/{namespace}/{name}/logs/{container}")
   public Multi<String> getLogs(
-    @PathParam("namespace") String namespace, @PathParam("name") String name) {
+    @PathParam("namespace") String namespace, @PathParam("name") String name, @PathParam("container") String container) {
 
     return Multi.createFrom().converter(MultiRxConverters.fromObservable(),
-      podService.getPodLog(name, namespace));
+      podService.getPodContainerLog(container, name, namespace));
   }
 }

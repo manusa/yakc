@@ -14,9 +14,8 @@
  * limitations under the License.
  *
  */
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
-import throttle from 'lodash/throttle';
 import {AutoSizer, List} from 'react-virtualized';
 import Convert from 'ansi-to-html';
 import dompurify from 'dompurify';
@@ -24,40 +23,32 @@ import metadata from '../metadata';
 import p from '../pods';
 import Card from '../components/Card';
 import DashboardPage from '../components/DashboardPage';
+import Dropdown from '../components/Dropdown';
 import Link from '../components/Link';
-import Switch from '../components/Switch';
 
+import Switch from '../components/Switch';
 import './PodsLogsPage.css';
 
 const ansi = new Convert();
 
-const PodsLogsPage = ({uid, namespace, name}) => {
-  const [log, setLog] = useState(['Loading logs...']);
-  const [follow, setFollow] = useState(true);
-  const throttledSetLog = throttle(setLog, 100, {trailing: true});
-  const listRef = useRef();
-  const [eventSource, setEventSource] = useState();
-  useEffect(() => {
-    if (!eventSource && namespace && name) {
-      const es = p.api.logs(namespace, name);
-      es.onopen = () => {
-        es.currentLog = [];
-      }
-      es.onmessage = ({data}) => {
-        es.currentLog.push(data);
-        throttledSetLog([...es.currentLog]);
-      };
-      setEventSource(es);
-    }
-  }, [eventSource, namespace, name, throttledSetLog]);
-  useEffect(() => {
-        if (follow) {
-          const {current} = listRef;
-          current.scrollToRow(current.props.rowCount);
-        }
-      },
-    [log, follow]);
-  useEffect(() => () =>  eventSource && eventSource.close(), [eventSource]);
+const ContainerDropdown = ({containers, selectedContainer, setSelectedContainer}) => (
+  <Dropdown
+    className='ml-2'
+    text={selectedContainer?.name ?? ''}
+    closeOnPanelClick={true}
+  >
+    {containers.map(c =>
+      <Dropdown.Item key={c.name} onClick={() => setSelectedContainer(c)}>{c.name}</Dropdown.Item>
+    )}
+  </Dropdown>
+);
+
+
+
+const PodsLogsPage = ({uid, namespace, name, containers}) => {
+  const {
+    listRef, log, follow, setFollow, selectedContainer, setSelectedContainer
+  } = p.useLogs(namespace, name, containers);
   const rowRenderer = ({key, index, style}) => (
     <div key={key} className='whitespace-no-wrap' style={{...style, width: 'auto'}}
          dangerouslySetInnerHTML={{__html: dompurify.sanitize(ansi.toHtml(log[index]))}} />
@@ -70,7 +61,13 @@ const PodsLogsPage = ({uid, namespace, name}) => {
       <div className='absolute inset-0 md:p-4 flex flex-col'>
         <Card className='flex-1 flex flex-col'>
           <Card.Title className='flex items-center'>
-            <div className='flex-1'>Logs - <Link.RouterLink to={`/pods/${uid}`}>{name}</Link.RouterLink></div>
+            <div className='flex-1 flex items-center'>
+              Logs
+              <Link.RouterLink className='ml-2' to={`/pods/${uid}`}>{name}</Link.RouterLink>
+              <ContainerDropdown
+                containers={containers} setSelectedContainer={setSelectedContainer} selectedContainer={selectedContainer}
+              />
+            </div>
             <div className='justify-self-end text-sm font-normal'>
               <Switch label='Follow' checked={follow} onChange={() => setFollow(!follow)} />
             </div>
@@ -86,7 +83,6 @@ const PodsLogsPage = ({uid, namespace, name}) => {
                   rowHeight={19}
                   rowRenderer={rowRenderer}
                   className='custom-scroll-dark'
-                  // style={{'--scrollbar-color': 'rgba(255,255,255, 0.5)'}}
                 />
               )}
             </AutoSizer>
@@ -97,17 +93,14 @@ const PodsLogsPage = ({uid, namespace, name}) => {
   );
 };
 
-const mapStateToProps = ({pods}) => ({
-  pods
-});
+const mapStateToProps = ({pods}) => ({pods});
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  ...stateProps,
+const mergeProps = ({pods}, dispatchProps, {match: {params: {uid}}}) => ({
   ...dispatchProps,
-  ...ownProps,
-  uid: ownProps.match.params.uid,
-  namespace: metadata.selectors.namespace(stateProps.pods[ownProps.match.params.uid]),
-  name: metadata.selectors.name(stateProps.pods[ownProps.match.params.uid])
+  uid,
+  namespace: metadata.selectors.namespace(pods[uid]),
+  name: metadata.selectors.name(pods[uid]),
+  containers: p.selectors.containers(pods[uid])
 });
 
 export default connect(mapStateToProps, null, mergeProps)(PodsLogsPage);
