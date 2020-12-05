@@ -17,8 +17,6 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.watch;
 
-import java.io.IOException;
-
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
