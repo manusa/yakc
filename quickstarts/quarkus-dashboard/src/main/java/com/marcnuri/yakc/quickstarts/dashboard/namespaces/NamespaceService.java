@@ -17,26 +17,51 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.namespaces;
 
-import com.marcnuri.yakc.KubernetesClient;
-import com.marcnuri.yakc.api.core.v1.CoreV1Api;
-import com.marcnuri.yakc.model.io.k8s.api.core.v1.Namespace;
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
-import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import com.marcnuri.yakc.KubernetesClient;
+import com.marcnuri.yakc.api.WatchEvent;
+import com.marcnuri.yakc.api.core.v1.CoreV1Api;
+import com.marcnuri.yakc.model.io.k8s.api.core.v1.Namespace;
+import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
+
+import io.reactivex.Observable;
 
 @Singleton
-public class NamespaceService {
+public class NamespaceService implements Watchable<Namespace> {
 
   private final KubernetesClient kubernetesClient;
 
   @Inject
   public NamespaceService(KubernetesClient kubernetesClient) {
     this.kubernetesClient = kubernetesClient;
+  }
+
+  @Override
+  public Optional<Observable<WatchEvent<Namespace>>> watch() throws IOException {
+    final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
+    return Optional.of(tryWithFallback(
+      () -> {
+        core.listNamespace(new CoreV1Api.ListNamespace().limit(1)).get();
+        return core.listNamespace().watch();
+      },
+      () -> {
+        final String configNamespace = kubernetesClient.getConfiguration().getNamespace();
+        if (configNamespace != null) {
+          return core.listNamespace(new CoreV1Api.ListNamespace().fieldSelector("metadata.name=" + configNamespace)).watch();
+        }
+        return Observable.empty();
+      }
+    )
+    );
   }
 
   public List<Namespace> get() throws IOException {

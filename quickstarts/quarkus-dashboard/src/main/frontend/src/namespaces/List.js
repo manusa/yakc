@@ -33,11 +33,8 @@ const headers = [
   ''
 ];
 
-const Rows = ({namespaces, addOrReplace}) => {
-  const deleteNamespace = namespace => async () => {
-    const deletedNamespace = await ns.api.delete(namespace);
-    addOrReplace(deletedNamespace);
-  };
+const Rows = ({namespaces}) => {
+  const deleteNamespace = namespace => () => ns.api.delete(namespace);
   return namespaces
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(namespace => (
@@ -69,20 +66,11 @@ const Rows = ({namespaces, addOrReplace}) => {
     ));
 };
 
-const List = ({namespaces, addOrReplace, loadedResources, deleteIngressAction, ...properties}) => (
-  <ResourceList headers={headers} resources={namespaces} loading={!loadedResources['Namespace']} {...properties}>
-    <Rows namespaces={namespaces} loadedResources={loadedResources} addOrReplace={addOrReplace} />
+const List = ({resources, crudDelete, loadedResources, ...properties}) => (
+  <ResourceList headers={headers} resources={resources} {...properties}>
+    <Rows namespaces={resources} loadedResources={loadedResources} />
   </ResourceList>
 );
 
-const mapStateToProps = ({namespaces, ui: {loadedResources}}) => ({
-  namespaces: Object.values(namespaces),
-  loadedResources
-});
-
-const mapDispatchToProps = dispatch =>  bindActionCreators({
-  addOrReplace: redux.actions.crudAddOrReplace
-}, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(List);
+export default ResourceList.resourceListConnect('namespaces')(List);
 

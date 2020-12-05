@@ -24,6 +24,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.customresourcedefinitions.CustomR
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentService;
 import com.marcnuri.yakc.quickstarts.dashboard.deploymentconfigs.DeploymentConfigService;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventService;
+import com.marcnuri.yakc.quickstarts.dashboard.namespaces.NamespaceService;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeService;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodService;
 import com.marcnuri.yakc.quickstarts.dashboard.replicaset.ReplicaSetService;
@@ -61,7 +62,9 @@ public class WatchService {
     CustomResourceDefinitionService customResourceDefinitionService,
     DeploymentConfigService deploymentConfigService,
     DeploymentService deploymentService,
-    EventService eventService, NodeService nodeService,
+    EventService eventService,
+    NamespaceService namespaceService,
+    NodeService nodeService,
     PodService podService,
     ReplicaSetService replicaSetService,
     ReplicationControllerService replicationControllerService,
@@ -77,6 +80,7 @@ public class WatchService {
       deploymentConfigService,
       deploymentService,
       eventService,
+      namespaceService,
       nodeService,
       podService,
       replicaSetService,
