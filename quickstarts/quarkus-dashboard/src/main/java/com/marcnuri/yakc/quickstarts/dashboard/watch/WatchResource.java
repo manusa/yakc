@@ -38,7 +38,7 @@ import io.smallrye.mutiny.converters.multi.MultiRxConverters;
 @RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
 public class WatchResource {
 
-  private WatchService watchService;
+  private final WatchService watchService;
 
   @Inject
   public WatchResource(WatchService watchService) {
@@ -48,7 +48,7 @@ public class WatchResource {
   @GET
   @Produces(MediaType.SERVER_SENT_EVENTS)
   @SseElementType(MediaType.APPLICATION_JSON)
-  public Multi<WatchEvent<? extends Model>> get() throws IOException {
+  public Multi<WatchEvent<? extends Model>> get() {
     return Multi.createFrom().converter(MultiRxConverters.fromObservable(),
       watchService.getWatch());
   }
