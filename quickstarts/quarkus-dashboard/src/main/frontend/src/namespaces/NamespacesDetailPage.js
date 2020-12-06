@@ -26,6 +26,7 @@ const NamespacesDetailPage = ({namespace}) => (
     name='Namespaces'
     path='namespaces'
     resource={namespace}
+    isReadyFunction={ns.selectors.isReady}
     editable={false}
     body={
       <Form>

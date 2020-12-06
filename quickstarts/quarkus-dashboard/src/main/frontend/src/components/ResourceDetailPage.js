@@ -15,10 +15,26 @@
  *
  */
 import React from 'react';
-import DashboardPage from './DashboardPage';
+import YAML from 'yaml';
 import metadata from '../metadata';
 import Card from './Card';
+import DashboardPage from './DashboardPage';
+import Icon from "./Icon";
 import Link from './Link';
+import PopupMenu from "./PopupMenu";
+
+const downloadResource = resource => {
+  const mimeType = 'text/yaml';
+  const blob = new Blob([YAML.stringify(resource)], {type: mimeType});
+  const url = URL.createObjectURL(blob);
+  const tempLink  = document.createElement('a');
+  tempLink.href = url;
+  tempLink.download = `${metadata.selectors.name(resource)}.yaml`;
+  document.body.appendChild(tempLink);
+  tempLink.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));
+  document.body.removeChild(tempLink);
+  URL.revokeObjectURL(url);
+};
 
 const ResourceDetailPage = ({
   name,
@@ -26,6 +42,7 @@ const ResourceDetailPage = ({
   resource,
   actions,
   body,
+  isReadyFunction,
   editable = true,
   children
 }) => {
@@ -37,6 +54,12 @@ const ResourceDetailPage = ({
           <Link.ResourceLink to={`/${path}`}>{name}</Link.ResourceLink>
           {namespace && <>&nbsp;- {namespace}</>}
           &nbsp;- {metadata.selectors.name(resource)}
+          {isReadyFunction && (
+            <Icon
+              className={`ml-2 ${isReadyFunction(resource) ? 'text-green-500' : 'text-red-500'}`}
+              icon={isReadyFunction(resource) ? 'fa-check' : 'fa-exclamation-circle'}
+            />
+          )}
         </div>
       }
     >
@@ -48,6 +71,11 @@ const ResourceDetailPage = ({
           </div>
           {editable && <Link.EditLink path={path} resource={resource} />}
           {actions}
+          <PopupMenu>
+            <PopupMenu.Item onClick={() => downloadResource(resource)}>
+              <Icon icon='fa-save' className='mr-2' /> Download
+            </PopupMenu.Item>
+          </PopupMenu>
         </Card.Title>
         <Card.Body>
           {body}

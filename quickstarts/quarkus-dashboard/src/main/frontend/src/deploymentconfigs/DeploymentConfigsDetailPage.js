@@ -33,6 +33,7 @@ const DeploymentConfigsDetailPage = ({deploymentConfig, replicationControllersUi
     name='DeploymentConfigs'
     path='deploymentconfigs'
     resource={deploymentConfig}
+    isReadyFunction={dc.selectors.isReady}
     actions={
       <Link
         className='ml-2'

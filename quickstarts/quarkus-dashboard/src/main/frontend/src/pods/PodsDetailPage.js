@@ -18,7 +18,7 @@ import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
 import mts from "../metrics";
-import podsModule from './';
+import p from './';
 import Card from '../components/Card';
 import ContainerList from '../components/ContainerList';
 import Form from '../components/Form';
@@ -33,7 +33,7 @@ const useMetrics = pod => {
     if (!timeoutHandle && pod) {
       const updateMetrics = async () => {
         try {
-          const metrics = await podsModule.api.metrics(pod);
+          const metrics = await p.api.metrics(pod);
           setMetrics(metrics);
         } catch (e) {
           setMetrics(null);
@@ -57,6 +57,7 @@ const PodsDetailPage = ({pod}) => {
       name='Pods'
       path='pods'
       resource={pod}
+      isReadyFunction={p.selectors.succeededOrContainersReady}
       actions={
         <Link.RouterLink
           className='ml-2'
@@ -72,22 +73,22 @@ const PodsDetailPage = ({pod}) => {
         <Form>
           <metadata.Details resource={pod} />
           <Form.Field label='Node'>
-            <Link.Node to={`/nodes/${podsModule.selectors.nodeName(pod)}`}>
-              {podsModule.selectors.nodeName(pod)}
+            <Link.Node to={`/nodes/${p.selectors.nodeName(pod)}`}>
+              {p.selectors.nodeName(pod)}
             </Link.Node>
           </Form.Field>
           <Form.Field label='Phase'>
-            <podsModule.StatusIcon
+            <p.StatusIcon
               className='text-gray-700 mr-1'
-              statusPhase={podsModule.selectors.statusPhase(pod)}
+              statusPhase={p.selectors.statusPhase(pod)}
             />
-            {podsModule.selectors.statusPhase(pod)}
+            {p.selectors.statusPhase(pod)}
           </Form.Field>
           <Form.Field label='Restart Policy'>
-            {podsModule.selectors.restartPolicy(pod)}
+            {p.selectors.restartPolicy(pod)}
           </Form.Field>
           <Form.Field label='Pod IP'>
-            {podsModule.selectors.statusPodIP(pod)}
+            {p.selectors.statusPodIP(pod)}
           </Form.Field>
           {podMetrics &&
             <>
@@ -108,7 +109,7 @@ const PodsDetailPage = ({pod}) => {
         title='Containers'
         titleVariant={Card.titleVariants.medium}
         className='mt-2'
-        containers={podsModule.selectors.containers(pod)}
+        containers={p.selectors.containers(pod)}
         podMetrics={podMetrics}
       />
     </ResourceDetailPage>

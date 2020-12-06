@@ -32,6 +32,7 @@ const StatefulSetsDetailPage = ({statefulSet}) => (
     name='StatefulSets'
     path='statefulsets'
     resource={statefulSet}
+    isReadyFunction={sts.selectors.isReady}
     actions={
       <Link
         className='ml-2'

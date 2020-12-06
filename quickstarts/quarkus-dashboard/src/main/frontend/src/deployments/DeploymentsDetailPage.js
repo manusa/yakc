@@ -32,6 +32,7 @@ const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
     name='Deployments'
     path='deployments'
     resource={deployment}
+    isReadyFunction={d.selectors.isReady}
     actions={
       <Link
         className='ml-2'

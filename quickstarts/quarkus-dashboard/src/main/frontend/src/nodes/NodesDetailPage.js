@@ -58,6 +58,7 @@ const NodesDetailPage = ({node, isMinikube, pods}) => {
       name='Nodes'
       path='nodes'
       resource={node}
+      isReadyFunction={n.selectors.isReady}
       actions={isMinikube && <Minikube className='h-6' />}
       body={
         <Form>

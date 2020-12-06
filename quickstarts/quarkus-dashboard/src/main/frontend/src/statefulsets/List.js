@@ -15,10 +15,8 @@
  *
  */
 import React from 'react';
-import {connect} from 'react-redux'
 import metadata from '../metadata';
 import sts from './';
-import redux from '../redux';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
 import ResourceList from '../components/ResourceList';
@@ -73,22 +71,10 @@ const Rows = ({statefulSets}) => {
     ));
 }
 
-const List = ({statefulSets, ...properties}) => (
-  <ResourceList headers={headers} resources={statefulSets} {...properties}>
-    <Rows statefulSets={statefulSets} />
+const List = ({resources, crudDelete, loadedResources, ...properties}) => (
+  <ResourceList headers={headers} resources={resources} {...properties}>
+    <Rows statefulSets={resources} loadedResources={loadedResources} />
   </ResourceList>
 );
 
-const mapStateToProps = ({statefulSets}) => ({
-  statefulSets
-});
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  ...stateProps,
-  ...dispatchProps,
-  ...ownProps,
-  statefulSets: Object.values(redux.selectors.resourcesBy(stateProps.statefulSets, ownProps))
-});
-
-export default connect(mapStateToProps, null, mergeProps)(List);
-
+export default ResourceList.resourceListConnect('statefulSets')(List);

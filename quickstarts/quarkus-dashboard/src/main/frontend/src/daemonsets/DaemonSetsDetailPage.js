@@ -31,6 +31,7 @@ const DaemonSetsDetailPage = ({daemonSet}) => (
     name='DaemonSets'
     path='daemonsets'
     resource={daemonSet}
+    isReadyFunction={ds.selectors.isReady}
     actions={
       <Link
         className='ml-2'

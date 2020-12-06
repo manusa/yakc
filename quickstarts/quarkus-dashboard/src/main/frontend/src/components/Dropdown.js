@@ -14,7 +14,8 @@
  * limitations under the License.
  *
  */
-import React, {useLayoutEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
+import usePopup from './popup/usePopup';
 import Icon from './Icon';
 
 const DropdownPanel = ({visible, items, onClick}) => (
@@ -35,12 +36,12 @@ const DropdownPanel = ({visible, items, onClick}) => (
 );
 
 const DropdownMain = ({
-  text, textColor, textColorActive, borderColor, onClick, showInput, filter, setFilter
+  text, textColor, textColorActive, borderColor, onClick, showInput, filter, setFilter, panelVisible
 }) => (
   <div className='z-10'>
     <span className='rounded-md shadow-sm'>
       <button
-        type='button' aria-haspopup='true' aria-expanded='true' onClick={onClick}
+        type='button' aria-haspopup='true' aria-expanded={panelVisible} onClick={onClick}
         className={`inline-flex justify-center items-center w-full rounded-md
           border ${borderColor} px-4 py-2 bg-white text-sm leading-5 font-medium ${textColor} hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:${textColorActive} transition ease-in-out duration-150`}
       >
@@ -69,22 +70,12 @@ const Dropdown = ({
   maxWidth = '30rem',
   closeOnPanelClick = false,
   ...props}) => {
-  const ddRef = useRef(null);
-  const [panelVisible, setPanelVisible] = useState(false);
+  const {popupRef, panelVisible, setPanelVisible} = usePopup();
   const [filter, setFilter] = useState('');
   const togglePanel = () => {
     children.length > 0 && setPanelVisible(!panelVisible);
     setFilter('');
   }
-  useLayoutEffect(() => {
-    const handleOutsideClick = event => {
-      if (ddRef.current && !ddRef.current.contains(event.target)) {
-        setPanelVisible(false);
-      }
-    }
-    document.addEventListener('mousedown', handleOutsideClick);
-    return () => document.removeEventListener('mousedown', handleOutsideClick);
-  }, [ddRef]);
   const visibleItems = React.Children.toArray(children).filter(item => {
     if (typeof item.props?.children === 'string' ){
       return item.props.children.toLowerCase().includes(filter.toLowerCase());
@@ -93,13 +84,13 @@ const Dropdown = ({
   });
   return (
     <div
-      ref={ddRef} className={`relative inline-block text-left ${className}`}
+      ref={popupRef} className={`relative inline-block text-left ${className}`}
       style={{minWidth, maxWidth}}
       {...props}
     >
       <DropdownMain
         borderColor={borderColor} text={text} textColor={textColor} textColorActive={textColorActive}
-        onClick={togglePanel} showInput={panelVisible} filter={filter} setFilter={setFilter}
+        onClick={togglePanel} showInput={panelVisible} filter={filter} setFilter={setFilter} panelVisible={panelVisible}
       />
       <DropdownPanel
         visible={panelVisible}
