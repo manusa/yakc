@@ -22,6 +22,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.clusterroles.ClusterRoleResource;
 import com.marcnuri.yakc.quickstarts.dashboard.configmaps.ConfigMapResource;
 import com.marcnuri.yakc.quickstarts.dashboard.customresourcedefinitions.CustomResourceDefinitionResource;
 import com.marcnuri.yakc.quickstarts.dashboard.customresources.CustomResourceResource;
+import com.marcnuri.yakc.quickstarts.dashboard.daemonsets.DaemonSetResource;
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentResource;
 import com.marcnuri.yakc.quickstarts.dashboard.deploymentconfigs.DeploymentConfigResource;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
@@ -55,6 +56,7 @@ public class ApiResource {
   @Inject ConfigMapResource configMapResource;
   @Inject CustomResourceDefinitionResource customResourceDefinitionResource;
   @Inject CustomResourceResource customResourceResource;
+  @Inject DaemonSetResource daemonSetResource;
   @Inject DeploymentConfigResource deploymentConfigResource;
   @Inject DeploymentResource deploymentResource;
   @Inject EventResource eventResource;
@@ -96,6 +98,11 @@ public class ApiResource {
   @Path("/customresources")
   public CustomResourceResource getCustomResourceResource() {
     return customResourceResource;
+  }
+
+  @Path("/daemonsets")
+  public DaemonSetResource getDaemonSetResource() {
+    return daemonSetResource;
   }
 
   @Path("/deploymentconfigs")

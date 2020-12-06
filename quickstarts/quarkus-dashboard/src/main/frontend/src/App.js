@@ -22,6 +22,7 @@ import cRoles from './clusterroles';
 import configMaps from './configmaps';
 import crd from './customresourcedefinitions';
 import dc from './deploymentconfigs';
+import ds from './daemonsets';
 import deployments from './deployments';
 import ingresses from './ingresses';
 import nodes from './nodes';
@@ -99,6 +100,9 @@ const App = ({dispatch}) => {
           <Route exact path='/customresourcedefinitions' component={crd.CustomResourceDefinitionsPage} />
           <Route exact path='/customresourcedefinitions/:uid' component={crd.CustomResourceDefinitionsDetailPage} />
           <Route exact path='/customresourcedefinitions/:uid/edit' component={crd.CustomResourceDefinitionsEditPage} />
+          <Route exact path='/daemonsets' component={ds.DaemonSetsPage} />
+          <Route exact path='/daemonsets/:uid' component={ds.DaemonSetsDetailPage} />
+          <Route exact path='/daemonsets/:uid/edit' component={ds.DaemonSetsEditPage} />
           <Route exact path='/deploymentconfigs' component={dc.DeploymentConfigsPage} />
           <Route exact path='/deploymentconfigs/:uid' component={dc.DeploymentConfigsDetailPage} />
           <Route exact path='/deploymentconfigs/:uid/edit' component={dc.DeploymentConfigsEditPage} />

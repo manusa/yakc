@@ -15,20 +15,19 @@
  *
  */
 import React from 'react';
-import {connect} from 'react-redux';
-import sts from './';
-import DashboardPage from '../components/DashboardPage';
-import FilterBar from '../components/FilterBar';
+import md from '../metadata';
+import ds from './';
+import ResourceEditPage from '../components/ResourceEditPage';
+import Link from '../components/Link';
 
-const StatefulSetsPage = ({selectedNamespace}) => (
-  <DashboardPage title='StatefulSets'>
-    <FilterBar />
-    <sts.List className='mt-4' namespace={selectedNamespace} />
-  </DashboardPage>
+const DaemonSetsEditPage = ({match: {params: {uid}}}) => (
+  <ResourceEditPage
+    cardTitle={resource =>
+      <Link.RouterLink to={`/daemonsets/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
+    }
+    save={async resource => await ds.api.update(resource)}
+    resourceFromState={state => state.daemonSets[uid]}
+  />
 );
 
-const mapStateToProps = ({ui: {selectedNamespace}}) => ({
-  selectedNamespace
-});
-
-export default connect(mapStateToProps)(StatefulSetsPage);
+export default DaemonSetsEditPage;

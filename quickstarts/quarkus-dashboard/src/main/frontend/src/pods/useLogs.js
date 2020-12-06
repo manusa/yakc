@@ -31,7 +31,7 @@ const initEventSource = (namespace, name, selectedContainer, throttledSetLog) =>
   };
   es.selectedContainer = selectedContainer;
   return es;
-}
+};
 
 const useLogs = (namespace, name, containers) => {
   const listRef = useRef();
@@ -50,7 +50,7 @@ const useLogs = (namespace, name, containers) => {
       setEventSource(initEventSource(namespace, name, selectedContainer, throttledSetLog));
     } else if (eventSource && eventSource.selectedContainer !== selectedContainer) {
       eventSource.close();
-      throttledSetLog(LOADING_MESSAGE);
+      throttledSetLog([LOADING_MESSAGE]);
       setEventSource(initEventSource(namespace, name, selectedContainer, throttledSetLog));
     }
   }, [eventSource, namespace, name, throttledSetLog, selectedContainer]);

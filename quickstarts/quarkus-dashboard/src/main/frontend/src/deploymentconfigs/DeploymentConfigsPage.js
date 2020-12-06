@@ -22,7 +22,7 @@ import FilterBar from '../components/FilterBar';
 
 const DeploymentConfigsPage = ({selectedNamespace}) => (
   <DashboardPage title='DeploymentConfigs'>
-    <FilterBar className='mt-4' />
+    <FilterBar />
     <dc.List className='mt-4' namespace={selectedNamespace} />
   </DashboardPage>
 );

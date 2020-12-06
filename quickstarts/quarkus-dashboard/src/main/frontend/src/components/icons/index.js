@@ -18,6 +18,7 @@ import React from 'react';
 import ClusterRole from './ClusterRole';
 import ConfigMap from './ConfigMap';
 import CustomResourceDefinition from './CustomResourceDefinition';
+import DaemonSet from './DaemonSet';
 import Deployment from './Deployment';
 import Ingress from './Ingress';
 import Kubernetes from './Kubernetes';
@@ -39,6 +40,7 @@ const icons = {};
 icons.ClusterRole = ClusterRole;
 icons.ConfigMap = ConfigMap;
 icons.CustomResourceDefinition = CustomResourceDefinition;
+icons.DaemonSet = DaemonSet;
 icons.DeploymentConfig = ({...props}) => <Deployment kubernetesColor='#db212e' {...props} />;
 icons.Deployment = Deployment
 icons.Ingress = Ingress;

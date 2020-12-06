@@ -17,9 +17,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
-import d from './';
+import ds from './';
 import pods from '../pods';
-import rs from '../replicasets';
 import Card from '../components/Card';
 import ContainerList from '../components/ContainerList';
 import Form from '../components/Form';
@@ -27,17 +26,17 @@ import Icon from '../components/Icon';
 import Link from '../components/Link';
 import ResourceDetailPage from '../components/ResourceDetailPage';
 
-const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
+const DaemonSetsDetailPage = ({daemonSet}) => (
   <ResourceDetailPage
-    name='Deployments'
-    path='deployments'
-    resource={deployment}
+    name='DaemonSets'
+    path='daemonsets'
+    resource={daemonSet}
     actions={
       <Link
         className='ml-2'
         size={Link.sizes.small}
         variant={Link.variants.outline}
-        onClick={() => d.api.restart(deployment)}
+        onClick={() => ds.api.restart(daemonSet)}
         title='Restart'
       >
         <Icon stylePrefix='fas' icon='fa-redo-alt' className='mr-2'/>
@@ -46,13 +45,8 @@ const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
     }
     body={
       <Form>
-        <metadata.Details resource={deployment} />
-        <rs.ReplicasField
-          resource={deployment}
-          replicas={d.selectors.specReplicas(deployment)}
-          updateReplicas={d.api.updateReplicas}
-        />
-        <Form.Field label='Strategy'>{d.selectors.specStrategyType(deployment)}</Form.Field>
+        <metadata.Details resource={daemonSet} />
+        <Form.Field label='Update Strategy'>{ds.selectors.specUpdateStrategyType(daemonSet)}</Form.Field>
       </Form>
     }
   >
@@ -60,34 +54,21 @@ const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
       title='Containers'
       titleVariant={Card.titleVariants.medium}
       className='mt-2'
-      containers={d.selectors.containers(deployment)} />
-    <rs.List
-      title='Replica Sets'
-      titleVariant={Card.titleVariants.medium}
-      className='mt-2'
-      ownerUid={metadata.selectors.uid(deployment)} />
+      containers={ds.selectors.containers(daemonSet)} />
     <pods.List
       title='Pods'
       titleVariant={Card.titleVariants.medium}
       className='mt-2'
-      ownerUids={replicaSetsUids} />
+      ownerUid={metadata.selectors.uid(daemonSet)} />
   </ResourceDetailPage>
 );
 
-const mapStateToProps = ({deployments, replicaSets}) => ({
-  deployments,
-  replicaSets
+const mapStateToProps = ({daemonSets}) => ({
+  daemonSets
 });
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  ...stateProps,
-  ...dispatchProps,
-  ...ownProps,
-  deployment: stateProps.deployments[ownProps.match.params.uid],
-  replicaSetsUids: Object.values(stateProps.replicaSets)
-    .filter(replicaSet => metadata.selectors.ownerReferencesUids(replicaSet)
-      .includes(metadata.selectors.uid(stateProps.deployments[ownProps.match.params.uid])))
-    .map(replicaSet => metadata.selectors.uid(replicaSet))
+const mergeProps = ({daemonSets}, dispatchProps, {match: {params: {uid}}}) => ({
+  daemonSet: daemonSets[uid]
 });
 
-export default connect(mapStateToProps, null, mergeProps)(DeploymentsDetailPage);
+export default connect(mapStateToProps, null, mergeProps)(DaemonSetsDetailPage);

@@ -60,7 +60,7 @@ const Rows = ({replicaSets}) => {
     ));
 }
 
-const List = ({replicaSets, ownerId, ...properties}) => (
+const List = ({replicaSets, ownerUid, ...properties}) => (
   <ResourceList headers={headers} resources={replicaSets} {...properties}>
     <Rows replicaSets={replicaSets} />
   </ResourceList>
@@ -78,7 +78,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
 });
 
 List.propTypes = {
-  ownerId: PropTypes.string
+  ownerUid: PropTypes.string
 };
 
 export default connect(mapStateToProps, null, mergeProps)(List);

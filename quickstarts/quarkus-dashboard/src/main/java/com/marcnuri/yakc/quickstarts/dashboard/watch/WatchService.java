@@ -21,6 +21,7 @@ import com.marcnuri.yakc.model.Model;
 import com.marcnuri.yakc.quickstarts.dashboard.clusterroles.ClusterRoleService;
 import com.marcnuri.yakc.quickstarts.dashboard.configmaps.ConfigMapService;
 import com.marcnuri.yakc.quickstarts.dashboard.customresourcedefinitions.CustomResourceDefinitionService;
+import com.marcnuri.yakc.quickstarts.dashboard.daemonsets.DaemonSetService;
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentService;
 import com.marcnuri.yakc.quickstarts.dashboard.deploymentconfigs.DeploymentConfigService;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventService;
@@ -60,6 +61,7 @@ public class WatchService {
     ClusterRoleService clusterRoleService,
     ConfigMapService configMapService,
     CustomResourceDefinitionService customResourceDefinitionService,
+    DaemonSetService daemonSetService,
     DeploymentConfigService deploymentConfigService,
     DeploymentService deploymentService,
     EventService eventService,
@@ -77,6 +79,7 @@ public class WatchService {
       clusterRoleService,
       configMapService,
       customResourceDefinitionService,
+      daemonSetService,
       deploymentConfigService,
       deploymentService,
       eventService,

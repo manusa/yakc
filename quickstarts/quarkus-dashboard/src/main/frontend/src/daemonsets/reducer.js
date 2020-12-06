@@ -14,21 +14,8 @@
  * limitations under the License.
  *
  */
-import React from 'react';
-import {connect} from 'react-redux';
-import sts from './';
-import DashboardPage from '../components/DashboardPage';
-import FilterBar from '../components/FilterBar';
+import redux from '../redux';
 
-const StatefulSetsPage = ({selectedNamespace}) => (
-  <DashboardPage title='StatefulSets'>
-    <FilterBar />
-    <sts.List className='mt-4' namespace={selectedNamespace} />
-  </DashboardPage>
-);
+const reducer = redux.reducer('DaemonSet');
 
-const mapStateToProps = ({ui: {selectedNamespace}}) => ({
-  selectedNamespace
-});
-
-export default connect(mapStateToProps)(StatefulSetsPage);
+export default reducer;

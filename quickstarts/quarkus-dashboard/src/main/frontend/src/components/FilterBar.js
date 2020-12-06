@@ -20,11 +20,9 @@ import redux from '../redux';
 import metadata from '../metadata';
 import Dropdown from './Dropdown';
 import {bindActionCreators} from 'redux';
-import Spinner from './Spinner';
 
 const NamespaceDropdown = ({
   namespaces,
-  loadedResources,
   selectedNamespace,
   selectNamespace,
   clearSelectedNamespace,
@@ -34,9 +32,6 @@ const NamespaceDropdown = ({
     textColor={selectedNamespace ? 'text-blue-700' : 'text-gray-500'} textColorActive={selectedNamespace ? 'text-blue-800' : null}
   >
     <Dropdown.Item onClick={clearSelectedNamespace}>All namespaces</Dropdown.Item>
-    {!loadedResources['Namespace'] &&
-    <Dropdown.Item><Spinner size={4} borderSize={2} className='my-0 mx-auto' /></Dropdown.Item>
-    }
     {Object.values(namespaces).map(ns => metadata.selectors.name(ns)).map(namespace => (
       <Dropdown.Item
         key={namespace}
@@ -55,10 +50,9 @@ const FilterBar = ({
   </div>
 );
 
-const mapStateToProps = ({namespaces, ui: {selectedNamespace, loadedResources}}) => ({
+const mapStateToProps = ({namespaces, ui: {selectedNamespace}}) => ({
   namespaces,
-  selectedNamespace,
-  loadedResources
+  selectedNamespace
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

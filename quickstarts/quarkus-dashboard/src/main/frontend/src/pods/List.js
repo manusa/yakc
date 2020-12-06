@@ -78,7 +78,7 @@ const Rows = ({pods}) => {
     ));
 }
 
-const List = ({pods, nodeName, ownerUids, ...properties}) => (
+const List = ({pods, nodeName, ownerUids, ownerUid, ...properties}) => (
   <ResourceList headers={headers} resources={pods} {...properties}>
     <Rows pods={pods} />
   </ResourceList>

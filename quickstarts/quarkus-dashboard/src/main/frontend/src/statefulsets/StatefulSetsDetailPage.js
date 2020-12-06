@@ -64,7 +64,7 @@ const StatefulSetsDetailPage = ({statefulSet}) => (
       title='Pods'
       titleVariant={Card.titleVariants.medium}
       className='mt-2'
-      ownerUids={[metadata.selectors.uid(statefulSet)]} />
+      ownerUid={metadata.selectors.uid(statefulSet)} />
   </ResourceDetailPage>
 );
 
@@ -72,11 +72,8 @@ const mapStateToProps = ({statefulSets}) => ({
   statefulSets,
 });
 
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  ...stateProps,
-  ...dispatchProps,
-  ...ownProps,
-  statefulSet: stateProps.statefulSets[ownProps.match.params.uid],
+const mergeProps = ({statefulSets}, dispatchProps, {match: {params: {uid}}}) => ({
+  statefulSet: statefulSets[uid],
 });
 
 export default connect(mapStateToProps, null, mergeProps)(StatefulSetsDetailPage);

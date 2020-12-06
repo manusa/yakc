@@ -14,21 +14,14 @@
  * limitations under the License.
  *
  */
-import React from 'react';
-import {connect} from 'react-redux';
-import sts from './';
-import DashboardPage from '../components/DashboardPage';
-import FilterBar from '../components/FilterBar';
+import {
+  deleteNamespacedResource,
+  restartNamespacedResource,
+  updateNamespacedResource,
+} from '../fetch';
 
-const StatefulSetsPage = ({selectedNamespace}) => (
-  <DashboardPage title='StatefulSets'>
-    <FilterBar />
-    <sts.List className='mt-4' namespace={selectedNamespace} />
-  </DashboardPage>
-);
-
-const mapStateToProps = ({ui: {selectedNamespace}}) => ({
-  selectedNamespace
-});
-
-export default connect(mapStateToProps)(StatefulSetsPage);
+export default {
+  delete: deleteNamespacedResource('daemonsets'),
+  restart: restartNamespacedResource('daemonsets'),
+  update: updateNamespacedResource('daemonsets')
+};

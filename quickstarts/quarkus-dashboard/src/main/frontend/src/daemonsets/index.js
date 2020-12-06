@@ -14,21 +14,20 @@
  * limitations under the License.
  *
  */
-import React from 'react';
-import {connect} from 'react-redux';
-import sts from './';
-import DashboardPage from '../components/DashboardPage';
-import FilterBar from '../components/FilterBar';
+import api from './api';
+import reducer from './reducer';
+import selectors from './selectors';
+import List from './List';
+import DaemonSetsDetailPage from './DaemonSetsDetailPage';
+import DaemonSetsEditPage from './DaemonSetsEditPage';
+import DaemonSetsPage from './DaemonSetsPage';
 
-const StatefulSetsPage = ({selectedNamespace}) => (
-  <DashboardPage title='StatefulSets'>
-    <FilterBar />
-    <sts.List className='mt-4' namespace={selectedNamespace} />
-  </DashboardPage>
-);
-
-const mapStateToProps = ({ui: {selectedNamespace}}) => ({
-  selectedNamespace
-});
-
-export default connect(mapStateToProps)(StatefulSetsPage);
+export default{
+  api,
+  reducer,
+  selectors,
+  DaemonSetsDetailPage,
+  DaemonSetsEditPage,
+  DaemonSetsPage,
+  List
+};

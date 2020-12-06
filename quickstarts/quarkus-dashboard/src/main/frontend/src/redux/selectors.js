@@ -26,7 +26,7 @@ selectors.toObjectReducer = (acc, [key, configMap]) => {
 selectors.resourcesBy = (resources = {}, {
   namespace,
   nameLike,
-  ownerId,
+  ownerUid,
   ownerUids
 } = undefined) => Object.entries(resources)
 .filter(([, resource]) => {
@@ -37,7 +37,7 @@ selectors.resourcesBy = (resources = {}, {
     return false;
   }
   const ownerRefs = md.selectors.ownerReferencesUids(resource);
-  if (ownerId && !ownerRefs.includes(ownerId)) {
+  if (ownerUid && !ownerRefs.includes(ownerUid)) {
     return false;
   }
   if (ownerUids && !ownerRefs.some(ownerUid => ownerUids.includes(ownerUid))) {

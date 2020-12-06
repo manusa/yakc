@@ -16,14 +16,14 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
-import sts from './';
+import ds from './';
 import DashboardPage from '../components/DashboardPage';
 import FilterBar from '../components/FilterBar';
 
-const StatefulSetsPage = ({selectedNamespace}) => (
-  <DashboardPage title='StatefulSets'>
+const DaemonSetsPage = ({selectedNamespace}) => (
+  <DashboardPage title='DaemonSets'>
     <FilterBar />
-    <sts.List className='mt-4' namespace={selectedNamespace} />
+    <ds.List className='mt-4' namespace={selectedNamespace} />
   </DashboardPage>
 );
 
@@ -31,4 +31,4 @@ const mapStateToProps = ({ui: {selectedNamespace}}) => ({
   selectedNamespace
 });
 
-export default connect(mapStateToProps)(StatefulSetsPage);
+export default connect(mapStateToProps)(DaemonSetsPage);

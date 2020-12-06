@@ -20,8 +20,9 @@ import {connect} from 'react-redux';
 import cRoles from '../clusterroles';
 import cm from '../configmaps';
 import crd from '../customresourcedefinitions';
-import dc from '../deploymentconfigs';
 import d from '../deployments';
+import dc from '../deploymentconfigs';
+import ds from '../daemonsets';
 import i from '../ingresses';
 import ns from '../namespaces';
 import p from '../pods';
@@ -59,6 +60,7 @@ const Results = ({query, selectedNamespace}) => {
       <p.List {...commonProps} title='Pods' nameLike={query} namespace={selectedNamespace} />
       <d.List {...commonProps} title='Deployments' nameLike={query} namespace={selectedNamespace} />
       <dc.List {...commonProps} title='DeploymentConfigs' nameLike={query} namespace={selectedNamespace} />
+      <ds.List {...commonProps} title='DaemonSets' nameLike={query} namespace={selectedNamespace} />
       <ss.List {...commonProps} title='StatefulSets' nameLike={query} namespace={selectedNamespace} />
       <rs.List {...commonProps} title='ReplicaSets' nameLike={query} namespace={selectedNamespace} />
       <rc.List {...commonProps} title='ReplicationControllers' nameLike={query} namespace={selectedNamespace} />

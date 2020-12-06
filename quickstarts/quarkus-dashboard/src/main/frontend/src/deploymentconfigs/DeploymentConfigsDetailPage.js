@@ -66,7 +66,7 @@ const DeploymentConfigsDetailPage = ({deploymentConfig, replicationControllersUi
       title='Replication Controller'
       titleVariant={Card.titleVariants.medium}
       className='mt-2'
-      ownerId={metadata.selectors.uid(deploymentConfig)} />
+      ownerUid={metadata.selectors.uid(deploymentConfig)} />
     <pods.List
       title='Pods'
       titleVariant={Card.titleVariants.medium}
