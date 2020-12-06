@@ -16,11 +16,12 @@
  */
 const selectors = {};
 
-selectors.statusReplicas = deploymentConfig => deploymentConfig?.status?.replicas ?? 0;
+selectors.specReplicas = deploymentConfig => deploymentConfig?.spec?.replicas ?? 0;
 
 selectors.statusReadyReplicas = deploymentConfig => deploymentConfig?.status?.readyReplicas ?? 0;
 
-selectors.isReady = deploymentConfig => selectors.statusReplicas(deploymentConfig) === selectors.statusReadyReplicas(deploymentConfig);
+selectors.isReady = deploymentConfig =>
+  selectors.specReplicas(deploymentConfig) === selectors.statusReadyReplicas(deploymentConfig);
 
 selectors.containers = deploymentConfig => deploymentConfig?.spec?.template?.spec?.containers ?? [];
 

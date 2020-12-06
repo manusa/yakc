@@ -48,20 +48,28 @@ public class NamespaceService implements Watchable<Namespace> {
   @Override
   public Optional<Observable<WatchEvent<Namespace>>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
+    final String configNamespace = kubernetesClient.getConfiguration().getNamespace();
     return Optional.of(tryWithFallback(
       () -> {
         core.listNamespace(new CoreV1Api.ListNamespace().limit(1)).get();
         return core.listNamespace().watch();
       },
       () -> {
-        final String configNamespace = kubernetesClient.getConfiguration().getNamespace();
         if (configNamespace != null) {
+          core.listNamespace(new CoreV1Api.ListNamespace().limit(1).fieldSelector("metadata.name=" + configNamespace)).get();
           return core.listNamespace(new CoreV1Api.ListNamespace().fieldSelector("metadata.name=" + configNamespace)).watch();
         }
         return Observable.empty();
+      },
+      () -> {
+        if (configNamespace != null) {
+          return Observable.just(
+            new WatchEvent<>(WatchEvent.Type.ADDED, core.readNamespace(configNamespace).get())
+          );
+        }
+        return Observable.empty();
       }
-    )
-    );
+    ));
   }
 
   public List<Namespace> get() throws IOException {
