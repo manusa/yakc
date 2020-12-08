@@ -18,6 +18,7 @@
 package com.marcnuri.yack.schema.api;
 
 import com.marcnuri.yack.schema.GeneratorSettings;
+import com.marcnuri.yack.schema.GeneratorUtils;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.parser.OpenAPIV3Parser;
 import io.swagger.v3.parser.util.InlineModelResolver;
@@ -26,6 +27,7 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
@@ -50,6 +52,7 @@ public class ApiGeneratorTask extends DefaultTask {
 
   @TaskAction
   public void run() {
+    GeneratorUtils.cleanSourceDirectory(resolveSourceDirectory());
     Stream.of(schemas).forEach(this::generateApi);
     getLogger().lifecycle("Api generation completed");
   }
@@ -65,7 +68,7 @@ public class ApiGeneratorTask extends DefaultTask {
       .schema(schema.toPath())
       .templatesDir(templatesDir.toPath())
       .outputDirectory(outputDirectory.toPath())
-      .sourceDirectory(outputDirectory.toPath().resolve("src").resolve("api").resolve("java"))
+      .sourceDirectory(resolveSourceDirectory())
       .overridesDirectory(outputDirectory.toPath().resolve("src").resolve("main").resolve("java"))
       .skipGenerationRegexes(Optional.ofNullable(skipGenerationRegexes).map(Arrays::asList).map(HashSet::new)
         .orElse(new HashSet<>()))
@@ -75,4 +78,7 @@ public class ApiGeneratorTask extends DefaultTask {
     new ApiGenerator(settings).generate();
   }
 
+  public Path resolveSourceDirectory() {
+    return outputDirectory.toPath().resolve("src").resolve("api").resolve("java");
+  }
 }

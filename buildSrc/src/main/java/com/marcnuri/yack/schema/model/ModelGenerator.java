@@ -64,12 +64,14 @@ class ModelGenerator {
 
   private final GeneratorSettings settings;
   private final SchemaUtils utils;
+  private final GeneratorUtils generatorUtils;
   private final TemplateLoader templateLoader;
   private final Template modelTemplate;
 
   ModelGenerator(GeneratorSettings settings, OpenAPI openAPI) {
     this.settings = settings;
     this.utils = new SchemaUtils(settings);
+    this.generatorUtils = new GeneratorUtils(settings);
     this.templateLoader = name -> new StringReader(utils.readTemplate(name));
     this.modelTemplate = Mustache.compiler()
         .withLoader(templateLoader)
@@ -198,12 +200,6 @@ class ModelGenerator {
 
   private void writeFile(String key, String fileContents) {
     final Path file = resolvePackageDirectory(key).resolve(resolveClassName(key).concat(".java"));
-    try {
-      Files.writeString(file, fileContents,
-          StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-    } catch (IOException ex) {
-      settings.getLogger().error(ex.getMessage());
-      throw new GeneratorException("Can't write java generated class " + file.toString());
-    }
+    generatorUtils.writeFile(file, fileContents);
   }
 }

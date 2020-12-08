@@ -114,10 +114,18 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ListCertificateRequestForAllNamespaces resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListCertificateRequestForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -213,10 +221,18 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ListCertificateForAllNamespaces resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListCertificateForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -312,10 +328,18 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public DeleteCollectionClusterIssuer resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionClusterIssuer resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -411,10 +435,18 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ListClusterIssuer resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListClusterIssuer resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -647,7 +679,7 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ReadClusterIssuer resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
@@ -822,7 +854,7 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ReadClusterIssuerStatus resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
@@ -1031,10 +1063,18 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ListIssuerForAllNamespaces resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListIssuerForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -1136,10 +1176,18 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public DeleteCollectionNamespacedCertificateRequest resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionNamespacedCertificateRequest resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -1241,10 +1289,18 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ListNamespacedCertificateRequest resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListNamespacedCertificateRequest resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -1495,7 +1551,7 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ReadNamespacedCertificateRequest resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
@@ -1682,7 +1738,7 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ReadNamespacedCertificateRequestStatus resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
@@ -1905,10 +1961,18 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public DeleteCollectionNamespacedCertificate resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionNamespacedCertificate resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -2010,10 +2074,18 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ListNamespacedCertificate resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListNamespacedCertificate resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -2264,7 +2336,7 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ReadNamespacedCertificate resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
@@ -2451,7 +2523,7 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ReadNamespacedCertificateStatus resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
@@ -2674,10 +2746,18 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public DeleteCollectionNamespacedIssuer resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionNamespacedIssuer resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -2779,10 +2859,18 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ListNamespacedIssuer resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListNamespacedIssuer resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
 
@@ -3033,7 +3121,7 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ReadNamespacedIssuer resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
@@ -3220,7 +3308,7 @@ public interface CertManagerIoV1alpha2Api extends Api {
     }
 
     /**
-     * When specified: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
     public ReadNamespacedIssuerStatus resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);

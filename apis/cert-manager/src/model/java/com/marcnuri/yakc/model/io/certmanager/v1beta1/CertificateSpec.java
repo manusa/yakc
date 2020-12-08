@@ -70,6 +70,12 @@ public class CertificateSpec implements Model {
   private List<String> emailSANs;
 
   /**
+   * EncodeUsagesInRequest controls whether key usages should be present in the CertificateRequest
+   */
+  @JsonProperty("encodeUsagesInRequest")
+  private Boolean encodeUsagesInRequest;
+
+  /**
    * IPAddresses is a list of IP address subjectAltNames to be set on the Certificate.
    */
   @JsonProperty("ipAddresses")

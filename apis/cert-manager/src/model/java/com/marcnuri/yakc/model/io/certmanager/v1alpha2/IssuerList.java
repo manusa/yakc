@@ -19,7 +19,7 @@ package com.marcnuri.yakc.model.io.certmanager.v1alpha2;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.ListModel;
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.io.certmanager.v1.CertificateListMetadata;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -62,7 +62,7 @@ public class IssuerList implements Model, ListModel<Issuer> {
   private String kind;
 
   @JsonProperty("metadata")
-  private CertificateListMetadata metadata;
+  private ListMeta metadata;
 
 }
 

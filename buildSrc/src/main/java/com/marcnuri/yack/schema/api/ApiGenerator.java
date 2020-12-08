@@ -29,9 +29,7 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -53,12 +51,14 @@ class ApiGenerator {
 
   private final GeneratorSettings settings;
   private final SchemaUtils utils;
+  private final GeneratorUtils generatorUtils;
   private final TemplateContextResolver templateContextResolver;
   private final Template apiTemplate;
 
   ApiGenerator(GeneratorSettings settings) {
     this.settings = settings;
     utils = new SchemaUtils(settings);
+    generatorUtils = new GeneratorUtils(settings);
     this.templateContextResolver = new TemplateContextResolver(settings);
     this.apiTemplate = Mustache.compiler()
         .withLoader(name -> new StringReader(utils.readTemplate(name)))
@@ -124,12 +124,6 @@ class ApiGenerator {
 
   private void writeFile(String tag, String fileContents) {
     final Path file = resolvePackageDirectory(tag).resolve(resolveClassName(tag).concat(".java"));
-    try {
-      Files.writeString(file, fileContents,
-          StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-    } catch (IOException ex) {
-      settings.getLogger().error(ex.getMessage());
-      throw new GeneratorException("Can't write java generated class " + file.toString());
-    }
+    generatorUtils.writeFile(file, fileContents);
   }
 }

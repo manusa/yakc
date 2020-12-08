@@ -18,6 +18,7 @@
 package com.marcnuri.yack.schema.model;
 
 import com.marcnuri.yack.schema.GeneratorSettings;
+import com.marcnuri.yack.schema.GeneratorUtils;
 import com.marcnuri.yack.schema.InlineModelResolver;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.parser.OpenAPIV3Parser;
@@ -26,6 +27,7 @@ import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
@@ -51,6 +53,7 @@ public class ModelGeneratorTask extends DefaultTask {
 
   @TaskAction
   public void run() {
+    GeneratorUtils.cleanSourceDirectory(resolveSourceDirectory());
     Stream.of(schemas).forEach(this::generateModel);
     getLogger().lifecycle("Model generation completed");
   }
@@ -66,7 +69,7 @@ public class ModelGeneratorTask extends DefaultTask {
       .schema(schema.toPath())
       .templatesDir(templatesDir.toPath())
       .outputDirectory(outputDirectory.toPath())
-      .sourceDirectory(outputDirectory.toPath().resolve("src").resolve("model").resolve("java"))
+      .sourceDirectory(resolveSourceDirectory())
       .overridesDirectory(outputDirectory.toPath().resolve("src").resolve("main").resolve("java"))
       .skipGenerationRegexes(Optional.ofNullable(skipGenerationRegexes).map(Arrays::asList).map(HashSet::new)
         .orElse(new HashSet<>()))
@@ -74,5 +77,9 @@ public class ModelGeneratorTask extends DefaultTask {
         .orElse(new HashSet<>()))
       .build();
     new ModelGenerator(settings, openAPI).generate();
+  }
+
+  public Path resolveSourceDirectory() {
+    return outputDirectory.toPath().resolve("src").resolve("model").resolve("java");
   }
 }

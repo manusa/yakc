@@ -21,7 +21,8 @@ sourceSets.main.java.srcDirs = ['src/api/java', 'src/main/java', 'src/model/java
 def templatesDirs = new File(rootProject.projectDir, "schema/templates")
 def schemaDir = new File(projectDir, "schema")
 def availableSchemaNames = Arrays.asList(
-  "cert-manager-1.0.4.json"
+  "cert-manager-1.0.4.json",
+  "cert-manager-1.1.0.json"
 )
 def availableSchemas = availableSchemaNames.stream()
     .map { s -> new File(schemaDir, s) }

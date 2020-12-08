@@ -17,6 +17,12 @@
  */
 package com.marcnuri.yack.schema;
 
+import org.apache.commons.io.FileUtils;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -25,7 +31,11 @@ import java.util.function.Predicate;
  */
 public class GeneratorUtils {
 
-  private GeneratorUtils() {}
+  private final GeneratorSettings settings;
+
+  public GeneratorUtils(GeneratorSettings settings) {
+    this.settings = settings;
+  }
 
   public static Predicate<? super Map.Entry<String, ?>> filter(GeneratorSettings gs) {
     return e -> {
@@ -46,4 +56,21 @@ public class GeneratorUtils {
     };
   }
 
+  public final void writeFile(Path file, String fileContents) {
+    try {
+      Files.writeString(file, fileContents,
+        StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+    } catch (IOException ex) {
+      settings.getLogger().error(ex.getMessage());
+      throw new GeneratorException("Can't write java generated class " + file.toString());
+    }
+  }
+
+  public static void cleanSourceDirectory(Path sourceDirectory) {
+    try {
+      FileUtils.deleteDirectory(sourceDirectory.toFile());
+    } catch (IOException ex) {
+      throw new GeneratorException("Can't clean existent generated sources");
+    }
+  }
 }
