@@ -17,7 +17,6 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.pod;
 
-import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Pod;
 import com.marcnuri.yakc.model.io.k8s.metrics.pkg.apis.metrics.v1beta1.PodMetrics;
 import io.quarkus.runtime.annotations.RegisterForReflection;
@@ -32,8 +31,12 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.sse.Sse;
+import javax.ws.rs.sse.SseEventSink;
+
 import org.jboss.resteasy.annotations.SseElementType;
 
 import java.io.IOException;
@@ -84,14 +87,21 @@ public class PodResource {
     return podService.updatePod(name, namespace, pod);
   }
 
+  @SuppressWarnings("VoidMethodAnnotatedWithGET")
   @GET
   @Produces(MediaType.SERVER_SENT_EVENTS)
   @SseElementType(MediaType.APPLICATION_JSON)
   @Path("/{namespace}/{name}/logs/{container}")
-  public Multi<String> getLogs(
+  public void getLogs(
+    @Context Sse sse, @Context SseEventSink sseEventSink,
     @PathParam("namespace") String namespace, @PathParam("name") String name, @PathParam("container") String container) {
 
-    return Multi.createFrom().converter(MultiRxConverters.fromObservable(),
-      podService.getPodContainerLog(container, name, namespace));
+    Multi.createFrom().converter(MultiRxConverters.fromObservable(),
+      podService.getPodContainerLog(container, name, namespace))
+      .subscribe()
+      .with(
+        logEntry -> sseEventSink.send(sse.newEvent(logEntry)),
+        () -> sseEventSink.send(sse.newEvent("log-complete", ""))
+      );
   }
 }

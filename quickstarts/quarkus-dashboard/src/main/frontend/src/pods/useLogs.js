@@ -24,11 +24,15 @@ const initEventSource = (namespace, name, selectedContainer, throttledSetLog) =>
   const es = p.api.logs(namespace, name, selectedContainer.name);
   es.onopen = () => {
     es.currentLog = [];
+    throttledSetLog(['Waiting for container to log messages...'])
   }
   es.onmessage = ({data}) => {
     es.currentLog.push(data);
     throttledSetLog([...es.currentLog]);
   };
+  es.addEventListener('log-complete', () => {
+    es.close();
+  });
   es.selectedContainer = selectedContainer;
   return es;
 };
