@@ -24,16 +24,29 @@ import p from '../pods';
 import Card from '../components/Card';
 import DashboardPage from '../components/DashboardPage';
 import Dropdown from '../components/Dropdown';
+import Icon from '../components/Icon';
 import Link from '../components/Link';
-
 import Switch from '../components/Switch';
+
 import './PodsLogsPage.css';
 
 const ansi = new Convert();
 
+const downloadLogs = (log, name, selectedContainer) => {
+  const mimeType = 'text/plain';
+  const blob = new Blob([log.join('\n')], {type: mimeType});
+  const url = URL.createObjectURL(blob);
+  const tempLink  = document.createElement('a');
+  tempLink.href = url;
+  tempLink.download = `${name}-${selectedContainer.name}.log`;
+  document.body.appendChild(tempLink);
+  tempLink.dispatchEvent(new MouseEvent('click', {bubbles: true, cancelable: true, view: window}));
+  document.body.removeChild(tempLink);
+  URL.revokeObjectURL(url);
+};
+
 const ContainerDropdown = ({containers, selectedContainer, setSelectedContainer}) => (
   <Dropdown
-    className='ml-2'
     text={selectedContainer?.name ?? ''}
     closeOnPanelClick={true}
   >
@@ -42,8 +55,6 @@ const ContainerDropdown = ({containers, selectedContainer, setSelectedContainer}
     )}
   </Dropdown>
 );
-
-
 
 const PodsLogsPage = ({uid, namespace, name, containers}) => {
   const {
@@ -61,15 +72,23 @@ const PodsLogsPage = ({uid, namespace, name, containers}) => {
       <div className='absolute inset-0 md:p-4 flex flex-col'>
         <Card className='flex-1 flex flex-col'>
           <Card.Title className='flex items-center'>
-            <div className='flex-1 flex items-center'>
-              Logs
-              <Link.RouterLink className='ml-2' to={`/pods/${uid}`}>{name}</Link.RouterLink>
+            <div className='flex-1 flex items-center flex-wrap'>
+              <span className='mr-2'>
+                Logs
+                <Link.RouterLink className='ml-2' to={`/pods/${uid}`}>{name}</Link.RouterLink>
+              </span>
               <ContainerDropdown
                 containers={containers} setSelectedContainer={setSelectedContainer} selectedContainer={selectedContainer}
               />
             </div>
-            <div className='justify-self-end text-sm font-normal'>
+            <div className='justify-self-end text-sm font-normal flex items-center'>
               <Switch label='Follow' checked={follow} onChange={() => setFollow(!follow)} />
+              <Link
+                onClick={() => downloadLogs(log, name, selectedContainer)}
+                className='ml-2' variant={Link.variants.outline} title='Download logs'
+              >
+                <Icon icon='fa-save' />
+              </Link>
             </div>
           </Card.Title>
           <Card.Body className='flex-1 bg-black text-white font-mono text-sm'>
