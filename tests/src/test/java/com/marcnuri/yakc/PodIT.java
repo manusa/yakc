@@ -31,6 +31,10 @@ import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodSpec;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import io.reactivex.disposables.Disposable;
+import okhttp3.Response;
+import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
+import okio.ByteString;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.awaitility.Awaitility;
 import org.junit.jupiter.api.AfterEach;
@@ -40,14 +44,18 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static com.marcnuri.yakc.KubernetesClientExtension.KC;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-25.
@@ -193,6 +201,48 @@ class PodIT {
   }
 
   @Test
+  @DisplayName("execInNamespacedPod, with valid container param, should upgrade to websocket")
+  void execInNamespacedPodValidContainerTty() throws IOException, InterruptedException {
+    // Given
+    awaitPodReady();
+    final CountDownLatch openLatch = new CountDownLatch(1);
+    final StringBuilder sb = new StringBuilder();
+    final CountDownLatch messageLatch = new CountDownLatch(1);
+    // When
+    final WebSocket ws = KC.create(ExtendedCoreV1Api.class)
+      .execInNamespacedPod(podName, NAMESPACE, "yakc-pod-it", Collections.singletonList("/bin/sh"), true, true, true, true)
+      .exec(
+        new WebSocketListener() {
+          @Override
+          public void onOpen(WebSocket webSocket, Response response) {
+            openLatch.countDown();
+          }
+
+          @Override
+          public void onMessage(WebSocket webSocket, ByteString bytes) {
+            switch (ExecMessage.StandardStream.fromByte(bytes.getByte(0))) {
+              case STDOUT:
+              case STDERR:
+                sb.append(bytes.substring(1).utf8());
+            }
+            if (sb.toString().matches(".+[\\r\\n]{1,2}hello-world[\\r\\n]{1,2}.+")) {
+              messageLatch.countDown();
+            }
+          }
+
+          @Override
+          public void onFailure(WebSocket webSocket, Throwable t, Response response) {
+            fail("WebSocket connection failed", t);
+          }
+        }
+      );
+    assertThat(openLatch.await(10, TimeUnit.SECONDS)).isTrue();
+    send(ws, "echo hello-world\n");
+    // Then
+    assertThat(messageLatch.await(10, TimeUnit.SECONDS)).isTrue();
+  }
+
+  @Test
   @DisplayName("replaceNamespacedPod, should replace existing Pod's image")
   void replaceNamespacedPod() throws IOException {
     // Given
@@ -279,5 +329,13 @@ class PodIT {
     } catch (NotFoundException ex) {
       // Ignore, this is only clean up. Resource may have been deleted by delete test
     }
+  }
+
+  private static void send(WebSocket ws, String command) {
+    byte[] commandBytes = command.getBytes(StandardCharsets.UTF_8);
+    byte[] toSend = new byte[commandBytes.length + 1];
+    toSend[0] = (byte) StandardStream.STDIN.getStandardStreamCode();
+    System.arraycopy(commandBytes, 0, toSend, 1, commandBytes.length);
+    ws.send(ByteString.of(toSend));
   }
 }

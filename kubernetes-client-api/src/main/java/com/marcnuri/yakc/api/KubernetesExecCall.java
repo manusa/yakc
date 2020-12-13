@@ -17,6 +17,8 @@
 package com.marcnuri.yakc.api;
 
 import io.reactivex.Observable;
+import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
 
 /**
  * {@inheritDoc}
@@ -24,4 +26,6 @@ import io.reactivex.Observable;
 public interface KubernetesExecCall<T> extends KubernetesCall<T> {
 
   Observable<ExecMessage> exec();
+
+  WebSocket exec(WebSocketListener webSocketListener);
 }

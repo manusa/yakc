@@ -28,6 +28,8 @@ import com.marcnuri.yakc.reactivex.ExecOnSubscribe;
 import com.marcnuri.yakc.reactivex.WatchOnSubscribe;
 import io.reactivex.Observable;
 import okhttp3.Request;
+import okhttp3.WebSocket;
+import okhttp3.WebSocketListener;
 import okio.Timeout;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -93,6 +95,11 @@ public class KubernetesHttpCall<T, W> implements KubernetesListCall<T, W>, Kuber
   @Override
   public Observable<ExecMessage> exec() {
     return Observable.create(new ExecOnSubscribe(request(), kubernetesClient));
+  }
+
+  @Override
+  public WebSocket exec(WebSocketListener webSocketListener) {
+    return kubernetesClient.getOkHttpClient().newWebSocket(request(), webSocketListener);
   }
 
   @Override

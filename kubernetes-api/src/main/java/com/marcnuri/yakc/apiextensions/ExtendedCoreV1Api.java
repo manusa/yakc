@@ -54,6 +54,10 @@ public interface ExtendedCoreV1Api extends CoreV1Api {
    * @param namespace namespace where the Pod resides.
    * @param container the name of the container.
    * @param commands the command and args to execute in the Pod container.
+   * @param stdin redirect the standard input stream of the pod for this call.
+   * @param stdout redirect the standard output stream of the pod for this call.
+   * @param stderr redirect the standard error stream of the pod for this call.
+   * @param tty allocate a terminal for this exec call.
    */
   @HTTP(
     method = "GET",
@@ -66,5 +70,27 @@ public interface ExtendedCoreV1Api extends CoreV1Api {
     @Path("name") String name,
     @Path("namespace") String namespace,
     @Query("container") String container,
-    @Query("command") List<String> commands);
+    @Query("command") List<String> commands,
+    @Query("stdin") boolean stdin,
+    @Query("stdout") boolean stdout,
+    @Query("stderr") boolean stderr,
+    @Query("tty") boolean tty
+  );
+
+  /**
+   * Execute a command in the provided container of the Pod with the provided name in the provided namespace.
+   *
+   * @param name name of the Pod.
+   * @param namespace namespace where the Pod resides.
+   * @param container the name of the container.
+   * @param commands the command and args to execute in the Pod container.
+   */
+  default KubernetesExecCall<String> execInNamespacedPod(
+    String name,
+    String namespace,
+    String container,
+    List<String> commands
+  ) {
+    return execInNamespacedPod(name, namespace, container, commands, false, true, true,false);
+  }
 }
