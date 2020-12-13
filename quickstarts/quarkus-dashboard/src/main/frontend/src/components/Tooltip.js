@@ -17,11 +17,13 @@
 import React, {useState} from 'react';
 
 const Tooltip = ({
-  content, children,
+  content,
+  children,
   className = '',
   gutter = 6,
   bg = 'bg-black bg-opacity-75',
-  color = 'text-white'
+  color = 'text-white',
+  ...props
 }) => {
   const [visible, setVisible] = useState(false);
   const [{x, y}, setCoords] = useState({x: 0 , y: 0})
@@ -32,6 +34,7 @@ const Tooltip = ({
       onMouseMove={({clientX, clientY}) =>
         setCoords({x: clientX, y: clientY})}
       onMouseLeave={() => setVisible(false)}
+      {...props}
     >
       <div
         className={`

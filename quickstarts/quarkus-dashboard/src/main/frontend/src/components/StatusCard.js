@@ -17,11 +17,27 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
 import icons from '../components/icons';
+import Tooltip from './Tooltip';
 
-const Progress = ({bg = 'bg-grey-light', fg = 'bg-blue-700', progress = 0}) => (
+const Progress = ({
+  bg='bg-orange-400',
+  ready,
+  readyProgress,
+  readyColor = 'bg-blue-700',
+  succeeded,
+  succeededProgress,
+  succeededColor = 'bg-blue-400',
+}) => (
   <div className='self-stretch mx-6'>
-    <div className={`w-full rounded ${bg}`}>
-      <div className={`leading-none py-1 rounded ${fg}`} style={{width: `${progress}%`}} />
+    <div className={`w-full rounded flex ${bg}`}>
+      <Tooltip
+        className={`leading-none py-1 rounded-l ${succeededProgress === 0 ? 'rounded-r' : ''} ${readyColor}`} gutter={12}
+        style={{width: `${readyProgress}%`}} content={`Ready: ${ready}`}
+      />
+      <Tooltip
+        className={`leading-none py-1 rounded-r ${succeededColor}`} gutter={12}
+        style={{width: `${succeededProgress}%`}} content={`Succeeded: ${succeeded}`}
+      />
     </div>
   </div>
 );
@@ -30,8 +46,10 @@ const StatusCard = ({
   header,
   Icon = icons.k8s,
   ready = 0,
+  succeeded = 0,
   total = 0,
-  progressWidth = 0,
+  readyProgress = 0,
+  succeededProgress = 0,
   responsiveClassName = '',
   className = '',
   to
@@ -55,7 +73,9 @@ const StatusCard = ({
           alt={`Icon for ${header} status`}
         />
         <h3 className='text-lg my-2'>{ready} / {total}</h3>
-        <Progress progress={progressWidth} bg='bg-orange-400'/>
+        <Progress
+          ready={ready} readyProgress={readyProgress} succeeded={succeeded} succeededProgress={succeededProgress}
+        />
       </div>
     </div>
   );

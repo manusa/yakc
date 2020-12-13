@@ -88,6 +88,7 @@ const PodsLogsPage = ({uid, namespace, name, containers}) => {
                 className='ml-2' variant={Link.variants.outline} title='Download logs'
               >
                 <Icon icon='fa-save' />
+                <span className='hidden xl:inline'> Download</span>
               </Link>
             </div>
           </Card.Title>

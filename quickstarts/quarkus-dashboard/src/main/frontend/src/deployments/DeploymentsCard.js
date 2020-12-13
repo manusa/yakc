@@ -31,7 +31,7 @@ const DeploymentsCard = ({deployments, ...properties}) => {
       Icon={icons.Deployment}
       ready={ready}
       total={total}
-      progressWidth={Math.round(ready/total*100)}
+      readyProgress={Math.round(ready/total*100)}
       {...properties}
     />
   );

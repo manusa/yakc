@@ -31,7 +31,7 @@ const NodesCard = ({nodes, ...properties}) => {
       Icon={icons.Node}
       ready={ready}
       total={total}
-      progressWidth={Math.round(ready/total*100)}
+      readyProgress={Math.round(ready/total*100)}
       {...properties}
     />
   );

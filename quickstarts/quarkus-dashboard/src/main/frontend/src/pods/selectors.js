@@ -35,8 +35,10 @@ selectors.containersReady = pod => {
   return css.length > 0 && css.every(cs => cs.ready);
 };
 
+selectors.isSucceded = pod => selectors.statusPhase(pod) === 'Succeeded';
+
 selectors.succeededOrContainersReady = pod =>
-  selectors.statusPhase(pod) === 'Succeeded' || selectors.containersReady(pod);
+  selectors.isSucceded(pod) || selectors.containersReady(pod);
 
 selectors.restartCount = pod => selectors.containerStatuses(pod).reduce(
   (acc, containerStatus) => acc + containerStatus.restartCount,
@@ -44,6 +46,11 @@ selectors.restartCount = pod => selectors.containerStatuses(pod).reduce(
 );
 
 // Selectors for array of Pods
+
+selectors.succeededCount = pods => pods.reduce(
+  (count, pod) => selectors.isSucceded(pod) ? count + 1 : count,
+  0
+);
 
 selectors.readyCount = pods => pods.reduce(
   (count, pod) => selectors.containersReady(pod) ? count + 1 : count,
