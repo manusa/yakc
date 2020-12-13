@@ -46,7 +46,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  namespace: metadata.selectors.byUidOrName(stateProps.namespaces, ownProps.match.params.uid)
+  namespace: metadata.selectors.byUidOrName(stateProps.namespaces, ownProps.match.params.uidOrName)
 });
 
 export default connect(mapStateToProps, null, mergeProps)(NamespacesDetailPage);

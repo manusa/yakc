@@ -19,6 +19,7 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 import {combineReducers, createStore} from 'redux';
 import apis from './apis';
+import crb from './clusterrolebindings';
 import cRoles from './clusterroles';
 import configMaps from './configmaps';
 import crd from './customresourcedefinitions'
@@ -56,6 +57,7 @@ const storeEnhancer = () => {
 
 const store = createStore(combineReducers({
   apiGroups: apis.apiGroupsReducer,
+  clusterRoleBindings: crb.reducer,
   clusterRoles: cRoles.reducer,
   configMaps: configMaps.reducer,
   customResourceDefinitions: crd.reducer,

@@ -18,6 +18,7 @@ import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import apis from './apis';
+import crb from './clusterrolebindings';
 import cRoles from './clusterroles';
 import configMaps from './configmaps';
 import crd from './customresourcedefinitions';
@@ -91,8 +92,11 @@ const App = ({dispatch}) => {
       <Router>
         <Switch>
           <Route exact path='/' component={Home} />
+          <Route exact path='/clusterrolebindings' component={crb.ClusterRoleBindingsPage} />
+          <Route exact path='/clusterrolebindings/:uidOrName' component={crb.ClusterRoleBindingsDetailPage} />
+          <Route exact path='/clusterrolebindings/:uid/edit' component={crb.ClusterRoleBindingsEditPage} />
           <Route exact path='/clusterroles' component={cRoles.ClusterRolesPage} />
-          <Route exact path='/clusterroles/:uid' component={cRoles.ClusterRolesDetailPage} />
+          <Route exact path='/clusterroles/:uidOrName' component={cRoles.ClusterRolesDetailPage} />
           <Route exact path='/clusterroles/:uid/edit' component={cRoles.ClusterRolesEditPage} />
           <Route exact path='/configmaps' component={configMaps.ConfigMapsPage} />
           <Route exact path='/configmaps/:uid' component={configMaps.ConfigMapsDetailPage} />
@@ -113,7 +117,7 @@ const App = ({dispatch}) => {
           <Route exact path='/ingresses/:uid' component={ingresses.IngressesDetailPage} />
           <Route exact path='/ingresses/:uid/edit' component={ingresses.IngressEditPage} />
           <Route exact path='/namespaces' component={ns.NamespacesPage} />
-          <Route exact path='/namespaces/:uid' component={ns.NamespacesDetailPage} />
+          <Route exact path='/namespaces/:uidOrName' component={ns.NamespacesDetailPage} />
           <Route exact path='/nodes' component={nodes.NodesPage} />
           <Route exact path='/nodes/:name' component={nodes.NodesDetailPage} />
           <Route exact path='/nodes/:uid/edit' component={nodes.NodesEditPage} />

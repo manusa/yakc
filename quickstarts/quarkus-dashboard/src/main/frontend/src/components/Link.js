@@ -70,6 +70,7 @@ Link.ResourceLink = ({className, Icon: IconComponent, iconClassName, children, .
 );
 
 Link.ClusterRole = ({...props}) => <Link.ResourceLink Icon={i.ClusterRole} {...props} />;
+Link.ClusterRoleBinding = ({...props}) => <Link.ResourceLink Icon={i.ClusterRoleBinding} {...props} />;
 Link.ConfigMap = ({...props}) => <Link.ResourceLink Icon={i.ConfigMap} {...props} />;
 Link.CustomResourceDefinition = ({...props}) => <Link.ResourceLink Icon={i.CustomResourceDefinition} {...props} />;
 Link.DaemonSet = ({...props}) => <Link.ResourceLink Icon={i.DaemonSet} {...props} />;

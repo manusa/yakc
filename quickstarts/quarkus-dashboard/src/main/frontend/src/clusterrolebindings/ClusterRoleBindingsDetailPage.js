@@ -17,41 +17,38 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
-import cRoles from './';
-import crb from '../clusterrolebindings';
-import Card from '../components/Card';
+import crb from './index';
 import Form from '../components/Form';
 import ResourceDetailPage from '../components/ResourceDetailPage';
+import Link from '../components/Link';
 
-const ClusterRolesDetailPage = ({clusterRole}) => (
+const ClusterRoleBindingsDetailPage = ({clusterRoleBinding}) => (
   <ResourceDetailPage
-    name='ClusterRoles'
-    path='clusterroles'
-    resource={clusterRole}
+    name='ClusterRoleBindings'
+    path='clusterrolebindings'
+    resource={clusterRoleBinding}
     body={
       <Form>
-        <metadata.Details resource={clusterRole}/>
+        <metadata.Details resource={clusterRoleBinding}/>
+        <Form.Field label='Role'>
+          <Link.ClusterRole to={`/clusterroles/${crb.selectors.roleRefName(clusterRoleBinding)}`}>
+            {crb.selectors.roleRefName(clusterRoleBinding)}
+          </Link.ClusterRole>
+        </Form.Field>
       </Form>
     }
-  >
-    <cRoles.RuleList className='mt-2' rules={cRoles.selectors.rules(clusterRole)}/>
-    <crb.List
-      title='Bindings'
-      titleVariant={Card.titleVariants.medium} className='mt-2'
-      roleRefName={metadata.selectors.name(clusterRole)}
-    />
-  </ResourceDetailPage>
+  />
 );
 
-const mapStateToProps = ({clusterRoles}) => ({
-  clusterRoles
+const mapStateToProps = ({clusterRoleBindings}) => ({
+  clusterRoleBindings
 });
 
 const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  clusterRole: metadata.selectors.byUidOrName(stateProps.clusterRoles, ownProps.match.params.uidOrName)
+  clusterRoleBinding: metadata.selectors.byUidOrName(stateProps.clusterRoleBindings, ownProps.match.params.uidOrName)
 });
 
-export default connect(mapStateToProps, null, mergeProps)(ClusterRolesDetailPage);
+export default connect(mapStateToProps, null, mergeProps)(ClusterRoleBindingsDetailPage);

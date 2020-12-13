@@ -52,10 +52,12 @@ const ResourceList = ({
   );
 };
 
+ResourceList.mapStateToProps = resource => ({ui: {loadedResources}, ...state}) => {
+  return {resources: state[resource], loadedResources}
+};
+
 ResourceList.resourceListConnect = resource => connect(
-  ({ui: {loadedResources}, ...state}) => {
-    return {resources: state[resource], loadedResources}
-  },
+  ResourceList.mapStateToProps(resource),
   dispatch =>  bindActionCreators({
     crudDelete: redux.actions.crudDelete
   }, dispatch),

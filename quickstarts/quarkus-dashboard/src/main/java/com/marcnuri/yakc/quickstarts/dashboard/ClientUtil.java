@@ -46,6 +46,15 @@ public class ClientUtil {
     throw exception;
   }
 
+  public static <T> T ignoreForbidden(ClientFunction<T> function, T defaultIfForbidden) throws IOException {
+    try {
+      return function.call();
+    } catch (ForbiddenException ex) {
+      LOG.debug("Access to resource is forbidden, ignoring:\n{}", ex.getMessage());
+      return defaultIfForbidden;
+    }
+  }
+
   public static Observable<WatchEvent<? extends Model>> selfHealingObservable(Watchable<? extends Model> watchable) {
     return Observable.create(emitter -> subscribe(emitter, watchable));
   }
@@ -68,15 +77,6 @@ public class ClientUtil {
         subscribe(selfHealingEmitter, watchable);
       }
     ));
-  }
-
-  public static <T> T ignoreForbidden(ClientFunction<T> function, T defaultIfForbidden) throws IOException {
-    try {
-      return function.call();
-    } catch (ForbiddenException ex) {
-      LOG.debug("Access to resource is forbidden, ignoring:\n{}", ex.getMessage());
-      return defaultIfForbidden;
-    }
   }
 
   @FunctionalInterface

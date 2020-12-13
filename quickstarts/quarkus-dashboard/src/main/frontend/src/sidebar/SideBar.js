@@ -130,6 +130,7 @@ const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem, isOpen
         <NavGroup expandedItems={expandedItems} toggleItem={toggleItem}
                   label='Access Control' icon='fa-shield-alt'>
           <K8sNavItem to='/clusterroles' Icon={i.ClusterRole}>ClusterRoles</K8sNavItem>
+          <K8sNavItem to='/clusterrolebindings' Icon={i.ClusterRoleBinding}>ClusterRoleBindings</K8sNavItem>
           <K8sNavItem to='/roles' Icon={i.Role}>Roles</K8sNavItem>
           <K8sNavItem to='/secrets' Icon={i.Secret}>Secrets</K8sNavItem>
         </NavGroup>

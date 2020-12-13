@@ -18,6 +18,7 @@ package com.marcnuri.yakc.quickstarts.dashboard.watch;
 
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.model.Model;
+import com.marcnuri.yakc.quickstarts.dashboard.clusterrolebindings.ClusterRoleBindingService;
 import com.marcnuri.yakc.quickstarts.dashboard.clusterroles.ClusterRoleService;
 import com.marcnuri.yakc.quickstarts.dashboard.configmaps.ConfigMapService;
 import com.marcnuri.yakc.quickstarts.dashboard.customresourcedefinitions.CustomResourceDefinitionService;
@@ -58,6 +59,7 @@ public class WatchService {
   @SuppressWarnings("java:S107")
   @Inject
   public WatchService(
+    ClusterRoleBindingService clusterRoleBindingService,
     ClusterRoleService clusterRoleService,
     ConfigMapService configMapService,
     CustomResourceDefinitionService customResourceDefinitionService,
@@ -76,6 +78,7 @@ public class WatchService {
     ServiceService serviceService,
     StatefulSetService statefulSetService) {
     this.watchables = Arrays.asList(
+      clusterRoleBindingService,
       clusterRoleService,
       configMapService,
       customResourceDefinitionService,

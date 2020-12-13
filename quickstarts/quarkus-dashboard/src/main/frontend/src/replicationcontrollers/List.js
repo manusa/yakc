@@ -16,9 +16,7 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux'
 import metadata from '../metadata';
-import redux from '../redux';
 import rc from './';
 import Icon from '../components/Icon';
 import ResourceList from '../components/ResourceList';
@@ -60,26 +58,15 @@ const Rows = ({replicationControllers}) => {
     ));
 }
 
-const List = ({replicationControllers, ownerUid, ...properties}) => (
-  <ResourceList headers={headers} resources={replicationControllers} {...properties}>
-    <Rows replicationControllers={replicationControllers} />
+const List = ({resources, ownerUid, crudDelete, loadedResources, ...properties}) => (
+  <ResourceList headers={headers} resources={resources} {...properties}>
+    <Rows replicationControllers={resources} />
   </ResourceList>
 );
-
-const mapStateToProps = ({replicationControllers}) => ({
-  replicationControllers
-});
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  ...stateProps,
-  ...dispatchProps,
-  ...ownProps,
-  replicationControllers: Object.values(redux.selectors.resourcesBy(stateProps.replicationControllers, ownProps))
-});
 
 List.propTypes = {
   ownerUid: PropTypes.string
 };
 
-export default connect(mapStateToProps, null, mergeProps)(List);
+export default ResourceList.resourceListConnect('replicationControllers')(List);
 

@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import ClusterRole from './ClusterRole';
+import ClusterRoleBinding from './ClusterRoleBinding';
 import ConfigMap from './ConfigMap';
 import CustomResourceDefinition from './CustomResourceDefinition';
 import DaemonSet from './DaemonSet';
@@ -38,6 +39,7 @@ import YAKCLogo from './YAKCLogo';
 const icons = {};
 
 icons.ClusterRole = ClusterRole;
+icons.ClusterRoleBinding = ClusterRoleBinding;
 icons.ConfigMap = ConfigMap;
 icons.CustomResourceDefinition = CustomResourceDefinition;
 icons.DaemonSet = DaemonSet;

@@ -18,6 +18,7 @@
 package com.marcnuri.yakc.quickstarts.dashboard;
 
 import com.marcnuri.yakc.quickstarts.dashboard.apis.ApisResource;
+import com.marcnuri.yakc.quickstarts.dashboard.clusterrolebindings.ClusterRoleBindingResource;
 import com.marcnuri.yakc.quickstarts.dashboard.clusterroles.ClusterRoleResource;
 import com.marcnuri.yakc.quickstarts.dashboard.configmaps.ConfigMapResource;
 import com.marcnuri.yakc.quickstarts.dashboard.customresourcedefinitions.CustomResourceDefinitionResource;
@@ -50,8 +51,8 @@ import javax.ws.rs.Path;
 @RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
 public class ApiResource {
 
-
   @Inject ApisResource apisResource;
+  @Inject ClusterRoleBindingResource clusterRoleBindingResource;
   @Inject ClusterRoleResource clusterRoleResource;
   @Inject ConfigMapResource configMapResource;
   @Inject CustomResourceDefinitionResource customResourceDefinitionResource;
@@ -78,6 +79,11 @@ public class ApiResource {
   @Path("/apis")
   public ApisResource getApisResource() {
     return apisResource;
+  }
+
+  @Path("/clusterrolebindings")
+  public ClusterRoleBindingResource getClusterRoleBindingResource() {
+    return clusterRoleBindingResource;
   }
 
   @Path("/clusterroles")

@@ -78,22 +78,11 @@ const Rows = ({pods}) => {
     ));
 }
 
-const List = ({pods, nodeName, ownerUids, ownerUid, ...properties}) => (
-  <ResourceList headers={headers} resources={pods} {...properties}>
-    <Rows pods={pods} />
+const List = ({resources, nodeName, ownerUids, ownerUid, crudDelete, loadedResources, ...properties}) => (
+  <ResourceList headers={headers} resources={resources} {...properties}>
+    <Rows pods={resources} />
   </ResourceList>
 );
-
-const mapStateToProps = ({pods}) => ({
-  pods
-});
-
-const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-  ...stateProps,
-  ...dispatchProps,
-  ...ownProps,
-  pods: Object.values(p.selectors.podsBy(stateProps.pods, ownProps))
-});
 
 List.propTypes = {
   nodeName: PropTypes.string,
@@ -101,5 +90,12 @@ List.propTypes = {
   namespace: PropTypes.string
 };
 
-export default connect(mapStateToProps, null, mergeProps)(List);
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+  ...stateProps,
+  ...dispatchProps,
+  ...ownProps,
+  resources: Object.values(p.selectors.podsBy(stateProps.resources, ownProps))
+});
+
+export default connect(ResourceList.mapStateToProps('pods'), null, mergeProps)(List);
 
