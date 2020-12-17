@@ -236,10 +236,14 @@ class PodIT {
           }
         }
       );
-    assertThat(openLatch.await(10, TimeUnit.SECONDS)).isTrue();
-    send(ws, "echo hello-world\n");
-    // Then
-    assertThat(messageLatch.await(10, TimeUnit.SECONDS)).isTrue();
+    try {
+      assertThat(openLatch.await(30, TimeUnit.SECONDS)).isTrue();
+      send(ws, "echo hello-world\n");
+      // Then
+      assertThat(messageLatch.await(30, TimeUnit.SECONDS)).isTrue();
+    } finally {
+      ws.close(1000, "");
+    }
   }
 
   @Test
