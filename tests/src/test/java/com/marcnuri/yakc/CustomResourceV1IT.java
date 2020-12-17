@@ -70,6 +70,7 @@ class CustomResourceV1IT {
   static void setUpAll() throws IOException {
     customResourceDefinition = CustomResourceDefinitionV1IT.createCustomResourceDefinitionForTest(
       "mountain", "mountains", "yakc.marcnuri.com");
+    CustomResourceDefinitionV1IT.awaitCustomResourceDefinitionReady(customResourceDefinition);
   }
 
   @AfterAll

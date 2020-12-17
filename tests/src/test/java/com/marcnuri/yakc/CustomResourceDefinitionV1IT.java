@@ -19,6 +19,7 @@ package com.marcnuri.yakc;
 
 import com.marcnuri.yakc.ClusterExecutionCondition.ClusterMinVersion;
 import com.marcnuri.yakc.api.NotFoundException;
+import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.apiextensions.v1.ApiextensionsV1Api;
 import com.marcnuri.yakc.model.io.k8s.apiextensionsapiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition;
 import com.marcnuri.yakc.model.io.k8s.apiextensionsapiserver.pkg.apis.apiextensions.v1.CustomResourceDefinitionNames;
@@ -37,6 +38,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import static com.marcnuri.yakc.KubernetesClientExtension.KC;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -58,6 +60,7 @@ class CustomResourceDefinitionV1IT {
     final String group = "crd-test.yakc.marcnuri.com";
 
     customResourceDefinition = createCustomResourceDefinitionForTest(singular, plural, group);
+    awaitCustomResourceDefinitionReady(customResourceDefinition);
     customResourceDefinitionName = customResourceDefinition.getMetadata().getName();
   }
 
@@ -146,6 +149,16 @@ class CustomResourceDefinitionV1IT {
             .build())
           .build())
         .build()).get();
+  }
+
+  static void awaitCustomResourceDefinitionReady(CustomResourceDefinition customResourceDefinition) throws IOException {
+    KC.create(ApiextensionsV1Api.class).listCustomResourceDefinition().watch()
+      .filter(we -> we.getType() == WatchEvent.Type.MODIFIED)
+      .filter(we -> we.getObject().getMetadata().getName().equals(customResourceDefinition.getMetadata().getName()))
+      .takeUntil(we -> (boolean)we.getObject().getStatus().getConditions().stream()
+        .anyMatch(pc -> pc.getType().equals("Established")))
+      .timeout(20, TimeUnit.SECONDS)
+      .subscribe();
   }
 
   static void deleteCustomResourceDefinitionForTest(
