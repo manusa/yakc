@@ -37,6 +37,9 @@ import lombok.ToString;
 public class MetricSpec implements Model {
 
 
+  @JsonProperty("containerResource")
+  private ContainerResourceMetricSource containerResource;
+
   @JsonProperty("external")
   private ExternalMetricSource external;
 
@@ -50,7 +53,7 @@ public class MetricSpec implements Model {
   private ResourceMetricSource resource;
 
   /**
-   * type is the type of metric source.  It should be one of "Object", "Pods" or "Resource", each mapping to a matching field in the object.
+   * type is the type of metric source.  It should be one of "ContainerResource", "External", "Object", "Pods" or "Resource", each mapping to a matching field in the object. Note: "ContainerResource" type is available on when the feature-gate HPAContainerMetrics is enabled
    */
   @NonNull
   @JsonProperty("type")

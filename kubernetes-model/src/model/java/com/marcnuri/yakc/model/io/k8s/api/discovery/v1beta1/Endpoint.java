@@ -53,16 +53,22 @@ public class Endpoint implements Model {
   private EndpointConditions conditions;
 
   /**
-   * hostname of this endpoint. This field may be used by consumers of endpoints to distinguish endpoints from each other (e.g. in DNS names). Multiple endpoints which use the same hostname should be considered fungible (e.g. multiple A values in DNS). Must pass DNS Label (RFC 1123) validation.
+   * hostname of this endpoint. This field may be used by consumers of endpoints to distinguish endpoints from each other (e.g. in DNS names). Multiple endpoints which use the same hostname should be considered fungible (e.g. multiple A values in DNS). Must be lowercase and pass DNS Label (RFC 1123) validation.
    */
   @JsonProperty("hostname")
   private String hostname;
+
+  /**
+   * nodeName represents the name of the Node hosting this endpoint. This can be used to determine endpoints local to a Node. This field can be enabled with the EndpointSliceNodeName feature gate.
+   */
+  @JsonProperty("nodeName")
+  private String nodeName;
 
   @JsonProperty("targetRef")
   private ObjectReference targetRef;
 
   /**
-   * topology contains arbitrary topology information associated with the endpoint. These key/value pairs must conform with the label format. https://kubernetes.io/docs/concepts/overview/working-with-objects/labels Topology may include a maximum of 16 key/value pairs. This includes, but is not limited to the following well known keys: &#42; kubernetes.io/hostname: the value indicates the hostname of the node<br><p>   where the endpoint is located. This should match the corresponding<br><p>   node label.<br><p> &#42; topology.kubernetes.io/zone: the value indicates the zone where the<br><p>   endpoint is located. This should match the corresponding node label.<br><p> &#42; topology.kubernetes.io/region: the value indicates the region where the<br><p>   endpoint is located. This should match the corresponding node label.
+   * topology contains arbitrary topology information associated with the endpoint. These key/value pairs must conform with the label format. https://kubernetes.io/docs/concepts/overview/working-with-objects/labels Topology may include a maximum of 16 key/value pairs. This includes, but is not limited to the following well known keys: &#42; kubernetes.io/hostname: the value indicates the hostname of the node<br><p>   where the endpoint is located. This should match the corresponding<br><p>   node label.<br><p> &#42; topology.kubernetes.io/zone: the value indicates the zone where the<br><p>   endpoint is located. This should match the corresponding node label.<br><p> &#42; topology.kubernetes.io/region: the value indicates the region where the<br><p>   endpoint is located. This should match the corresponding node label.<br><p> This field is deprecated and will be removed in future api versions.
    */
   @JsonProperty("topology")
   @Singular(value = "putInTopology", ignoreNullCollections = true)

@@ -23,7 +23,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Singular;
 import lombok.ToString;
 
@@ -48,7 +47,6 @@ public class ProjectedVolumeSource implements Model {
   /**
    * list of volume projections
    */
-  @NonNull
   @JsonProperty("sources")
   @Singular(value = "addToSources", ignoreNullCollections = true)
   private List<VolumeProjection> sources;

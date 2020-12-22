@@ -18,10 +18,13 @@ package com.marcnuri.yakc.model.io.k8s.api.core.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Condition;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Singular;
 import lombok.ToString;
 
 /**
@@ -35,6 +38,13 @@ import lombok.ToString;
 @ToString
 public class ServiceStatus implements Model {
 
+
+  /**
+   * Current service state
+   */
+  @JsonProperty("conditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
+  private List<Condition> conditions;
 
   @JsonProperty("loadBalancer")
   private LoadBalancerStatus loadBalancer;

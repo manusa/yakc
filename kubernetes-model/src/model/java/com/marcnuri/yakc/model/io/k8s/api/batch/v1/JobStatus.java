@@ -49,7 +49,7 @@ public class JobStatus implements Model {
   private OffsetDateTime completionTime;
 
   /**
-   * The latest available observations of an object's current state. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
+   * The latest available observations of an object's current state. When a job fails, one of the conditions will have type == "Failed". More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
    */
   @JsonProperty("conditions")
   @Singular(value = "addToConditions", ignoreNullCollections = true)

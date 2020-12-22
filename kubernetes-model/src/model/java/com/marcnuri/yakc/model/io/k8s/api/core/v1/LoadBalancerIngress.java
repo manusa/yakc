@@ -18,10 +18,12 @@ package com.marcnuri.yakc.model.io.k8s.api.core.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Singular;
 import lombok.ToString;
 
 /**
@@ -47,6 +49,13 @@ public class LoadBalancerIngress implements Model {
    */
   @JsonProperty("ip")
   private String ip;
+
+  /**
+   * Ports is a list of records of service ports If used, every port defined in the service should have an entry in it
+   */
+  @JsonProperty("ports")
+  @Singular(value = "addToPorts", ignoreNullCollections = true)
+  private List<PortStatus> ports;
 
 }
 
