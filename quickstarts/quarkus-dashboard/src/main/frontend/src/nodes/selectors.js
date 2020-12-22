@@ -59,7 +59,7 @@ s.readyCount = nodes => nodes.reduce(
 s.isMinikube = nodes => Object.values(nodes).length === 1 && Object.values(nodes)
   .filter(node => metadata.selectors.name(node) === 'minikube')
   .filter(node => metadata.selectors.labels(node)['minikube.k8s.io/name'] === 'minikube')
-  .filter(node => metadata.selectors.labels(node).hasOwnProperty('node-role.kubernetes.io/master'))
+  .filter(node => metadata.selectors.labels(node).hasOwnProperty('minikube.k8s.io/version'))
   .length === 1;
 
 export default s;
