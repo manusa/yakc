@@ -13,7 +13,7 @@ ext {
 }
 
 project.group = 'com.marcnuri.yakc'
-project.version = '0.0.17'
+project.version = '0.0.18'
 
 repositories {
   jcenter()
