@@ -19,6 +19,7 @@ package com.marcnuri.yakc.api.metrics;
 
 import com.marcnuri.yakc.ClusterExecutionCondition;
 import com.marcnuri.yakc.KubernetesClientExtension;
+import com.marcnuri.yakc.api.NotFoundException;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.api.metrics.v1beta1.MetricsV1beta1Api;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Node;
@@ -32,6 +33,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 import static com.marcnuri.yakc.KubernetesClientExtension.KC;
@@ -117,15 +119,14 @@ class MetricsV1beta1ApiIT {
 
   @Test
   @DisplayName("readNamespacedPodMetrics, cluster contains a Pod with some metrics")
-  void readNamespacedPodMetrics() throws IOException {
+  void readNamespacedPodMetrics() throws IOException, InterruptedException {
     // Given
     final Pod pod = KC.create(CoreV1Api.class)
       .listPodForAllNamespaces(new CoreV1Api.ListPodForAllNamespaces().labelSelector("k8s-app=metrics-server"))
       .stream().findFirst()
       .orElseThrow(() -> new AssertionError("No Pod found for metrics-server"));
     // When
-    final PodMetrics result = KC.create(MetricsV1beta1Api.class)
-      .readNamespacedPodMetrics(pod.getMetadata().getName(), pod.getMetadata().getNamespace()).get();
+    final PodMetrics result = getWithRetry(pod.getMetadata().getName(), pod.getMetadata().getNamespace(), 10);
     // Then
     assertThat(result)
       .hasFieldOrProperty("apiVersion")
@@ -141,5 +142,19 @@ class MetricsV1beta1ApiIT {
         .hasFieldOrProperty("usage.cpu")
         .hasFieldOrProperty("usage.memory")
       );
+  }
+
+  private static PodMetrics getWithRetry(String name, String namespace, int retries)
+    throws IOException, InterruptedException {
+
+    try {
+      return KC.create(MetricsV1beta1Api.class).readNamespacedPodMetrics(name, namespace).get();
+    } catch(NotFoundException ex) {
+      if (retries > 0) {
+        TimeUnit.SECONDS.sleep(1);
+        return getWithRetry(name, namespace, --retries);
+      }
+      throw ex;
+    }
   }
 }
