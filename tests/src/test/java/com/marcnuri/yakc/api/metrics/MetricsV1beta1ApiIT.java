@@ -59,9 +59,12 @@ class MetricsV1beta1ApiIT {
 
   @Test
   @DisplayName("listNodeMetrics.stream, cluster contains at least a Node with some metrics")
-  void listNodeMetricsStream() throws IOException {
+  void listNodeMetricsStream() throws IOException, InterruptedException {
     // When
-    final Stream<NodeMetrics> result = KC.create(MetricsV1beta1Api.class).listNodeMetrics().stream();
+    final Stream<NodeMetrics> result = getWithRetry(
+      () -> KC.create(MetricsV1beta1Api.class).listNodeMetrics().stream(),
+      10
+    );
     // Then
     assertThat(result)
       .hasSizeGreaterThanOrEqualTo(1)
@@ -76,13 +79,15 @@ class MetricsV1beta1ApiIT {
 
   @Test
   @DisplayName("readNodeMetrics, cluster contains at least a Node with some metrics")
-  void readNodeMetrics() throws IOException {
+  void readNodeMetrics() throws IOException, InterruptedException {
     // Given
     final String node = KC.create(CoreV1Api.class).listNode().stream().findFirst()
       .map(Node::getMetadata).map(ObjectMeta::getName)
       .orElseThrow(() -> new AssertionError("No nodes found"));
     // When
-    final NodeMetrics result = KC.create(MetricsV1beta1Api.class).readNodeMetrics(node).get();
+    final NodeMetrics result = getWithRetry(
+      () -> KC.create(MetricsV1beta1Api.class).readNodeMetrics(node).get(),
+    10);
     // Then
     assertThat(result)
       .hasFieldOrPropertyWithValue("metadata.name", node)
@@ -95,12 +100,14 @@ class MetricsV1beta1ApiIT {
 
   @Test
   @DisplayName("ListPodMetricsForAllNamespaces.stream, cluster contains at least a Pod with some metrics")
-  void listPodMetricsForAllNamespacesStream() throws IOException {
+  void listPodMetricsForAllNamespacesStream() throws IOException, InterruptedException {
     // When
-    final Stream<PodMetrics> result = KC.create(MetricsV1beta1Api.class)
+    final Stream<PodMetrics> result = getWithRetry(() ->KC.create(MetricsV1beta1Api.class)
       .listPodMetricsForAllNamespaces(new MetricsV1beta1Api.ListPodMetricsForAllNamespaces()
         .labelSelector("k8s-app=metrics-server"))
-      .stream();
+      .stream(),
+      10
+    );
     // Then
     assertThat(result)
       .hasSizeGreaterThanOrEqualTo(1)
@@ -126,7 +133,11 @@ class MetricsV1beta1ApiIT {
       .stream().findFirst()
       .orElseThrow(() -> new AssertionError("No Pod found for metrics-server"));
     // When
-    final PodMetrics result = getWithRetry(pod.getMetadata().getName(), pod.getMetadata().getNamespace(), 10);
+    final PodMetrics result = getWithRetry(
+      () ->  KC.create(MetricsV1beta1Api.class)
+        .readNamespacedPodMetrics(pod.getMetadata().getName(), pod.getMetadata().getNamespace()).get(),
+      10)
+      ;
     // Then
     assertThat(result)
       .hasFieldOrProperty("apiVersion")
@@ -144,15 +155,19 @@ class MetricsV1beta1ApiIT {
       );
   }
 
-  private static PodMetrics getWithRetry(String name, String namespace, int retries)
+  @FunctionalInterface
+  private interface RetryFunction<T> {
+    T run() throws IOException;
+  }
+  private static <T> T getWithRetry(RetryFunction<T> rf, int retries)
     throws IOException, InterruptedException {
 
     try {
-      return KC.create(MetricsV1beta1Api.class).readNamespacedPodMetrics(name, namespace).get();
+      return rf.run();
     } catch(NotFoundException ex) {
       if (retries > 0) {
         TimeUnit.SECONDS.sleep(1);
-        return getWithRetry(name, namespace, --retries);
+        return getWithRetry(rf, --retries);
       }
       throw ex;
     }
