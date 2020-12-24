@@ -96,6 +96,8 @@ Provides the basic interfaces and Exception types to be used across the differen
 
 Kubernetes model objects to be used for REST API serialization/deserialization.
 
+Model types are generated for Kubernetes equivalents in versions from 1.15 to 1.20.
+
 #### kubernetes-api
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc/kubernetes-api)
 ](https://search.maven.org/search?q=g:com.marcnuri.yakc%20a:kubernetes-api)
@@ -105,6 +107,8 @@ Kubernetes model objects to be used for REST API serialization/deserialization.
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for the latest
 [Kubernetes JSON](https://github.com/kubernetes/kubernetes/blob/master/api/openapi-spec/swagger.json)
 [OpenAPI](https://swagger.io/specification/) schema.
+
+API methods for Kubernetes REST endpoints in versions from 1.15 to 1.20.
 
 #### kubernetes-client
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc/kubernetes-client)
@@ -123,7 +127,25 @@ Kubernetes Retrofit2 based Java client to be used with kubernetes-api or any of 
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/cert-manager)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[Kubernetes cert-manager](https://cert-manager.io/).
+[Kubernetes cert-manager](https://cert-manager.io/) (1.0.4 - 1.1.0).
+
+#### Istio
+[![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/istio)
+](https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:istio)
+[![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc.apis/istio/javadoc.svg)
+](https://javadoc.io/doc/com.marcnuri.yakc.apis/istio)
+
+[Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
+[Istio](https://istio.io/) (1.7 - 1.8).
+
+#### Knative
+[![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/knative)
+](https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:knative)
+[![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc.apis/knative/javadoc.svg)
+](https://javadoc.io/doc/com.marcnuri.yakc.apis/knative)
+
+[Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
+[Knative](https://knative.dev/) (0.19.0).
 
 #### metrics-server
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/metrics-server)
@@ -132,7 +154,7 @@ Kubernetes Retrofit2 based Java client to be used with kubernetes-api or any of 
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/metrics-server)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[Kubernetes Metrics Server](https://github.com/kubernetes-sigs/metrics-server).
+[Kubernetes Metrics Server](https://github.com/kubernetes-sigs/metrics-server)  (0.4.0).
 
 #### OpenShift
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/openshift)
@@ -141,7 +163,7 @@ Kubernetes Retrofit2 based Java client to be used with kubernetes-api or any of 
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/openshift)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[OpenShift](https://github.com/openshift/origin).
+[OpenShift](https://github.com/openshift/origin) (3.11 - 4.4).
 
 This module contains models for OpenShift specific Kubernetes resources and the Retrofit APIs to
 access them.  
