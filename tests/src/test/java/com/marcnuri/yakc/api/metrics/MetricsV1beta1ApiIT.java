@@ -29,7 +29,11 @@ import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import com.marcnuri.yakc.model.io.k8s.metrics.pkg.apis.metrics.v1beta1.NodeMetrics;
 import com.marcnuri.yakc.model.io.k8s.metrics.pkg.apis.metrics.v1beta1.PodMetrics;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.io.IOException;
@@ -39,6 +43,8 @@ import java.util.stream.Stream;
 import static com.marcnuri.yakc.KubernetesClientExtension.KC;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Timeout(value = 2, unit = TimeUnit.MINUTES)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith(KubernetesClientExtension.class)
 @ClusterExecutionCondition.ClusterMinVersion(minVersion = "1.17.0")
 class MetricsV1beta1ApiIT {
@@ -58,12 +64,12 @@ class MetricsV1beta1ApiIT {
   }
 
   @Test
+  @Order(Integer.MAX_VALUE) // Run last. Other methods will block Suite test execution until metrics are available
   @DisplayName("listNodeMetrics.stream, cluster contains at least a Node with some metrics")
   void listNodeMetricsStream() throws IOException, InterruptedException {
     // When
     final Stream<NodeMetrics> result = getWithRetry(
-      () -> KC.create(MetricsV1beta1Api.class).listNodeMetrics().stream(),
-      10
+      () -> KC.create(MetricsV1beta1Api.class).listNodeMetrics().stream()
     );
     // Then
     assertThat(result)
@@ -86,8 +92,8 @@ class MetricsV1beta1ApiIT {
       .orElseThrow(() -> new AssertionError("No nodes found"));
     // When
     final NodeMetrics result = getWithRetry(
-      () -> KC.create(MetricsV1beta1Api.class).readNodeMetrics(node).get(),
-    10);
+      () -> KC.create(MetricsV1beta1Api.class).readNodeMetrics(node).get()
+    );
     // Then
     assertThat(result)
       .hasFieldOrPropertyWithValue("metadata.name", node)
@@ -105,8 +111,7 @@ class MetricsV1beta1ApiIT {
     final Stream<PodMetrics> result = getWithRetry(() ->KC.create(MetricsV1beta1Api.class)
       .listPodMetricsForAllNamespaces(new MetricsV1beta1Api.ListPodMetricsForAllNamespaces()
         .labelSelector("k8s-app=metrics-server"))
-      .stream(),
-      10
+      .stream()
     );
     // Then
     assertThat(result)
@@ -135,9 +140,8 @@ class MetricsV1beta1ApiIT {
     // When
     final PodMetrics result = getWithRetry(
       () ->  KC.create(MetricsV1beta1Api.class)
-        .readNamespacedPodMetrics(pod.getMetadata().getName(), pod.getMetadata().getNamespace()).get(),
-      10)
-      ;
+        .readNamespacedPodMetrics(pod.getMetadata().getName(), pod.getMetadata().getNamespace()).get()
+      );
     // Then
     assertThat(result)
       .hasFieldOrProperty("apiVersion")
@@ -159,17 +163,12 @@ class MetricsV1beta1ApiIT {
   private interface RetryFunction<T> {
     T run() throws IOException;
   }
-  private static <T> T getWithRetry(RetryFunction<T> rf, int retries)
-    throws IOException, InterruptedException {
-
+  private static <T> T getWithRetry(RetryFunction<T> rf) throws IOException, InterruptedException {
     try {
       return rf.run();
     } catch(NotFoundException ex) {
-      if (retries > 0) {
-        TimeUnit.SECONDS.sleep(1);
-        return getWithRetry(rf, --retries);
-      }
-      throw ex;
+      TimeUnit.SECONDS.sleep(1);
+      return getWithRetry(rf);
     }
   }
 }
