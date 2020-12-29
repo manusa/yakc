@@ -56,7 +56,14 @@ public class ClientUtil {
   }
 
   public static Observable<WatchEvent<? extends Model>> selfHealingObservable(Watchable<? extends Model> watchable) {
-    return Observable.create(emitter -> subscribe(emitter, watchable));
+    return Observable.create(emitter -> {
+      try {
+        subscribe(emitter, watchable);
+      } catch (Exception ex) {
+        LOG.error("Error when starting subscription for {}", watchable.getClass(), ex);
+        emitter.onComplete();
+      }
+    });
   }
 
   private static void subscribe(
