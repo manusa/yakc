@@ -41,8 +41,8 @@ clusterrolebinding.rbac.authorization.k8s.io/yakc-kubernetes-dashboard-cluster-a
 deployment.apps/quarkus-kubernetes-dashboard created
 route.route.openshift.io/yakc-dashboard created
 # Retrieve URL for created route
-$ oc get route yakc-dashboard -o jsonpath='{.spec.host}'
-yakc-dashboard-default.1337-13-kota037.environments.katacoda.com
+$ echo "http://$(oc get route yakc-dashboard -o jsonpath='{.spec.host}')"
+http://yakc-dashboard-default.1337-13-kota037.environments.katacoda.com
 ```
 
 Now you can open the URL in your browser.

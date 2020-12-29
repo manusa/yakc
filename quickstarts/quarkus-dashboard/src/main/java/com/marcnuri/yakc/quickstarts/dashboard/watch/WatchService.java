@@ -102,8 +102,7 @@ public class WatchService {
   public Observable<WatchEvent<? extends Model>> getWatch() {
     final List<Observable<? extends WatchEvent<? extends Model>>> watchers = new ArrayList<>();
     for (Watchable<? extends Model> watchable : watchables) {
-      watchers.add(selfHealingObservable(watchable)
-        .observeOn(Schedulers.newThread()).subscribeOn(Schedulers.newThread()));
+      watchers.add(selfHealingObservable(watchable).subscribeOn(Schedulers.newThread()));
     }
     return Observable.merge(watchers)
       .doOnError(e -> LOG.error("Exception on Watcher", e))
