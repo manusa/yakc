@@ -34,7 +34,7 @@ const headers = [
 ];
 
 const Rows = ({pods}) => {
-  const deletePod = pod => async () => await p.api.requestDelete(pod);
+  const deletePod = pod => async () => await p.api.delete(pod);
   return pods
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(pod => (
@@ -71,6 +71,13 @@ const Rows = ({pods}) => {
             to={`/pods/${metadata.selectors.uid(pod)}/logs`}
             title='Logs'
           ><Icon stylePrefix='far' icon='fa-file-alt' /></Link.RouterLink>
+          <Link.RouterLink
+            variant={Link.variants.outline}
+            size={Link.sizes.small}
+            to={`/pods/${metadata.selectors.uid(pod)}/exec`}
+            title='Terminal'
+            className='ml-1'
+          ><Icon stylePrefix='fas' icon='fa-terminal' /></Link.RouterLink>
           <Table.DeleteButton
             className='ml-1' onClick={deletePod(pod)} />
         </Table.Cell>

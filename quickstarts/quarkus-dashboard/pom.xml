@@ -49,6 +49,10 @@
       <artifactId>quarkus-resteasy-jackson</artifactId>
     </dependency>
     <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-undertow-websockets</artifactId>
+    </dependency>
+    <dependency>
       <groupId>com.marcnuri.yakc.apis</groupId>
       <artifactId>metrics-server</artifactId>
       <version>${project.version}</version>
@@ -61,7 +65,7 @@
     <dependency>
       <groupId>com.marcnuri.yakc</groupId>
       <artifactId>quarkus-yakc-extension</artifactId>
-      <version>0.0.6</version>
+      <version>0.0.7</version>
     </dependency>
   </dependencies>
   <build>

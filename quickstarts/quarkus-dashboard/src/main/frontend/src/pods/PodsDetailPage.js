@@ -49,6 +49,18 @@ const useMetrics = pod => {
   return metrics;
 }
 
+const ActionLink = ({to, title, stylePrefix, icon}) => (
+  <Link.RouterLink
+    className='ml-2'
+    size={Link.sizes.small}
+    variant={Link.variants.outline}
+    to={to}
+    title={title}
+  >
+    <Icon stylePrefix={stylePrefix} icon={icon} className='mr-2'/>{title}
+  </Link.RouterLink>
+);
+
 const PodsDetailPage = ({pod}) => {
   const metrics = useMetrics(pod);
   const podMetrics = metrics && mts.selectors.podMetrics(metrics);
@@ -59,15 +71,20 @@ const PodsDetailPage = ({pod}) => {
       resource={pod}
       isReadyFunction={p.selectors.succeededOrContainersReady}
       actions={
-        <Link.RouterLink
-          className='ml-2'
-          size={Link.sizes.small}
-          variant={Link.variants.outline}
-          to={`/pods/${metadata.selectors.uid(pod)}/logs`}
-          title='Logs'
-        >
-          <Icon stylePrefix='far' icon='fa-file-alt' className='mr-2'/>Logs
-        </Link.RouterLink>
+        <>
+          <ActionLink
+            to={`/pods/${metadata.selectors.uid(pod)}/logs`}
+            title='Logs'
+            stylePrefix='far'
+            icon='fa-file-alt'
+          />
+          <ActionLink
+            to={`/pods/${metadata.selectors.uid(pod)}/exec`}
+            title='Exec'
+            stylePrefix='fas'
+            icon='fa-terminal'
+          />
+        </>
       }
       body={
         <Form>

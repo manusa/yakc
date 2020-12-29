@@ -17,11 +17,13 @@
 import api from './api';
 import reducer from './reducer';
 import selectors from './selectors';
+import useExec from './useExec';
 import useLogs from './useLogs';
 import List from './List'
 import PodsCard from './PodsCard';
 import PodsDetailPage from './PodsDetailPage';
 import PodsEditPage from './PodsEditPage';
+import PodsExecPage from './PodsExecPage';
 import PodsLogsPage from './PodsLogsPage';
 import PodsPage from './PodsPage';
 import StatusIcon from './StatusIcon';
@@ -31,11 +33,13 @@ const pods = {};
 pods.api = api;
 pods.reducer = reducer;
 pods.selectors = selectors;
+pods.useExec = useExec;
 pods.useLogs = useLogs;
 pods.List = List;
 pods.PodsCard = PodsCard;
 pods.PodsDetailPage = PodsDetailPage;
 pods.PodsEditPage = PodsEditPage;
+pods.PodsExecPage = PodsExecPage;
 pods.PodsLogsPage = PodsLogsPage;
 pods.PodsPage = PodsPage;
 pods.StatusIcon = StatusIcon;

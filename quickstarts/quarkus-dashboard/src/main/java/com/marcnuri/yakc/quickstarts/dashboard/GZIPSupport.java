@@ -17,26 +17,17 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard;
 
-import io.vertx.core.http.HttpServerRequest;
-
 import javax.annotation.Priority;
-import javax.inject.Inject;
 import javax.ws.rs.Priorities;
-import javax.ws.rs.core.Context;
+import javax.ws.rs.container.ContainerRequestContext;
+import javax.ws.rs.container.ContainerResponseContext;
+import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Request;
 import javax.ws.rs.ext.Provider;
-import javax.ws.rs.ext.ReaderInterceptor;
-import javax.ws.rs.ext.ReaderInterceptorContext;
-import javax.ws.rs.ext.WriterInterceptor;
-import javax.ws.rs.ext.WriterInterceptorContext;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.stream.Stream;
-import java.util.zip.GZIPOutputStream;
 
 /**
  * https://github.com/quarkusio/quarkus/issues/9671#issuecomment-704050467
@@ -46,27 +37,25 @@ import java.util.zip.GZIPOutputStream;
  *
  */
 @Provider
-public class GZIPSupport implements WriterInterceptor {
+@Priority(Priorities.HEADER_DECORATOR)
+public class GZIPSupport implements ContainerResponseFilter {
 
-  @Context
-  HttpServerRequest request;
-
-  private boolean isGZIPSupported() {
-    return Optional.ofNullable(request)
-      .map(r -> r.getHeader(HttpHeaders.ACCEPT_ENCODING))
+  private boolean isGZIPSupported(ContainerRequestContext containerRequestContext) {
+    return Optional.ofNullable(containerRequestContext)
+      .filter(r -> !r.getAcceptableMediaTypes().contains(MediaType.SERVER_SENT_EVENTS_TYPE)) // Vert.x still doesn't work
+      .map(r -> r.getHeaderString(HttpHeaders.ACCEPT_ENCODING))
       .map(s -> s.split(","))
       .map(encodings -> Arrays.stream(encodings).anyMatch("gzip"::equals))
       .orElse(false);
   }
 
   @Override
-  public void aroundWriteTo(WriterInterceptorContext context) throws IOException {
-    if (isGZIPSupported()) {
-      MultivaluedMap<String, Object> headers = context.getHeaders();
+  public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
+    if (isGZIPSupported(requestContext)) {
+      MultivaluedMap<String, Object> headers = responseContext.getHeaders();
       headers.add(HttpHeaders.CONTENT_ENCODING, "gzip");
-      OutputStream outputStream = context.getOutputStream();
-      context.setOutputStream(new GZIPOutputStream(outputStream));
+      // Do nothing
+      // GZIPEncodingInterceptor will take care of encapsulating the outputStream
     }
-    context.proceed();
   }
 }

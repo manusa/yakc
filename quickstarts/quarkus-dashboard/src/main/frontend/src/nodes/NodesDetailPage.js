@@ -59,7 +59,7 @@ const NodesDetailPage = ({node, isMinikube, pods}) => {
       path='nodes'
       resource={node}
       isReadyFunction={n.selectors.isReady}
-      actions={isMinikube && <Minikube className='h-6' />}
+      actions={isMinikube && <Minikube className='ml-2 h-6' />}
       body={
         <Form>
           <div className='w-full mb-4 flex flex-wrap justify-around'>

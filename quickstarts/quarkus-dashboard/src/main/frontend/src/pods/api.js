@@ -18,20 +18,34 @@ import {getApiURL} from '../env';
 import {deleteNamespacedResource, toJson, updateNamespacedResource} from '../fetch';
 import metadata from "../metadata";
 
-const api = {};
 
-api.metrics = async pod => {
+const logs = (namespace, name, container) => new EventSource(
+  `${getApiURL()}/pods/${namespace}/${name}/logs/${container}`
+);
+
+const metrics = async pod => {
   const response = await fetch(
     `${getApiURL()}/pods/${metadata.selectors.namespace(pod)}/${metadata.selectors.name(pod)}/metrics`);
   return await toJson(response);
 };
 
-api.logs = (namespace, name, container) => new EventSource(
-  `${getApiURL()}/pods/${namespace}/${name}/logs/${container}`
+const isAbsolute = url => /^https?:\/\//i.test(url);
+const getWsUrl = () => {
+  const apiURL = getApiURL();
+  if (isAbsolute(apiURL)) {
+    return apiURL.replace(/^http/i, 'ws');
+  }
+  const wsOrigin = window.location.origin.replace(/^http/i, 'ws');
+  return `${wsOrigin}/${apiURL.replace(/^\//, '')}`;
+}
+const exec = (namespace, name, container) => new WebSocket(
+  `${getWsUrl()}/pods/${namespace}/${name}/exec/${container}`
 );
 
-api.requestDelete = deleteNamespacedResource('pods');
-
-api.update = updateNamespacedResource('pods');
-
-export default api;
+export default {
+  exec,
+  logs,
+  metrics,
+  delete: deleteNamespacedResource('pods'),
+  update: updateNamespacedResource('pods')
+};
