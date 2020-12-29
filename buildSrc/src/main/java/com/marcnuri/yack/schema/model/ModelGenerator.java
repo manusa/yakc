@@ -95,7 +95,7 @@ class ModelGenerator {
           final String fileContents = modelTemplate.execute(templateContext);
           writeFile(key, fileContents);
         });
-    settings.getLogger().lifecycle("Generated {} api entries", schemas.size());
+    settings.getLogger().lifecycle("Generated {} model entries", schemas.size());
   }
 
   private Map<String, Object> templateContext(Entry<String, Schema> entry) {

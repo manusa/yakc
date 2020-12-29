@@ -27,6 +27,16 @@ import lombok.NonNull;
 import lombok.Singular;
 import lombok.ToString;
 
+/*
+ *
+ *
+ * FILE OVERRIDDEN DUE TO BAD DESCRIPTION FOR ingress FIELD:
+ * - It can come as null, but it's marked as required.
+ *
+ *
+ *
+ */
+
 /**
  * RouteStatus provides relevant info about the status of a route, including which routers acknowledge it.
  */
@@ -42,7 +52,6 @@ public class RouteStatus implements Model {
   /**
    * ingress describes the places where the route may be exposed. The list of ingress points may contain duplicate Host or RouterName values. Routes are considered live once they are `Ready`
    */
-  @NonNull
   @JsonProperty("ingress")
   @Singular(value = "addToIngress", ignoreNullCollections = true)
   private List<RouteIngress> ingress;
