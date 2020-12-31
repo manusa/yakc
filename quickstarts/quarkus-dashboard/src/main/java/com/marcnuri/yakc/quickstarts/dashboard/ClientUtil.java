@@ -6,20 +6,13 @@
 package com.marcnuri.yakc.quickstarts.dashboard;
 
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
-
-import com.marcnuri.yakc.api.WatchEvent;
-import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.quickstarts.dashboard.watch.RequestRestartError;
-import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
+import com.marcnuri.yakc.api.ClientErrorException;
+import com.marcnuri.yakc.api.ForbiddenException;
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.marcnuri.yakc.api.ClientErrorException;
-import com.marcnuri.yakc.api.ForbiddenException;
+import java.io.IOException;
 
 /**
  * Created by Marc Nuri on 2020-10-05.
@@ -27,8 +20,6 @@ import com.marcnuri.yakc.api.ForbiddenException;
 public class ClientUtil {
 
   private static final Logger LOG = LoggerFactory.getLogger(ClientUtil.class);
-
-  private static final long OBSERVABLE_HEAL_DELAY_SECONDS = 5L;
 
   @SafeVarargs
   public static <T> T tryWithFallback(ClientFunction<T>... functions) throws IOException {
@@ -55,35 +46,8 @@ public class ClientUtil {
     }
   }
 
-  public static Observable<WatchEvent<? extends Model>> selfHealingObservable(Watchable<? extends Model> watchable) {
-    return Observable.create(emitter -> {
-      try {
-        subscribe(emitter, watchable);
-      } catch (Exception ex) {
-        LOG.error("Error when starting subscription for {}", watchable.getClass(), ex);
-        emitter.onComplete();
-      }
-    });
-  }
-
-  private static void subscribe(
-    ObservableEmitter<WatchEvent<? extends Model>> selfHealingEmitter, Watchable<? extends Model> watchable)
-    throws IOException {
-    watchable.watch().ifPresent(watch -> watch.subscribe(
-      selfHealingEmitter::onNext,
-      error -> {
-        LOG.error("Subscription error for watchable {}: {}", watchable.getClass(), error.getMessage());
-        TimeUnit.SECONDS.sleep(OBSERVABLE_HEAL_DELAY_SECONDS);
-        selfHealingEmitter.onNext(new WatchEvent<>(WatchEvent.Type.ERROR, new RequestRestartError(watchable, error)));
-        subscribe(selfHealingEmitter, watchable);
-      },
-      () -> {
-        LOG.warn("Subscription complete for watchable {}, reconnecting...", watchable.getClass());
-        TimeUnit.SECONDS.sleep(OBSERVABLE_HEAL_DELAY_SECONDS);
-        selfHealingEmitter.onNext(new WatchEvent<>(WatchEvent.Type.ERROR, new RequestRestartError(watchable, null)));
-        subscribe(selfHealingEmitter, watchable);
-      }
-    ));
+  public static <T> Observable<T> justWithNoComplete(T object) {
+    return Observable.create(emitter -> emitter.onNext(object));
   }
 
   @FunctionalInterface

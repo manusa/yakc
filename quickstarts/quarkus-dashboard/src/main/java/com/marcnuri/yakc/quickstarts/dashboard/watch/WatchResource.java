@@ -17,20 +17,17 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.watch;
 
+import com.marcnuri.yakc.api.WatchEvent;
+import com.marcnuri.yakc.model.Model;
+import io.quarkus.runtime.annotations.RegisterForReflection;
+import io.smallrye.mutiny.Multi;
+import org.jboss.resteasy.annotations.SseElementType;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import org.jboss.resteasy.annotations.SseElementType;
-
-import com.marcnuri.yakc.api.WatchEvent;
-import com.marcnuri.yakc.model.Model;
-
-import io.quarkus.runtime.annotations.RegisterForReflection;
-import io.smallrye.mutiny.Multi;
-import io.smallrye.mutiny.converters.multi.MultiRxConverters;
 
 @Singleton
 @RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
@@ -47,7 +44,6 @@ public class WatchResource {
   @Produces(MediaType.SERVER_SENT_EVENTS)
   @SseElementType(MediaType.APPLICATION_JSON)
   public Multi<WatchEvent<? extends Model>> get() {
-    return Multi.createFrom().converter(MultiRxConverters.fromObservable(),
-      watchService.getWatch());
+    return watchService.newWatch();
   }
 }

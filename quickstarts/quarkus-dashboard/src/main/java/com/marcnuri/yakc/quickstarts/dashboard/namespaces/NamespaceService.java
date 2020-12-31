@@ -17,6 +17,7 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.namespaces;
 
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.justWithNoComplete;
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 import java.io.IOException;
@@ -63,9 +64,7 @@ public class NamespaceService implements Watchable<Namespace> {
       },
       () -> {
         if (configNamespace != null) {
-          return Observable.just(
-            new WatchEvent<>(WatchEvent.Type.ADDED, core.readNamespace(configNamespace).get())
-          );
+          return justWithNoComplete(new WatchEvent<>(WatchEvent.Type.ADDED, core.readNamespace(configNamespace).get()));
         }
         return Observable.empty();
       }

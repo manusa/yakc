@@ -36,23 +36,17 @@ import com.marcnuri.yakc.quickstarts.dashboard.routes.RouteService;
 import com.marcnuri.yakc.quickstarts.dashboard.secrets.SecretService;
 import com.marcnuri.yakc.quickstarts.dashboard.service.ServiceService;
 import com.marcnuri.yakc.quickstarts.dashboard.statefulsets.StatefulSetService;
-import io.reactivex.Observable;
-import io.reactivex.schedulers.Schedulers;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.smallrye.mutiny.Multi;
+import io.smallrye.mutiny.subscription.BackPressureStrategy;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.selfHealingObservable;
+import java.util.function.Consumer;
 
 @Singleton
 public class WatchService {
-
-  private static final Logger LOG = LoggerFactory.getLogger(WatchService.class);
 
   private final List<Watchable<? extends Model>> watchables;
 
@@ -99,13 +93,12 @@ public class WatchService {
     );
   }
 
-  public Observable<WatchEvent<? extends Model>> getWatch() {
-    final List<Observable<? extends WatchEvent<? extends Model>>> watchers = new ArrayList<>();
-    for (Watchable<? extends Model> watchable : watchables) {
-      watchers.add(selfHealingObservable(watchable).subscribeOn(Schedulers.newThread()));
-    }
-    return Observable.merge(watchers)
-      .doOnError(e -> LOG.error("Exception on Watcher", e))
-      .onErrorReturn(DashboardError::watchEvent);
+  @SuppressWarnings({"unchecked", "rawtypes", "java:S1452"})
+  public Multi<WatchEvent<? extends Model>> newWatch() {
+    final SelfHealingWatchableConsumer consumer = new SelfHealingWatchableConsumer(watchables);
+    return Multi.createFrom().emitter((Consumer)consumer, BackPressureStrategy.BUFFER)
+      .onCompletion().call(consumer::dispose)
+      .onCancellation().call(consumer::dispose)
+      .onFailure().call(consumer::dispose);
   }
 }

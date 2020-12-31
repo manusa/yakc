@@ -10,7 +10,7 @@
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
-    <version.quarkus>1.9.1.Final</version.quarkus>
+    <version.quarkus>1.10.5.Final</version.quarkus>
     <version.smallrye.reactive>0.7.0</version.smallrye.reactive>
     <version.jkube>1.0.2</version.jkube>
     <version.exec-maven-plugin>3.0.0</version.exec-maven-plugin>
