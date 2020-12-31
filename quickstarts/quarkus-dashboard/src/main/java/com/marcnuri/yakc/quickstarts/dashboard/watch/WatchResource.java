@@ -17,33 +17,46 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.watch;
 
-import com.marcnuri.yakc.api.WatchEvent;
-import com.marcnuri.yakc.model.Model;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.quarkus.runtime.annotations.RegisterForReflection;
-import io.smallrye.mutiny.Multi;
 import org.jboss.resteasy.annotations.SseElementType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.sse.Sse;
+import javax.ws.rs.sse.SseEventSink;
 
 @Singleton
 @RegisterForReflection // Quarkus doesn't generate constructors for JAX-RS Subresources
 public class WatchResource {
 
+  private static final Logger LOG = LoggerFactory.getLogger(WatchResource.class);
+
   private final WatchService watchService;
+  private final ObjectMapper objectMapper;
 
   @Inject
-  public WatchResource(WatchService watchService) {
+  public WatchResource(WatchService watchService, ObjectMapper objectMapper) {
     this.watchService = watchService;
+    this.objectMapper = objectMapper;
   }
 
   @GET
   @Produces(MediaType.SERVER_SENT_EVENTS)
   @SseElementType(MediaType.APPLICATION_JSON)
-  public Multi<WatchEvent<? extends Model>> get() {
-    return watchService.newWatch();
+  public void get(@Context Sse sse, @Context SseEventSink sseEventSink) {
+    watchService.newWatch().subscribe().with(we -> {
+      try {
+        sseEventSink.send(sse.newEvent(objectMapper.writeValueAsString(we)));
+      } catch (Exception e) {
+        LOG.error("Error serializing object", e);
+      }
+    });
   }
 }
