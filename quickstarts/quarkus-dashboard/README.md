@@ -29,19 +29,25 @@ $ minikube service yakc-dashboard
 
 You can test YAKC Kubernetes Dashboard by taking advantage of the OpenShift getting started Katacoda.
 
-Access the Course: https://learn.openshift.com/introduction/cluster-access/
+Access the Course (from Red Hat): https://learn.openshift.com/introduction/cluster-access/
+
+Or access the Course (from Katacoda): https://www.katacoda.com/openshift/courses/developing-on-openshift/getting-started/
 
 When the terminal loads, apply the provided YAKC Kubernetes Dashboard configuration:
 
 ```shell script
+#
 # Deploy the application using https://hub.docker.com/r/marcnuri/yakc-kubernetes-dashboard SNAPSHOT
+#
 $ oc create -f https://raw.githubusercontent.com/manusa/yakc/master/quickstarts/quarkus-dashboard/docs/yakc-kubernetes-dashboard.openshift-4.yml
-service/yakc-dashboard created
+service/yakc-quarkus-kubernetes-dashboard created
 clusterrolebinding.rbac.authorization.k8s.io/yakc-kubernetes-dashboard-cluster-admin created
-deployment.apps/quarkus-kubernetes-dashboard created
-route.route.openshift.io/yakc-dashboard created
+deployment.apps/yakc-quarkus-kubernetes-dashboard created
+route.route.openshift.io/yakc-quarkus-kubernetes-dashboard created
+#
 # Retrieve URL for created route
-$ echo "http://$(oc get route yakc-dashboard -o jsonpath='{.spec.host}')"
+#
+$ echo "http://$(oc get route yakc-quarkus-kubernetes-dashboard -o jsonpath='{.spec.host}')"
 http://yakc-dashboard-default.1337-13-kota037.environments.katacoda.com
 ```
 

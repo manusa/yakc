@@ -7,9 +7,9 @@ items:
   metadata:
     labels:
       expose: "true"
-      app: quarkus-kubernetes-dashboard
+      app: yakc-quarkus-kubernetes-dashboard
       group: com.marcnuri.yakc.quickstart
-    name: yakc-dashboard
+    name: yakc-quarkus-kubernetes-dashboard
   spec:
     ports:
     - name: http
@@ -17,14 +17,14 @@ items:
       protocol: TCP
       targetPort: 8080
     selector:
-      app: quarkus-kubernetes-dashboard
+      app: yakc-quarkus-kubernetes-dashboard
       group: com.marcnuri.yakc.quickstarts
     type: NodePort
 - apiVersion: rbac.authorization.k8s.io/v1
   kind: ClusterRoleBinding
   metadata:
     labels:
-      app: quarkus-kubernetes-dashboard
+      app: yakc-quarkus-kubernetes-dashboard
       group: com.marcnuri.yakc.quickstarts
     name: yakc-kubernetes-dashboard-cluster-admin
   roleRef:
@@ -39,20 +39,20 @@ items:
   kind: Deployment
   metadata:
     labels:
-      app: quarkus-kubernetes-dashboard
+      app: yakc-quarkus-kubernetes-dashboard
       group: com.marcnuri.yakc.quickstarts
-    name: quarkus-kubernetes-dashboard
+    name: yakc-quarkus-kubernetes-dashboard
   spec:
     replicas: 1
     revisionHistoryLimit: 2
     selector:
       matchLabels:
-        app: quarkus-kubernetes-dashboard
+        app: yakc-quarkus-kubernetes-dashboard
         group: com.marcnuri.yakc.quickstarts
     template:
       metadata:
         labels:
-          app: quarkus-kubernetes-dashboard
+          app: yakc-quarkus-kubernetes-dashboard
           group: com.marcnuri.yakc.quickstarts
       spec:
         containers:
@@ -69,7 +69,7 @@ items:
             value: "true"
           image: marcnuri/yakc-kubernetes-dashboard:latest
           imagePullPolicy: Always
-          name: quarkus
+          name: yakc-quarkus-kubernetes-dashboard
           ports:
           - containerPort: 8080
             name: http
@@ -80,13 +80,13 @@ items:
   kind: Route
   metadata:
     labels:
-      app: quarkus-kubernetes-dashboard
+      app: yakc-quarkus-kubernetes-dashboard
       group: com.marcnuri.yakc.quickstart
-    name: yakc-dashboard
+    name: yakc-quarkus-kubernetes-dashboard
   spec:
     path: /
     to:
       kind: Service
-      name: yakc-dashboard
+      name: yakc-quarkus-kubernetes-dashboard
     port:
       targetPort: 8080
