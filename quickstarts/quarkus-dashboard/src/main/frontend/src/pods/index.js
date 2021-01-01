@@ -17,6 +17,7 @@
 import api from './api';
 import reducer from './reducer';
 import selectors from './selectors';
+import useContainers from './useContainers';
 import useExec from './useExec';
 import useLogs from './useLogs';
 import List from './List'
@@ -33,6 +34,7 @@ const pods = {};
 pods.api = api;
 pods.reducer = reducer;
 pods.selectors = selectors;
+pods.useContainers = useContainers;
 pods.useExec = useExec;
 pods.useLogs = useLogs;
 pods.List = List;

@@ -21,34 +21,47 @@ import {FitAddon} from 'xterm-addon-fit';
 import {WebLinksAddon} from 'xterm-addon-web-links';
 import p from './index';
 
+const startTerminal = (ref, namespace, name, selectedContainer) => {
+  const xterm = new Terminal();
+  const fitAddon = new FitAddon();
+  xterm.loadAddon(fitAddon);
+  xterm.loadAddon(new WebLinksAddon());
+  xterm.open(ref.current);
+  fitAddon.fit();
+  const ws = p.api.exec(namespace, name, selectedContainer?.name);
+  const attachAddon = new AttachAddon(ws);
+  xterm.loadAddon(attachAddon);
+  xterm.focus();
+  xterm.resizeEventListener = () => {
+    fitAddon.fit();
+  };
+  window.addEventListener('resize', xterm.resizeEventListener);
+  xterm.selectedContainer = selectedContainer;
+  return xterm;
+}
+
 const useExec = (namespace, name, containers) => {
   const ref = useRef(null);
+  const {selectedContainer, setSelectedContainer} = p.useContainers(containers);
   const [terminal, setTerminal] = useState(null);
   useEffect(() => {
-    if (!terminal && ref.current && namespace && name && containers) {
-      const xterm = new Terminal();
-      const fitAddon = new FitAddon();
-      xterm.loadAddon(fitAddon);
-      xterm.loadAddon(new WebLinksAddon());
-      xterm.open(ref.current);
-      fitAddon.fit();
-      const ws = p.api.exec(namespace, name, containers[0]?.name);
-      const attachAddon = new AttachAddon(ws);
-      xterm.loadAddon(attachAddon);
-      setTerminal(xterm);
-      xterm.focus();
-      xterm.resizeEventListener = () => {
-        fitAddon.fit();
-      };
-      window.addEventListener('resize', xterm.resizeEventListener);
-    }
-  }, [terminal, setTerminal, namespace, name, containers]);
-  useEffect(() => () => {
-    if (terminal && terminal.resizeEventListener) {
+    if (!terminal && ref.current && namespace && name && selectedContainer) {
+      setTerminal(startTerminal(ref, namespace, name, selectedContainer));
+    } else if (terminal && terminal.selectedContainer !== selectedContainer) {
       window.removeEventListener('resize', terminal.resizeEventListener);
+      terminal.dispose();
+      setTerminal(startTerminal(ref, namespace, name, selectedContainer));
+    }
+  }, [terminal, setTerminal, namespace, name, selectedContainer]);
+  useEffect(() => () => {
+    if (terminal) {
+      if (terminal.resizeEventListener) {
+        window.removeEventListener('resize', terminal.resizeEventListener);
+      }
+      terminal.dispose();
     }
   }, [terminal])
-  return {ref};
+  return {ref, selectedContainer, setSelectedContainer};
 };
 
 export default useExec;

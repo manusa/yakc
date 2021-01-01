@@ -14,9 +14,9 @@
  * limitations under the License.
  *
  */
-import {useEffect, useRef, useState} from "react";
-import throttle from "lodash/throttle";
-import p from "./index";
+import {useEffect, useRef, useState} from 'react';
+import throttle from 'lodash/throttle';
+import p from './index';
 
 const LOADING_MESSAGE = 'Loading logs...';
 
@@ -39,16 +39,11 @@ const initEventSource = (namespace, name, selectedContainer, throttledSetLog) =>
 
 const useLogs = (namespace, name, containers) => {
   const listRef = useRef();
-  const [selectedContainer, setSelectedContainer] = useState(null);
+  const {selectedContainer, setSelectedContainer} = p.useContainers(containers);
   const [log, setLog] = useState([LOADING_MESSAGE]);
   const [follow, setFollow] = useState(true);
   const throttledSetLog = throttle(setLog, 100, {trailing: true});
   const [eventSource, setEventSource] = useState();
-  useEffect(() => {
-    if (selectedContainer === null && containers && containers.length > 0) {
-      setSelectedContainer(containers[0]);
-    }
-  }, [containers, selectedContainer, setSelectedContainer]);
   useEffect(() => {
     if (!eventSource && namespace && name && selectedContainer) {
       setEventSource(initEventSource(namespace, name, selectedContainer, throttledSetLog));
