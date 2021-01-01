@@ -23,7 +23,7 @@ import ResourceDetailPage from '../components/ResourceDetailPage';
 
 const NamespacesDetailPage = ({namespace}) => (
   <ResourceDetailPage
-    name='Namespaces'
+    kind='Namespaces'
     path='namespaces'
     resource={namespace}
     isReadyFunction={ns.selectors.isReady}

@@ -25,7 +25,7 @@ import Link from '../components/Link';
 
 const PersistentVolumesDetailPage = ({persistentVolume}) => (
   <ResourceDetailPage
-    name='PersistentVolumes'
+    kind='PersistentVolumes'
     path='persistentvolumes'
     resource={persistentVolume}
     body={

@@ -60,7 +60,7 @@ const DataField = ({label, value}) => {
 
 const SecretsDetailPage = ({secret}) => (
   <ResourceDetailPage
-    name='Secrets'
+    kind='Secrets'
     path='secrets'
     resource={secret}
     body={

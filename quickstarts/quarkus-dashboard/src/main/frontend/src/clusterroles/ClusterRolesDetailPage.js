@@ -25,7 +25,7 @@ import ResourceDetailPage from '../components/ResourceDetailPage';
 
 const ClusterRolesDetailPage = ({clusterRole}) => (
   <ResourceDetailPage
-    name='ClusterRoles'
+    kind='ClusterRoles'
     path='clusterroles'
     resource={clusterRole}
     body={

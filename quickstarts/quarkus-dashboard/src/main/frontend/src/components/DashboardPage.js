@@ -18,8 +18,9 @@ import React, {useState} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import redux from '../redux';
-import apis from "../apis";
+import apis from '../apis';
 import i from './icons';
+import metadata from '../metadata';
 import nm from '../nodes';
 import sidebar from '../sidebar';
 import Alert from './Alert';
@@ -100,6 +101,30 @@ const DashboardPage = ({
     </div>
   );
 };
+
+DashboardPage.Title = ({
+  path,
+  kind,
+  namespace,
+  name,
+  resource,
+  isReadyFunction,
+  children
+}) => (
+  <div className='flex items-center'>
+    <Link.ResourceLink to={`/${path}`}>{kind}</Link.ResourceLink>
+    {namespace && <>&nbsp;- {namespace}</>}
+    {name && <>&nbsp;- {name}</>}
+    {!name && resource && <>&nbsp;- {metadata.selectors.name(resource)}</>}
+    {isReadyFunction && (
+      <Icon
+        className={`ml-2 ${isReadyFunction(resource) ? 'text-green-500' : 'text-red-500'}`}
+        icon={isReadyFunction(resource) ? 'fa-check' : 'fa-exclamation-circle'}
+      />
+    )}
+    {children}
+  </div>
+);
 
 
 const mapStateToProps = ({apiGroups, nodes, ui: {offline, error}}) => ({

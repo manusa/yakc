@@ -24,7 +24,7 @@ import ResourceDetailPage from '../components/ResourceDetailPage';
 
 const RolesDetailPage = ({role}) => (
   <ResourceDetailPage
-    name='Roles'
+    kind='Roles'
     path='roles'
     resource={role}
     body={

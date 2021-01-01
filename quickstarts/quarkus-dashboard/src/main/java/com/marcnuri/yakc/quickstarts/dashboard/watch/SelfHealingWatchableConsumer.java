@@ -42,14 +42,17 @@ import java.util.function.Consumer;
  * re-subscribing even if the underlying connection is closed by the client.
  *
  * <p> It also allows active subscriptions to detect this situation and automatically dispose
- * the subscription threads when the connection is closed.
+ * the subscription threads when the connection is closed by the client.
  *
- * <p> The class was added as a result of adding the quarkus-undertow extension, since RESTEasy now
+ * <p> The class was added as a result/consequence of adding the quarkus-undertow extension, since RESTEasy now
  * runs as a filter with asynchronous non-blocking NIO threads and IOExceptions are silently discarded.
- * In the previous scenario (RESTEasy runs on top of Vert.x), whenever the underlaying connection is closed by
- * the client, the IOException cascades and all of the subscription Threads are automatically interrupted.
+ *
+ * <p> In the previous scenario (RESTEasy runs on top of Vert.x HTTP server), whenever the underlying connection
+ * is closed by  * the client, the IOException cascades and all of the subscription Threads are automatically
+ * interrupted.
  *
  * @see <a href="https://quarkus.io/guides/http-reference">QUARKUS - HTTP REFERENCE</a>
+ * @see <a href="https://quarkus.io/guides/rest-json#servlet-compatibility">RESTEasy Servlet</a>
  */
 public class SelfHealingWatchableConsumer implements Consumer<MultiEmitter<WatchEvent<? extends Model>>> {
 

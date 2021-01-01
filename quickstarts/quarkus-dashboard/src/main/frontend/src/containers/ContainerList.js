@@ -16,8 +16,8 @@
  */
 import React from 'react';
 import metrics from '../metrics';
-import Icon from './Icon';
-import Table from './Table';
+import Icon from '../components/Icon';
+import Table from '../components/Table';
 
 const containerHeaders = [
   <span><Icon icon='fa-id-card' /> Name</span>,

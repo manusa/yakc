@@ -22,7 +22,7 @@ import ResourceDetailPage from '../components/ResourceDetailPage';
 
 const IngressesDetailPage = ({ingress}) => (
   <ResourceDetailPage
-    name='Ingresses'
+    kind='Ingresses'
     path='ingresses'
     resource={ingress}
     body={

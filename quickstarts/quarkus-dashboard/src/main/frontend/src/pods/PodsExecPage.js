@@ -27,7 +27,11 @@ const PodsExecPage = ({namespace, name, containers}) => {
   const {ref} = p.useExec(namespace, name, containers);
   return (
     <DashboardPage
-      title={`Pods - ${namespace} - ${name} - Terminal`}
+      title={
+        <DashboardPage.Title path='pods' kind='Pods' namespace={namespace} name={name}>
+          &nbsp;- Terminal
+        </DashboardPage.Title>
+      }
       className='pods-logs-page'
     >
       <div className='absolute inset-0 md:p-4 flex flex-col'>

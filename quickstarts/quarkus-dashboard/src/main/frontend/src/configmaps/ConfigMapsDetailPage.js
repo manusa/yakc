@@ -33,7 +33,7 @@ const DataField = ({label, value}) => (
 )
 const ConfigMapsDetailPage = ({configMap}) => (
   <ResourceDetailPage
-    name='ConfigMaps'
+    kind='ConfigMaps'
     path='configmaps'
     resource={configMap}
     body={

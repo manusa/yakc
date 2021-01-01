@@ -17,10 +17,10 @@
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
-import mts from "../metrics";
+import cnt from '../containers';
+import mts from '../metrics';
 import p from './';
 import Card from '../components/Card';
-import ContainerList from '../components/ContainerList';
 import Form from '../components/Form';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
@@ -66,7 +66,7 @@ const PodsDetailPage = ({pod}) => {
   const podMetrics = metrics && mts.selectors.podMetrics(metrics);
   return (
     <ResourceDetailPage
-      name='Pods'
+      kind='Pods'
       path='pods'
       resource={pod}
       isReadyFunction={p.selectors.succeededOrContainersReady}
@@ -122,7 +122,7 @@ const PodsDetailPage = ({pod}) => {
         </Form>
       }
     >
-      <ContainerList
+      <cnt.ContainerList
         title='Containers'
         titleVariant={Card.titleVariants.medium}
         className='mt-2'

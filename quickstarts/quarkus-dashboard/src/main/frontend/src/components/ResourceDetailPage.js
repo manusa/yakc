@@ -37,7 +37,7 @@ const downloadResource = resource => {
 };
 
 const ResourceDetailPage = ({
-  name,
+  kind,
   path,
   resource,
   actions,
@@ -50,17 +50,8 @@ const ResourceDetailPage = ({
   return (
     <DashboardPage
       title={
-        <div className='flex items-center'>
-          <Link.ResourceLink to={`/${path}`}>{name}</Link.ResourceLink>
-          {namespace && <>&nbsp;- {namespace}</>}
-          &nbsp;- {metadata.selectors.name(resource)}
-          {isReadyFunction && (
-            <Icon
-              className={`ml-2 ${isReadyFunction(resource) ? 'text-green-500' : 'text-red-500'}`}
-              icon={isReadyFunction(resource) ? 'fa-check' : 'fa-exclamation-circle'}
-            />
-          )}
-        </div>
+        <DashboardPage.Title
+          path={path} kind={kind} namespace={namespace} resource={resource} isReadyFunction={isReadyFunction} />
       }
     >
       <Card>

@@ -59,7 +59,7 @@ const CustomResourceDefinitionsDetailPage = ({customResourceDefinition}) => {
   const applicableVersion = version ? version : crd.selectors.specVersionsLatest(customResourceDefinition);
   return (
     <ResourceDetailPage
-      name='CustomResourceDefinitions'
+      kind='CustomResourceDefinitions'
       path='customresourcedefinitions'
       resource={customResourceDefinition}
       body={

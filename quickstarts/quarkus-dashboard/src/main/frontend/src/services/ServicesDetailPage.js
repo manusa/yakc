@@ -40,7 +40,7 @@ const ExternalIps = ({ips}) => (
 
 const ServicesDetailPage = ({service}) => (
   <ResourceDetailPage
-    name='Services'
+    kind='Services'
     path='services'
     resource={service}
     body={

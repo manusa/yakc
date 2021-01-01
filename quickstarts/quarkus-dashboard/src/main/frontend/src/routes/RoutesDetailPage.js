@@ -23,7 +23,7 @@ import ResourceDetailPage from '../components/ResourceDetailPage';
 
 const RoutesDetailPage = ({route}) => (
   <ResourceDetailPage
-    name='Routes'
+    kind='Routes'
     path='routes'
     resource={route}
     body={

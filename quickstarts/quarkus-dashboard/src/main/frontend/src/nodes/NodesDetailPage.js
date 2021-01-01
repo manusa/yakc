@@ -55,7 +55,7 @@ const NodesDetailPage = ({node, isMinikube, pods}) => {
     .reduce((acc, c) => acc + metrics.selectors.quantityToScalar(c), 0);
   return (
     <ResourceDetailPage
-      name='Nodes'
+      kind='Nodes'
       path='nodes'
       resource={node}
       isReadyFunction={n.selectors.isReady}

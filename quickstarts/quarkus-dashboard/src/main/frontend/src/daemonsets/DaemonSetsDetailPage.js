@@ -17,10 +17,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
+import cnt from '../containers';
 import ds from './';
 import pods from '../pods';
 import Card from '../components/Card';
-import ContainerList from '../components/ContainerList';
 import Form from '../components/Form';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
@@ -28,7 +28,7 @@ import ResourceDetailPage from '../components/ResourceDetailPage';
 
 const DaemonSetsDetailPage = ({daemonSet}) => (
   <ResourceDetailPage
-    name='DaemonSets'
+    kind='DaemonSets'
     path='daemonsets'
     resource={daemonSet}
     isReadyFunction={ds.selectors.isReady}
@@ -51,7 +51,7 @@ const DaemonSetsDetailPage = ({daemonSet}) => (
       </Form>
     }
   >
-    <ContainerList
+    <cnt.ContainerList
       title='Containers'
       titleVariant={Card.titleVariants.medium}
       className='mt-2'

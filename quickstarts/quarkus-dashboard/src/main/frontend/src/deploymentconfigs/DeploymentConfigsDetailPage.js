@@ -17,12 +17,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
+import cnt from '../containers';
 import dc from './';
 import pods from '../pods';
 import rs from '../replicasets';
 import rc from '../replicationcontrollers';
 import Card from '../components/Card';
-import ContainerList from '../components/ContainerList';
 import Form from '../components/Form';
 import ResourceDetailPage from '../components/ResourceDetailPage';
 import Link from '../components/Link';
@@ -30,7 +30,7 @@ import Icon from '../components/Icon';
 
 const DeploymentConfigsDetailPage = ({deploymentConfig, replicationControllersUids}) => (
   <ResourceDetailPage
-    name='DeploymentConfigs'
+    kind='DeploymentConfigs'
     path='deploymentconfigs'
     resource={deploymentConfig}
     isReadyFunction={dc.selectors.isReady}
@@ -58,7 +58,7 @@ const DeploymentConfigsDetailPage = ({deploymentConfig, replicationControllersUi
       </Form>
     }
   >
-    <ContainerList
+    <cnt.ContainerList
       title='Containers'
       titleVariant={Card.titleVariants.medium}
       className='mt-2'

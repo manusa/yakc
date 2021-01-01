@@ -20,10 +20,10 @@ import {AutoSizer, List} from 'react-virtualized';
 import Convert from 'ansi-to-html';
 import dompurify from 'dompurify';
 import metadata from '../metadata';
+import cnt from '../containers';
 import p from '../pods';
 import Card from '../components/Card';
 import DashboardPage from '../components/DashboardPage';
-import Dropdown from '../components/Dropdown';
 import Icon from '../components/Icon';
 import Link from '../components/Link';
 import Switch from '../components/Switch';
@@ -45,17 +45,6 @@ const downloadLogs = (log, name, selectedContainer) => {
   URL.revokeObjectURL(url);
 };
 
-const ContainerDropdown = ({containers, selectedContainer, setSelectedContainer}) => (
-  <Dropdown
-    text={selectedContainer?.name ?? ''}
-    closeOnPanelClick={true}
-  >
-    {containers.map(c =>
-      <Dropdown.Item key={c.name} onClick={() => setSelectedContainer(c)}>{c.name}</Dropdown.Item>
-    )}
-  </Dropdown>
-);
-
 const PodsLogsPage = ({uid, namespace, name, containers}) => {
   const {
     listRef, log, follow, setFollow, selectedContainer, setSelectedContainer
@@ -66,7 +55,11 @@ const PodsLogsPage = ({uid, namespace, name, containers}) => {
   );
   return (
     <DashboardPage
-      title={`Pods - ${namespace} - ${name} - Logs`}
+      title={
+        <DashboardPage.Title path='pods' kind='Pods' namespace={namespace} name={name}>
+          &nbsp;- Logs
+        </DashboardPage.Title>
+      }
       className='pods-logs-page'
     >
       <div className='absolute inset-0 md:p-4 flex flex-col'>
@@ -77,8 +70,8 @@ const PodsLogsPage = ({uid, namespace, name, containers}) => {
                 Logs
                 <Link.RouterLink className='ml-2' to={`/pods/${uid}`}>{name}</Link.RouterLink>
               </span>
-              <ContainerDropdown
-                containers={containers} setSelectedContainer={setSelectedContainer} selectedContainer={selectedContainer}
+              <cnt.ContainerDropdown
+                containers={containers} onContainerSelect={setSelectedContainer} selectedContainer={selectedContainer}
               />
             </div>
             <div className='justify-self-end text-sm font-normal flex items-center'>
