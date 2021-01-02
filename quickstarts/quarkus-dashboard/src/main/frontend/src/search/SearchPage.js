@@ -24,6 +24,7 @@ import d from '../deployments';
 import dc from '../deploymentconfigs';
 import ds from '../daemonsets';
 import i from '../ingresses';
+import j from '../jobs';
 import ns from '../namespaces';
 import p from '../pods';
 import pvc from '../persistentvolumeclaims';
@@ -61,6 +62,7 @@ const Results = ({query, selectedNamespace}) => {
       <d.List {...commonProps} title='Deployments' nameLike={query} namespace={selectedNamespace} />
       <dc.List {...commonProps} title='DeploymentConfigs' nameLike={query} namespace={selectedNamespace} />
       <ds.List {...commonProps} title='DaemonSets' nameLike={query} namespace={selectedNamespace} />
+      <j.List {...commonProps} title='Jobs' nameLike={query} namespace={selectedNamespace} />
       <ss.List {...commonProps} title='StatefulSets' nameLike={query} namespace={selectedNamespace} />
       <rs.List {...commonProps} title='ReplicaSets' nameLike={query} namespace={selectedNamespace} />
       <rc.List {...commonProps} title='ReplicationControllers' nameLike={query} namespace={selectedNamespace} />

@@ -28,6 +28,7 @@ import dc from './deploymentconfigs'
 import deployments from './deployments';
 import events from './events';
 import ing from './ingresses';
+import job from './jobs';
 import ns from './namespaces';
 import nodes from './nodes';
 import pvc from './persistentvolumeclaims';
@@ -66,6 +67,7 @@ const store = createStore(combineReducers({
   deployments: deployments.reducer,
   events: events.reducer,
   ingresses: ing.reducer,
+  jobs: job.reducer,
   namespaces: ns.reducer,
   nodes: nodes.reducer,
   persistentVolumeClaims: pvc.reducer,

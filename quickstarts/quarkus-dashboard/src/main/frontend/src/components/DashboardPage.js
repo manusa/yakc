@@ -109,6 +109,10 @@ DashboardPage.Title = ({
   name,
   resource,
   isReadyFunction,
+  readyIcon = 'fa-check',
+  readyClassName = 'text-green-500',
+  notReadyClassName = 'text-red-500',
+  notReadyIcon = 'fa-exclamation-circle',
   children
 }) => (
   <div className='flex items-center'>
@@ -118,8 +122,8 @@ DashboardPage.Title = ({
     {!name && resource && <>&nbsp;- {metadata.selectors.name(resource)}</>}
     {isReadyFunction && (
       <Icon
-        className={`ml-2 ${isReadyFunction(resource) ? 'text-green-500' : 'text-red-500'}`}
-        icon={isReadyFunction(resource) ? 'fa-check' : 'fa-exclamation-circle'}
+        className={`ml-2 ${isReadyFunction(resource) ? readyClassName : notReadyClassName}`}
+        icon={isReadyFunction(resource) ? readyIcon : notReadyIcon}
       />
     )}
     {children}

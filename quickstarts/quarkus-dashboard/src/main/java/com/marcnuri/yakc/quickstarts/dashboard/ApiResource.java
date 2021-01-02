@@ -28,6 +28,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentResource;
 import com.marcnuri.yakc.quickstarts.dashboard.deploymentconfigs.DeploymentConfigResource;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
 import com.marcnuri.yakc.quickstarts.dashboard.ingresses.IngressResource;
+import com.marcnuri.yakc.quickstarts.dashboard.jobs.JobResource;
 import com.marcnuri.yakc.quickstarts.dashboard.namespaces.NamespaceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeResource;
 import com.marcnuri.yakc.quickstarts.dashboard.persistentvolumeclaims.PersistentVolumeClaimResource;
@@ -62,6 +63,7 @@ public class ApiResource {
   @Inject DeploymentResource deploymentResource;
   @Inject EventResource eventResource;
   @Inject IngressResource ingressResource;
+  @Inject JobResource jobResource;
   @Inject NamespaceResource namespaceResource;
   @Inject NodeResource nodeResource;
   @Inject PersistentVolumeClaimResource persistentVolumeClaimResource;
@@ -129,6 +131,11 @@ public class ApiResource {
   @Path("/ingresses")
   public IngressResource getIngressResource() {
     return ingressResource;
+  }
+
+  @Path("/jobs")
+  public JobResource getJobResource() {
+    return jobResource;
   }
 
   @Path("/namespaces")

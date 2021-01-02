@@ -22,6 +22,7 @@ import CustomResourceDefinition from './CustomResourceDefinition';
 import DaemonSet from './DaemonSet';
 import Deployment from './Deployment';
 import Ingress from './Ingress';
+import Job from './Job';
 import Kubernetes from './Kubernetes';
 import Minikube from './Minikube';
 import Namespace from './Namespace';
@@ -46,6 +47,7 @@ icons.DaemonSet = DaemonSet;
 icons.DeploymentConfig = ({...props}) => <Deployment kubernetesColor='#db212e' {...props} />;
 icons.Deployment = Deployment
 icons.Ingress = Ingress;
+icons.Job = Job;
 icons.Kubernetes = Kubernetes;
 icons.Minikube = Minikube;
 icons.Namespace = Namespace;

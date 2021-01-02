@@ -43,15 +43,15 @@ const ResourceDetailPage = ({
   actions,
   body,
   isReadyFunction,
+  title,
   editable = true,
   children
 }) => {
   const namespace = metadata.selectors.namespace(resource);
   return (
     <DashboardPage
-      title={
-        <DashboardPage.Title
-          path={path} kind={kind} namespace={namespace} resource={resource} isReadyFunction={isReadyFunction} />
+      title={title ?? <DashboardPage.Title
+        path={path} kind={kind} namespace={namespace} resource={resource} isReadyFunction={isReadyFunction} />
       }
     >
       <Card>

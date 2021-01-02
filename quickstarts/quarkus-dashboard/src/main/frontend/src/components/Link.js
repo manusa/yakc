@@ -77,6 +77,7 @@ Link.DaemonSet = ({...props}) => <Link.ResourceLink Icon={i.DaemonSet} {...props
 Link.DeploymentConfig = ({...props}) => <Link.ResourceLink Icon={i.DeploymentConfig} {...props} />;
 Link.Deployment = ({...props}) => <Link.ResourceLink Icon={i.Deployment} {...props} />;
 Link.Ingress = ({...props}) => <Link.ResourceLink Icon={i.Ingress} {...props} />;
+Link.Job = ({...props}) => <Link.ResourceLink Icon={i.Job} {...props} />;
 Link.Namespace = ({...props}) => <Link.ResourceLink Icon={i.Namespace} {...props} />;
 Link.Node = ({...props}) => <Link.ResourceLink Icon={i.Node} {...props} />;
 Link.PersistentVolume = ({...props}) => <Link.ResourceLink Icon={i.PersistentVolume} {...props} />;

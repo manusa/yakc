@@ -55,6 +55,10 @@ const EventName = ({event}) => {
       Component = Link.Ingress;
       url = `/ingresses/${uid}`;
       break;
+    case 'Job':
+      Component = Link.Job;
+      url = `/jobs/${uid}`;
+      break;
     case 'Node':
       Component = Link.Node;
       url = `/nodes/${uid}`;

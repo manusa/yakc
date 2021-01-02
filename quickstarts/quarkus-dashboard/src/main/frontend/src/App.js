@@ -26,6 +26,7 @@ import dc from './deploymentconfigs';
 import ds from './daemonsets';
 import deployments from './deployments';
 import ingresses from './ingresses';
+import jobs from './jobs';
 import nodes from './nodes';
 import ns from './namespaces';
 import pvc from './persistentvolumeclaims';
@@ -116,6 +117,9 @@ const App = ({dispatch}) => {
           <Route exact path='/ingresses' component={ingresses.IngressesPage} />
           <Route exact path='/ingresses/:uid' component={ingresses.IngressesDetailPage} />
           <Route exact path='/ingresses/:uid/edit' component={ingresses.IngressEditPage} />
+          <Route exact path='/jobs' component={jobs.JobsPage} />
+          <Route exact path='/jobs/:uid' component={jobs.JobsDetailPage} />
+          <Route exact path='/jobs/:uid/edit' component={jobs.JobsEditPage} />
           <Route exact path='/namespaces' component={ns.NamespacesPage} />
           <Route exact path='/namespaces/:uidOrName' component={ns.NamespacesDetailPage} />
           <Route exact path='/nodes' component={nodes.NodesPage} />
