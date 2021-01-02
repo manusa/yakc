@@ -24,7 +24,7 @@ import Link from '../components/Link';
 
 const ClusterRoleBindingsDetailPage = ({clusterRoleBinding}) => (
   <ResourceDetailPage
-    name='ClusterRoleBindings'
+    kind='ClusterRoleBindings'
     path='clusterrolebindings'
     resource={clusterRoleBinding}
     body={

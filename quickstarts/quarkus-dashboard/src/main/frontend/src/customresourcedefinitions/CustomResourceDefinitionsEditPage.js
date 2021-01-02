@@ -22,6 +22,11 @@ import Link from '../components/Link';
 
 const CustomResourceDefinitionsEditPage = ({match: {params: {uid}}}) => (
   <ResourceEditPage
+    kind='CustomResourceDefinitions'
+    path='customresourcedefinitions'
+    dashboardPageTitle={resource => <crd.DashboardPageTitle customResourceDefinition={resource}>
+      &nbsp;- Edit
+    </crd.DashboardPageTitle>}
     cardTitle={resource =>
       <Link.RouterLink to={`/customresourcedefinitions/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
     }

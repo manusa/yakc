@@ -22,6 +22,8 @@ import Link from '../components/Link';
 
 const StatefulSetsEditPage = ({match: {params: {uid}}}) => (
   <ResourceEditPage
+    kind='StatefulSets'
+    path='statefulsets'
     cardTitle={resource =>
       <Link.RouterLink to={`/statefulsets/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
     }

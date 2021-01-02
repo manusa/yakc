@@ -21,6 +21,7 @@ import {combineReducers, createStore} from 'redux';
 import apis from './apis';
 import crb from './clusterrolebindings';
 import cRoles from './clusterroles';
+import cv from './clusterversions';
 import configMaps from './configmaps';
 import crd from './customresourcedefinitions'
 import ds from './daemonsets';
@@ -60,6 +61,7 @@ const store = createStore(combineReducers({
   apiGroups: apis.apiGroupsReducer,
   clusterRoleBindings: crb.reducer,
   clusterRoles: cRoles.reducer,
+  clusterVersions: cv.reducer,
   configMaps: configMaps.reducer,
   customResourceDefinitions: crd.reducer,
   daemonSets: ds.reducer,

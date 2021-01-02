@@ -28,6 +28,9 @@ import Alert from './Alert';
 import useEditor from "./editor/useEditor";
 
 const ResourceEditPage = ({
+  kind,
+  path,
+  dashboardPageTitle,
   cardTitle = () => 'Edit - Resource',
   save,
   resourceFromState
@@ -49,7 +52,11 @@ const ResourceEditPage = ({
   const name = md.selectors.name(resource);
   return (
     <DashboardPage
-      title={`Edit ${resource?.kind ? ` - ${resource.kind}` : ''} ${namespace ? ` - ${namespace}` : ''} - ${name}`}
+      title={dashboardPageTitle ? dashboardPageTitle(resource) :
+        <DashboardPage.Title path={path} kind={kind} namespace={namespace} name={name}>
+          &nbsp;- Edit
+        </DashboardPage.Title>
+      }
     >
       <div className='absolute inset-0 md:p-4 flex flex-col'>
         <Card className='flex-1 flex flex-col'>

@@ -56,11 +56,14 @@ const useCustomResourceList = customResourceDefinition => {
 const CustomResourceDefinitionsDetailPage = ({customResourceDefinition}) => {
   const [customResourceList, setCustomResourceList, version, changeVersion] =
     useCustomResourceList(customResourceDefinition);
+  const kind = 'CustomResourceDefinitions';
+  const path ='customresourcedefinitions';
   const applicableVersion = version ? version : crd.selectors.specVersionsLatest(customResourceDefinition);
   return (
     <ResourceDetailPage
-      kind='CustomResourceDefinitions'
-      path='customresourcedefinitions'
+      kind={kind}
+      path={path}
+      title={<crd.DashboardPageTitle customResourceDefinition={customResourceDefinition}/>}
       resource={customResourceDefinition}
       body={
         <Form>

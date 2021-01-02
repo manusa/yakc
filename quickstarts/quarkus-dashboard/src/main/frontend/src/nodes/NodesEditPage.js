@@ -22,6 +22,8 @@ import Link from '../components/Link';
 
 const NodesEditPage = ({match: {params: {uid}}}) => (
   <ResourceEditPage
+    kind='Nodes'
+    path='nodes'
     cardTitle={resource =>
       <Link.RouterLink to={`/nodes/${md.selectors.name(resource)}`}>{md.selectors.name(resource)}</Link.RouterLink>
     }

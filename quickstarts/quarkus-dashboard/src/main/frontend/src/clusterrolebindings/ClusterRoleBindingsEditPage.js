@@ -22,6 +22,8 @@ import Link from '../components/Link';
 
 const ClusterRoleBindingsEditPage = ({match: {params: {uid}}}) => (
   <ResourceEditPage
+    kind='ClusterRoleBindings'
+    path='clusterrolebindings'
     cardTitle={resource =>
       <Link.RouterLink to={`/clusterrolebindings/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
     }

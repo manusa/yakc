@@ -22,6 +22,8 @@ import Link from '../components/Link';
 
 const PodsEditPage = ({match: {params: {uid}}}) => (
   <ResourceEditPage
+    kind='Pods'
+    path='pods'
     cardTitle={resource =>
       <Link.RouterLink to={`/pods/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
     }

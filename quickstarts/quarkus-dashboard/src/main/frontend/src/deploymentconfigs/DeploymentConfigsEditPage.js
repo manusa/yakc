@@ -22,6 +22,8 @@ import Link from '../components/Link';
 
 const DeploymentConfigsEditPage = ({match: {params: {uid}}}) => (
   <ResourceEditPage
+    kind='DeploymentConfigs'
+    path='deploymentconfigs'
     cardTitle={resource =>
       <Link.RouterLink to={`/deploymentconfigs/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
     }

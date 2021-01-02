@@ -23,7 +23,7 @@ import ResourceDetailPage from '../components/ResourceDetailPage';
 
 const PersistentVolumeClaimsDetailPage = ({persistentVolumeClaim}) => (
   <ResourceDetailPage
-    name='PersistentVolumeClaims'
+    kind='PersistentVolumeClaims'
     path='persistentvolumeclaims'
     resource={persistentVolumeClaim}
     body={

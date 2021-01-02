@@ -14,22 +14,8 @@
  * limitations under the License.
  *
  */
-import React from 'react';
-import md from '../metadata';
-import d from './';
-import ResourceEditPage from '../components/ResourceEditPage';
-import Link from '../components/Link';
+import redux from '../redux';
 
-const DeploymentsEditPage = ({match: {params: {uid}}}) => (
-  <ResourceEditPage
-    kind='Deployments'
-    path='deployments'
-    cardTitle={resource =>
-      <Link.RouterLink to={`/deployments/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
-    }
-    save={async resource => await d.api.update(resource)}
-    resourceFromState={state => state.deployments[uid]}
-  />
-);
+const reducer = redux.reducer('ClusterVersion');
 
-export default DeploymentsEditPage;
+export default reducer;

@@ -15,21 +15,16 @@
  *
  */
 import React from 'react';
-import md from '../metadata';
-import d from './';
-import ResourceEditPage from '../components/ResourceEditPage';
-import Link from '../components/Link';
+import metadata from '../metadata';
+import crd from './index';
+import DashboardPage from '../components/DashboardPage';
 
-const DeploymentsEditPage = ({match: {params: {uid}}}) => (
-  <ResourceEditPage
-    kind='Deployments'
-    path='deployments'
-    cardTitle={resource =>
-      <Link.RouterLink to={`/deployments/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
-    }
-    save={async resource => await d.api.update(resource)}
-    resourceFromState={state => state.deployments[uid]}
-  />
+const DashboardPageTitle = ({customResourceDefinition, children}) => (
+  <DashboardPage.Title path='customresourcedefinitions' kind='CustomResourceDefinitions'>
+    &nbsp;-&nbsp;<crd.GroupLink customResourceDefinition={customResourceDefinition} />
+    &nbsp;- {metadata.selectors.name(customResourceDefinition)}
+    {children}
+  </DashboardPage.Title>
 );
 
-export default DeploymentsEditPage;
+export default DashboardPageTitle;

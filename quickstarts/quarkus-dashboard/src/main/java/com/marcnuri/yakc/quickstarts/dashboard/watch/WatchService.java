@@ -29,6 +29,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.events.EventService;
 import com.marcnuri.yakc.quickstarts.dashboard.jobs.JobService;
 import com.marcnuri.yakc.quickstarts.dashboard.namespaces.NamespaceService;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeService;
+import com.marcnuri.yakc.quickstarts.dashboard.openshiftconfig.ClusterVersionService;
 import com.marcnuri.yakc.quickstarts.dashboard.pod.PodService;
 import com.marcnuri.yakc.quickstarts.dashboard.replicaset.ReplicaSetService;
 import com.marcnuri.yakc.quickstarts.dashboard.replicationcontrollers.ReplicationControllerService;
@@ -56,6 +57,7 @@ public class WatchService {
   public WatchService(
     ClusterRoleBindingService clusterRoleBindingService,
     ClusterRoleService clusterRoleService,
+    ClusterVersionService clusterVersionService,
     ConfigMapService configMapService,
     CustomResourceDefinitionService customResourceDefinitionService,
     DaemonSetService daemonSetService,
@@ -76,6 +78,7 @@ public class WatchService {
     this.watchables = Arrays.asList(
       clusterRoleBindingService,
       clusterRoleService,
+      clusterVersionService,
       configMapService,
       customResourceDefinitionService,
       daemonSetService,

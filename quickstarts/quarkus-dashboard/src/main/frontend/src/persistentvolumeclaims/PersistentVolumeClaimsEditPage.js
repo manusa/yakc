@@ -22,6 +22,8 @@ import Link from '../components/Link';
 
 const PersistentVolumeClaimsEditPage = ({match: {params: {uid}}}) => (
   <ResourceEditPage
+    kind='PersistentVolumeClaims'
+    path='persistentvolumeclaims'
     cardTitle={resource =>
       <Link.RouterLink to={`/persistentvolumeclaims/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
     }

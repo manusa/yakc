@@ -22,6 +22,8 @@ import Link from '../components/Link';
 
 const DaemonSetsEditPage = ({match: {params: {uid}}}) => (
   <ResourceEditPage
+    kind='DaemonSets'
+    path='daemonsets'
     cardTitle={resource =>
       <Link.RouterLink to={`/daemonsets/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
     }

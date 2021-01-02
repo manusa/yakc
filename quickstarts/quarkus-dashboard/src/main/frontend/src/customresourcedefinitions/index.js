@@ -18,6 +18,7 @@ import api from './api';
 import reducer from './reducer';
 import selectors from './selectors';
 import List from './List';
+import DashboardPageTitle from './DashboardPageTitle';
 import CustomResourceDefinitionsDetailPage from './CustomResourceDefinitionsDetailPage';
 import CustomResourceDefinitionsEditPage from './CustomResourceDefinitionsEditPage';
 import CustomResourceDefinitionsPage from './CustomResourceDefinitionsPage';
@@ -31,5 +32,6 @@ export default {
   CustomResourceDefinitionsDetailPage,
   CustomResourceDefinitionsEditPage,
   CustomResourceDefinitionsPage,
+  DashboardPageTitle,
   GroupLink
 };
