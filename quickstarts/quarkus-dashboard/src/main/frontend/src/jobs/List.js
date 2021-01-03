@@ -62,7 +62,7 @@ const Rows = ({jobs}) => {
     ));
 };
 
-const List = ({resources, crudDelete, loadedResources, ...properties}) => (
+const List = ({resources, ownerUid, uids, uidsNotIn, crudDelete, loadedResources, ...properties}) => (
   <ResourceList headers={headers} resources={resources} {...properties}>
     <Rows jobs={resources} loadedResources={loadedResources} />
   </ResourceList>

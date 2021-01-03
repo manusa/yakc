@@ -62,4 +62,19 @@ public class CronJobResource {
     return cronJobService.update(name, namespace, cronJob);
   }
 
+  @PUT
+  @Path("/{namespace}/{name}/spec/suspend/{suspend}")
+  public Response updateSuspend(
+    @PathParam("namespace") String namespace, @PathParam("name") String name, @PathParam("suspend") boolean suspend
+  ) throws IOException {
+    cronJobService.updateSuspend(name, namespace, suspend);
+    return Response.noContent().build();
+  }
+
+  @PUT
+  @Path("/{namespace}/{name}/trigger")
+  public Response trigger(@PathParam("namespace") String namespace, @PathParam("name") String name) throws IOException {
+    cronJobService.trigger(name, namespace);
+    return Response.noContent().build();
+  }
 }

@@ -22,7 +22,28 @@ import jobs from '../jobs';
 import Card from '../components/Card';
 import DashboardPage from '../components/DashboardPage';
 import Form from '../components/Form';
+import Icon from '../components/Icon';
+import Link from '../components/Link';
 import ResourceDetailPage from '../components/ResourceDetailPage';
+
+const SuspendField = ({cronJob}) => {
+  const isSuspended = cj.selectors.specSuspend(cronJob);
+  const toggleSuspend = () => cj.api.updateSuspend(cronJob, !isSuspended);
+  return (
+    <Form.Field label='Suspended'>
+      <div className='flex items-center'>
+        <div className='flex flex-col mr-1 text-blue-600'>
+          <Icon
+            icon={isSuspended ? 'fa-play-circle' : 'fa-pause-circle'}
+            className='pr-1 py-1 leading-3 hover:text-blue-800 cursor-pointer'
+            onClick={toggleSuspend}
+          />
+        </div>
+        {isSuspended.toString()}
+      </div>
+    </Form.Field>
+  );
+}
 
 const CronJobsDetailPage = ({cronJob}) => (
   <ResourceDetailPage
@@ -34,15 +55,25 @@ const CronJobsDetailPage = ({cronJob}) => (
       />
     }
     resource={cronJob}
+    actions={
+      <Link
+        className='ml-2'
+        size={Link.sizes.small}
+        variant={Link.variants.outline}
+        onClick={() => cj.api.trigger(cronJob)}
+        title='Manual Trigger'
+      >
+        <Icon icon='fa-play' className='mr-2'/>
+        Trigger
+      </Link>
+    }
     body={
       <Form>
         <metadata.Details resource={cronJob} />
         <Form.Field label='Schedule'>
           {cj.selectors.specSchedule(cronJob)}
         </Form.Field>
-        <Form.Field label='Suspend'>
-          {cj.selectors.specSuspend(cronJob).toString()}
-        </Form.Field>
+        <SuspendField cronJob={cronJob} />
         <Form.Field label='Active'>
           {cj.selectors.statusActive(cronJob).length}
         </Form.Field>

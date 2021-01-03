@@ -27,7 +27,7 @@ const headers = [
   <span><Icon icon='fa-id-card' /> Name</span>,
   'Namespace',
   'Schedule',
-  'Suspend',
+  'Suspended',
   'Active',
   ''
 ];

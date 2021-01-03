@@ -14,12 +14,27 @@
  * limitations under the License.
  *
  */
-import {
-  deleteNamespacedResource,
-  updateNamespacedResource,
-} from '../fetch';
+import {deleteNamespacedResource, updateNamespacedResource,} from '../fetch';
+import {getApiURL} from "../env";
+import metadata from "../metadata";
+
+const updateSuspend = async (resource, suspend) => {
+  await fetch(
+    `${getApiURL()}/cronjobs/${metadata.selectors.namespace(resource)}/${metadata.selectors.name(resource)}/spec/suspend/${suspend}`,
+    {method: 'PUT'}
+  );
+};
+
+const trigger =  async resource => {
+  await fetch(
+    `${getApiURL()}/cronjobs/${metadata.selectors.namespace(resource)}/${metadata.selectors.name(resource)}/trigger`,
+    {method: 'PUT'}
+  );
+};
 
 export default {
   delete: deleteNamespacedResource('cronjobs'),
-  update: updateNamespacedResource('cronjobs')
+  update: updateNamespacedResource('cronjobs'),
+  updateSuspend,
+  trigger
 };
