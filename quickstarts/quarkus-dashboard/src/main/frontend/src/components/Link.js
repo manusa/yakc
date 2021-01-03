@@ -72,6 +72,7 @@ Link.ResourceLink = ({className, Icon: IconComponent, iconClassName, children, .
 Link.ClusterRole = ({...props}) => <Link.ResourceLink Icon={i.ClusterRole} {...props} />;
 Link.ClusterRoleBinding = ({...props}) => <Link.ResourceLink Icon={i.ClusterRoleBinding} {...props} />;
 Link.ConfigMap = ({...props}) => <Link.ResourceLink Icon={i.ConfigMap} {...props} />;
+Link.CronJob = ({...props}) => <Link.ResourceLink Icon={i.CronJob} {...props} />;
 Link.CustomResourceDefinition = ({...props}) => <Link.ResourceLink Icon={i.CustomResourceDefinition} {...props} />;
 Link.DaemonSet = ({...props}) => <Link.ResourceLink Icon={i.DaemonSet} {...props} />;
 Link.DeploymentConfig = ({...props}) => <Link.ResourceLink Icon={i.DeploymentConfig} {...props} />;

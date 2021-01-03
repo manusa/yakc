@@ -21,6 +21,7 @@ import com.marcnuri.yakc.model.Model;
 import com.marcnuri.yakc.quickstarts.dashboard.clusterrolebindings.ClusterRoleBindingService;
 import com.marcnuri.yakc.quickstarts.dashboard.clusterroles.ClusterRoleService;
 import com.marcnuri.yakc.quickstarts.dashboard.configmaps.ConfigMapService;
+import com.marcnuri.yakc.quickstarts.dashboard.cronjobs.CronJobService;
 import com.marcnuri.yakc.quickstarts.dashboard.customresourcedefinitions.CustomResourceDefinitionService;
 import com.marcnuri.yakc.quickstarts.dashboard.daemonsets.DaemonSetService;
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentService;
@@ -59,6 +60,7 @@ public class WatchService {
     ClusterRoleService clusterRoleService,
     ClusterVersionService clusterVersionService,
     ConfigMapService configMapService,
+    CronJobService cronJobService,
     CustomResourceDefinitionService customResourceDefinitionService,
     DaemonSetService daemonSetService,
     DeploymentConfigService deploymentConfigService,
@@ -74,12 +76,14 @@ public class WatchService {
     RouteService routeService,
     SecretService secretService,
     ServiceService serviceService,
-    StatefulSetService statefulSetService) {
+    StatefulSetService statefulSetService
+  ) {
     this.watchables = Arrays.asList(
       clusterRoleBindingService,
       clusterRoleService,
       clusterVersionService,
       configMapService,
+      cronJobService,
       customResourceDefinitionService,
       daemonSetService,
       deploymentConfigService,

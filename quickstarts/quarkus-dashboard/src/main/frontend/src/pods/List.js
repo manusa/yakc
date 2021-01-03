@@ -38,7 +38,7 @@ const Rows = ({pods}) => {
   return pods
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(pod => (
-      <Table.Row key={metadata.selectors.uid(pod)}>
+      <Table.ResourceRow key={metadata.selectors.uid(pod)} resource={pod}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>
           <Icon
             className={p.selectors.succeededOrContainersReady(pod) ? 'text-green-500' : 'text-red-500'}
@@ -81,7 +81,7 @@ const Rows = ({pods}) => {
           <Table.DeleteButton
             className='ml-1' onClick={deletePod(pod)} />
         </Table.Cell>
-      </Table.Row>
+      </Table.ResourceRow>
     ));
 }
 

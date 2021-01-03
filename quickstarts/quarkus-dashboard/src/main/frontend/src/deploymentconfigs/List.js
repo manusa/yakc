@@ -38,7 +38,7 @@ const Rows = ({deploymentConfigs}) => {
   return deploymentConfigs
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(deploymentConfig => (
-      <Table.Row key={metadata.selectors.uid(deploymentConfig)}>
+      <Table.ResourceRow key={metadata.selectors.uid(deploymentConfig)} resource={deploymentConfig}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>
           <Icon
             className={dc.selectors.isReady(deploymentConfig) ? 'text-green-500' : 'text-red-500'}
@@ -69,7 +69,7 @@ const Rows = ({deploymentConfigs}) => {
           <Table.DeleteButton
             className='ml-1' onClick={deleteDC(deploymentConfig)} />
         </Table.Cell>
-      </Table.Row>
+      </Table.ResourceRow>
     ));
 }
 

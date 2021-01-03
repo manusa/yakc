@@ -47,7 +47,7 @@ const Rows = ({customResources, customResourceDefinition, version, editResource,
   return customResources
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(customResource => (
-        <Table.Row key={metadata.selectors.uid(customResource)}>
+        <Table.ResourceRow key={metadata.selectors.uid(customResource)} resource={customResource}>
           <Table.Cell>
             <Link onClick={() => editResource(customResource)} >
               {metadata.selectors.name(customResource)}
@@ -63,7 +63,7 @@ const Rows = ({customResources, customResourceDefinition, version, editResource,
           <Table.Cell>
             <Table.DeleteButton onClick={deleteCustomResource(customResource)} />
           </Table.Cell>
-        </Table.Row>
+        </Table.ResourceRow>
     ));
 };
 

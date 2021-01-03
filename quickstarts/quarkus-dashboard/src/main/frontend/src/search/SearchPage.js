@@ -19,6 +19,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import cRoles from '../clusterroles';
 import cm from '../configmaps';
+import cj from '../cronjobs';
 import crd from '../customresourcedefinitions';
 import d from '../deployments';
 import dc from '../deploymentconfigs';
@@ -62,6 +63,7 @@ const Results = ({query, selectedNamespace}) => {
       <d.List {...commonProps} title='Deployments' nameLike={query} namespace={selectedNamespace} />
       <dc.List {...commonProps} title='DeploymentConfigs' nameLike={query} namespace={selectedNamespace} />
       <ds.List {...commonProps} title='DaemonSets' nameLike={query} namespace={selectedNamespace} />
+      <cj.List {...commonProps} title='CronJobs' nameLike={query} namespace={selectedNamespace} />
       <j.List {...commonProps} title='Jobs' nameLike={query} namespace={selectedNamespace} />
       <ss.List {...commonProps} title='StatefulSets' nameLike={query} namespace={selectedNamespace} />
       <rs.List {...commonProps} title='ReplicaSets' nameLike={query} namespace={selectedNamespace} />

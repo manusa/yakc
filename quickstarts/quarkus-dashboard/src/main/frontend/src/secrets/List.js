@@ -34,7 +34,7 @@ const Rows = ({secrets}) => {
   return secrets
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(secret => (
-        <Table.Row key={metadata.selectors.uid(secret)}>
+        <Table.ResourceRow key={metadata.selectors.uid(secret)} resource={secret}>
           <Table.Cell>
             <Link.Secret to={`/secrets/${metadata.selectors.uid(secret)}`}>
               {metadata.selectors.name(secret)}
@@ -49,7 +49,7 @@ const Rows = ({secrets}) => {
           <Table.Cell>
             <Table.DeleteButton onClick={deleteSecret(secret)} />
           </Table.Cell>
-        </Table.Row>
+        </Table.ResourceRow>
     ));
 };
 

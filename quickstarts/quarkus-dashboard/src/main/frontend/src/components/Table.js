@@ -15,6 +15,7 @@
  *
  */
 import React from 'react';
+import metadata from '../metadata';
 import Card from './Card';
 import Spinner from './Spinner';
 import Link from './Link';
@@ -50,7 +51,16 @@ Table.Body = ({children}) => (
 );
 
 // For stripes to work need to add 'even' variant to specific property in tailwind.config.js
-Table.Row = ({children}) => <tr className='even:bg-opacity-50 even:bg-gray-200'>{children}</tr>;
+Table.Row = ({children, className = ''}) => (
+  <tr className={`even:bg-opacity-50 even:bg-gray-200 ${className}`}>{children}</tr>
+);
+Table.ResourceRow = ({resource, children, ...properties}) => (
+  <Table.Row
+    className={metadata.selectors.deletionTimestamp(resource) ? 'line-through' : ''} {...properties}
+  >
+    {children}
+  </Table.Row>
+)
 
 Table.Cell = ({children, textColor = 'text-gray-800', textSize = 'text-sm', className = '', ...properties}) => (
   <td

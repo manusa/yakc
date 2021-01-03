@@ -49,10 +49,10 @@ const PopupMenu = ({
       <button
         type='button' aria-haspopup='true' aria-expanded={panelVisible} onClick={togglePanel}
         className={`
-          border-0 outline-none focus:outline-none text-center
+          ml-1 border-0 outline-none focus:outline-none text-center
           ${textColor} hover:text-gray-500 active:${textColorActive} `}
       >
-        <Icon icon='fa-ellipsis-v' className='ml-3'/>
+        <Icon icon='fa-ellipsis-v' className='px-3'/>
       </button>
       <PopupPanel
         visible={panelVisible}

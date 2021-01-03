@@ -43,6 +43,10 @@ const EventName = ({event}) => {
       Component = Link.ConfigMap;
       url = `/configmaps/${uid}`;
       break;
+    case 'CronJob':
+      Component = Link.CronJob;
+      url = `/cronjobs/${uid}`;
+      break;
     case 'Deployment':
       Component = Link.Deployment;
       url = `/deployments/${uid}`;
@@ -90,7 +94,7 @@ const Rows = ({events}) => {
     .map(event => {
       const lastTimestamp = new Date(event.lastTimestamp);
       return (
-        <Table.Row key={metadata.selectors.uid(event)}>
+        <Table.ResourceRow key={metadata.selectors.uid(event)} resource={event}>
           <Table.Cell className='whitespace-no-wrap w-3 text-center'>
             <Icon
               className={ev.selectors.typeIsNormal(event) ? 'text-green-500' : 'text-red-500'}
@@ -118,7 +122,7 @@ const Rows = ({events}) => {
           <Table.Cell>
             {event.message}
           </Table.Cell>
-        </Table.Row>
+        </Table.ResourceRow>
       );
     });
 }

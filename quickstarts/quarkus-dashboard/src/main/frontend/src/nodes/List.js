@@ -34,7 +34,7 @@ const Rows = ({nodes}) => {
   return nodes
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(node => (
-      <Table.Row key={metadata.selectors.uid(node)}>
+      <Table.ResourceRow key={metadata.selectors.uid(node)} resource={node}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>
           <Icon
             className={n.selectors.isReady(node) ? 'text-green-500' : 'text-red-500'}
@@ -61,7 +61,7 @@ const Rows = ({nodes}) => {
             maxEntries={2}
           />
         </Table.Cell>
-      </Table.Row>
+      </Table.ResourceRow>
     ));
 }
 

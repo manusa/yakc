@@ -35,7 +35,7 @@ const Rows = ({roles}) => {
   return roles
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(role => (
-        <Table.Row key={metadata.selectors.uid(role)}>
+        <Table.ResourceRow key={metadata.selectors.uid(role)} resource={role}>
           <Table.Cell>
             <Link.Role to={`/roles/${metadata.selectors.uid(role)}`}>
               {metadata.selectors.name(role)}
@@ -58,7 +58,7 @@ const Rows = ({roles}) => {
           <Table.Cell>
             <Table.DeleteButton onClick={deleteRole(role)} />
           </Table.Cell>
-        </Table.Row>
+        </Table.ResourceRow>
     ));
 };
 

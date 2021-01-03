@@ -110,6 +110,7 @@ const NavSection = ({currentScrollTop, scroll, expandedItems, toggleItem, isOpen
           {isOpenShift && <K8sNavItem to='/deploymentconfigs' Icon={i.DeploymentConfig}>Deployment Configs</K8sNavItem>}
           <K8sNavItem to='/daemonsets' Icon={i.DaemonSet}>DaemonSets</K8sNavItem>
           <K8sNavItem to='/statefulsets' Icon={i.StatefulSet}>StatefulSets</K8sNavItem>
+          <K8sNavItem to='/cronjobs' Icon={i.CronJob}>CronJobs</K8sNavItem>
           <K8sNavItem to='/jobs' Icon={i.Job}>Jobs</K8sNavItem>
         </NavGroup>
         <NavGroup expandedItems={expandedItems} toggleItem={toggleItem}

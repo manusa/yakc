@@ -21,6 +21,7 @@ import apis from './apis';
 import crb from './clusterrolebindings';
 import cRoles from './clusterroles';
 import configMaps from './configmaps';
+import cj from './cronjobs';
 import crd from './customresourcedefinitions';
 import dc from './deploymentconfigs';
 import ds from './daemonsets';
@@ -102,6 +103,9 @@ const App = ({dispatch}) => {
           <Route exact path='/configmaps' component={configMaps.ConfigMapsPage} />
           <Route exact path='/configmaps/:uid' component={configMaps.ConfigMapsDetailPage} />
           <Route exact path='/configmaps/:uid/edit' component={configMaps.ConfigMapsEditPage} />
+          <Route exact path='/cronjobs' component={cj.CronJobsPage} />
+          <Route exact path='/cronjobs/:uid' component={cj.CronJobsDetailPage} />
+          <Route exact path='/cronjobs/:uid/edit' component={cj.CronJobsEditPage} />
           <Route exact path='/customresourcedefinitions' component={crd.CustomResourceDefinitionsPage} />
           <Route exact path='/customresourcedefinitions/:uid' component={crd.CustomResourceDefinitionsDetailPage} />
           <Route exact path='/customresourcedefinitions/:uid/edit' component={crd.CustomResourceDefinitionsEditPage} />

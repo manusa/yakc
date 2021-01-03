@@ -16,12 +16,13 @@
  */
 const selectors = {};
 
-selectors.creationTimestamp = object => {
-  const ct = object?.metadata?.creationTimestamp;
-  if (ct) {
-    return new Date(ct);
+const toDate = timestamp => {
+  if (timestamp) {
+    return new Date(timestamp);
   }
 }
+selectors.creationTimestamp = object => toDate(object?.metadata?.creationTimestamp);
+selectors.deletionTimestamp = object => toDate(object?.metadata?.deletionTimestamp);
 
 selectors.annotations = object => object?.metadata?.annotations ?? {};
 

@@ -23,6 +23,7 @@ import crb from './clusterrolebindings';
 import cRoles from './clusterroles';
 import cv from './clusterversions';
 import configMaps from './configmaps';
+import cj from './cronjobs';
 import crd from './customresourcedefinitions'
 import ds from './daemonsets';
 import dc from './deploymentconfigs'
@@ -63,6 +64,7 @@ const store = createStore(combineReducers({
   clusterRoles: cRoles.reducer,
   clusterVersions: cv.reducer,
   configMaps: configMaps.reducer,
+  cronJobs: cj.reducer,
   customResourceDefinitions: crd.reducer,
   daemonSets: ds.reducer,
   deploymentConfigs: dc.reducer,

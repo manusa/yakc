@@ -35,7 +35,7 @@ const Rows = ({replicaSets}) => {
   return replicaSets
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(replicaSet => (
-      <Table.Row key={metadata.selectors.uid(replicaSet)}>
+      <Table.ResourceRow key={metadata.selectors.uid(replicaSet)} resource={replicaSet}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>
           <Icon
             className={rs.selectors.isReady(replicaSet) ? 'text-green-500' : 'text-red-500'}
@@ -54,7 +54,7 @@ const Rows = ({replicaSets}) => {
         <Table.Cell className='whitespace-no-wrap text-center'>
           <Table.DeleteButton onClick={deleteReplicaSet(replicaSet)} />
         </Table.Cell>
-      </Table.Row>
+      </Table.ResourceRow>
     ));
 }
 

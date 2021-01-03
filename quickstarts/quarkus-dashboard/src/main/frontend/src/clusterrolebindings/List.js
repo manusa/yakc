@@ -37,7 +37,7 @@ const Rows = ({clusterRoleBindings}) => {
   return clusterRoleBindings
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(clusterRoleBinding => (
-        <Table.Row key={metadata.selectors.uid(clusterRoleBinding)}>
+        <Table.ResourceRow key={metadata.selectors.uid(clusterRoleBinding)} resource={clusterRoleBinding}>
           <Table.Cell>
             <Link.ClusterRoleBinding to={`/clusterrolebindings/${metadata.selectors.uid(clusterRoleBinding)}`}>
               {metadata.selectors.name(clusterRoleBinding)}
@@ -60,7 +60,7 @@ const Rows = ({clusterRoleBindings}) => {
           <Table.Cell>
             <Table.DeleteButton onClick={deleteCRB(clusterRoleBinding)} />
           </Table.Cell>
-        </Table.Row>
+        </Table.ResourceRow>
     ));
 };
 

@@ -35,7 +35,7 @@ const Rows = ({jobs}) => {
   return jobs
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(job => (
-      <Table.Row key={metadata.selectors.uid(job)}>
+      <Table.ResourceRow key={metadata.selectors.uid(job)} resource={job}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>
           <Icon
             className={j.selectors.isComplete(job) ? 'text-green-500' : 'text-gray-500'}
@@ -43,9 +43,9 @@ const Rows = ({jobs}) => {
           />
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
-          <Link.DaemonSet to={`/jobs/${metadata.selectors.uid(job)}`}>
+          <Link.Job to={`/jobs/${metadata.selectors.uid(job)}`}>
             {metadata.selectors.name(job)}
-          </Link.DaemonSet>
+          </Link.Job>
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
           <Link.Namespace to={`/namespaces/${metadata.selectors.namespace(job)}`}>
@@ -58,7 +58,7 @@ const Rows = ({jobs}) => {
         <Table.Cell className='whitespace-no-wrap text-center'>
           <Table.DeleteButton onClick={deleteJob(job)} />
         </Table.Cell>
-      </Table.Row>
+      </Table.ResourceRow>
     ));
 };
 

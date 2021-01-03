@@ -38,7 +38,7 @@ const Rows = ({persistentVolumes, crudDelete}) => {
   return persistentVolumes
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(persistentVolume => (
-        <Table.Row key={metadata.selectors.uid(persistentVolume)}>
+        <Table.ResourceRow key={metadata.selectors.uid(persistentVolume)} resource={persistentVolume}>
           <Table.Cell>
             <Link.PersistentVolume to={`/persistentvolumes/${metadata.selectors.uid(persistentVolume)}`}>
               {metadata.selectors.name(persistentVolume)}
@@ -56,7 +56,7 @@ const Rows = ({persistentVolumes, crudDelete}) => {
           <Table.Cell>
             <Table.DeleteButton onClick={deletePersistentVolume(persistentVolume)} />
           </Table.Cell>
-        </Table.Row>
+        </Table.ResourceRow>
     ));
 };
 

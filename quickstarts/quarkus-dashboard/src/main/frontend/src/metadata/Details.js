@@ -49,7 +49,7 @@ const Details = ({resource}) => {
       </Form.Field>}
       <Form.Field label='Creation timestamp'>
         <Icon stylePrefix='far' icon='fa-clock' className='text-gray-600 mr-2' />
-        {`${creationTimestamp?.toLocaleDateString()} ${creationTimestamp?.toLocaleTimeString()}`}
+        {`${creationTimestamp?.toLocaleDateString() ?? ''} ${creationTimestamp?.toLocaleTimeString() ?? ''}`}
       </Form.Field>
       <AnnotationsRow annotations={metadata.selectors.annotations(resource)} />
     </>

@@ -27,7 +27,9 @@ selectors.resourcesBy = (resources = {}, {
   namespace,
   nameLike,
   ownerUid,
-  ownerUids
+  ownerUids,
+  uids,
+  uidsNotIn,
 } = undefined) => Object.entries(resources)
 .filter(([, resource]) => {
   if (namespace && md.selectors.namespace(resource) !== namespace) {
@@ -41,6 +43,12 @@ selectors.resourcesBy = (resources = {}, {
     return false;
   }
   if (ownerUids && !ownerRefs.some(ownerUid => ownerUids.includes(ownerUid))) {
+    return false;
+  }
+  if (uids && !uids.includes(md.selectors.uid(resource))) {
+    return false;
+  }
+  if (uidsNotIn && uidsNotIn.includes(md.selectors.uid(resource))) {
     return false;
   }
   return true;

@@ -38,7 +38,7 @@ const Rows = ({ingresses, crudDelete}) => {
   return ingresses
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(ingress => (
-        <Table.Row key={metadata.selectors.uid(ingress)}>
+        <Table.ResourceRow key={metadata.selectors.uid(ingress)} resource={ingress}>
           <Table.Cell>
             <Link.Ingress to={`/ingresses/${metadata.selectors.uid(ingress)}`}>
               {metadata.selectors.name(ingress)}
@@ -62,7 +62,7 @@ const Rows = ({ingresses, crudDelete}) => {
           <Table.Cell>
             <Table.DeleteButton onClick={deleteIngress(ingress)} />
           </Table.Cell>
-        </Table.Row>
+        </Table.ResourceRow>
     ));
 };
 

@@ -35,7 +35,7 @@ const Rows = ({namespaces}) => {
   return namespaces
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(namespace => (
-        <Table.Row key={metadata.selectors.uid(namespace)}>
+        <Table.ResourceRow key={metadata.selectors.uid(namespace)} resource={namespace}>
           <Table.Cell className='whitespace-no-wrap w-3 text-center'>
             <Icon
               className={ns.selectors.isReady(namespace) ? 'text-green-500' : 'text-red-500'}
@@ -59,7 +59,7 @@ const Rows = ({namespaces}) => {
           <Table.Cell className='whitespace-no-wrap text-center'>
             <Table.DeleteButton onClick={deleteNamespace(namespace)} />
           </Table.Cell>
-        </Table.Row>
+        </Table.ResourceRow>
     ));
 };
 

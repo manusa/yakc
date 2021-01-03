@@ -35,7 +35,7 @@ const Rows = ({replicationControllers}) => {
   return replicationControllers
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(replicationController => (
-      <Table.Row key={metadata.selectors.uid(replicationController)}>
+      <Table.ResourceRow key={metadata.selectors.uid(replicationController)} resource={replicationController}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>
           <Icon
             className={rc.selectors.isReady(replicationController) ? 'text-green-500' : 'text-red-500'}
@@ -54,7 +54,7 @@ const Rows = ({replicationControllers}) => {
         <Table.Cell className='whitespace-no-wrap text-center'>
           <Table.DeleteButton onClick={deleteReplicationController(replicationController)} />
         </Table.Cell>
-      </Table.Row>
+      </Table.ResourceRow>
     ));
 }
 

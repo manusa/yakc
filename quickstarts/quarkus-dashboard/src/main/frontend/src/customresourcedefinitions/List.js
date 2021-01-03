@@ -37,7 +37,7 @@ const Rows = ({customResourceDefinitions}) => {
   return customResourceDefinitions
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(customResourceDefinition => (
-        <Table.Row key={metadata.selectors.uid(customResourceDefinition)}>
+        <Table.ResourceRow key={metadata.selectors.uid(customResourceDefinition)} resource={customResourceDefinition}>
           <Table.Cell>
             <Link.CustomResourceDefinition to={`/customresourcedefinitions/${metadata.selectors.uid(customResourceDefinition)}`}>
               {metadata.selectors.name(customResourceDefinition)}
@@ -60,7 +60,7 @@ const Rows = ({customResourceDefinitions}) => {
           <Table.Cell>
             <Table.DeleteButton onClick={deleteCrd(customResourceDefinition)} />
           </Table.Cell>
-        </Table.Row>
+        </Table.ResourceRow>
     ));
 };
 

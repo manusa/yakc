@@ -36,7 +36,7 @@ const Rows = ({daemonSets}) => {
   return daemonSets
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(daemonSet => (
-      <Table.Row key={metadata.selectors.uid(daemonSet)}>
+      <Table.ResourceRow key={metadata.selectors.uid(daemonSet)} resource={daemonSet}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>
           <Icon
             className={ds.selectors.isReady(daemonSet) ? 'text-green-500' : 'text-red-500'}
@@ -67,7 +67,7 @@ const Rows = ({daemonSets}) => {
           <Table.DeleteButton
             className='ml-1' onClick={deleteDS(daemonSet)} />
         </Table.Cell>
-      </Table.Row>
+      </Table.ResourceRow>
     ));
 };
 

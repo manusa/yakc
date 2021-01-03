@@ -34,7 +34,7 @@ const Rows = ({clusterRoles}) => {
   return clusterRoles
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(clusterRole => (
-        <Table.Row key={metadata.selectors.uid(clusterRole)}>
+        <Table.ResourceRow key={metadata.selectors.uid(clusterRole)} resource={clusterRole}>
           <Table.Cell>
             <Link.ClusterRole to={`/clusterroles/${metadata.selectors.uid(clusterRole)}`}>
               {metadata.selectors.name(clusterRole)}
@@ -52,7 +52,7 @@ const Rows = ({clusterRoles}) => {
           <Table.Cell>
             <Table.DeleteButton onClick={deleteClusterRole(clusterRole)} />
           </Table.Cell>
-        </Table.Row>
+        </Table.ResourceRow>
     ));
 };
 

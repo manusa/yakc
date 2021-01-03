@@ -38,7 +38,7 @@ const Rows = ({deployments}) => {
   return deployments
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(deployment => (
-      <Table.Row key={metadata.selectors.uid(deployment)}>
+      <Table.ResourceRow key={metadata.selectors.uid(deployment)} resource={deployment}>
         <Table.Cell className='whitespace-no-wrap w-3 text-center'>
           <Icon
             className={deploymentsModule.selectors.isReady(deployment) ? 'text-green-500' : 'text-red-500'}
@@ -69,7 +69,7 @@ const Rows = ({deployments}) => {
           <Table.DeleteButton
             className='ml-1' onClick={deleteDeployment(deployment)} />
         </Table.Cell>
-      </Table.Row>
+      </Table.ResourceRow>
     ));
 }
 

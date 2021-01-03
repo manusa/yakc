@@ -21,6 +21,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.apis.ApisResource;
 import com.marcnuri.yakc.quickstarts.dashboard.clusterrolebindings.ClusterRoleBindingResource;
 import com.marcnuri.yakc.quickstarts.dashboard.clusterroles.ClusterRoleResource;
 import com.marcnuri.yakc.quickstarts.dashboard.configmaps.ConfigMapResource;
+import com.marcnuri.yakc.quickstarts.dashboard.cronjobs.CronJobResource;
 import com.marcnuri.yakc.quickstarts.dashboard.customresourcedefinitions.CustomResourceDefinitionResource;
 import com.marcnuri.yakc.quickstarts.dashboard.customresources.CustomResourceResource;
 import com.marcnuri.yakc.quickstarts.dashboard.daemonsets.DaemonSetResource;
@@ -56,6 +57,7 @@ public class ApiResource {
   @Inject ClusterRoleBindingResource clusterRoleBindingResource;
   @Inject ClusterRoleResource clusterRoleResource;
   @Inject ConfigMapResource configMapResource;
+  @Inject CronJobResource cronJobResource;
   @Inject CustomResourceDefinitionResource customResourceDefinitionResource;
   @Inject CustomResourceResource customResourceResource;
   @Inject DaemonSetResource daemonSetResource;
@@ -96,6 +98,11 @@ public class ApiResource {
   @Path("/configmaps")
   public ConfigMapResource getConfigMapResource() {
     return configMapResource;
+  }
+
+  @Path("/cronjobs")
+  public CronJobResource getCronJobResource() {
+    return cronJobResource;
   }
 
   @Path("/customresourcedefinitions")

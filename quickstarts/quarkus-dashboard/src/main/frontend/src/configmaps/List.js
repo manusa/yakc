@@ -33,7 +33,7 @@ const Rows = ({configMaps}) => {
   return configMaps
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(configMap => (
-        <Table.Row key={metadata.selectors.uid(configMap)}>
+        <Table.ResourceRow key={metadata.selectors.uid(configMap)} resource={configMap}>
           <Table.Cell>
             <Link.ConfigMap to={`/configmaps/${metadata.selectors.uid(configMap)}`}>
               {metadata.selectors.name(configMap)}
@@ -47,7 +47,7 @@ const Rows = ({configMaps}) => {
           <Table.Cell>
             <Table.DeleteButton onClick={deleteConfigMap(configMap)} />
           </Table.Cell>
-        </Table.Row>
+        </Table.ResourceRow>
     ));
 };
 
