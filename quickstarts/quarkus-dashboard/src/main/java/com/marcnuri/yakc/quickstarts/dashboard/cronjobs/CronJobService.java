@@ -89,7 +89,7 @@ public class CronJobService implements Watchable<CronJob> {
         .addToOwnerReferences(OwnerReference.builder()
           .kind(cronJob.getKind())
           .apiVersion(cronJob.getApiVersion())
-          .controller(true)
+          .controller(false)
           .name(cronJob.getMetadata().getName())
           .uid(cronJob.getMetadata().getUid())
           .build())
