@@ -30,14 +30,16 @@ import com.marcnuri.yakc.api.batch.v1beta1.BatchV1beta1Api;
 import com.marcnuri.yakc.model.io.k8s.api.batch.v1beta1.CronJob;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 
+@SuppressWarnings("unused")
 @Command(
   name = "CronJobs",
   mixinStandardHelpOptions = true,
   description = "Examples of Kubernetes CronJobs from Java"
 )
 class CronJobs implements Callable<Integer> {
+  @SuppressWarnings("java:S115")
   enum Options {
-    list, trigger, example
+    list, delete, trigger, example
   }
 
   @CommandLine.Option(names = {"-ns", "--namespace"})
@@ -65,6 +67,8 @@ class CronJobs implements Callable<Integer> {
         case example:
           createExample(kc);
           break;
+        case delete:
+          return delete(kc);
         case trigger:
           return trigger(kc);
         case list:
@@ -118,6 +122,7 @@ class CronJobs implements Callable<Integer> {
     info(" - " + cj.getMetadata().getCreationTimestamp().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
   }
 
+  // https://github.com/kubernetes/kubernetes/blob/ff4234720d4ec390ca6f6aac4c19a21ba6661841/staging/src/k8s.io/kubectl/pkg/cmd/create/create_job.go#L263
   private int trigger(KubernetesClient kc) throws IOException {
     if (params == null || params.length != 1) {
       error("Missing required param <name>");
@@ -148,6 +153,18 @@ class CronJobs implements Callable<Integer> {
       .spec(jts.getSpec())
       .build()).get();
     info(" - Created manual Job: " + jobName);
+    return 0;
+  }
+
+  private int delete(KubernetesClient kc) throws IOException {
+    if (params == null || params.length != 1) {
+      error("Missing required param <name>");
+      return 1;
+    }
+    final String name = params[0];
+    final String applicableNamespace = namespace(kc);
+    info("Deleting CronJob " + applicableNamespace + "/" + name);
+    kc.create(BatchV1beta1Api.class).deleteNamespacedCronJob(name, applicableNamespace).get(CronJob.class);
     return 0;
   }
 
