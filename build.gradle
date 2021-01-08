@@ -1,5 +1,5 @@
-import com.marcnuri.yack.schema.api.ApiGeneratorTask
-import com.marcnuri.yack.schema.model.ModelGeneratorTask
+import com.marcnuri.yakc.schema.api.ApiGeneratorTask
+import com.marcnuri.yakc.schema.model.ModelGeneratorTask
 
 plugins {
   id 'java-library'

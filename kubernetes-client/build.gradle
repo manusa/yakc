@@ -16,6 +16,7 @@ dependencies {
   annotationProcessor "org.projectlombok:lombok:$version_projectlombok"
   testImplementation "org.junit.jupiter:junit-jupiter-api:$version_junit"
   testImplementation "org.assertj:assertj-core:$version_assertj"
+  testImplementation "org.mockito:mockito-core:$version_mockito"
   testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$version_junit"
 }
 

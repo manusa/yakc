@@ -13,25 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Created on 2020-04-10, 13:08
+ * Created on 2021-01-08, 7:30
  */
-package com.marcnuri.yack.schema.api;
+package com.marcnuri.yakc.config;
 
-import io.swagger.v3.oas.models.Operation;
-import lombok.Builder;
-import lombok.Data;
+import java.io.IOException;
 
-/**
- * Created by Marc Nuri on 2020-04-10.
- */
-@Builder(toBuilder = true)
-@Data
-class ApiOperation {
-  enum Method {
-    DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
-  }
-  private String tag;
-  private String path;
-  private Method method;
-  private Operation operation;
+@FunctionalInterface
+public interface ConfigurationSupplier<T> {
+
+  /**
+   * Gets a result.
+   *
+   * @return a result
+   */
+  T get() throws IOException;
 }

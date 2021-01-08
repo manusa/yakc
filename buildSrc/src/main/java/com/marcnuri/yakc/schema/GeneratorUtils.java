@@ -15,7 +15,7 @@
  *
  * Created on 2020-11-11, 19:16
  */
-package com.marcnuri.yack.schema;
+package com.marcnuri.yakc.schema;
 
 import org.apache.commons.io.FileUtils;
 

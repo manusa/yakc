@@ -15,11 +15,11 @@
  *
  * Created on 2020-04-04, 17:31
  */
-package com.marcnuri.yack.schema.model;
+package com.marcnuri.yakc.schema.model;
 
-import com.marcnuri.yack.schema.GeneratorSettings;
-import com.marcnuri.yack.schema.GeneratorUtils;
-import com.marcnuri.yack.schema.InlineModelResolver;
+import com.marcnuri.yakc.schema.GeneratorSettings;
+import com.marcnuri.yakc.schema.GeneratorUtils;
+import com.marcnuri.yakc.schema.InlineModelResolver;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.parser.OpenAPIV3Parser;
 import org.gradle.api.DefaultTask;

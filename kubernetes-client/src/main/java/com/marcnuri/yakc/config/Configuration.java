@@ -23,9 +23,6 @@ import lombok.Data;
 import java.io.File;
 import java.time.Duration;
 
-/**
- * Created by Marc Nuri on 2020-04-11.
- */
 @Builder(toBuilder = true)
 @Data
 public class Configuration {
@@ -38,9 +35,9 @@ public class Configuration {
   private File clientCertificate;
   private String clientKeyData;
   private File clientKey;
-  private String token;
-  private String username;
-  private String password;
+  private ConfigurationSupplier<String> token;
+  private ConfigurationSupplier<String> username;
+  private ConfigurationSupplier<String> password;
   private Duration connectTimeout;
   private Duration readTimeout;
 }

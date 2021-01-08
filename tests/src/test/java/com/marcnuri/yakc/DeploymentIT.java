@@ -106,7 +106,7 @@ class DeploymentIT {
   }
 
   Deployment createDeploymentForTest() throws IOException {
-    final String appName = "yack-deployment-it";
+    final String appName = "yakc-deployment-it";
     return KC.create(AppsV1Api.class).createNamespacedDeployment(NAMESPACE, Deployment.builder()
       .metadata(ObjectMeta.builder()
         .name(deploymentName)
