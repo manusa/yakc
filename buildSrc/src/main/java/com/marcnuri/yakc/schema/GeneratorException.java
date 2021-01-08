@@ -15,7 +15,7 @@
  *
  * Created on 2020-04-20, 8:02
  */
-package com.marcnuri.yack.schema;
+package com.marcnuri.yakc.schema;
 
 /**
  * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-20.

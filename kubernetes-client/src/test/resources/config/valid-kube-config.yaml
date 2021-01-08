@@ -1,0 +1,9 @@
+kind: Config
+contexts:
+  - context:
+      cluster: yakc
+      namespace: default
+      user: yakc-user
+    name: yakc
+current-context: yakc
+users:

@@ -15,10 +15,10 @@
  *
  * Created on 2020-04-05, 19:33
  */
-package com.marcnuri.yack.schema.api;
+package com.marcnuri.yakc.schema.api;
 
-import com.marcnuri.yack.schema.GeneratorSettings;
-import com.marcnuri.yack.schema.GeneratorUtils;
+import com.marcnuri.yakc.schema.GeneratorSettings;
+import com.marcnuri.yakc.schema.GeneratorUtils;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.parser.OpenAPIV3Parser;
 import io.swagger.v3.parser.util.InlineModelResolver;

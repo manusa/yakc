@@ -15,7 +15,7 @@
  *
  * Created on 2020-04-12, 8:58
  */
-package com.marcnuri.yack.schema;
+package com.marcnuri.yakc.schema;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import lombok.Builder;

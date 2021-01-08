@@ -15,12 +15,12 @@
  *
  * Created on 2020-04-10, 8:32
  */
-package com.marcnuri.yack.schema.api;
+package com.marcnuri.yakc.schema.api;
 
-import com.marcnuri.yack.schema.GeneratorException;
-import com.marcnuri.yack.schema.GeneratorSettings;
-import com.marcnuri.yack.schema.GeneratorUtils;
-import com.marcnuri.yack.schema.SchemaUtils;
+import com.marcnuri.yakc.schema.GeneratorException;
+import com.marcnuri.yakc.schema.GeneratorSettings;
+import com.marcnuri.yakc.schema.GeneratorUtils;
+import com.marcnuri.yakc.schema.SchemaUtils;
 import com.samskivert.mustache.Escapers;
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Template;
@@ -40,9 +40,9 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import static com.marcnuri.yack.schema.SchemaUtils.removeUnnecessaryImports;
-import static com.marcnuri.yack.schema.SchemaUtils.sanitizePackageName;
-import static com.marcnuri.yack.schema.api.TemplateContextResolver.resolveClassName;
+import static com.marcnuri.yakc.schema.SchemaUtils.removeUnnecessaryImports;
+import static com.marcnuri.yakc.schema.SchemaUtils.sanitizePackageName;
+import static com.marcnuri.yakc.schema.api.TemplateContextResolver.resolveClassName;
 
 /**
  * Created by Marc Nuri on 2020-04-10.

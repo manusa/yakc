@@ -13,24 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- * Created on 2020-04-12, 8:51
+ * Created on 2020-04-10, 13:08
  */
-package com.marcnuri.yack.schema.model;
+package com.marcnuri.yakc.schema.api;
 
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.media.Schema;
-
-import java.util.Map;
+import io.swagger.v3.oas.models.Operation;
+import lombok.Builder;
+import lombok.Data;
 
 /**
- * Created by Marc Nuri on 2020-04-12.
+ * Created by Marc Nuri on 2020-04-10.
  */
-class ModelExtractor {
-
-  private ModelExtractor() {}
-
-  static Map<String, Schema> extractSchemas(OpenAPI openAPI) {
-    return openAPI.getComponents().getSchemas();
+@Builder(toBuilder = true)
+@Data
+class ApiOperation {
+  enum Method {
+    DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT, TRACE
   }
-
+  private String tag;
+  private String path;
+  private Method method;
+  private Operation operation;
 }

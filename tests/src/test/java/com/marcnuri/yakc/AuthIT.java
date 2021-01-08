@@ -56,7 +56,7 @@ class AuthIT {
     final Configuration configuration = Configuration.builder()
       .server(KC.getConfiguration().getServer())
       .certificateAuthorityData(secret.getData().get("ca.crt"))
-      .token(secret.getData().get("token"))
+      .token(() -> secret.getData().get("token"))
       .build();
     // When
     final Node node = new KubernetesClient(configuration).create(CoreV1Api.class)

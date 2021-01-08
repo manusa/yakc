@@ -15,10 +15,10 @@
  *
  * Created on 2020-04-10, 9:13
  */
-package com.marcnuri.yack.schema.api;
+package com.marcnuri.yakc.schema.api;
 
-import com.marcnuri.yack.schema.GeneratorSettings;
-import com.marcnuri.yack.schema.api.ApiOperation.Method;
+import com.marcnuri.yakc.schema.GeneratorSettings;
+import com.marcnuri.yakc.schema.api.ApiOperation.Method;
 import io.swagger.v3.oas.models.PathItem;
 
 import java.util.Collections;

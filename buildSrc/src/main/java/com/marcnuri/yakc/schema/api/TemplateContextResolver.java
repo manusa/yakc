@@ -15,10 +15,10 @@
  *
  * Created on 2020-04-10, 18:44
  */
-package com.marcnuri.yack.schema.api;
+package com.marcnuri.yakc.schema.api;
 
-import com.marcnuri.yack.schema.GeneratorSettings;
-import com.marcnuri.yack.schema.SchemaUtils;
+import com.marcnuri.yakc.schema.GeneratorSettings;
+import com.marcnuri.yakc.schema.SchemaUtils;
 import io.swagger.v3.oas.models.media.Schema;
 import io.swagger.v3.oas.models.parameters.Parameter;
 import io.swagger.v3.oas.models.parameters.RequestBody;
@@ -35,12 +35,12 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.marcnuri.yack.schema.SchemaUtils.APPLICATION_JSON;
-import static com.marcnuri.yack.schema.SchemaUtils.capitalizedTagName;
-import static com.marcnuri.yack.schema.SchemaUtils.isPatch;
-import static com.marcnuri.yack.schema.SchemaUtils.sanitizeDescription;
-import static com.marcnuri.yack.schema.SchemaUtils.sanitizeVariable;
-import static com.marcnuri.yack.schema.api.ApiOperation.Method.PATCH;
+import static com.marcnuri.yakc.schema.SchemaUtils.APPLICATION_JSON;
+import static com.marcnuri.yakc.schema.SchemaUtils.capitalizedTagName;
+import static com.marcnuri.yakc.schema.SchemaUtils.isPatch;
+import static com.marcnuri.yakc.schema.SchemaUtils.sanitizeDescription;
+import static com.marcnuri.yakc.schema.SchemaUtils.sanitizeVariable;
+import static com.marcnuri.yakc.schema.api.ApiOperation.Method.PATCH;
 
 /**
  * Created by Marc Nuri on 2020-04-10.

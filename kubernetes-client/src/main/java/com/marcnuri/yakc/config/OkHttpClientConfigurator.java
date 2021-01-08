@@ -71,18 +71,23 @@ public class OkHttpClientConfigurator {
     } catch (Exception e) {
       log.log(Level.WARNING, String.format("Error while loading certificates: %s", e.getMessage()), e);
     }
-    if (configuration.getUsername() != null) {
-      builder.addInterceptor(c -> c.proceed(
-        c.request().newBuilder().addHeader(HEADER_AUTHORIZATION,
-          Credentials.basic(configuration.getUsername(), configuration.getPassword())).build()
-      ));
-    }
-    if (configuration.getToken() != null) {
-      builder.addInterceptor(c -> c.proceed(
-        c.request().newBuilder().header(HEADER_AUTHORIZATION,
-          String.format("Bearer %s", configuration.getToken())).build()
-      ));
-    }
+    builder.addInterceptor(c -> {
+      final String currentUserName = configuration.getUsername().get();
+      final String currentPassword = configuration.getPassword().get();
+      if (currentUserName != null) {
+        c.proceed(c.request().newBuilder().addHeader(HEADER_AUTHORIZATION,
+          Credentials.basic(currentUserName, currentPassword)).build());
+      }
+      return c.proceed(c.request());
+    });
+    builder.addInterceptor(c -> {
+      final String currentToken = configuration.getToken().get();
+      if (currentToken != null) {
+        return c.proceed(c.request().newBuilder().header(HEADER_AUTHORIZATION,
+          String.format("Bearer %s", currentToken)).build());
+      }
+      return c.proceed(c.request());
+    });
     return builder.build();
   }
 }

@@ -15,12 +15,12 @@
  *
  * Created on 2020-04-12, 8:49
  */
-package com.marcnuri.yack.schema.model;
+package com.marcnuri.yakc.schema.model;
 
-import com.marcnuri.yack.schema.GeneratorException;
-import com.marcnuri.yack.schema.GeneratorSettings;
-import com.marcnuri.yack.schema.GeneratorUtils;
-import com.marcnuri.yack.schema.SchemaUtils;
+import com.marcnuri.yakc.schema.GeneratorException;
+import com.marcnuri.yakc.schema.GeneratorSettings;
+import com.marcnuri.yakc.schema.GeneratorUtils;
+import com.marcnuri.yakc.schema.SchemaUtils;
 import com.samskivert.mustache.Escapers;
 import com.samskivert.mustache.Mustache;
 import com.samskivert.mustache.Mustache.TemplateLoader;
@@ -34,9 +34,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -48,13 +46,13 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.TreeSet;
 
-import static com.marcnuri.yack.schema.SchemaUtils.isArray;
-import static com.marcnuri.yack.schema.SchemaUtils.isMap;
-import static com.marcnuri.yack.schema.SchemaUtils.removeUnnecessaryImports;
-import static com.marcnuri.yack.schema.SchemaUtils.sanitizeDescription;
-import static com.marcnuri.yack.schema.SchemaUtils.sanitizePackageName;
-import static com.marcnuri.yack.schema.SchemaUtils.sanitizeVariable;
-import static com.marcnuri.yack.schema.SchemaUtils.serializerForSchema;
+import static com.marcnuri.yakc.schema.SchemaUtils.isArray;
+import static com.marcnuri.yakc.schema.SchemaUtils.isMap;
+import static com.marcnuri.yakc.schema.SchemaUtils.removeUnnecessaryImports;
+import static com.marcnuri.yakc.schema.SchemaUtils.sanitizeDescription;
+import static com.marcnuri.yakc.schema.SchemaUtils.sanitizePackageName;
+import static com.marcnuri.yakc.schema.SchemaUtils.sanitizeVariable;
+import static com.marcnuri.yakc.schema.SchemaUtils.serializerForSchema;
 import static java.util.function.Predicate.not;
 
 /**
