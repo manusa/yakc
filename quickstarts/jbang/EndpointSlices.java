@@ -1,7 +1,7 @@
 ///usr/bin/env jbang "$0" "$@" ; exit $?
 //DEPS info.picocli:picocli:4.6.1
-//DEPS com.marcnuri.yakc:kubernetes-client:0.0.19
-//DEPS com.marcnuri.yakc:kubernetes-api:0.0.19
+//DEPS com.marcnuri.yakc:kubernetes-client:0.0.20
+//DEPS com.marcnuri.yakc:kubernetes-api:0.0.20
 
 import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.ClientErrorException;
