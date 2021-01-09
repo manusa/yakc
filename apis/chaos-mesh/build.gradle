@@ -1,5 +1,5 @@
-import com.marcnuri.yack.schema.api.ApiGeneratorTask
-import com.marcnuri.yack.schema.model.ModelGeneratorTask
+import com.marcnuri.yakc.schema.api.ApiGeneratorTask
+import com.marcnuri.yakc.schema.model.ModelGeneratorTask
 
 apply from: rootDir.toPath().resolve('shared.gradle').toFile()
 
@@ -21,7 +21,7 @@ sourceSets.main.java.srcDirs = ['src/api/java', 'src/main/java', 'src/model/java
 def templatesDirs = new File(rootProject.projectDir, "schema/templates")
 def schemaDir = new File(projectDir, "schema")
 def availableSchemaNames = Arrays.asList(
-  "chaos-mesh-ce547f117d41ae3c67de35b1a0e2fb6031d2ce94.json"
+  "chaos-mesh-1.1.0.json"
 )
 def availableSchemas = availableSchemaNames.stream()
     .map { s -> new File(schemaDir, s) }

@@ -47,6 +47,13 @@ public class NetworkChaosSpecTargetSelector implements Model {
   private Map<String, String> annotationSelectors;
 
   /**
+   * a slice of label selector expressions that can be used to select objects. A list of selectors based on set-based label expressions.
+   */
+  @JsonProperty("expressionSelectors")
+  @Singular(value = "addToExpressionSelectors", ignoreNullCollections = true)
+  private List<DNSChaosSpecSelectorExpressionSelectors> expressionSelectors;
+
+  /**
    * Map of string keys and values that can be used to select objects. A selector based on fields.
    */
   @JsonProperty("fieldSelectors")
