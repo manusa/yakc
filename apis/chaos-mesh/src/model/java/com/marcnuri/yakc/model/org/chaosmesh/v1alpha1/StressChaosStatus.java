@@ -53,16 +53,6 @@ public class StressChaosStatus implements Model {
   @Singular(value = "putInInstances", ignoreNullCollections = true)
   private Map<String, StressChaosStatusInstances> instances;
 
-  /**
-   * Phase is the chaos status.
-   */
-  @NonNull
-  @JsonProperty("phase")
-  private String phase;
-
-  @JsonProperty("reason")
-  private String reason;
-
   @JsonProperty("scheduler")
   private DNSChaosStatusScheduler scheduler;
 

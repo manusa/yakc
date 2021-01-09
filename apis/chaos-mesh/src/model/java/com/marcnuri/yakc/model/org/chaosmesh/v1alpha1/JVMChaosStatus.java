@@ -44,16 +44,6 @@ public class JVMChaosStatus implements Model {
   @JsonProperty("failedMessage")
   private String failedMessage;
 
-  /**
-   * Phase is the chaos status.
-   */
-  @NonNull
-  @JsonProperty("phase")
-  private String phase;
-
-  @JsonProperty("reason")
-  private String reason;
-
   @JsonProperty("scheduler")
   private DNSChaosStatusScheduler scheduler;
 

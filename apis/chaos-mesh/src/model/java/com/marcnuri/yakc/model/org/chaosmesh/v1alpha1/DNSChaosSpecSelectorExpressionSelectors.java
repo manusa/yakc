@@ -18,15 +18,17 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Singular;
 import lombok.ToString;
 
 /**
- * IoChaosStatus defines the observed state of IoChaos
+ * A label selector requirement is a selector that contains values, a key, and an operator that relates the key and values.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -34,18 +36,29 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class IoChaosStatus implements Model {
+public class DNSChaosSpecSelectorExpressionSelectors implements Model {
 
 
+  /**
+   * key is the label key that the selector applies to.
+   */
   @NonNull
-  @JsonProperty("experiment")
-  private DNSChaosStatusExperiment experiment;
+  @JsonProperty("key")
+  private String key;
 
-  @JsonProperty("failedMessage")
-  private String failedMessage;
+  /**
+   * operator represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists and DoesNotExist.
+   */
+  @NonNull
+  @JsonProperty("operator")
+  private String operator;
 
-  @JsonProperty("scheduler")
-  private DNSChaosStatusScheduler scheduler;
+  /**
+   * values is an array of string values. If the operator is In or NotIn, the values array must be non-empty. If the operator is Exists or DoesNotExist, the values array must be empty. This array is replaced during a strategic merge patch.
+   */
+  @JsonProperty("values")
+  @Singular(value = "addToValues", ignoreNullCollections = true)
+  private List<String> values;
 
 }
 
