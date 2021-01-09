@@ -28,6 +28,7 @@ import javax.net.ssl.KeyManager;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -72,8 +73,10 @@ public class OkHttpClientConfigurator {
       log.log(Level.WARNING, String.format("Error while loading certificates: %s", e.getMessage()), e);
     }
     builder.addInterceptor(c -> {
-      final String currentUserName = configuration.getUsername().get();
-      final String currentPassword = configuration.getPassword().get();
+      final String currentUserName = Optional.ofNullable(configuration.getUsername())
+        .map(OkHttpClientConfigurator::getConfiguration).orElse(null);
+      final String currentPassword = Optional.ofNullable(configuration.getPassword())
+        .map(OkHttpClientConfigurator::getConfiguration).orElse(null);
       if (currentUserName != null) {
         c.proceed(c.request().newBuilder().addHeader(HEADER_AUTHORIZATION,
           Credentials.basic(currentUserName, currentPassword)).build());
@@ -81,7 +84,8 @@ public class OkHttpClientConfigurator {
       return c.proceed(c.request());
     });
     builder.addInterceptor(c -> {
-      final String currentToken = configuration.getToken().get();
+      final String currentToken = Optional.ofNullable(configuration.getToken())
+        .map(OkHttpClientConfigurator::getConfiguration).orElse(null);
       if (currentToken != null) {
         return c.proceed(c.request().newBuilder().header(HEADER_AUTHORIZATION,
           String.format("Bearer %s", currentToken)).build());
@@ -89,5 +93,13 @@ public class OkHttpClientConfigurator {
       return c.proceed(c.request());
     });
     return builder.build();
+  }
+
+  private static <T> T getConfiguration(ConfigurationSupplier<T> cs) {
+    try {
+      return cs.get();
+    } catch (IOException e) {
+      return null;
+    }
   }
 }
