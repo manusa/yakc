@@ -18,12 +18,16 @@ import api from './api';
 import reducer from './reducer';
 import selectors from './selectors';
 import List from './List';
+import ReplicationControllersDetailPage from './ReplicationControllersDetailPage';
+import ReplicationControllersEditPage from './ReplicationControllersEditPage';
+import ReplicationControllersPage from './ReplicationControllersPage';
 
-const replicationControllers = {};
-
-replicationControllers.api = api;
-replicationControllers.reducer = reducer;
-replicationControllers.selectors = selectors;
-replicationControllers.List = List;
-
-export default replicationControllers;
+export default {
+  api,
+  reducer,
+  selectors,
+  List,
+  ReplicationControllersDetailPage,
+  ReplicationControllersEditPage,
+  ReplicationControllersPage
+};

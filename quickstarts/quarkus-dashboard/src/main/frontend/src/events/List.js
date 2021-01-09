@@ -71,6 +71,10 @@ const EventName = ({event}) => {
       Component = Link.Pod;
       url = `/pods/${uid}`;
       break;
+    case 'ReplicationController':
+      Component = Link.ReplicationController;
+      url = `/replicationcontrollers/${uid}`;
+      break;
     case 'StatefulSet':
       Component = Link.StatefulSet;
       url = `/statefulsets/${uid}`;

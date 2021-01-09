@@ -84,6 +84,7 @@ Link.Node = ({...props}) => <Link.ResourceLink Icon={i.Node} {...props} />;
 Link.PersistentVolume = ({...props}) => <Link.ResourceLink Icon={i.PersistentVolume} {...props} />;
 Link.PersistentVolumeClaim = ({...props}) => <Link.ResourceLink Icon={i.PersistentVolumeClaim} {...props} />;
 Link.Pod = ({...props}) => <Link.ResourceLink Icon={i.Pod} {...props} />;
+Link.ReplicationController = ({...props}) => <Link.ResourceLink Icon={i.ReplicaSet} {...props} />;
 Link.Role = ({...props}) => <Link.ResourceLink Icon={i.Role} {...props} />;
 Link.Route = ({...props}) => <Link.ResourceLink Icon={i.Route} {...props} />;
 Link.Secret = ({...props}) => <Link.ResourceLink Icon={i.Secret} {...props} />;

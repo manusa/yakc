@@ -21,6 +21,7 @@ import rc from './';
 import Icon from '../components/Icon';
 import ResourceList from '../components/ResourceList';
 import Table from '../components/Table';
+import Link from "../components/Link";
 
 const headers = [
   '',
@@ -43,7 +44,9 @@ const Rows = ({replicationControllers}) => {
           />
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
-          {metadata.selectors.name(replicationController)}
+          <Link.ReplicationController to={`/replicationcontrollers/${metadata.selectors.uid(replicationController)}`}>
+            {metadata.selectors.name(replicationController)}
+          </Link.ReplicationController>
         </Table.Cell>
         <Table.Cell className='whitespace-no-wrap'>
           {metadata.selectors.namespace(replicationController)}

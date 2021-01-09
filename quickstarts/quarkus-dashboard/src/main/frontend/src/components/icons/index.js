@@ -32,6 +32,7 @@ import OpenShift from "./OpenShift";
 import PersistentVolume from './PersistentVolume';
 import PersistentVolumeClaim from './PersistentVolumeClaim';
 import Pod from './Pod';
+import ReplicaSet from './ReplicaSet'
 import Role from './Role';
 import Secret from './Secret';
 import Service from './Service';
@@ -58,6 +59,7 @@ icons.OpenShift = OpenShift;
 icons.PersistentVolume = PersistentVolume;
 icons.PersistentVolumeClaim = PersistentVolumeClaim;
 icons.Pod = Pod;
+icons.ReplicaSet = ReplicaSet;
 icons.Role = Role;
 icons.Route = ({...props}) => <Ingress kubernetesColor='#db212e' {...props} />;
 icons.Secret = Secret;

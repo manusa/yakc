@@ -14,9 +14,21 @@
  * limitations under the License.
  *
  */
-import {deleteNamespacedResource, updateNamespacedResource} from '../fetch';
+import React from 'react';
+import {connect} from 'react-redux';
+import rc from './';
+import DashboardPage from '../components/DashboardPage';
+import FilterBar from '../components/FilterBar';
 
-export default {
-  delete: deleteNamespacedResource('replicationcontrollers'),
-  update: updateNamespacedResource('replicationcontrollers')
-};
+const ReplicationControllersPage = ({selectedNamespace}) => (
+  <DashboardPage title='ReplicationControllers'>
+    <FilterBar />
+    <rc.List className='mt-4' namespace={selectedNamespace} />
+  </DashboardPage>
+);
+
+const mapStateToProps = ({ui: {selectedNamespace}}) => ({
+  selectedNamespace
+});
+
+export default connect(mapStateToProps)(ReplicationControllersPage);

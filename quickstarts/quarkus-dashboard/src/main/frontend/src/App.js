@@ -33,6 +33,7 @@ import ns from './namespaces';
 import pvc from './persistentvolumeclaims';
 import pv from './persistentvolumes';
 import pods from './pods';
+import rc from './replicationcontrollers';
 import redux from './redux';
 import roles from './roles';
 import routes from './routes';
@@ -140,6 +141,9 @@ const App = ({dispatch}) => {
           <Route exact path='/pods/:uid/edit' component={pods.PodsEditPage} />
           <Route exact path='/pods/:uid/exec' component={pods.PodsExecPage} />
           <Route exact path='/pods/:uid/logs' component={pods.PodsLogsPage} />
+          <Route exact path='/replicationcontrollers' component={rc.ReplicationControllersPage} />
+          <Route exact path='/replicationcontrollers/:uid' component={rc.ReplicationControllersDetailPage} />
+          <Route exact path='/replicationcontrollers/:uid/edit' component={rc.ReplicationControllersEditPage} />
           <Route exact path='/roles' component={roles.RolesPage} />
           <Route exact path='/roles/:uid' component={roles.RolesDetailPage} />
           <Route exact path='/roles/:uid/edit' component={roles.RolesEditPage} />

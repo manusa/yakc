@@ -25,6 +25,8 @@ selectors.isReady = replicationController =>
 
 selectors.specReplicas = replicationController => replicationController?.spec?.replicas ?? 0;
 
+selectors.containers = replicationController => replicationController?.spec?.template?.spec?.containers ?? [];
+
 // Selectors for array of ReplicationControllers
 
 selectors.readyCount = replicationControllers => replicationControllers.reduce(
