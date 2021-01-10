@@ -43,6 +43,7 @@ const ServicesDetailPage = ({service}) => (
     kind='Services'
     path='services'
     resource={service}
+    deleteFunction={svc.api.delete}
     body={
       <Form>
         <metadata.Details resource={service} />

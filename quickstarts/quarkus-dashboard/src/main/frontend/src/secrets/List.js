@@ -30,7 +30,7 @@ const headers = [
 ];
 
 const Rows = ({secrets}) => {
-  const deleteSecret = secret => async () => await s.api.requestDelete(secret);
+  const deleteSecret = secret => async () => await s.api.delete(secret);
   return secrets
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(secret => (

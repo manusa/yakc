@@ -63,6 +63,7 @@ const SecretsDetailPage = ({secret}) => (
     kind='Secrets'
     path='secrets'
     resource={secret}
+    deleteFunction={s.api.delete}
     body={
       <Form>
         <metadata.Details resource={secret} />

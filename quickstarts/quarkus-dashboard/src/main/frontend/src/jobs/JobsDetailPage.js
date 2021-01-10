@@ -35,6 +35,7 @@ const JobsDetailPage = ({job}) => (
       />
     }
     resource={job}
+    deleteFunction={j.api.delete}
     body={
       <Form>
         <metadata.Details resource={job} />

@@ -24,7 +24,7 @@ const api = {};
 
 api.list = listResource('configmaps', 'ConfigMap');
 
-api.requestDelete = deleteNamespacedResource('configmaps');
+api.delete = deleteNamespacedResource('configmaps');
 
 api.update = updateNamespacedResource('configmaps');
 

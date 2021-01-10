@@ -24,7 +24,7 @@ const api = {};
 
 api.list = listResource('services', 'Service');
 
-api.requestDelete = deleteNamespacedResource('services');
+api.delete = deleteNamespacedResource('services');
 
 api.update = updateNamespacedResource('services');
 

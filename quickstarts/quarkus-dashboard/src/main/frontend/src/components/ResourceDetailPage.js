@@ -22,6 +22,7 @@ import DashboardPage from './DashboardPage';
 import Icon from "./Icon";
 import Link from './Link';
 import PopupMenu from "./PopupMenu";
+import {useHistory} from "react-router-dom";
 
 const downloadResource = resource => {
   const mimeType = 'text/yaml';
@@ -43,11 +44,17 @@ const ResourceDetailPage = ({
   actions,
   body,
   isReadyFunction,
+  deleteFunction,
   title,
   editable = true,
   children
 }) => {
   const namespace = metadata.selectors.namespace(resource);
+  const history = useHistory();
+  const deleteAction = () => {
+    deleteFunction(resource);
+    history.push(`/${path}`);
+  };
   return (
     <DashboardPage
       title={title ?? <DashboardPage.Title
@@ -66,6 +73,11 @@ const ResourceDetailPage = ({
             <PopupMenu.Item onClick={() => downloadResource(resource)}>
               <Icon icon='fa-save' className='mr-2' /> Download
             </PopupMenu.Item>
+            {deleteFunction &&
+              <PopupMenu.Item onClick={deleteAction}>
+                <Icon stylePrefix='far' icon='fa-trash-alt' className='mr-2' /> Delete
+              </PopupMenu.Item>
+            }
           </PopupMenu>
         </Card.Title>
         <Card.Body>

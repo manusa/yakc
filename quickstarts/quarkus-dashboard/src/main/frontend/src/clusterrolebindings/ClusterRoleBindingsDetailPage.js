@@ -27,6 +27,7 @@ const ClusterRoleBindingsDetailPage = ({clusterRoleBinding}) => (
     kind='ClusterRoleBindings'
     path='clusterrolebindings'
     resource={clusterRoleBinding}
+    deleteFunction={crb.api.delete}
     body={
       <Form>
         <metadata.Details resource={clusterRoleBinding}/>

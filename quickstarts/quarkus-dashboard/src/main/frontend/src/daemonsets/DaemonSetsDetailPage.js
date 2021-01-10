@@ -32,6 +32,7 @@ const DaemonSetsDetailPage = ({daemonSet}) => (
     path='daemonsets'
     resource={daemonSet}
     isReadyFunction={ds.selectors.isReady}
+    deleteFunction={ds.api.delete}
     actions={
       <Link
         className='ml-2'

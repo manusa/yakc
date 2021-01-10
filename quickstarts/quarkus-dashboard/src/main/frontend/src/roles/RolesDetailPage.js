@@ -27,6 +27,7 @@ const RolesDetailPage = ({role}) => (
     kind='Roles'
     path='roles'
     resource={role}
+    deleteFunction={r.api.delete}
     body={
       <Form>
         <metadata.Details resource={role}/>

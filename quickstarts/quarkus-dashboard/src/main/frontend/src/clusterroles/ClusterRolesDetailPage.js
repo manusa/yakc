@@ -28,6 +28,7 @@ const ClusterRolesDetailPage = ({clusterRole}) => (
     kind='ClusterRoles'
     path='clusterroles'
     resource={clusterRole}
+    deleteFunction={cRoles.api.delete}
     body={
       <Form>
         <metadata.Details resource={clusterRole}/>

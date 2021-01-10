@@ -70,6 +70,7 @@ const PodsDetailPage = ({pod}) => {
       path='pods'
       resource={pod}
       isReadyFunction={p.selectors.succeededOrContainersReady}
+      deleteFunction={p.api.delete}
       actions={
         <>
           <ActionLink

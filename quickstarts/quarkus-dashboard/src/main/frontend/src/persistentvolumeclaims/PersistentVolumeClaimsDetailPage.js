@@ -26,6 +26,7 @@ const PersistentVolumeClaimsDetailPage = ({persistentVolumeClaim}) => (
     kind='PersistentVolumeClaims'
     path='persistentvolumeclaims'
     resource={persistentVolumeClaim}
+    deleteFunction={pvc.api.delete}
     body={
       <>
         <Form>

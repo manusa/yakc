@@ -29,7 +29,7 @@ const headers = [
 ];
 
 const Rows = ({configMaps}) => {
-  const deleteConfigMap = configMap => async () => await cm.api.requestDelete(configMap);
+  const deleteConfigMap = configMap => async () => await cm.api.delete(configMap);
   return configMaps
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(configMap => (

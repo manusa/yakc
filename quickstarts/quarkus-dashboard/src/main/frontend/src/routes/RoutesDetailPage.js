@@ -26,6 +26,7 @@ const RoutesDetailPage = ({route}) => (
     kind='Routes'
     path='routes'
     resource={route}
+    deleteFunction={r.api.delete}
     body={
       <Form>
         <metadata.Details resource={route} />

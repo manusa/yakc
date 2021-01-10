@@ -32,7 +32,7 @@ const headers = [
 
 const Rows = ({ingresses, crudDelete}) => {
   const deleteIngress = ingress => async () => {
-    await ing.api.requestDelete(ingress);
+    await ing.api.delete(ingress);
     crudDelete(ingress);
   };
   return ingresses

@@ -33,6 +33,7 @@ const DeploymentsDetailPage = ({deployment, replicaSetsUids}) => (
     path='deployments'
     resource={deployment}
     isReadyFunction={d.selectors.isReady}
+    deleteFunction={d.api.delete}
     actions={
       <Link
         className='ml-2'

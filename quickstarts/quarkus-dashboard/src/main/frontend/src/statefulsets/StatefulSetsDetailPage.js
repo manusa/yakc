@@ -33,6 +33,7 @@ const StatefulSetsDetailPage = ({statefulSet}) => (
     path='statefulsets'
     resource={statefulSet}
     isReadyFunction={sts.selectors.isReady}
+    deleteFunction={sts.api.delete}
     actions={
       <Link
         className='ml-2'

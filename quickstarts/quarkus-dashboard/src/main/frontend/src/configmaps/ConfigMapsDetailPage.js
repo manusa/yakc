@@ -36,6 +36,7 @@ const ConfigMapsDetailPage = ({configMap}) => (
     kind='ConfigMaps'
     path='configmaps'
     resource={configMap}
+    deleteFunction={cm.api.delete}
     body={
       <Form>
         <metadata.Details resource={configMap} />

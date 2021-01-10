@@ -65,6 +65,7 @@ const CustomResourceDefinitionsDetailPage = ({customResourceDefinition}) => {
       path={path}
       title={<crd.DashboardPageTitle customResourceDefinition={customResourceDefinition}/>}
       resource={customResourceDefinition}
+      deleteFunction={crd.api.delete}
       body={
         <Form>
           <metadata.Details resource={customResourceDefinition} />

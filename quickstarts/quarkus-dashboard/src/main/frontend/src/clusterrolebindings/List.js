@@ -64,7 +64,7 @@ const Rows = ({clusterRoleBindings}) => {
     ));
 };
 
-const List = ({resources, loadedResources, crudDelete, ...properties}) => (
+const List = ({resources, roleRefName, loadedResources, crudDelete, ...properties}) => (
   <ResourceList headers={headers} resources={resources} {...properties}>
     <Rows clusterRoleBindings={resources} />
   </ResourceList>

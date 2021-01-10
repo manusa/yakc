@@ -34,6 +34,7 @@ const DeploymentConfigsDetailPage = ({deploymentConfig, replicationControllersUi
     path='deploymentconfigs'
     resource={deploymentConfig}
     isReadyFunction={dc.selectors.isReady}
+    deleteFunction={dc.api.delete}
     actions={
       <Link
         className='ml-2'

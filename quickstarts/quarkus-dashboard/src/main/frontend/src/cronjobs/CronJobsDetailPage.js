@@ -55,6 +55,7 @@ const CronJobsDetailPage = ({cronJob}) => (
       />
     }
     resource={cronJob}
+    deleteFunction={cj.api.delete}
     actions={
       <Link
         className='ml-2'

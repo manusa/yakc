@@ -28,6 +28,7 @@ const PersistentVolumesDetailPage = ({persistentVolume}) => (
     kind='PersistentVolumes'
     path='persistentvolumes'
     resource={persistentVolume}
+    deleteFunction={pv.api.delete}
     body={
       <>
         <Form>

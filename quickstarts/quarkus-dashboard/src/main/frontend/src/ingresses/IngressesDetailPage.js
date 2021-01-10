@@ -17,6 +17,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import metadata from '../metadata';
+import i from './';
 import Form from '../components/Form';
 import ResourceDetailPage from '../components/ResourceDetailPage';
 
@@ -25,6 +26,7 @@ const IngressesDetailPage = ({ingress}) => (
     kind='Ingresses'
     path='ingresses'
     resource={ingress}
+    deleteFunction={i.api.delete}
     body={
       <Form>
         <metadata.Details resource={ingress} />

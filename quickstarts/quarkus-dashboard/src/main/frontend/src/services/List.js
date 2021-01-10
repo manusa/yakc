@@ -31,7 +31,7 @@ const headers = [
 ];
 
 const Rows = ({services}) => {
-  const deleteService = service => async () => await svc.api.requestDelete(service);
+  const deleteService = service => async () => await svc.api.delete(service);
   return services
     .sort(metadata.selectors.sortByCreationTimeStamp)
     .map(service => (

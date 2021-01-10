@@ -23,7 +23,7 @@ import {
 
 const api = {};
 
-api.requestDelete = deleteNamespacedResource('statefulsets');
+api.delete = deleteNamespacedResource('statefulsets');
 
 api.update = updateNamespacedResource('statefulsets');
 

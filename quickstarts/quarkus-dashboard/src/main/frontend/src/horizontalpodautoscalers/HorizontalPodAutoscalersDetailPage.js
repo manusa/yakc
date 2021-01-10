@@ -27,6 +27,7 @@ const HorizontalPodAutoscalersDetailPage = ({horizontalPodAutoscaler}) => (
     path='horizontalpodautoscalers'
     resource={horizontalPodAutoscaler}
     isReadyFunction={hpa.selectors.isReady}
+    deleteFunction={hpa.api.delete}
     body={
       <Form>
         <metadata.Details resource={horizontalPodAutoscaler} />

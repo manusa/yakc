@@ -24,7 +24,7 @@ const api = {};
 
 api.list = listResource('secrets', 'Secret');
 
-api.requestDelete = deleteNamespacedResource('secrets');
+api.delete = deleteNamespacedResource('secrets');
 
 api.update = updateNamespacedResource('secrets');
 

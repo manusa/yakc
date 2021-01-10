@@ -30,6 +30,7 @@ const ReplicationControllersDetailPage = ({replicationController}) => (
     path='replicationcontrollers'
     resource={replicationController}
     isReadyFunction={rc.selectors.isReady}
+    deleteFunction={rc.api.delete}
     body={
       <Form>
         <metadata.Details resource={replicationController} />

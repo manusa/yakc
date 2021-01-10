@@ -31,7 +31,7 @@ const headers = [
 ];
 
 const Rows = ({statefulSets}) => {
-  const deleteStatefulSet = statefulSet => async () => await sts.api.requestDelete(statefulSet);
+  const deleteStatefulSet = statefulSet => async () => await sts.api.delete(statefulSet);
   const restartStatefulSet = statefulSet => async () => await sts.api.restart(statefulSet);
   return statefulSets
     .sort(metadata.selectors.sortByCreationTimeStamp)

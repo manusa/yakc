@@ -22,7 +22,7 @@ import {
 
 const api = {};
 
-api.requestDelete = deleteNamespacedResource('ingresses');
+api.delete = deleteNamespacedResource('ingresses');
 
 api.list = listResource('ingresses', 'Ingress');
 

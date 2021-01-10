@@ -27,6 +27,7 @@ const NamespacesDetailPage = ({namespace}) => (
     path='namespaces'
     resource={namespace}
     isReadyFunction={ns.selectors.isReady}
+    deleteFunction={ns.api.delete}
     editable={false}
     body={
       <Form>
