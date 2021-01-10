@@ -22,6 +22,7 @@ import CronJob from './CronJob';
 import CustomResourceDefinition from './CustomResourceDefinition';
 import DaemonSet from './DaemonSet';
 import Deployment from './Deployment';
+import HorizontalPodAutoscaler from './HorizontalPodAutoscaler';
 import Ingress from './Ingress';
 import Job from './Job';
 import Kubernetes from './Kubernetes';
@@ -49,6 +50,7 @@ icons.CustomResourceDefinition = CustomResourceDefinition;
 icons.DaemonSet = DaemonSet;
 icons.DeploymentConfig = ({...props}) => <Deployment kubernetesColor='#db212e' {...props} />;
 icons.Deployment = Deployment
+icons.HorizontalPodAutoscaler = HorizontalPodAutoscaler;
 icons.Ingress = Ingress;
 icons.Job = Job;
 icons.Kubernetes = Kubernetes;

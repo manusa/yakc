@@ -29,6 +29,7 @@ import ds from './daemonsets';
 import dc from './deploymentconfigs'
 import deployments from './deployments';
 import events from './events';
+import hpa from './horizontalpodautoscalers'
 import ing from './ingresses';
 import job from './jobs';
 import ns from './namespaces';
@@ -70,6 +71,7 @@ const store = createStore(combineReducers({
   deploymentConfigs: dc.reducer,
   deployments: deployments.reducer,
   events: events.reducer,
+  horizontalPodAutoscalers: hpa.reducer,
   ingresses: ing.reducer,
   jobs: job.reducer,
   namespaces: ns.reducer,

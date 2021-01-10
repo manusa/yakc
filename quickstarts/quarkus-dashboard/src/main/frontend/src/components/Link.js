@@ -77,6 +77,7 @@ Link.CustomResourceDefinition = ({...props}) => <Link.ResourceLink Icon={i.Custo
 Link.DaemonSet = ({...props}) => <Link.ResourceLink Icon={i.DaemonSet} {...props} />;
 Link.DeploymentConfig = ({...props}) => <Link.ResourceLink Icon={i.DeploymentConfig} {...props} />;
 Link.Deployment = ({...props}) => <Link.ResourceLink Icon={i.Deployment} {...props} />;
+Link.HorizontalPodAutoscaler = ({...props}) => <Link.ResourceLink Icon={i.HorizontalPodAutoscaler} {...props} />;
 Link.Ingress = ({...props}) => <Link.ResourceLink Icon={i.Ingress} {...props} />;
 Link.Job = ({...props}) => <Link.ResourceLink Icon={i.Job} {...props} />;
 Link.Namespace = ({...props}) => <Link.ResourceLink Icon={i.Namespace} {...props} />;

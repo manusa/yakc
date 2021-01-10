@@ -26,6 +26,7 @@ import crd from './customresourcedefinitions';
 import dc from './deploymentconfigs';
 import ds from './daemonsets';
 import deployments from './deployments';
+import hpa from './horizontalpodautoscalers';
 import ingresses from './ingresses';
 import jobs from './jobs';
 import nodes from './nodes';
@@ -119,6 +120,9 @@ const App = ({dispatch}) => {
           <Route exact path='/deployments' component={deployments.DeploymentsPage} />
           <Route exact path='/deployments/:uid' component={deployments.DeploymentsDetailPage} />
           <Route exact path='/deployments/:uid/edit' component={deployments.DeploymentsEditPage} />
+          <Route exact path='/horizontalpodautoscalers' component={hpa.HorizontalPodAutoscalersPage} />
+          <Route exact path='/horizontalpodautoscalers/:uid' component={hpa.HorizontalPodAutoscalersDetailPage} />
+          <Route exact path='/horizontalpodautoscalers/:uid/edit' component={hpa.HorizontalPodAutoscalersEditPage} />
           <Route exact path='/ingresses' component={ingresses.IngressesPage} />
           <Route exact path='/ingresses/:uid' component={ingresses.IngressesDetailPage} />
           <Route exact path='/ingresses/:uid/edit' component={ingresses.IngressEditPage} />

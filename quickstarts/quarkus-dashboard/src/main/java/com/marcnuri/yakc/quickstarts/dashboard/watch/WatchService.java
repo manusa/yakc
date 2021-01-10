@@ -27,6 +27,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.daemonsets.DaemonSetService;
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentService;
 import com.marcnuri.yakc.quickstarts.dashboard.deploymentconfigs.DeploymentConfigService;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventService;
+import com.marcnuri.yakc.quickstarts.dashboard.horizontalpodautoscalers.HorizontalPodAutoscalerService;
 import com.marcnuri.yakc.quickstarts.dashboard.jobs.JobService;
 import com.marcnuri.yakc.quickstarts.dashboard.namespaces.NamespaceService;
 import com.marcnuri.yakc.quickstarts.dashboard.node.NodeService;
@@ -66,6 +67,7 @@ public class WatchService {
     DeploymentConfigService deploymentConfigService,
     DeploymentService deploymentService,
     EventService eventService,
+    HorizontalPodAutoscalerService horizontalPodAutoscalerService,
     JobService jobService,
     NamespaceService namespaceService,
     NodeService nodeService,
@@ -89,6 +91,7 @@ public class WatchService {
       deploymentConfigService,
       deploymentService,
       eventService,
+      horizontalPodAutoscalerService,
       jobService,
       namespaceService,
       nodeService,

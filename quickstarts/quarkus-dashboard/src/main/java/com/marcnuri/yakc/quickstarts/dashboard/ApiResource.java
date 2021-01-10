@@ -28,6 +28,7 @@ import com.marcnuri.yakc.quickstarts.dashboard.daemonsets.DaemonSetResource;
 import com.marcnuri.yakc.quickstarts.dashboard.deployment.DeploymentResource;
 import com.marcnuri.yakc.quickstarts.dashboard.deploymentconfigs.DeploymentConfigResource;
 import com.marcnuri.yakc.quickstarts.dashboard.events.EventResource;
+import com.marcnuri.yakc.quickstarts.dashboard.horizontalpodautoscalers.HorizontalPodAutoscalerResource;
 import com.marcnuri.yakc.quickstarts.dashboard.ingresses.IngressResource;
 import com.marcnuri.yakc.quickstarts.dashboard.jobs.JobResource;
 import com.marcnuri.yakc.quickstarts.dashboard.namespaces.NamespaceResource;
@@ -64,6 +65,7 @@ public class ApiResource {
   @Inject DeploymentConfigResource deploymentConfigResource;
   @Inject DeploymentResource deploymentResource;
   @Inject EventResource eventResource;
+  @Inject HorizontalPodAutoscalerResource horizontalPodAutoscalerResource;
   @Inject IngressResource ingressResource;
   @Inject JobResource jobResource;
   @Inject NamespaceResource namespaceResource;
@@ -133,6 +135,11 @@ public class ApiResource {
   @Path("/events")
   public EventResource getEventResource() {
     return eventResource;
+  }
+
+  @Path("/horizontalpodautoscalers")
+  public HorizontalPodAutoscalerResource getHorizontalPodAutoscalerResource() {
+    return horizontalPodAutoscalerResource;
   }
 
   @Path("/ingresses")
