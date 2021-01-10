@@ -129,6 +129,24 @@ Kubernetes Retrofit2 based Java client to be used with kubernetes-api or any of 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
 [Kubernetes cert-manager](https://cert-manager.io/) (1.0.4 - 1.1.0).
 
+cert-manager provides support for x509 certificate management for Kubernetes. It's a Kubernetes
+add-on that automates the management and issuance of TLS certificates, making it very easy
+to provide certificates for developers working within your cluster.
+
+The Java types provided by YAKC will further improve the developer experience by enabling
+developers to interact with cert-manager from Java.
+
+#### Chaos Mesh
+[![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/chaos-mesh)
+](https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:chaos-mesh)
+[![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc.apis/chaos-mesh/javadoc.svg)
+](https://javadoc.io/doc/com.marcnuri.yakc.apis/chaos-mesh)
+
+[Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
+[Chaos Mesh](https://chaos-mesh.org/) (1.1.0).
+
+Chaos Mesh is chaos engineering platform that orchestrates chaos on Kubernetes environments.
+
 #### Istio
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/istio)
 ](https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:istio)
@@ -137,6 +155,10 @@ Kubernetes Retrofit2 based Java client to be used with kubernetes-api or any of 
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
 [Istio](https://istio.io/) (1.7 - 1.8).
+
+Istio is a service-mesh for distributed applications. Istio leverages the required features to
+run a successful and efficient distributed microservice architecture by providing a uniform way
+to secure, monitor and connect microservices.
 
 #### Knative
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/knative)
@@ -147,6 +169,8 @@ Kubernetes Retrofit2 based Java client to be used with kubernetes-api or any of 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
 [Knative](https://knative.dev/) (0.19.0).
 
+Knative is a Kubernetes-based platform to manage and deploy serverless workloads.
+
 #### metrics-server
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/metrics-server)
 ](https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:metrics-server)
@@ -155,6 +179,11 @@ Kubernetes Retrofit2 based Java client to be used with kubernetes-api or any of 
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
 [Kubernetes Metrics Server](https://github.com/kubernetes-sigs/metrics-server)  (0.4.0).
+
+Metrics server collects resource metrics from Pods and Nodes making them ready to be consumed
+via the Metrics API by Horizontal Pod Autoscaler and other scaling solutions.
+
+YAKC provides the means to access the Metrics API from Java.
 
 #### OpenShift
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/openshift)
