@@ -24,6 +24,7 @@ import crd from '../customresourcedefinitions';
 import d from '../deployments';
 import dc from '../deploymentconfigs';
 import ds from '../daemonsets';
+import hpa from '../horizontalpodautoscalers';
 import i from '../ingresses';
 import j from '../jobs';
 import ns from '../namespaces';
@@ -68,6 +69,7 @@ const Results = ({query, selectedNamespace}) => {
       <ss.List {...commonProps} title='StatefulSets' nameLike={query} namespace={selectedNamespace} />
       <rs.List {...commonProps} title='ReplicaSets' nameLike={query} namespace={selectedNamespace} />
       <rc.List {...commonProps} title='ReplicationControllers' nameLike={query} namespace={selectedNamespace} />
+      <hpa.List {...commonProps} title='HorizontalPodAutoscalers' nameLike={query} namespace={selectedNamespace} />
       <svc.List {...commonProps} title='Services' nameLike={query} namespace={selectedNamespace} />
       <i.List {...commonProps} title='Ingresses' nameLike={query} namespace={selectedNamespace} />
       <routes.List {...commonProps} title='Routes' nameLike={query} namespace={selectedNamespace} />

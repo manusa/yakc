@@ -55,6 +55,10 @@ const EventName = ({event}) => {
       Component = Link.DeploymentConfig;
       url = `/deploymentconfigs/${uid}`;
       break;
+    case 'HorizontalPodAutoscaler':
+      Component = Link.HorizontalPodAutoscaler;
+      url = `/horizontalpodautoscalers/${uid}`;
+      break;
     case 'Ingress':
       Component = Link.Ingress;
       url = `/ingresses/${uid}`;
