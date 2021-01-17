@@ -19,7 +19,7 @@ package com.marcnuri.yakc.model.dev.knative.flows.v1beta1;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.ListModel;
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.dev.knative.eventing.v1.BrokerListMetadata;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -62,7 +62,7 @@ public class ParallelList implements Model, ListModel<Parallel> {
   private String kind;
 
   @JsonProperty("metadata")
-  private BrokerListMetadata metadata;
+  private ListMeta metadata;
 
 }
 

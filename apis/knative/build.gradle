@@ -21,7 +21,8 @@ sourceSets.main.java.srcDirs = ['src/api/java', 'src/main/java', 'src/model/java
 def templatesDirs = new File(rootProject.projectDir, "schema/templates")
 def schemaDir = new File(projectDir, "schema")
 def availableSchemaNames = Arrays.asList(
-  "knative-0.19.0.json"
+  "knative-0.19.0.json",
+  "knative-0.20.0.json"
 )
 def availableSchemas = availableSchemaNames.stream()
     .map { s -> new File(schemaDir, s) }

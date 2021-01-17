@@ -14,23 +14,20 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.dev.knative.sources.v1beta1;
+package com.marcnuri.yakc.model.dev.knative.sources.v1beta2;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.marcnuri.yakc.model.ListModel;
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta;
-import java.util.List;
+import com.marcnuri.yakc.model.dev.knative.sources.v1alpha2.PingSourceStatus;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Singular;
 import lombok.ToString;
 
 /**
- * PingSourceList is a list of PingSource
+ * PingSource describes an event source with a fixed payload produced on a specified cron schedule.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -38,7 +35,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class PingSourceList implements Model, ListModel<PingSource> {
+public class PingSource implements Model {
 
 
   /**
@@ -48,21 +45,19 @@ public class PingSourceList implements Model, ListModel<PingSource> {
   private String apiVersion;
 
   /**
-   * List of pingsources. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md
-   */
-  @NonNull
-  @JsonProperty("items")
-  @Singular(value = "addToItems", ignoreNullCollections = true)
-  private List<PingSource> items;
-
-  /**
    * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
    */
   @JsonProperty("kind")
   private String kind;
 
   @JsonProperty("metadata")
-  private ListMeta metadata;
+  private ObjectMeta metadata;
+
+  @JsonProperty("spec")
+  private PingSourceSpec spec;
+
+  @JsonProperty("status")
+  private PingSourceStatus status;
 
 }
 

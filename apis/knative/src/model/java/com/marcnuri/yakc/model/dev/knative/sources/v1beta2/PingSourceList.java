@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.dev.knative.sources.v1beta1;
+package com.marcnuri.yakc.model.dev.knative.sources.v1beta2;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.ListModel;

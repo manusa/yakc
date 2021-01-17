@@ -167,7 +167,7 @@ to secure, monitor and connect microservices.
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/knative)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[Knative](https://knative.dev/) (0.19.0).
+[Knative](https://knative.dev/) (0.20.0).
 
 Knative is a Kubernetes-based platform to manage and deploy serverless workloads.
 

@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.api.messagingknativedev.v1;
+package com.marcnuri.yakc.api.sourcesknativedev.v1beta2;
 
 import com.marcnuri.yakc.api.Api;
 import com.marcnuri.yakc.api.KubernetesCall;
 import com.marcnuri.yakc.api.KubernetesListCall;
-import com.marcnuri.yakc.model.dev.knative.messaging.v1.Channel;
-import com.marcnuri.yakc.model.dev.knative.messaging.v1.ChannelList;
+import com.marcnuri.yakc.model.dev.knative.sources.v1beta2.PingSource;
+import com.marcnuri.yakc.model.dev.knative.sources.v1beta2.PingSourceList;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import java.util.HashMap;
@@ -31,151 +31,44 @@ import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
 
 @SuppressWarnings({"squid:S1192", "unused"})
-public interface MessagingKnativeDevV1Api extends Api {
+public interface SourcesKnativeDevV1beta2Api extends Api {
   /**
-   * list objects of kind Channel
-   */
-  @HTTP(
-    method = "GET",
-    path = "/apis/messaging.knative.dev/v1/channels"
-  )
-  @Headers({ 
-    "Accept: */*"
-  })
-  KubernetesListCall<ChannelList, Channel> listChannelForAllNamespaces();
-
-  /**
-   * list objects of kind Channel
-   */
-  @HTTP(
-    method = "GET",
-    path = "/apis/messaging.knative.dev/v1/channels"
-  )
-  @Headers({ 
-    "Accept: */*"
-  })
-  KubernetesListCall<ChannelList, Channel> listChannelForAllNamespaces(
-    @QueryMap ListChannelForAllNamespaces queryParameters);
-
-  
-  final class ListChannelForAllNamespaces extends HashMap<String, Object> { 
-    /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
-     */
-    public ListChannelForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
-      put("allowWatchBookmarks", allowWatchBookmarks);
-      return this;
-    }
-
-    /**
-     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
-     */
-    public ListChannelForAllNamespaces continues(String continues) {
-      put("continue", continues);
-      return this;
-    }
-
-    /**
-     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
-     */
-    public ListChannelForAllNamespaces fieldSelector(String fieldSelector) {
-      put("fieldSelector", fieldSelector);
-      return this;
-    }
-
-    /**
-     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
-     */
-    public ListChannelForAllNamespaces labelSelector(String labelSelector) {
-      put("labelSelector", labelSelector);
-      return this;
-    }
-
-    /**
-     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
-     */
-    public ListChannelForAllNamespaces limit(Number limit) {
-      put("limit", limit);
-      return this;
-    }
-
-    /**
-     * If 'true', then the output is pretty printed.
-     */
-    public ListChannelForAllNamespaces pretty(String pretty) {
-      put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
-     */
-    public ListChannelForAllNamespaces resourceVersion(String resourceVersion) {
-      put("resourceVersion", resourceVersion);
-      return this;
-    }
-
-    /**
-     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
-     */
-    public ListChannelForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
-      put("resourceVersionMatch", resourceVersionMatch);
-      return this;
-    }
-
-    /**
-     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
-     */
-    public ListChannelForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
-      put("timeoutSeconds", timeoutSeconds);
-      return this;
-    }
-
-    /**
-     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
-     */
-    public ListChannelForAllNamespaces watch(Boolean watch) {
-      put("watch", watch);
-      return this;
-    }
-  } 
-  /**
-   * delete collection of Channel
+   * delete collection of PingSource
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "DELETE",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels"
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources"
   )
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedChannel(
+  KubernetesCall<Status> deleteCollectionNamespacedPingSource(
     @Path("namespace") String namespace);
 
   /**
-   * delete collection of Channel
+   * delete collection of PingSource
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "DELETE",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels"
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources"
   )
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedChannel(
+  KubernetesCall<Status> deleteCollectionNamespacedPingSource(
     @Path("namespace") String namespace, 
-    @QueryMap DeleteCollectionNamespacedChannel queryParameters);
+    @QueryMap DeleteCollectionNamespacedPingSource queryParameters);
 
   
-  final class DeleteCollectionNamespacedChannel extends HashMap<String, Object> { 
+  final class DeleteCollectionNamespacedPingSource extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public DeleteCollectionNamespacedChannel pretty(String pretty) {
+    public DeleteCollectionNamespacedPingSource pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -183,7 +76,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      */
-    public DeleteCollectionNamespacedChannel allowWatchBookmarks(Boolean allowWatchBookmarks) {
+    public DeleteCollectionNamespacedPingSource allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
       return this;
     }
@@ -191,7 +84,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      */
-    public DeleteCollectionNamespacedChannel continues(String continues) {
+    public DeleteCollectionNamespacedPingSource continues(String continues) {
       put("continue", continues);
       return this;
     }
@@ -199,7 +92,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their fields. Defaults to everything.
      */
-    public DeleteCollectionNamespacedChannel fieldSelector(String fieldSelector) {
+    public DeleteCollectionNamespacedPingSource fieldSelector(String fieldSelector) {
       put("fieldSelector", fieldSelector);
       return this;
     }
@@ -207,7 +100,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their labels. Defaults to everything.
      */
-    public DeleteCollectionNamespacedChannel labelSelector(String labelSelector) {
+    public DeleteCollectionNamespacedPingSource labelSelector(String labelSelector) {
       put("labelSelector", labelSelector);
       return this;
     }
@@ -215,7 +108,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public DeleteCollectionNamespacedChannel limit(Number limit) {
+    public DeleteCollectionNamespacedPingSource limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -223,7 +116,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public DeleteCollectionNamespacedChannel resourceVersion(String resourceVersion) {
+    public DeleteCollectionNamespacedPingSource resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
@@ -231,7 +124,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public DeleteCollectionNamespacedChannel resourceVersionMatch(String resourceVersionMatch) {
+    public DeleteCollectionNamespacedPingSource resourceVersionMatch(String resourceVersionMatch) {
       put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
@@ -239,7 +132,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public DeleteCollectionNamespacedChannel timeoutSeconds(Number timeoutSeconds) {
+    public DeleteCollectionNamespacedPingSource timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
@@ -247,48 +140,48 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
-    public DeleteCollectionNamespacedChannel watch(Boolean watch) {
+    public DeleteCollectionNamespacedPingSource watch(Boolean watch) {
       put("watch", watch);
       return this;
     }
   } 
   /**
-   * list objects of kind Channel
+   * list objects of kind PingSource
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "GET",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels"
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources"
   )
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesListCall<ChannelList, Channel> listNamespacedChannel(
+  KubernetesListCall<PingSourceList, PingSource> listNamespacedPingSource(
     @Path("namespace") String namespace);
 
   /**
-   * list objects of kind Channel
+   * list objects of kind PingSource
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "GET",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels"
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources"
   )
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesListCall<ChannelList, Channel> listNamespacedChannel(
+  KubernetesListCall<PingSourceList, PingSource> listNamespacedPingSource(
     @Path("namespace") String namespace, 
-    @QueryMap ListNamespacedChannel queryParameters);
+    @QueryMap ListNamespacedPingSource queryParameters);
 
   
-  final class ListNamespacedChannel extends HashMap<String, Object> { 
+  final class ListNamespacedPingSource extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ListNamespacedChannel pretty(String pretty) {
+    public ListNamespacedPingSource pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -296,7 +189,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      */
-    public ListNamespacedChannel allowWatchBookmarks(Boolean allowWatchBookmarks) {
+    public ListNamespacedPingSource allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
       return this;
     }
@@ -304,7 +197,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      */
-    public ListNamespacedChannel continues(String continues) {
+    public ListNamespacedPingSource continues(String continues) {
       put("continue", continues);
       return this;
     }
@@ -312,7 +205,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their fields. Defaults to everything.
      */
-    public ListNamespacedChannel fieldSelector(String fieldSelector) {
+    public ListNamespacedPingSource fieldSelector(String fieldSelector) {
       put("fieldSelector", fieldSelector);
       return this;
     }
@@ -320,7 +213,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their labels. Defaults to everything.
      */
-    public ListNamespacedChannel labelSelector(String labelSelector) {
+    public ListNamespacedPingSource labelSelector(String labelSelector) {
       put("labelSelector", labelSelector);
       return this;
     }
@@ -328,7 +221,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public ListNamespacedChannel limit(Number limit) {
+    public ListNamespacedPingSource limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -336,7 +229,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ListNamespacedChannel resourceVersion(String resourceVersion) {
+    public ListNamespacedPingSource resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
@@ -344,7 +237,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ListNamespacedChannel resourceVersionMatch(String resourceVersionMatch) {
+    public ListNamespacedPingSource resourceVersionMatch(String resourceVersionMatch) {
       put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
@@ -352,7 +245,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public ListNamespacedChannel timeoutSeconds(Number timeoutSeconds) {
+    public ListNamespacedPingSource timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
@@ -360,54 +253,54 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
-    public ListNamespacedChannel watch(Boolean watch) {
+    public ListNamespacedPingSource watch(Boolean watch) {
       put("watch", watch);
       return this;
     }
   } 
   /**
-   * create a Channel
+   * create a PingSource
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "POST",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels",
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Channel> createNamespacedChannel(
+  KubernetesCall<PingSource> createNamespacedPingSource(
     @Path("namespace") String namespace, 
-    @Body Channel body);
+    @Body PingSource body);
 
   /**
-   * create a Channel
+   * create a PingSource
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "POST",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels",
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Channel> createNamespacedChannel(
+  KubernetesCall<PingSource> createNamespacedPingSource(
     @Path("namespace") String namespace, 
-    @Body Channel body, 
-    @QueryMap CreateNamespacedChannel queryParameters);
+    @Body PingSource body, 
+    @QueryMap CreateNamespacedPingSource queryParameters);
 
   
-  final class CreateNamespacedChannel extends HashMap<String, Object> { 
+  final class CreateNamespacedPingSource extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public CreateNamespacedChannel pretty(String pretty) {
+    public CreateNamespacedPingSource pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -415,7 +308,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public CreateNamespacedChannel dryRun(String dryRun) {
+    public CreateNamespacedPingSource dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -423,97 +316,97 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
      */
-    public CreateNamespacedChannel fieldManager(String fieldManager) {
+    public CreateNamespacedPingSource fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
       return this;
     }
   } 
   /**
-   * delete a Channel
+   * delete a PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "DELETE",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}",
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedChannel(
+  KubernetesCall<Status> deleteNamespacedPingSource(
     @Path("name") String name,
     @Path("namespace") String namespace, 
     @Body DeleteOptions body);
 
     /**
-   * delete a Channel
+   * delete a PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
     @HTTP(
     method = "DELETE",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}",
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedChannel(
+  KubernetesCall<Status> deleteNamespacedPingSource(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
   /**
-   * delete a Channel
+   * delete a PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "DELETE",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}",
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedChannel(
+  KubernetesCall<Status> deleteNamespacedPingSource(
     @Path("name") String name,
     @Path("namespace") String namespace, 
     @Body DeleteOptions body, 
-    @QueryMap DeleteNamespacedChannel queryParameters);
+    @QueryMap DeleteNamespacedPingSource queryParameters);
 
   /**
-   * delete a Channel
+   * delete a PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "DELETE",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}",
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedChannel(
+  KubernetesCall<Status> deleteNamespacedPingSource(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @QueryMap DeleteNamespacedChannel queryParameters);
+    @QueryMap DeleteNamespacedPingSource queryParameters);
 
   
-  final class DeleteNamespacedChannel extends HashMap<String, Object> { 
+  final class DeleteNamespacedPingSource extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public DeleteNamespacedChannel pretty(String pretty) {
+    public DeleteNamespacedPingSource pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -521,7 +414,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public DeleteNamespacedChannel dryRun(String dryRun) {
+    public DeleteNamespacedPingSource dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -529,7 +422,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
      */
-    public DeleteNamespacedChannel gracePeriodSeconds(Number gracePeriodSeconds) {
+    public DeleteNamespacedPingSource gracePeriodSeconds(Number gracePeriodSeconds) {
       put("gracePeriodSeconds", gracePeriodSeconds);
       return this;
     }
@@ -537,7 +430,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
      */
-    public DeleteNamespacedChannel orphanDependents(Boolean orphanDependents) {
+    public DeleteNamespacedPingSource orphanDependents(Boolean orphanDependents) {
       put("orphanDependents", orphanDependents);
       return this;
     }
@@ -545,52 +438,52 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
      */
-    public DeleteNamespacedChannel propagationPolicy(String propagationPolicy) {
+    public DeleteNamespacedPingSource propagationPolicy(String propagationPolicy) {
       put("propagationPolicy", propagationPolicy);
       return this;
     }
   } 
   /**
-   * read the specified Channel
+   * read the specified PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "GET",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}"
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}"
   )
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Channel> readNamespacedChannel(
+  KubernetesCall<PingSource> readNamespacedPingSource(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
   /**
-   * read the specified Channel
+   * read the specified PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "GET",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}"
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}"
   )
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Channel> readNamespacedChannel(
+  KubernetesCall<PingSource> readNamespacedPingSource(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @QueryMap ReadNamespacedChannel queryParameters);
+    @QueryMap ReadNamespacedPingSource queryParameters);
 
   
-  final class ReadNamespacedChannel extends HashMap<String, Object> { 
+  final class ReadNamespacedPingSource extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ReadNamespacedChannel pretty(String pretty) {
+    public ReadNamespacedPingSource pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -598,58 +491,58 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ReadNamespacedChannel resourceVersion(String resourceVersion) {
+    public ReadNamespacedPingSource resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
   } 
   /**
-   * partially update the specified Channel
+   * partially update the specified PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "PATCH",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}",
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
-  KubernetesCall<Channel> patchNamespacedChannel(
+  KubernetesCall<PingSource> patchNamespacedPingSource(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body Channel body);
+    @Body PingSource body);
 
   /**
-   * partially update the specified Channel
+   * partially update the specified PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "PATCH",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}",
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
-  KubernetesCall<Channel> patchNamespacedChannel(
+  KubernetesCall<PingSource> patchNamespacedPingSource(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body Channel body, 
-    @QueryMap PatchNamespacedChannel queryParameters);
+    @Body PingSource body, 
+    @QueryMap PatchNamespacedPingSource queryParameters);
 
   
-  final class PatchNamespacedChannel extends HashMap<String, Object> { 
+  final class PatchNamespacedPingSource extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public PatchNamespacedChannel pretty(String pretty) {
+    public PatchNamespacedPingSource pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -657,7 +550,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public PatchNamespacedChannel dryRun(String dryRun) {
+    public PatchNamespacedPingSource dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -665,58 +558,58 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
      */
-    public PatchNamespacedChannel fieldManager(String fieldManager) {
+    public PatchNamespacedPingSource fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
       return this;
     }
   } 
   /**
-   * replace the specified Channel
+   * replace the specified PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "PUT",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}",
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Channel> replaceNamespacedChannel(
+  KubernetesCall<PingSource> replaceNamespacedPingSource(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body Channel body);
+    @Body PingSource body);
 
   /**
-   * replace the specified Channel
+   * replace the specified PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "PUT",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}",
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Channel> replaceNamespacedChannel(
+  KubernetesCall<PingSource> replaceNamespacedPingSource(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body Channel body, 
-    @QueryMap ReplaceNamespacedChannel queryParameters);
+    @Body PingSource body, 
+    @QueryMap ReplaceNamespacedPingSource queryParameters);
 
   
-  final class ReplaceNamespacedChannel extends HashMap<String, Object> { 
+  final class ReplaceNamespacedPingSource extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ReplaceNamespacedChannel pretty(String pretty) {
+    public ReplaceNamespacedPingSource pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -724,7 +617,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public ReplaceNamespacedChannel dryRun(String dryRun) {
+    public ReplaceNamespacedPingSource dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -732,52 +625,52 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
      */
-    public ReplaceNamespacedChannel fieldManager(String fieldManager) {
+    public ReplaceNamespacedPingSource fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
       return this;
     }
   } 
   /**
-   * read status of the specified Channel
+   * read status of the specified PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "GET",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}/status"
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}/status"
   )
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Channel> readNamespacedChannelStatus(
+  KubernetesCall<PingSource> readNamespacedPingSourceStatus(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
   /**
-   * read status of the specified Channel
+   * read status of the specified PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "GET",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}/status"
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}/status"
   )
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Channel> readNamespacedChannelStatus(
+  KubernetesCall<PingSource> readNamespacedPingSourceStatus(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @QueryMap ReadNamespacedChannelStatus queryParameters);
+    @QueryMap ReadNamespacedPingSourceStatus queryParameters);
 
   
-  final class ReadNamespacedChannelStatus extends HashMap<String, Object> { 
+  final class ReadNamespacedPingSourceStatus extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ReadNamespacedChannelStatus pretty(String pretty) {
+    public ReadNamespacedPingSourceStatus pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -785,58 +678,58 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ReadNamespacedChannelStatus resourceVersion(String resourceVersion) {
+    public ReadNamespacedPingSourceStatus resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
   } 
   /**
-   * partially update status of the specified Channel
+   * partially update status of the specified PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "PATCH",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}/status",
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}/status",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
-  KubernetesCall<Channel> patchNamespacedChannelStatus(
+  KubernetesCall<PingSource> patchNamespacedPingSourceStatus(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body Channel body);
+    @Body PingSource body);
 
   /**
-   * partially update status of the specified Channel
+   * partially update status of the specified PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "PATCH",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}/status",
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}/status",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
-  KubernetesCall<Channel> patchNamespacedChannelStatus(
+  KubernetesCall<PingSource> patchNamespacedPingSourceStatus(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body Channel body, 
-    @QueryMap PatchNamespacedChannelStatus queryParameters);
+    @Body PingSource body, 
+    @QueryMap PatchNamespacedPingSourceStatus queryParameters);
 
   
-  final class PatchNamespacedChannelStatus extends HashMap<String, Object> { 
+  final class PatchNamespacedPingSourceStatus extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public PatchNamespacedChannelStatus pretty(String pretty) {
+    public PatchNamespacedPingSourceStatus pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -844,7 +737,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public PatchNamespacedChannelStatus dryRun(String dryRun) {
+    public PatchNamespacedPingSourceStatus dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -852,58 +745,58 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
      */
-    public PatchNamespacedChannelStatus fieldManager(String fieldManager) {
+    public PatchNamespacedPingSourceStatus fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
       return this;
     }
   } 
   /**
-   * replace status of the specified Channel
+   * replace status of the specified PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "PUT",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}/status",
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}/status",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Channel> replaceNamespacedChannelStatus(
+  KubernetesCall<PingSource> replaceNamespacedPingSourceStatus(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body Channel body);
+    @Body PingSource body);
 
   /**
-   * replace status of the specified Channel
+   * replace status of the specified PingSource
    *
-   * @param name name of the Channel
+   * @param name name of the PingSource
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "PUT",
-    path = "/apis/messaging.knative.dev/v1/namespaces/{namespace}/channels/{name}/status",
+    path = "/apis/sources.knative.dev/v1beta2/namespaces/{namespace}/pingsources/{name}/status",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Channel> replaceNamespacedChannelStatus(
+  KubernetesCall<PingSource> replaceNamespacedPingSourceStatus(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body Channel body, 
-    @QueryMap ReplaceNamespacedChannelStatus queryParameters);
+    @Body PingSource body, 
+    @QueryMap ReplaceNamespacedPingSourceStatus queryParameters);
 
   
-  final class ReplaceNamespacedChannelStatus extends HashMap<String, Object> { 
+  final class ReplaceNamespacedPingSourceStatus extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ReplaceNamespacedChannelStatus pretty(String pretty) {
+    public ReplaceNamespacedPingSourceStatus pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -911,7 +804,7 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public ReplaceNamespacedChannelStatus dryRun(String dryRun) {
+    public ReplaceNamespacedPingSourceStatus dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -919,8 +812,115 @@ public interface MessagingKnativeDevV1Api extends Api {
     /**
      * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
      */
-    public ReplaceNamespacedChannelStatus fieldManager(String fieldManager) {
+    public ReplaceNamespacedPingSourceStatus fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
+   * list objects of kind PingSource
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/sources.knative.dev/v1beta2/pingsources"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<PingSourceList, PingSource> listPingSourceForAllNamespaces();
+
+  /**
+   * list objects of kind PingSource
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/sources.knative.dev/v1beta2/pingsources"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<PingSourceList, PingSource> listPingSourceForAllNamespaces(
+    @QueryMap ListPingSourceForAllNamespaces queryParameters);
+
+  
+  final class ListPingSourceForAllNamespaces extends HashMap<String, Object> { 
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     */
+    public ListPingSourceForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public ListPingSourceForAllNamespaces continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public ListPingSourceForAllNamespaces fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public ListPingSourceForAllNamespaces labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public ListPingSourceForAllNamespaces limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ListPingSourceForAllNamespaces pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListPingSourceForAllNamespaces resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListPingSourceForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public ListPingSourceForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public ListPingSourceForAllNamespaces watch(Boolean watch) {
+      put("watch", watch);
       return this;
     }
   } 
