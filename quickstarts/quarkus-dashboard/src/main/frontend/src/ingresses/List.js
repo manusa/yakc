@@ -51,7 +51,7 @@ const Rows = ({ingresses, crudDelete}) => {
           </Table.Cell>
           <Table.Cell>
             {ing.selectors.allHosts(ingress).map((host, idx) =>
-              <div key={idx}><a href={`http://${host}`}>{host}</a></div>
+              <div key={idx}><Link href={`http://${host}`} target='_blank'>{host}</Link ></div>
             )}
           </Table.Cell>
           <Table.Cell>
