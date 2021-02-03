@@ -101,9 +101,12 @@ public class CrdQuickstart {
 
   private static void deleteCrdIfExists(ApiextensionsV1Api api) throws IOException {
     try {
-      deleteCrd(api);
+      if (api.listCustomResourceDefinition().stream().noneMatch(crd -> crd.getMetadata().getName().equals(CRD_NAME))){
+        return;
+      }
       System.out.printf("Waiting for pre-existing CRD %s to be deleted%n", CRD_NAME);
       api.listCustomResourceDefinition().watch()
+        .doOnSubscribe(s -> deleteCrd(api))
         .filter(we -> we.getObject().getMetadata().getName().equals(CRD_NAME))
         .takeUntil(we -> we.getType() == Type.DELETED)
         .subscribe();
@@ -128,24 +131,28 @@ public class CrdQuickstart {
             .schema(CustomResourceValidation.builder()
               .openAPIV3Schema(JSONSchemaProps.builder()
                 .type("object")
-                .addToRequired("name")
-                .addToRequired("releaseDate")
-                .putInProperties("name", JSONSchemaProps.builder()
-                  .type("string")
-                  .minimum(1)
-                  .build())
-                .putInProperties("releaseDate", JSONSchemaProps.builder()
-                  .type("string")
-                  .format("date")
-                  .minimum(1)
-                  .build())
-                .putInProperties("score", JSONSchemaProps.builder()
-                  .type("number")
-                  .format("double")
-                  .build())
-                .putInProperties("imdb", JSONSchemaProps.builder()
-                  .type("string")
-                  .format("uri")
+                .addToRequired("spec")
+                .putInProperties("spec", JSONSchemaProps.builder()
+                  .type("object")
+                  .addToRequired("name")
+                  .addToRequired("releaseDate")
+                  .putInProperties("name", JSONSchemaProps.builder()
+                    .type("string")
+                    .minimum(1)
+                    .build())
+                  .putInProperties("releaseDate", JSONSchemaProps.builder()
+                    .type("string")
+                    .format("date")
+                    .minimum(1)
+                    .build())
+                  .putInProperties("score", JSONSchemaProps.builder()
+                    .type("number")
+                    .format("double")
+                    .build())
+                  .putInProperties("imdb", JSONSchemaProps.builder()
+                    .type("string")
+                    .format("uri")
+                    .build())
                   .build())
                 .build())
               .build())
@@ -166,9 +173,11 @@ public class CrdQuickstart {
         .name("house-of-cards")
         .putInLabels("app", "shows")
         .build())
-      .name("House of Cards")
-      .releaseDate(LocalDate.of(2013, Month.FEBRUARY, 1))
-      .imdb(new URL("https://www.imdb.com/title/tt1856010/"))
+      .spec(ShowSpec.builder()
+        .name("House of Cards")
+        .releaseDate(LocalDate.of(2013, Month.FEBRUARY, 1))
+        .imdb(new URL("https://www.imdb.com/title/tt1856010/"))
+        .build())
       .build()
     ).get();
     api.createNamespacedShow(NAMESPACE, Show.builder()
@@ -176,10 +185,12 @@ public class CrdQuickstart {
         .name("breaking-bad")
         .putInLabels("app", "shows")
         .build())
-      .name("Breaking Bad")
-      .releaseDate(LocalDate.of(2008, Month.JANUARY, 20))
-      .score(9.5)
-      .imdb(new URL("https://www.imdb.com/title/tt0903747/"))
+      .spec(ShowSpec.builder()
+        .name("Breaking Bad")
+        .releaseDate(LocalDate.of(2008, Month.JANUARY, 20))
+        .score(9.5)
+        .imdb(new URL("https://www.imdb.com/title/tt0903747/"))
+        .build())
       .build()
     ).get();
     api.createNamespacedShow(NAMESPACE, Show.builder()
@@ -187,9 +198,11 @@ public class CrdQuickstart {
         .name("band-of-brothers")
         .putInLabels("app", "shows")
         .build())
-      .name("Band of Brothers")
-      .releaseDate(LocalDate.of(2001, Month.SEPTEMBER, 9))
-      .imdb(new URL("https://www.imdb.com/title/tt0903747/"))
+      .spec(ShowSpec.builder()
+        .name("Band of Brothers")
+        .releaseDate(LocalDate.of(2001, Month.SEPTEMBER, 9))
+        .imdb(new URL("https://www.imdb.com/title/tt0903747/"))
+        .build())
       .build()
     ).get();
   }
@@ -199,6 +212,7 @@ public class CrdQuickstart {
     System.out.printf(format, "SHOW", " AIR DATE ", "SCORE", "IMDB URL");
     System.out.printf(format, "====", "==========", "=====", "========");
     api.listNamespacedShow(NAMESPACE).stream()
+      .map(Show::getSpec)
       .forEach(show -> System.out.printf(format,
         show.getName(), show.getReleaseDate().toString(),
         Optional.ofNullable(show.getScore()).map(Object::toString).orElse(""),
@@ -208,9 +222,11 @@ public class CrdQuickstart {
 
   private static void patchShow(ShowsV1Api api) throws IOException {
     System.out.println("Patching show scores...\n");
-    api.patchNamespacedShow("breaking-bad", NAMESPACE, Show.builder().score(10D).build())
+    api.patchNamespacedShow("breaking-bad", NAMESPACE, Show.builder()
+      .spec(ShowSpec.builder().score(10D).build()).build())
       .get();
-    api.patchNamespacedShow("house-of-cards", NAMESPACE, Show.builder().score(8.7).build())
+    api.patchNamespacedShow("house-of-cards", NAMESPACE, Show.builder()
+      .spec(ShowSpec.builder().score(8.7).build()).build())
       .get();
   }
 }

@@ -18,15 +18,14 @@
 package com.marcnuri.yakc.quickstarts;
 
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import static com.marcnuri.yakc.quickstarts.ShowsV1Api.API_VERSION;
-import static com.marcnuri.yakc.quickstarts.ShowsV1Api.CRD_GROUP;
+import java.net.URL;
+import java.time.LocalDate;
 
 /**
  * Created by Marc Nuri on 2020-05-11.
@@ -36,14 +35,10 @@ import static com.marcnuri.yakc.quickstarts.ShowsV1Api.CRD_GROUP;
 @NoArgsConstructor
 @Data
 @EqualsAndHashCode
-public class Show implements Model {
+public class ShowSpec implements Model {
 
-  private ObjectMeta metadata;
-  private ShowSpec spec;
-  public String getApiVersion() {
-    return String.format("%s/%s", CRD_GROUP, API_VERSION);
-  }
-  public String getKind() {
-    return "Show";
-  }
+  private String name;
+  private Double score;
+  private LocalDate releaseDate;
+  private URL imdb;
 }
