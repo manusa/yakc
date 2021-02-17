@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.certmanager.v1;
+package com.marcnuri.yakc.model.io.certmanager.v1alpha2;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import com.marcnuri.yakc.model.io.certmanager.v1.CertificateSpecKeystoresJksPasswordSecretRef;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +27,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * IssuerRef is a reference to the issuer for this certificate. If the `kind` field is not set, or set to `Issuer`, an Issuer resource with the given name in the same namespace as the Certificate will be used. If the `kind` field is set to `ClusterIssuer`, a ClusterIssuer with the provided name will be used. The `name` field in this stanza is required at all times.
+ * JKS configures options for storing a JKS keystore in the `spec.secretName` Secret resource.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -34,27 +35,19 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class CertificateSpecIssuerRef implements Model {
+public class CertificateSpecKeystoresJks implements Model {
 
 
   /**
-   * Group of the resource being referred to.
-   */
-  @JsonProperty("group")
-  private String group;
-
-  /**
-   * Kind of the resource being referred to.
-   */
-  @JsonProperty("kind")
-  private String kind;
-
-  /**
-   * Name of the resource being referred to.
+   * Create enables JKS keystore creation for the Certificate. If true, a file named `keystore.jks` will be created in the target Secret resource, encrypted using the password stored in `passwordSecretRef`. The keystore file will only be updated upon re-issuance.
    */
   @NonNull
-  @JsonProperty("name")
-  private String name;
+  @JsonProperty("create")
+  private Boolean create;
+
+  @NonNull
+  @JsonProperty("passwordSecretRef")
+  private CertificateSpecKeystoresJksPasswordSecretRef passwordSecretRef;
 
 }
 

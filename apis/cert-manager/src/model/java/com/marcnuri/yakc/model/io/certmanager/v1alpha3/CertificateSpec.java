@@ -19,7 +19,6 @@ package com.marcnuri.yakc.model.io.certmanager.v1alpha3;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
 import com.marcnuri.yakc.model.io.certmanager.v1.CertificateSpecIssuerRef;
-import com.marcnuri.yakc.model.io.certmanager.v1.CertificateSpecKeystores;
 import com.marcnuri.yakc.model.io.certmanager.v1.CertificateSpecSubject;
 import com.marcnuri.yakc.model.io.certmanager.v1alpha2.CertificateSpecPrivateKey;
 import java.util.List;
@@ -93,19 +92,19 @@ public class CertificateSpec implements Model {
   private CertificateSpecIssuerRef issuerRef;
 
   /**
-   * KeyAlgorithm is the private key algorithm of the corresponding private key for this certificate. If provided, allowed values are either "rsa" or "ecdsa" If `keyAlgorithm` is specified and `keySize` is not provided, key size of 256 will be used for "ecdsa" key algorithm and key size of 2048 will be used for "rsa" key algorithm.
+   * KeyAlgorithm is the private key algorithm of the corresponding private key for this certificate. If provided, allowed values are either `rsa` or `ecdsa` If `keyAlgorithm` is specified and `keySize` is not provided, key size of 256 will be used for `ecdsa` key algorithm and key size of 2048 will be used for `rsa` key algorithm.
    */
   @JsonProperty("keyAlgorithm")
   private String keyAlgorithm;
 
   /**
-   * KeyEncoding is the private key cryptography standards (PKCS) for this certificate's private key to be encoded in. If provided, allowed values are "pkcs1" and "pkcs8" standing for PKCS#1 and PKCS#8, respectively. If KeyEncoding is not specified, then PKCS#1 will be used by default.
+   * KeyEncoding is the private key cryptography standards (PKCS) for this certificate's private key to be encoded in. If provided, allowed values are `pkcs1` and `pkcs8` standing for PKCS#1 and PKCS#8, respectively. If KeyEncoding is not specified, then `pkcs1` will be used by default.
    */
   @JsonProperty("keyEncoding")
   private String keyEncoding;
 
   /**
-   * KeySize is the key bit size of the corresponding private key for this certificate. If `keyAlgorithm` is set to `RSA`, valid values are `2048`, `4096` or `8192`, and will default to `2048` if not specified. If `keyAlgorithm` is set to `ECDSA`, valid values are `256`, `384` or `521`, and will default to `256` if not specified. No other values are allowed.
+   * KeySize is the key bit size of the corresponding private key for this certificate. If `keyAlgorithm` is set to `rsa`, valid values are `2048`, `4096` or `8192`, and will default to `2048` if not specified. If `keyAlgorithm` is set to `ecdsa`, valid values are `256`, `384` or `521`, and will default to `256` if not specified. No other values are allowed.
    */
   @JsonProperty("keySize")
   private Number keySize;

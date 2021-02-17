@@ -57,14 +57,14 @@ public class ClusterIssuerStatusConditions implements Model {
   private String reason;
 
   /**
-   * Status of the condition, one of ('True', 'False', 'Unknown').
+   * Status of the condition, one of (`True`, `False`, `Unknown`).
    */
   @NonNull
   @JsonProperty("status")
   private String status;
 
   /**
-   * Type of the condition, known values are ('Ready').
+   * Type of the condition, known values are (`Ready`).
    */
   @NonNull
   @JsonProperty("type")

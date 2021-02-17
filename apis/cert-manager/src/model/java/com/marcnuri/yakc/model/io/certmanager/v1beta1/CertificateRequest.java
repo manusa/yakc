@@ -28,7 +28,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * A CertificateRequest is used to request a signed certificate from one of the configured issuers. <br><p>  All fields within the CertificateRequest's `spec` are immutable after creation. A CertificateRequest will either succeed or fail, as denoted by its `status.state` field. <br><p>  A CertificateRequest is a 'one-shot' resource, meaning it represents a single point in time request for a certificate and cannot be re-used.
+ * A CertificateRequest is used to request a signed certificate from one of the configured issuers. <br><p>  All fields within the CertificateRequest's `spec` are immutable after creation. A CertificateRequest will either succeed or fail, as denoted by its `status.state` field. <br><p>  A CertificateRequest is a one-shot resource, meaning it represents a single point in time request for a certificate and cannot be re-used.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")

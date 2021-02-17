@@ -57,14 +57,14 @@ public class CertificateRequestStatusConditions implements Model {
   private String reason;
 
   /**
-   * Status of the condition, one of ('True', 'False', 'Unknown').
+   * Status of the condition, one of (`True`, `False`, `Unknown`).
    */
   @NonNull
   @JsonProperty("status")
   private String status;
 
   /**
-   * Type of the condition, known values are ('Ready', 'InvalidRequest').
+   * Type of the condition, known values are (`Ready`, `InvalidRequest`).
    */
   @NonNull
   @JsonProperty("type")

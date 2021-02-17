@@ -22,7 +22,8 @@ def templatesDirs = new File(rootProject.projectDir, "schema/templates")
 def schemaDir = new File(projectDir, "schema")
 def availableSchemaNames = Arrays.asList(
   "cert-manager-1.0.4.json",
-  "cert-manager-1.1.0.json"
+  "cert-manager-1.1.1.json",
+  "cert-manager-1.2.0.json"
 )
 def availableSchemas = availableSchemaNames.stream()
     .map { s -> new File(schemaDir, s) }
