@@ -71,7 +71,8 @@ public class SchemaUtils {
       "import", "imports",
       "private", "privates",
       "for", "fors",
-      "return", "returns"
+      "return", "returns",
+      "package", "packages"
   );
 
   private final GeneratorSettings settings;

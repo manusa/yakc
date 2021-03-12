@@ -77,6 +77,9 @@ import static com.marcnuri.yakc.config.OkHttpClientConfigurator.initOkHttpClient
  *   <li><a href="https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:knative">
  *     com.marcnuri.yakc.apis:knative</a>
  *   </li>
+ *   <li><a href="https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:kudo">
+ *     com.marcnuri.yakc.apis:kudo</a>
+ *   </li>
  *   <li><a href="https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:metrics-server">
  *     com.marcnuri.yakc.apis:metrics-server</a>
  *   </li>

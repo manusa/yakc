@@ -127,7 +127,7 @@ Kubernetes Retrofit2 based Java client to be used with kubernetes-api or any of 
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/cert-manager)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[Kubernetes cert-manager](https://cert-manager.io/) (1.0.4 - 1.1.0).
+[Kubernetes cert-manager](https://cert-manager.io/) (1.0.4 - 1.2.0).
 
 cert-manager provides support for x509 certificate management for Kubernetes. It's a Kubernetes
 add-on that automates the management and issuance of TLS certificates, making it very easy
@@ -167,9 +167,21 @@ to secure, monitor and connect microservices.
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/knative)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[Knative](https://knative.dev/) (0.20.0).
+[Knative](https://knative.dev/) (0.19.0 - 0.20.0).
 
 Knative is a Kubernetes-based platform to manage and deploy serverless workloads.
+
+#### KUDO - Kubernetes Universal Declarative Operator (KUDO)
+[![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/kudo)
+](https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:kudo)
+[![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc.apis/kudo/javadoc.svg)
+](https://javadoc.io/doc/com.marcnuri.yakc.apis/kudo)
+
+[Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
+[Knative](https://kudo.dev/) (0.18.2).
+
+Kubernetes Universal Declarative Operator (KUDO) provides a declarative approach to building production-grade Kubernetes
+Operators covering the entire application lifecycle.
 
 #### metrics-server
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/metrics-server)
