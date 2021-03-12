@@ -1,6 +1,6 @@
 # YAKC - Yet Another Kubernetes Client
 
-> Declarative Java REST client for Kubernetes API.
+> Lower level Java REST client for Kubernetes API.
 
 This project is still in an early stage, public API and classes are subject to changes.
 
