@@ -7,7 +7,7 @@ ext {
   isPublishable = true
   project.group = project.group + ".apis"
   pomName = 'Knative Model & API'
-  pomDescription = 'Retrofit2 based Java interfaces to create a declarative REST API client and model files for Knative (Serving & Eventing).'
+  pomDescription = 'Retrofit2 based Java interfaces to create a REST API client and model files for Knative (Serving & Eventing).'
 }
 
 dependencies {
