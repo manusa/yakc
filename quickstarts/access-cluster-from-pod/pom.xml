@@ -9,7 +9,7 @@
   </parent>
   <groupId>com.marcnuri.yakc.quickstarts</groupId>
   <artifactId>access-cluster-from-pod</artifactId>
-  <version>0.0.20</version>
+  <version>0.0.21</version>
   <name>YAKC :: Quickstarts :: Access Cluster API from a Pod</name>
 
   <properties>

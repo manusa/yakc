@@ -15,20 +15,20 @@ Please try it out and share your opinion, but use at your own risk.
   <dependency>
     <groupId>com.marcnuri.yakc</groupId>
     <artifactId>kubernetes-api</artifactId>
-    <version>0.0.20</version>
+    <version>0.0.21</version>
   </dependency>
   <dependency>
     <groupId>com.marcnuri.yakc</groupId>
     <artifactId>kubernetes-client</artifactId>
-    <version>0.0.20</version>
+    <version>0.0.21</version>
   </dependency>
 </dependencies>
 ```
 #### Gradle
 ```groovy
 dependencies {
-  compile 'com.marcnuri.yakc:kubernetes-api:0.0.20'
-  compile 'com.marcnuri.yakc:kubernetes-client:0.0.20'
+  compile 'com.marcnuri.yakc:kubernetes-api:0.0.21'
+  compile 'com.marcnuri.yakc:kubernetes-client:0.0.21'
 }
 ```
 #### List all Pods
@@ -178,7 +178,7 @@ Knative is a Kubernetes-based platform to manage and deploy serverless workloads
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/kudo)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[Knative](https://kudo.dev/) (0.18.2).
+[KUDO](https://kudo.dev/) (0.18.2).
 
 Kubernetes Universal Declarative Operator (KUDO) provides a declarative approach to building production-grade Kubernetes
 Operators covering the entire application lifecycle.
