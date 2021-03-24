@@ -147,6 +147,17 @@ developers to interact with cert-manager from Java.
 
 Chaos Mesh is chaos engineering platform that orchestrates chaos on Kubernetes environments.
 
+#### Dapr
+[![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/dapr)
+](https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:dapr)
+[![javadoc](https://javadoc.io/badge2/com.marcnuri.yakc.apis/dapr/javadoc.svg)
+](https://javadoc.io/doc/com.marcnuri.yakc.apis/dapr)
+
+[Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
+[Dapr](https://dapr.io/) - Distributed Application Runtime (1.0.1).
+
+Dapr is a portable, event-driven, runtime for building distributed applications across cloud and edge.
+
 #### Istio
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc.apis/istio)
 ](https://search.maven.org/search?q=g:com.marcnuri.yakc.apis%20a:istio)
