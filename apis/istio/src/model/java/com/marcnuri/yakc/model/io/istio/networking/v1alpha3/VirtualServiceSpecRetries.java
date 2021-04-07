@@ -43,7 +43,7 @@ public class VirtualServiceSpecRetries implements Model {
   private Number attempts;
 
   /**
-   * Timeout per retry attempt for a given request.
+   * Timeout per attempt for a given request, including the initial call and any retries.
    */
   @JsonProperty("perTryTimeout")
   private String perTryTimeout;

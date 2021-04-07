@@ -45,7 +45,7 @@ public class WorkloadGroupSpecProbeHttpGet implements Model {
   private String host;
 
   /**
-   * headers the proxy will pass on to make the request.
+   * Headers the proxy will pass on to make the request.
    */
   @JsonProperty("httpHeaders")
   @Singular(value = "addToHttpHeaders", ignoreNullCollections = true)
@@ -58,7 +58,7 @@ public class WorkloadGroupSpecProbeHttpGet implements Model {
   private String path;
 
   /**
-   * port on which the endpoint lives.
+   * Port on which the endpoint lives.
    */
   @JsonProperty("port")
   private Number port;
