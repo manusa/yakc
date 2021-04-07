@@ -27,7 +27,7 @@ import lombok.Singular;
 import lombok.ToString;
 
 /**
- * health is determined by how the command that is executed exited.
+ * Health is determined by how the command that is executed exited.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -39,7 +39,7 @@ public class WorkloadGroupSpecProbeExec implements Model {
 
 
   /**
-   * command to run.
+   * Command to run.
    */
   @JsonProperty("command")
   @Singular(value = "addToCommand", ignoreNullCollections = true)

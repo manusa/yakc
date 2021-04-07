@@ -165,7 +165,7 @@ Dapr is a portable, event-driven, runtime for building distributed applications 
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/istio)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[Istio](https://istio.io/) (1.7 - 1.8).
+[Istio](https://istio.io/) (1.7 - 1.9.2).
 
 Istio is a service-mesh for distributed applications. Istio leverages the required features to
 run a successful and efficient distributed microservice architecture by providing a uniform way
@@ -178,7 +178,7 @@ to secure, monitor and connect microservices.
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/knative)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[Knative](https://knative.dev/) (0.19.0 - 0.20.0).
+[Knative](https://knative.dev/) (0.19.0 - 0.22.0).
 
 Knative is a Kubernetes-based platform to manage and deploy serverless workloads.
 
