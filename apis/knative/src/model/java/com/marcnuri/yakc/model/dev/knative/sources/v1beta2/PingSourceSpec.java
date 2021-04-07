@@ -54,7 +54,7 @@ public class PingSourceSpec implements Model {
   private String data;
 
   /**
-   * DataBase64 is base64 encoded binary data used as the body of the event posted to the sink. Default is empty. Mutually exclusive with `data`.
+   * DataBase64 is the base64-encoded string of the actual event's body posted to the sink. Default is empty. Mutually exclusive with `data`.
    */
   @JsonProperty("dataBase64")
   private String dataBase64;

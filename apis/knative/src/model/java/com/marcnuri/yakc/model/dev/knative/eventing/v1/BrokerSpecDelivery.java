@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Delivery is the delivery specification for Events within the Broker mesh. This includes things like retries, DLQ, etc.
+ * Delivery contains the delivery spec for each trigger to this Broker. Each trigger delivery spec, if any, overrides this global delivery spec.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -43,7 +43,7 @@ public class BrokerSpecDelivery implements Model {
   private String backoffDelay;
 
   /**
-   *  BackoffPolicy is the retry backoff policy (linear, exponential).
+   * BackoffPolicy is the retry backoff policy (linear, exponential).
    */
   @JsonProperty("backoffPolicy")
   private String backoffPolicy;
