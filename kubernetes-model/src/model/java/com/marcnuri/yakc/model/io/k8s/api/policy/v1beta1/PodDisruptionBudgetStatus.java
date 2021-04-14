@@ -18,7 +18,9 @@ package com.marcnuri.yakc.model.io.k8s.api.policy.v1beta1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Condition;
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,6 +41,13 @@ import lombok.ToString;
 @ToString
 public class PodDisruptionBudgetStatus implements Model {
 
+
+  /**
+   * Conditions contain conditions for PDB. The disruption controller sets the DisruptionAllowed condition. The following are known values for the reason field (additional reasons could be added in the future): - SyncFailed: The controller encountered an error and wasn't able to compute<br><p>               the number of allowed disruptions. Therefore no disruptions are<br><p>               allowed and the status of the condition will be False.<br><p> - InsufficientPods: The number of pods are either at or below the number<br><p>                     required by the PodDisruptionBudget. No disruptions are<br><p>                     allowed and the status of the condition will be False.<br><p> - SufficientPods: There are more pods than required by the PodDisruptionBudget.<br><p>                   The condition will be True, and the number of allowed<br><p>                   disruptions are provided by the disruptionsAllowed property.
+   */
+  @JsonProperty("conditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
+  private List<Condition> conditions;
 
   /**
    * current number of healthy pods

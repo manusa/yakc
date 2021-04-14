@@ -665,22 +665,6 @@ public interface AutoscalingV2beta1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedHorizontalPodAutoscaler exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedHorizontalPodAutoscaler export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified HorizontalPodAutoscaler

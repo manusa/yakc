@@ -50,5 +50,8 @@ public class CronJobStatus implements Model {
   @JsonProperty("lastScheduleTime")
   private OffsetDateTime lastScheduleTime;
 
+  @JsonProperty("lastSuccessfulTime")
+  private OffsetDateTime lastSuccessfulTime;
+
 }
 

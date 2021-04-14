@@ -78,7 +78,6 @@ public class Event implements Model {
   @JsonProperty("kind")
   private String kind;
 
-  @NonNull
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
