@@ -18,7 +18,6 @@ package com.marcnuri.yakc.model.io.k8s.api.networking.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.io.k8s.api.core.v1.TypedLocalObjectReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -44,7 +43,7 @@ public class IngressClassSpec implements Model {
   private String controller;
 
   @JsonProperty("parameters")
-  private TypedLocalObjectReference parameters;
+  private IngressClassParametersReference parameters;
 
 }
 

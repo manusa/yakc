@@ -36,12 +36,6 @@ import lombok.ToString;
 public class EphemeralVolumeSource implements Model {
 
 
-  /**
-   * Specifies a read-only configuration for the volume. Defaults to false (read/write).
-   */
-  @JsonProperty("readOnly")
-  private Boolean readOnly;
-
   @JsonProperty("volumeClaimTemplate")
   private PersistentVolumeClaimTemplate volumeClaimTemplate;
 

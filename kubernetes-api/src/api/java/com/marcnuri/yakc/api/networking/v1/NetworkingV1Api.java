@@ -526,22 +526,6 @@ public interface NetworkingV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadIngressClass exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadIngressClass export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified IngressClass
@@ -1294,22 +1278,6 @@ public interface NetworkingV1Api extends Api {
      */
     public ReadNamespacedIngress pretty(String pretty) {
       put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedIngress exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedIngress export(Boolean export) {
-      put("export", export);
       return this;
     }
   } 
@@ -2152,22 +2120,6 @@ public interface NetworkingV1Api extends Api {
      */
     public ReadNamespacedNetworkPolicy pretty(String pretty) {
       put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedNetworkPolicy exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedNetworkPolicy export(Boolean export) {
-      put("export", export);
       return this;
     }
   } 

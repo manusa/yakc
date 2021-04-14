@@ -528,22 +528,6 @@ public interface StorageV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadCSIDriver exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadCSIDriver export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified CSIDriver
@@ -1153,22 +1137,6 @@ public interface StorageV1Api extends Api {
      */
     public ReadCSINode pretty(String pretty) {
       put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadCSINode exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadCSINode export(Boolean export) {
-      put("export", export);
       return this;
     }
   } 
@@ -1782,22 +1750,6 @@ public interface StorageV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadStorageClass exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadStorageClass export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified StorageClass
@@ -2407,22 +2359,6 @@ public interface StorageV1Api extends Api {
      */
     public ReadVolumeAttachment pretty(String pretty) {
       put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadVolumeAttachment exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadVolumeAttachment export(Boolean export) {
-      put("export", export);
       return this;
     }
   } 
