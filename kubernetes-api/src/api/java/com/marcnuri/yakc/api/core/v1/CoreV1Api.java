@@ -28,6 +28,7 @@ import com.marcnuri.yakc.model.io.k8s.api.core.v1.ConfigMap;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.ConfigMapList;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Endpoints;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.EndpointsList;
+import com.marcnuri.yakc.model.io.k8s.api.core.v1.EphemeralContainers;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Event;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.EventList;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.LimitRange;
@@ -1395,22 +1396,6 @@ public interface CoreV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedConfigMap exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedConfigMap export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified ConfigMap
@@ -2064,22 +2049,6 @@ public interface CoreV1Api extends Api {
      */
     public ReadNamespacedEndpoints pretty(String pretty) {
       put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedEndpoints exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedEndpoints export(Boolean export) {
-      put("export", export);
       return this;
     }
   } 
@@ -2737,22 +2706,6 @@ public interface CoreV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedEvent exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedEvent export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified Event
@@ -3408,22 +3361,6 @@ public interface CoreV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedLimitRange exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedLimitRange export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified LimitRange
@@ -4077,22 +4014,6 @@ public interface CoreV1Api extends Api {
      */
     public ReadNamespacedPersistentVolumeClaim pretty(String pretty) {
       put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedPersistentVolumeClaim exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedPersistentVolumeClaim export(Boolean export) {
-      put("export", export);
       return this;
     }
   } 
@@ -4937,22 +4858,6 @@ public interface CoreV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedPod exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedPod export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified Pod
@@ -5160,6 +5065,193 @@ public interface CoreV1Api extends Api {
      */
     public CreateNamespacedPodBinding pretty(String pretty) {
       put("pretty", pretty);
+      return this;
+    }
+  } 
+  /**
+   * read ephemeralcontainers of the specified Pod
+   *
+   * @param name name of the EphemeralContainers
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<EphemeralContainers> readNamespacedPodEphemeralcontainers(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * read ephemeralcontainers of the specified Pod
+   *
+   * @param name name of the EphemeralContainers
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<EphemeralContainers> readNamespacedPodEphemeralcontainers(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap ReadNamespacedPodEphemeralcontainers queryParameters);
+
+  
+  final class ReadNamespacedPodEphemeralcontainers extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReadNamespacedPodEphemeralcontainers pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+  } 
+  /**
+   * partially update ephemeralcontainers of the specified Pod
+   *
+   * @param name name of the EphemeralContainers
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<EphemeralContainers> patchNamespacedPodEphemeralcontainers(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body EphemeralContainers body);
+
+  /**
+   * partially update ephemeralcontainers of the specified Pod
+   *
+   * @param name name of the EphemeralContainers
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<EphemeralContainers> patchNamespacedPodEphemeralcontainers(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body EphemeralContainers body, 
+    @QueryMap PatchNamespacedPodEphemeralcontainers queryParameters);
+
+  
+  final class PatchNamespacedPodEphemeralcontainers extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public PatchNamespacedPodEphemeralcontainers pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public PatchNamespacedPodEphemeralcontainers dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+     */
+    public PatchNamespacedPodEphemeralcontainers fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+     */
+    public PatchNamespacedPodEphemeralcontainers force(Boolean force) {
+      put("force", force);
+      return this;
+    }
+  } 
+  /**
+   * replace ephemeralcontainers of the specified Pod
+   *
+   * @param name name of the EphemeralContainers
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<EphemeralContainers> replaceNamespacedPodEphemeralcontainers(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body EphemeralContainers body);
+
+  /**
+   * replace ephemeralcontainers of the specified Pod
+   *
+   * @param name name of the EphemeralContainers
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/api/v1/namespaces/{namespace}/pods/{name}/ephemeralcontainers",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<EphemeralContainers> replaceNamespacedPodEphemeralcontainers(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body EphemeralContainers body, 
+    @QueryMap ReplaceNamespacedPodEphemeralcontainers queryParameters);
+
+  
+  final class ReplaceNamespacedPodEphemeralcontainers extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReplaceNamespacedPodEphemeralcontainers pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public ReplaceNamespacedPodEphemeralcontainers dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public ReplaceNamespacedPodEphemeralcontainers fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
       return this;
     }
   } 
@@ -6038,22 +6130,6 @@ public interface CoreV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedPodTemplate exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedPodTemplate export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified PodTemplate
@@ -6707,22 +6783,6 @@ public interface CoreV1Api extends Api {
      */
     public ReadNamespacedReplicationController pretty(String pretty) {
       put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedReplicationController exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedReplicationController export(Boolean export) {
-      put("export", export);
       return this;
     }
   } 
@@ -7754,22 +7814,6 @@ public interface CoreV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedResourceQuota exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedResourceQuota export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified ResourceQuota
@@ -8612,22 +8656,6 @@ public interface CoreV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedSecret exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedSecret export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified Secret
@@ -9283,22 +9311,6 @@ public interface CoreV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedServiceAccount exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedServiceAccount export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified ServiceAccount
@@ -9851,22 +9863,6 @@ public interface CoreV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedService exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedService export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified Service
@@ -10349,22 +10345,6 @@ public interface CoreV1Api extends Api {
      */
     public ReadNamespace pretty(String pretty) {
       put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespace exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespace export(Boolean export) {
-      put("export", export);
       return this;
     }
   } 
@@ -11214,22 +11194,6 @@ public interface CoreV1Api extends Api {
      */
     public ReadNode pretty(String pretty) {
       put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNode exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNode export(Boolean export) {
-      put("export", export);
       return this;
     }
   } 
@@ -12123,22 +12087,6 @@ public interface CoreV1Api extends Api {
      */
     public ReadPersistentVolume pretty(String pretty) {
       put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadPersistentVolume exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadPersistentVolume export(Boolean export) {
-      put("export", export);
       return this;
     }
   } 

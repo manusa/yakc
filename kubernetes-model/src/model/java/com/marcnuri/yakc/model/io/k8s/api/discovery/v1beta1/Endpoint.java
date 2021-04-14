@@ -52,6 +52,9 @@ public class Endpoint implements Model {
   @JsonProperty("conditions")
   private EndpointConditions conditions;
 
+  @JsonProperty("hints")
+  private EndpointHints hints;
+
   /**
    * hostname of this endpoint. This field may be used by consumers of endpoints to distinguish endpoints from each other (e.g. in DNS names). Multiple endpoints which use the same hostname should be considered fungible (e.g. multiple A values in DNS). Must be lowercase and pass DNS Label (RFC 1123) validation.
    */

@@ -888,22 +888,6 @@ public interface AppsV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedControllerRevision exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedControllerRevision export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified ControllerRevision
@@ -1557,22 +1541,6 @@ public interface AppsV1Api extends Api {
      */
     public ReadNamespacedDaemonSet pretty(String pretty) {
       put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedDaemonSet exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedDaemonSet export(Boolean export) {
-      put("export", export);
       return this;
     }
   } 
@@ -2415,22 +2383,6 @@ public interface AppsV1Api extends Api {
      */
     public ReadNamespacedDeployment pretty(String pretty) {
       put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedDeployment exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedDeployment export(Boolean export) {
-      put("export", export);
       return this;
     }
   } 
@@ -3462,22 +3414,6 @@ public interface AppsV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedReplicaSet exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedReplicaSet export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified ReplicaSet
@@ -4505,22 +4441,6 @@ public interface AppsV1Api extends Api {
      */
     public ReadNamespacedStatefulSet pretty(String pretty) {
       put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedStatefulSet exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadNamespacedStatefulSet export(Boolean export) {
-      put("export", export);
       return this;
     }
   } 

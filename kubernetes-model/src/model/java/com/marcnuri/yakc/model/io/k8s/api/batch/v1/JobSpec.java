@@ -40,7 +40,7 @@ public class JobSpec implements Model {
 
 
   /**
-   * Specifies the duration in seconds relative to the startTime that the job may be active before the system tries to terminate it; value must be positive integer
+   * Specifies the duration in seconds relative to the startTime that the job may be continuously active before the system tries to terminate it; value must be positive integer. If a Job is suspended (at creation or through an update), this timer will effectively be stopped and reset when the Job is resumed again.
    */
   @JsonProperty("activeDeadlineSeconds")
   private Number activeDeadlineSeconds;
@@ -50,6 +50,12 @@ public class JobSpec implements Model {
    */
   @JsonProperty("backoffLimit")
   private Number backoffLimit;
+
+  /**
+   * CompletionMode specifies how Pod completions are tracked. It can be `NonIndexed` (default) or `Indexed`.<br><p> <br><p> `NonIndexed` means that the Job is considered complete when there have been .spec.completions successfully completed Pods. Each Pod completion is homologous to each other.<br><p> <br><p> `Indexed` means that the Pods of a Job get an associated completion index from 0 to (.spec.completions - 1), available in the annotation batch.kubernetes.io/job-completion-index. The Job is considered complete when there is one successfully completed Pod for each index. When value is `Indexed`, .spec.completions must be specified and `.spec.parallelism` must be less than or equal to 10^5.<br><p> <br><p> This field is alpha-level and is only honored by servers that enable the IndexedJob feature gate. More completion modes can be added in the future. If the Job controller observes a mode that it doesn't recognize, the controller skips updates for the Job.
+   */
+  @JsonProperty("completionMode")
+  private String completionMode;
 
   /**
    * Specifies the desired number of successfully finished pods the job should be run with.  Setting to nil means that the success of any pod signals the success of all pods, and allows parallelism to have any positive value.  Setting to 1 means that parallelism is limited to 1 and the success of that pod signals the success of the job. More info: https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
@@ -71,6 +77,12 @@ public class JobSpec implements Model {
 
   @JsonProperty("selector")
   private LabelSelector selector;
+
+  /**
+   * Suspend specifies whether the Job controller should create Pods or not. If a Job is created with suspend set to true, no Pods are created by the Job controller. If a Job is suspended after creation (i.e. the flag goes from false to true), the Job controller will delete all active Pods associated with this Job. Users must design their workload to gracefully handle this. Suspending a Job will reset the StartTime field of the Job, effectively resetting the ActiveDeadlineSeconds timer too. This is an alpha field and requires the SuspendJob feature gate to be enabled; otherwise this field may not be set to true. Defaults to false.
+   */
+  @JsonProperty("suspend")
+  private Boolean suspend;
 
   @NonNull
   @JsonProperty("template")

@@ -48,7 +48,7 @@ public class LimitRangeList implements Model, ListModel<LimitRange> {
   private String apiVersion;
 
   /**
-   * Items is a list of LimitRange objects. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+   * Items is a list of LimitRange objects. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
    */
   @NonNull
   @JsonProperty("items")

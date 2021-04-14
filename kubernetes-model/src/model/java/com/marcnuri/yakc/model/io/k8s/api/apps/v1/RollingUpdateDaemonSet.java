@@ -37,6 +37,10 @@ import lombok.ToString;
 public class RollingUpdateDaemonSet implements Model {
 
 
+  @JsonProperty("maxSurge")
+  @JsonSerialize(using = com.marcnuri.yakc.model.serialization.IntOrStringSerializer.class)
+  private String maxSurge;
+
   @JsonProperty("maxUnavailable")
   @JsonSerialize(using = com.marcnuri.yakc.model.serialization.IntOrStringSerializer.class)
   private String maxUnavailable;

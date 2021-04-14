@@ -524,22 +524,6 @@ public interface FlowcontrolApiserverV1beta1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadFlowSchema exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadFlowSchema export(Boolean export) {
-      put("export", export);
-      return this;
-    }
   } 
   /**
    * partially update the specified FlowSchema
@@ -1324,22 +1308,6 @@ public interface FlowcontrolApiserverV1beta1Api extends Api {
      */
     public ReadPriorityLevelConfiguration pretty(String pretty) {
       put("pretty", pretty);
-      return this;
-    }
-
-    /**
-     * Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadPriorityLevelConfiguration exact(Boolean exact) {
-      put("exact", exact);
-      return this;
-    }
-
-    /**
-     * Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
-     */
-    public ReadPriorityLevelConfiguration export(Boolean export) {
-      put("export", export);
       return this;
     }
   } 

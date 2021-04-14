@@ -96,7 +96,7 @@ Provides the basic interfaces and Exception types to be used across the differen
 
 Kubernetes model objects to be used for REST API serialization/deserialization.
 
-Model types are generated for Kubernetes equivalents in versions from 1.15 to 1.20.
+Model types are generated for Kubernetes equivalents in versions from 1.15 to 1.21.
 
 #### kubernetes-api
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc/kubernetes-api)
