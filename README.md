@@ -189,7 +189,7 @@ Knative is a Kubernetes-based platform to manage and deploy serverless workloads
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/kudo)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[KUDO](https://kudo.dev/) (0.18.2).
+[KUDO](https://kudo.dev/) (0.18.2 - 0.19.0).
 
 Kubernetes Universal Declarative Operator (KUDO) provides a declarative approach to building production-grade Kubernetes
 Operators covering the entire application lifecycle.
