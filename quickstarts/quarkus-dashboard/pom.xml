@@ -10,8 +10,9 @@
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
-    <version.yakc-quarkus-extension>0.0.10</version.yakc-quarkus-extension>
-    <version.quarkus>1.12.2.Final</version.quarkus>
+    <quarkus.package.type>uber-jar</quarkus.package.type>
+    <version.yakc-quarkus-extension>0.0.12</version.yakc-quarkus-extension>
+    <version.quarkus>1.13.3.Final</version.quarkus>
     <version.smallrye.reactive>0.7.0</version.smallrye.reactive>
     <version.jkube>1.2.0</version.jkube>
     <version.exec-maven-plugin>3.0.0</version.exec-maven-plugin>
