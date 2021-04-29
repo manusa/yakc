@@ -80,6 +80,9 @@ public class PodIoChaosSpecActions implements Model {
   @Singular(value = "addToMethods", ignoreNullCollections = true)
   private List<String> methods;
 
+  @JsonProperty("mistake")
+  private PodIoChaosSpecMistake mistake;
+
   @JsonProperty("mtime")
   private IoChaosSpecAttrAtime mtime;
 

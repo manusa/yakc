@@ -18,17 +18,16 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import java.util.Map;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Singular;
 import lombok.ToString;
 
 /**
- * Most recently observed status of the time chaos experiment
+ * AwsChaos is the Schema for the awschaos API
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -36,25 +35,30 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class StressChaosStatus implements Model {
+public class AwsChaos implements Model {
 
-
-  @NonNull
-  @JsonProperty("experiment")
-  private AwsChaosStatusExperiment experiment;
-
-  @JsonProperty("failedMessage")
-  private String failedMessage;
 
   /**
-   * Instances always specifies stressing instances
+   * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
    */
-  @JsonProperty("instances")
-  @Singular(value = "putInInstances", ignoreNullCollections = true)
-  private Map<String, StressChaosStatusInstances> instances;
+  @JsonProperty("apiVersion")
+  private String apiVersion;
 
-  @JsonProperty("scheduler")
-  private AwsChaosStatusScheduler scheduler;
+  /**
+   * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+   */
+  @JsonProperty("kind")
+  private String kind;
+
+  @JsonProperty("metadata")
+  private ObjectMeta metadata;
+
+  @NonNull
+  @JsonProperty("spec")
+  private AwsChaosSpec spec;
+
+  @JsonProperty("status")
+  private AwsChaosStatus status;
 
 }
 

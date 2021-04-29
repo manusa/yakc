@@ -26,7 +26,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * Spec defines the behavior of a kernel chaos experiment
+ * AwsChaosSpec is the content of the specification for an AwsChaos
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -34,38 +34,62 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class KernelChaosSpec implements Model {
+public class AwsChaosSpec implements Model {
 
 
   /**
-   * Duration represents the duration of the chaos action
+   * Action defines the specific aws chaos action. Supported action: ec2-stop / ec2-restart / detach-volume Default action: ec2-stop
+   */
+  @NonNull
+  @JsonProperty("action")
+  private String action;
+
+  /**
+   * AwsRegion defines the region of aws.
+   */
+  @NonNull
+  @JsonProperty("awsRegion")
+  private String awsRegion;
+
+  /**
+   * DeviceName indicates the name of the device. Needed in detach-volume.
+   */
+  @JsonProperty("deviceName")
+  private String deviceName;
+
+  /**
+   * Duration represents the duration of the chaos action.
    */
   @JsonProperty("duration")
   private String duration;
 
-  @NonNull
-  @JsonProperty("failKernRequest")
-  private KernelChaosSpecFailKernRequest failKernRequest;
-
   /**
-   * Mode defines the mode to run chaos action. Supported mode: one / all / fixed / fixed-percent / random-max-percent
+   * Ec2Instance indicates the ID of the ec2 instance.
    */
   @NonNull
-  @JsonProperty("mode")
-  private String mode;
+  @JsonProperty("ec2Instance")
+  private String ec2Instance;
+
+  /**
+   * Endpoint indicates the endpoint of the aws server. Just used it in test now.
+   */
+  @JsonProperty("endpoint")
+  private String endpoint;
 
   @JsonProperty("scheduler")
   private AwsChaosSpecScheduler scheduler;
 
-  @NonNull
-  @JsonProperty("selector")
-  private DNSChaosSpecSelector selector;
+  /**
+   * SecretName defines the name of kubernetes secret.
+   */
+  @JsonProperty("secretName")
+  private String secretName;
 
   /**
-   * Value is required when the mode is set to `FixedPodMode` / `FixedPercentPodMod` / `RandomMaxPercentPodMod`. If `FixedPodMode`, provide an integer of pods to do chaos action. If `FixedPercentPodMod`, provide a number from 0-100 to specify the percent of pods the server can do chaos action. If `RandomMaxPercentPodMod`,  provide a number from 0-100 to specify the max percent of pods to do chaos action
+   * EbsVolume indicates the ID of the EBS volume. Needed in detach-volume.
    */
-  @JsonProperty("value")
-  private String value;
+  @JsonProperty("volumeID")
+  private String volumeID;
 
 }
 

@@ -18,11 +18,13 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Singular;
 import lombok.ToString;
 
 /**
@@ -57,15 +59,15 @@ public class DNSChaosSpec implements Model {
   @JsonProperty("mode")
   private String mode;
 
+  /**
+   * Choose which domain names to take effect, support the placeholder ? and wildcard &#42;, or the Specified domain name. Note:      1. The wildcard &#42; must be at the end of the string. For example, chaos-&#42;.org is invalid.      2. if the patterns is empty, will take effect on all the domain names. For example: 		The value is ["google.com", "github.&#42;", "chaos-mes?.org"], 		will take effect on "google.com", "github.com" and "chaos-mesh.org"
+   */
+  @JsonProperty("patterns")
+  @Singular(value = "addToPatterns", ignoreNullCollections = true)
+  private List<String> patterns;
+
   @JsonProperty("scheduler")
   private DNSChaosSpecScheduler scheduler;
-
-  /**
-   * Action defines the scope which the DNS chaos works. Supported action: outer, inner, all Default action: outer
-   */
-  @NonNull
-  @JsonProperty("scope")
-  private String scope;
 
   @NonNull
   @JsonProperty("selector")

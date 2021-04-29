@@ -18,17 +18,15 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Singular;
 import lombok.ToString;
 
 /**
- * Most recently observed status of the time chaos experiment
+ * PodStatus represents information about the status of a pod in chaos experiment.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -36,25 +34,34 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class StressChaosStatus implements Model {
+public class AwsChaosStatusExperimentPodRecords implements Model {
 
 
   @NonNull
-  @JsonProperty("experiment")
-  private AwsChaosStatusExperiment experiment;
+  @JsonProperty("action")
+  private String action;
 
-  @JsonProperty("failedMessage")
-  private String failedMessage;
+  @NonNull
+  @JsonProperty("hostIP")
+  private String hostIP;
 
   /**
-   * Instances always specifies stressing instances
+   * A brief CamelCase message indicating details about the chaos action. e.g. "delete this pod" or "pause this pod duration 5m"
    */
-  @JsonProperty("instances")
-  @Singular(value = "putInInstances", ignoreNullCollections = true)
-  private Map<String, StressChaosStatusInstances> instances;
+  @JsonProperty("message")
+  private String message;
 
-  @JsonProperty("scheduler")
-  private AwsChaosStatusScheduler scheduler;
+  @NonNull
+  @JsonProperty("name")
+  private String name;
+
+  @NonNull
+  @JsonProperty("namespace")
+  private String namespace;
+
+  @NonNull
+  @JsonProperty("podIP")
+  private String podIP;
 
 }
 

@@ -18,11 +18,13 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Singular;
 import lombok.ToString;
 
 /**
@@ -38,20 +40,11 @@ public class JVMChaosSpec implements Model {
 
 
   /**
-   * Action defines the specific jvm chaos action. Supported action: delay, return, script, cfl, oom, ccf, tce, delay4servlet, tce4servlet
+   * Action defines the specific jvm chaos action. Supported action: delay;return;script;cfl;oom;ccf;tce;cpf;tde;tpf
    */
   @NonNull
   @JsonProperty("action")
   private String action;
-
-  @JsonProperty("cfl")
-  private JVMChaosSpecCfl cfl;
-
-  @JsonProperty("delay")
-  private JVMChaosSpecDelay delay;
-
-  @JsonProperty("delay4servlet")
-  private JVMChaosSpecDelay4servlet delay4servlet;
 
   /**
    * Duration represents the duration of the chaos action
@@ -60,16 +53,18 @@ public class JVMChaosSpec implements Model {
   private String duration;
 
   /**
-   * EffectCount represents the number of affect
+   * Flags represents the flags of action
    */
-  @JsonProperty("effectcount")
-  private Number effectcount;
+  @JsonProperty("flags")
+  @Singular(value = "putInFlags", ignoreNullCollections = true)
+  private Map<String, String> flags;
 
   /**
-   * EffectPercent represents the percent of affect
+   * Matchers represents the matching rules for the target
    */
-  @JsonProperty("effectpercent")
-  private Number effectpercent;
+  @JsonProperty("matchers")
+  @Singular(value = "putInMatchers", ignoreNullCollections = true)
+  private Map<String, String> matchers;
 
   /**
    * Mode defines the mode to run chaos action. Supported mode: one / all / fixed / fixed-percent / random-max-percent
@@ -78,27 +73,19 @@ public class JVMChaosSpec implements Model {
   @JsonProperty("mode")
   private String mode;
 
-  @JsonProperty("oom")
-  private JVMChaosSpecOom oom;
-
-  @JsonProperty("return")
-  private JVMChaosSpecReturn returns;
-
   @JsonProperty("scheduler")
-  private JVMChaosSpecScheduler scheduler;
-
-  @JsonProperty("script")
-  private JVMChaosSpecScript script;
+  private AwsChaosSpecScheduler scheduler;
 
   @NonNull
   @JsonProperty("selector")
   private DNSChaosSpecSelector selector;
 
-  @JsonProperty("tce")
-  private JVMChaosSpecTce tce;
-
-  @JsonProperty("tce4servlet")
-  private JVMChaosSpecTce4servlet tce4servlet;
+  /**
+   * Target defines the specific jvm chaos target. Supported target: servlet;psql;jvm;jedis;http;dubbo;rocketmq;tars;mysql;druid;redisson;rabbitmq;mongodb
+   */
+  @NonNull
+  @JsonProperty("target")
+  private String target;
 
   /**
    * Value is required when the mode is set to `FixedPodMode` / `FixedPercentPodMod` / `RandomMaxPercentPodMod`. If `FixedPodMode`, provide an integer of pods to do chaos action. If `FixedPercentPodMod`, provide a number from 0-100 to specify the max % of pods the server can do chaos action. If `RandomMaxPercentPodMod`,  provide a number from 0-100 to specify the % of pods to do chaos action

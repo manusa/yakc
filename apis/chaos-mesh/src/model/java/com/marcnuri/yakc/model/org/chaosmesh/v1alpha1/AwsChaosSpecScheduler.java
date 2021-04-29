@@ -18,17 +18,15 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Singular;
 import lombok.ToString;
 
 /**
- * Most recently observed status of the time chaos experiment
+ * Scheduler defines some schedule rules to control the running time of the chaos experiment about time.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -36,25 +34,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class StressChaosStatus implements Model {
+public class AwsChaosSpecScheduler implements Model {
 
-
-  @NonNull
-  @JsonProperty("experiment")
-  private AwsChaosStatusExperiment experiment;
-
-  @JsonProperty("failedMessage")
-  private String failedMessage;
 
   /**
-   * Instances always specifies stressing instances
+   * Cron defines a cron job rule. <br><p>  Some rule examples: "0 30 &#42; &#42; &#42; &#42;" means to "Every hour on the half hour" "@hourly"      means to "Every hour" "@every 1h30m" means to "Every hour thirty" <br><p>  More rule info: https://godoc.org/github.com/robfig/cron
    */
-  @JsonProperty("instances")
-  @Singular(value = "putInInstances", ignoreNullCollections = true)
-  private Map<String, StressChaosStatusInstances> instances;
-
-  @JsonProperty("scheduler")
-  private AwsChaosStatusScheduler scheduler;
+  @NonNull
+  @JsonProperty("cron")
+  private String cron;
 
 }
 
