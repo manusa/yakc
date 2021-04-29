@@ -57,7 +57,7 @@ public class StressChaosSpec implements Model {
   private String mode;
 
   @JsonProperty("scheduler")
-  private JVMChaosSpecScheduler scheduler;
+  private AwsChaosSpecScheduler scheduler;
 
   @NonNull
   @JsonProperty("selector")

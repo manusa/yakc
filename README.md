@@ -143,7 +143,7 @@ developers to interact with cert-manager from Java.
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/chaos-mesh)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[Chaos Mesh](https://chaos-mesh.org/) (1.1.0).
+[Chaos Mesh](https://chaos-mesh.org/) (1.1.0 - 1.2.0).
 
 Chaos Mesh is chaos engineering platform that orchestrates chaos on Kubernetes environments.
 

@@ -39,13 +39,13 @@ public class IoChaosStatus implements Model {
 
   @NonNull
   @JsonProperty("experiment")
-  private DNSChaosStatusExperiment experiment;
+  private AwsChaosStatusExperiment experiment;
 
   @JsonProperty("failedMessage")
   private String failedMessage;
 
   @JsonProperty("scheduler")
-  private DNSChaosStatusScheduler scheduler;
+  private AwsChaosStatusScheduler scheduler;
 
 }
 

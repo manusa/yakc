@@ -47,6 +47,12 @@ public class StressChaosSpecStressorsMemory implements Model {
   private List<String> options;
 
   /**
+   * Size specifies N bytes consumed per vm worker, default is the total available memory. One can specify the size as % of total available memory or in units of B, KB/KiB, MB/MiB, GB/GiB, TB/TiB.
+   */
+  @JsonProperty("size")
+  private String size;
+
+  /**
    * Workers specifies N workers to apply the stressor.
    */
   @NonNull

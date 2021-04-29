@@ -18,17 +18,14 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Singular;
 import lombok.ToString;
 
 /**
- * Most recently observed status of the time chaos experiment
+ * Mistake defines what types of incorrectness are injected to IO operations
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -36,25 +33,26 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class StressChaosStatus implements Model {
+public class IoChaosSpecMistake implements Model {
 
-
-  @NonNull
-  @JsonProperty("experiment")
-  private AwsChaosStatusExperiment experiment;
-
-  @JsonProperty("failedMessage")
-  private String failedMessage;
 
   /**
-   * Instances always specifies stressing instances
+   * Filling determines what is filled in the miskate data.
    */
-  @JsonProperty("instances")
-  @Singular(value = "putInInstances", ignoreNullCollections = true)
-  private Map<String, StressChaosStatusInstances> instances;
+  @JsonProperty("filling")
+  private String filling;
 
-  @JsonProperty("scheduler")
-  private AwsChaosStatusScheduler scheduler;
+  /**
+   * Max length of each wrong data segment in bytes
+   */
+  @JsonProperty("maxLength")
+  private Number maxLength;
+
+  /**
+   * There will be [1, MaxOccurrences] segments of wrong data.
+   */
+  @JsonProperty("maxOccurrences")
+  private Number maxOccurrences;
 
 }
 

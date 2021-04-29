@@ -18,17 +18,17 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import java.util.Map;
+import java.time.OffsetDateTime;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Singular;
 import lombok.ToString;
 
 /**
- * Most recently observed status of the time chaos experiment
+ * Experiment records the last experiment state.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -36,25 +36,30 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class StressChaosStatus implements Model {
+public class AwsChaosStatusExperiment implements Model {
 
 
-  @NonNull
-  @JsonProperty("experiment")
-  private AwsChaosStatusExperiment experiment;
+  @JsonProperty("duration")
+  private String duration;
 
-  @JsonProperty("failedMessage")
-  private String failedMessage;
+  @JsonProperty("endTime")
+  private OffsetDateTime endTime;
 
   /**
-   * Instances always specifies stressing instances
+   * ExperimentPhase is the current status of chaos experiment.
    */
-  @JsonProperty("instances")
-  @Singular(value = "putInInstances", ignoreNullCollections = true)
-  private Map<String, StressChaosStatusInstances> instances;
+  @JsonProperty("phase")
+  private String phase;
 
-  @JsonProperty("scheduler")
-  private AwsChaosStatusScheduler scheduler;
+  @JsonProperty("podRecords")
+  @Singular(value = "addToPodRecords", ignoreNullCollections = true)
+  private List<AwsChaosStatusExperimentPodRecords> podRecords;
+
+  @JsonProperty("reason")
+  private String reason;
+
+  @JsonProperty("startTime")
+  private OffsetDateTime startTime;
 
 }
 

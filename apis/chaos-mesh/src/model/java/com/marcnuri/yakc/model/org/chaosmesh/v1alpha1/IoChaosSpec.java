@@ -40,7 +40,7 @@ public class IoChaosSpec implements Model {
 
 
   /**
-   * Action defines the specific pod chaos action. Supported action: latency / fault / attrOverride
+   * Action defines the specific pod chaos action. Supported action: latency / fault / attrOverride / mistake
    */
   @NonNull
   @JsonProperty("action")
@@ -79,6 +79,9 @@ public class IoChaosSpec implements Model {
   @JsonProperty("methods")
   @Singular(value = "addToMethods", ignoreNullCollections = true)
   private List<String> methods;
+
+  @JsonProperty("mistake")
+  private IoChaosSpecMistake mistake;
 
   /**
    * Mode defines the mode to run chaos action. Supported mode: one / all / fixed / fixed-percent / random-max-percent

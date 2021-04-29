@@ -18,17 +18,15 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import java.util.Map;
+import java.time.OffsetDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Singular;
 import lombok.ToString;
 
 /**
- * Most recently observed status of the time chaos experiment
+ * ScheduleStatus is the current status of chaos scheduler.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -36,25 +34,20 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class StressChaosStatus implements Model {
+public class AwsChaosStatusScheduler implements Model {
 
-
-  @NonNull
-  @JsonProperty("experiment")
-  private AwsChaosStatusExperiment experiment;
-
-  @JsonProperty("failedMessage")
-  private String failedMessage;
 
   /**
-   * Instances always specifies stressing instances
+   * Next time when this action will be recovered
    */
-  @JsonProperty("instances")
-  @Singular(value = "putInInstances", ignoreNullCollections = true)
-  private Map<String, StressChaosStatusInstances> instances;
+  @JsonProperty("nextRecover")
+  private OffsetDateTime nextRecover;
 
-  @JsonProperty("scheduler")
-  private AwsChaosStatusScheduler scheduler;
+  /**
+   * Next time when this action will be applied again
+   */
+  @JsonProperty("nextStart")
+  private OffsetDateTime nextStart;
 
 }
 
