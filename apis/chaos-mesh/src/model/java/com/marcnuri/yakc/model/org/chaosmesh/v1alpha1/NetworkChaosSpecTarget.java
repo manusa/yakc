@@ -38,7 +38,7 @@ public class NetworkChaosSpecTarget implements Model {
 
 
   /**
-   * TargetMode defines the target selector mode
+   * Mode defines the mode to run chaos action. Supported mode: one / all / fixed / fixed-percent / random-max-percent
    */
   @NonNull
   @JsonProperty("mode")
@@ -46,10 +46,10 @@ public class NetworkChaosSpecTarget implements Model {
 
   @NonNull
   @JsonProperty("selector")
-  private NetworkChaosSpecTargetSelector selector;
+  private DNSChaosSpecSelector selector;
 
   /**
-   * TargetValue is required when the mode is set to `FixedPodMode` / `FixedPercentPodMod` / `RandomMaxPercentPodMod`. If `FixedPodMode`, provide an integer of pods to do chaos action. If `FixedPercentPodMod`, provide a number from 0-100 to specify the percent of pods the server can do chaos action. If `RandomMaxPercentPodMod`,  provide a number from 0-100 to specify the max percent of pods to do chaos action
+   * Value is required when the mode is set to `FixedPodMode` / `FixedPercentPodMod` / `RandomMaxPercentPodMod`. If `FixedPodMode`, provide an integer of pods to do chaos action. If `FixedPercentPodMod`, provide a number from 0-100 to specify the percent of pods the server can do chaos action. IF `RandomMaxPercentPodMod`,  provide a number from 0-100 to specify the max percent of pods to do chaos action
    */
   @JsonProperty("value")
   private String value;

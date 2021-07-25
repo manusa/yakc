@@ -18,11 +18,13 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Singular;
 import lombok.ToString;
 
 /**
@@ -37,15 +39,16 @@ import lombok.ToString;
 public class TimeChaosStatus implements Model {
 
 
+  /**
+   * Conditions represents the current global condition of the chaos
+   */
+  @JsonProperty("conditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
+  private List<AWSChaosStatusConditions> conditions;
+
   @NonNull
   @JsonProperty("experiment")
-  private AwsChaosStatusExperiment experiment;
-
-  @JsonProperty("failedMessage")
-  private String failedMessage;
-
-  @JsonProperty("scheduler")
-  private AwsChaosStatusScheduler scheduler;
+  private AWSChaosStatusExperiment experiment;
 
 }
 

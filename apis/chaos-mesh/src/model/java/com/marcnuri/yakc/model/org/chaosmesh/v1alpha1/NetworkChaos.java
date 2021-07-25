@@ -58,7 +58,7 @@ public class NetworkChaos implements Model {
   private NetworkChaosSpec spec;
 
   @JsonProperty("status")
-  private DNSChaosStatus status;
+  private NetworkChaosStatus status;
 
 }
 

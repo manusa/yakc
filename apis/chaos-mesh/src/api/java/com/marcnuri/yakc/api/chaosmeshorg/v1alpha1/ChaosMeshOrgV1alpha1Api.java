@@ -19,16 +19,16 @@ package com.marcnuri.yakc.api.chaosmeshorg.v1alpha1;
 import com.marcnuri.yakc.api.Api;
 import com.marcnuri.yakc.api.KubernetesCall;
 import com.marcnuri.yakc.api.KubernetesListCall;
-import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions;
-import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
-import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.AwsChaos;
-import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.AwsChaosList;
+import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.AWSChaos;
+import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.AWSChaosList;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.DNSChaos;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.DNSChaosList;
+import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.GCPChaos;
+import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.GCPChaosList;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.HTTPChaos;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.HTTPChaosList;
-import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.IoChaos;
-import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.IoChaosList;
+import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.IOChaos;
+import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.IOChaosList;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.JVMChaos;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.JVMChaosList;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.KernelChaos;
@@ -37,10 +37,14 @@ import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.NetworkChaos;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.NetworkChaosList;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.PodChaos;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.PodChaosList;
-import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.PodIoChaos;
-import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.PodIoChaosList;
+import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.PodHttpChaos;
+import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.PodHttpChaosList;
+import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.PodIOChaos;
+import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.PodIOChaosList;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.PodNetworkChaos;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.PodNetworkChaosList;
+import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.Schedule;
+import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.ScheduleList;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.StressChaos;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.StressChaosList;
 import com.marcnuri.yakc.model.org.chaosmesh.v1alpha1.TimeChaos;
@@ -55,7 +59,7 @@ import retrofit2.http.QueryMap;
 @SuppressWarnings({"squid:S1192", "unused"})
 public interface ChaosMeshOrgV1alpha1Api extends Api {
   /**
-   * list objects of kind AwsChaos
+   * list objects of kind AWSChaos
    */
   @HTTP(
     method = "GET",
@@ -64,10 +68,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesListCall<AwsChaosList, AwsChaos> listAwsChaosForAllNamespaces();
+  KubernetesListCall<AWSChaosList, AWSChaos> listAWSChaosForAllNamespaces();
 
   /**
-   * list objects of kind AwsChaos
+   * list objects of kind AWSChaos
    */
   @HTTP(
     method = "GET",
@@ -76,15 +80,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesListCall<AwsChaosList, AwsChaos> listAwsChaosForAllNamespaces(
-    @QueryMap ListAwsChaosForAllNamespaces queryParameters);
+  KubernetesListCall<AWSChaosList, AWSChaos> listAWSChaosForAllNamespaces(
+    @QueryMap ListAWSChaosForAllNamespaces queryParameters);
 
   
-  final class ListAwsChaosForAllNamespaces extends HashMap<String, Object> { 
+  final class ListAWSChaosForAllNamespaces extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      */
-    public ListAwsChaosForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
+    public ListAWSChaosForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
       return this;
     }
@@ -92,7 +96,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      */
-    public ListAwsChaosForAllNamespaces continues(String continues) {
+    public ListAWSChaosForAllNamespaces continues(String continues) {
       put("continue", continues);
       return this;
     }
@@ -100,7 +104,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their fields. Defaults to everything.
      */
-    public ListAwsChaosForAllNamespaces fieldSelector(String fieldSelector) {
+    public ListAWSChaosForAllNamespaces fieldSelector(String fieldSelector) {
       put("fieldSelector", fieldSelector);
       return this;
     }
@@ -108,7 +112,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their labels. Defaults to everything.
      */
-    public ListAwsChaosForAllNamespaces labelSelector(String labelSelector) {
+    public ListAWSChaosForAllNamespaces labelSelector(String labelSelector) {
       put("labelSelector", labelSelector);
       return this;
     }
@@ -116,7 +120,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public ListAwsChaosForAllNamespaces limit(Number limit) {
+    public ListAWSChaosForAllNamespaces limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -124,7 +128,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ListAwsChaosForAllNamespaces pretty(String pretty) {
+    public ListAWSChaosForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -132,7 +136,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ListAwsChaosForAllNamespaces resourceVersion(String resourceVersion) {
+    public ListAWSChaosForAllNamespaces resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
@@ -140,7 +144,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ListAwsChaosForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
+    public ListAWSChaosForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
       put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
@@ -148,7 +152,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public ListAwsChaosForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
+    public ListAWSChaosForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
@@ -156,7 +160,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
-    public ListAwsChaosForAllNamespaces watch(Boolean watch) {
+    public ListAWSChaosForAllNamespaces watch(Boolean watch) {
       put("watch", watch);
       return this;
     }
@@ -269,6 +273,113 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     }
   } 
   /**
+   * list objects of kind GCPChaos
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/gcpchaos"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<GCPChaosList, GCPChaos> listGCPChaosForAllNamespaces();
+
+  /**
+   * list objects of kind GCPChaos
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/gcpchaos"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<GCPChaosList, GCPChaos> listGCPChaosForAllNamespaces(
+    @QueryMap ListGCPChaosForAllNamespaces queryParameters);
+
+  
+  final class ListGCPChaosForAllNamespaces extends HashMap<String, Object> { 
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     */
+    public ListGCPChaosForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public ListGCPChaosForAllNamespaces continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public ListGCPChaosForAllNamespaces fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public ListGCPChaosForAllNamespaces labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public ListGCPChaosForAllNamespaces limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ListGCPChaosForAllNamespaces pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListGCPChaosForAllNamespaces resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListGCPChaosForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public ListGCPChaosForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public ListGCPChaosForAllNamespaces watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
    * list objects of kind HTTPChaos
    */
   @HTTP(
@@ -376,7 +487,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     }
   } 
   /**
-   * list objects of kind IoChaos
+   * list objects of kind IOChaos
    */
   @HTTP(
     method = "GET",
@@ -385,10 +496,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesListCall<IoChaosList, IoChaos> listIoChaosForAllNamespaces();
+  KubernetesListCall<IOChaosList, IOChaos> listIOChaosForAllNamespaces();
 
   /**
-   * list objects of kind IoChaos
+   * list objects of kind IOChaos
    */
   @HTTP(
     method = "GET",
@@ -397,15 +508,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesListCall<IoChaosList, IoChaos> listIoChaosForAllNamespaces(
-    @QueryMap ListIoChaosForAllNamespaces queryParameters);
+  KubernetesListCall<IOChaosList, IOChaos> listIOChaosForAllNamespaces(
+    @QueryMap ListIOChaosForAllNamespaces queryParameters);
 
   
-  final class ListIoChaosForAllNamespaces extends HashMap<String, Object> { 
+  final class ListIOChaosForAllNamespaces extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      */
-    public ListIoChaosForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
+    public ListIOChaosForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
       return this;
     }
@@ -413,7 +524,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      */
-    public ListIoChaosForAllNamespaces continues(String continues) {
+    public ListIOChaosForAllNamespaces continues(String continues) {
       put("continue", continues);
       return this;
     }
@@ -421,7 +532,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their fields. Defaults to everything.
      */
-    public ListIoChaosForAllNamespaces fieldSelector(String fieldSelector) {
+    public ListIOChaosForAllNamespaces fieldSelector(String fieldSelector) {
       put("fieldSelector", fieldSelector);
       return this;
     }
@@ -429,7 +540,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their labels. Defaults to everything.
      */
-    public ListIoChaosForAllNamespaces labelSelector(String labelSelector) {
+    public ListIOChaosForAllNamespaces labelSelector(String labelSelector) {
       put("labelSelector", labelSelector);
       return this;
     }
@@ -437,7 +548,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public ListIoChaosForAllNamespaces limit(Number limit) {
+    public ListIOChaosForAllNamespaces limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -445,7 +556,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ListIoChaosForAllNamespaces pretty(String pretty) {
+    public ListIOChaosForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -453,7 +564,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ListIoChaosForAllNamespaces resourceVersion(String resourceVersion) {
+    public ListIOChaosForAllNamespaces resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
@@ -461,7 +572,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ListIoChaosForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
+    public ListIOChaosForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
       put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
@@ -469,7 +580,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public ListIoChaosForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
+    public ListIOChaosForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
@@ -477,7 +588,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
-    public ListIoChaosForAllNamespaces watch(Boolean watch) {
+    public ListIOChaosForAllNamespaces watch(Boolean watch) {
       put("watch", watch);
       return this;
     }
@@ -697,7 +808,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     }
   } 
   /**
-   * delete collection of AwsChaos
+   * delete collection of AWSChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
@@ -708,11 +819,11 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedAwsChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedAWSChaos(
     @Path("namespace") String namespace);
 
   /**
-   * delete collection of AwsChaos
+   * delete collection of AWSChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
@@ -723,16 +834,16 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedAwsChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedAWSChaos(
     @Path("namespace") String namespace, 
-    @QueryMap DeleteCollectionNamespacedAwsChaos queryParameters);
+    @QueryMap DeleteCollectionNamespacedAWSChaos queryParameters);
 
   
-  final class DeleteCollectionNamespacedAwsChaos extends HashMap<String, Object> { 
+  final class DeleteCollectionNamespacedAWSChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public DeleteCollectionNamespacedAwsChaos pretty(String pretty) {
+    public DeleteCollectionNamespacedAWSChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -740,7 +851,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      */
-    public DeleteCollectionNamespacedAwsChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
+    public DeleteCollectionNamespacedAWSChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
       return this;
     }
@@ -748,7 +859,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      */
-    public DeleteCollectionNamespacedAwsChaos continues(String continues) {
+    public DeleteCollectionNamespacedAWSChaos continues(String continues) {
       put("continue", continues);
       return this;
     }
@@ -756,7 +867,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their fields. Defaults to everything.
      */
-    public DeleteCollectionNamespacedAwsChaos fieldSelector(String fieldSelector) {
+    public DeleteCollectionNamespacedAWSChaos fieldSelector(String fieldSelector) {
       put("fieldSelector", fieldSelector);
       return this;
     }
@@ -764,7 +875,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their labels. Defaults to everything.
      */
-    public DeleteCollectionNamespacedAwsChaos labelSelector(String labelSelector) {
+    public DeleteCollectionNamespacedAWSChaos labelSelector(String labelSelector) {
       put("labelSelector", labelSelector);
       return this;
     }
@@ -772,7 +883,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public DeleteCollectionNamespacedAwsChaos limit(Number limit) {
+    public DeleteCollectionNamespacedAWSChaos limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -780,7 +891,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public DeleteCollectionNamespacedAwsChaos resourceVersion(String resourceVersion) {
+    public DeleteCollectionNamespacedAWSChaos resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
@@ -788,7 +899,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public DeleteCollectionNamespacedAwsChaos resourceVersionMatch(String resourceVersionMatch) {
+    public DeleteCollectionNamespacedAWSChaos resourceVersionMatch(String resourceVersionMatch) {
       put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
@@ -796,7 +907,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public DeleteCollectionNamespacedAwsChaos timeoutSeconds(Number timeoutSeconds) {
+    public DeleteCollectionNamespacedAWSChaos timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
@@ -804,13 +915,13 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
-    public DeleteCollectionNamespacedAwsChaos watch(Boolean watch) {
+    public DeleteCollectionNamespacedAWSChaos watch(Boolean watch) {
       put("watch", watch);
       return this;
     }
   } 
   /**
-   * list objects of kind AwsChaos
+   * list objects of kind AWSChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
@@ -821,11 +932,11 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesListCall<AwsChaosList, AwsChaos> listNamespacedAwsChaos(
+  KubernetesListCall<AWSChaosList, AWSChaos> listNamespacedAWSChaos(
     @Path("namespace") String namespace);
 
   /**
-   * list objects of kind AwsChaos
+   * list objects of kind AWSChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
@@ -836,16 +947,16 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesListCall<AwsChaosList, AwsChaos> listNamespacedAwsChaos(
+  KubernetesListCall<AWSChaosList, AWSChaos> listNamespacedAWSChaos(
     @Path("namespace") String namespace, 
-    @QueryMap ListNamespacedAwsChaos queryParameters);
+    @QueryMap ListNamespacedAWSChaos queryParameters);
 
   
-  final class ListNamespacedAwsChaos extends HashMap<String, Object> { 
+  final class ListNamespacedAWSChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ListNamespacedAwsChaos pretty(String pretty) {
+    public ListNamespacedAWSChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -853,7 +964,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      */
-    public ListNamespacedAwsChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
+    public ListNamespacedAWSChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
       return this;
     }
@@ -861,7 +972,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      */
-    public ListNamespacedAwsChaos continues(String continues) {
+    public ListNamespacedAWSChaos continues(String continues) {
       put("continue", continues);
       return this;
     }
@@ -869,7 +980,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their fields. Defaults to everything.
      */
-    public ListNamespacedAwsChaos fieldSelector(String fieldSelector) {
+    public ListNamespacedAWSChaos fieldSelector(String fieldSelector) {
       put("fieldSelector", fieldSelector);
       return this;
     }
@@ -877,7 +988,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their labels. Defaults to everything.
      */
-    public ListNamespacedAwsChaos labelSelector(String labelSelector) {
+    public ListNamespacedAWSChaos labelSelector(String labelSelector) {
       put("labelSelector", labelSelector);
       return this;
     }
@@ -885,7 +996,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public ListNamespacedAwsChaos limit(Number limit) {
+    public ListNamespacedAWSChaos limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -893,7 +1004,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ListNamespacedAwsChaos resourceVersion(String resourceVersion) {
+    public ListNamespacedAWSChaos resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
@@ -901,7 +1012,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ListNamespacedAwsChaos resourceVersionMatch(String resourceVersionMatch) {
+    public ListNamespacedAWSChaos resourceVersionMatch(String resourceVersionMatch) {
       put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
@@ -909,7 +1020,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public ListNamespacedAwsChaos timeoutSeconds(Number timeoutSeconds) {
+    public ListNamespacedAWSChaos timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
@@ -917,13 +1028,13 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
-    public ListNamespacedAwsChaos watch(Boolean watch) {
+    public ListNamespacedAWSChaos watch(Boolean watch) {
       put("watch", watch);
       return this;
     }
   } 
   /**
-   * create AwsChaos
+   * create AWSChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
@@ -936,12 +1047,12 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<AwsChaos> createNamespacedAwsChaos(
+  KubernetesCall<AWSChaos> createNamespacedAWSChaos(
     @Path("namespace") String namespace, 
-    @Body AwsChaos body);
+    @Body AWSChaos body);
 
   /**
-   * create AwsChaos
+   * create AWSChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
@@ -954,17 +1065,17 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<AwsChaos> createNamespacedAwsChaos(
+  KubernetesCall<AWSChaos> createNamespacedAWSChaos(
     @Path("namespace") String namespace, 
-    @Body AwsChaos body, 
-    @QueryMap CreateNamespacedAwsChaos queryParameters);
+    @Body AWSChaos body, 
+    @QueryMap CreateNamespacedAWSChaos queryParameters);
 
   
-  final class CreateNamespacedAwsChaos extends HashMap<String, Object> { 
+  final class CreateNamespacedAWSChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public CreateNamespacedAwsChaos pretty(String pretty) {
+    public CreateNamespacedAWSChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -972,7 +1083,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public CreateNamespacedAwsChaos dryRun(String dryRun) {
+    public CreateNamespacedAWSChaos dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -980,15 +1091,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
      */
-    public CreateNamespacedAwsChaos fieldManager(String fieldManager) {
+    public CreateNamespacedAWSChaos fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
       return this;
     }
   } 
   /**
-   * delete AwsChaos
+   * delete AWSChaos
    *
-   * @param name name of the AwsChaos
+   * @param name name of the AWSChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -1000,15 +1111,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedAwsChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedAWSChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
-   * delete AwsChaos
+   * delete AWSChaos
    *
-   * @param name name of the AwsChaos
+   * @param name name of the AWSChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
     @HTTP(
@@ -1020,14 +1131,14 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedAwsChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedAWSChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
   /**
-   * delete AwsChaos
+   * delete AWSChaos
    *
-   * @param name name of the AwsChaos
+   * @param name name of the AWSChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -1039,16 +1150,16 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedAwsChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedAWSChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
-    @QueryMap DeleteNamespacedAwsChaos queryParameters);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
+    @QueryMap DeleteNamespacedAWSChaos queryParameters);
 
   /**
-   * delete AwsChaos
+   * delete AWSChaos
    *
-   * @param name name of the AwsChaos
+   * @param name name of the AWSChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -1060,17 +1171,17 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedAwsChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedAWSChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @QueryMap DeleteNamespacedAwsChaos queryParameters);
+    @QueryMap DeleteNamespacedAWSChaos queryParameters);
 
   
-  final class DeleteNamespacedAwsChaos extends HashMap<String, Object> { 
+  final class DeleteNamespacedAWSChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public DeleteNamespacedAwsChaos pretty(String pretty) {
+    public DeleteNamespacedAWSChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -1078,7 +1189,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public DeleteNamespacedAwsChaos dryRun(String dryRun) {
+    public DeleteNamespacedAWSChaos dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -1086,7 +1197,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
      */
-    public DeleteNamespacedAwsChaos gracePeriodSeconds(Number gracePeriodSeconds) {
+    public DeleteNamespacedAWSChaos gracePeriodSeconds(Number gracePeriodSeconds) {
       put("gracePeriodSeconds", gracePeriodSeconds);
       return this;
     }
@@ -1094,7 +1205,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
      */
-    public DeleteNamespacedAwsChaos orphanDependents(Boolean orphanDependents) {
+    public DeleteNamespacedAWSChaos orphanDependents(Boolean orphanDependents) {
       put("orphanDependents", orphanDependents);
       return this;
     }
@@ -1102,15 +1213,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
      */
-    public DeleteNamespacedAwsChaos propagationPolicy(String propagationPolicy) {
+    public DeleteNamespacedAWSChaos propagationPolicy(String propagationPolicy) {
       put("propagationPolicy", propagationPolicy);
       return this;
     }
   } 
   /**
-   * read the specified AwsChaos
+   * read the specified AWSChaos
    *
-   * @param name name of the AwsChaos
+   * @param name name of the AWSChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -1120,14 +1231,14 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<AwsChaos> readNamespacedAwsChaos(
+  KubernetesCall<AWSChaos> readNamespacedAWSChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
   /**
-   * read the specified AwsChaos
+   * read the specified AWSChaos
    *
-   * @param name name of the AwsChaos
+   * @param name name of the AWSChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -1137,17 +1248,17 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<AwsChaos> readNamespacedAwsChaos(
+  KubernetesCall<AWSChaos> readNamespacedAWSChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @QueryMap ReadNamespacedAwsChaos queryParameters);
+    @QueryMap ReadNamespacedAWSChaos queryParameters);
 
   
-  final class ReadNamespacedAwsChaos extends HashMap<String, Object> { 
+  final class ReadNamespacedAWSChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ReadNamespacedAwsChaos pretty(String pretty) {
+    public ReadNamespacedAWSChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -1155,15 +1266,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ReadNamespacedAwsChaos resourceVersion(String resourceVersion) {
+    public ReadNamespacedAWSChaos resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
   } 
   /**
-   * partially update the specified AwsChaos
+   * partially update the specified AWSChaos
    *
-   * @param name name of the AwsChaos
+   * @param name name of the AWSChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -1175,15 +1286,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
-  KubernetesCall<AwsChaos> patchNamespacedAwsChaos(
+  KubernetesCall<AWSChaos> patchNamespacedAWSChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body AwsChaos body);
+    @Body AWSChaos body);
 
   /**
-   * partially update the specified AwsChaos
+   * partially update the specified AWSChaos
    *
-   * @param name name of the AwsChaos
+   * @param name name of the AWSChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -1195,18 +1306,18 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
-  KubernetesCall<AwsChaos> patchNamespacedAwsChaos(
+  KubernetesCall<AWSChaos> patchNamespacedAWSChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body AwsChaos body, 
-    @QueryMap PatchNamespacedAwsChaos queryParameters);
+    @Body AWSChaos body, 
+    @QueryMap PatchNamespacedAWSChaos queryParameters);
 
   
-  final class PatchNamespacedAwsChaos extends HashMap<String, Object> { 
+  final class PatchNamespacedAWSChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public PatchNamespacedAwsChaos pretty(String pretty) {
+    public PatchNamespacedAWSChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -1214,7 +1325,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public PatchNamespacedAwsChaos dryRun(String dryRun) {
+    public PatchNamespacedAWSChaos dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -1222,15 +1333,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
      */
-    public PatchNamespacedAwsChaos fieldManager(String fieldManager) {
+    public PatchNamespacedAWSChaos fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
       return this;
     }
   } 
   /**
-   * replace the specified AwsChaos
+   * replace the specified AWSChaos
    *
-   * @param name name of the AwsChaos
+   * @param name name of the AWSChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -1242,15 +1353,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<AwsChaos> replaceNamespacedAwsChaos(
+  KubernetesCall<AWSChaos> replaceNamespacedAWSChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body AwsChaos body);
+    @Body AWSChaos body);
 
   /**
-   * replace the specified AwsChaos
+   * replace the specified AWSChaos
    *
-   * @param name name of the AwsChaos
+   * @param name name of the AWSChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -1262,18 +1373,18 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<AwsChaos> replaceNamespacedAwsChaos(
+  KubernetesCall<AWSChaos> replaceNamespacedAWSChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body AwsChaos body, 
-    @QueryMap ReplaceNamespacedAwsChaos queryParameters);
+    @Body AWSChaos body, 
+    @QueryMap ReplaceNamespacedAWSChaos queryParameters);
 
   
-  final class ReplaceNamespacedAwsChaos extends HashMap<String, Object> { 
+  final class ReplaceNamespacedAWSChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ReplaceNamespacedAwsChaos pretty(String pretty) {
+    public ReplaceNamespacedAWSChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -1281,7 +1392,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public ReplaceNamespacedAwsChaos dryRun(String dryRun) {
+    public ReplaceNamespacedAWSChaos dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -1289,7 +1400,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
      */
-    public ReplaceNamespacedAwsChaos fieldManager(String fieldManager) {
+    public ReplaceNamespacedAWSChaos fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
       return this;
     }
@@ -1306,7 +1417,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedDNSChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedDNSChaos(
     @Path("namespace") String namespace);
 
   /**
@@ -1321,7 +1432,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedDNSChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedDNSChaos(
     @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedDNSChaos queryParameters);
 
@@ -1598,10 +1709,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedDNSChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedDNSChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
    * delete DNSChaos
@@ -1618,7 +1729,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedDNSChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedDNSChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
@@ -1637,10 +1748,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedDNSChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedDNSChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
     @QueryMap DeleteNamespacedDNSChaos queryParameters);
 
   /**
@@ -1658,7 +1769,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedDNSChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedDNSChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedDNSChaos queryParameters);
@@ -1893,6 +2004,604 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     }
   } 
   /**
+   * delete collection of GCPChaos
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedGCPChaos(
+    @Path("namespace") String namespace);
+
+  /**
+   * delete collection of GCPChaos
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedGCPChaos(
+    @Path("namespace") String namespace, 
+    @QueryMap DeleteCollectionNamespacedGCPChaos queryParameters);
+
+  
+  final class DeleteCollectionNamespacedGCPChaos extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public DeleteCollectionNamespacedGCPChaos pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     */
+    public DeleteCollectionNamespacedGCPChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public DeleteCollectionNamespacedGCPChaos continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public DeleteCollectionNamespacedGCPChaos fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public DeleteCollectionNamespacedGCPChaos labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public DeleteCollectionNamespacedGCPChaos limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionNamespacedGCPChaos resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionNamespacedGCPChaos resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public DeleteCollectionNamespacedGCPChaos timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public DeleteCollectionNamespacedGCPChaos watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * list objects of kind GCPChaos
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<GCPChaosList, GCPChaos> listNamespacedGCPChaos(
+    @Path("namespace") String namespace);
+
+  /**
+   * list objects of kind GCPChaos
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<GCPChaosList, GCPChaos> listNamespacedGCPChaos(
+    @Path("namespace") String namespace, 
+    @QueryMap ListNamespacedGCPChaos queryParameters);
+
+  
+  final class ListNamespacedGCPChaos extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ListNamespacedGCPChaos pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     */
+    public ListNamespacedGCPChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public ListNamespacedGCPChaos continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public ListNamespacedGCPChaos fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public ListNamespacedGCPChaos labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public ListNamespacedGCPChaos limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListNamespacedGCPChaos resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListNamespacedGCPChaos resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public ListNamespacedGCPChaos timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public ListNamespacedGCPChaos watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * create GCPChaos
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "POST",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<GCPChaos> createNamespacedGCPChaos(
+    @Path("namespace") String namespace, 
+    @Body GCPChaos body);
+
+  /**
+   * create GCPChaos
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "POST",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<GCPChaos> createNamespacedGCPChaos(
+    @Path("namespace") String namespace, 
+    @Body GCPChaos body, 
+    @QueryMap CreateNamespacedGCPChaos queryParameters);
+
+  
+  final class CreateNamespacedGCPChaos extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public CreateNamespacedGCPChaos pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public CreateNamespacedGCPChaos dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public CreateNamespacedGCPChaos fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
+   * delete GCPChaos
+   *
+   * @param name name of the GCPChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedGCPChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
+
+    /**
+   * delete GCPChaos
+   *
+   * @param name name of the GCPChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+    @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedGCPChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * delete GCPChaos
+   *
+   * @param name name of the GCPChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedGCPChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
+    @QueryMap DeleteNamespacedGCPChaos queryParameters);
+
+  /**
+   * delete GCPChaos
+   *
+   * @param name name of the GCPChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedGCPChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap DeleteNamespacedGCPChaos queryParameters);
+
+  
+  final class DeleteNamespacedGCPChaos extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public DeleteNamespacedGCPChaos pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public DeleteNamespacedGCPChaos dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+     */
+    public DeleteNamespacedGCPChaos gracePeriodSeconds(Number gracePeriodSeconds) {
+      put("gracePeriodSeconds", gracePeriodSeconds);
+      return this;
+    }
+
+    /**
+     * Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+     */
+    public DeleteNamespacedGCPChaos orphanDependents(Boolean orphanDependents) {
+      put("orphanDependents", orphanDependents);
+      return this;
+    }
+
+    /**
+     * Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+     */
+    public DeleteNamespacedGCPChaos propagationPolicy(String propagationPolicy) {
+      put("propagationPolicy", propagationPolicy);
+      return this;
+    }
+  } 
+  /**
+   * read the specified GCPChaos
+   *
+   * @param name name of the GCPChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<GCPChaos> readNamespacedGCPChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * read the specified GCPChaos
+   *
+   * @param name name of the GCPChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<GCPChaos> readNamespacedGCPChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap ReadNamespacedGCPChaos queryParameters);
+
+  
+  final class ReadNamespacedGCPChaos extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReadNamespacedGCPChaos pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ReadNamespacedGCPChaos resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+  } 
+  /**
+   * partially update the specified GCPChaos
+   *
+   * @param name name of the GCPChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<GCPChaos> patchNamespacedGCPChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body GCPChaos body);
+
+  /**
+   * partially update the specified GCPChaos
+   *
+   * @param name name of the GCPChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<GCPChaos> patchNamespacedGCPChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body GCPChaos body, 
+    @QueryMap PatchNamespacedGCPChaos queryParameters);
+
+  
+  final class PatchNamespacedGCPChaos extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public PatchNamespacedGCPChaos pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public PatchNamespacedGCPChaos dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public PatchNamespacedGCPChaos fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
+   * replace the specified GCPChaos
+   *
+   * @param name name of the GCPChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<GCPChaos> replaceNamespacedGCPChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body GCPChaos body);
+
+  /**
+   * replace the specified GCPChaos
+   *
+   * @param name name of the GCPChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/gcpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<GCPChaos> replaceNamespacedGCPChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body GCPChaos body, 
+    @QueryMap ReplaceNamespacedGCPChaos queryParameters);
+
+  
+  final class ReplaceNamespacedGCPChaos extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReplaceNamespacedGCPChaos pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public ReplaceNamespacedGCPChaos dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public ReplaceNamespacedGCPChaos fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
    * delete collection of HTTPChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
@@ -1904,7 +2613,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedHTTPChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedHTTPChaos(
     @Path("namespace") String namespace);
 
   /**
@@ -1919,7 +2628,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedHTTPChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedHTTPChaos(
     @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedHTTPChaos queryParameters);
 
@@ -2196,10 +2905,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedHTTPChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedHTTPChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
    * delete HTTPChaos
@@ -2216,7 +2925,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedHTTPChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedHTTPChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
@@ -2235,10 +2944,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedHTTPChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedHTTPChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
     @QueryMap DeleteNamespacedHTTPChaos queryParameters);
 
   /**
@@ -2256,7 +2965,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedHTTPChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedHTTPChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedHTTPChaos queryParameters);
@@ -2491,7 +3200,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     }
   } 
   /**
-   * delete collection of IoChaos
+   * delete collection of IOChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
@@ -2502,11 +3211,11 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedIoChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedIOChaos(
     @Path("namespace") String namespace);
 
   /**
-   * delete collection of IoChaos
+   * delete collection of IOChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
@@ -2517,16 +3226,16 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedIoChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedIOChaos(
     @Path("namespace") String namespace, 
-    @QueryMap DeleteCollectionNamespacedIoChaos queryParameters);
+    @QueryMap DeleteCollectionNamespacedIOChaos queryParameters);
 
   
-  final class DeleteCollectionNamespacedIoChaos extends HashMap<String, Object> { 
+  final class DeleteCollectionNamespacedIOChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public DeleteCollectionNamespacedIoChaos pretty(String pretty) {
+    public DeleteCollectionNamespacedIOChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -2534,7 +3243,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      */
-    public DeleteCollectionNamespacedIoChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
+    public DeleteCollectionNamespacedIOChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
       return this;
     }
@@ -2542,7 +3251,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      */
-    public DeleteCollectionNamespacedIoChaos continues(String continues) {
+    public DeleteCollectionNamespacedIOChaos continues(String continues) {
       put("continue", continues);
       return this;
     }
@@ -2550,7 +3259,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their fields. Defaults to everything.
      */
-    public DeleteCollectionNamespacedIoChaos fieldSelector(String fieldSelector) {
+    public DeleteCollectionNamespacedIOChaos fieldSelector(String fieldSelector) {
       put("fieldSelector", fieldSelector);
       return this;
     }
@@ -2558,7 +3267,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their labels. Defaults to everything.
      */
-    public DeleteCollectionNamespacedIoChaos labelSelector(String labelSelector) {
+    public DeleteCollectionNamespacedIOChaos labelSelector(String labelSelector) {
       put("labelSelector", labelSelector);
       return this;
     }
@@ -2566,7 +3275,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public DeleteCollectionNamespacedIoChaos limit(Number limit) {
+    public DeleteCollectionNamespacedIOChaos limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -2574,7 +3283,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public DeleteCollectionNamespacedIoChaos resourceVersion(String resourceVersion) {
+    public DeleteCollectionNamespacedIOChaos resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
@@ -2582,7 +3291,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public DeleteCollectionNamespacedIoChaos resourceVersionMatch(String resourceVersionMatch) {
+    public DeleteCollectionNamespacedIOChaos resourceVersionMatch(String resourceVersionMatch) {
       put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
@@ -2590,7 +3299,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public DeleteCollectionNamespacedIoChaos timeoutSeconds(Number timeoutSeconds) {
+    public DeleteCollectionNamespacedIOChaos timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
@@ -2598,13 +3307,13 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
-    public DeleteCollectionNamespacedIoChaos watch(Boolean watch) {
+    public DeleteCollectionNamespacedIOChaos watch(Boolean watch) {
       put("watch", watch);
       return this;
     }
   } 
   /**
-   * list objects of kind IoChaos
+   * list objects of kind IOChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
@@ -2615,11 +3324,11 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesListCall<IoChaosList, IoChaos> listNamespacedIoChaos(
+  KubernetesListCall<IOChaosList, IOChaos> listNamespacedIOChaos(
     @Path("namespace") String namespace);
 
   /**
-   * list objects of kind IoChaos
+   * list objects of kind IOChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
@@ -2630,16 +3339,16 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesListCall<IoChaosList, IoChaos> listNamespacedIoChaos(
+  KubernetesListCall<IOChaosList, IOChaos> listNamespacedIOChaos(
     @Path("namespace") String namespace, 
-    @QueryMap ListNamespacedIoChaos queryParameters);
+    @QueryMap ListNamespacedIOChaos queryParameters);
 
   
-  final class ListNamespacedIoChaos extends HashMap<String, Object> { 
+  final class ListNamespacedIOChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ListNamespacedIoChaos pretty(String pretty) {
+    public ListNamespacedIOChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -2647,7 +3356,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      */
-    public ListNamespacedIoChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
+    public ListNamespacedIOChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
       return this;
     }
@@ -2655,7 +3364,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      */
-    public ListNamespacedIoChaos continues(String continues) {
+    public ListNamespacedIOChaos continues(String continues) {
       put("continue", continues);
       return this;
     }
@@ -2663,7 +3372,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their fields. Defaults to everything.
      */
-    public ListNamespacedIoChaos fieldSelector(String fieldSelector) {
+    public ListNamespacedIOChaos fieldSelector(String fieldSelector) {
       put("fieldSelector", fieldSelector);
       return this;
     }
@@ -2671,7 +3380,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their labels. Defaults to everything.
      */
-    public ListNamespacedIoChaos labelSelector(String labelSelector) {
+    public ListNamespacedIOChaos labelSelector(String labelSelector) {
       put("labelSelector", labelSelector);
       return this;
     }
@@ -2679,7 +3388,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public ListNamespacedIoChaos limit(Number limit) {
+    public ListNamespacedIOChaos limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -2687,7 +3396,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ListNamespacedIoChaos resourceVersion(String resourceVersion) {
+    public ListNamespacedIOChaos resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
@@ -2695,7 +3404,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ListNamespacedIoChaos resourceVersionMatch(String resourceVersionMatch) {
+    public ListNamespacedIOChaos resourceVersionMatch(String resourceVersionMatch) {
       put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
@@ -2703,7 +3412,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public ListNamespacedIoChaos timeoutSeconds(Number timeoutSeconds) {
+    public ListNamespacedIOChaos timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
@@ -2711,13 +3420,13 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
-    public ListNamespacedIoChaos watch(Boolean watch) {
+    public ListNamespacedIOChaos watch(Boolean watch) {
       put("watch", watch);
       return this;
     }
   } 
   /**
-   * create IoChaos
+   * create IOChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
@@ -2730,12 +3439,12 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<IoChaos> createNamespacedIoChaos(
+  KubernetesCall<IOChaos> createNamespacedIOChaos(
     @Path("namespace") String namespace, 
-    @Body IoChaos body);
+    @Body IOChaos body);
 
   /**
-   * create IoChaos
+   * create IOChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
@@ -2748,17 +3457,17 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<IoChaos> createNamespacedIoChaos(
+  KubernetesCall<IOChaos> createNamespacedIOChaos(
     @Path("namespace") String namespace, 
-    @Body IoChaos body, 
-    @QueryMap CreateNamespacedIoChaos queryParameters);
+    @Body IOChaos body, 
+    @QueryMap CreateNamespacedIOChaos queryParameters);
 
   
-  final class CreateNamespacedIoChaos extends HashMap<String, Object> { 
+  final class CreateNamespacedIOChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public CreateNamespacedIoChaos pretty(String pretty) {
+    public CreateNamespacedIOChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -2766,7 +3475,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public CreateNamespacedIoChaos dryRun(String dryRun) {
+    public CreateNamespacedIOChaos dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -2774,15 +3483,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
      */
-    public CreateNamespacedIoChaos fieldManager(String fieldManager) {
+    public CreateNamespacedIOChaos fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
       return this;
     }
   } 
   /**
-   * delete IoChaos
+   * delete IOChaos
    *
-   * @param name name of the IoChaos
+   * @param name name of the IOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -2794,15 +3503,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedIoChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
-   * delete IoChaos
+   * delete IOChaos
    *
-   * @param name name of the IoChaos
+   * @param name name of the IOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
     @HTTP(
@@ -2814,14 +3523,14 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedIoChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
   /**
-   * delete IoChaos
+   * delete IOChaos
    *
-   * @param name name of the IoChaos
+   * @param name name of the IOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -2833,16 +3542,16 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedIoChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
-    @QueryMap DeleteNamespacedIoChaos queryParameters);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
+    @QueryMap DeleteNamespacedIOChaos queryParameters);
 
   /**
-   * delete IoChaos
+   * delete IOChaos
    *
-   * @param name name of the IoChaos
+   * @param name name of the IOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -2854,17 +3563,17 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedIoChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @QueryMap DeleteNamespacedIoChaos queryParameters);
+    @QueryMap DeleteNamespacedIOChaos queryParameters);
 
   
-  final class DeleteNamespacedIoChaos extends HashMap<String, Object> { 
+  final class DeleteNamespacedIOChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public DeleteNamespacedIoChaos pretty(String pretty) {
+    public DeleteNamespacedIOChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -2872,7 +3581,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public DeleteNamespacedIoChaos dryRun(String dryRun) {
+    public DeleteNamespacedIOChaos dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -2880,7 +3589,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
      */
-    public DeleteNamespacedIoChaos gracePeriodSeconds(Number gracePeriodSeconds) {
+    public DeleteNamespacedIOChaos gracePeriodSeconds(Number gracePeriodSeconds) {
       put("gracePeriodSeconds", gracePeriodSeconds);
       return this;
     }
@@ -2888,7 +3597,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
      */
-    public DeleteNamespacedIoChaos orphanDependents(Boolean orphanDependents) {
+    public DeleteNamespacedIOChaos orphanDependents(Boolean orphanDependents) {
       put("orphanDependents", orphanDependents);
       return this;
     }
@@ -2896,15 +3605,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
      */
-    public DeleteNamespacedIoChaos propagationPolicy(String propagationPolicy) {
+    public DeleteNamespacedIOChaos propagationPolicy(String propagationPolicy) {
       put("propagationPolicy", propagationPolicy);
       return this;
     }
   } 
   /**
-   * read the specified IoChaos
+   * read the specified IOChaos
    *
-   * @param name name of the IoChaos
+   * @param name name of the IOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -2914,14 +3623,14 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<IoChaos> readNamespacedIoChaos(
+  KubernetesCall<IOChaos> readNamespacedIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
   /**
-   * read the specified IoChaos
+   * read the specified IOChaos
    *
-   * @param name name of the IoChaos
+   * @param name name of the IOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -2931,17 +3640,17 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<IoChaos> readNamespacedIoChaos(
+  KubernetesCall<IOChaos> readNamespacedIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @QueryMap ReadNamespacedIoChaos queryParameters);
+    @QueryMap ReadNamespacedIOChaos queryParameters);
 
   
-  final class ReadNamespacedIoChaos extends HashMap<String, Object> { 
+  final class ReadNamespacedIOChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ReadNamespacedIoChaos pretty(String pretty) {
+    public ReadNamespacedIOChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -2949,15 +3658,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ReadNamespacedIoChaos resourceVersion(String resourceVersion) {
+    public ReadNamespacedIOChaos resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
   } 
   /**
-   * partially update the specified IoChaos
+   * partially update the specified IOChaos
    *
-   * @param name name of the IoChaos
+   * @param name name of the IOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -2969,15 +3678,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
-  KubernetesCall<IoChaos> patchNamespacedIoChaos(
+  KubernetesCall<IOChaos> patchNamespacedIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body IoChaos body);
+    @Body IOChaos body);
 
   /**
-   * partially update the specified IoChaos
+   * partially update the specified IOChaos
    *
-   * @param name name of the IoChaos
+   * @param name name of the IOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -2989,18 +3698,18 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
-  KubernetesCall<IoChaos> patchNamespacedIoChaos(
+  KubernetesCall<IOChaos> patchNamespacedIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body IoChaos body, 
-    @QueryMap PatchNamespacedIoChaos queryParameters);
+    @Body IOChaos body, 
+    @QueryMap PatchNamespacedIOChaos queryParameters);
 
   
-  final class PatchNamespacedIoChaos extends HashMap<String, Object> { 
+  final class PatchNamespacedIOChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public PatchNamespacedIoChaos pretty(String pretty) {
+    public PatchNamespacedIOChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -3008,7 +3717,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public PatchNamespacedIoChaos dryRun(String dryRun) {
+    public PatchNamespacedIOChaos dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -3016,15 +3725,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
      */
-    public PatchNamespacedIoChaos fieldManager(String fieldManager) {
+    public PatchNamespacedIOChaos fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
       return this;
     }
   } 
   /**
-   * replace the specified IoChaos
+   * replace the specified IOChaos
    *
-   * @param name name of the IoChaos
+   * @param name name of the IOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -3036,15 +3745,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<IoChaos> replaceNamespacedIoChaos(
+  KubernetesCall<IOChaos> replaceNamespacedIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body IoChaos body);
+    @Body IOChaos body);
 
   /**
-   * replace the specified IoChaos
+   * replace the specified IOChaos
    *
-   * @param name name of the IoChaos
+   * @param name name of the IOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -3056,18 +3765,18 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<IoChaos> replaceNamespacedIoChaos(
+  KubernetesCall<IOChaos> replaceNamespacedIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body IoChaos body, 
-    @QueryMap ReplaceNamespacedIoChaos queryParameters);
+    @Body IOChaos body, 
+    @QueryMap ReplaceNamespacedIOChaos queryParameters);
 
   
-  final class ReplaceNamespacedIoChaos extends HashMap<String, Object> { 
+  final class ReplaceNamespacedIOChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ReplaceNamespacedIoChaos pretty(String pretty) {
+    public ReplaceNamespacedIOChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -3075,7 +3784,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public ReplaceNamespacedIoChaos dryRun(String dryRun) {
+    public ReplaceNamespacedIOChaos dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -3083,7 +3792,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
      */
-    public ReplaceNamespacedIoChaos fieldManager(String fieldManager) {
+    public ReplaceNamespacedIOChaos fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
       return this;
     }
@@ -3100,7 +3809,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedJVMChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedJVMChaos(
     @Path("namespace") String namespace);
 
   /**
@@ -3115,7 +3824,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedJVMChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedJVMChaos(
     @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedJVMChaos queryParameters);
 
@@ -3392,10 +4101,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedJVMChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedJVMChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
    * delete JVMChaos
@@ -3412,7 +4121,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedJVMChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedJVMChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
@@ -3431,10 +4140,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedJVMChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedJVMChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
     @QueryMap DeleteNamespacedJVMChaos queryParameters);
 
   /**
@@ -3452,7 +4161,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedJVMChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedJVMChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedJVMChaos queryParameters);
@@ -3698,7 +4407,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedKernelChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedKernelChaos(
     @Path("namespace") String namespace);
 
   /**
@@ -3713,7 +4422,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedKernelChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedKernelChaos(
     @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedKernelChaos queryParameters);
 
@@ -3990,10 +4699,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedKernelChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedKernelChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
    * delete KernelChaos
@@ -4010,7 +4719,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedKernelChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedKernelChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
@@ -4029,10 +4738,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedKernelChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedKernelChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
     @QueryMap DeleteNamespacedKernelChaos queryParameters);
 
   /**
@@ -4050,7 +4759,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedKernelChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedKernelChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedKernelChaos queryParameters);
@@ -4296,7 +5005,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedNetworkChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedNetworkChaos(
     @Path("namespace") String namespace);
 
   /**
@@ -4311,7 +5020,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedNetworkChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedNetworkChaos(
     @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedNetworkChaos queryParameters);
 
@@ -4588,10 +5297,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedNetworkChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedNetworkChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
    * delete NetworkChaos
@@ -4608,7 +5317,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedNetworkChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedNetworkChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
@@ -4627,10 +5336,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedNetworkChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedNetworkChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
     @QueryMap DeleteNamespacedNetworkChaos queryParameters);
 
   /**
@@ -4648,7 +5357,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedNetworkChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedNetworkChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedNetworkChaos queryParameters);
@@ -4894,7 +5603,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedPodChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedPodChaos(
     @Path("namespace") String namespace);
 
   /**
@@ -4909,7 +5618,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedPodChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedPodChaos(
     @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedPodChaos queryParameters);
 
@@ -5186,10 +5895,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedPodChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
    * delete PodChaos
@@ -5206,7 +5915,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedPodChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
@@ -5225,10 +5934,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedPodChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
     @QueryMap DeleteNamespacedPodChaos queryParameters);
 
   /**
@@ -5246,7 +5955,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedPodChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedPodChaos queryParameters);
@@ -5481,42 +6190,42 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     }
   } 
   /**
-   * delete collection of PodIoChaos
+   * delete collection of PodHttpChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "DELETE",
-    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos"
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos"
   )
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedPodIoChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedPodHttpChaos(
     @Path("namespace") String namespace);
 
   /**
-   * delete collection of PodIoChaos
+   * delete collection of PodHttpChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "DELETE",
-    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos"
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos"
   )
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedPodIoChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedPodHttpChaos(
     @Path("namespace") String namespace, 
-    @QueryMap DeleteCollectionNamespacedPodIoChaos queryParameters);
+    @QueryMap DeleteCollectionNamespacedPodHttpChaos queryParameters);
 
   
-  final class DeleteCollectionNamespacedPodIoChaos extends HashMap<String, Object> { 
+  final class DeleteCollectionNamespacedPodHttpChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public DeleteCollectionNamespacedPodIoChaos pretty(String pretty) {
+    public DeleteCollectionNamespacedPodHttpChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -5524,7 +6233,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      */
-    public DeleteCollectionNamespacedPodIoChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
+    public DeleteCollectionNamespacedPodHttpChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
       return this;
     }
@@ -5532,7 +6241,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      */
-    public DeleteCollectionNamespacedPodIoChaos continues(String continues) {
+    public DeleteCollectionNamespacedPodHttpChaos continues(String continues) {
       put("continue", continues);
       return this;
     }
@@ -5540,7 +6249,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their fields. Defaults to everything.
      */
-    public DeleteCollectionNamespacedPodIoChaos fieldSelector(String fieldSelector) {
+    public DeleteCollectionNamespacedPodHttpChaos fieldSelector(String fieldSelector) {
       put("fieldSelector", fieldSelector);
       return this;
     }
@@ -5548,7 +6257,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their labels. Defaults to everything.
      */
-    public DeleteCollectionNamespacedPodIoChaos labelSelector(String labelSelector) {
+    public DeleteCollectionNamespacedPodHttpChaos labelSelector(String labelSelector) {
       put("labelSelector", labelSelector);
       return this;
     }
@@ -5556,7 +6265,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public DeleteCollectionNamespacedPodIoChaos limit(Number limit) {
+    public DeleteCollectionNamespacedPodHttpChaos limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -5564,7 +6273,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public DeleteCollectionNamespacedPodIoChaos resourceVersion(String resourceVersion) {
+    public DeleteCollectionNamespacedPodHttpChaos resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
@@ -5572,7 +6281,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public DeleteCollectionNamespacedPodIoChaos resourceVersionMatch(String resourceVersionMatch) {
+    public DeleteCollectionNamespacedPodHttpChaos resourceVersionMatch(String resourceVersionMatch) {
       put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
@@ -5580,7 +6289,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public DeleteCollectionNamespacedPodIoChaos timeoutSeconds(Number timeoutSeconds) {
+    public DeleteCollectionNamespacedPodHttpChaos timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
@@ -5588,48 +6297,48 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
-    public DeleteCollectionNamespacedPodIoChaos watch(Boolean watch) {
+    public DeleteCollectionNamespacedPodHttpChaos watch(Boolean watch) {
       put("watch", watch);
       return this;
     }
   } 
   /**
-   * list objects of kind PodIoChaos
+   * list objects of kind PodHttpChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "GET",
-    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos"
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos"
   )
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesListCall<PodIoChaosList, PodIoChaos> listNamespacedPodIoChaos(
+  KubernetesListCall<PodHttpChaosList, PodHttpChaos> listNamespacedPodHttpChaos(
     @Path("namespace") String namespace);
 
   /**
-   * list objects of kind PodIoChaos
+   * list objects of kind PodHttpChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "GET",
-    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos"
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos"
   )
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesListCall<PodIoChaosList, PodIoChaos> listNamespacedPodIoChaos(
+  KubernetesListCall<PodHttpChaosList, PodHttpChaos> listNamespacedPodHttpChaos(
     @Path("namespace") String namespace, 
-    @QueryMap ListNamespacedPodIoChaos queryParameters);
+    @QueryMap ListNamespacedPodHttpChaos queryParameters);
 
   
-  final class ListNamespacedPodIoChaos extends HashMap<String, Object> { 
+  final class ListNamespacedPodHttpChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ListNamespacedPodIoChaos pretty(String pretty) {
+    public ListNamespacedPodHttpChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -5637,7 +6346,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      */
-    public ListNamespacedPodIoChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
+    public ListNamespacedPodHttpChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
       return this;
     }
@@ -5645,7 +6354,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      */
-    public ListNamespacedPodIoChaos continues(String continues) {
+    public ListNamespacedPodHttpChaos continues(String continues) {
       put("continue", continues);
       return this;
     }
@@ -5653,7 +6362,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their fields. Defaults to everything.
      */
-    public ListNamespacedPodIoChaos fieldSelector(String fieldSelector) {
+    public ListNamespacedPodHttpChaos fieldSelector(String fieldSelector) {
       put("fieldSelector", fieldSelector);
       return this;
     }
@@ -5661,7 +6370,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their labels. Defaults to everything.
      */
-    public ListNamespacedPodIoChaos labelSelector(String labelSelector) {
+    public ListNamespacedPodHttpChaos labelSelector(String labelSelector) {
       put("labelSelector", labelSelector);
       return this;
     }
@@ -5669,7 +6378,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public ListNamespacedPodIoChaos limit(Number limit) {
+    public ListNamespacedPodHttpChaos limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -5677,7 +6386,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ListNamespacedPodIoChaos resourceVersion(String resourceVersion) {
+    public ListNamespacedPodHttpChaos resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
@@ -5685,7 +6394,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ListNamespacedPodIoChaos resourceVersionMatch(String resourceVersionMatch) {
+    public ListNamespacedPodHttpChaos resourceVersionMatch(String resourceVersionMatch) {
       put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
@@ -5693,7 +6402,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public ListNamespacedPodIoChaos timeoutSeconds(Number timeoutSeconds) {
+    public ListNamespacedPodHttpChaos timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
@@ -5701,54 +6410,54 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
-    public ListNamespacedPodIoChaos watch(Boolean watch) {
+    public ListNamespacedPodHttpChaos watch(Boolean watch) {
       put("watch", watch);
       return this;
     }
   } 
   /**
-   * create PodIoChaos
+   * create PodHttpChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "POST",
-    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<PodIoChaos> createNamespacedPodIoChaos(
+  KubernetesCall<PodHttpChaos> createNamespacedPodHttpChaos(
     @Path("namespace") String namespace, 
-    @Body PodIoChaos body);
+    @Body PodHttpChaos body);
 
   /**
-   * create PodIoChaos
+   * create PodHttpChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
     method = "POST",
-    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos",
     hasBody = true
   )
   @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<PodIoChaos> createNamespacedPodIoChaos(
+  KubernetesCall<PodHttpChaos> createNamespacedPodHttpChaos(
     @Path("namespace") String namespace, 
-    @Body PodIoChaos body, 
-    @QueryMap CreateNamespacedPodIoChaos queryParameters);
+    @Body PodHttpChaos body, 
+    @QueryMap CreateNamespacedPodHttpChaos queryParameters);
 
   
-  final class CreateNamespacedPodIoChaos extends HashMap<String, Object> { 
+  final class CreateNamespacedPodHttpChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public CreateNamespacedPodIoChaos pretty(String pretty) {
+    public CreateNamespacedPodHttpChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -5756,7 +6465,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public CreateNamespacedPodIoChaos dryRun(String dryRun) {
+    public CreateNamespacedPodHttpChaos dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -5764,15 +6473,800 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
      */
-    public CreateNamespacedPodIoChaos fieldManager(String fieldManager) {
+    public CreateNamespacedPodHttpChaos fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
       return this;
     }
   } 
   /**
-   * delete PodIoChaos
+   * delete PodHttpChaos
    *
-   * @param name name of the PodIoChaos
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodHttpChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
+
+    /**
+   * delete PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+    @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodHttpChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * delete PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodHttpChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
+    @QueryMap DeleteNamespacedPodHttpChaos queryParameters);
+
+  /**
+   * delete PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodHttpChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap DeleteNamespacedPodHttpChaos queryParameters);
+
+  
+  final class DeleteNamespacedPodHttpChaos extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public DeleteNamespacedPodHttpChaos pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public DeleteNamespacedPodHttpChaos dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+     */
+    public DeleteNamespacedPodHttpChaos gracePeriodSeconds(Number gracePeriodSeconds) {
+      put("gracePeriodSeconds", gracePeriodSeconds);
+      return this;
+    }
+
+    /**
+     * Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+     */
+    public DeleteNamespacedPodHttpChaos orphanDependents(Boolean orphanDependents) {
+      put("orphanDependents", orphanDependents);
+      return this;
+    }
+
+    /**
+     * Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+     */
+    public DeleteNamespacedPodHttpChaos propagationPolicy(String propagationPolicy) {
+      put("propagationPolicy", propagationPolicy);
+      return this;
+    }
+  } 
+  /**
+   * read the specified PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<PodHttpChaos> readNamespacedPodHttpChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * read the specified PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<PodHttpChaos> readNamespacedPodHttpChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap ReadNamespacedPodHttpChaos queryParameters);
+
+  
+  final class ReadNamespacedPodHttpChaos extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReadNamespacedPodHttpChaos pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ReadNamespacedPodHttpChaos resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+  } 
+  /**
+   * partially update the specified PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodHttpChaos> patchNamespacedPodHttpChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodHttpChaos body);
+
+  /**
+   * partially update the specified PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodHttpChaos> patchNamespacedPodHttpChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodHttpChaos body, 
+    @QueryMap PatchNamespacedPodHttpChaos queryParameters);
+
+  
+  final class PatchNamespacedPodHttpChaos extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public PatchNamespacedPodHttpChaos pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public PatchNamespacedPodHttpChaos dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public PatchNamespacedPodHttpChaos fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
+   * replace the specified PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodHttpChaos> replaceNamespacedPodHttpChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodHttpChaos body);
+
+  /**
+   * replace the specified PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodHttpChaos> replaceNamespacedPodHttpChaos(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodHttpChaos body, 
+    @QueryMap ReplaceNamespacedPodHttpChaos queryParameters);
+
+  
+  final class ReplaceNamespacedPodHttpChaos extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReplaceNamespacedPodHttpChaos pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public ReplaceNamespacedPodHttpChaos dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public ReplaceNamespacedPodHttpChaos fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
+   * read status of the specified PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}/status"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<PodHttpChaos> readNamespacedPodHttpChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * read status of the specified PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}/status"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<PodHttpChaos> readNamespacedPodHttpChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap ReadNamespacedPodHttpChaosStatus queryParameters);
+
+  
+  final class ReadNamespacedPodHttpChaosStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReadNamespacedPodHttpChaosStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ReadNamespacedPodHttpChaosStatus resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+  } 
+  /**
+   * partially update status of the specified PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodHttpChaos> patchNamespacedPodHttpChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodHttpChaos body);
+
+  /**
+   * partially update status of the specified PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodHttpChaos> patchNamespacedPodHttpChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodHttpChaos body, 
+    @QueryMap PatchNamespacedPodHttpChaosStatus queryParameters);
+
+  
+  final class PatchNamespacedPodHttpChaosStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public PatchNamespacedPodHttpChaosStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public PatchNamespacedPodHttpChaosStatus dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public PatchNamespacedPodHttpChaosStatus fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
+   * replace status of the specified PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodHttpChaos> replaceNamespacedPodHttpChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodHttpChaos body);
+
+  /**
+   * replace status of the specified PodHttpChaos
+   *
+   * @param name name of the PodHttpChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podhttpchaos/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodHttpChaos> replaceNamespacedPodHttpChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodHttpChaos body, 
+    @QueryMap ReplaceNamespacedPodHttpChaosStatus queryParameters);
+
+  
+  final class ReplaceNamespacedPodHttpChaosStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReplaceNamespacedPodHttpChaosStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public ReplaceNamespacedPodHttpChaosStatus dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public ReplaceNamespacedPodHttpChaosStatus fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
+   * delete collection of PodIOChaos
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedPodIOChaos(
+    @Path("namespace") String namespace);
+
+  /**
+   * delete collection of PodIOChaos
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedPodIOChaos(
+    @Path("namespace") String namespace, 
+    @QueryMap DeleteCollectionNamespacedPodIOChaos queryParameters);
+
+  
+  final class DeleteCollectionNamespacedPodIOChaos extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public DeleteCollectionNamespacedPodIOChaos pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     */
+    public DeleteCollectionNamespacedPodIOChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public DeleteCollectionNamespacedPodIOChaos continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public DeleteCollectionNamespacedPodIOChaos fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public DeleteCollectionNamespacedPodIOChaos labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public DeleteCollectionNamespacedPodIOChaos limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionNamespacedPodIOChaos resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionNamespacedPodIOChaos resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public DeleteCollectionNamespacedPodIOChaos timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public DeleteCollectionNamespacedPodIOChaos watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * list objects of kind PodIOChaos
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<PodIOChaosList, PodIOChaos> listNamespacedPodIOChaos(
+    @Path("namespace") String namespace);
+
+  /**
+   * list objects of kind PodIOChaos
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<PodIOChaosList, PodIOChaos> listNamespacedPodIOChaos(
+    @Path("namespace") String namespace, 
+    @QueryMap ListNamespacedPodIOChaos queryParameters);
+
+  
+  final class ListNamespacedPodIOChaos extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ListNamespacedPodIOChaos pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     */
+    public ListNamespacedPodIOChaos allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public ListNamespacedPodIOChaos continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public ListNamespacedPodIOChaos fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public ListNamespacedPodIOChaos labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public ListNamespacedPodIOChaos limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListNamespacedPodIOChaos resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListNamespacedPodIOChaos resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public ListNamespacedPodIOChaos timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public ListNamespacedPodIOChaos watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * create PodIOChaos
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "POST",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodIOChaos> createNamespacedPodIOChaos(
+    @Path("namespace") String namespace, 
+    @Body PodIOChaos body);
+
+  /**
+   * create PodIOChaos
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "POST",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodIOChaos> createNamespacedPodIOChaos(
+    @Path("namespace") String namespace, 
+    @Body PodIOChaos body, 
+    @QueryMap CreateNamespacedPodIOChaos queryParameters);
+
+  
+  final class CreateNamespacedPodIOChaos extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public CreateNamespacedPodIOChaos pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public CreateNamespacedPodIOChaos dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public CreateNamespacedPodIOChaos fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
+   * delete PodIOChaos
+   *
+   * @param name name of the PodIOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -5784,15 +7278,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedPodIoChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
-   * delete PodIoChaos
+   * delete PodIOChaos
    *
-   * @param name name of the PodIoChaos
+   * @param name name of the PodIOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
     @HTTP(
@@ -5804,14 +7298,14 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedPodIoChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
   /**
-   * delete PodIoChaos
+   * delete PodIOChaos
    *
-   * @param name name of the PodIoChaos
+   * @param name name of the PodIOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -5823,16 +7317,16 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedPodIoChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
-    @QueryMap DeleteNamespacedPodIoChaos queryParameters);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
+    @QueryMap DeleteNamespacedPodIOChaos queryParameters);
 
   /**
-   * delete PodIoChaos
+   * delete PodIOChaos
    *
-   * @param name name of the PodIoChaos
+   * @param name name of the PodIOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -5844,17 +7338,17 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedPodIoChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @QueryMap DeleteNamespacedPodIoChaos queryParameters);
+    @QueryMap DeleteNamespacedPodIOChaos queryParameters);
 
   
-  final class DeleteNamespacedPodIoChaos extends HashMap<String, Object> { 
+  final class DeleteNamespacedPodIOChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public DeleteNamespacedPodIoChaos pretty(String pretty) {
+    public DeleteNamespacedPodIOChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -5862,7 +7356,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public DeleteNamespacedPodIoChaos dryRun(String dryRun) {
+    public DeleteNamespacedPodIOChaos dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -5870,7 +7364,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
      */
-    public DeleteNamespacedPodIoChaos gracePeriodSeconds(Number gracePeriodSeconds) {
+    public DeleteNamespacedPodIOChaos gracePeriodSeconds(Number gracePeriodSeconds) {
       put("gracePeriodSeconds", gracePeriodSeconds);
       return this;
     }
@@ -5878,7 +7372,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
      */
-    public DeleteNamespacedPodIoChaos orphanDependents(Boolean orphanDependents) {
+    public DeleteNamespacedPodIOChaos orphanDependents(Boolean orphanDependents) {
       put("orphanDependents", orphanDependents);
       return this;
     }
@@ -5886,15 +7380,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
      */
-    public DeleteNamespacedPodIoChaos propagationPolicy(String propagationPolicy) {
+    public DeleteNamespacedPodIOChaos propagationPolicy(String propagationPolicy) {
       put("propagationPolicy", propagationPolicy);
       return this;
     }
   } 
   /**
-   * read the specified PodIoChaos
+   * read the specified PodIOChaos
    *
-   * @param name name of the PodIoChaos
+   * @param name name of the PodIOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -5904,14 +7398,14 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<PodIoChaos> readNamespacedPodIoChaos(
+  KubernetesCall<PodIOChaos> readNamespacedPodIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
   /**
-   * read the specified PodIoChaos
+   * read the specified PodIOChaos
    *
-   * @param name name of the PodIoChaos
+   * @param name name of the PodIOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -5921,17 +7415,17 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<PodIoChaos> readNamespacedPodIoChaos(
+  KubernetesCall<PodIOChaos> readNamespacedPodIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @QueryMap ReadNamespacedPodIoChaos queryParameters);
+    @QueryMap ReadNamespacedPodIOChaos queryParameters);
 
   
-  final class ReadNamespacedPodIoChaos extends HashMap<String, Object> { 
+  final class ReadNamespacedPodIOChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ReadNamespacedPodIoChaos pretty(String pretty) {
+    public ReadNamespacedPodIOChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -5939,15 +7433,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ReadNamespacedPodIoChaos resourceVersion(String resourceVersion) {
+    public ReadNamespacedPodIOChaos resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
   } 
   /**
-   * partially update the specified PodIoChaos
+   * partially update the specified PodIOChaos
    *
-   * @param name name of the PodIoChaos
+   * @param name name of the PodIOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -5959,15 +7453,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
-  KubernetesCall<PodIoChaos> patchNamespacedPodIoChaos(
+  KubernetesCall<PodIOChaos> patchNamespacedPodIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body PodIoChaos body);
+    @Body PodIOChaos body);
 
   /**
-   * partially update the specified PodIoChaos
+   * partially update the specified PodIOChaos
    *
-   * @param name name of the PodIoChaos
+   * @param name name of the PodIOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -5979,18 +7473,18 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
-  KubernetesCall<PodIoChaos> patchNamespacedPodIoChaos(
+  KubernetesCall<PodIOChaos> patchNamespacedPodIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body PodIoChaos body, 
-    @QueryMap PatchNamespacedPodIoChaos queryParameters);
+    @Body PodIOChaos body, 
+    @QueryMap PatchNamespacedPodIOChaos queryParameters);
 
   
-  final class PatchNamespacedPodIoChaos extends HashMap<String, Object> { 
+  final class PatchNamespacedPodIOChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public PatchNamespacedPodIoChaos pretty(String pretty) {
+    public PatchNamespacedPodIOChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -5998,7 +7492,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public PatchNamespacedPodIoChaos dryRun(String dryRun) {
+    public PatchNamespacedPodIOChaos dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -6006,15 +7500,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
      */
-    public PatchNamespacedPodIoChaos fieldManager(String fieldManager) {
+    public PatchNamespacedPodIOChaos fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
       return this;
     }
   } 
   /**
-   * replace the specified PodIoChaos
+   * replace the specified PodIOChaos
    *
-   * @param name name of the PodIoChaos
+   * @param name name of the PodIOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -6026,15 +7520,15 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<PodIoChaos> replaceNamespacedPodIoChaos(
+  KubernetesCall<PodIOChaos> replaceNamespacedPodIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body PodIoChaos body);
+    @Body PodIOChaos body);
 
   /**
-   * replace the specified PodIoChaos
+   * replace the specified PodIOChaos
    *
-   * @param name name of the PodIoChaos
+   * @param name name of the PodIOChaos
    * @param namespace object name and auth scope, such as for teams and projects
    */
   @HTTP(
@@ -6046,18 +7540,18 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<PodIoChaos> replaceNamespacedPodIoChaos(
+  KubernetesCall<PodIOChaos> replaceNamespacedPodIOChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body PodIoChaos body, 
-    @QueryMap ReplaceNamespacedPodIoChaos queryParameters);
+    @Body PodIOChaos body, 
+    @QueryMap ReplaceNamespacedPodIOChaos queryParameters);
 
   
-  final class ReplaceNamespacedPodIoChaos extends HashMap<String, Object> { 
+  final class ReplaceNamespacedPodIOChaos extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ReplaceNamespacedPodIoChaos pretty(String pretty) {
+    public ReplaceNamespacedPodIOChaos pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -6065,7 +7559,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
-    public ReplaceNamespacedPodIoChaos dryRun(String dryRun) {
+    public ReplaceNamespacedPodIOChaos dryRun(String dryRun) {
       put("dryRun", dryRun);
       return this;
     }
@@ -6073,7 +7567,194 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
      */
-    public ReplaceNamespacedPodIoChaos fieldManager(String fieldManager) {
+    public ReplaceNamespacedPodIOChaos fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
+   * read status of the specified PodIOChaos
+   *
+   * @param name name of the PodIOChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos/{name}/status"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<PodIOChaos> readNamespacedPodIOChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * read status of the specified PodIOChaos
+   *
+   * @param name name of the PodIOChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos/{name}/status"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<PodIOChaos> readNamespacedPodIOChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap ReadNamespacedPodIOChaosStatus queryParameters);
+
+  
+  final class ReadNamespacedPodIOChaosStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReadNamespacedPodIOChaosStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ReadNamespacedPodIOChaosStatus resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+  } 
+  /**
+   * partially update status of the specified PodIOChaos
+   *
+   * @param name name of the PodIOChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodIOChaos> patchNamespacedPodIOChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodIOChaos body);
+
+  /**
+   * partially update status of the specified PodIOChaos
+   *
+   * @param name name of the PodIOChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodIOChaos> patchNamespacedPodIOChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodIOChaos body, 
+    @QueryMap PatchNamespacedPodIOChaosStatus queryParameters);
+
+  
+  final class PatchNamespacedPodIOChaosStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public PatchNamespacedPodIOChaosStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public PatchNamespacedPodIOChaosStatus dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public PatchNamespacedPodIOChaosStatus fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
+   * replace status of the specified PodIOChaos
+   *
+   * @param name name of the PodIOChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodIOChaos> replaceNamespacedPodIOChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodIOChaos body);
+
+  /**
+   * replace status of the specified PodIOChaos
+   *
+   * @param name name of the PodIOChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podiochaos/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodIOChaos> replaceNamespacedPodIOChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodIOChaos body, 
+    @QueryMap ReplaceNamespacedPodIOChaosStatus queryParameters);
+
+  
+  final class ReplaceNamespacedPodIOChaosStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReplaceNamespacedPodIOChaosStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public ReplaceNamespacedPodIOChaosStatus dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public ReplaceNamespacedPodIOChaosStatus fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
       return this;
     }
@@ -6090,7 +7771,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedPodNetworkChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedPodNetworkChaos(
     @Path("namespace") String namespace);
 
   /**
@@ -6105,7 +7786,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedPodNetworkChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedPodNetworkChaos(
     @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedPodNetworkChaos queryParameters);
 
@@ -6382,10 +8063,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedPodNetworkChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodNetworkChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
    * delete PodNetworkChaos
@@ -6402,7 +8083,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedPodNetworkChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodNetworkChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
@@ -6421,10 +8102,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedPodNetworkChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodNetworkChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
     @QueryMap DeleteNamespacedPodNetworkChaos queryParameters);
 
   /**
@@ -6442,7 +8123,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedPodNetworkChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedPodNetworkChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedPodNetworkChaos queryParameters);
@@ -6677,6 +8358,791 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     }
   } 
   /**
+   * read status of the specified PodNetworkChaos
+   *
+   * @param name name of the PodNetworkChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podnetworkchaos/{name}/status"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<PodNetworkChaos> readNamespacedPodNetworkChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * read status of the specified PodNetworkChaos
+   *
+   * @param name name of the PodNetworkChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podnetworkchaos/{name}/status"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<PodNetworkChaos> readNamespacedPodNetworkChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap ReadNamespacedPodNetworkChaosStatus queryParameters);
+
+  
+  final class ReadNamespacedPodNetworkChaosStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReadNamespacedPodNetworkChaosStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ReadNamespacedPodNetworkChaosStatus resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+  } 
+  /**
+   * partially update status of the specified PodNetworkChaos
+   *
+   * @param name name of the PodNetworkChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podnetworkchaos/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodNetworkChaos> patchNamespacedPodNetworkChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodNetworkChaos body);
+
+  /**
+   * partially update status of the specified PodNetworkChaos
+   *
+   * @param name name of the PodNetworkChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podnetworkchaos/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodNetworkChaos> patchNamespacedPodNetworkChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodNetworkChaos body, 
+    @QueryMap PatchNamespacedPodNetworkChaosStatus queryParameters);
+
+  
+  final class PatchNamespacedPodNetworkChaosStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public PatchNamespacedPodNetworkChaosStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public PatchNamespacedPodNetworkChaosStatus dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public PatchNamespacedPodNetworkChaosStatus fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
+   * replace status of the specified PodNetworkChaos
+   *
+   * @param name name of the PodNetworkChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podnetworkchaos/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodNetworkChaos> replaceNamespacedPodNetworkChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodNetworkChaos body);
+
+  /**
+   * replace status of the specified PodNetworkChaos
+   *
+   * @param name name of the PodNetworkChaos
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/podnetworkchaos/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<PodNetworkChaos> replaceNamespacedPodNetworkChaosStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body PodNetworkChaos body, 
+    @QueryMap ReplaceNamespacedPodNetworkChaosStatus queryParameters);
+
+  
+  final class ReplaceNamespacedPodNetworkChaosStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReplaceNamespacedPodNetworkChaosStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public ReplaceNamespacedPodNetworkChaosStatus dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public ReplaceNamespacedPodNetworkChaosStatus fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
+   * delete collection of Schedule
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedSchedule(
+    @Path("namespace") String namespace);
+
+  /**
+   * delete collection of Schedule
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedSchedule(
+    @Path("namespace") String namespace, 
+    @QueryMap DeleteCollectionNamespacedSchedule queryParameters);
+
+  
+  final class DeleteCollectionNamespacedSchedule extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public DeleteCollectionNamespacedSchedule pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     */
+    public DeleteCollectionNamespacedSchedule allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public DeleteCollectionNamespacedSchedule continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public DeleteCollectionNamespacedSchedule fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public DeleteCollectionNamespacedSchedule labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public DeleteCollectionNamespacedSchedule limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionNamespacedSchedule resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionNamespacedSchedule resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public DeleteCollectionNamespacedSchedule timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public DeleteCollectionNamespacedSchedule watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * list objects of kind Schedule
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<ScheduleList, Schedule> listNamespacedSchedule(
+    @Path("namespace") String namespace);
+
+  /**
+   * list objects of kind Schedule
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<ScheduleList, Schedule> listNamespacedSchedule(
+    @Path("namespace") String namespace, 
+    @QueryMap ListNamespacedSchedule queryParameters);
+
+  
+  final class ListNamespacedSchedule extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ListNamespacedSchedule pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     */
+    public ListNamespacedSchedule allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public ListNamespacedSchedule continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public ListNamespacedSchedule fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public ListNamespacedSchedule labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public ListNamespacedSchedule limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListNamespacedSchedule resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListNamespacedSchedule resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public ListNamespacedSchedule timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public ListNamespacedSchedule watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * create a Schedule
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "POST",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Schedule> createNamespacedSchedule(
+    @Path("namespace") String namespace, 
+    @Body Schedule body);
+
+  /**
+   * create a Schedule
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "POST",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Schedule> createNamespacedSchedule(
+    @Path("namespace") String namespace, 
+    @Body Schedule body, 
+    @QueryMap CreateNamespacedSchedule queryParameters);
+
+  
+  final class CreateNamespacedSchedule extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public CreateNamespacedSchedule pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public CreateNamespacedSchedule dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public CreateNamespacedSchedule fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
+   * delete a Schedule
+   *
+   * @param name name of the Schedule
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedSchedule(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
+
+    /**
+   * delete a Schedule
+   *
+   * @param name name of the Schedule
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+    @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedSchedule(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * delete a Schedule
+   *
+   * @param name name of the Schedule
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedSchedule(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
+    @QueryMap DeleteNamespacedSchedule queryParameters);
+
+  /**
+   * delete a Schedule
+   *
+   * @param name name of the Schedule
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedSchedule(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap DeleteNamespacedSchedule queryParameters);
+
+  
+  final class DeleteNamespacedSchedule extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public DeleteNamespacedSchedule pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public DeleteNamespacedSchedule dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+     */
+    public DeleteNamespacedSchedule gracePeriodSeconds(Number gracePeriodSeconds) {
+      put("gracePeriodSeconds", gracePeriodSeconds);
+      return this;
+    }
+
+    /**
+     * Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+     */
+    public DeleteNamespacedSchedule orphanDependents(Boolean orphanDependents) {
+      put("orphanDependents", orphanDependents);
+      return this;
+    }
+
+    /**
+     * Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+     */
+    public DeleteNamespacedSchedule propagationPolicy(String propagationPolicy) {
+      put("propagationPolicy", propagationPolicy);
+      return this;
+    }
+  } 
+  /**
+   * read the specified Schedule
+   *
+   * @param name name of the Schedule
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<Schedule> readNamespacedSchedule(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * read the specified Schedule
+   *
+   * @param name name of the Schedule
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<Schedule> readNamespacedSchedule(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap ReadNamespacedSchedule queryParameters);
+
+  
+  final class ReadNamespacedSchedule extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReadNamespacedSchedule pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ReadNamespacedSchedule resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+  } 
+  /**
+   * partially update the specified Schedule
+   *
+   * @param name name of the Schedule
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<Schedule> patchNamespacedSchedule(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body Schedule body);
+
+  /**
+   * partially update the specified Schedule
+   *
+   * @param name name of the Schedule
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<Schedule> patchNamespacedSchedule(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body Schedule body, 
+    @QueryMap PatchNamespacedSchedule queryParameters);
+
+  
+  final class PatchNamespacedSchedule extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public PatchNamespacedSchedule pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public PatchNamespacedSchedule dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public PatchNamespacedSchedule fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
+   * replace the specified Schedule
+   *
+   * @param name name of the Schedule
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Schedule> replaceNamespacedSchedule(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body Schedule body);
+
+  /**
+   * replace the specified Schedule
+   *
+   * @param name name of the Schedule
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/chaos-mesh.org/v1alpha1/namespaces/{namespace}/schedules/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Schedule> replaceNamespacedSchedule(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body Schedule body, 
+    @QueryMap ReplaceNamespacedSchedule queryParameters);
+
+  
+  final class ReplaceNamespacedSchedule extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReplaceNamespacedSchedule pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public ReplaceNamespacedSchedule dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public ReplaceNamespacedSchedule fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+  } 
+  /**
    * delete collection of StressChaos
    *
    * @param namespace object name and auth scope, such as for teams and projects
@@ -6688,7 +9154,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedStressChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedStressChaos(
     @Path("namespace") String namespace);
 
   /**
@@ -6703,7 +9169,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedStressChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedStressChaos(
     @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedStressChaos queryParameters);
 
@@ -6980,10 +9446,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedStressChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedStressChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
    * delete StressChaos
@@ -7000,7 +9466,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedStressChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedStressChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
@@ -7019,10 +9485,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedStressChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedStressChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
     @QueryMap DeleteNamespacedStressChaos queryParameters);
 
   /**
@@ -7040,7 +9506,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedStressChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedStressChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedStressChaos queryParameters);
@@ -7286,7 +9752,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedTimeChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedTimeChaos(
     @Path("namespace") String namespace);
 
   /**
@@ -7301,7 +9767,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedTimeChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedTimeChaos(
     @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedTimeChaos queryParameters);
 
@@ -7578,10 +10044,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedTimeChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedTimeChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
    * delete TimeChaos
@@ -7598,7 +10064,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedTimeChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedTimeChaos(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
@@ -7617,10 +10083,10 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedTimeChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedTimeChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
     @QueryMap DeleteNamespacedTimeChaos queryParameters);
 
   /**
@@ -7638,7 +10104,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedTimeChaos(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedTimeChaos(
     @Path("name") String name,
     @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedTimeChaos queryParameters);
@@ -8087,36 +10553,36 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     }
   } 
   /**
-   * list objects of kind PodIoChaos
+   * list objects of kind PodHttpChaos
    */
   @HTTP(
     method = "GET",
-    path = "/apis/chaos-mesh.org/v1alpha1/podiochaos"
+    path = "/apis/chaos-mesh.org/v1alpha1/podhttpchaos"
   )
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesListCall<PodIoChaosList, PodIoChaos> listPodIoChaosForAllNamespaces();
+  KubernetesListCall<PodHttpChaosList, PodHttpChaos> listPodHttpChaosForAllNamespaces();
 
   /**
-   * list objects of kind PodIoChaos
+   * list objects of kind PodHttpChaos
    */
   @HTTP(
     method = "GET",
-    path = "/apis/chaos-mesh.org/v1alpha1/podiochaos"
+    path = "/apis/chaos-mesh.org/v1alpha1/podhttpchaos"
   )
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesListCall<PodIoChaosList, PodIoChaos> listPodIoChaosForAllNamespaces(
-    @QueryMap ListPodIoChaosForAllNamespaces queryParameters);
+  KubernetesListCall<PodHttpChaosList, PodHttpChaos> listPodHttpChaosForAllNamespaces(
+    @QueryMap ListPodHttpChaosForAllNamespaces queryParameters);
 
   
-  final class ListPodIoChaosForAllNamespaces extends HashMap<String, Object> { 
+  final class ListPodHttpChaosForAllNamespaces extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
      */
-    public ListPodIoChaosForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
+    public ListPodHttpChaosForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
       return this;
     }
@@ -8124,7 +10590,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
      */
-    public ListPodIoChaosForAllNamespaces continues(String continues) {
+    public ListPodHttpChaosForAllNamespaces continues(String continues) {
       put("continue", continues);
       return this;
     }
@@ -8132,7 +10598,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their fields. Defaults to everything.
      */
-    public ListPodIoChaosForAllNamespaces fieldSelector(String fieldSelector) {
+    public ListPodHttpChaosForAllNamespaces fieldSelector(String fieldSelector) {
       put("fieldSelector", fieldSelector);
       return this;
     }
@@ -8140,7 +10606,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * A selector to restrict the list of returned objects by their labels. Defaults to everything.
      */
-    public ListPodIoChaosForAllNamespaces labelSelector(String labelSelector) {
+    public ListPodHttpChaosForAllNamespaces labelSelector(String labelSelector) {
       put("labelSelector", labelSelector);
       return this;
     }
@@ -8148,7 +10614,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
      */
-    public ListPodIoChaosForAllNamespaces limit(Number limit) {
+    public ListPodHttpChaosForAllNamespaces limit(Number limit) {
       put("limit", limit);
       return this;
     }
@@ -8156,7 +10622,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * If 'true', then the output is pretty printed.
      */
-    public ListPodIoChaosForAllNamespaces pretty(String pretty) {
+    public ListPodHttpChaosForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
       return this;
     }
@@ -8164,7 +10630,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ListPodIoChaosForAllNamespaces resourceVersion(String resourceVersion) {
+    public ListPodHttpChaosForAllNamespaces resourceVersion(String resourceVersion) {
       put("resourceVersion", resourceVersion);
       return this;
     }
@@ -8172,7 +10638,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
      */
-    public ListPodIoChaosForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
+    public ListPodHttpChaosForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
       put("resourceVersionMatch", resourceVersionMatch);
       return this;
     }
@@ -8180,7 +10646,7 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
-    public ListPodIoChaosForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
+    public ListPodHttpChaosForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
@@ -8188,7 +10654,114 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
     /**
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
-    public ListPodIoChaosForAllNamespaces watch(Boolean watch) {
+    public ListPodHttpChaosForAllNamespaces watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * list objects of kind PodIOChaos
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/podiochaos"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<PodIOChaosList, PodIOChaos> listPodIOChaosForAllNamespaces();
+
+  /**
+   * list objects of kind PodIOChaos
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/podiochaos"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<PodIOChaosList, PodIOChaos> listPodIOChaosForAllNamespaces(
+    @QueryMap ListPodIOChaosForAllNamespaces queryParameters);
+
+  
+  final class ListPodIOChaosForAllNamespaces extends HashMap<String, Object> { 
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     */
+    public ListPodIOChaosForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public ListPodIOChaosForAllNamespaces continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public ListPodIOChaosForAllNamespaces fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public ListPodIOChaosForAllNamespaces labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public ListPodIOChaosForAllNamespaces limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ListPodIOChaosForAllNamespaces pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListPodIOChaosForAllNamespaces resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListPodIOChaosForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public ListPodIOChaosForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public ListPodIOChaosForAllNamespaces watch(Boolean watch) {
       put("watch", watch);
       return this;
     }
@@ -8296,6 +10869,113 @@ public interface ChaosMeshOrgV1alpha1Api extends Api {
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
     public ListPodNetworkChaosForAllNamespaces watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * list objects of kind Schedule
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/schedules"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<ScheduleList, Schedule> listScheduleForAllNamespaces();
+
+  /**
+   * list objects of kind Schedule
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/chaos-mesh.org/v1alpha1/schedules"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<ScheduleList, Schedule> listScheduleForAllNamespaces(
+    @QueryMap ListScheduleForAllNamespaces queryParameters);
+
+  
+  final class ListScheduleForAllNamespaces extends HashMap<String, Object> { 
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     */
+    public ListScheduleForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public ListScheduleForAllNamespaces continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public ListScheduleForAllNamespaces fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public ListScheduleForAllNamespaces labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public ListScheduleForAllNamespaces limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ListScheduleForAllNamespaces pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListScheduleForAllNamespaces resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListScheduleForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public ListScheduleForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public ListScheduleForAllNamespaces watch(Boolean watch) {
       put("watch", watch);
       return this;
     }

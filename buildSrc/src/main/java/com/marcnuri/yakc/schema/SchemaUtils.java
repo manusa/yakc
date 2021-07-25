@@ -48,7 +48,10 @@ public class SchemaUtils {
 
   private static final Map<String, String> REF_MAP = Map.of(
     "#/components/schemas/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1beta1.JSON", OBJECT_PRIMITIVE,
-    "#/components/schemas/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON", OBJECT_PRIMITIVE
+    "#/components/schemas/io.k8s.apiextensions-apiserver.pkg.apis.apiextensions.v1.JSON", OBJECT_PRIMITIVE,
+    // TODO: Added due to wrong OpenAPI spec from ChaosMesh - Try to remove in next release
+    "#/components/schemas/io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions_v2", "com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions",
+    "#/components/schemas/io.k8s.apimachinery.pkg.apis.meta.v1.Status_v2", "com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status"
   );
 
   private static final Map<String, String> REF_SERIALIZER_MAP = Map.of(

@@ -47,6 +47,13 @@ public class DNSChaosSpec implements Model {
   private String action;
 
   /**
+   * ContainerNames indicates list of the name of affected container. If not set, all containers will be injected
+   */
+  @JsonProperty("containerNames")
+  @Singular(value = "addToContainerNames", ignoreNullCollections = true)
+  private List<String> containerNames;
+
+  /**
    * Duration represents the duration of the chaos action
    */
   @JsonProperty("duration")
@@ -66,15 +73,12 @@ public class DNSChaosSpec implements Model {
   @Singular(value = "addToPatterns", ignoreNullCollections = true)
   private List<String> patterns;
 
-  @JsonProperty("scheduler")
-  private DNSChaosSpecScheduler scheduler;
-
   @NonNull
   @JsonProperty("selector")
   private DNSChaosSpecSelector selector;
 
   /**
-   * Value is required when the mode is set to `FixedPodMode` / `FixedPercentPodMod` / `RandomMaxPercentPodMod`. If `FixedPodMode`, provide an integer of pods to do chaos action. If `FixedPercentPodMod`, provide a number from 0-100 to specify the percent of pods the server can do chaos action. If `RandomMaxPercentPodMod`, provide a number from 0-100 to specify the max percent of pods to do chaos action
+   * Value is required when the mode is set to `FixedPodMode` / `FixedPercentPodMod` / `RandomMaxPercentPodMod`. If `FixedPodMode`, provide an integer of pods to do chaos action. If `FixedPercentPodMod`, provide a number from 0-100 to specify the percent of pods the server can do chaos action. IF `RandomMaxPercentPodMod`,  provide a number from 0-100 to specify the max percent of pods to do chaos action
    */
   @JsonProperty("value")
   private String value;

@@ -37,7 +37,6 @@ import lombok.ToString;
 public class NetworkChaosSpecLoss implements Model {
 
 
-  @NonNull
   @JsonProperty("correlation")
   private String correlation;
 

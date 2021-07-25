@@ -58,7 +58,7 @@ public class PodNetworkChaos implements Model {
   private PodNetworkChaosSpec spec;
 
   @JsonProperty("status")
-  private DNSChaosStatus status;
+  private PodNetworkChaosStatus status;
 
 }
 

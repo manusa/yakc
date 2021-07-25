@@ -18,7 +18,7 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,24 +40,34 @@ public class HTTPChaosSpec implements Model {
 
 
   /**
-   * Action defines the specific pod chaos action. Supported action: delay | abort | mixed Default action: delay
+   * Abort is a rule to abort a http session.
    */
-  @NonNull
-  @JsonProperty("action")
-  private String action;
+  @JsonProperty("abort")
+  private Boolean abort;
 
   /**
-   * Duration represents the duration of the chaos action. It is required when the action is `PodFailureAction`. A duration string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "-1.5h" or "2h45m". Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+   * Code is a rule to select target by http status code in response.
+   */
+  @JsonProperty("code")
+  private Number code;
+
+  /**
+   * Delay represents the delay of the target request/response. A duration string is a possibly unsigned sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "2h45m". Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
+   */
+  @JsonProperty("delay")
+  private String delay;
+
+  /**
+   * Duration represents the duration of the chaos action.
    */
   @JsonProperty("duration")
   private String duration;
 
   /**
-   * Specifies how the header match will be performed to route the request.
+   * Method is a rule to select target by http method in request.
    */
-  @JsonProperty("headers")
-  @Singular(value = "addToHeaders", ignoreNullCollections = true)
-  private List<HTTPChaosSpecHeaders> headers;
+  @JsonProperty("method")
+  private String method;
 
   /**
    * Mode defines the mode to run chaos action. Supported mode: one / all / fixed / fixed-percent / random-max-percent
@@ -66,18 +76,48 @@ public class HTTPChaosSpec implements Model {
   @JsonProperty("mode")
   private String mode;
 
-  /**
-   * Percent defines the percentage of injection errors and provides a number from 0-100. default: 100.
-   */
-  @JsonProperty("percent")
-  private String percent;
+  @JsonProperty("patch")
+  private HTTPChaosSpecPatch patch;
 
-  @JsonProperty("scheduler")
-  private HTTPChaosSpecScheduler scheduler;
+  /**
+   * Path is a rule to select target by uri path in http request.
+   */
+  @JsonProperty("path")
+  private String path;
+
+  /**
+   * Port represents the target port to be proxy of.
+   */
+  @JsonProperty("port")
+  private Number port;
+
+  @JsonProperty("replace")
+  private HTTPChaosSpecReplace replace;
+
+  /**
+   * RequestHeaders is a rule to select target by http headers in request. The key-value pairs represent header name and header value pairs.
+   */
+  @JsonProperty("request_headers")
+  @Singular(value = "putInRequest_headers", ignoreNullCollections = true)
+  private Map<String, String> request_headers;
+
+  /**
+   * ResponseHeaders is a rule to select target by http headers in response. The key-value pairs represent header name and header value pairs.
+   */
+  @JsonProperty("response_headers")
+  @Singular(value = "putInResponse_headers", ignoreNullCollections = true)
+  private Map<String, String> response_headers;
 
   @NonNull
   @JsonProperty("selector")
   private DNSChaosSpecSelector selector;
+
+  /**
+   * Target is the object to be selected and injected.
+   */
+  @NonNull
+  @JsonProperty("target")
+  private String target;
 
   /**
    * Value is required when the mode is set to `FixedPodMode` / `FixedPercentPodMod` / `RandomMaxPercentPodMod`. If `FixedPodMode`, provide an integer of pods to do chaos action. If `FixedPercentPodMod`, provide a number from 0-100 to specify the percent of pods the server can do chaos action. IF `RandomMaxPercentPodMod`,  provide a number from 0-100 to specify the max percent of pods to do chaos action

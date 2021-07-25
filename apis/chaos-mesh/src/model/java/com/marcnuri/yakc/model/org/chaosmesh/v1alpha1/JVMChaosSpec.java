@@ -18,6 +18,7 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -47,6 +48,13 @@ public class JVMChaosSpec implements Model {
   private String action;
 
   /**
+   * ContainerNames indicates list of the name of affected container. If not set, all containers will be injected
+   */
+  @JsonProperty("containerNames")
+  @Singular(value = "addToContainerNames", ignoreNullCollections = true)
+  private List<String> containerNames;
+
+  /**
    * Duration represents the duration of the chaos action
    */
   @JsonProperty("duration")
@@ -73,9 +81,6 @@ public class JVMChaosSpec implements Model {
   @JsonProperty("mode")
   private String mode;
 
-  @JsonProperty("scheduler")
-  private AwsChaosSpecScheduler scheduler;
-
   @NonNull
   @JsonProperty("selector")
   private DNSChaosSpecSelector selector;
@@ -88,7 +93,7 @@ public class JVMChaosSpec implements Model {
   private String target;
 
   /**
-   * Value is required when the mode is set to `FixedPodMode` / `FixedPercentPodMod` / `RandomMaxPercentPodMod`. If `FixedPodMode`, provide an integer of pods to do chaos action. If `FixedPercentPodMod`, provide a number from 0-100 to specify the max % of pods the server can do chaos action. If `RandomMaxPercentPodMod`,  provide a number from 0-100 to specify the % of pods to do chaos action
+   * Value is required when the mode is set to `FixedPodMode` / `FixedPercentPodMod` / `RandomMaxPercentPodMod`. If `FixedPodMode`, provide an integer of pods to do chaos action. If `FixedPercentPodMod`, provide a number from 0-100 to specify the percent of pods the server can do chaos action. IF `RandomMaxPercentPodMod`,  provide a number from 0-100 to specify the max percent of pods to do chaos action
    */
   @JsonProperty("value")
   private String value;
