@@ -18,13 +18,11 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Singular;
 import lombok.ToString;
 
 /**
@@ -49,10 +47,8 @@ public class PodNetworkChaosSpecIptables implements Model {
   /**
    * The name of related ipset
    */
-  @NonNull
   @JsonProperty("ipsets")
-  @Singular(value = "addToIpsets", ignoreNullCollections = true)
-  private List<String> ipsets;
+  private Object ipsets;
 
   /**
    * The name of iptables chain

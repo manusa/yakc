@@ -18,6 +18,7 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,12 +40,16 @@ import lombok.ToString;
 public class StressChaosStatus implements Model {
 
 
+  /**
+   * Conditions represents the current global condition of the chaos
+   */
+  @JsonProperty("conditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
+  private List<AWSChaosStatusConditions> conditions;
+
   @NonNull
   @JsonProperty("experiment")
-  private AwsChaosStatusExperiment experiment;
-
-  @JsonProperty("failedMessage")
-  private String failedMessage;
+  private AWSChaosStatusExperiment experiment;
 
   /**
    * Instances always specifies stressing instances
@@ -52,9 +57,6 @@ public class StressChaosStatus implements Model {
   @JsonProperty("instances")
   @Singular(value = "putInInstances", ignoreNullCollections = true)
   private Map<String, StressChaosStatusInstances> instances;
-
-  @JsonProperty("scheduler")
-  private AwsChaosStatusScheduler scheduler;
 
 }
 

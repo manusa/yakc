@@ -18,11 +18,13 @@ package com.marcnuri.yakc.model.org.chaosmesh.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Singular;
 import lombok.ToString;
 
 /**
@@ -45,10 +47,11 @@ public class PodChaosSpec implements Model {
   private String action;
 
   /**
-   * ContainerName indicates the name of the container. Needed in container-kill.
+   * ContainerNames indicates list of the name of affected container. If not set, all containers will be injected
    */
-  @JsonProperty("containerName")
-  private String containerName;
+  @JsonProperty("containerNames")
+  @Singular(value = "addToContainerNames", ignoreNullCollections = true)
+  private List<String> containerNames;
 
   /**
    * Duration represents the duration of the chaos action. It is required when the action is `PodFailureAction`. A duration string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "-1.5h" or "2h45m". Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
@@ -68,9 +71,6 @@ public class PodChaosSpec implements Model {
   @NonNull
   @JsonProperty("mode")
   private String mode;
-
-  @JsonProperty("scheduler")
-  private HTTPChaosSpecScheduler scheduler;
 
   @NonNull
   @JsonProperty("selector")
