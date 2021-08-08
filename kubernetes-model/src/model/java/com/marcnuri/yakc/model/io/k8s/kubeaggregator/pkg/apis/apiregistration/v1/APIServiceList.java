@@ -47,6 +47,9 @@ public class APIServiceList implements Model, ListModel<APIService> {
   @JsonProperty("apiVersion")
   private String apiVersion;
 
+  /**
+   * Items is the list of APIService
+   */
   @NonNull
   @JsonProperty("items")
   @Singular(value = "addToItems", ignoreNullCollections = true)

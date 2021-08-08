@@ -47,6 +47,9 @@ public class StatefulSetList implements Model, ListModel<StatefulSet> {
   @JsonProperty("apiVersion")
   private String apiVersion;
 
+  /**
+   * Items is the list of stateful sets.
+   */
   @NonNull
   @JsonProperty("items")
   @Singular(value = "addToItems", ignoreNullCollections = true)

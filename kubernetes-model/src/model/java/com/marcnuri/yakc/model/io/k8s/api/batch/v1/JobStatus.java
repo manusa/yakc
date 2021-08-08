@@ -76,5 +76,8 @@ public class JobStatus implements Model {
   @JsonProperty("succeeded")
   private Number succeeded;
 
+  @JsonProperty("uncountedTerminatedPods")
+  private UncountedTerminatedPods uncountedTerminatedPods;
+
 }
 

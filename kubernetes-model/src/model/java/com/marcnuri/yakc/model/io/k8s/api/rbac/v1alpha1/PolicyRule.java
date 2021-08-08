@@ -61,14 +61,14 @@ public class PolicyRule implements Model {
   private List<String> resourceNames;
 
   /**
-   * Resources is a list of resources this rule applies to.  ResourceAll represents all resources.
+   * Resources is a list of resources this rule applies to. '&#42;' represents all resources.
    */
   @JsonProperty("resources")
   @Singular(value = "addToResources", ignoreNullCollections = true)
   private List<String> resources;
 
   /**
-   * Verbs is a list of Verbs that apply to ALL the ResourceKinds and AttributeRestrictions contained in this rule.  VerbAll represents all kinds.
+   * Verbs is a list of Verbs that apply to ALL the ResourceKinds and AttributeRestrictions contained in this rule. '&#42;' represents all verbs.
    */
   @NonNull
   @JsonProperty("verbs")

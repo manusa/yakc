@@ -47,6 +47,9 @@ public class PodDisruptionBudgetList implements Model, ListModel<PodDisruptionBu
   @JsonProperty("apiVersion")
   private String apiVersion;
 
+  /**
+   * items list individual PodDisruptionBudget objects
+   */
   @NonNull
   @JsonProperty("items")
   @Singular(value = "addToItems", ignoreNullCollections = true)
