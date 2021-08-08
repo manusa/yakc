@@ -51,6 +51,12 @@ public class CertificateStatusConditions implements Model {
   private String message;
 
   /**
+   * If set, this represents the .metadata.generation that the condition was set based upon. For instance, if .metadata.generation is currently 12, but the .status.condition[x].observedGeneration is 9, the condition is out of date with respect to the current state of the Certificate.
+   */
+  @JsonProperty("observedGeneration")
+  private Number observedGeneration;
+
+  /**
    * Reason is a brief machine readable explanation for the condition's last transition.
    */
   @JsonProperty("reason")

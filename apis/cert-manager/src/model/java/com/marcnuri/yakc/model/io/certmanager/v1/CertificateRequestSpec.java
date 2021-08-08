@@ -19,6 +19,7 @@ package com.marcnuri.yakc.model.io.certmanager.v1;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
 import java.util.List;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,6 +47,20 @@ public class CertificateRequestSpec implements Model {
   private String duration;
 
   /**
+   * Extra contains extra attributes of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+   */
+  @JsonProperty("extra")
+  @Singular(value = "putInExtra", ignoreNullCollections = true)
+  private Map<String, List<String>> extra;
+
+  /**
+   * Groups contains group membership of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+   */
+  @JsonProperty("groups")
+  @Singular(value = "addToGroups", ignoreNullCollections = true)
+  private List<String> groups;
+
+  /**
    * IsCA will request to mark the certificate as valid for certificate signing when submitting to the issuer. This will automatically add the `cert sign` usage to the list of `usages`.
    */
   @JsonProperty("isCA")
@@ -63,11 +78,23 @@ public class CertificateRequestSpec implements Model {
   private String request;
 
   /**
+   * UID contains the uid of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+   */
+  @JsonProperty("uid")
+  private String uid;
+
+  /**
    * Usages is the set of x509 usages that are requested for the certificate. If usages are set they SHOULD be encoded inside the CSR spec Defaults to `digital signature` and `key encipherment` if not specified.
    */
   @JsonProperty("usages")
   @Singular(value = "addToUsages", ignoreNullCollections = true)
   private List<String> usages;
+
+  /**
+   * Username contains the name of the user that created the CertificateRequest. Populated by the cert-manager webhook on creation and immutable.
+   */
+  @JsonProperty("username")
+  private String username;
 
 }
 
