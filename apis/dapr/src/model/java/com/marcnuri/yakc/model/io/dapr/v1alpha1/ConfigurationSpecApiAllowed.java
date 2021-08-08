@@ -18,17 +18,15 @@ package com.marcnuri.yakc.model.io.dapr.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Singular;
 import lombok.ToString;
 
 /**
- * SubscriptionSpec is the spec for an event subscription
+ * APIAccessRule describes an access rule for allowing a Dapr API to be enabled and accessible by an app
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -36,24 +34,19 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class SubscriptionSpec implements Model {
+public class ConfigurationSpecApiAllowed implements Model {
 
-
-  @JsonProperty("metadata")
-  @Singular(value = "putInMetadata", ignoreNullCollections = true)
-  private Map<String, String> metadata;
 
   @NonNull
-  @JsonProperty("pubsubname")
-  private String pubsubname;
+  @JsonProperty("name")
+  private String name;
+
+  @JsonProperty("protocol")
+  private String protocol;
 
   @NonNull
-  @JsonProperty("route")
-  private String route;
-
-  @NonNull
-  @JsonProperty("topic")
-  private String topic;
+  @JsonProperty("version")
+  private String version;
 
 }
 

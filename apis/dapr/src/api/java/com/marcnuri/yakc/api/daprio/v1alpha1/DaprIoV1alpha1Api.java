@@ -25,8 +25,6 @@ import com.marcnuri.yakc.model.io.dapr.v1alpha1.Configuration;
 import com.marcnuri.yakc.model.io.dapr.v1alpha1.ConfigurationList;
 import com.marcnuri.yakc.model.io.dapr.v1alpha1.Subscription;
 import com.marcnuri.yakc.model.io.dapr.v1alpha1.SubscriptionList;
-import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions;
-import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import java.util.HashMap;
 import retrofit2.http.Body;
 import retrofit2.http.HTTP;
@@ -262,7 +260,7 @@ public interface DaprIoV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedComponent(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedComponent(
     @Path("namespace") String namespace);
 
   /**
@@ -277,7 +275,7 @@ public interface DaprIoV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedComponent(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedComponent(
     @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedComponent queryParameters);
 
@@ -554,10 +552,10 @@ public interface DaprIoV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedComponent(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedComponent(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
    * delete a Component
@@ -574,7 +572,7 @@ public interface DaprIoV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedComponent(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedComponent(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
@@ -593,10 +591,10 @@ public interface DaprIoV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedComponent(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedComponent(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
     @QueryMap DeleteNamespacedComponent queryParameters);
 
   /**
@@ -614,7 +612,7 @@ public interface DaprIoV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedComponent(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedComponent(
     @Path("name") String name,
     @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedComponent queryParameters);
@@ -860,7 +858,7 @@ public interface DaprIoV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedConfiguration(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedConfiguration(
     @Path("namespace") String namespace);
 
   /**
@@ -875,7 +873,7 @@ public interface DaprIoV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedConfiguration(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedConfiguration(
     @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedConfiguration queryParameters);
 
@@ -1152,10 +1150,10 @@ public interface DaprIoV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedConfiguration(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedConfiguration(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
    * delete a Configuration
@@ -1172,7 +1170,7 @@ public interface DaprIoV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedConfiguration(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedConfiguration(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
@@ -1191,10 +1189,10 @@ public interface DaprIoV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedConfiguration(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedConfiguration(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
     @QueryMap DeleteNamespacedConfiguration queryParameters);
 
   /**
@@ -1212,7 +1210,7 @@ public interface DaprIoV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedConfiguration(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedConfiguration(
     @Path("name") String name,
     @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedConfiguration queryParameters);
@@ -1458,7 +1456,7 @@ public interface DaprIoV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedSubscription(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedSubscription(
     @Path("namespace") String namespace);
 
   /**
@@ -1473,7 +1471,7 @@ public interface DaprIoV1alpha1Api extends Api {
   @Headers({ 
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteCollectionNamespacedSubscription(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteCollectionNamespacedSubscription(
     @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedSubscription queryParameters);
 
@@ -1750,10 +1748,10 @@ public interface DaprIoV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedSubscription(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedSubscription(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body);
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body);
 
     /**
    * delete a Subscription
@@ -1770,7 +1768,7 @@ public interface DaprIoV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedSubscription(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedSubscription(
     @Path("name") String name,
     @Path("namespace") String namespace);
 
@@ -1789,10 +1787,10 @@ public interface DaprIoV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedSubscription(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedSubscription(
     @Path("name") String name,
     @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
+    @Body com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions body, 
     @QueryMap DeleteNamespacedSubscription queryParameters);
 
   /**
@@ -1810,7 +1808,7 @@ public interface DaprIoV1alpha1Api extends Api {
     "Content-Type: application/json",
     "Accept: */*"
   })
-  KubernetesCall<Status> deleteNamespacedSubscription(
+  KubernetesCall<com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status> deleteNamespacedSubscription(
     @Path("name") String name,
     @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedSubscription queryParameters);

@@ -18,17 +18,15 @@ package com.marcnuri.yakc.model.io.dapr.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Singular;
 import lombok.ToString;
 
 /**
- * SubscriptionSpec is the spec for an event subscription
+ * FeatureSpec defines the features that are enabled/disabled
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -36,24 +34,16 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class SubscriptionSpec implements Model {
+public class ConfigurationSpecFeatures implements Model {
 
-
-  @JsonProperty("metadata")
-  @Singular(value = "putInMetadata", ignoreNullCollections = true)
-  private Map<String, String> metadata;
 
   @NonNull
-  @JsonProperty("pubsubname")
-  private String pubsubname;
+  @JsonProperty("enabled")
+  private Boolean enabled;
 
   @NonNull
-  @JsonProperty("route")
-  private String route;
-
-  @NonNull
-  @JsonProperty("topic")
-  private String topic;
+  @JsonProperty("name")
+  private String name;
 
 }
 

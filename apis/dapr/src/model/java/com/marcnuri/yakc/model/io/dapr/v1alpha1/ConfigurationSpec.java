@@ -18,10 +18,12 @@ package com.marcnuri.yakc.model.io.dapr.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Singular;
 import lombok.ToString;
 
 /**
@@ -39,6 +41,13 @@ public class ConfigurationSpec implements Model {
   @JsonProperty("accessControl")
   private ConfigurationSpecAccessControl accessControl;
 
+  @JsonProperty("api")
+  private ConfigurationSpecApi api;
+
+  @JsonProperty("features")
+  @Singular(value = "addToFeatures", ignoreNullCollections = true)
+  private List<ConfigurationSpecFeatures> features;
+
   @JsonProperty("httpPipeline")
   private ConfigurationSpecHttpPipeline httpPipeline;
 
@@ -47,6 +56,9 @@ public class ConfigurationSpec implements Model {
 
   @JsonProperty("mtls")
   private ConfigurationSpecMtls mtls;
+
+  @JsonProperty("nameResolution")
+  private ConfigurationSpecNameResolution nameResolution;
 
   @JsonProperty("secrets")
   private ConfigurationSpecSecrets secrets;
