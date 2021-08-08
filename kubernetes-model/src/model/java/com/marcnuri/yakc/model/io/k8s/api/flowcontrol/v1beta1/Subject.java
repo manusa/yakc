@@ -41,7 +41,7 @@ public class Subject implements Model {
   private GroupSubject group;
 
   /**
-   * Required
+   * `kind` indicates which one of the other fields is non-empty. Required
    */
   @NonNull
   @JsonProperty("kind")

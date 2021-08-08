@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * 
+ * SelfSubjectRulesReviewSpec defines the specification for SelfSubjectRulesReview.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")

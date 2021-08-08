@@ -246,7 +246,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListClusterRoleBinding allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -857,7 +857,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListClusterRole allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -1486,7 +1486,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListNamespacedRoleBinding allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -2141,7 +2141,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListNamespacedRole allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -2612,7 +2612,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class ListRoleBindingForAllNamespaces extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListRoleBindingForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -2719,7 +2719,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class ListRoleForAllNamespaces extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListRoleForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -2826,7 +2826,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class WatchClusterRoleBindingList extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchClusterRoleBindingList allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -2939,7 +2939,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class WatchClusterRoleBinding extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchClusterRoleBinding allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -3046,7 +3046,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class WatchClusterRoleList extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchClusterRoleList allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -3159,7 +3159,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class WatchClusterRole extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchClusterRole allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -3272,7 +3272,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class WatchNamespacedRoleBindingList extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchNamespacedRoleBindingList allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -3389,7 +3389,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class WatchNamespacedRoleBinding extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchNamespacedRoleBinding allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -3502,7 +3502,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class WatchNamespacedRoleList extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchNamespacedRoleList allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -3619,7 +3619,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class WatchNamespacedRole extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchNamespacedRole allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -3726,7 +3726,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class WatchRoleBindingListForAllNamespaces extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchRoleBindingListForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -3833,7 +3833,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class WatchRoleListForAllNamespaces extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchRoleListForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);

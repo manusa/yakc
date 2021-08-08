@@ -26,7 +26,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the Node.
+ * ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a config source for the Node. This API is deprecated since 1.22: https://git.k8s.io/enhancements/keps/sig-node/281-dynamic-kubelet-configuration
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")

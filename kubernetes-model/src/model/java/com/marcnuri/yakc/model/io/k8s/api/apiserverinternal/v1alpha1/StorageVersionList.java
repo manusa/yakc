@@ -47,6 +47,9 @@ public class StorageVersionList implements Model, ListModel<StorageVersion> {
   @JsonProperty("apiVersion")
   private String apiVersion;
 
+  /**
+   * Items holds a list of StorageVersion
+   */
   @NonNull
   @JsonProperty("items")
   @Singular(value = "addToItems", ignoreNullCollections = true)

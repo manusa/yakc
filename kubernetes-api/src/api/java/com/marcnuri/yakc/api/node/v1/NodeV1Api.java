@@ -240,7 +240,7 @@ public interface NodeV1Api extends Api {
     }
 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListRuntimeClass allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -685,7 +685,7 @@ public interface NodeV1Api extends Api {
   
   final class WatchRuntimeClassList extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchRuntimeClassList allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -798,7 +798,7 @@ public interface NodeV1Api extends Api {
   
   final class WatchRuntimeClass extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchRuntimeClass allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);

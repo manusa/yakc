@@ -83,7 +83,7 @@ public interface AppsV1Api extends Api {
   
   final class ListControllerRevisionForAllNamespaces extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListControllerRevisionForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -190,7 +190,7 @@ public interface AppsV1Api extends Api {
   
   final class ListDaemonSetForAllNamespaces extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListDaemonSetForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -297,7 +297,7 @@ public interface AppsV1Api extends Api {
   
   final class ListDeploymentForAllNamespaces extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListDeploymentForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -588,7 +588,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListNamespacedControllerRevision allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -1243,7 +1243,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListNamespacedDaemonSet allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -2085,7 +2085,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListNamespacedDeployment allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -3114,7 +3114,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListNamespacedReplicaSet allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -4143,7 +4143,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListNamespacedStatefulSet allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -4988,7 +4988,7 @@ public interface AppsV1Api extends Api {
   
   final class ListReplicaSetForAllNamespaces extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListReplicaSetForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -5095,7 +5095,7 @@ public interface AppsV1Api extends Api {
   
   final class ListStatefulSetForAllNamespaces extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public ListStatefulSetForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -5202,7 +5202,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchControllerRevisionListForAllNamespaces extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchControllerRevisionListForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -5309,7 +5309,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchDaemonSetListForAllNamespaces extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchDaemonSetListForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -5416,7 +5416,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchDeploymentListForAllNamespaces extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchDeploymentListForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -5529,7 +5529,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchNamespacedControllerRevisionList extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchNamespacedControllerRevisionList allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -5646,7 +5646,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchNamespacedControllerRevision extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchNamespacedControllerRevision allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -5759,7 +5759,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchNamespacedDaemonSetList extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchNamespacedDaemonSetList allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -5876,7 +5876,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchNamespacedDaemonSet extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchNamespacedDaemonSet allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -5989,7 +5989,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchNamespacedDeploymentList extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchNamespacedDeploymentList allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -6106,7 +6106,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchNamespacedDeployment extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchNamespacedDeployment allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -6219,7 +6219,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchNamespacedReplicaSetList extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchNamespacedReplicaSetList allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -6336,7 +6336,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchNamespacedReplicaSet extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchNamespacedReplicaSet allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -6449,7 +6449,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchNamespacedStatefulSetList extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchNamespacedStatefulSetList allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -6566,7 +6566,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchNamespacedStatefulSet extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchNamespacedStatefulSet allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -6673,7 +6673,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchReplicaSetListForAllNamespaces extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchReplicaSetListForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);
@@ -6780,7 +6780,7 @@ public interface AppsV1Api extends Api {
   
   final class WatchStatefulSetListForAllNamespaces extends HashMap<String, Object> { 
     /**
-     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
     public WatchStatefulSetListForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
       put("allowWatchBookmarks", allowWatchBookmarks);

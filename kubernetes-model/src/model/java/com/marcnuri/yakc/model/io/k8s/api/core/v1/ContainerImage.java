@@ -23,7 +23,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Singular;
 import lombok.ToString;
 
@@ -42,7 +41,6 @@ public class ContainerImage implements Model {
   /**
    * Names by which this image is known. e.g. ["k8s.gcr.io/hyperkube:v1.0.7", "dockerhub.io/google_containers/hyperkube:v1.0.7"]
    */
-  @NonNull
   @JsonProperty("names")
   @Singular(value = "addToNames", ignoreNullCollections = true)
   private List<String> names;

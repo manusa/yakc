@@ -41,6 +41,12 @@ public class CertificateSigningRequestSpec implements Model {
 
 
   /**
+   * expirationSeconds is the requested duration of validity of the issued certificate. The certificate signer may issue a certificate with a different validity duration so a client must check the delta between the notBefore and and notAfter fields in the issued certificate to determine the actual duration.<br><p> <br><p> The v1.22+ in-tree implementations of the well-known Kubernetes signers will honor this field as long as the requested duration is not greater than the maximum duration they will honor per the --cluster-signing-duration CLI flag to the Kubernetes controller manager.<br><p> <br><p> Certificate signers may not honor this field for various reasons:<br><p> <br><p>   1. Old signer that is unaware of the field (such as the in-tree<br><p>      implementations prior to v1.22)<br><p>   2. Signer whose configured maximum is shorter than the requested duration<br><p>   3. Signer whose configured minimum is longer than the requested duration<br><p> <br><p> The minimum valid value for expirationSeconds is 600, i.e. 10 minutes.<br><p> <br><p> As of v1.22, this field is beta and is controlled via the CSRDuration feature gate.
+   */
+  @JsonProperty("expirationSeconds")
+  private Number expirationSeconds;
+
+  /**
    * extra contains extra attributes of the user that created the CertificateSigningRequest. Populated by the API server on creation and immutable.
    */
   @JsonProperty("extra")
