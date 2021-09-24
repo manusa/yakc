@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.dapr.v1alpha1;
+package com.marcnuri.yakc.model.io.dapr.v2alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
@@ -39,18 +39,27 @@ import lombok.ToString;
 public class SubscriptionSpec implements Model {
 
 
+  /**
+   * The optional metadata to provide the the subscription.
+   */
   @JsonProperty("metadata")
   @Singular(value = "putInMetadata", ignoreNullCollections = true)
   private Map<String, String> metadata;
 
+  /**
+   * The PubSub component name.
+   */
   @NonNull
   @JsonProperty("pubsubname")
   private String pubsubname;
 
   @NonNull
-  @JsonProperty("route")
-  private String route;
+  @JsonProperty("routes")
+  private SubscriptionSpecRoutes routes;
 
+  /**
+   * The topic name to subscribe to.
+   */
   @NonNull
   @JsonProperty("topic")
   private String topic;

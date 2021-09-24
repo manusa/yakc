@@ -14,21 +14,19 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.dapr.v1alpha1;
+package com.marcnuri.yakc.model.io.dapr.v2alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Singular;
 import lombok.ToString;
 
 /**
- * SubscriptionSpec is the spec for an event subscription.
+ * Rule is used to specify the condition for sending a message to a specific path.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -36,24 +34,22 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class SubscriptionSpec implements Model {
+public class SubscriptionSpecRoutesRules implements Model {
 
 
-  @JsonProperty("metadata")
-  @Singular(value = "putInMetadata", ignoreNullCollections = true)
-  private Map<String, String> metadata;
-
+  /**
+   * The optional CEL expression used to match the event. If the match is not specified, then the route is considered the default. The rules are tested in the order specified, so they should be define from most-to-least specific. The default route should appear last in the list.
+   */
   @NonNull
-  @JsonProperty("pubsubname")
-  private String pubsubname;
+  @JsonProperty("match")
+  private String match;
 
+  /**
+   * The path for events that match this rule.
+   */
   @NonNull
-  @JsonProperty("route")
-  private String route;
-
-  @NonNull
-  @JsonProperty("topic")
-  private String topic;
+  @JsonProperty("path")
+  private String path;
 
 }
 

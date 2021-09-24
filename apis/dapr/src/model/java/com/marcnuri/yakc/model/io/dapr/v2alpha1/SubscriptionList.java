@@ -14,21 +14,23 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.dapr.v1alpha1;
+package com.marcnuri.yakc.model.io.dapr.v2alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.marcnuri.yakc.model.ListModel;
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Singular;
 import lombok.ToString;
 
 /**
- * Subscription describes an pub/sub event subscription.
+ * SubscriptionList is a list of Subscription
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -36,7 +38,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class Subscription implements Model {
+public class SubscriptionList implements Model, ListModel<Subscription> {
 
 
   /**
@@ -46,20 +48,21 @@ public class Subscription implements Model {
   private String apiVersion;
 
   /**
+   * List of subscriptions. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md
+   */
+  @NonNull
+  @JsonProperty("items")
+  @Singular(value = "addToItems", ignoreNullCollections = true)
+  private List<Subscription> items;
+
+  /**
    * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
    */
   @JsonProperty("kind")
   private String kind;
 
   @JsonProperty("metadata")
-  private ObjectMeta metadata;
-
-  @JsonProperty("scopes")
-  @Singular(value = "addToScopes", ignoreNullCollections = true)
-  private List<String> scopes;
-
-  @JsonProperty("spec")
-  private SubscriptionSpec spec;
+  private ListMeta metadata;
 
 }
 

@@ -14,21 +14,20 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.dapr.v1alpha1;
+package com.marcnuri.yakc.model.io.dapr.v2alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import java.util.Map;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Singular;
 import lombok.ToString;
 
 /**
- * SubscriptionSpec is the spec for an event subscription.
+ * The Routes configuration for this topic.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -36,24 +35,18 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class SubscriptionSpec implements Model {
+public class SubscriptionSpecRoutes implements Model {
 
 
-  @JsonProperty("metadata")
-  @Singular(value = "putInMetadata", ignoreNullCollections = true)
-  private Map<String, String> metadata;
+  @JsonProperty("default")
+  private String defaults;
 
-  @NonNull
-  @JsonProperty("pubsubname")
-  private String pubsubname;
-
-  @NonNull
-  @JsonProperty("route")
-  private String route;
-
-  @NonNull
-  @JsonProperty("topic")
-  private String topic;
+  /**
+   * The list of rules for this topic.
+   */
+  @JsonProperty("rules")
+  @Singular(value = "addToRules", ignoreNullCollections = true)
+  private List<SubscriptionSpecRoutesRules> rules;
 
 }
 

@@ -154,7 +154,7 @@ Chaos Mesh is chaos engineering platform that orchestrates chaos on Kubernetes e
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/dapr)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[Dapr](https://dapr.io/) - Distributed Application Runtime (1.3.0).
+[Dapr](https://dapr.io/) - Distributed Application Runtime (1.0.1 - 1.4.1).
 
 Dapr is a portable, event-driven, runtime for building distributed applications across cloud and edge.
 
