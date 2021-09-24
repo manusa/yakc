@@ -42,6 +42,12 @@ public class EnvoyFilterSpecMatchListenerFilterChain implements Model {
   @JsonProperty("applicationProtocols")
   private String applicationProtocols;
 
+  /**
+   * The destination_port value used by a filter chain's match condition.
+   */
+  @JsonProperty("destinationPort")
+  private Number destinationPort;
+
   @JsonProperty("filter")
   private EnvoyFilterSpecMatchListenerFilterChainFilter filter;
 
@@ -58,7 +64,7 @@ public class EnvoyFilterSpecMatchListenerFilterChain implements Model {
   private String sni;
 
   /**
-   * Applies only to SIDECAR_INBOUND context.
+   * Applies only to `SIDECAR_INBOUND` context.
    */
   @JsonProperty("transportProtocol")
   private String transportProtocol;

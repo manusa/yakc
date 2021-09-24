@@ -37,6 +37,12 @@ public class EnvoyFilterSpecPatch implements Model {
 
 
   /**
+   * Determines the filter insertion order.
+   */
+  @JsonProperty("filterClass")
+  private String filterClass;
+
+  /**
    * Determines how the patch should be applied.
    */
   @JsonProperty("operation")

@@ -16,10 +16,13 @@
 
 package com.marcnuri.yakc.model.io.istio.networking.v1alpha3;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -28,10 +31,32 @@ import lombok.ToString;
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 @ToString
 public class EnvoyFilter implements Model {
 
+
+  /**
+   * APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+   */
+  @JsonProperty("apiVersion")
+  private String apiVersion;
+
+  /**
+   * Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+   */
+  @JsonProperty("kind")
+  private String kind;
+
+  @JsonProperty("metadata")
+  private ObjectMeta metadata;
+
+  @JsonProperty("spec")
+  private EnvoyFilterSpec spec;
+
+  @JsonProperty("status")
+  private Object status;
 
 }
 

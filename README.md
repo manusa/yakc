@@ -165,7 +165,7 @@ Dapr is a portable, event-driven, runtime for building distributed applications 
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/istio)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[Istio](https://istio.io/) (1.7 - 1.9.2).
+[Istio](https://istio.io/) (1.7 - 1.10.4).
 
 Istio is a service-mesh for distributed applications. Istio leverages the required features to
 run a successful and efficient distributed microservice architecture by providing a uniform way

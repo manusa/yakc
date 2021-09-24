@@ -23,7 +23,8 @@ def schemaDir = new File(projectDir, "schema")
 def availableSchemaNames = Arrays.asList(
   "istio-1.7.4.json",
   "istio-1.8.0.json",
-  "istio-1.9.2.json"
+  "istio-1.9.2.json",
+  "istio-1.10.4.json"
 )
 def availableSchemas = availableSchemaNames.stream()
     .map { s -> new File(schemaDir, s) }
