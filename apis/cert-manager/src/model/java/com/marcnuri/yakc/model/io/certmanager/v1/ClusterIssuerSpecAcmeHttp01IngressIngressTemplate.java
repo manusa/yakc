@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Optional ingress template used to configure the ACME challenge solver ingress used for HTTP01 challenges
+ * Optional ingress template used to configure the ACME challenge solver ingress used for HTTP01 challenges.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")

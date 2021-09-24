@@ -19,6 +19,7 @@ package com.marcnuri.yakc.model.io.certmanager.v1alpha3;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
 import com.marcnuri.yakc.model.io.certmanager.v1.CertificateSpecIssuerRef;
+import com.marcnuri.yakc.model.io.certmanager.v1.CertificateSpecSecretTemplate;
 import com.marcnuri.yakc.model.io.certmanager.v1.CertificateSpecSubject;
 import com.marcnuri.yakc.model.io.certmanager.v1alpha2.CertificateSpecPrivateKey;
 import java.util.List;
@@ -133,6 +134,9 @@ public class CertificateSpec implements Model {
   @NonNull
   @JsonProperty("secretName")
   private String secretName;
+
+  @JsonProperty("secretTemplate")
+  private CertificateSpecSecretTemplate secretTemplate;
 
   @JsonProperty("subject")
   private CertificateSpecSubject subject;

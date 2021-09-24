@@ -47,7 +47,7 @@ public class ClusterIssuerSpecCa implements Model {
   private List<String> crlDistributionPoints;
 
   /**
-   * The OCSP server list is an X.509 v3 extension that defines a list of URLs of OCSP responders. The OCSP responders can be queried for the revocation status of an issued certificate. If not set, the certificate wil be issued with no OCSP servers set. For example, an OCSP server URL could be "http://ocsp.int-x3.letsencrypt.org".
+   * The OCSP server list is an X.509 v3 extension that defines a list of URLs of OCSP responders. The OCSP responders can be queried for the revocation status of an issued certificate. If not set, the certificate will be issued with no OCSP servers set. For example, an OCSP server URL could be "http://ocsp.int-x3.letsencrypt.org".
    */
   @JsonProperty("ocspServers")
   @Singular(value = "addToOcspServers", ignoreNullCollections = true)

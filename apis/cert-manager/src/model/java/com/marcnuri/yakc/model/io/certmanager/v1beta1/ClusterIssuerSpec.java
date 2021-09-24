@@ -14,11 +14,14 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.certmanager.v1alpha2;
+package com.marcnuri.yakc.model.io.certmanager.v1beta1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.io.certmanager.v1.ClusterIssuerSpecAcmeSelector;
+import com.marcnuri.yakc.model.io.certmanager.v1.ClusterIssuerSpecCa;
+import com.marcnuri.yakc.model.io.certmanager.v1.ClusterIssuerSpecSelfSigned;
+import com.marcnuri.yakc.model.io.certmanager.v1.ClusterIssuerSpecVault;
+import com.marcnuri.yakc.model.io.certmanager.v1.ClusterIssuerSpecVenafi;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +29,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Configures an issuer to solve challenges using the specified options. Only one of HTTP01 or DNS01 may be provided.
+ * Desired state of the ClusterIssuer resource.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -34,17 +37,23 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class ClusterIssuerSpecAcmeSolvers implements Model {
+public class ClusterIssuerSpec implements Model {
 
 
-  @JsonProperty("dns01")
-  private ClusterIssuerSpecAcmeDns01 dns01;
+  @JsonProperty("acme")
+  private ClusterIssuerSpecAcme acme;
 
-  @JsonProperty("http01")
-  private ClusterIssuerSpecAcmeHttp01 http01;
+  @JsonProperty("ca")
+  private ClusterIssuerSpecCa ca;
 
-  @JsonProperty("selector")
-  private ClusterIssuerSpecAcmeSelector selector;
+  @JsonProperty("selfSigned")
+  private ClusterIssuerSpecSelfSigned selfSigned;
+
+  @JsonProperty("vault")
+  private ClusterIssuerSpecVault vault;
+
+  @JsonProperty("venafi")
+  private ClusterIssuerSpecVenafi venafi;
 
 }
 

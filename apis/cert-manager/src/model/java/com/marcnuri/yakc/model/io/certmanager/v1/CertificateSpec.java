@@ -113,6 +113,9 @@ public class CertificateSpec implements Model {
   @JsonProperty("secretName")
   private String secretName;
 
+  @JsonProperty("secretTemplate")
+  private CertificateSpecSecretTemplate secretTemplate;
+
   @JsonProperty("subject")
   private CertificateSpecSubject subject;
 

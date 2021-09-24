@@ -127,7 +127,7 @@ Kubernetes Retrofit2 based Java client to be used with kubernetes-api or any of 
 ](https://javadoc.io/doc/com.marcnuri.yakc.apis/cert-manager)
 
 [Retrofit](https://square.github.io/retrofit/) API client Java interfaces for
-[Kubernetes cert-manager](https://cert-manager.io/) (1.0.4 - 1.4.3).
+[Kubernetes cert-manager](https://cert-manager.io/) (1.0.4 - 1.5.3).
 
 cert-manager provides support for x509 certificate management for Kubernetes. It's a Kubernetes
 add-on that automates the management and issuance of TLS certificates, making it very easy

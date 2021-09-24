@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Optional pod template used to configure the ACME challenge solver pods used for HTTP01 challenges
+ * Optional pod template used to configure the ACME challenge solver pods used for HTTP01 challenges.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")

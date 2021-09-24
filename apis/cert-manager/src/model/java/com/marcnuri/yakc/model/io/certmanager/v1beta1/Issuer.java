@@ -18,7 +18,6 @@ package com.marcnuri.yakc.model.io.certmanager.v1beta1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.io.certmanager.v1.IssuerSpec;
 import com.marcnuri.yakc.model.io.certmanager.v1.IssuerStatus;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import lombok.AllArgsConstructor;

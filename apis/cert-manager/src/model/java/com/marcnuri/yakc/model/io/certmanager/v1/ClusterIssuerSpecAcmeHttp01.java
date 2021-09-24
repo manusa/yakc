@@ -36,6 +36,9 @@ import lombok.ToString;
 public class ClusterIssuerSpecAcmeHttp01 implements Model {
 
 
+  @JsonProperty("gatewayHTTPRoute")
+  private ClusterIssuerSpecAcmeHttp01GatewayHTTPRoute gatewayHTTPRoute;
+
   @JsonProperty("ingress")
   private ClusterIssuerSpecAcmeHttp01Ingress ingress;
 

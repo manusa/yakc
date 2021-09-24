@@ -24,7 +24,8 @@ def availableSchemaNames = Arrays.asList(
   "cert-manager-1.0.4.json",
   "cert-manager-1.1.1.json",
   "cert-manager-1.2.0.json",
-  "cert-manager-1.4.3.json"
+  "cert-manager-1.4.3.json",
+  "cert-manager-1.5.3.json"
 )
 def availableSchemas = availableSchemaNames.stream()
     .map { s -> new File(schemaDir, s) }

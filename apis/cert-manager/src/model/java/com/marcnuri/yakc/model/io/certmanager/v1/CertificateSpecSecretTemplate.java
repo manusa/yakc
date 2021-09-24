@@ -14,19 +14,20 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.certmanager.v1alpha2;
+package com.marcnuri.yakc.model.io.certmanager.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.io.certmanager.v1.ClusterIssuerSpecAcmeSelector;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Singular;
 import lombok.ToString;
 
 /**
- * Configures an issuer to solve challenges using the specified options. Only one of HTTP01 or DNS01 may be provided.
+ * SecretTemplate defines annotations and labels to be propagated to the Kubernetes Secret when it is created or updated. Once created, labels and annotations are not yet removed from the Secret when they are removed from the template. See https://github.com/jetstack/cert-manager/issues/4292
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -34,17 +35,22 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class ClusterIssuerSpecAcmeSolvers implements Model {
+public class CertificateSpecSecretTemplate implements Model {
 
 
-  @JsonProperty("dns01")
-  private ClusterIssuerSpecAcmeDns01 dns01;
+  /**
+   * Annotations is a key value map to be copied to the target Kubernetes Secret.
+   */
+  @JsonProperty("annotations")
+  @Singular(value = "putInAnnotations", ignoreNullCollections = true)
+  private Map<String, String> annotations;
 
-  @JsonProperty("http01")
-  private ClusterIssuerSpecAcmeHttp01 http01;
-
-  @JsonProperty("selector")
-  private ClusterIssuerSpecAcmeSelector selector;
+  /**
+   * Labels is a key value map to be copied to the target Kubernetes Secret.
+   */
+  @JsonProperty("labels")
+  @Singular(value = "putInLabels", ignoreNullCollections = true)
+  private Map<String, String> labels;
 
 }
 

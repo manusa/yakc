@@ -14,10 +14,11 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.certmanager.v1alpha2;
+package com.marcnuri.yakc.model.io.certmanager.v1beta1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import com.marcnuri.yakc.model.io.certmanager.v1.ClusterIssuerSpecAcmeDns01;
 import com.marcnuri.yakc.model.io.certmanager.v1.ClusterIssuerSpecAcmeSelector;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

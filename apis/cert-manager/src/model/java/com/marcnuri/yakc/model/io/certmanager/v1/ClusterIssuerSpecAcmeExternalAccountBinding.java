@@ -38,9 +38,8 @@ public class ClusterIssuerSpecAcmeExternalAccountBinding implements Model {
 
 
   /**
-   * keyAlgorithm is the MAC key algorithm that the key is used for. Valid values are "HS256", "HS384" and "HS512".
+   * Deprecated: keyAlgorithm field exists for historical compatibility reasons and should not be used. The algorithm is now hardcoded to HS256 in golang/x/crypto/acme.
    */
-  @NonNull
   @JsonProperty("keyAlgorithm")
   private String keyAlgorithm;
 

@@ -18,14 +18,16 @@ package com.marcnuri.yakc.model.io.certmanager.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Singular;
 import lombok.ToString;
 
 /**
- * The ingress based HTTP01 challenge solver will solve challenges by creating or modifying Ingress resources in order to route requests for '/.well-known/acme-challenge/XYZ' to 'challenge solver' pods that are provisioned by cert-manager for each Challenge to be completed.
+ * The Gateway API is a sig-network community API that models service networking in Kubernetes (https://gateway-api.sigs.k8s.io/). The Gateway solver will create HTTPRoutes with the specified labels in the same namespace as the challenge. This solver is experimental, and fields / behaviour may change in the future.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -33,26 +35,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class ClusterIssuerSpecAcmeHttp01Ingress implements Model {
+public class ClusterIssuerSpecAcmeHttp01GatewayHTTPRoute implements Model {
 
 
   /**
-   * The ingress class to use when creating Ingress resources to solve ACME challenges that use this challenge solver. Only one of 'class' or 'name' may be specified.
+   * The labels that cert-manager will use when creating the temporary HTTPRoute needed for solving the HTTP-01 challenge. These labels must match the label selector of at least one Gateway.
    */
-  @JsonProperty("class")
-  private String clazz;
-
-  @JsonProperty("ingressTemplate")
-  private ClusterIssuerSpecAcmeHttp01IngressIngressTemplate ingressTemplate;
-
-  /**
-   * The name of the ingress resource that should have ACME challenge solving routes inserted into it in order to solve HTTP01 challenges. This is typically used in conjunction with ingress controllers like ingress-gce, which maintains a 1:1 mapping between external IPs and ingress resources.
-   */
-  @JsonProperty("name")
-  private String name;
-
-  @JsonProperty("podTemplate")
-  private ClusterIssuerSpecAcmeHttp01IngressPodTemplate podTemplate;
+  @JsonProperty("labels")
+  @Singular(value = "putInLabels", ignoreNullCollections = true)
+  private Map<String, String> labels;
 
   /**
    * Optional service type for Kubernetes solver service. Supported values are NodePort or ClusterIP. If unset, defaults to NodePort.

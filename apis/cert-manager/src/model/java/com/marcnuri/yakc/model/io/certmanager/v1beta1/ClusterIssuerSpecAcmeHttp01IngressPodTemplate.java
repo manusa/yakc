@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.certmanager.v1alpha2;
+package com.marcnuri.yakc.model.io.certmanager.v1beta1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.io.certmanager.v1.ClusterIssuerSpecAcmeSelector;
+import com.marcnuri.yakc.model.io.certmanager.v1.ClusterIssuerSpecAcmeHttp01IngressPodTemplateMetadata;
+import com.marcnuri.yakc.model.io.certmanager.v1.ClusterIssuerSpecAcmeHttp01IngressPodTemplateSpec;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +27,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * Configures an issuer to solve challenges using the specified options. Only one of HTTP01 or DNS01 may be provided.
+ * Optional pod template used to configure the ACME challenge solver pods used for HTTP01 challenges
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -34,17 +35,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class ClusterIssuerSpecAcmeSolvers implements Model {
+public class ClusterIssuerSpecAcmeHttp01IngressPodTemplate implements Model {
 
 
-  @JsonProperty("dns01")
-  private ClusterIssuerSpecAcmeDns01 dns01;
+  @JsonProperty("metadata")
+  private ClusterIssuerSpecAcmeHttp01IngressPodTemplateMetadata metadata;
 
-  @JsonProperty("http01")
-  private ClusterIssuerSpecAcmeHttp01 http01;
-
-  @JsonProperty("selector")
-  private ClusterIssuerSpecAcmeSelector selector;
+  @JsonProperty("spec")
+  private ClusterIssuerSpecAcmeHttp01IngressPodTemplateSpec spec;
 
 }
 
