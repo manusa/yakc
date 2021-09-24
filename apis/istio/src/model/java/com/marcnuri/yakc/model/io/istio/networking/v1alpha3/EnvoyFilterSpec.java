@@ -45,6 +45,12 @@ public class EnvoyFilterSpec implements Model {
   @Singular(value = "addToConfigPatches", ignoreNullCollections = true)
   private List<EnvoyFilterSpecConfigPatches> configPatches;
 
+  /**
+   * Priority defines the order in which patch sets are applied within a context.
+   */
+  @JsonProperty("priority")
+  private Number priority;
+
   @JsonProperty("workloadSelector")
   private EnvoyFilterSpecWorkloadSelector workloadSelector;
 

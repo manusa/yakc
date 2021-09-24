@@ -50,7 +50,7 @@ public class SidecarSpec implements Model {
   private SidecarSpecOutboundTrafficPolicy outboundTrafficPolicy;
 
   @JsonProperty("workloadSelector")
-  private SidecarSpecWorkloadSelector workloadSelector;
+  private EnvoyFilterSpecWorkloadSelector workloadSelector;
 
 }
 

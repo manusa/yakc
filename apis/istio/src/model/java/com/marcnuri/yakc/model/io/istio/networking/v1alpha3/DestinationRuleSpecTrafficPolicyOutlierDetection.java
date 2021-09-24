@@ -57,6 +57,9 @@ public class DestinationRuleSpecTrafficPolicyOutlierDetection implements Model {
   @JsonProperty("consecutiveGatewayErrors")
   private Object consecutiveGatewayErrors;
 
+  @JsonProperty("consecutiveLocalOriginFailures")
+  private Object consecutiveLocalOriginFailures;
+
   /**
    * Time interval between ejection sweep analysis.
    */
@@ -68,6 +71,12 @@ public class DestinationRuleSpecTrafficPolicyOutlierDetection implements Model {
 
   @JsonProperty("minHealthPercent")
   private Number minHealthPercent;
+
+  /**
+   * Determines whether to distinguish local origin failures from external errors.
+   */
+  @JsonProperty("splitExternalLocalOriginErrors")
+  private Boolean splitExternalLocalOriginErrors;
 
 }
 
