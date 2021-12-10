@@ -40,8 +40,9 @@ public class StatefulSetStatus implements Model {
 
 
   /**
-   * Total number of available pods (ready for at least minReadySeconds) targeted by this statefulset. This is an alpha field and requires enabling StatefulSetMinReadySeconds feature gate. Remove omitempty when graduating to beta
+   * Total number of available pods (ready for at least minReadySeconds) targeted by this statefulset. This is a beta field and enabled/disabled by StatefulSetMinReadySeconds feature gate.
    */
+  @NonNull
   @JsonProperty("availableReplicas")
   private Number availableReplicas;
 
@@ -77,7 +78,7 @@ public class StatefulSetStatus implements Model {
   private Number observedGeneration;
 
   /**
-   * readyReplicas is the number of Pods created by the StatefulSet controller that have a Ready Condition.
+   * readyReplicas is the number of pods created for this StatefulSet with a Ready Condition.
    */
   @JsonProperty("readyReplicas")
   private Number readyReplicas;

@@ -43,7 +43,6 @@ public class HorizontalPodAutoscalerStatus implements Model {
   /**
    * conditions is the set of conditions required for this autoscaler to scale its target, and indicates whether or not those conditions are met.
    */
-  @NonNull
   @JsonProperty("conditions")
   @Singular(value = "addToConditions", ignoreNullCollections = true)
   private List<HorizontalPodAutoscalerCondition> conditions;

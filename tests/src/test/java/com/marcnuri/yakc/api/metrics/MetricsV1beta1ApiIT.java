@@ -46,7 +46,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Timeout(value = 2, unit = TimeUnit.MINUTES)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ExtendWith(KubernetesClientExtension.class)
-@ClusterExecutionCondition.ClusterMinVersion(minVersion = "1.17.0")
+@ClusterExecutionCondition.ClusterVersion(minVersion = "1.17.0")
 class MetricsV1beta1ApiIT {
 
   @Test

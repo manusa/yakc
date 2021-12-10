@@ -47,7 +47,7 @@ public class NodeSelectorRequirement implements Model {
   private String key;
 
   /**
-   * Represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.
+   * Represents a key's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist. Gt, and Lt.<br><p> <br><p> Possible enum values:<br><p>  - `"DoesNotExist"`<br><p>  - `"Exists"`<br><p>  - `"Gt"`<br><p>  - `"In"`<br><p>  - `"Lt"`<br><p>  - `"NotIn"`
    */
   @NonNull
   @JsonProperty("operator")

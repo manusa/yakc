@@ -64,7 +64,7 @@ public class DeploymentStatus implements Model {
   private Number observedGeneration;
 
   /**
-   * Total number of ready pods targeted by this deployment.
+   * readyReplicas is the number of pods targeted by this Deployment with a Ready Condition.
    */
   @JsonProperty("readyReplicas")
   private Number readyReplicas;

@@ -18,7 +18,7 @@
 package com.marcnuri.yakc;
 
 
-import com.marcnuri.yakc.ClusterExecutionCondition.ClusterMinVersion;
+import com.marcnuri.yakc.ClusterExecutionCondition.ClusterVersion;
 import com.marcnuri.yakc.api.NotFoundException;
 import com.marcnuri.yakc.api.events.v1.EventsV1Api;
 import com.marcnuri.yakc.api.events.v1.EventsV1Api.ListNamespacedEvent;
@@ -42,7 +42,7 @@ import static com.marcnuri.yakc.KubernetesClientExtension.KC;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(KubernetesClientExtension.class)
-@ClusterMinVersion(minVersion = "1.19.0")
+@ClusterVersion(minVersion = "1.19.0")
 class EventsV1ApiIT {
 
   private static final String NAMESPACE = "default";

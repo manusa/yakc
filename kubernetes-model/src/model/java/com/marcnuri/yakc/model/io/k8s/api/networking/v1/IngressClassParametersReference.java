@@ -64,7 +64,7 @@ public class IngressClassParametersReference implements Model {
   private String namespace;
 
   /**
-   * Scope represents if this refers to a cluster or namespace scoped resource. This may be set to "Cluster" (default) or "Namespace". Field can be enabled with IngressClassNamespacedParams feature gate.
+   * Scope represents if this refers to a cluster or namespace scoped resource. This may be set to "Cluster" (default) or "Namespace".
    */
   @JsonProperty("scope")
   private String scope;

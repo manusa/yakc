@@ -28,7 +28,7 @@ import java.io.IOException;
 import static com.marcnuri.yakc.KubernetesClientExtension.KC;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@ClusterExecutionCondition.ClusterMinVersion(minVersion = "1.20.0")
+@ClusterExecutionCondition.ClusterVersion(minVersion = "1.20.0")
 @ExtendWith(KubernetesClientExtension.class)
 class NodeV1IT {
 

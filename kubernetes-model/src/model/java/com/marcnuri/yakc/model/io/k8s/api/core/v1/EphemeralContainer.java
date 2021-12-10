@@ -28,7 +28,7 @@ import lombok.Singular;
 import lombok.ToString;
 
 /**
- * An EphemeralContainer is a container that may be added temporarily to an existing pod for user-initiated activities such as debugging. Ephemeral containers have no resource or scheduling guarantees, and they will not be restarted when they exit or when a pod is removed or restarted. If an ephemeral container causes a pod to exceed its resource allocation, the pod may be evicted. Ephemeral containers may not be added by directly updating the pod spec. They must be added via the pod's ephemeralcontainers subresource, and they will appear in the pod spec once added. This is an alpha feature enabled by the EphemeralContainers feature flag.
+ * An EphemeralContainer is a temporary container that you may add to an existing Pod for user-initiated activities such as debugging. Ephemeral containers have no resource or scheduling guarantees, and they will not be restarted when they exit or when a Pod is removed or restarted. The kubelet may evict a Pod if an ephemeral container causes the Pod to exceed its resource allocation.<br><p> <br><p> To add an ephemeral container, use the ephemeralcontainers subresource of an existing Pod. Ephemeral containers may not be removed or restarted.<br><p> <br><p> This is a beta feature available on clusters that haven't disabled the EphemeralContainers feature gate.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -74,7 +74,7 @@ public class EphemeralContainer implements Model {
   private String image;
 
   /**
-   * Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images
+   * Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images<br><p> <br><p> Possible enum values:<br><p>  - `"Always"` means that kubelet always attempts to pull the latest image. Container will fail If the pull fails.<br><p>  - `"IfNotPresent"` means that kubelet pulls if the image isn't present on disk. Container will fail if the image isn't present and the pull fails.<br><p>  - `"Never"` means that kubelet never pulls an image, but only uses a local image. Container will fail if the image isn't present
    */
   @JsonProperty("imagePullPolicy")
   private String imagePullPolicy;
@@ -124,7 +124,7 @@ public class EphemeralContainer implements Model {
   private Boolean stdinOnce;
 
   /**
-   * If set, the name of the container from PodSpec that this ephemeral container targets. The ephemeral container will be run in the namespaces (IPC, PID, etc) of this container. If not set then the ephemeral container is run in whatever namespaces are shared for the pod. Note that the container runtime must support this feature.
+   * If set, the name of the container from PodSpec that this ephemeral container targets. The ephemeral container will be run in the namespaces (IPC, PID, etc) of this container. If not set then the ephemeral container uses the namespaces configured in the Pod spec.<br><p> <br><p> The container runtime must implement support for this feature. If the runtime does not support namespace targeting then the result of setting this field is undefined.
    */
   @JsonProperty("targetContainerName")
   private String targetContainerName;
@@ -136,7 +136,7 @@ public class EphemeralContainer implements Model {
   private String terminationMessagePath;
 
   /**
-   * Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.
+   * Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.<br><p> <br><p> Possible enum values:<br><p>  - `"FallbackToLogsOnError"` will read the most recent contents of the container logs for the container status message when the container exits with an error and the terminationMessagePath has no contents.<br><p>  - `"File"` is the default behavior and will set the container status message to the contents of the container's terminationMessagePath when the container exits.
    */
   @JsonProperty("terminationMessagePolicy")
   private String terminationMessagePolicy;
@@ -155,7 +155,7 @@ public class EphemeralContainer implements Model {
   private List<VolumeDevice> volumeDevices;
 
   /**
-   * Pod volumes to mount into the container's filesystem. Cannot be updated.
+   * Pod volumes to mount into the container's filesystem. Subpath mounts are not allowed for ephemeral containers. Cannot be updated.
    */
   @JsonProperty("volumeMounts")
   @Singular(value = "addToVolumeMounts", ignoreNullCollections = true)

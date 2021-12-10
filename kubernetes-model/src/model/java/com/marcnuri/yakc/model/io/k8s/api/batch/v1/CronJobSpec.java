@@ -38,7 +38,7 @@ public class CronJobSpec implements Model {
 
 
   /**
-   * Specifies how to treat concurrent executions of a Job. Valid values are: - "Allow" (default): allows CronJobs to run concurrently; - "Forbid": forbids concurrent runs, skipping next run if previous run hasn't finished yet; - "Replace": cancels currently running job and replaces it with a new one
+   * Specifies how to treat concurrent executions of a Job. Valid values are: - "Allow" (default): allows CronJobs to run concurrently; - "Forbid": forbids concurrent runs, skipping next run if previous run hasn't finished yet; - "Replace": cancels currently running job and replaces it with a new one<br><p> <br><p> Possible enum values:<br><p>  - `"Allow"` allows CronJobs to run concurrently.<br><p>  - `"Forbid"` forbids concurrent runs, skipping next run if previous hasn't finished yet.<br><p>  - `"Replace"` cancels currently running job and replaces it with a new one.
    */
   @JsonProperty("concurrencyPolicy")
   private String concurrencyPolicy;

@@ -37,10 +37,10 @@ public class Lifecycle implements Model {
 
 
   @JsonProperty("postStart")
-  private Handler postStart;
+  private LifecycleHandler postStart;
 
   @JsonProperty("preStop")
-  private Handler preStop;
+  private LifecycleHandler preStop;
 
 }
 

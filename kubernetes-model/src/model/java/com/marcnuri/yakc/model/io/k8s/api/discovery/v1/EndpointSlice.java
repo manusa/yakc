@@ -41,7 +41,7 @@ public class EndpointSlice implements Model {
 
 
   /**
-   * addressType specifies the type of address carried by this EndpointSlice. All addresses in this slice must be the same type. This field is immutable after creation. The following address types are currently supported: &#42; IPv4: Represents an IPv4 Address. &#42; IPv6: Represents an IPv6 Address. &#42; FQDN: Represents a Fully Qualified Domain Name.
+   * addressType specifies the type of address carried by this EndpointSlice. All addresses in this slice must be the same type. This field is immutable after creation. The following address types are currently supported: &#42; IPv4: Represents an IPv4 Address. &#42; IPv6: Represents an IPv6 Address. &#42; FQDN: Represents a Fully Qualified Domain Name.<br><p> <br><p> Possible enum values:<br><p>  - `"FQDN"` represents a FQDN.<br><p>  - `"IPv4"` represents an IPv4 Address.<br><p>  - `"IPv6"` represents an IPv6 Address.
    */
   @NonNull
   @JsonProperty("addressType")

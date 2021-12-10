@@ -17,7 +17,7 @@
  */
 package com.marcnuri.yakc;
 
-import com.marcnuri.yakc.ClusterExecutionCondition.ClusterMinVersion;
+import com.marcnuri.yakc.ClusterExecutionCondition.ClusterVersion;
 import com.marcnuri.yakc.api.NotFoundException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.apiextensions.v1.ApiextensionsV1Api;
@@ -47,7 +47,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Created by Marc Nuri on 2020-05-03.
  */
 @ExtendWith(KubernetesClientExtension.class)
-@ClusterMinVersion(minVersion = "1.17.0")
+@ClusterVersion(minVersion = "1.17.0")
 class CustomResourceDefinitionV1IT {
 
   private String customResourceDefinitionName;

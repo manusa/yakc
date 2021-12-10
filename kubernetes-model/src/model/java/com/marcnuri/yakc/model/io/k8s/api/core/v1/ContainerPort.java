@@ -63,7 +63,7 @@ public class ContainerPort implements Model {
   private String name;
 
   /**
-   * Protocol for port. Must be UDP, TCP, or SCTP. Defaults to "TCP".
+   * Protocol for port. Must be UDP, TCP, or SCTP. Defaults to "TCP".<br><p> <br><p> Possible enum values:<br><p>  - `"SCTP"` is the SCTP protocol.<br><p>  - `"TCP"` is the TCP protocol.<br><p>  - `"UDP"` is the UDP protocol.
    */
   @JsonProperty("protocol")
   private String protocol;

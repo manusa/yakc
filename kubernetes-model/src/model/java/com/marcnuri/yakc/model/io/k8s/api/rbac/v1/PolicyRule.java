@@ -68,7 +68,7 @@ public class PolicyRule implements Model {
   private List<String> resources;
 
   /**
-   * Verbs is a list of Verbs that apply to ALL the ResourceKinds and AttributeRestrictions contained in this rule. '&#42;' represents all verbs.
+   * Verbs is a list of Verbs that apply to ALL the ResourceKinds contained in this rule. '&#42;' represents all verbs.
    */
   @NonNull
   @JsonProperty("verbs")
