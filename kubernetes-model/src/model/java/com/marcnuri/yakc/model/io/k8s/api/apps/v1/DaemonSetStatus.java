@@ -80,7 +80,7 @@ public class DaemonSetStatus implements Model {
   private Number numberMisscheduled;
 
   /**
-   * The number of nodes that should be running the daemon pod and have one or more of the daemon pod running and ready.
+   * numberReady is the number of nodes that should be running the daemon pod and have one or more of the daemon pod running with a Ready Condition.
    */
   @NonNull
   @JsonProperty("numberReady")

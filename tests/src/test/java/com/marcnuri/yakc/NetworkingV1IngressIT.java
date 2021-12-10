@@ -17,7 +17,7 @@
  */
 package com.marcnuri.yakc;
 
-import com.marcnuri.yakc.ClusterExecutionCondition.ClusterMinVersion;
+import com.marcnuri.yakc.ClusterExecutionCondition.ClusterVersion;
 import com.marcnuri.yakc.api.NotFoundException;
 import com.marcnuri.yakc.api.networking.v1.NetworkingV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.networking.v1.HTTPIngressPath;
@@ -45,7 +45,7 @@ import static com.marcnuri.yakc.KubernetesClientExtension.KC;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(KubernetesClientExtension.class)
-@ClusterMinVersion(minVersion = "1.19.0")
+@ClusterVersion(minVersion = "1.19.0")
 class NetworkingV1IngressIT {
 
   private static final String NAMESPACE = "default";

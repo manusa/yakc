@@ -373,6 +373,14 @@ public interface RbacAuthorizationV1Api extends Api {
       put("fieldManager", fieldManager);
       return this;
     }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public CreateClusterRoleBinding fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
   } 
   /**
    * delete a ClusterRoleBinding
@@ -593,6 +601,14 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchClusterRoleBinding fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchClusterRoleBinding force(Boolean force) {
@@ -660,6 +676,14 @@ public interface RbacAuthorizationV1Api extends Api {
      */
     public ReplaceClusterRoleBinding fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceClusterRoleBinding fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -984,6 +1008,14 @@ public interface RbacAuthorizationV1Api extends Api {
       put("fieldManager", fieldManager);
       return this;
     }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public CreateClusterRole fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
   } 
   /**
    * delete a ClusterRole
@@ -1204,6 +1236,14 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchClusterRole fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchClusterRole force(Boolean force) {
@@ -1271,6 +1311,14 @@ public interface RbacAuthorizationV1Api extends Api {
      */
     public ReplaceClusterRole fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceClusterRole fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -1619,6 +1667,14 @@ public interface RbacAuthorizationV1Api extends Api {
       put("fieldManager", fieldManager);
       return this;
     }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public CreateNamespacedRoleBinding fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
   } 
   /**
    * delete a RoleBinding
@@ -1855,6 +1911,14 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedRoleBinding fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedRoleBinding force(Boolean force) {
@@ -1926,6 +1990,14 @@ public interface RbacAuthorizationV1Api extends Api {
      */
     public ReplaceNamespacedRoleBinding fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedRoleBinding fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -2274,6 +2346,14 @@ public interface RbacAuthorizationV1Api extends Api {
       put("fieldManager", fieldManager);
       return this;
     }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public CreateNamespacedRole fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
   } 
   /**
    * delete a Role
@@ -2510,6 +2590,14 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedRole fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedRole force(Boolean force) {
@@ -2581,6 +2669,14 @@ public interface RbacAuthorizationV1Api extends Api {
      */
     public ReplaceNamespacedRole fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedRole fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 

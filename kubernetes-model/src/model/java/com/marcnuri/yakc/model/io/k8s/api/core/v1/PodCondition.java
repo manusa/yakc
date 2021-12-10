@@ -64,7 +64,7 @@ public class PodCondition implements Model {
   private String status;
 
   /**
-   * Type is the type of the condition. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions
+   * Type is the type of the condition. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-conditions<br><p> <br><p> Possible enum values:<br><p>  - `"ContainersReady"` indicates whether all containers in the pod are ready.<br><p>  - `"Initialized"` means that all init containers in the pod have started successfully.<br><p>  - `"PodScheduled"` represents status of the scheduling process for this pod.<br><p>  - `"Ready"` means the pod is able to service requests and should be added to the load balancing pools of all matching services.
    */
   @NonNull
   @JsonProperty("type")

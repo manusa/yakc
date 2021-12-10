@@ -57,7 +57,7 @@ public class EndpointPort implements Model {
   private Number port;
 
   /**
-   * The IP protocol for this port. Must be UDP, TCP, or SCTP. Default is TCP.
+   * The IP protocol for this port. Must be UDP, TCP, or SCTP. Default is TCP.<br><p> <br><p> Possible enum values:<br><p>  - `"SCTP"` is the SCTP protocol.<br><p>  - `"TCP"` is the TCP protocol.<br><p>  - `"UDP"` is the UDP protocol.
    */
   @JsonProperty("protocol")
   private String protocol;

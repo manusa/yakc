@@ -65,7 +65,7 @@ public class HTTPGetAction implements Model {
   private String port;
 
   /**
-   * Scheme to use for connecting to the host. Defaults to HTTP.
+   * Scheme to use for connecting to the host. Defaults to HTTP.<br><p> <br><p> Possible enum values:<br><p>  - `"HTTP"` means that the scheme used will be http://<br><p>  - `"HTTPS"` means that the scheme used will be https://
    */
   @JsonProperty("scheme")
   private String scheme;

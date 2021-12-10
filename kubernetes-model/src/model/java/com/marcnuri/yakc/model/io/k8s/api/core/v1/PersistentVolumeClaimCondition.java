@@ -60,6 +60,9 @@ public class PersistentVolumeClaimCondition implements Model {
   @JsonProperty("status")
   private String status;
 
+  /**
+   * <br><p> <br><p> <br><p> Possible enum values:<br><p>  - `"FileSystemResizePending"` - controller resize is finished and a file system resize is pending on node<br><p>  - `"Resizing"` - a user trigger resize of pvc has been started
+   */
   @NonNull
   @JsonProperty("type")
   private String type;

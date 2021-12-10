@@ -367,6 +367,14 @@ public interface CertificatesV1Api extends Api {
       put("fieldManager", fieldManager);
       return this;
     }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public CreateCertificateSigningRequest fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
   } 
   /**
    * delete a CertificateSigningRequest
@@ -587,6 +595,14 @@ public interface CertificatesV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchCertificateSigningRequest fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchCertificateSigningRequest force(Boolean force) {
@@ -654,6 +670,14 @@ public interface CertificatesV1Api extends Api {
      */
     public ReplaceCertificateSigningRequest fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceCertificateSigningRequest fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -762,6 +786,14 @@ public interface CertificatesV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchCertificateSigningRequestApproval fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchCertificateSigningRequestApproval force(Boolean force) {
@@ -829,6 +861,14 @@ public interface CertificatesV1Api extends Api {
      */
     public ReplaceCertificateSigningRequestApproval fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceCertificateSigningRequestApproval fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -937,6 +977,14 @@ public interface CertificatesV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchCertificateSigningRequestStatus fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchCertificateSigningRequestStatus force(Boolean force) {
@@ -1004,6 +1052,14 @@ public interface CertificatesV1Api extends Api {
      */
     public ReplaceCertificateSigningRequestStatus fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceCertificateSigningRequestStatus fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 

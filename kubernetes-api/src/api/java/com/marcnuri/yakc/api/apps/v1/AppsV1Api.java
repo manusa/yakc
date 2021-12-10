@@ -721,6 +721,14 @@ public interface AppsV1Api extends Api {
       put("fieldManager", fieldManager);
       return this;
     }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public CreateNamespacedControllerRevision fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
   } 
   /**
    * delete a ControllerRevision
@@ -957,6 +965,14 @@ public interface AppsV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedControllerRevision fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedControllerRevision force(Boolean force) {
@@ -1028,6 +1044,14 @@ public interface AppsV1Api extends Api {
      */
     public ReplaceNamespacedControllerRevision fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedControllerRevision fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -1376,6 +1400,14 @@ public interface AppsV1Api extends Api {
       put("fieldManager", fieldManager);
       return this;
     }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public CreateNamespacedDaemonSet fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
   } 
   /**
    * delete a DaemonSet
@@ -1612,6 +1644,14 @@ public interface AppsV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedDaemonSet fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedDaemonSet force(Boolean force) {
@@ -1683,6 +1723,14 @@ public interface AppsV1Api extends Api {
      */
     public ReplaceNamespacedDaemonSet fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedDaemonSet fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -1799,6 +1847,14 @@ public interface AppsV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedDaemonSetStatus fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedDaemonSetStatus force(Boolean force) {
@@ -1870,6 +1926,14 @@ public interface AppsV1Api extends Api {
      */
     public ReplaceNamespacedDaemonSetStatus fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedDaemonSetStatus fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -2218,6 +2282,14 @@ public interface AppsV1Api extends Api {
       put("fieldManager", fieldManager);
       return this;
     }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public CreateNamespacedDeployment fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
   } 
   /**
    * delete a Deployment
@@ -2454,6 +2526,14 @@ public interface AppsV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedDeployment fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedDeployment force(Boolean force) {
@@ -2525,6 +2605,14 @@ public interface AppsV1Api extends Api {
      */
     public ReplaceNamespacedDeployment fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedDeployment fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -2641,6 +2729,14 @@ public interface AppsV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedDeploymentScale fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedDeploymentScale force(Boolean force) {
@@ -2712,6 +2808,14 @@ public interface AppsV1Api extends Api {
      */
     public ReplaceNamespacedDeploymentScale fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedDeploymentScale fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -2828,6 +2932,14 @@ public interface AppsV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedDeploymentStatus fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedDeploymentStatus force(Boolean force) {
@@ -2899,6 +3011,14 @@ public interface AppsV1Api extends Api {
      */
     public ReplaceNamespacedDeploymentStatus fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedDeploymentStatus fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -3247,6 +3367,14 @@ public interface AppsV1Api extends Api {
       put("fieldManager", fieldManager);
       return this;
     }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public CreateNamespacedReplicaSet fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
   } 
   /**
    * delete a ReplicaSet
@@ -3483,6 +3611,14 @@ public interface AppsV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedReplicaSet fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedReplicaSet force(Boolean force) {
@@ -3554,6 +3690,14 @@ public interface AppsV1Api extends Api {
      */
     public ReplaceNamespacedReplicaSet fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedReplicaSet fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -3670,6 +3814,14 @@ public interface AppsV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedReplicaSetScale fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedReplicaSetScale force(Boolean force) {
@@ -3741,6 +3893,14 @@ public interface AppsV1Api extends Api {
      */
     public ReplaceNamespacedReplicaSetScale fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedReplicaSetScale fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -3857,6 +4017,14 @@ public interface AppsV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedReplicaSetStatus fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedReplicaSetStatus force(Boolean force) {
@@ -3928,6 +4096,14 @@ public interface AppsV1Api extends Api {
      */
     public ReplaceNamespacedReplicaSetStatus fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedReplicaSetStatus fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -4276,6 +4452,14 @@ public interface AppsV1Api extends Api {
       put("fieldManager", fieldManager);
       return this;
     }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public CreateNamespacedStatefulSet fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
   } 
   /**
    * delete a StatefulSet
@@ -4512,6 +4696,14 @@ public interface AppsV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedStatefulSet fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedStatefulSet force(Boolean force) {
@@ -4583,6 +4775,14 @@ public interface AppsV1Api extends Api {
      */
     public ReplaceNamespacedStatefulSet fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedStatefulSet fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -4699,6 +4899,14 @@ public interface AppsV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedStatefulSetScale fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedStatefulSetScale force(Boolean force) {
@@ -4770,6 +4978,14 @@ public interface AppsV1Api extends Api {
      */
     public ReplaceNamespacedStatefulSetScale fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedStatefulSetScale fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 
@@ -4886,6 +5102,14 @@ public interface AppsV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedStatefulSetStatus fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedStatefulSetStatus force(Boolean force) {
@@ -4957,6 +5181,14 @@ public interface AppsV1Api extends Api {
      */
     public ReplaceNamespacedStatefulSetStatus fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedStatefulSetStatus fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 

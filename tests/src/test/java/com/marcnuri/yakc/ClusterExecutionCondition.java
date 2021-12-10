@@ -26,6 +26,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
@@ -38,24 +39,42 @@ public class ClusterExecutionCondition implements ExecutionCondition {
       .map(Integer::valueOf).toArray(Integer[]::new);
   }
 
+  private static Integer[] extractComponents(ExtensionContext context, Function<ClusterVersion, String> annotationMapper) {
+    return extractComponents(annotationMapper.apply(
+      context.getTestClass()
+        .orElseThrow(() -> new IllegalArgumentException("@ClusterVersion must be used on a Class"))
+        .getAnnotation(ClusterVersion.class)));
+  }
+
+  private Integer[] validateVersionComponents(Integer[] versionComponents, int expectedLength) {
+    if (versionComponents.length != expectedLength) {
+      throw new IllegalArgumentException(String.format("Versions must be formatted as x.x.x: expected %s found %s",
+        expectedLength, versionComponents.length));
+    }
+    return versionComponents;
+  }
+
   @Override
   public ConditionEvaluationResult evaluateExecutionCondition(ExtensionContext context) {
     final Integer[] kubernetesVersionComponents = extractComponents(
-      System.getenv().getOrDefault("K8S_VERSION", Integer.MAX_VALUE + ".0.0"));
-    final Integer[] minVersionComponents = extractComponents(
-      context.getTestClass()
-        .orElseThrow(() -> new IllegalArgumentException("@ClusterMinVersion must be used on a Class"))
-        .getAnnotation(ClusterMinVersion.class).minVersion()
-    );
-    if (minVersionComponents.length != kubernetesVersionComponents.length) {
-      throw new IllegalArgumentException(String.format("Versions must be formatted as x.x.x found %s / %s",
-        kubernetesVersionComponents, minVersionComponents));
-    }
+      System.getenv().getOrDefault("K8S_VERSION", Integer.MAX_VALUE - 1 + ".0.0"));
+    final Integer[] minVersionComponents = validateVersionComponents(
+      extractComponents(context, ClusterVersion::minVersion), kubernetesVersionComponents.length);
     for(int it = 0; it < kubernetesVersionComponents.length; it++){
       if (kubernetesVersionComponents[it] > minVersionComponents[it]) {
         break;
       }
       if (kubernetesVersionComponents[it] < minVersionComponents[it]) {
+        return ConditionEvaluationResult.disabled("Current cluster is not supported by the Test Suite");
+      }
+    }
+    final Integer[] maxVersionComponents = validateVersionComponents(
+      extractComponents(context, ClusterVersion::maxVersion), kubernetesVersionComponents.length);
+    for(int it = 0; it < kubernetesVersionComponents.length; it++){
+      if (kubernetesVersionComponents[it] < maxVersionComponents[it]) {
+        break;
+      }
+      if (kubernetesVersionComponents[it] > maxVersionComponents[it]) {
         return ConditionEvaluationResult.disabled("Current cluster is not supported by the Test Suite");
       }
     }
@@ -65,8 +84,9 @@ public class ClusterExecutionCondition implements ExecutionCondition {
   @Retention(RetentionPolicy.RUNTIME)
   @ExtendWith(ClusterExecutionCondition.class)
   @Target(ElementType.TYPE)
-  public @interface ClusterMinVersion {
+  public @interface ClusterVersion {
     String minVersion() default "0.0.0";
+    String maxVersion() default Integer.MAX_VALUE + "." + Integer.MAX_VALUE + "." + Integer.MAX_VALUE ;
   }
 }
 

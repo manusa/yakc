@@ -64,7 +64,7 @@ public class JobCondition implements Model {
   private String status;
 
   /**
-   * Type of job condition, Complete or Failed.
+   * Type of job condition, Complete or Failed.<br><p> <br><p> Possible enum values:<br><p>  - `"Complete"` means the job has completed its execution.<br><p>  - `"Failed"` means the job has failed its execution.<br><p>  - `"Suspended"` means the job has been suspended.
    */
   @NonNull
   @JsonProperty("type")

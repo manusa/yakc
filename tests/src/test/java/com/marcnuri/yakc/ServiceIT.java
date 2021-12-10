@@ -17,6 +17,7 @@
  */
 package com.marcnuri.yakc;
 
+import com.marcnuri.yakc.ClusterExecutionCondition.ClusterVersion;
 import com.marcnuri.yakc.api.NotFoundException;
 import com.marcnuri.yakc.api.WatchEvent.Type;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
@@ -25,7 +26,6 @@ import com.marcnuri.yakc.model.io.k8s.api.core.v1.ServicePort;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.ServiceSpec;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
-import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import io.reactivex.disposables.Disposable;
 import org.assertj.core.api.InstanceOfAssertFactories;
 import org.junit.jupiter.api.AfterEach;
@@ -43,6 +43,7 @@ import static com.marcnuri.yakc.KubernetesClientExtension.KC;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(KubernetesClientExtension.class)
+@ClusterVersion(minVersion = "1.23.0")
 class ServiceIT {
 
   private static final String NAMESPACE = "default";
@@ -52,7 +53,7 @@ class ServiceIT {
 
   @BeforeEach
   void setUp() throws IOException {
-    serviceName = "a" + UUID.randomUUID().toString();
+    serviceName = "a" + UUID.randomUUID();
     service = createServiceForTest();
   }
 
@@ -148,12 +149,12 @@ class ServiceIT {
   @DisplayName("deleteNamespacedService, should delete existing Service")
   void deleteNamespacedService() throws IOException {
     // When
-    final Status result = KC.create(CoreV1Api.class).deleteNamespacedService(serviceName, NAMESPACE).get();
+    final Service result = KC.create(CoreV1Api.class).deleteNamespacedService(serviceName, NAMESPACE).get();
     // Then
     assertThat(result)
       .isNotNull()
-      .extracting(Status::getStatus)
-      .isEqualTo("Success");
+      .extracting(Service::getMetadata)
+      .hasFieldOrPropertyWithValue("name", serviceName);
   }
 
   private Service createServiceForTest() throws IOException {
@@ -182,7 +183,8 @@ class ServiceIT {
   private void deleteServiceForTest() throws IOException {
     try {
       KC.create(CoreV1Api.class)
-        .deleteNamespacedService(serviceName, NAMESPACE, DeleteOptions.builder().gracePeriodSeconds(0).build()).get();
+        .deleteNamespacedService(serviceName, NAMESPACE, DeleteOptions.builder().gracePeriodSeconds(0).build())
+        .get();
     } catch (NotFoundException ex) {
       // Ignore, this is only clean up. Resource may have been deleted by delete test
     }

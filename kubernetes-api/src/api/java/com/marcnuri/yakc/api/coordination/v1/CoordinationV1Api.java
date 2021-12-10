@@ -498,6 +498,14 @@ public interface CoordinationV1Api extends Api {
       put("fieldManager", fieldManager);
       return this;
     }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public CreateNamespacedLease fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
   } 
   /**
    * delete a Lease
@@ -734,6 +742,14 @@ public interface CoordinationV1Api extends Api {
     }
 
     /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public PatchNamespacedLease fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
      * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
      */
     public PatchNamespacedLease force(Boolean force) {
@@ -805,6 +821,14 @@ public interface CoordinationV1Api extends Api {
      */
     public ReplaceNamespacedLease fieldManager(String fieldManager) {
       put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     */
+    public ReplaceNamespacedLease fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
       return this;
     }
   } 

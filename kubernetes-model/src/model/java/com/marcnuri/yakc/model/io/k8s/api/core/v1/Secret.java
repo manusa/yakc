@@ -75,7 +75,7 @@ public class Secret implements Model {
   private Map<String, String> stringData;
 
   /**
-   * Used to facilitate programmatic handling of secret data.
+   * Used to facilitate programmatic handling of secret data. More info: https://kubernetes.io/docs/concepts/configuration/secret/#secret-types
    */
   @JsonProperty("type")
   private String type;

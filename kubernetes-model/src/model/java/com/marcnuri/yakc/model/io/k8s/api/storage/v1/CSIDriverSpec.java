@@ -45,7 +45,7 @@ public class CSIDriverSpec implements Model {
   private Boolean attachRequired;
 
   /**
-   * Defines if the underlying volume supports changing ownership and permission of the volume before being mounted. Refer to the specific FSGroupPolicy values for additional details. This field is beta, and is only honored by servers that enable the CSIVolumeFSGroupPolicy feature gate.<br><p> <br><p> This field is immutable.<br><p> <br><p> Defaults to ReadWriteOnceWithFSType, which will examine each volume to determine if Kubernetes should modify ownership and permissions of the volume. With the default policy the defined fsGroup will only be applied if a fstype is defined and the volume's access mode contains ReadWriteOnce.
+   * Defines if the underlying volume supports changing ownership and permission of the volume before being mounted. Refer to the specific FSGroupPolicy values for additional details.<br><p> <br><p> This field is immutable.<br><p> <br><p> Defaults to ReadWriteOnceWithFSType, which will examine each volume to determine if Kubernetes should modify ownership and permissions of the volume. With the default policy the defined fsGroup will only be applied if a fstype is defined and the volume's access mode contains ReadWriteOnce.
    */
   @JsonProperty("fsGroupPolicy")
   private String fsGroupPolicy;
@@ -63,7 +63,7 @@ public class CSIDriverSpec implements Model {
   private Boolean requiresRepublish;
 
   /**
-   * If set to true, storageCapacity indicates that the CSI volume driver wants pod scheduling to consider the storage capacity that the driver deployment will report by creating CSIStorageCapacity objects with capacity information.<br><p> <br><p> The check can be enabled immediately when deploying a driver. In that case, provisioning new volumes with late binding will pause until the driver deployment has published some suitable CSIStorageCapacity object.<br><p> <br><p> Alternatively, the driver can be deployed with the field unset or false and it can be flipped later when storage capacity information has been published.<br><p> <br><p> This field is immutable.<br><p> <br><p> This is a beta field and only available when the CSIStorageCapacity feature is enabled. The default is false.
+   * If set to true, storageCapacity indicates that the CSI volume driver wants pod scheduling to consider the storage capacity that the driver deployment will report by creating CSIStorageCapacity objects with capacity information.<br><p> <br><p> The check can be enabled immediately when deploying a driver. In that case, provisioning new volumes with late binding will pause until the driver deployment has published some suitable CSIStorageCapacity object.<br><p> <br><p> Alternatively, the driver can be deployed with the field unset or false and it can be flipped later when storage capacity information has been published.<br><p> <br><p> This field was immutable in Kubernetes &lt;= 1.22 and now is mutable.<br><p> <br><p> This is a beta field and only available when the CSIStorageCapacity feature is enabled. The default is false.
    */
   @JsonProperty("storageCapacity")
   private Boolean storageCapacity;

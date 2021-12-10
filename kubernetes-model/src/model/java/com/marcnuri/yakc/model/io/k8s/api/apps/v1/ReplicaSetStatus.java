@@ -65,7 +65,7 @@ public class ReplicaSetStatus implements Model {
   private Number observedGeneration;
 
   /**
-   * The number of ready replicas for this replica set.
+   * readyReplicas is the number of pods targeted by this ReplicaSet with a Ready Condition.
    */
   @JsonProperty("readyReplicas")
   private Number readyReplicas;

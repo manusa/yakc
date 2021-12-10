@@ -45,6 +45,9 @@ public class Probe implements Model {
   @JsonProperty("failureThreshold")
   private Number failureThreshold;
 
+  @JsonProperty("grpc")
+  private GRPCAction grpc;
+
   @JsonProperty("httpGet")
   private HTTPGetAction httpGet;
 

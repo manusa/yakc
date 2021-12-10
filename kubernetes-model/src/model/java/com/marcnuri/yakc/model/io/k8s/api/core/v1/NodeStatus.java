@@ -84,7 +84,7 @@ public class NodeStatus implements Model {
   private NodeSystemInfo nodeInfo;
 
   /**
-   * NodePhase is the recently observed lifecycle phase of the node. More info: https://kubernetes.io/docs/concepts/nodes/node/#phase The field is never populated, and now is deprecated.
+   * NodePhase is the recently observed lifecycle phase of the node. More info: https://kubernetes.io/docs/concepts/nodes/node/#phase The field is never populated, and now is deprecated.<br><p> <br><p> Possible enum values:<br><p>  - `"Pending"` means the node has been created/added by the system, but not configured.<br><p>  - `"Running"` means the node has been configured and has Kubernetes components running.<br><p>  - `"Terminated"` means the node has been removed from the cluster.
    */
   @JsonProperty("phase")
   private String phase;

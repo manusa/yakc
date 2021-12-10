@@ -199,5 +199,12 @@ public class JSONSchemaProps implements Model {
   @JsonProperty("x-kubernetes-preserve-unknown-fields")
   private Boolean xKubernetesPreserveUnknownFields;
 
+  /**
+   * x-kubernetes-validations describes a list of validation rules written in the CEL expression language. This field is an alpha-level. Using this field requires the feature gate `CustomResourceValidationExpressions` to be enabled.
+   */
+  @JsonProperty("x-kubernetes-validations")
+  @Singular(value = "addToXKubernetesValidations", ignoreNullCollections = true)
+  private List<ValidationRule> xKubernetesValidations;
+
 }
 
