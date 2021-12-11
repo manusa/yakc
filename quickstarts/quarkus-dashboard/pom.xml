@@ -11,11 +11,10 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
     <container.image.tag>latest</container.image.tag>
-    <quarkus.package.type>uber-jar</quarkus.package.type>
-    <version.yakc-quarkus-extension>0.0.12</version.yakc-quarkus-extension>
-    <version.quarkus>1.13.3.Final</version.quarkus>
+    <version.yakc-quarkus-extension>0.0.13</version.yakc-quarkus-extension>
+    <version.quarkus>2.5.2.Final</version.quarkus>
     <version.smallrye.reactive>0.16.0</version.smallrye.reactive>
-    <version.jkube>1.2.0</version.jkube>
+    <version.jkube>1.5.1</version.jkube>
     <version.exec-maven-plugin>3.0.0</version.exec-maven-plugin>
     <k8s.namespace>default</k8s.namespace>
   </properties>
@@ -177,7 +176,6 @@
       </activation>
       <properties>
         <quarkus.package.type>native</quarkus.package.type>
-        <jkube.generator.quarkus.nativeImage>true</jkube.generator.quarkus.nativeImage>
         <quarkus.native.additional-build-args>
           -H:ResourceConfigurationFiles=resources-config.json,
           -H:DynamicProxyConfigurationFiles=dynamic-proxy-classes-config.json,
