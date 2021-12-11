@@ -19,8 +19,13 @@ package com.marcnuri.yakc.quickstarts.dashboard;
 
 import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.config.ConfigurationResolver;
+
+import javax.enterprise.event.Observes;
 import javax.inject.Singleton;
 import javax.ws.rs.Produces;
+
+import io.quarkus.runtime.StartupEvent;
+import io.smallrye.mutiny.infrastructure.Infrastructure;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +40,12 @@ public class KubernetesDashboardConfiguration {
 
   @ConfigProperty(name = "yakc.dashboard.insecureSkipTlsVerify", defaultValue = "false")
   boolean insecureSkipTlsVerify;
+
+  void onStart(@Observes StartupEvent event) {
+    // Keep logs clean
+    Infrastructure.setDroppedExceptionHandler(ex ->
+      LOG.error("Mutiny subscription closed with dropped exception {}", ex.getMessage()));
+  }
 
   @Produces
   @Singleton
