@@ -17,7 +17,6 @@
  */
 package com.marcnuri.yakc;
 
-
 import com.marcnuri.yakc.ClusterExecutionCondition.ClusterVersion;
 import com.marcnuri.yakc.api.NotFoundException;
 import com.marcnuri.yakc.api.events.v1.EventsV1Api;
