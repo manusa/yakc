@@ -32,7 +32,7 @@ ext.configurePublishing = { Project evaluatedProject ->
     return
   }
   def delombokedSourceDir = "$buildDir/delombok"
-  def isRelease = version.endsWith('SNAPSHOT')
+  def isRelease = !version.endsWith('SNAPSHOT')
   def ossrhUsername = findProperty("ossrhUsername")
   def ossrhPassword = findProperty("ossrhPassword")
   def releaseUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
