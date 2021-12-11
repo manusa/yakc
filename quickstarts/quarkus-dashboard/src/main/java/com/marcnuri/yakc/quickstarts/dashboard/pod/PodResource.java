@@ -87,7 +87,6 @@ public class PodResource {
     return podService.updatePod(name, namespace, pod);
   }
 
-  @SuppressWarnings("VoidMethodAnnotatedWithGET")
   @GET
   @Produces(MediaType.SERVER_SENT_EVENTS)
   @SseElementType(MediaType.APPLICATION_JSON)
