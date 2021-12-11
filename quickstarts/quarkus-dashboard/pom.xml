@@ -10,6 +10,7 @@
   <properties>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
+    <container.image.tag>latest</container.image.tag>
     <quarkus.package.type>uber-jar</quarkus.package.type>
     <version.yakc-quarkus-extension>0.0.12</version.yakc-quarkus-extension>
     <version.quarkus>1.13.3.Final</version.quarkus>
@@ -142,7 +143,7 @@
     <profile>
       <id>k8s</id>
       <properties>
-        <jkube.generator.name>marcnuri/yakc-kubernetes-dashboard</jkube.generator.name>
+        <jkube.generator.name>marcnuri/yakc-kubernetes-dashboard:${container.image.tag}</jkube.generator.name>
         <jkube.enricher.jkube-service.type>NodePort</jkube.enricher.jkube-service.type>
         <jkube.enricher.jkube-service.name>yakc-dashboard</jkube.enricher.jkube-service.name>
       </properties>

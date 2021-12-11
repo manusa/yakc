@@ -1,4 +1,4 @@
-name: Publish Kubernetes Dashboard
+name: Publish Kubernetes Dashboard Stable
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   publish-image:
-    name: Publish Kubernetes Dashboard
+    name: Publish Kubernetes Dashboard Stable
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
