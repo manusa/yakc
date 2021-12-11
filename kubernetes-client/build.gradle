@@ -7,12 +7,12 @@ ext {
 }
 
 dependencies {
-  compile  project(':kubernetes-client-api')
+  api project(':kubernetes-client-api')
   compileOnly "org.projectlombok:lombok:$version_projectlombok"
-  compile "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$version_jackson"
-  compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$version_jackson"
-  compile "org.bouncycastle:bcprov-jdk15on:$version_bouncycastle"
-  compile "org.bouncycastle:bcpkix-jdk15on:$version_bouncycastle"
+  api "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$version_jackson"
+  api "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$version_jackson"
+  api "org.bouncycastle:bcprov-jdk15on:$version_bouncycastle"
+  api "org.bouncycastle:bcpkix-jdk15on:$version_bouncycastle"
   annotationProcessor "org.projectlombok:lombok:$version_projectlombok"
   testImplementation "org.junit.jupiter:junit-jupiter-api:$version_junit"
   testImplementation "org.assertj:assertj-core:$version_assertj"

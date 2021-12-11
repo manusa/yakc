@@ -7,7 +7,7 @@ ext {
   version_junit = '5.7.0'
   version_mockito = '3.7.0'
   version_mustache = '1.15'
-  version_projectlombok = '1.18.12'
+  version_projectlombok = '1.18.22'
   version_retrofit = '2.8.1'
   version_rxjava2 = '2.2.19'
   version_swagger_parser = '2.0.19'
@@ -31,19 +31,15 @@ ext.configurePublishing = { Project evaluatedProject ->
   if (!evaluatedProject.isPublishable || project.hasProperty("skipPublishing")) {
     return
   }
-  if (project.hasProperty("sign")) {
-    apply plugin: 'signing'
-    signing {
-      def signingKey = findProperty("signingKey")
-      def signingPassword = findProperty("signingPassword")
-      useInMemoryPgpKeys(signingKey, signingPassword)
-      sign configurations.archives
-    }
-  }
+  def delombokedSourceDir = "$buildDir/delombok"
+  def isRelease = version.endsWith('SNAPSHOT')
+  def ossrhUsername = findProperty("ossrhUsername")
+  def ossrhPassword = findProperty("ossrhPassword")
+  def releaseUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+  def snapshotUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+  apply plugin: 'maven-publish'
   apply plugin: 'org.kordamp.gradle.jandex'
   jar.dependsOn jandex
-  apply plugin: 'maven'
-  def delombokedSourceDir = "$buildDir/delombok";
   task delombok(dependsOn: classes) {
     group = 'maven'
     inputs.dir projectDir.toPath().resolve("src").toFile()
@@ -52,7 +48,7 @@ ext.configurePublishing = { Project evaluatedProject ->
       ant.taskdef(
         name: 'delombok',
         classname: 'lombok.delombok.ant.Tasks$Delombok',
-        classpath: configurations.compile.asPath + ";" + configurations.compileOnly.asPath
+        classpath: configurations.compileClasspath.asPath + ";" + configurations.runtimeClasspath.asPath
       )
       ant.mkdir(dir: delombokedSourceDir)
       evaluatedProject.sourceSets.main.java.srcDirs.each { srcDir ->
@@ -63,7 +59,7 @@ ext.configurePublishing = { Project evaluatedProject ->
   task delombokedJavadoc(type: Javadoc, dependsOn: delombok) {
     group = 'maven'
     source = delombokedSourceDir
-    classpath = files(configurations.compile, configurations.compileOnly.asPath)
+    classpath = files(configurations.compileClasspath.asPath, configurations.runtimeClasspath.asPath)
   }
   task sourcesJar(type: Jar, dependsOn: classes) {
     group = 'maven'
@@ -78,50 +74,60 @@ ext.configurePublishing = { Project evaluatedProject ->
   task assemblePublication(dependsOn: [classes, assemble, sourcesJar, javadocJar]) {
     group = 'maven'
   }
-  install.group 'maven'
-  install.dependsOn assemblePublication
-  artifacts {
-    archives sourcesJar
-    archives javadocJar
+  java {
+    withJavadocJar()
+    withSourcesJar()
   }
-  def ossrhUsername = findProperty("ossrhUsername")
-  def ossrhPassword = findProperty("ossrhPassword")
-  uploadArchives {
+  publishing {
     repositories {
-      mavenDeployer {
-        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-        repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
-          authentication(userName: ossrhUsername, password: ossrhPassword)
+      maven {
+        url = isRelease ? releaseUrl : snapshotUrl
+        credentials {
+          username = ossrhUsername
+          password = ossrhPassword
         }
-        snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
-          authentication(userName: ossrhUsername, password: ossrhPassword)
-        }
-        pom.project {
-          name pomName
-          description pomDescription
-          url 'https://github.com/manusa/yakc'
-          packaging 'jar'
+      }
+    }
+    publications {
+      mavenJava(MavenPublication) {
+        from components.java
+        pom {
+          name = pomName
+          description = pomDescription
+          url = 'https://github.com/manusa/yakc'
+          packaging = 'jar'
           scm {
-            connection 'scm:git:git://github.com/manusa/yakc.git'
-            developerConnection 'scm:git:ssh://github.com:manusa/yakc.git'
-            url 'https://github.com/manusa/yakc'
+            connection = 'scm:git:git://github.com/manusa/yakc.git'
+            developerConnection = 'scm:git:ssh://github.com:manusa/yakc.git'
+            url = 'https://github.com/manusa/yakc'
           }
           licenses {
             license {
-              name 'The Apache License, Version 2.0'
-              url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+              name = 'The Apache License, Version 2.0'
+              url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
             }
           }
           developers {
             developer {
-              name 'Marc Nuri'
-              email 'marc@marcnuri.com'
+              name = 'Marc Nuri'
+              email = 'marc@marcnuri.com'
             }
           }
         }
       }
     }
-    uploadArchives.group 'maven'
-    uploadArchives.dependsOn install
+  }
+  publishToMavenLocal.group 'maven'
+  publishToMavenLocal.dependsOn assemblePublication
+  publish.group 'maven'
+  publish.dependsOn publishToMavenLocal
+  if (project.hasProperty("sign")) {
+    apply plugin: 'signing'
+    signing {
+      def signingKey = findProperty("signingKey")
+      def signingPassword = findProperty("signingPassword")
+      useInMemoryPgpKeys(signingKey, signingPassword)
+      sign publishing.publications.mavenJava
+    }
   }
 }

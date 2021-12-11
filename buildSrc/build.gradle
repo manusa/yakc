@@ -10,9 +10,9 @@ java {
 }
 
 dependencies {
-  compile gradleApi()
-  compile "com.samskivert:jmustache:$version_mustache"
-  compile "io.swagger.parser.v3:swagger-parser:$version_swagger_parser"
+  compileOnly gradleApi()
+  compileOnly "com.samskivert:jmustache:$version_mustache"
+  compileOnly "io.swagger.parser.v3:swagger-parser:$version_swagger_parser"
   compileOnly "org.projectlombok:lombok:$version_projectlombok"
   annotationProcessor "org.projectlombok:lombok:$version_projectlombok"
 }
