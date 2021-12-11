@@ -28,6 +28,14 @@ import java.util.Optional;
 
 public interface Watchable<T extends Model> {
 
+  /**
+   * TODO: Document better
+   *
+   * <p> If an Empty Optional is returned, the subscription will not be retried.
+   *
+   * @return an Optional of an Observable WatchEvent
+   * @throws IOException if there are IO problems when opening the watch
+   */
   Optional<Observable<WatchEvent<T>>> watch() throws IOException;
 
   default String getType() {

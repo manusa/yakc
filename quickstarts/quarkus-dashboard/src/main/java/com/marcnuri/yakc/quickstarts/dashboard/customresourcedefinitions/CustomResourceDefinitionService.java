@@ -27,7 +27,6 @@ import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.apiextensions.v1.ApiextensionsV1Api;
 import com.marcnuri.yakc.model.io.k8s.apiextensionsapiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition;
-import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 
 import io.reactivex.Observable;

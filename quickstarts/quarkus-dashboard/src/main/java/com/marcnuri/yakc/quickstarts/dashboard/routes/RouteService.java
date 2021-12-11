@@ -17,52 +17,59 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.routes;
 
-import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
-
-import java.io.IOException;
-import java.util.Optional;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.routeopenshiftio.v1.RouteOpenshiftIoV1Api;
 import com.marcnuri.yakc.model.com.github.openshift.api.route.v1.Route;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
+import com.marcnuri.yakc.quickstarts.dashboard.ApiChecker;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
-
 import io.reactivex.Observable;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.io.IOException;
+import java.util.Optional;
+import java.util.concurrent.TimeUnit;
+
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 @Singleton
 public class RouteService implements Watchable<Route> {
 
-  private final KubernetesClient kubernetesClient;
+  private final RouteOpenshiftIoV1Api routes;
+  private final String namespace;
+  private final ApiChecker apiChecker;
 
   @Inject
   public RouteService(KubernetesClient kubernetesClient) {
-    this.kubernetesClient = kubernetesClient;
+    routes = kubernetesClient.create(RouteOpenshiftIoV1Api.class);
+    namespace = kubernetesClient.getConfiguration().getNamespace();
+    apiChecker = new ApiChecker(routes::getAPIResources);
   }
 
   @Override
   public Optional<Observable<WatchEvent<Route>>> watch() throws IOException {
-    final RouteOpenshiftIoV1Api routes = kubernetesClient.create(RouteOpenshiftIoV1Api.class);
+    if (!apiChecker.isAvailable()) {
+      return Optional.of(Observable.<WatchEvent<Route>>empty()
+        .delay(apiChecker.getCheckIntervalSeconds(), TimeUnit.SECONDS));
+    }
     return tryWithFallback(
       () -> {
         routes.listRouteForAllNamespaces(new RouteOpenshiftIoV1Api.ListRouteForAllNamespaces().limit(1))
           .get();
         return Optional.of(routes.listRouteForAllNamespaces().watch());
       },
-      () -> Optional.of(routes.listNamespacedRoute(kubernetesClient.getConfiguration().getNamespace()).watch()),
+      () -> Optional.of(routes.listNamespacedRoute(namespace).watch()),
       Optional::empty
     );
   }
 
   public Status delete(String name, String namespace) throws IOException {
-    return kubernetesClient.create(RouteOpenshiftIoV1Api.class).deleteNamespacedRoute(name, namespace).get();
+    return routes.deleteNamespacedRoute(name, namespace).get();
   }
 
   public Route update(String name, String namespace, Route route) throws IOException {
-    return kubernetesClient.create(RouteOpenshiftIoV1Api.class).replaceNamespacedRoute(name, namespace, route).get();
+    return routes.replaceNamespacedRoute(name, namespace, route).get();
   }
 }

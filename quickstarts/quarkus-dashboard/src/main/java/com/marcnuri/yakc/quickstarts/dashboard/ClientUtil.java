@@ -5,7 +5,6 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard;
 
-
 import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.ForbiddenException;
 import io.reactivex.Observable;
