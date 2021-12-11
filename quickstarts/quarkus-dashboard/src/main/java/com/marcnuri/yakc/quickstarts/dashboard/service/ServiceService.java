@@ -23,7 +23,6 @@ import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListNamespacedService;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListServiceForAllNamespaces;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Service;
-import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 import javax.inject.Inject;
