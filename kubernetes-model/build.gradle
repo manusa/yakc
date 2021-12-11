@@ -7,7 +7,7 @@ ext {
 }
 
 dependencies {
-  compile  project(':kubernetes-client-api')
+  api project(':kubernetes-client-api')
   compileOnly "com.fasterxml.jackson.core:jackson-databind:$version_jackson"
   compileOnly "org.projectlombok:lombok:$version_projectlombok"
   annotationProcessor "org.projectlombok:lombok:$version_projectlombok"

@@ -7,7 +7,7 @@ ext {
 }
 
 dependencies {
-  compile  project(':kubernetes-model')
+  api project(':kubernetes-model')
   compileOnly "org.projectlombok:lombok:$version_projectlombok"
   annotationProcessor "org.projectlombok:lombok:$version_projectlombok"
 }
