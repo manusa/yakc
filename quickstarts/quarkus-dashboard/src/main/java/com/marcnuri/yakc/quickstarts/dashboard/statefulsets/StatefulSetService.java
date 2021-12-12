@@ -29,12 +29,11 @@ import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import java.io.IOException;
 import java.time.Instant;
-import java.util.Optional;
 
 @Singleton
 public class StatefulSetService implements Watchable<StatefulSet> {
@@ -47,13 +46,13 @@ public class StatefulSetService implements Watchable<StatefulSet> {
   }
 
   @Override
-  public Optional<Observable<WatchEvent<StatefulSet>>> watch() throws IOException {
+  public Observable<WatchEvent<StatefulSet>> watch() throws IOException {
     final AppsV1Api apps = kubernetesClient.create(AppsV1Api.class);
     try {
       apps.listStatefulSetForAllNamespaces(new ListStatefulSetForAllNamespaces().limit(1)).get();
-      return Optional.of(apps.listStatefulSetForAllNamespaces().watch());
+      return apps.listStatefulSetForAllNamespaces().watch();
     } catch (ClientErrorException ex) {
-      return Optional.of(apps.listNamespacedStatefulSet(kubernetesClient.getConfiguration().getNamespace()).watch());
+      return apps.listNamespacedStatefulSet(kubernetesClient.getConfiguration().getNamespace()).watch();
     }
   }
 

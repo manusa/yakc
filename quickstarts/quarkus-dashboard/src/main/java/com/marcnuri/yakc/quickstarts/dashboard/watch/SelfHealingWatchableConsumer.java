@@ -29,10 +29,10 @@ import io.undertow.servlet.handlers.ServletRequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -58,17 +58,17 @@ public class SelfHealingWatchableConsumer implements Consumer<MultiEmitter<Watch
 
   private static final Logger LOG = LoggerFactory.getLogger(SelfHealingWatchableConsumer.class);
 
-  private static final long OBSERVABLE_HEAL_DELAY_SECONDS = 5L;
-
   private final List<Watchable<? extends Model>> watchables;
   private final HttpServerExchange exchange;
   private final Map<Class<? extends Watchable>, Disposable> deferredWatchables;
   private final Map<Class<? extends Watchable>, Disposable> selfHealingSubscriptions;
+  private final Set<Class<? extends Watchable>> finalizedWatchables;
 
   public SelfHealingWatchableConsumer(List<Watchable<? extends Model>> watchables) {
     this.watchables = watchables;
     deferredWatchables = new ConcurrentHashMap<>();
     selfHealingSubscriptions = new ConcurrentHashMap<>();
+    finalizedWatchables = ConcurrentHashMap.newKeySet();
     exchange = ServletRequestContext.requireCurrent().getOriginalRequest().getExchange();
   }
 
@@ -90,27 +90,35 @@ public class SelfHealingWatchableConsumer implements Consumer<MultiEmitter<Watch
 
   /**
    * Encapsulates the Watchable Observable subscription within another Observable
-   * so that the individual subscription process for each watchable can be processed in separate threads
-   * in a non-blocking way.
+   * so that the individual subscription process for each watchable can be processed in separate
+   * threads in a non-blocking way.
    */
   private Observable<WatchEvent<? extends Model>> deferredWatchObservable(
     Watchable<? extends Model> watchable
   ) {
     return Observable.create(emitter -> {
-      try {
-        subscribe(emitter, watchable);
-      } catch (Exception ex) {
-        LOG.error("Error when starting subscription for {}", watchable.getClass(), ex);
-        emitter.onComplete();
-        dispose();
+      boolean subscribed;
+      while (!shouldStopAndDispose(emitter) && !watchable.isAvailable()) {
+        LOG.debug("Watchable {} is not available, waiting for it to become available", watchable.getType());
+        TimeUnit.SECONDS.sleep(watchable.getRetrySubscriptionDelay().getSeconds());
+      }
+      do {
+        subscribed = subscribe(emitter, watchable);
+        if (!subscribed && watchable.isRetrySubscription()) {
+          LOG.debug("Initial subscription for {} failed, retrying...", watchable.getType());
+          TimeUnit.SECONDS.sleep(watchable.getRetrySubscriptionDelay().getSeconds());
+        }
+      } while (!shouldStopAndDispose(emitter) && !subscribed && watchable.isRetrySubscription());
+      if (!subscribed) {
+        finalizedWatchables.add(watchable.getClass());
       }
     });
   }
 
   /**
-   * Dispose all of the currently active subscriptions.
+   * Dispose all the currently active subscriptions.
    *
-   * <p> Should clean-up all of the active threads and Watch connections to the cluster.
+   * <p> Should clean up all the active threads and Watch connections to the cluster.
    */
   public int dispose() {
     selfHealingSubscriptions.values().forEach(Disposable::dispose);
@@ -135,19 +143,28 @@ public class SelfHealingWatchableConsumer implements Consumer<MultiEmitter<Watch
     return emitter.isDisposed() || exchange.isResponseComplete();
   }
 
-  private void subscribe(
+  private boolean subscribe(
     ObservableEmitter<WatchEvent<? extends Model>> emitter, Watchable<? extends Model> watchable
-  ) throws IOException {
+  ) {
     Optional.ofNullable(selfHealingSubscriptions.get(watchable.getClass())).ifPresent(Disposable::dispose);
     if (shouldStopAndDispose(emitter)) {
-      return;
+      return false;
     }
-    watchable.watch().ifPresent(watch -> selfHealingSubscriptions.put(watchable.getClass(),
-      watch.subscribeOn(Schedulers.newThread()).subscribe(
-        selfHealingOnNextConsumer(emitter),
-        selfHealingErrorConsumer(emitter, watchable),
-        selfHealingOnCompleteAction(emitter, watchable)
-    )));
+    try {
+      selfHealingSubscriptions.put(watchable.getClass(),
+        watchable.watch().subscribeOn(Schedulers.newThread()).subscribe(
+          selfHealingOnNextConsumer(emitter),
+          selfHealingErrorConsumer(emitter, watchable),
+          selfHealingOnCompleteAction(emitter, watchable)
+        ));
+      LOG.debug("Subscribed to {}", watchable.getType());
+      return true;
+    } catch (Exception ex) {
+      LOG.info("Error when starting subscription for {}", watchable.getClass(), ex);
+      emitter.onComplete();
+      dispose();
+    }
+    return false;
   }
 
   private io.reactivex.functions.Consumer<WatchEvent<? extends Model>> selfHealingOnNextConsumer(
@@ -165,8 +182,8 @@ public class SelfHealingWatchableConsumer implements Consumer<MultiEmitter<Watch
     ObservableEmitter<WatchEvent<? extends Model>> emitter, Watchable<? extends Model> watchable
   ) {
     return error -> {
-      LOG.error("Subscription error for watchable {}: {}", watchable.getClass(), error.getMessage());
-      TimeUnit.SECONDS.sleep(OBSERVABLE_HEAL_DELAY_SECONDS);
+      LOG.debug("Subscription error for watchable {}: {}", watchable.getClass(), error.getMessage());
+      TimeUnit.SECONDS.sleep(watchable.getSelfHealingDelay().toSeconds());
       emitter.onNext(new WatchEvent<>(WatchEvent.Type.ERROR, new RequestRestartError(watchable, error)));
       subscribe(emitter, watchable);
     };
@@ -176,8 +193,8 @@ public class SelfHealingWatchableConsumer implements Consumer<MultiEmitter<Watch
     ObservableEmitter<WatchEvent<? extends Model>> emitter, Watchable<? extends Model> watchable
   ) {
     return () -> {
-      LOG.warn("Subscription complete for watchable {}, reconnecting...", watchable.getClass());
-      TimeUnit.SECONDS.sleep(OBSERVABLE_HEAL_DELAY_SECONDS);
+      LOG.debug("Subscription complete for watchable {}, reconnecting...", watchable.getClass());
+      TimeUnit.SECONDS.sleep(watchable.getSelfHealingDelay().toSeconds());
       emitter.onNext(new WatchEvent<>(WatchEvent.Type.ERROR, new RequestRestartError(watchable, null)));
       subscribe(emitter, watchable);
     };

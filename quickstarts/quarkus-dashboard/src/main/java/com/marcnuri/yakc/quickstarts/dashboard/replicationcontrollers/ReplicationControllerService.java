@@ -29,7 +29,6 @@ import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
-import java.util.Optional;
 
 @Singleton
 public class ReplicationControllerService implements Watchable<ReplicationController> {
@@ -42,13 +41,13 @@ public class ReplicationControllerService implements Watchable<ReplicationContro
   }
 
   @Override
-  public Optional<Observable<WatchEvent<ReplicationController>>> watch() throws IOException {
+  public Observable<WatchEvent<ReplicationController>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
     try {
       core.listReplicationControllerForAllNamespaces(new CoreV1Api.ListReplicationControllerForAllNamespaces().limit(1)).get();
-      return Optional.of(core.listReplicationControllerForAllNamespaces().watch());
+      return core.listReplicationControllerForAllNamespaces().watch();
     } catch (ClientErrorException ex) {
-      return Optional.of(core.listNamespacedReplicationController(kubernetesClient.getConfiguration().getNamespace()).watch());
+      return core.listNamespacedReplicationController(kubernetesClient.getConfiguration().getNamespace()).watch();
     }
   }
 

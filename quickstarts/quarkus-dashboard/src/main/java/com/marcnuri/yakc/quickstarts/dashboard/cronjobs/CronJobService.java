@@ -50,13 +50,13 @@ public class CronJobService implements Watchable<CronJob> {
   }
 
   @Override
-  public Optional<Observable<WatchEvent<CronJob>>> watch() throws IOException {
+  public Observable<WatchEvent<CronJob>> watch() throws IOException {
     final BatchV1beta1Api batch = kubernetesClient.create(BatchV1beta1Api.class);
     try {
       batch.listCronJobForAllNamespaces(new BatchV1beta1Api.ListCronJobForAllNamespaces().limit(1)).get();
-      return Optional.of(batch.listCronJobForAllNamespaces().watch());
+      return batch.listCronJobForAllNamespaces().watch();
     } catch (ClientErrorException ex) {
-      return Optional.of(batch.listNamespacedCronJob(kubernetesClient.getConfiguration().getNamespace()).watch());
+      return batch.listNamespacedCronJob(kubernetesClient.getConfiguration().getNamespace()).watch();
     }
   }
 

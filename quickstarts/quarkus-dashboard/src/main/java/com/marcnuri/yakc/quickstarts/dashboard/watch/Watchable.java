@@ -23,8 +23,8 @@ import io.reactivex.Observable;
 
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
+import java.time.Duration;
 import java.util.Arrays;
-import java.util.Optional;
 
 public interface Watchable<T extends Model> {
 
@@ -36,16 +36,46 @@ public interface Watchable<T extends Model> {
    * @return an Optional of an Observable WatchEvent
    * @throws IOException if there are IO problems when opening the watch
    */
-  Optional<Observable<WatchEvent<T>>> watch() throws IOException;
+  Observable<WatchEvent<T>> watch() throws IOException;
 
   default String getType() {
     return Arrays.stream(getClass().getGenericInterfaces())
-      .filter(gi -> gi instanceof ParameterizedType)
+      .filter(ParameterizedType.class::isInstance)
       .map(ParameterizedType.class::cast)
       .map(pt -> pt.getActualTypeArguments()[0])
       .map(Class.class::cast)
       .map(Class::getSimpleName)
       .findFirst()
       .orElse("");
+  }
+
+  /**
+   * Should the watch subscription be retried in case of failure.
+   *
+   * <p> Defaults to {@code true}. Override in case the watch subscription
+   * shouldn't be retried in case of failure (e.g. we know that specific
+   * resource won't ever be available in this cluster).
+   *
+   * @return true if the watch subscription should be retried.
+   */
+  default boolean isRetrySubscription() {
+    return true;
+  }
+
+  default Duration getRetrySubscriptionDelay() {
+    return Duration.ofSeconds(30);
+  }
+
+  default Duration getSelfHealingDelay() {
+    return Duration.ofSeconds(5);
+  }
+
+  /**
+   * Is the current resource available in the cluster.
+   *
+   * @return true if the resource API is available in the cluster.
+   */
+  default boolean isAvailable() {
+    return true;
   }
 }

@@ -32,18 +32,17 @@ import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import okhttp3.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Objects;
-import java.util.Optional;
 
 @Singleton
 public class PodService implements Watchable<Pod> {
@@ -58,13 +57,13 @@ public class PodService implements Watchable<Pod> {
   }
 
   @Override
-  public Optional<Observable<WatchEvent<Pod>>> watch() throws IOException {
+  public Observable<WatchEvent<Pod>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
     try {
       core.listPodForAllNamespaces(new ListPodForAllNamespaces().limit(1)).get();
-      return Optional.of(core.listPodForAllNamespaces().watch());
+      return core.listPodForAllNamespaces().watch();
     } catch (ClientErrorException ex) {
-      return Optional.of(core.listNamespacedPod(kubernetesClient.getConfiguration().getNamespace()).watch());
+      return core.listNamespacedPod(kubernetesClient.getConfiguration().getNamespace()).watch();
     }
   }
 

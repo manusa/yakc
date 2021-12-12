@@ -27,30 +27,34 @@ import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
-import java.util.Optional;
-
-import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 @Singleton
 public class ClusterVersionService implements Watchable<ClusterVersion> {
 
-  private final KubernetesClient kubernetesClient;
+  private final ConfigOpenshiftIoV1Api config;
 
   @Inject
   public ClusterVersionService(KubernetesClient kubernetesClient) {
-    this.kubernetesClient = kubernetesClient;
+    config = kubernetesClient.create(ConfigOpenshiftIoV1Api.class);
   }
 
   @Override
-  public Optional<Observable<WatchEvent<ClusterVersion>>> watch() throws IOException {
-    final ConfigOpenshiftIoV1Api config = kubernetesClient.create(ConfigOpenshiftIoV1Api.class);
-    return tryWithFallback(
-      () -> {
-        config.listClusterVersion(new ConfigOpenshiftIoV1Api.ListClusterVersion().limit(1))
-          .get();
-        return Optional.of(config.listClusterVersion().watch());
-      },
-      Optional::empty
-    );
+  public boolean isAvailable() {
+    try {
+       config.listClusterVersion(new ConfigOpenshiftIoV1Api.ListClusterVersion().limit(1)).get();
+       return true;
+    } catch (Exception e) {
+      return false;
+    }
+  }
+
+  @Override
+  public boolean isRetrySubscription() {
+    return false;
+  }
+
+  @Override
+  public Observable<WatchEvent<ClusterVersion>> watch() throws IOException {
+    return config.listClusterVersion().watch();
   }
 }

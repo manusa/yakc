@@ -28,7 +28,6 @@ import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
-import java.util.Optional;
 
 @Singleton
 public class JobService implements Watchable<Job> {
@@ -41,13 +40,13 @@ public class JobService implements Watchable<Job> {
   }
 
   @Override
-  public Optional<Observable<WatchEvent<Job>>> watch() throws IOException {
+  public Observable<WatchEvent<Job>> watch() throws IOException {
     final BatchV1Api batch = kubernetesClient.create(BatchV1Api.class);
     try {
       batch.listJobForAllNamespaces(new BatchV1Api.ListJobForAllNamespaces().limit(1)).get();
-      return Optional.of(batch.listJobForAllNamespaces().watch());
+      return batch.listJobForAllNamespaces().watch();
     } catch (ClientErrorException ex) {
-      return Optional.of(batch.listNamespacedJob(kubernetesClient.getConfiguration().getNamespace()).watch());
+      return batch.listNamespacedJob(kubernetesClient.getConfiguration().getNamespace()).watch();
     }
   }
 

@@ -29,8 +29,6 @@ import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
@@ -49,19 +47,19 @@ public class RouteService implements Watchable<Route> {
   }
 
   @Override
-  public Optional<Observable<WatchEvent<Route>>> watch() throws IOException {
-    if (!apiChecker.isAvailable()) {
-      return Optional.of(Observable.<WatchEvent<Route>>empty()
-        .delay(apiChecker.getCheckIntervalSeconds(), TimeUnit.SECONDS));
-    }
+  public boolean isAvailable() {
+    return apiChecker.isAvailable();
+  }
+
+  @Override
+  public Observable<WatchEvent<Route>> watch() throws IOException {
     return tryWithFallback(
       () -> {
         routes.listRouteForAllNamespaces(new RouteOpenshiftIoV1Api.ListRouteForAllNamespaces().limit(1))
           .get();
-        return Optional.of(routes.listRouteForAllNamespaces().watch());
+        return routes.listRouteForAllNamespaces().watch();
       },
-      () -> Optional.of(routes.listNamespacedRoute(namespace).watch()),
-      Optional::empty
+      () -> routes.listNamespacedRoute(namespace).watch()
     );
   }
 

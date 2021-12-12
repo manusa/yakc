@@ -32,47 +32,55 @@ import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.ignoreForbidden;
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 @Singleton
 public class ClusterRoleBindingService implements Watchable<ClusterRoleBinding> {
 
-  private final KubernetesClient kubernetesClient;
+  private final RbacAuthorizationV1Api rbacAuthV1;
+  private final RbacAuthorizationV1beta1Api rbacAuthV1beta1;
 
   @Inject
   public ClusterRoleBindingService(KubernetesClient kubernetesClient) {
-    this.kubernetesClient = kubernetesClient;
+    rbacAuthV1 = kubernetesClient.create(RbacAuthorizationV1Api.class);
+    rbacAuthV1beta1 = kubernetesClient.create(RbacAuthorizationV1beta1Api.class);
   }
 
   @Override
-  public Optional<Observable<WatchEvent<ClusterRoleBinding>>> watch() throws IOException {
-    return ignoreForbidden(
-      () -> tryWithFallback(
-        () -> {
-          kubernetesClient.create(RbacAuthorizationV1Api.class).listClusterRoleBinding(new ListClusterRoleBinding().limit(1)).get();
-          return Optional.of(kubernetesClient.create(RbacAuthorizationV1Api.class).listClusterRoleBinding().watch());
-        },
-        () -> {
-          kubernetesClient.create(RbacAuthorizationV1beta1Api.class)
-            .listClusterRoleBinding(new RbacAuthorizationV1beta1Api.ListClusterRoleBinding().limit(1)).get();
-          return Optional.of(kubernetesClient.create(RbacAuthorizationV1beta1Api.class).listClusterRoleBinding().watch()
-            .map(ClusterRoleBindingService::to));
-        }
-      ),
-      Optional.empty()
+  public boolean isAvailable() {
+    try {
+      tryWithFallback(
+        () -> rbacAuthV1.listClusterRoleBinding(new ListClusterRoleBinding().limit(1)).get(),
+        () -> rbacAuthV1beta1.listClusterRoleBinding(new RbacAuthorizationV1beta1Api.ListClusterRoleBinding().limit(1))
+          .get()
+      );
+    } catch (Exception e) {
+      return false;
+    }
+    return true;
+  }
+
+  @Override
+  public Observable<WatchEvent<ClusterRoleBinding>> watch() throws IOException {
+    return tryWithFallback(
+      () -> rbacAuthV1.listClusterRoleBinding().watch(),
+      () -> rbacAuthV1beta1.listClusterRoleBinding().watch().map(ClusterRoleBindingService::to)
     );
   }
 
+  @Override
+  public boolean isRetrySubscription() {
+    return false;
+  }
+
   public Status delete(String name) throws IOException {
-    return kubernetesClient.create(RbacAuthorizationV1Api.class).deleteClusterRoleBinding(name).get();
+    return rbacAuthV1.deleteClusterRoleBinding(name).get();
   }
 
   public ClusterRoleBinding update(String name, ClusterRoleBinding clusterRoleBinding) throws IOException {
-    return kubernetesClient.create(RbacAuthorizationV1Api.class).replaceClusterRoleBinding(name, clusterRoleBinding).get();
+    return rbacAuthV1.replaceClusterRoleBinding(name, clusterRoleBinding).get();
   }
 
   static WatchEvent<ClusterRoleBinding> to(WatchEvent<com.marcnuri.yakc.model.io.k8s.api.rbac.v1beta1.ClusterRoleBinding> from) {
