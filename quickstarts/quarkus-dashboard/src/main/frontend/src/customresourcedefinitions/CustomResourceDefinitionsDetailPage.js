@@ -16,6 +16,7 @@
  */
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import crd from './';
 import cr from '../customresources'
@@ -109,7 +110,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  customResourceDefinition: stateProps.customResourceDefinitions[ownProps.match.params.uid],
+  customResourceDefinition: stateProps.customResourceDefinitions[ownProps.params.uid],
 });
 
-export default connect(mapStateToProps, null, mergeProps)(CustomResourceDefinitionsDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(CustomResourceDefinitionsDetailPage));

@@ -15,12 +15,13 @@
  *
  */
 import React from 'react';
+import {withParams} from '../router';
 import md from '../metadata';
 import pv from './';
 import ResourceEditPage from '../components/ResourceEditPage';
 import Link from '../components/Link';
 
-const PersistentVolumesEditPage = ({match: {params: {uid}}}) => (
+const PersistentVolumesEditPage = ({params: {uid}}) => (
   <ResourceEditPage
     kind='PersistentVolumes'
     path='persistentvolumes'
@@ -32,4 +33,4 @@ const PersistentVolumesEditPage = ({match: {params: {uid}}}) => (
   />
 );
 
-export default PersistentVolumesEditPage;
+export default withParams(PersistentVolumesEditPage);

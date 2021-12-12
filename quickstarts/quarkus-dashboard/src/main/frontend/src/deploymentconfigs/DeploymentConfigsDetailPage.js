@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import cnt from '../containers';
 import dc from './';
@@ -86,11 +87,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  deploymentConfig: stateProps.deploymentConfigs[ownProps.match.params.uid],
+  deploymentConfig: stateProps.deploymentConfigs[ownProps.params.uid],
   replicationControllersUids: Object.values(stateProps.replicationControllers)
     .filter(replicationController => metadata.selectors.ownerReferencesUids(replicationController)
-      .includes(metadata.selectors.uid(stateProps.deploymentConfigs[ownProps.match.params.uid])))
+      .includes(metadata.selectors.uid(stateProps.deploymentConfigs[ownProps.params.uid])))
     .map(replicationController => metadata.selectors.uid(replicationController))
 });
 
-export default connect(mapStateToProps, null, mergeProps)(DeploymentConfigsDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(DeploymentConfigsDetailPage));

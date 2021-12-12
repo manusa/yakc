@@ -15,12 +15,13 @@
  *
  */
 import React from 'react';
+import {withParams} from '../router';
 import md from '../metadata';
 import p from './';
 import ResourceEditPage from '../components/ResourceEditPage';
 import Link from '../components/Link';
 
-const PodsEditPage = ({match: {params: {uid}}}) => (
+const PodsEditPage = ({params: {uid}}) => (
   <ResourceEditPage
     kind='Pods'
     path='pods'
@@ -32,4 +33,4 @@ const PodsEditPage = ({match: {params: {uid}}}) => (
   />
 );
 
-export default PodsEditPage;
+export default withParams(PodsEditPage);

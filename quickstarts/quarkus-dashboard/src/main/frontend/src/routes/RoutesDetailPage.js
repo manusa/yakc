@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import r from './';
 import Form from '../components/Form';
@@ -44,7 +45,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  route: stateProps.routes[ownProps.match.params.uid],
+  route: stateProps.routes[ownProps.params.uid],
 });
 
-export default connect(mapStateToProps, null, mergeProps)(RoutesDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(RoutesDetailPage));

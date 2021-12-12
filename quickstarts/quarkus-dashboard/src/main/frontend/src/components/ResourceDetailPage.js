@@ -19,10 +19,10 @@ import YAML from 'yaml';
 import metadata from '../metadata';
 import Card from './Card';
 import DashboardPage from './DashboardPage';
-import Icon from "./Icon";
+import Icon from './Icon';
 import Link from './Link';
-import PopupMenu from "./PopupMenu";
-import {useHistory} from "react-router-dom";
+import PopupMenu from './PopupMenu';
+import {useNavigate} from 'react-router-dom';
 
 const downloadResource = resource => {
   const mimeType = 'text/yaml';
@@ -50,10 +50,10 @@ const ResourceDetailPage = ({
   children
 }) => {
   const namespace = metadata.selectors.namespace(resource);
-  const history = useHistory();
+  const navigate = useNavigate();
   const deleteAction = () => {
     deleteFunction(resource);
-    history.push(`/${path}`);
+    navigate(`/${path}`);
   };
   return (
     <DashboardPage

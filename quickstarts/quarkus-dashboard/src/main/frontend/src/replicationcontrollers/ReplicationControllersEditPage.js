@@ -15,12 +15,13 @@
  *
  */
 import React from 'react';
+import {withParams} from '../router';
 import md from '../metadata';
 import rc from './';
 import ResourceEditPage from '../components/ResourceEditPage';
 import Link from '../components/Link';
 
-const ReplicationControllersEditPage = ({match: {params: {uid}}}) => (
+const ReplicationControllersEditPage = ({params: {uid}}) => (
   <ResourceEditPage
     kind='ReplicationControllers'
     path='replicationcontrollers'
@@ -32,4 +33,4 @@ const ReplicationControllersEditPage = ({match: {params: {uid}}}) => (
   />
 );
 
-export default ReplicationControllersEditPage;
+export default withParams(ReplicationControllersEditPage);

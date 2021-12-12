@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import hpa from './';
 import Form from '../components/Form';
@@ -41,8 +42,8 @@ const mapStateToProps = ({horizontalPodAutoscalers}) => ({
   horizontalPodAutoscalers
 });
 
-const mergeProps = ({horizontalPodAutoscalers}, dispatchProps, {match: {params: {uid}}}) => ({
+const mergeProps = ({horizontalPodAutoscalers}, dispatchProps, {params: {uid}}) => ({
   horizontalPodAutoscaler: horizontalPodAutoscalers[uid]
 });
 
-export default connect(mapStateToProps, null, mergeProps)(HorizontalPodAutoscalersDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(HorizontalPodAutoscalersDetailPage));

@@ -15,12 +15,13 @@
  *
  */
 import React from 'react';
+import {withParams} from '../router';
 import md from '../metadata';
 import i from './';
 import ResourceEditPage from '../components/ResourceEditPage';
 import Link from '../components/Link';
 
-const IngressesEditPage = ({match: {params: {uid}}}) => (
+const IngressesEditPage = ({params: {uid}}) => (
   <ResourceEditPage
     kind='Ingresses'
     path='ingresses'
@@ -32,4 +33,4 @@ const IngressesEditPage = ({match: {params: {uid}}}) => (
   />
 );
 
-export default IngressesEditPage;
+export default withParams(IngressesEditPage);

@@ -15,12 +15,13 @@
  *
  */
 import React from 'react';
+import {withParams} from '../router';
 import md from '../metadata';
 import r from './';
 import ResourceEditPage from '../components/ResourceEditPage';
 import Link from '../components/Link';
 
-const RoutesEditPage = ({match: {params: {uid}}}) => (
+const RoutesEditPage = ({params: {uid}}) => (
   <ResourceEditPage
     kind='Routes'
     path='routes'
@@ -32,4 +33,4 @@ const RoutesEditPage = ({match: {params: {uid}}}) => (
   />
 );
 
-export default RoutesEditPage;
+export default withParams(RoutesEditPage);

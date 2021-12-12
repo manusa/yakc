@@ -16,6 +16,7 @@
  */
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import s from './';
 import metadata from '../metadata';
 import Form from '../components/Form';
@@ -82,7 +83,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  secret: stateProps.secrets[ownProps.match.params.uid],
+  secret: stateProps.secrets[ownProps.params.uid],
 });
 
-export default connect(mapStateToProps, null, mergeProps)(SecretsDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(SecretsDetailPage));

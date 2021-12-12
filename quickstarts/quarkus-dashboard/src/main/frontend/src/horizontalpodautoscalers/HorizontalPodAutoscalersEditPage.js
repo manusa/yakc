@@ -15,12 +15,13 @@
  *
  */
 import React from 'react';
+import {withParams} from '../router';
 import md from '../metadata';
 import hpa from './';
 import ResourceEditPage from '../components/ResourceEditPage';
 import Link from '../components/Link';
 
-const HorizontalPodAutoscalersEditPage = ({match: {params: {uid}}}) => (
+const HorizontalPodAutoscalersEditPage = ({params: {uid}}) => (
   <ResourceEditPage
     kind='HorizontalPodAutoscalers'h
     path='horizontalpodautoscalers'
@@ -32,4 +33,4 @@ const HorizontalPodAutoscalersEditPage = ({match: {params: {uid}}}) => (
   />
 );
 
-export default HorizontalPodAutoscalersEditPage;
+export default withParams(HorizontalPodAutoscalersEditPage);

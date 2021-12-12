@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import svc from './';
 import Card from '../components/Card';
@@ -73,7 +74,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  service: stateProps.services[ownProps.match.params.uid],
+  service: stateProps.services[ownProps.params.uid],
 });
 
-export default connect(mapStateToProps, null, mergeProps)(ServicesDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(ServicesDetailPage));

@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import cnt from '../containers';
 import sts from './';
@@ -74,8 +75,8 @@ const mapStateToProps = ({statefulSets}) => ({
   statefulSets,
 });
 
-const mergeProps = ({statefulSets}, dispatchProps, {match: {params: {uid}}}) => ({
-  statefulSet: statefulSets[uid],
+const mergeProps = ({statefulSets}, dispatchProps, ownProps) => ({
+  statefulSet: statefulSets[ownProps.params.uid],
 });
 
-export default connect(mapStateToProps, null, mergeProps)(StatefulSetsDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(StatefulSetsDetailPage));

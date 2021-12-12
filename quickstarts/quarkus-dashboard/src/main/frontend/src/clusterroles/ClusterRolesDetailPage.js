@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import cRoles from './';
 import crb from '../clusterrolebindings';
@@ -52,7 +53,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  clusterRole: metadata.selectors.byUidOrName(stateProps.clusterRoles, ownProps.match.params.uidOrName)
+  clusterRole: metadata.selectors.byUidOrName(stateProps.clusterRoles, ownProps.params.uidOrName)
 });
 
-export default connect(mapStateToProps, null, mergeProps)(ClusterRolesDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(ClusterRolesDetailPage));
