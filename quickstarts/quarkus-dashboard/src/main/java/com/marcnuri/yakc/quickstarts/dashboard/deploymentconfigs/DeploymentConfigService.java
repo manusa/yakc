@@ -59,19 +59,19 @@ public class DeploymentConfigService implements Watchable<DeploymentConfig> {
   }
 
   @Override
-  public Optional<Observable<WatchEvent<DeploymentConfig>>> watch() throws IOException {
-    if (!apiChecker.isAvailable()) {
-      return Optional.of(Observable.<WatchEvent<DeploymentConfig>>empty()
-        .delay(apiChecker.getCheckIntervalSeconds(), TimeUnit.SECONDS));
-    }
+  public boolean isAvailable() {
+    return apiChecker.isAvailable();
+  }
+
+  @Override
+  public Observable<WatchEvent<DeploymentConfig>> watch() throws IOException {
     return tryWithFallback(
       () -> {
         apps.listDeploymentConfigForAllNamespaces(new AppsOpenshiftIoV1Api.ListDeploymentConfigForAllNamespaces().limit(1))
           .get();
-        return Optional.of(apps.listDeploymentConfigForAllNamespaces().watch());
+        return apps.listDeploymentConfigForAllNamespaces().watch();
       },
-      () -> Optional.of(apps.listNamespacedDeploymentConfig(namespace).watch()),
-      Optional::empty
+      () -> apps.listNamespacedDeploymentConfig(namespace).watch()
     );
   }
 

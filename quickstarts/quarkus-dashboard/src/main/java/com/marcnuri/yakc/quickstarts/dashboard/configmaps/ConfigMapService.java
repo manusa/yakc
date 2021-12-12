@@ -26,12 +26,11 @@ import com.marcnuri.yakc.model.io.k8s.api.core.v1.ConfigMap;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
@@ -54,13 +53,13 @@ public class ConfigMapService implements Watchable<ConfigMap> {
   }
 
   @Override
-  public Optional<Observable<WatchEvent<ConfigMap>>> watch() throws IOException {
+  public Observable<WatchEvent<ConfigMap>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
     try {
       core.listConfigMapForAllNamespaces(new ListConfigMapForAllNamespaces().limit(1)).get();
-      return Optional.of(core.listConfigMapForAllNamespaces().watch());
+      return core.listConfigMapForAllNamespaces().watch();
     } catch (ClientErrorException ex) {
-      return Optional.of(core.listNamespacedConfigMap(kubernetesClient.getConfiguration().getNamespace()).watch());
+      return core.listNamespacedConfigMap(kubernetesClient.getConfiguration().getNamespace()).watch();
     }
   }
 

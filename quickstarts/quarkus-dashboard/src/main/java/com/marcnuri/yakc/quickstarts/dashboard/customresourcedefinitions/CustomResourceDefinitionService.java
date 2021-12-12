@@ -17,19 +17,16 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.customresourcedefinitions;
 
-import java.io.IOException;
-import java.util.Optional;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.apiextensions.v1.ApiextensionsV1Api;
 import com.marcnuri.yakc.model.io.k8s.apiextensionsapiserver.pkg.apis.apiextensions.v1.CustomResourceDefinition;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
-
 import io.reactivex.Observable;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.io.IOException;
 
 @Singleton
 public class CustomResourceDefinitionService implements Watchable<CustomResourceDefinition> {
@@ -42,8 +39,8 @@ public class CustomResourceDefinitionService implements Watchable<CustomResource
   }
 
   @Override
-  public Optional<Observable<WatchEvent<CustomResourceDefinition>>> watch() throws IOException {
-    return Optional.of(kubernetesClient.create(ApiextensionsV1Api.class).listCustomResourceDefinition().watch());
+  public Observable<WatchEvent<CustomResourceDefinition>> watch() throws IOException {
+    return kubernetesClient.create(ApiextensionsV1Api.class).listCustomResourceDefinition().watch();
   }
 
   public CustomResourceDefinition delete(String name) throws IOException {

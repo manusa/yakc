@@ -17,22 +17,16 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.node;
 
-import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.ignoreForbidden;
-
-import java.io.IOException;
-import java.util.Optional;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
-import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListNode;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Node;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
-
 import io.reactivex.Observable;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.io.IOException;
 
 @Singleton
 public class NodeService implements Watchable<Node> {
@@ -45,15 +39,14 @@ public class NodeService implements Watchable<Node> {
   }
 
   @Override
-  public Optional<Observable<WatchEvent<Node>>> watch() throws IOException {
+  public boolean isRetrySubscription() {
+    return false;
+  }
+
+  @Override
+  public Observable<WatchEvent<Node>> watch() throws IOException {
     final CoreV1Api core = kubernetesClient.create(CoreV1Api.class);
-    return ignoreForbidden(
-      () -> {
-        core.listNode(new ListNode().limit(1)).get();
-        return Optional.of(core.listNode().watch());
-      },
-      Optional.empty()
-    );
+    return core.listNode().watch();
   }
 
   public Node update(String name, Node node) throws IOException {

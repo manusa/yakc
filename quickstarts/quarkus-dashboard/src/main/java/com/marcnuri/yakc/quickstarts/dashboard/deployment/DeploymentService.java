@@ -47,13 +47,13 @@ public class DeploymentService implements Watchable<Deployment> {
   }
 
   @Override
-  public Optional<Observable<WatchEvent<Deployment>>> watch() throws IOException {
+  public Observable<WatchEvent<Deployment>> watch() throws IOException {
     final AppsV1Api apps = kubernetesClient.create(AppsV1Api.class);
     try {
       apps.listDeploymentForAllNamespaces(new ListDeploymentForAllNamespaces().limit(1)).get();
-      return Optional.of(apps.listDeploymentForAllNamespaces().watch());
+      return apps.listDeploymentForAllNamespaces().watch();
     } catch (ClientErrorException ex) {
-      return Optional.of(apps.listNamespacedDeployment(kubernetesClient.getConfiguration().getNamespace()).watch());
+      return apps.listNamespacedDeployment(kubernetesClient.getConfiguration().getNamespace()).watch();
     }
   }
 

@@ -43,16 +43,20 @@ public class HorizontalPodAutoscalerService implements Watchable<HorizontalPodAu
   }
 
   @Override
-  public Optional<Observable<WatchEvent<HorizontalPodAutoscaler>>> watch() throws IOException {
+  public boolean isRetrySubscription() {
+    return false;
+  }
+
+  @Override
+  public Observable<WatchEvent<HorizontalPodAutoscaler>> watch() throws IOException {
     final AutoscalingV1Api autoscaling = kubernetesClient.create(AutoscalingV1Api.class);
     return tryWithFallback(
       () -> {
         autoscaling.listHorizontalPodAutoscalerForAllNamespaces(new AutoscalingV1Api.ListHorizontalPodAutoscalerForAllNamespaces().limit(1))
           .get();
-        return Optional.of(autoscaling.listHorizontalPodAutoscalerForAllNamespaces().watch());
+        return autoscaling.listHorizontalPodAutoscalerForAllNamespaces().watch();
       },
-      () -> Optional.of(autoscaling.listNamespacedHorizontalPodAutoscaler(kubernetesClient.getConfiguration().getNamespace()).watch()),
-      Optional::empty
+      () -> autoscaling.listNamespacedHorizontalPodAutoscaler(kubernetesClient.getConfiguration().getNamespace()).watch()
     );
   }
 

@@ -17,13 +17,6 @@
  */
 package com.marcnuri.yakc.quickstarts.dashboard.daemonsets;
 
-import java.io.IOException;
-import java.time.Instant;
-import java.util.Optional;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
@@ -34,8 +27,12 @@ import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodTemplateSpec;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
-
 import io.reactivex.Observable;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.io.IOException;
+import java.time.Instant;
 
 @Singleton
 public class DaemonSetService implements Watchable<DaemonSet> {
@@ -48,13 +45,13 @@ public class DaemonSetService implements Watchable<DaemonSet> {
   }
 
   @Override
-  public Optional<Observable<WatchEvent<DaemonSet>>> watch() throws IOException {
+  public Observable<WatchEvent<DaemonSet>> watch() throws IOException {
     final AppsV1Api apps = kubernetesClient.create(AppsV1Api.class);
     try {
       apps.listDaemonSetForAllNamespaces(new AppsV1Api.ListDaemonSetForAllNamespaces().limit(1)).get();
-      return Optional.of(apps.listDaemonSetForAllNamespaces().watch());
+      return apps.listDaemonSetForAllNamespaces().watch();
     } catch (ClientErrorException ex) {
-      return Optional.of(apps.listNamespacedDaemonSet(kubernetesClient.getConfiguration().getNamespace()).watch());
+      return apps.listNamespacedDaemonSet(kubernetesClient.getConfiguration().getNamespace()).watch();
     }
   }
 

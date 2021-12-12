@@ -25,12 +25,11 @@ import com.marcnuri.yakc.api.core.v1.CoreV1Api.ListServiceForAllNamespaces;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Service;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
@@ -45,17 +44,17 @@ public class ServiceService implements Watchable<Service> {
   }
 
   @Override
-  public Optional<Observable<WatchEvent<Service>>> watch() throws IOException {
+  public Observable<WatchEvent<Service>> watch() throws IOException {
     final CoreV1Api api = kubernetesClient.create(CoreV1Api.class);
     return tryWithFallback(
       () -> {
         api.listServiceForAllNamespaces(new ListServiceForAllNamespaces().limit(1)).get();
-        return Optional.of(api.listServiceForAllNamespaces().watch());
+        return api.listServiceForAllNamespaces().watch();
       },
       () -> {
         final String ns = kubernetesClient.getConfiguration().getNamespace();
         api.listNamespacedService(ns, new ListNamespacedService().limit(1)).get();
-        return Optional.of(api.listNamespacedService(ns).watch());
+        return api.listNamespacedService(ns).watch();
       }
     );
   }

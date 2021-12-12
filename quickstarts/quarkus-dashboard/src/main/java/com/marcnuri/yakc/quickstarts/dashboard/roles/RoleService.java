@@ -28,11 +28,10 @@ import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import com.marcnuri.yakc.quickstarts.dashboard.clusterroles.ClusterRoleService;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import java.io.IOException;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
@@ -48,9 +47,9 @@ public class RoleService implements Watchable<Role> {
   }
 
   @Override
-  public Optional<Observable<WatchEvent<Role>>> watch() throws IOException {
+  public Observable<WatchEvent<Role>> watch() throws IOException {
     final String ns = kubernetesClient.getConfiguration().getNamespace();
-    return Optional.of(tryWithFallback(
+    return tryWithFallback(
       () -> {
         kubernetesClient.create(RbacAuthorizationV1Api.class)
           .listRoleForAllNamespaces(new ListRoleForAllNamespaces().limit(1)).get();
@@ -73,7 +72,7 @@ public class RoleService implements Watchable<Role> {
         return kubernetesClient.create(RbacAuthorizationV1beta1Api.class).listNamespacedRole(ns).watch()
           .map(RoleService::to);
       }
-    ));
+    );
   }
 
   public Status delete(String name, String namespace) throws IOException {

@@ -27,35 +27,35 @@ import com.marcnuri.yakc.model.io.k8s.api.apps.v1.ReplicaSet;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import java.io.IOException;
-import java.util.Optional;
 
 @Singleton
 public class ReplicaSetService implements Watchable<ReplicaSet> {
 
-  private final KubernetesClient kubernetesClient;
+  private final AppsV1Api apps;
+  private final String namespace;
 
   @Inject
   public ReplicaSetService(KubernetesClient kubernetesClient) {
-    this.kubernetesClient = kubernetesClient;
+    apps = kubernetesClient.create(AppsV1Api.class);
+    namespace = kubernetesClient.getConfiguration().getNamespace();
   }
 
   @Override
-  public Optional<Observable<WatchEvent<ReplicaSet>>> watch() throws IOException {
-    final AppsV1Api apps = kubernetesClient.create(AppsV1Api.class);
+  public Observable<WatchEvent<ReplicaSet>> watch() throws IOException {
     try {
       apps.listReplicaSetForAllNamespaces(new ListReplicaSetForAllNamespaces().limit(1)).get();
-      return Optional.of(apps.listReplicaSetForAllNamespaces().watch());
+      return apps.listReplicaSetForAllNamespaces().watch();
     } catch (ClientErrorException ex) {
-      return Optional.of(apps.listNamespacedReplicaSet(kubernetesClient.getConfiguration().getNamespace()).watch());
+      return apps.listNamespacedReplicaSet(namespace).watch();
     }
   }
 
   public Status deleteReplicaSet(String name, String namespace) throws IOException {
-    return kubernetesClient.create(AppsV1Api.class).deleteNamespacedReplicaSet(name, namespace).get();
+    return apps.deleteNamespacedReplicaSet(name, namespace).get();
   }
 
 }
