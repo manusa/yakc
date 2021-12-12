@@ -22,13 +22,14 @@ import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.routeopenshiftio.v1.RouteOpenshiftIoV1Api;
 import com.marcnuri.yakc.model.com.github.openshift.api.route.v1.Route;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
-import com.marcnuri.yakc.quickstarts.dashboard.ApiChecker;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
+import java.util.Optional;
+import java.util.concurrent.Callable;
 
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
@@ -37,18 +38,16 @@ public class RouteService implements Watchable<Route> {
 
   private final RouteOpenshiftIoV1Api routes;
   private final String namespace;
-  private final ApiChecker apiChecker;
 
   @Inject
   public RouteService(KubernetesClient kubernetesClient) {
     routes = kubernetesClient.create(RouteOpenshiftIoV1Api.class);
     namespace = kubernetesClient.getConfiguration().getNamespace();
-    apiChecker = new ApiChecker(routes::getAPIResources);
   }
 
   @Override
-  public boolean isAvailable() {
-    return apiChecker.isAvailable();
+  public Optional<Callable<Object>> getAvailabilityCheckFunction() {
+    return Optional.of(routes.getAPIResources()::executeRaw);
   }
 
   @Override

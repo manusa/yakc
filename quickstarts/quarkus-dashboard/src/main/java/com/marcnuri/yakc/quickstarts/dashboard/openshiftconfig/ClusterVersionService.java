@@ -27,6 +27,8 @@ import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
+import java.util.Optional;
+import java.util.concurrent.Callable;
 
 @Singleton
 public class ClusterVersionService implements Watchable<ClusterVersion> {
@@ -39,13 +41,9 @@ public class ClusterVersionService implements Watchable<ClusterVersion> {
   }
 
   @Override
-  public boolean isAvailable() {
-    try {
-       config.listClusterVersion(new ConfigOpenshiftIoV1Api.ListClusterVersion().limit(1)).get();
-       return true;
-    } catch (Exception e) {
-      return false;
-    }
+  public Optional<Callable<Object>> getAvailabilityCheckFunction() {
+    return Optional.of(() -> config.listClusterVersion(new ConfigOpenshiftIoV1Api.ListClusterVersion().limit(1))
+      .executeRaw());
   }
 
   @Override

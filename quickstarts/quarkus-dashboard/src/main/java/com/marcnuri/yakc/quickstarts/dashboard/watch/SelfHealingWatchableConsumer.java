@@ -59,16 +59,18 @@ public class SelfHealingWatchableConsumer implements Consumer<MultiEmitter<Watch
   private static final Logger LOG = LoggerFactory.getLogger(SelfHealingWatchableConsumer.class);
 
   private final List<Watchable<? extends Model>> watchables;
-  private final HttpServerExchange exchange;
   private final Map<Class<? extends Watchable>, Disposable> deferredWatchables;
   private final Map<Class<? extends Watchable>, Disposable> selfHealingSubscriptions;
   private final Set<Class<? extends Watchable>> finalizedWatchables;
+  private final ApiAvailability apiAvailability;
+  private final HttpServerExchange exchange;
 
   public SelfHealingWatchableConsumer(List<Watchable<? extends Model>> watchables) {
     this.watchables = watchables;
     deferredWatchables = new ConcurrentHashMap<>();
     selfHealingSubscriptions = new ConcurrentHashMap<>();
     finalizedWatchables = ConcurrentHashMap.newKeySet();
+    apiAvailability = new ApiAvailability();
     exchange = ServletRequestContext.requireCurrent().getOriginalRequest().getExchange();
   }
 
@@ -98,7 +100,7 @@ public class SelfHealingWatchableConsumer implements Consumer<MultiEmitter<Watch
   ) {
     return Observable.create(emitter -> {
       boolean subscribed;
-      while (!shouldStopAndDispose(emitter) && !watchable.isAvailable()) {
+      while (!shouldStopAndDispose(emitter) && !apiAvailability.isAvailable(watchable)) {
         LOG.debug("Watchable {} is not available, waiting for it to become available", watchable.getType());
         TimeUnit.SECONDS.sleep(watchable.getRetrySubscriptionDelay().getSeconds());
       }

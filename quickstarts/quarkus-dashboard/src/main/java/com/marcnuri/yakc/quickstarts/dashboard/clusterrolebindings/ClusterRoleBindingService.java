@@ -32,6 +32,8 @@ import io.reactivex.Observable;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
+import java.util.Optional;
+import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
@@ -49,17 +51,12 @@ public class ClusterRoleBindingService implements Watchable<ClusterRoleBinding> 
   }
 
   @Override
-  public boolean isAvailable() {
-    try {
-      tryWithFallback(
-        () -> rbacAuthV1.listClusterRoleBinding(new ListClusterRoleBinding().limit(1)).get(),
-        () -> rbacAuthV1beta1.listClusterRoleBinding(new RbacAuthorizationV1beta1Api.ListClusterRoleBinding().limit(1))
-          .get()
-      );
-    } catch (Exception e) {
-      return false;
-    }
-    return true;
+  public Optional<Callable<Object>> getAvailabilityCheckFunction() {
+    return Optional.of(() -> tryWithFallback(
+      () -> rbacAuthV1.listClusterRoleBinding(new ListClusterRoleBinding().limit(1)).executeRaw(),
+      () -> rbacAuthV1beta1.listClusterRoleBinding(new RbacAuthorizationV1beta1Api.ListClusterRoleBinding().limit(1))
+        .executeRaw()
+    ));
   }
 
   @Override

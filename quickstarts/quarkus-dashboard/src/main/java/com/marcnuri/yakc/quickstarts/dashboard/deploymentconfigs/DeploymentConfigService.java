@@ -25,7 +25,6 @@ import com.marcnuri.yakc.model.com.github.openshift.api.apps.v1.DeploymentConfig
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodTemplateSpec;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
-import com.marcnuri.yakc.quickstarts.dashboard.ApiChecker;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 
@@ -34,7 +33,7 @@ import javax.inject.Singleton;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.Callable;
 
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
@@ -43,13 +42,11 @@ public class DeploymentConfigService implements Watchable<DeploymentConfig> {
 
   private final AppsOpenshiftIoV1Api apps;
   private final String namespace;
-  private final ApiChecker apiChecker;
 
   @Inject
   public DeploymentConfigService(KubernetesClient kubernetesClient) {
     apps = kubernetesClient.create(AppsOpenshiftIoV1Api.class);
     namespace = kubernetesClient.getConfiguration().getNamespace();
-    apiChecker = new ApiChecker(apps::getAPIResources);
   }
 
   private static DeploymentConfig emptyDeploymentConfig() {
@@ -59,8 +56,8 @@ public class DeploymentConfigService implements Watchable<DeploymentConfig> {
   }
 
   @Override
-  public boolean isAvailable() {
-    return apiChecker.isAvailable();
+  public Optional<Callable<Object>> getAvailabilityCheckFunction() {
+    return Optional.of(apps.getAPIResources()::executeRaw);
   }
 
   @Override
