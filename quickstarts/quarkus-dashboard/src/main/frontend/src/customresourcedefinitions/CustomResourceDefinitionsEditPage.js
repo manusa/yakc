@@ -15,12 +15,13 @@
  *
  */
 import React from 'react';
+import {withParams} from '../router';
 import md from '../metadata';
 import crd from './';
 import ResourceEditPage from '../components/ResourceEditPage';
 import Link from '../components/Link';
 
-const CustomResourceDefinitionsEditPage = ({match: {params: {uid}}}) => (
+const CustomResourceDefinitionsEditPage = ({params: {uid}}) => (
   <ResourceEditPage
     kind='CustomResourceDefinitions'
     path='customresourcedefinitions'
@@ -35,4 +36,4 @@ const CustomResourceDefinitionsEditPage = ({match: {params: {uid}}}) => (
   />
 );
 
-export default CustomResourceDefinitionsEditPage;
+export default withParams(CustomResourceDefinitionsEditPage);

@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import ns from './';
 import Form from '../components/Form';
@@ -47,7 +48,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  namespace: metadata.selectors.byUidOrName(stateProps.namespaces, ownProps.match.params.uidOrName)
+  namespace: metadata.selectors.byUidOrName(stateProps.namespaces, ownProps.params.uidOrName)
 });
 
-export default connect(mapStateToProps, null, mergeProps)(NamespacesDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(NamespacesDetailPage));

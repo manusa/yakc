@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import cnt from '../containers';
 import p from './index';
@@ -60,7 +61,7 @@ const PodsExecPage = ({uid, namespace, name, containers}) => {
 
 const mapStateToProps = ({pods}) => ({pods});
 
-const mergeProps = ({pods}, dispatchProps, {match: {params: {uid}}}) => ({
+const mergeProps = ({pods}, dispatchProps, {params: {uid}}) => ({
   ...dispatchProps,
   uid,
   namespace: metadata.selectors.namespace(pods[uid]),
@@ -68,4 +69,4 @@ const mergeProps = ({pods}, dispatchProps, {match: {params: {uid}}}) => ({
   containers: p.selectors.containers(pods[uid])
 });
 
-export default connect(mapStateToProps, null, mergeProps)(PodsExecPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(PodsExecPage));

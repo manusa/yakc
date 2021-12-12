@@ -15,12 +15,13 @@
  *
  */
 import React from 'react';
+import {withParams} from '../router';
 import md from '../metadata';
 import ds from './';
 import ResourceEditPage from '../components/ResourceEditPage';
 import Link from '../components/Link';
 
-const DaemonSetsEditPage = ({match: {params: {uid}}}) => (
+const DaemonSetsEditPage = ({params: {uid}}) => (
   <ResourceEditPage
     kind='DaemonSets'
     path='daemonsets'
@@ -32,4 +33,4 @@ const DaemonSetsEditPage = ({match: {params: {uid}}}) => (
   />
 );
 
-export default DaemonSetsEditPage;
+export default withParams(DaemonSetsEditPage);

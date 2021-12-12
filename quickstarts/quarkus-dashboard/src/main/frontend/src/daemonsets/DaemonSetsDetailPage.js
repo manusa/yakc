@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import cnt from '../containers';
 import ds from './';
@@ -69,8 +70,8 @@ const mapStateToProps = ({daemonSets}) => ({
   daemonSets
 });
 
-const mergeProps = ({daemonSets}, dispatchProps, {match: {params: {uid}}}) => ({
+const mergeProps = ({daemonSets}, dispatchProps, {params: {uid}}) => ({
   daemonSet: daemonSets[uid]
 });
 
-export default connect(mapStateToProps, null, mergeProps)(DaemonSetsDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(DaemonSetsDetailPage));

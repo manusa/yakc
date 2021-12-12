@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import pv from './';
 import Form from '../components/Form';
@@ -81,7 +82,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  persistentVolume: stateProps.persistentVolumes[ownProps.match.params.uid],
+  persistentVolume: stateProps.persistentVolumes[ownProps.params.uid],
 });
 
-export default connect(mapStateToProps, null, mergeProps)(PersistentVolumesDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(PersistentVolumesDetailPage));

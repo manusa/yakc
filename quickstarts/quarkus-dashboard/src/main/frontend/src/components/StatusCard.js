@@ -15,7 +15,7 @@
  *
  */
 import React from 'react';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import icons from '../components/icons';
 import Tooltip from './Tooltip';
 
@@ -54,10 +54,10 @@ const StatusCard = ({
   className = '',
   to
 }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const onClick = () => {
     if (to) {
-      history.push(to);
+      navigate(to);
     }
   }
   return (

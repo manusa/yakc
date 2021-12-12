@@ -17,7 +17,7 @@
 import React, {useRef, useLayoutEffect} from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router-dom';
+import {useMatch} from 'react-router-dom';
 import apis from "../apis";
 import i from '../components/icons';
 import redux from '../redux';
@@ -27,20 +27,19 @@ import Link from '../components/Link';
 
 import './SideBar.css';
 
-const SideBarNavLink = ({match: {path}, to, staticContext, className = '', ...props}) => (
-  <Link.RouterLink
+const RoutedLink = ({to, staticContext, className = '', ...props}) => {
+  const match = useMatch(`${to}/*`);
+  return   <Link.RouterLink
     variant={Link.variants.none}
     to={to}
     className={`${className}
       flex items-center border-l-4 px-4 py-2 lg:py-3
-      ${path === to ?
+      ${match ?
       'bg-gray-600 bg-opacity-25 text-gray-100 border-gray-100' :
       'border-transparent text-gray-500 hover:bg-gray-600 hover:bg-opacity-25 hover:text-gray-100'}`}
     {...props}
   />
-);
-
-const RoutedLink = withRouter(SideBarNavLink);
+}
 
 const NavGroup = ({expandedItems, toggleItem, label, icon, children}) => {
   const expanded = expandedItems.includes(label);

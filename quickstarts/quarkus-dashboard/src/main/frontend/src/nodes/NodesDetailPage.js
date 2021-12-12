@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import metrics from '../metrics';
 import n from './';
@@ -121,7 +122,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...ownProps,
   isMinikube: n.selectors.isMinikube(stateProps.nodes),
   node: Object.values(stateProps.nodes).find(node =>
-    metadata.selectors.name(node) === ownProps.match.params.name)
+    metadata.selectors.name(node) === ownProps.params.name)
 });
 
-export default connect(mapStateToProps, null, mergeProps)(NodesDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(NodesDetailPage));

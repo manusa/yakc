@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import cj from './';
 import jobs from '../jobs';
@@ -106,8 +107,8 @@ const mapStateToProps = ({cronJobs}) => ({
   cronJobs
 });
 
-const mergeProps = ({cronJobs}, dispatchProps, {match: {params: {uid}}}) => ({
+const mergeProps = ({cronJobs}, dispatchProps, {params: {uid}}) => ({
   cronJob: cronJobs[uid]
 });
 
-export default connect(mapStateToProps, null, mergeProps)(CronJobsDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(CronJobsDetailPage));

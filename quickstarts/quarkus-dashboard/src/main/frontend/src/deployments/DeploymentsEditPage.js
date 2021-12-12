@@ -15,12 +15,13 @@
  *
  */
 import React from 'react';
+import {withParams} from '../router';
 import md from '../metadata';
 import d from './';
 import ResourceEditPage from '../components/ResourceEditPage';
 import Link from '../components/Link';
 
-const DeploymentsEditPage = ({match: {params: {uid}}}) => (
+const DeploymentsEditPage = ({params: {uid}}) => (
   <ResourceEditPage
     kind='Deployments'
     path='deployments'
@@ -32,4 +33,4 @@ const DeploymentsEditPage = ({match: {params: {uid}}}) => (
   />
 );
 
-export default DeploymentsEditPage;
+export default withParams(DeploymentsEditPage);

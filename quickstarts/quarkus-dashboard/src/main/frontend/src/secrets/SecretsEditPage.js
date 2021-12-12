@@ -15,12 +15,13 @@
  *
  */
 import React from 'react';
+import {withParams} from '../router';
 import md from '../metadata';
 import s from './';
 import ResourceEditPage from '../components/ResourceEditPage';
 import Link from '../components/Link';
 
-const SecretsEditPage = ({match: {params: {uid}}}) => (
+const SecretsEditPage = ({params: {uid}}) => (
   <ResourceEditPage
     kind='Secrets'
     path='secrets'
@@ -32,4 +33,4 @@ const SecretsEditPage = ({match: {params: {uid}}}) => (
   />
 );
 
-export default SecretsEditPage;
+export default withParams(SecretsEditPage);

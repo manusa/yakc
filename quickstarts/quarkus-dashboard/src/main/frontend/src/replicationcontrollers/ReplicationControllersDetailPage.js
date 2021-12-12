@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import cnt from '../containers';
 import pods from '../pods';
@@ -54,8 +55,8 @@ const mapStateToProps = ({replicationControllers}) => ({
   replicationControllers
 });
 
-const mergeProps = ({replicationControllers}, dispatchProps, {match: {params: {uid}}}) => ({
+const mergeProps = ({replicationControllers}, dispatchProps, {params: {uid}}) => ({
   replicationController: replicationControllers[uid]
 });
 
-export default connect(mapStateToProps, null, mergeProps)(ReplicationControllersDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(ReplicationControllersDetailPage));

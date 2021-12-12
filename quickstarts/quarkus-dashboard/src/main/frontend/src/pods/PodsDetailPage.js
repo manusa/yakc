@@ -16,6 +16,7 @@
  */
 import React, {useState, useEffect} from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import cnt from '../containers';
 import mts from '../metrics';
@@ -142,7 +143,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  pod: stateProps.pods[ownProps.match.params.uid]
+  pod: stateProps.pods[ownProps.params.uid]
 });
 
-export default connect(mapStateToProps, null, mergeProps)(PodsDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(PodsDetailPage));

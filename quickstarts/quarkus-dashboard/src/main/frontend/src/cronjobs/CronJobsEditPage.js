@@ -15,12 +15,13 @@
  *
  */
 import React from 'react';
+import {withParams} from '../router';
 import md from '../metadata';
 import cj from './';
 import ResourceEditPage from '../components/ResourceEditPage';
 import Link from '../components/Link';
 
-const CronJobsEditPage = ({match: {params: {uid}}}) => (
+const CronJobsEditPage = ({params: {uid}}) => (
   <ResourceEditPage
     kind='CronJobs'
     path='cronjobs'
@@ -32,4 +33,4 @@ const CronJobsEditPage = ({match: {params: {uid}}}) => (
   />
 );
 
-export default CronJobsEditPage;
+export default withParams(CronJobsEditPage);

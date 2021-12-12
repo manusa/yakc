@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import cRoles from '../clusterroles';
 import r from './';
@@ -46,7 +47,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  role: stateProps.roles[ownProps.match.params.uid],
+  role: stateProps.roles[ownProps.params.uid],
 });
 
-export default connect(mapStateToProps, null, mergeProps)(RolesDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(RolesDetailPage));

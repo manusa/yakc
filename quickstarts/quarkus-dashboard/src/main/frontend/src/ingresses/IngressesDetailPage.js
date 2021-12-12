@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import i from './';
 import Form from '../components/Form';
@@ -42,7 +43,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  ingress: stateProps.ingresses[ownProps.match.params.uid],
+  ingress: stateProps.ingresses[ownProps.params.uid],
 });
 
-export default connect(mapStateToProps, null, mergeProps)(IngressesDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(IngressesDetailPage));

@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import cnt from '../containers';
 import d from './';
@@ -85,11 +86,11 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => ({
   ...stateProps,
   ...dispatchProps,
   ...ownProps,
-  deployment: stateProps.deployments[ownProps.match.params.uid],
+  deployment: stateProps.deployments[ownProps.params.uid],
   replicaSetsUids: Object.values(stateProps.replicaSets)
     .filter(replicaSet => metadata.selectors.ownerReferencesUids(replicaSet)
-      .includes(metadata.selectors.uid(stateProps.deployments[ownProps.match.params.uid])))
+      .includes(metadata.selectors.uid(stateProps.deployments[ownProps.params.uid])))
     .map(replicaSet => metadata.selectors.uid(replicaSet))
 });
 
-export default connect(mapStateToProps, null, mergeProps)(DeploymentsDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(DeploymentsDetailPage));

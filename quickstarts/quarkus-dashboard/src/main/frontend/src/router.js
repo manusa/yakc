@@ -15,22 +15,13 @@
  *
  */
 import React from 'react';
-import {withParams} from '../router';
-import md from '../metadata';
-import cm from './';
-import ResourceEditPage from '../components/ResourceEditPage';
-import Link from '../components/Link';
+import {useParams} from 'react-router-dom';
 
-const ConfigMapsEditPage = ({params: {uid}}) => (
-  <ResourceEditPage
-    kind='ConfigMaps'
-    path='configmaps'
-    cardTitle={resource =>
-      <Link.RouterLink to={`/configmaps/${uid}`}>{md.selectors.name(resource)}</Link.RouterLink>
-    }
-    save={async resource => await cm.api.update(resource)}
-    resourceFromState={state => state.configMaps[uid]}
-  />
-);
+const router = {};
 
-export default withParams(ConfigMapsEditPage);
+export const withParams = Component => props => {
+  const params = useParams();
+  return <Component params={params} {...props} />;
+};
+
+export default router;

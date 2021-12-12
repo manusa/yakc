@@ -15,12 +15,13 @@
  *
  */
 import React from 'react';
+import {withParams} from '../router';
 import md from '../metadata';
 import cRoles from './';
 import ResourceEditPage from '../components/ResourceEditPage';
 import Link from '../components/Link';
 
-const ClusterRolesEditPage = ({match: {params: {uid}}}) => (
+const ClusterRolesEditPage = ({params: {uid}}) => (
   <ResourceEditPage
     kind='ClusterRoles'
     path='clusterroles'
@@ -32,4 +33,4 @@ const ClusterRolesEditPage = ({match: {params: {uid}}}) => (
   />
 );
 
-export default ClusterRolesEditPage;
+export default withParams(ClusterRolesEditPage);

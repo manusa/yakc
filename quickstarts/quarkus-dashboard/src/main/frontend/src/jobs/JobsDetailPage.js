@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import {connect} from 'react-redux';
+import {withParams} from '../router';
 import metadata from '../metadata';
 import j from './';
 import cnt from '../containers';
@@ -68,8 +69,8 @@ const mapStateToProps = ({jobs}) => ({
   jobs
 });
 
-const mergeProps = ({jobs}, dispatchProps, {match: {params: {uid}}}) => ({
+const mergeProps = ({jobs}, dispatchProps, {params: {uid}}) => ({
   job: jobs[uid]
 });
 
-export default connect(mapStateToProps, null, mergeProps)(JobsDetailPage);
+export default withParams(connect(mapStateToProps, null, mergeProps)(JobsDetailPage));

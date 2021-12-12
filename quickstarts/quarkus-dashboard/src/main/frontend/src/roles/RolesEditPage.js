@@ -15,12 +15,13 @@
  *
  */
 import React from 'react';
+import {withParams} from '../router';
 import md from '../metadata';
 import r from './';
 import ResourceEditPage from '../components/ResourceEditPage';
 import Link from '../components/Link';
 
-const RolesEditPage = ({match: {params: {uid}}}) => (
+const RolesEditPage = ({params: {uid}}) => (
   <ResourceEditPage
     kind='Roles'
     path='roles'
@@ -32,4 +33,4 @@ const RolesEditPage = ({match: {params: {uid}}}) => (
   />
 );
 
-export default RolesEditPage;
+export default withParams(RolesEditPage);

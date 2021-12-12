@@ -15,12 +15,13 @@
  *
  */
 import React from 'react';
+import {withParams} from '../router';
 import md from '../metadata';
 import sts from './';
 import ResourceEditPage from '../components/ResourceEditPage';
 import Link from '../components/Link';
 
-const StatefulSetsEditPage = ({match: {params: {uid}}}) => (
+const StatefulSetsEditPage = ({params: {uid}}) => (
   <ResourceEditPage
     kind='StatefulSets'
     path='statefulsets'
@@ -32,4 +33,4 @@ const StatefulSetsEditPage = ({match: {params: {uid}}}) => (
   />
 );
 
-export default StatefulSetsEditPage;
+export default withParams(StatefulSetsEditPage);
