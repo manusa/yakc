@@ -54,8 +54,8 @@ public class ReplicaSetService implements Watchable<ReplicaSet> {
     }
   }
 
-  public Status deleteReplicaSet(String name, String namespace) throws IOException {
-    return apps.deleteNamespacedReplicaSet(name, namespace).get();
+  public void deleteReplicaSet(String name, String namespace) throws IOException {
+    apps.deleteNamespacedReplicaSet(name, namespace).executeRaw();
   }
 
 }

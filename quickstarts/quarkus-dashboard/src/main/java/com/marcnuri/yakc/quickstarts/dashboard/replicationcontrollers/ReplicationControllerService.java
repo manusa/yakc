@@ -51,8 +51,8 @@ public class ReplicationControllerService implements Watchable<ReplicationContro
     }
   }
 
-  public Status delete(String name, String namespace) throws IOException {
-    return kubernetesClient.create(CoreV1Api.class).deleteNamespacedReplicationController(name, namespace).get();
+  public void delete(String name, String namespace) throws IOException {
+    kubernetesClient.create(CoreV1Api.class).deleteNamespacedReplicationController(name, namespace).executeRaw();
   }
 
   public ReplicationController update(String name, String namespace, ReplicationController replicationController) throws IOException {

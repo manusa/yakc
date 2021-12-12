@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.Optional;
+import java.util.concurrent.Callable;
 
 public interface Watchable<T extends Model> {
 
@@ -50,6 +52,22 @@ public interface Watchable<T extends Model> {
   }
 
   /**
+   * Function to be called to check if the Watchable is available in the current cluster.
+   *
+   * <p> The function will be executed periodically to make sure that the current Resource
+   * is watchable.
+   *
+   * <p> If the function is executed without Exceptions, the Watchable is considered available.
+   *
+   * <p> In case we want to skip the check, an empty Optional can be returned.
+   *
+   * @return an Optional containing a Callable to check availability or an empty Optional to skip the check.
+   */
+  default Optional<Callable<Object>> getAvailabilityCheckFunction() {
+    return Optional.empty();
+  }
+
+  /**
    * Should the watch subscription be retried in case of failure.
    *
    * <p> Defaults to {@code true}. Override in case the watch subscription
@@ -70,12 +88,4 @@ public interface Watchable<T extends Model> {
     return Duration.ofSeconds(5);
   }
 
-  /**
-   * Is the current resource available in the cluster.
-   *
-   * @return true if the resource API is available in the cluster.
-   */
-  default boolean isAvailable() {
-    return true;
-  }
 }

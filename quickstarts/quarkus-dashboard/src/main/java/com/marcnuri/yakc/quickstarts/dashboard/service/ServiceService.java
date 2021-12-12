@@ -68,7 +68,7 @@ public class ServiceService implements Watchable<Service> {
   }
 
   public void deleteService(String name, String namespace) throws IOException {
-    kubernetesClient.create(CoreV1Api.class).deleteNamespacedService(name, namespace).get();
+    kubernetesClient.create(CoreV1Api.class).deleteNamespacedService(name, namespace).executeRaw();
   }
 
   public Service updateService(String name, String namespace, Service service) throws IOException {
