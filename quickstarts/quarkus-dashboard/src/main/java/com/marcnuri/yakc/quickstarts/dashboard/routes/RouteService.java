@@ -31,6 +31,7 @@ import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.Optional;
 
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.executeRaw;
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 @Singleton
@@ -46,8 +47,8 @@ public class RouteService implements Watchable<Route> {
   }
 
   @Override
-  public Optional<ClientFunction<Object>> getAvailabilityCheckFunction() {
-    return Optional.of(routes.getAPIResources()::get);
+  public Optional<ClientFunction<?>> getAvailabilityCheckFunction() {
+    return Optional.of(executeRaw(routes.getAPIResources()));
   }
 
   @Override

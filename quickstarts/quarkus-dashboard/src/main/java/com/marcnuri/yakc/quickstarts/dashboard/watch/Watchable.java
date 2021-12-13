@@ -63,7 +63,7 @@ public interface Watchable<T extends Model> {
    *
    * @return an Optional containing a Callable to check availability or an empty Optional to skip the check.
    */
-  default Optional<ClientFunction<Object>> getAvailabilityCheckFunction() {
+  default Optional<ClientFunction<?>> getAvailabilityCheckFunction() {
     return Optional.empty();
   }
 

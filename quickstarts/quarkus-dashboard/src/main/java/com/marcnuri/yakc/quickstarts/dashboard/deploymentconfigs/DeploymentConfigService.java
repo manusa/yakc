@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.time.Instant;
 import java.util.Optional;
 
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.executeRaw;
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 @Singleton
@@ -56,8 +57,8 @@ public class DeploymentConfigService implements Watchable<DeploymentConfig> {
   }
 
   @Override
-  public Optional<ClientFunction<Object>> getAvailabilityCheckFunction() {
-    return Optional.of(apps.getAPIResources()::get);
+  public Optional<ClientFunction<?>> getAvailabilityCheckFunction() {
+    return Optional.of(executeRaw(apps.getAPIResources()));
   }
 
   @Override
