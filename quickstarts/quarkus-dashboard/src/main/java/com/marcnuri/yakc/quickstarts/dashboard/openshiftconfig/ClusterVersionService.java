@@ -21,6 +21,7 @@ import com.marcnuri.yakc.KubernetesClient;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.configopenshiftio.v1.ConfigOpenshiftIoV1Api;
 import com.marcnuri.yakc.model.io.openshift.config.v1.ClusterVersion;
+import com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.ClientFunction;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 
@@ -28,7 +29,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.Optional;
-import java.util.concurrent.Callable;
 
 @Singleton
 public class ClusterVersionService implements Watchable<ClusterVersion> {
@@ -41,9 +41,8 @@ public class ClusterVersionService implements Watchable<ClusterVersion> {
   }
 
   @Override
-  public Optional<Callable<Object>> getAvailabilityCheckFunction() {
-    return Optional.of(() -> config.listClusterVersion(new ConfigOpenshiftIoV1Api.ListClusterVersion().limit(1))
-      .executeRaw());
+  public Optional<ClientFunction<Object>> getAvailabilityCheckFunction() {
+    return Optional.of(config.listClusterVersion(new ConfigOpenshiftIoV1Api.ListClusterVersion().limit(1))::get);
   }
 
   @Override

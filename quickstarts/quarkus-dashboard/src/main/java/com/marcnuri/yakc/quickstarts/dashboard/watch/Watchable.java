@@ -19,6 +19,7 @@ package com.marcnuri.yakc.quickstarts.dashboard.watch;
 
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.model.Model;
+import com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.ClientFunction;
 import io.reactivex.Observable;
 
 import java.io.IOException;
@@ -26,7 +27,6 @@ import java.lang.reflect.ParameterizedType;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Optional;
-import java.util.concurrent.Callable;
 
 public interface Watchable<T extends Model> {
 
@@ -63,7 +63,7 @@ public interface Watchable<T extends Model> {
    *
    * @return an Optional containing a Callable to check availability or an empty Optional to skip the check.
    */
-  default Optional<Callable<Object>> getAvailabilityCheckFunction() {
+  default Optional<ClientFunction<Object>> getAvailabilityCheckFunction() {
     return Optional.empty();
   }
 

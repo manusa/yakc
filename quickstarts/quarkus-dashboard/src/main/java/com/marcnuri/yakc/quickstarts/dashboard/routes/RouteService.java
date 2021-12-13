@@ -22,6 +22,7 @@ import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.routeopenshiftio.v1.RouteOpenshiftIoV1Api;
 import com.marcnuri.yakc.model.com.github.openshift.api.route.v1.Route;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
+import com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.ClientFunction;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 
@@ -29,7 +30,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.Optional;
-import java.util.concurrent.Callable;
 
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
@@ -46,8 +46,8 @@ public class RouteService implements Watchable<Route> {
   }
 
   @Override
-  public Optional<Callable<Object>> getAvailabilityCheckFunction() {
-    return Optional.of(routes.getAPIResources()::executeRaw);
+  public Optional<ClientFunction<Object>> getAvailabilityCheckFunction() {
+    return Optional.of(routes.getAPIResources()::get);
   }
 
   @Override

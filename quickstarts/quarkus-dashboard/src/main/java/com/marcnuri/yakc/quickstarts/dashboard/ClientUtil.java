@@ -7,7 +7,9 @@ package com.marcnuri.yakc.quickstarts.dashboard;
 
 import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.ForbiddenException;
+import com.marcnuri.yakc.api.KubernetesCall;
 import io.reactivex.Observable;
+import okhttp3.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +49,21 @@ public class ClientUtil {
 
   public static <T> Observable<T> justWithNoComplete(T object) {
     return Observable.create(emitter -> emitter.onNext(object));
+  }
+
+  /**
+   * Function to execute a Raw call on a {@link KubernetesCall} and make sure
+   * that the response is closed (Prevents leak).
+   *
+   * @param call on which to perform the raw execute call.
+   * @return the closed Response.
+   */
+  public static ClientFunction<Response> executeRaw(KubernetesCall<?> call) {
+    return () -> {
+      try (var response = call.executeRaw()) {
+        return response;
+      }
+    };
   }
 
   @FunctionalInterface

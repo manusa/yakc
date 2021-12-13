@@ -18,6 +18,7 @@
 package com.marcnuri.yakc.quickstarts.dashboard.clusterrolebindings;
 
 import com.marcnuri.yakc.KubernetesClient;
+import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.rbacauthorization.v1.RbacAuthorizationV1Api;
 import com.marcnuri.yakc.api.rbacauthorization.v1.RbacAuthorizationV1Api.ListClusterRoleBinding;
@@ -26,6 +27,7 @@ import com.marcnuri.yakc.model.io.k8s.api.rbac.v1.ClusterRoleBinding;
 import com.marcnuri.yakc.model.io.k8s.api.rbac.v1.RoleRef;
 import com.marcnuri.yakc.model.io.k8s.api.rbac.v1.Subject;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
+import com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.ClientFunction;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 
@@ -33,9 +35,9 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.Optional;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.executeRaw;
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 @Singleton
@@ -51,12 +53,18 @@ public class ClusterRoleBindingService implements Watchable<ClusterRoleBinding> 
   }
 
   @Override
-  public Optional<Callable<Object>> getAvailabilityCheckFunction() {
-    return Optional.of(() -> tryWithFallback(
-      () -> rbacAuthV1.listClusterRoleBinding(new ListClusterRoleBinding().limit(1)).executeRaw(),
-      () -> rbacAuthV1beta1.listClusterRoleBinding(new RbacAuthorizationV1beta1Api.ListClusterRoleBinding().limit(1))
-        .executeRaw()
-    ));
+  public Optional<ClientFunction<Object>> getAvailabilityCheckFunction() {
+    return Optional.of(() -> {
+      final var response = tryWithFallback(
+        executeRaw(rbacAuthV1.listClusterRoleBinding(new ListClusterRoleBinding().limit(1))),
+        executeRaw(rbacAuthV1beta1
+          .listClusterRoleBinding(new RbacAuthorizationV1beta1Api.ListClusterRoleBinding().limit(1)))
+      );
+      if (!response.isSuccessful()) {
+        throw new ClientErrorException("ClusterRoleBinding API is not available", response);
+      }
+      return null;
+    });
   }
 
   @Override

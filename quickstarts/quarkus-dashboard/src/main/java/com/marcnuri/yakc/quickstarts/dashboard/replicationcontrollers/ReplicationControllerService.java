@@ -22,13 +22,14 @@ import com.marcnuri.yakc.api.ClientErrorException;
 import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.ReplicationController;
-import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
+
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.executeRaw;
 
 @Singleton
 public class ReplicationControllerService implements Watchable<ReplicationController> {
@@ -52,7 +53,7 @@ public class ReplicationControllerService implements Watchable<ReplicationContro
   }
 
   public void delete(String name, String namespace) throws IOException {
-    kubernetesClient.create(CoreV1Api.class).deleteNamespacedReplicationController(name, namespace).executeRaw();
+    executeRaw(kubernetesClient.create(CoreV1Api.class).deleteNamespacedReplicationController(name, namespace)).call();
   }
 
   public ReplicationController update(String name, String namespace, ReplicationController replicationController) throws IOException {

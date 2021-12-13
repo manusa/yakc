@@ -25,6 +25,7 @@ import com.marcnuri.yakc.model.com.github.openshift.api.apps.v1.DeploymentConfig
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.PodTemplateSpec;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
+import com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.ClientFunction;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 
@@ -33,7 +34,6 @@ import javax.inject.Singleton;
 import java.io.IOException;
 import java.time.Instant;
 import java.util.Optional;
-import java.util.concurrent.Callable;
 
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
@@ -56,8 +56,8 @@ public class DeploymentConfigService implements Watchable<DeploymentConfig> {
   }
 
   @Override
-  public Optional<Callable<Object>> getAvailabilityCheckFunction() {
-    return Optional.of(apps.getAPIResources()::executeRaw);
+  public Optional<ClientFunction<Object>> getAvailabilityCheckFunction() {
+    return Optional.of(apps.getAPIResources()::get);
   }
 
   @Override
