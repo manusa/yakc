@@ -16,6 +16,8 @@
  */
 import {updateResource} from '../fetch';
 
-export default {
+const api = {
   update: updateResource('nodes')
 };
+
+export default api;

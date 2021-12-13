@@ -24,7 +24,7 @@ import CustomResourceDefinitionsEditPage from './CustomResourceDefinitionsEditPa
 import CustomResourceDefinitionsPage from './CustomResourceDefinitionsPage';
 import GroupLink from './GroupLink';
 
-export default {
+const index = {
   api,
   reducer,
   selectors,
@@ -35,3 +35,5 @@ export default {
   DashboardPageTitle,
   GroupLink
 };
+
+export default index;

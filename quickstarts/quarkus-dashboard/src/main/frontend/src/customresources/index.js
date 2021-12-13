@@ -18,8 +18,10 @@ import api from './api';
 import selectors from './selectors';
 import List from './List';
 
-export default {
+const index = {
   api,
   selectors,
   List
 };
+
+export default index;

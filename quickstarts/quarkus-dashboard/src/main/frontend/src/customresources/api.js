@@ -26,7 +26,7 @@ import crds from '../customresourcedefinitions';
 const basePath = (crd, version = crds.selectors.specVersionsLatest(crd)) =>
   `customresources/${crds.selectors.specGroup(crd)}/${version}/${crds.selectors.specNamesPlural(crd)}`;
 
-export default {
+const api = {
   list: (crd, version) => listResource(
     `customresources/${
       crds.selectors.specGroup(crd)
@@ -53,3 +53,4 @@ export default {
   }
 };
 
+export default api;

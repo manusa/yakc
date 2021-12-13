@@ -97,5 +97,3 @@ export const updateReplicasInNamespacedResource = path => async (resource, repli
     {method: 'PUT'}
   );
 };
-
-export default {};

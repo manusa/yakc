@@ -42,10 +42,12 @@ const exec = (namespace, name, container) => new WebSocket(
   `${getWsUrl()}/pods/${namespace}/${name}/exec/${container}`
 );
 
-export default {
+const api = {
   exec,
   logs,
   metrics,
   delete: deleteNamespacedResource('pods'),
   update: updateNamespacedResource('pods')
 };
+
+export default api;

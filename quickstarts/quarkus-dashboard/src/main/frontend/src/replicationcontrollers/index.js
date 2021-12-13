@@ -22,7 +22,7 @@ import ReplicationControllersDetailPage from './ReplicationControllersDetailPage
 import ReplicationControllersEditPage from './ReplicationControllersEditPage';
 import ReplicationControllersPage from './ReplicationControllersPage';
 
-export default {
+const index = {
   api,
   reducer,
   selectors,
@@ -31,3 +31,5 @@ export default {
   ReplicationControllersEditPage,
   ReplicationControllersPage
 };
+
+export default index;

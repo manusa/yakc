@@ -16,7 +16,9 @@
  */
 import {deleteNamespacedResource, updateNamespacedResource,} from '../fetch';
 
-export default {
+const api = {
   delete: deleteNamespacedResource('horizontalpodautoscalers'),
   update: updateNamespacedResource('horizontalpodautoscalers')
 };
+
+export default api;

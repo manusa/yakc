@@ -22,7 +22,7 @@ import DaemonSetsDetailPage from './DaemonSetsDetailPage';
 import DaemonSetsEditPage from './DaemonSetsEditPage';
 import DaemonSetsPage from './DaemonSetsPage';
 
-export default{
+const index = {
   api,
   reducer,
   selectors,
@@ -31,3 +31,5 @@ export default{
   DaemonSetsPage,
   List
 };
+
+export default index;

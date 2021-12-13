@@ -17,7 +17,9 @@
 import ContainerDropdown from './ContainerDropdown';
 import ContainerList from './ContainerList';
 
-export default {
+const index = {
   ContainerDropdown,
   ContainerList
 };
+
+export default index;

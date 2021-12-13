@@ -22,7 +22,7 @@ import ClusterRoleBindingsDetailPage from './ClusterRoleBindingsDetailPage';
 import ClusterRoleBindingsEditPage from './ClusterRoleBindingsEditPage';
 import ClusterRoleBindingsPage from './ClusterRoleBindingsPage';
 
-export default {
+const index = {
   api,
   reducer,
   selectors,
@@ -31,3 +31,5 @@ export default {
   ClusterRoleBindingsPage,
   List
 };
+
+export default index;

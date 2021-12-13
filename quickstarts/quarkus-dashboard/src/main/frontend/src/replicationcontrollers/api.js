@@ -16,7 +16,9 @@
  */
 import {deleteNamespacedResource, updateNamespacedResource} from '../fetch';
 
-export default {
+const api = {
   delete: deleteNamespacedResource('replicationcontrollers'),
   update: updateNamespacedResource('replicationcontrollers')
 };
+
+export default api;

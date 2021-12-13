@@ -19,7 +19,9 @@ import {
   updateNamespacedResource
 } from '../fetch';
 
-export default {
+const api = {
   delete:  deleteNamespacedResource('routes'),
   update: updateNamespacedResource('routes')
 };
+
+export default api;

@@ -16,6 +16,8 @@
  */
 import reducer from './reducer';
 
-export default {
+const index = {
   reducer,
 };
+
+export default index;

@@ -23,7 +23,7 @@ import RoutesDetailPage from './RoutesDetailPage';
 import RoutesEditPage from './RoutesEditPage';
 import RoutesPage from './RoutesPage';
 
-export default {
+const index = {
   api,
   reducer,
   selectors,
@@ -33,3 +33,5 @@ export default {
   RoutesEditPage,
   RoutesPage
 };
+
+export default index;

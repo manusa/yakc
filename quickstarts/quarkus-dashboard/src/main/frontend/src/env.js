@@ -16,5 +16,3 @@
  */
 
 export const getApiURL = () => process.env.REACT_APP_API_URL;
-
-export default {};

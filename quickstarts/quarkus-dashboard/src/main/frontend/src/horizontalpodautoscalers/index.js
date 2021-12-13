@@ -22,7 +22,7 @@ import HorizontalPodAutoscalersDetailPage from './HorizontalPodAutoscalersDetail
 import HorizontalPodAutoscalersEditPage from './HorizontalPodAutoscalersEditPage';
 import HorizontalPodAutoscalersPage from './HorizontalPodAutoscalersPage';
 
-export default{
+const index = {
   api,
   reducer,
   selectors,
@@ -31,3 +31,5 @@ export default{
   HorizontalPodAutoscalersPage,
   List
 };
+
+export default index;

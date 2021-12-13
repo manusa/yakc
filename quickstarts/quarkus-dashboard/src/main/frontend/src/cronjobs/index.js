@@ -22,7 +22,7 @@ import CronJobsDetailPage from './CronJobsDetailPage';
 import CronJobsEditPage from './CronJobsEditPage';
 import CronJobsPage from './CronJobsPage';
 
-export default{
+const index = {
   api,
   reducer,
   selectors,
@@ -31,3 +31,5 @@ export default{
   CronJobsPage,
   List
 };
+
+export default index;

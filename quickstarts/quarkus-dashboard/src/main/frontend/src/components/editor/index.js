@@ -18,8 +18,10 @@ import useEditor from './useEditor';
 import ResourceEditModal from './ResourceEditModal';
 import YamlEditor from './YamlEditor';
 
-export default {
+const index = {
   useEditor,
   ResourceEditModal,
   YamlEditor
 };
+
+export default index;

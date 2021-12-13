@@ -32,9 +32,11 @@ const trigger =  async resource => {
   );
 };
 
-export default {
+const api = {
   delete: deleteNamespacedResource('cronjobs'),
   update: updateNamespacedResource('cronjobs'),
   updateSuspend,
   trigger
 };
+
+export default api;

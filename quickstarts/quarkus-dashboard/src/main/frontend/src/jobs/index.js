@@ -22,7 +22,7 @@ import JobsDetailPage from './JobsDetailPage';
 import JobsEditPage from './JobsEditPage';
 import JobsPage from './JobsPage';
 
-export default{
+const index = {
   api,
   reducer,
   selectors,
@@ -31,3 +31,5 @@ export default{
   JobsPage,
   List
 };
+
+export default index;
