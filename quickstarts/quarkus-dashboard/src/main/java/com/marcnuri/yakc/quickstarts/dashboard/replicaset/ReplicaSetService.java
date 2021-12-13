@@ -24,13 +24,14 @@ import com.marcnuri.yakc.api.WatchEvent;
 import com.marcnuri.yakc.api.apps.v1.AppsV1Api;
 import com.marcnuri.yakc.api.apps.v1.AppsV1Api.ListReplicaSetForAllNamespaces;
 import com.marcnuri.yakc.model.io.k8s.api.apps.v1.ReplicaSet;
-import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
 import com.marcnuri.yakc.quickstarts.dashboard.watch.Watchable;
 import io.reactivex.Observable;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
+
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.executeRaw;
 
 @Singleton
 public class ReplicaSetService implements Watchable<ReplicaSet> {
@@ -55,7 +56,7 @@ public class ReplicaSetService implements Watchable<ReplicaSet> {
   }
 
   public void deleteReplicaSet(String name, String namespace) throws IOException {
-    apps.deleteNamespacedReplicaSet(name, namespace).executeRaw();
+    executeRaw(apps.deleteNamespacedReplicaSet(name, namespace)).call();
   }
 
 }

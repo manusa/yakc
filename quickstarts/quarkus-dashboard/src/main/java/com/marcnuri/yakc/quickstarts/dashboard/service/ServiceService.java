@@ -31,6 +31,7 @@ import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.List;
 
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.executeRaw;
 import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.tryWithFallback;
 
 @Singleton
@@ -68,7 +69,7 @@ public class ServiceService implements Watchable<Service> {
   }
 
   public void deleteService(String name, String namespace) throws IOException {
-    kubernetesClient.create(CoreV1Api.class).deleteNamespacedService(name, namespace).executeRaw();
+    executeRaw(kubernetesClient.create(CoreV1Api.class).deleteNamespacedService(name, namespace)).call();
   }
 
   public Service updateService(String name, String namespace, Service service) throws IOException {
