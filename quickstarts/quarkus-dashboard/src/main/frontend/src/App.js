@@ -16,7 +16,7 @@
  */
 import React, {useEffect} from 'react';
 import {connect} from 'react-redux';
-import {BrowserRouter as Router, Route, Routes, useMatch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import apis from './apis';
 import crb from './clusterrolebindings';
 import cRoles from './clusterroles';
