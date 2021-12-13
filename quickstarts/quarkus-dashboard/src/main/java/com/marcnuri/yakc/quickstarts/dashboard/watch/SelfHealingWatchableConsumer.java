@@ -33,8 +33,9 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -54,23 +55,25 @@ import java.util.concurrent.TimeUnit;
  * @see <a href="https://quarkus.io/guides/http-reference">QUARKUS - HTTP REFERENCE</a>
  * @see <a href="https://quarkus.io/guides/rest-json#servlet-compatibility">RESTEasy Servlet</a>
  */
-public class SelfHealingWatchableConsumer
-  implements java.util.function.Consumer<MultiEmitter<Object>> {
+public class SelfHealingWatchableConsumer implements java.util.function.Consumer<MultiEmitter<Object>> {
 
   private static final Logger LOG = LoggerFactory.getLogger(SelfHealingWatchableConsumer.class);
 
   private final List<Watchable<? extends Model>> watchables;
+  private final ExecutorService subscribeExecutor;
+  private final ExecutorService observableExecutor;
   private final Map<Class<?>, Disposable> deferredWatchables;
   private final Map<Class<?>, Disposable> selfHealingSubscriptions;
-  private final Set<Class<?>> finalizedWatchables;
   private final ApiAvailability apiAvailability;
   private final HttpServerExchange exchange;
+  private volatile boolean disposed;
 
   public SelfHealingWatchableConsumer(List<Watchable<? extends Model>> watchables) {
     this.watchables = watchables;
+    subscribeExecutor = Executors.newCachedThreadPool();
+    observableExecutor = Executors.newCachedThreadPool();
     deferredWatchables = new ConcurrentHashMap<>();
     selfHealingSubscriptions = new ConcurrentHashMap<>();
-    finalizedWatchables = ConcurrentHashMap.newKeySet();
     apiAvailability = new ApiAvailability();
     exchange = ServletRequestContext.requireCurrent().getOriginalRequest().getExchange();
   }
@@ -79,7 +82,7 @@ public class SelfHealingWatchableConsumer
   public void accept(MultiEmitter<Object> multiEmitter) {
     for (Watchable<? extends Model> watchable : watchables) {
       deferredWatchables.put(watchable.getClass(),
-        deferredWatchObservable(watchable).subscribeOn(Schedulers.newThread()).subscribe(
+        deferredWatchObservable(watchable).subscribeOn(Schedulers.from(subscribeExecutor)).subscribe(
           multiEmitter::emit,
           exception -> {
             LOG.error("Self Healing Watch subscription process failed for {}: {}", watchable.getType(), exception.getMessage());
@@ -108,9 +111,6 @@ public class SelfHealingWatchableConsumer
           TimeUnit.SECONDS.sleep(watchable.getRetrySubscriptionDelay().getSeconds());
         }
       } while (!shouldStopAndDispose(emitter) && !subscribed && watchable.isRetrySubscription());
-      if (!subscribed) {
-        finalizedWatchables.add(watchable.getClass());
-      }
     });
   }
 
@@ -119,9 +119,14 @@ public class SelfHealingWatchableConsumer
    *
    * <p> Should clean up all the active threads and Watch connections to the cluster.
    */
-  public int dispose() {
-    selfHealingSubscriptions.values().forEach(Disposable::dispose);
-    deferredWatchables.values().forEach(Disposable::dispose);
+  public synchronized int dispose() {
+    if (!disposed) {
+      disposed = true;
+      deferredWatchables.values().forEach(Disposable::dispose);
+      subscribeExecutor.shutdown();
+      selfHealingSubscriptions.values().forEach(Disposable::dispose);
+      observableExecutor.shutdown();
+    }
     return deferredWatchables.size();
   }
 
@@ -136,10 +141,10 @@ public class SelfHealingWatchableConsumer
    * @return if the current Observable should stop self-healing
    */
   private boolean shouldStopAndDispose(ObservableEmitter<?> emitter) {
-    if (exchange.isResponseComplete()) {
+    if (!disposed && exchange.isResponseComplete()) {
       dispose();
     }
-    return emitter.isDisposed() || exchange.isResponseComplete();
+    return disposed || emitter.isDisposed() || exchange.isResponseComplete();
   }
 
   private boolean subscribe(
@@ -158,7 +163,7 @@ public class SelfHealingWatchableConsumer
           .delay(watchable.getRetrySubscriptionDelay().getSeconds(), TimeUnit.SECONDS);
       }
       selfHealingSubscriptions.put(watchable.getClass(),
-        observable.subscribeOn(Schedulers.newThread()).subscribe(
+        observable.subscribeOn(Schedulers.from(observableExecutor)).subscribe(
           selfHealingOnNextConsumer(emitter),
           selfHealingErrorConsumer(emitter, watchable),
           selfHealingOnCompleteAction(emitter, watchable)
@@ -188,9 +193,11 @@ public class SelfHealingWatchableConsumer
     return error -> {
       LOG.debug("Subscription error for watchable {}: {}, reconnecting...",
         watchable.getClass(), error.getMessage());
-      TimeUnit.SECONDS.sleep(watchable.getSelfHealingDelay().toSeconds());
-      emitter.onNext(new WatchEvent<>(WatchEvent.Type.ERROR, new RequestRestartError(watchable, error)));
-      subscribe(emitter, watchable);
+      if (!disposed ) {
+        emitter.onNext(new WatchEvent<>(WatchEvent.Type.ERROR, new RequestRestartError(watchable, error)));
+        TimeUnit.SECONDS.sleep(watchable.getSelfHealingDelay().toSeconds());
+        subscribe(emitter, watchable);
+      }
     };
   }
 
@@ -199,10 +206,11 @@ public class SelfHealingWatchableConsumer
   ) {
     return () -> {
       LOG.debug("Subscription complete for watchable {}, reconnecting...", watchable.getClass());
-      TimeUnit.SECONDS.sleep(watchable.getSelfHealingDelay().toSeconds());
-      emitter.onNext(new WatchEvent<>(WatchEvent.Type.ERROR, new RequestRestartError(watchable, null)));
-      subscribe(emitter, watchable);
+      if (!disposed) {
+        emitter.onNext(new WatchEvent<>(WatchEvent.Type.ERROR, new RequestRestartError(watchable, null)));
+        TimeUnit.SECONDS.sleep(watchable.getSelfHealingDelay().toSeconds());
+        subscribe(emitter, watchable);
+      }
     };
   }
-
 }
