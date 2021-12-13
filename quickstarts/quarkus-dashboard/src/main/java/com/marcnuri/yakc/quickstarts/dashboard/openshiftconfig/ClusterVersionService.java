@@ -30,6 +30,8 @@ import javax.inject.Singleton;
 import java.io.IOException;
 import java.util.Optional;
 
+import static com.marcnuri.yakc.quickstarts.dashboard.ClientUtil.executeRaw;
+
 @Singleton
 public class ClusterVersionService implements Watchable<ClusterVersion> {
 
@@ -41,8 +43,8 @@ public class ClusterVersionService implements Watchable<ClusterVersion> {
   }
 
   @Override
-  public Optional<ClientFunction<Object>> getAvailabilityCheckFunction() {
-    return Optional.of(config.listClusterVersion(new ConfigOpenshiftIoV1Api.ListClusterVersion().limit(1))::get);
+  public Optional<ClientFunction<?>> getAvailabilityCheckFunction() {
+    return Optional.of(executeRaw(config.listClusterVersion(new ConfigOpenshiftIoV1Api.ListClusterVersion().limit(1))));
   }
 
   @Override

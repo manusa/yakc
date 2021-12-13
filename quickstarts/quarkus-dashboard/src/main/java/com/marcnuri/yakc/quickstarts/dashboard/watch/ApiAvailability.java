@@ -28,7 +28,7 @@ public class ApiAvailability {
 
   private static final int CHECK_INTERVAL_SECONDS = 30;
 
-  private final Map<Class<? extends Watchable>, Availability> availability;
+  private final Map<Class<?>, Availability> availability;
 
   public ApiAvailability() {
     this.availability = new ConcurrentHashMap<>();

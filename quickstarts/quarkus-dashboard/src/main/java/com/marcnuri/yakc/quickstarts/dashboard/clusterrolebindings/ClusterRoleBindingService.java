@@ -53,18 +53,12 @@ public class ClusterRoleBindingService implements Watchable<ClusterRoleBinding> 
   }
 
   @Override
-  public Optional<ClientFunction<Object>> getAvailabilityCheckFunction() {
-    return Optional.of(() -> {
-      final var response = tryWithFallback(
+  public Optional<ClientFunction<?>> getAvailabilityCheckFunction() {
+    return Optional.of(() -> tryWithFallback(
         executeRaw(rbacAuthV1.listClusterRoleBinding(new ListClusterRoleBinding().limit(1))),
         executeRaw(rbacAuthV1beta1
           .listClusterRoleBinding(new RbacAuthorizationV1beta1Api.ListClusterRoleBinding().limit(1)))
-      );
-      if (!response.isSuccessful()) {
-        throw new ClientErrorException("ClusterRoleBinding API is not available", response);
-      }
-      return null;
-    });
+      ));
   }
 
   @Override
