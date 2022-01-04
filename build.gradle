@@ -1,5 +1,5 @@
 import com.marcnuri.yakc.schema.api.ApiGeneratorTask
-import com.marcnuri.yakc.schema.model.ModelGeneratorTask
+import com.marcnuri.yakc.schema.model.OpenApiModelGeneratorTask
 
 plugins {
   id 'java-library'
@@ -24,7 +24,7 @@ def availableSchemaNames = Arrays.asList(
 def availableSchemas = availableSchemaNames.stream()
   .map { s -> new File(schemaDir, s) }
   .toArray{ i -> new File[i]}
-task generateModel(type: ModelGeneratorTask) {
+task generateModel(type: OpenApiModelGeneratorTask) {
   group = 'generators'
   packageName = 'com.marcnuri.yakc'
   schemas = availableSchemas

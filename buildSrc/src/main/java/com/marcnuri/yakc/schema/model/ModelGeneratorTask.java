@@ -24,6 +24,7 @@ import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.parser.OpenAPIV3Parser;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.Internal;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
@@ -31,12 +32,10 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
-/**
- * Created by Marc Nuri on 2020-04-04.
- */
-public class ModelGeneratorTask extends DefaultTask {
+public abstract class ModelGeneratorTask extends DefaultTask {
 
   @Input
   public String packageName;
@@ -51,6 +50,12 @@ public class ModelGeneratorTask extends DefaultTask {
   @Input
   public String[] includeGenerationRegexes;
 
+  private final Function<File, OpenAPI> converter;
+
+  ModelGeneratorTask(Function<File, OpenAPI> converter) {
+    this.converter = converter;
+  }
+
   @TaskAction
   public void run() {
     GeneratorUtils.cleanSourceDirectory(resolveSourceDirectory());
@@ -60,7 +65,7 @@ public class ModelGeneratorTask extends DefaultTask {
 
   private void generateModel(File schema) {
     getLogger().lifecycle("Generating Model for schema {}", schema.getName());
-    final OpenAPI openAPI = new OpenAPIV3Parser().read(schema.getAbsolutePath());
+    final OpenAPI openAPI = converter.apply(schema);
     new InlineModelResolver().flatten(openAPI);
     final GeneratorSettings settings = GeneratorSettings.builder()
       .openAPI(openAPI)

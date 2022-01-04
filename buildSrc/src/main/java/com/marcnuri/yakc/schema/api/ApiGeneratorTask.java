@@ -22,8 +22,11 @@ import com.marcnuri.yakc.schema.GeneratorUtils;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.parser.OpenAPIV3Parser;
 import io.swagger.v3.parser.util.InlineModelResolver;
+import lombok.Getter;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.InputDirectory;
+import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
@@ -38,16 +41,24 @@ import java.util.stream.Stream;
  */
 public class ApiGeneratorTask extends DefaultTask {
   @Input
+  @Getter
   public String packageName;
-  @Input
+  @InputFiles
+  @Getter
   public File[] schemas;
-  @Input
+  @InputDirectory
+  @Getter
   public File templatesDir;
-  @Input
+  @InputDirectory
+  @Getter
   public File outputDirectory;
   @Input
+  @org.gradle.api.tasks.Optional
+  @Getter
   public String[] skipGenerationRegexes;
   @Input
+  @org.gradle.api.tasks.Optional
+  @Getter
   public String[] includeGenerationRegexes;
 
   @TaskAction
