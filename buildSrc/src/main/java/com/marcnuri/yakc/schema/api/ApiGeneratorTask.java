@@ -24,6 +24,9 @@ import io.swagger.v3.parser.OpenAPIV3Parser;
 import io.swagger.v3.parser.util.InlineModelResolver;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.tasks.Input;
+import org.gradle.api.tasks.InputDirectory;
+import org.gradle.api.tasks.InputFile;
+import org.gradle.api.tasks.InputFiles;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
@@ -37,17 +40,12 @@ import java.util.stream.Stream;
  * Created by Marc Nuri on 2020-04-05.
  */
 public class ApiGeneratorTask extends DefaultTask {
-  @Input
+
   public String packageName;
-  @Input
   public File[] schemas;
-  @Input
   public File templatesDir;
-  @Input
   public File outputDirectory;
-  @Input
   public String[] skipGenerationRegexes;
-  @Input
   public String[] includeGenerationRegexes;
 
   @TaskAction
@@ -80,5 +78,37 @@ public class ApiGeneratorTask extends DefaultTask {
 
   public Path resolveSourceDirectory() {
     return outputDirectory.toPath().resolve("src").resolve("api").resolve("java");
+  }
+
+  @Input
+  public String getPackageName() {
+    return packageName;
+  }
+
+  @InputFiles
+  public File[] getSchemas() {
+    return schemas;
+  }
+
+  @InputDirectory
+  public File getTemplatesDir() {
+    return templatesDir;
+  }
+
+  @InputDirectory
+  public File getOutputDirectory() {
+    return outputDirectory;
+  }
+
+  @Input
+  @org.gradle.api.tasks.Optional
+  public String[] getSkipGenerationRegexes() {
+    return skipGenerationRegexes;
+  }
+
+  @Input
+  @org.gradle.api.tasks.Optional
+  public String[] getIncludeGenerationRegexes() {
+    return includeGenerationRegexes;
   }
 }

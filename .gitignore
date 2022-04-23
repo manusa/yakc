@@ -3,5 +3,6 @@
 build
 !apis/openshift/src/model/java/com/marcnuri/yakc/model/com/github/openshift/api/build
 quickstarts/**/target
+**/tailwind.css
 
 *.iml

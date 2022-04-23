@@ -11,8 +11,8 @@ java {
 
 dependencies {
   compileOnly gradleApi()
-  compileOnly "com.samskivert:jmustache:$version_mustache"
-  compileOnly "io.swagger.parser.v3:swagger-parser:$version_swagger_parser"
+  implementation "com.samskivert:jmustache:$version_mustache"
+  implementation "io.swagger.parser.v3:swagger-parser:$version_swagger_parser"
   compileOnly "org.projectlombok:lombok:$version_projectlombok"
   annotationProcessor "org.projectlombok:lombok:$version_projectlombok"
 }
