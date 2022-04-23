@@ -1,16 +1,16 @@
 ext {
   isPublishable = false
-  version_assertj = '3.18.1'
-  version_awaitility = '4.0.3'
-  version_bouncycastle = '1.65'
+  version_assertj = '3.22.0'
+  version_awaitility = '4.2.0'
+  version_bouncycastle = '1.70'
   version_jackson = '2.10.1' // Matches transitive version for retrofit2:converter-jackson:2.8.1
-  version_junit = '5.7.0'
-  version_mockito = '3.7.0'
+  version_junit = '5.8.2'
+  version_mockito = '4.5.1'
   version_mustache = '1.15'
-  version_projectlombok = '1.18.22'
-  version_retrofit = '2.8.1'
-  version_rxjava2 = '2.2.19'
-  version_swagger_parser = '2.0.19'
+  version_projectlombok = '1.18.24'
+  version_retrofit = '2.9.0'
+  version_rxjava2 = '2.2.21'
+  version_swagger_parser = '2.0.32'
 }
 
 project.group = 'com.marcnuri.yakc'
