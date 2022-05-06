@@ -40,14 +40,14 @@ public class ScopedResourceSelectorRequirement implements Model {
 
 
   /**
-   * Represents a scope's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist.<br><p> <br><p> Possible enum values:<br><p>  - `"DoesNotExist"`<br><p>  - `"Exists"`<br><p>  - `"In"`<br><p>  - `"NotIn"`
+   * Represents a scope's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist.<br><p> <br><p> 
    */
   @NonNull
   @JsonProperty("operator")
   private String operator;
 
   /**
-   * The name of the scope that the selector applies to.<br><p> <br><p> Possible enum values:<br><p>  - `"BestEffort"` Match all pod objects that have best effort quality of service<br><p>  - `"CrossNamespacePodAffinity"` Match all pod objects that have cross-namespace pod (anti)affinity mentioned. This is a beta feature enabled by the PodAffinityNamespaceSelector feature flag.<br><p>  - `"NotBestEffort"` Match all pod objects that do not have best effort quality of service<br><p>  - `"NotTerminating"` Match all pod objects where spec.activeDeadlineSeconds is nil<br><p>  - `"PriorityClass"` Match all pod objects that have priority class mentioned<br><p>  - `"Terminating"` Match all pod objects where spec.activeDeadlineSeconds &gt;=0
+   * The name of the scope that the selector applies to.<br><p> <br><p> 
    */
   @NonNull
   @JsonProperty("scopeName")

@@ -55,7 +55,7 @@ public class NamespaceCondition implements Model {
   private String status;
 
   /**
-   * Type of namespace controller condition.<br><p> <br><p> Possible enum values:<br><p>  - `"NamespaceContentRemaining"` contains information about resources remaining in a namespace.<br><p>  - `"NamespaceDeletionContentFailure"` contains information about namespace deleter errors during deletion of resources.<br><p>  - `"NamespaceDeletionDiscoveryFailure"` contains information about namespace deleter errors during resource discovery.<br><p>  - `"NamespaceDeletionGroupVersionParsingFailure"` contains information about namespace deleter errors parsing GV for legacy types.<br><p>  - `"NamespaceFinalizersRemaining"` contains information about which finalizers are on resources remaining in a namespace.
+   * Type of namespace controller condition.
    */
   @NonNull
   @JsonProperty("type")

@@ -39,32 +39,32 @@ public class FCVolumeSource implements Model {
 
 
   /**
-   * Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
+   * fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
    */
   @JsonProperty("fsType")
   private String fsType;
 
   /**
-   * Optional: FC target lun number
+   * lun is Optional: FC target lun number
    */
   @JsonProperty("lun")
   private Number lun;
 
   /**
-   * Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
+   * readOnly is Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
    */
   @JsonProperty("readOnly")
   private Boolean readOnly;
 
   /**
-   * Optional: FC target worldwide names (WWNs)
+   * targetWWNs is Optional: FC target worldwide names (WWNs)
    */
   @JsonProperty("targetWWNs")
   @Singular(value = "addToTargetWWNs", ignoreNullCollections = true)
   private List<String> targetWWNs;
 
   /**
-   * Optional: FC volume world wide identifiers (wwids) Either wwids or combination of targetWWNs and lun must be set, but not both simultaneously.
+   * wwids Optional: FC volume world wide identifiers (wwids) Either wwids or combination of targetWWNs and lun must be set, but not both simultaneously.
    */
   @JsonProperty("wwids")
   @Singular(value = "addToWwids", ignoreNullCollections = true)

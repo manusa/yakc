@@ -48,7 +48,7 @@ public class PersistentVolumeClaimList implements Model, ListModel<PersistentVol
   private String apiVersion;
 
   /**
-   * A list of persistent volume claims. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
+   * items is a list of persistent volume claims. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
    */
   @NonNull
   @JsonProperty("items")

@@ -64,7 +64,7 @@ public class NodeCondition implements Model {
   private String status;
 
   /**
-   * Type of node condition.<br><p> <br><p> Possible enum values:<br><p>  - `"DiskPressure"` means the kubelet is under pressure due to insufficient available disk.<br><p>  - `"MemoryPressure"` means the kubelet is under pressure due to insufficient available memory.<br><p>  - `"NetworkUnavailable"` means that network for the node is not correctly configured.<br><p>  - `"PIDPressure"` means the kubelet is under pressure due to insufficient available PID.<br><p>  - `"Ready"` means kubelet is healthy and ready to accept pods.
+   * Type of node condition.
    */
   @NonNull
   @JsonProperty("type")

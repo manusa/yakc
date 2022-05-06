@@ -39,7 +39,7 @@ public class ContainerStateTerminated implements Model {
 
 
   /**
-   * Container's ID in the format 'docker://&lt;container_id&gt;'
+   * Container's ID in the format '&lt;type&gt;://&lt;container_id&gt;'
    */
   @JsonProperty("containerID")
   private String containerID;

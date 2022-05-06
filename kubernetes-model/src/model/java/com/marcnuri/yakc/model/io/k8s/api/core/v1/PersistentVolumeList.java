@@ -48,7 +48,7 @@ public class PersistentVolumeList implements Model, ListModel<PersistentVolume> 
   private String apiVersion;
 
   /**
-   * List of persistent volumes. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes
+   * items is a list of persistent volumes. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes
    */
   @NonNull
   @JsonProperty("items")

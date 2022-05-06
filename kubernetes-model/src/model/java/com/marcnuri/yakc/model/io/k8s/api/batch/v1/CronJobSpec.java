@@ -38,7 +38,7 @@ public class CronJobSpec implements Model {
 
 
   /**
-   * Specifies how to treat concurrent executions of a Job. Valid values are: - "Allow" (default): allows CronJobs to run concurrently; - "Forbid": forbids concurrent runs, skipping next run if previous run hasn't finished yet; - "Replace": cancels currently running job and replaces it with a new one<br><p> <br><p> Possible enum values:<br><p>  - `"Allow"` allows CronJobs to run concurrently.<br><p>  - `"Forbid"` forbids concurrent runs, skipping next run if previous hasn't finished yet.<br><p>  - `"Replace"` cancels currently running job and replaces it with a new one.
+   * Specifies how to treat concurrent executions of a Job. Valid values are: - "Allow" (default): allows CronJobs to run concurrently; - "Forbid": forbids concurrent runs, skipping next run if previous run hasn't finished yet; - "Replace": cancels currently running job and replaces it with a new one<br><p> <br><p> 
    */
   @JsonProperty("concurrencyPolicy")
   private String concurrencyPolicy;
@@ -77,6 +77,12 @@ public class CronJobSpec implements Model {
    */
   @JsonProperty("suspend")
   private Boolean suspend;
+
+  /**
+   * The time zone for the given schedule, see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones. If not specified, this will rely on the time zone of the kube-controller-manager process. ALPHA: This field is in alpha and must be enabled via the `CronJobTimeZone` feature gate.
+   */
+  @JsonProperty("timeZone")
+  private String timeZone;
 
 }
 

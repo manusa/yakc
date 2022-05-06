@@ -40,14 +40,14 @@ public class CSIVolumeSource implements Model {
 
 
   /**
-   * Driver is the name of the CSI driver that handles this volume. Consult with your admin for the correct name as registered in the cluster.
+   * driver is the name of the CSI driver that handles this volume. Consult with your admin for the correct name as registered in the cluster.
    */
   @NonNull
   @JsonProperty("driver")
   private String driver;
 
   /**
-   * Filesystem type to mount. Ex. "ext4", "xfs", "ntfs". If not provided, the empty value is passed to the associated CSI driver which will determine the default filesystem to apply.
+   * fsType to mount. Ex. "ext4", "xfs", "ntfs". If not provided, the empty value is passed to the associated CSI driver which will determine the default filesystem to apply.
    */
   @JsonProperty("fsType")
   private String fsType;
@@ -56,13 +56,13 @@ public class CSIVolumeSource implements Model {
   private LocalObjectReference nodePublishSecretRef;
 
   /**
-   * Specifies a read-only configuration for the volume. Defaults to false (read/write).
+   * readOnly specifies a read-only configuration for the volume. Defaults to false (read/write).
    */
   @JsonProperty("readOnly")
   private Boolean readOnly;
 
   /**
-   * VolumeAttributes stores driver-specific properties that are passed to the CSI driver. Consult your driver's documentation for supported values.
+   * volumeAttributes stores driver-specific properties that are passed to the CSI driver. Consult your driver's documentation for supported values.
    */
   @JsonProperty("volumeAttributes")
   @Singular(value = "putInVolumeAttributes", ignoreNullCollections = true)

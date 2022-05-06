@@ -40,7 +40,7 @@ public class PersistentVolumeClaimSpec implements Model {
 
 
   /**
-   * AccessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
+   * accessModes contains the desired access modes the volume should have. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
    */
   @JsonProperty("accessModes")
   @Singular(value = "addToAccessModes", ignoreNullCollections = true)
@@ -59,7 +59,7 @@ public class PersistentVolumeClaimSpec implements Model {
   private LabelSelector selector;
 
   /**
-   * Name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1
+   * storageClassName is the name of the StorageClass required by the claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1
    */
   @JsonProperty("storageClassName")
   private String storageClassName;
@@ -71,7 +71,7 @@ public class PersistentVolumeClaimSpec implements Model {
   private String volumeMode;
 
   /**
-   * VolumeName is the binding reference to the PersistentVolume backing this claim.
+   * volumeName is the binding reference to the PersistentVolume backing this claim.
    */
   @JsonProperty("volumeName")
   private String volumeName;

@@ -92,7 +92,7 @@ public class Volume implements Model {
   private ISCSIVolumeSource iscsi;
 
   /**
-   * Volume's name. Must be a DNS_LABEL and unique within the pod. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+   * name of the volume. Must be a DNS_LABEL and unique within the pod. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
    */
   @NonNull
   @JsonProperty("name")

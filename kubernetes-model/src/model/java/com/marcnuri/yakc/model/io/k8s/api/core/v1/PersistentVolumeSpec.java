@@ -40,7 +40,7 @@ public class PersistentVolumeSpec implements Model {
 
 
   /**
-   * AccessModes contains all ways the volume can be mounted. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes
+   * accessModes contains all ways the volume can be mounted. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes
    */
   @JsonProperty("accessModes")
   @Singular(value = "addToAccessModes", ignoreNullCollections = true)
@@ -56,7 +56,7 @@ public class PersistentVolumeSpec implements Model {
   private AzureFilePersistentVolumeSource azureFile;
 
   /**
-   * A description of the persistent volume's resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
+   * capacity is the description of the persistent volume's resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
    */
   @JsonProperty("capacity")
   @Singular(value = "putInCapacity", ignoreNullCollections = true)
@@ -99,7 +99,7 @@ public class PersistentVolumeSpec implements Model {
   private LocalVolumeSource local;
 
   /**
-   * A list of mount options, e.g. ["ro", "soft"]. Not validated - mount will simply fail if one is invalid. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options
+   * mountOptions is the list of mount options, e.g. ["ro", "soft"]. Not validated - mount will simply fail if one is invalid. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options
    */
   @JsonProperty("mountOptions")
   @Singular(value = "addToMountOptions", ignoreNullCollections = true)
@@ -112,7 +112,7 @@ public class PersistentVolumeSpec implements Model {
   private VolumeNodeAffinity nodeAffinity;
 
   /**
-   * What happens to a persistent volume when released from its claim. Valid options are Retain (default for manually created PersistentVolumes), Delete (default for dynamically provisioned PersistentVolumes), and Recycle (deprecated). Recycle must be supported by the volume plugin underlying this PersistentVolume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming<br><p> <br><p> Possible enum values:<br><p>  - `"Delete"` means the volume will be deleted from Kubernetes on release from its claim. The volume plugin must support Deletion.<br><p>  - `"Recycle"` means the volume will be recycled back into the pool of unbound persistent volumes on release from its claim. The volume plugin must support Recycling.<br><p>  - `"Retain"` means the volume will be left in its current phase (Released) for manual reclamation by the administrator. The default policy is Retain.
+   * persistentVolumeReclaimPolicy defines what happens to a persistent volume when released from its claim. Valid options are Retain (default for manually created PersistentVolumes), Delete (default for dynamically provisioned PersistentVolumes), and Recycle (deprecated). Recycle must be supported by the volume plugin underlying this PersistentVolume. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming<br><p> <br><p> 
    */
   @JsonProperty("persistentVolumeReclaimPolicy")
   private String persistentVolumeReclaimPolicy;
@@ -133,7 +133,7 @@ public class PersistentVolumeSpec implements Model {
   private ScaleIOPersistentVolumeSource scaleIO;
 
   /**
-   * Name of StorageClass to which this persistent volume belongs. Empty value means that this volume does not belong to any StorageClass.
+   * storageClassName is the name of StorageClass to which this persistent volume belongs. Empty value means that this volume does not belong to any StorageClass.
    */
   @JsonProperty("storageClassName")
   private String storageClassName;

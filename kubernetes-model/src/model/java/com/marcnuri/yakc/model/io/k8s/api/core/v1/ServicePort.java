@@ -39,7 +39,7 @@ public class ServicePort implements Model {
 
 
   /**
-   * The application protocol for this port. This field follows standard Kubernetes label syntax. Un-prefixed names are reserved for IANA standard service names (as per RFC-6335 and http://www.iana.org/assignments/service-names). Non-standard protocols should use prefixed names such as mycompany.com/my-custom-protocol.
+   * The application protocol for this port. This field follows standard Kubernetes label syntax. Un-prefixed names are reserved for IANA standard service names (as per RFC-6335 and https://www.iana.org/assignments/service-names). Non-standard protocols should use prefixed names such as mycompany.com/my-custom-protocol.
    */
   @JsonProperty("appProtocol")
   private String appProtocol;
@@ -64,7 +64,7 @@ public class ServicePort implements Model {
   private Number port;
 
   /**
-   * The IP protocol for this port. Supports "TCP", "UDP", and "SCTP". Default is TCP.<br><p> <br><p> Possible enum values:<br><p>  - `"SCTP"` is the SCTP protocol.<br><p>  - `"TCP"` is the TCP protocol.<br><p>  - `"UDP"` is the UDP protocol.
+   * The IP protocol for this port. Supports "TCP", "UDP", and "SCTP". Default is TCP.<br><p> <br><p> 
    */
   @JsonProperty("protocol")
   private String protocol;

@@ -55,5 +55,8 @@ public class NetworkPolicy implements Model {
   @JsonProperty("spec")
   private NetworkPolicySpec spec;
 
+  @JsonProperty("status")
+  private NetworkPolicyStatus status;
+
 }
 

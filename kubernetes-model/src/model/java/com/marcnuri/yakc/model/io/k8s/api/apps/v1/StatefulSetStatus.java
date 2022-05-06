@@ -42,7 +42,6 @@ public class StatefulSetStatus implements Model {
   /**
    * Total number of available pods (ready for at least minReadySeconds) targeted by this statefulset. This is a beta field and enabled/disabled by StatefulSetMinReadySeconds feature gate.
    */
-  @NonNull
   @JsonProperty("availableReplicas")
   private Number availableReplicas;
 

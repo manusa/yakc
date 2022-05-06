@@ -38,26 +38,26 @@ public class ScaleIOVolumeSource implements Model {
 
 
   /**
-   * Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Default is "xfs".
+   * fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Default is "xfs".
    */
   @JsonProperty("fsType")
   private String fsType;
 
   /**
-   * The host address of the ScaleIO API Gateway.
+   * gateway is the host address of the ScaleIO API Gateway.
    */
   @NonNull
   @JsonProperty("gateway")
   private String gateway;
 
   /**
-   * The name of the ScaleIO Protection Domain for the configured storage.
+   * protectionDomain is the name of the ScaleIO Protection Domain for the configured storage.
    */
   @JsonProperty("protectionDomain")
   private String protectionDomain;
 
   /**
-   * Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
+   * readOnly Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
    */
   @JsonProperty("readOnly")
   private Boolean readOnly;
@@ -67,32 +67,32 @@ public class ScaleIOVolumeSource implements Model {
   private LocalObjectReference secretRef;
 
   /**
-   * Flag to enable/disable SSL communication with Gateway, default false
+   * sslEnabled Flag enable/disable SSL communication with Gateway, default false
    */
   @JsonProperty("sslEnabled")
   private Boolean sslEnabled;
 
   /**
-   * Indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned. Default is ThinProvisioned.
+   * storageMode indicates whether the storage for a volume should be ThickProvisioned or ThinProvisioned. Default is ThinProvisioned.
    */
   @JsonProperty("storageMode")
   private String storageMode;
 
   /**
-   * The ScaleIO Storage Pool associated with the protection domain.
+   * storagePool is the ScaleIO Storage Pool associated with the protection domain.
    */
   @JsonProperty("storagePool")
   private String storagePool;
 
   /**
-   * The name of the storage system as configured in ScaleIO.
+   * system is the name of the storage system as configured in ScaleIO.
    */
   @NonNull
   @JsonProperty("system")
   private String system;
 
   /**
-   * The name of a volume already created in the ScaleIO system that is associated with this volume source.
+   * volumeName is the name of a volume already created in the ScaleIO system that is associated with this volume source.
    */
   @JsonProperty("volumeName")
   private String volumeName;

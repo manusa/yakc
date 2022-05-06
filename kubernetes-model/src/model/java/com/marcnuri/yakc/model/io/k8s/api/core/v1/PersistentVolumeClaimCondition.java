@@ -45,13 +45,13 @@ public class PersistentVolumeClaimCondition implements Model {
   private OffsetDateTime lastTransitionTime;
 
   /**
-   * Human-readable message indicating details about last transition.
+   * message is the human-readable message indicating details about last transition.
    */
   @JsonProperty("message")
   private String message;
 
   /**
-   * Unique, this should be a short, machine understandable string that gives the reason for condition's last transition. If it reports "ResizeStarted" that means the underlying persistent volume is being resized.
+   * reason is a unique, this should be a short, machine understandable string that gives the reason for condition's last transition. If it reports "ResizeStarted" that means the underlying persistent volume is being resized.
    */
   @JsonProperty("reason")
   private String reason;
@@ -60,9 +60,6 @@ public class PersistentVolumeClaimCondition implements Model {
   @JsonProperty("status")
   private String status;
 
-  /**
-   * <br><p> <br><p> <br><p> Possible enum values:<br><p>  - `"FileSystemResizePending"` - controller resize is finished and a file system resize is pending on node<br><p>  - `"Resizing"` - a user trigger resize of pvc has been started
-   */
   @NonNull
   @JsonProperty("type")
   private String type;

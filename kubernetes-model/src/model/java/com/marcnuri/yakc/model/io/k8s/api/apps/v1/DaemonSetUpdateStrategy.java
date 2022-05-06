@@ -40,7 +40,7 @@ public class DaemonSetUpdateStrategy implements Model {
   private RollingUpdateDaemonSet rollingUpdate;
 
   /**
-   * Type of daemon set update. Can be "RollingUpdate" or "OnDelete". Default is RollingUpdate.<br><p> <br><p> Possible enum values:<br><p>  - `"OnDelete"` Replace the old daemons only when it's killed<br><p>  - `"RollingUpdate"` Replace the old daemons by new ones using rolling update i.e replace them on each node one after the other.
+   * Type of daemon set update. Can be "RollingUpdate" or "OnDelete". Default is RollingUpdate.<br><p> <br><p> 
    */
   @JsonProperty("type")
   private String type;
