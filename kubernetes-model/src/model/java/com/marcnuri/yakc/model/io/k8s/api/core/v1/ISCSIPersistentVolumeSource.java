@@ -40,58 +40,58 @@ public class ISCSIPersistentVolumeSource implements Model {
 
 
   /**
-   * whether support iSCSI Discovery CHAP authentication
+   * chapAuthDiscovery defines whether support iSCSI Discovery CHAP authentication
    */
   @JsonProperty("chapAuthDiscovery")
   private Boolean chapAuthDiscovery;
 
   /**
-   * whether support iSCSI Session CHAP authentication
+   * chapAuthSession defines whether support iSCSI Session CHAP authentication
    */
   @JsonProperty("chapAuthSession")
   private Boolean chapAuthSession;
 
   /**
-   * Filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi
+   * fsType is the filesystem type of the volume that you want to mount. Tip: Ensure that the filesystem type is supported by the host operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi
    */
   @JsonProperty("fsType")
   private String fsType;
 
   /**
-   * Custom iSCSI Initiator Name. If initiatorName is specified with iscsiInterface simultaneously, new iSCSI interface &lt;target portal&gt;:&lt;volume name&gt; will be created for the connection.
+   * initiatorName is the custom iSCSI Initiator Name. If initiatorName is specified with iscsiInterface simultaneously, new iSCSI interface &lt;target portal&gt;:&lt;volume name&gt; will be created for the connection.
    */
   @JsonProperty("initiatorName")
   private String initiatorName;
 
   /**
-   * Target iSCSI Qualified Name.
+   * iqn is Target iSCSI Qualified Name.
    */
   @NonNull
   @JsonProperty("iqn")
   private String iqn;
 
   /**
-   * iSCSI Interface Name that uses an iSCSI transport. Defaults to 'default' (tcp).
+   * iscsiInterface is the interface Name that uses an iSCSI transport. Defaults to 'default' (tcp).
    */
   @JsonProperty("iscsiInterface")
   private String iscsiInterface;
 
   /**
-   * iSCSI Target Lun number.
+   * lun is iSCSI Target Lun number.
    */
   @NonNull
   @JsonProperty("lun")
   private Number lun;
 
   /**
-   * iSCSI Target Portal List. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260).
+   * portals is the iSCSI Target Portal List. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260).
    */
   @JsonProperty("portals")
   @Singular(value = "addToPortals", ignoreNullCollections = true)
   private List<String> portals;
 
   /**
-   * ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false.
+   * readOnly here will force the ReadOnly setting in VolumeMounts. Defaults to false.
    */
   @JsonProperty("readOnly")
   private Boolean readOnly;
@@ -100,7 +100,7 @@ public class ISCSIPersistentVolumeSource implements Model {
   private SecretReference secretRef;
 
   /**
-   * iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260).
+   * targetPortal is iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port is other than default (typically TCP ports 860 and 3260).
    */
   @NonNull
   @JsonProperty("targetPortal")

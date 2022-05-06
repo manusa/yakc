@@ -17,6 +17,7 @@
 package com.marcnuri.yakc.model.io.k8s.api.apps.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.marcnuri.yakc.model.Model;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,8 +37,12 @@ import lombok.ToString;
 public class RollingUpdateStatefulSetStrategy implements Model {
 
 
+  @JsonProperty("maxUnavailable")
+  @JsonSerialize(using = com.marcnuri.yakc.model.serialization.IntOrStringSerializer.class)
+  private String maxUnavailable;
+
   /**
-   * Partition indicates the ordinal at which the StatefulSet should be partitioned. Default value is 0.
+   * Partition indicates the ordinal at which the StatefulSet should be partitioned for updates. During a rolling update, all pods from ordinal Replicas-1 to Partition are updated. All pods from ordinal Partition-1 to 0 remain untouched. This is helpful in being able to do a canary based deployment. The default value is 0.
    */
   @JsonProperty("partition")
   private Number partition;

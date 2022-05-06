@@ -38,19 +38,19 @@ public class PortworxVolumeSource implements Model {
 
 
   /**
-   * FSType represents the filesystem type to mount Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs". Implicitly inferred to be "ext4" if unspecified.
+   * fSType represents the filesystem type to mount Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs". Implicitly inferred to be "ext4" if unspecified.
    */
   @JsonProperty("fsType")
   private String fsType;
 
   /**
-   * Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
+   * readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
    */
   @JsonProperty("readOnly")
   private Boolean readOnly;
 
   /**
-   * VolumeID uniquely identifies a Portworx volume
+   * volumeID uniquely identifies a Portworx volume
    */
   @NonNull
   @JsonProperty("volumeID")

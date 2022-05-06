@@ -75,7 +75,7 @@ public class LimitRangeItem implements Model {
   private Map<String, String> min;
 
   /**
-   * Type of resource that this limit applies to.<br><p> <br><p> Possible enum values:<br><p>  - `"Container"` Limit that applies to all containers in a namespace<br><p>  - `"PersistentVolumeClaim"` Limit that applies to all persistent volume claims in a namespace<br><p>  - `"Pod"` Limit that applies to all pods in a namespace
+   * Type of resource that this limit applies to.
    */
   @NonNull
   @JsonProperty("type")

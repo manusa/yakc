@@ -78,5 +78,11 @@ public class CronJobSpec implements Model {
   @JsonProperty("suspend")
   private Boolean suspend;
 
+  /**
+   * The time zone for the given schedule, see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones. If not specified, this will rely on the time zone of the kube-controller-manager process. ALPHA: This field is in alpha and must be enabled via the `CronJobTimeZone` feature gate.
+   */
+  @JsonProperty("timeZone")
+  private String timeZone;
+
 }
 

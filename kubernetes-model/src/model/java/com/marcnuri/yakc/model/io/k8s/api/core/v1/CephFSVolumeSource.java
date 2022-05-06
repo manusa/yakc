@@ -40,7 +40,7 @@ public class CephFSVolumeSource implements Model {
 
 
   /**
-   * Required: Monitors is a collection of Ceph monitors More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
+   * monitors is Required: Monitors is a collection of Ceph monitors More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
    */
   @NonNull
   @JsonProperty("monitors")
@@ -48,19 +48,19 @@ public class CephFSVolumeSource implements Model {
   private List<String> monitors;
 
   /**
-   * Optional: Used as the mounted root, rather than the full Ceph tree, default is /
+   * path is Optional: Used as the mounted root, rather than the full Ceph tree, default is /
    */
   @JsonProperty("path")
   private String path;
 
   /**
-   * Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
+   * readOnly is Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts. More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
    */
   @JsonProperty("readOnly")
   private Boolean readOnly;
 
   /**
-   * Optional: SecretFile is the path to key ring for User, default is /etc/ceph/user.secret More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
+   * secretFile is Optional: SecretFile is the path to key ring for User, default is /etc/ceph/user.secret More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
    */
   @JsonProperty("secretFile")
   private String secretFile;
@@ -69,7 +69,7 @@ public class CephFSVolumeSource implements Model {
   private LocalObjectReference secretRef;
 
   /**
-   * Optional: User is the rados user name, default is admin More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
+   * user is optional: User is the rados user name, default is admin More info: https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
    */
   @JsonProperty("user")
   private String user;

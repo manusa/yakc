@@ -40,27 +40,27 @@ public class FlexPersistentVolumeSource implements Model {
 
 
   /**
-   * Driver is the name of the driver to use for this volume.
+   * driver is the name of the driver to use for this volume.
    */
   @NonNull
   @JsonProperty("driver")
   private String driver;
 
   /**
-   * Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". The default filesystem depends on FlexVolume script.
+   * fsType is the Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". The default filesystem depends on FlexVolume script.
    */
   @JsonProperty("fsType")
   private String fsType;
 
   /**
-   * Optional: Extra command options if any.
+   * options is Optional: this field holds extra command options if any.
    */
   @JsonProperty("options")
   @Singular(value = "putInOptions", ignoreNullCollections = true)
   private Map<String, String> options;
 
   /**
-   * Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
+   * readOnly is Optional: defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
    */
   @JsonProperty("readOnly")
   private Boolean readOnly;

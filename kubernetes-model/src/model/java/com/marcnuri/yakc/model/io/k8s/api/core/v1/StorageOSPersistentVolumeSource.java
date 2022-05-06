@@ -37,13 +37,13 @@ public class StorageOSPersistentVolumeSource implements Model {
 
 
   /**
-   * Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
+   * fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
    */
   @JsonProperty("fsType")
   private String fsType;
 
   /**
-   * Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
+   * readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly setting in VolumeMounts.
    */
   @JsonProperty("readOnly")
   private Boolean readOnly;
@@ -52,13 +52,13 @@ public class StorageOSPersistentVolumeSource implements Model {
   private ObjectReference secretRef;
 
   /**
-   * VolumeName is the human-readable name of the StorageOS volume.  Volume names are only unique within a namespace.
+   * volumeName is the human-readable name of the StorageOS volume.  Volume names are only unique within a namespace.
    */
   @JsonProperty("volumeName")
   private String volumeName;
 
   /**
-   * VolumeNamespace specifies the scope of the volume within StorageOS.  If no namespace is specified then the Pod's namespace will be used.  This allows the Kubernetes name scoping to be mirrored within StorageOS for tighter integration. Set VolumeName to any name to override the default behaviour. Set to "default" if you are not using namespaces within StorageOS. Namespaces that do not pre-exist within StorageOS will be created.
+   * volumeNamespace specifies the scope of the volume within StorageOS.  If no namespace is specified then the Pod's namespace will be used.  This allows the Kubernetes name scoping to be mirrored within StorageOS for tighter integration. Set VolumeName to any name to override the default behaviour. Set to "default" if you are not using namespaces within StorageOS. Namespaces that do not pre-exist within StorageOS will be created.
    */
   @JsonProperty("volumeNamespace")
   private String volumeNamespace;

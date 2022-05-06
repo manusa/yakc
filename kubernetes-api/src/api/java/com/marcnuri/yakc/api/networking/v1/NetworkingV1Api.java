@@ -373,7 +373,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public CreateIngressClass fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -599,7 +599,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public PatchIngressClass fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -678,7 +678,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public ReplaceIngressClass fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -1139,7 +1139,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public CreateNamespacedIngress fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -1381,7 +1381,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public PatchNamespacedIngress fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -1464,7 +1464,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public ReplaceNamespacedIngress fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -1584,7 +1584,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public PatchNamespacedIngressStatus fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -1667,7 +1667,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public ReplaceNamespacedIngressStatus fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -2021,7 +2021,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public CreateNamespacedNetworkPolicy fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -2263,7 +2263,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public PatchNamespacedNetworkPolicy fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -2346,9 +2346,212 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * fieldValidation determines how the server should respond to unknown/duplicate fields in the object in the request. Introduced as alpha in 1.23, older servers or servers with the `ServerSideFieldValidation` feature disabled will discard valid values specified in  this param and not perform any server side field validation. Valid values are: - Ignore: ignores unknown/duplicate fields. - Warn: responds with a warning for each unknown/duplicate field, but successfully serves the request. - Strict: fails the request on unknown/duplicate fields.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public ReplaceNamespacedNetworkPolicy fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+  } 
+  /**
+   * read status of the specified NetworkPolicy
+   *
+   * @param name name of the NetworkPolicy
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}/status"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<NetworkPolicy> readNamespacedNetworkPolicyStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * read status of the specified NetworkPolicy
+   *
+   * @param name name of the NetworkPolicy
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}/status"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<NetworkPolicy> readNamespacedNetworkPolicyStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap ReadNamespacedNetworkPolicyStatus queryParameters);
+
+  
+  final class ReadNamespacedNetworkPolicyStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReadNamespacedNetworkPolicyStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+  } 
+  /**
+   * partially update status of the specified NetworkPolicy
+   *
+   * @param name name of the NetworkPolicy
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<NetworkPolicy> patchNamespacedNetworkPolicyStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body NetworkPolicy body);
+
+  /**
+   * partially update status of the specified NetworkPolicy
+   *
+   * @param name name of the NetworkPolicy
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<NetworkPolicy> patchNamespacedNetworkPolicyStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body NetworkPolicy body, 
+    @QueryMap PatchNamespacedNetworkPolicyStatus queryParameters);
+
+  
+  final class PatchNamespacedNetworkPolicyStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public PatchNamespacedNetworkPolicyStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public PatchNamespacedNetworkPolicyStatus dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+     */
+    public PatchNamespacedNetworkPolicyStatus fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     */
+    public PatchNamespacedNetworkPolicyStatus fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
+     * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+     */
+    public PatchNamespacedNetworkPolicyStatus force(Boolean force) {
+      put("force", force);
+      return this;
+    }
+  } 
+  /**
+   * replace status of the specified NetworkPolicy
+   *
+   * @param name name of the NetworkPolicy
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<NetworkPolicy> replaceNamespacedNetworkPolicyStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body NetworkPolicy body);
+
+  /**
+   * replace status of the specified NetworkPolicy
+   *
+   * @param name name of the NetworkPolicy
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/networking.k8s.io/v1/namespaces/{namespace}/networkpolicies/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<NetworkPolicy> replaceNamespacedNetworkPolicyStatus(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body NetworkPolicy body, 
+    @QueryMap ReplaceNamespacedNetworkPolicyStatus queryParameters);
+
+  
+  final class ReplaceNamespacedNetworkPolicyStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReplaceNamespacedNetworkPolicyStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public ReplaceNamespacedNetworkPolicyStatus dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public ReplaceNamespacedNetworkPolicyStatus fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     */
+    public ReplaceNamespacedNetworkPolicyStatus fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
       return this;
     }

@@ -38,13 +38,13 @@ public class PhotonPersistentDiskVolumeSource implements Model {
 
 
   /**
-   * Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
+   * fsType is the filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.
    */
   @JsonProperty("fsType")
   private String fsType;
 
   /**
-   * ID that identifies Photon Controller persistent disk
+   * pdID is the ID that identifies Photon Controller persistent disk
    */
   @NonNull
   @JsonProperty("pdID")

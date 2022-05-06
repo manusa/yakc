@@ -46,14 +46,14 @@ public class CSIPersistentVolumeSource implements Model {
   private SecretReference controllerPublishSecretRef;
 
   /**
-   * Driver is the name of the driver to use for this volume. Required.
+   * driver is the name of the driver to use for this volume. Required.
    */
   @NonNull
   @JsonProperty("driver")
   private String driver;
 
   /**
-   * Filesystem type to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs".
+   * fsType to mount. Must be a filesystem type supported by the host operating system. Ex. "ext4", "xfs", "ntfs".
    */
   @JsonProperty("fsType")
   private String fsType;
@@ -65,20 +65,20 @@ public class CSIPersistentVolumeSource implements Model {
   private SecretReference nodeStageSecretRef;
 
   /**
-   * Optional: The value to pass to ControllerPublishVolumeRequest. Defaults to false (read/write).
+   * readOnly value to pass to ControllerPublishVolumeRequest. Defaults to false (read/write).
    */
   @JsonProperty("readOnly")
   private Boolean readOnly;
 
   /**
-   * Attributes of the volume to publish.
+   * volumeAttributes of the volume to publish.
    */
   @JsonProperty("volumeAttributes")
   @Singular(value = "putInVolumeAttributes", ignoreNullCollections = true)
   private Map<String, String> volumeAttributes;
 
   /**
-   * VolumeHandle is the unique volume name returned by the CSI volume plugin’s CreateVolume to refer to the volume on all subsequent calls. Required.
+   * volumeHandle is the unique volume name returned by the CSI volume plugin’s CreateVolume to refer to the volume on all subsequent calls. Required.
    */
   @NonNull
   @JsonProperty("volumeHandle")

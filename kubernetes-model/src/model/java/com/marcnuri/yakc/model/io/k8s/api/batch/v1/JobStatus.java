@@ -68,7 +68,7 @@ public class JobStatus implements Model {
   private Number failed;
 
   /**
-   * The number of pods which have a Ready condition.<br><p> <br><p> This field is alpha-level. The job controller populates the field when the feature gate JobReadyPods is enabled (disabled by default).
+   * The number of pods which have a Ready condition.<br><p> <br><p> This field is beta-level. The job controller populates the field when the feature gate JobReadyPods is enabled (enabled by default).
    */
   @JsonProperty("ready")
   private Number ready;

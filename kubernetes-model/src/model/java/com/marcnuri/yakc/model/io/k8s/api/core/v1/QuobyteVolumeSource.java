@@ -38,38 +38,38 @@ public class QuobyteVolumeSource implements Model {
 
 
   /**
-   * Group to map volume access to Default is no group
+   * group to map volume access to Default is no group
    */
   @JsonProperty("group")
   private String group;
 
   /**
-   * ReadOnly here will force the Quobyte volume to be mounted with read-only permissions. Defaults to false.
+   * readOnly here will force the Quobyte volume to be mounted with read-only permissions. Defaults to false.
    */
   @JsonProperty("readOnly")
   private Boolean readOnly;
 
   /**
-   * Registry represents a single or multiple Quobyte Registry services specified as a string as host:port pair (multiple entries are separated with commas) which acts as the central registry for volumes
+   * registry represents a single or multiple Quobyte Registry services specified as a string as host:port pair (multiple entries are separated with commas) which acts as the central registry for volumes
    */
   @NonNull
   @JsonProperty("registry")
   private String registry;
 
   /**
-   * Tenant owning the given Quobyte volume in the Backend Used with dynamically provisioned Quobyte volumes, value is set by the plugin
+   * tenant owning the given Quobyte volume in the Backend Used with dynamically provisioned Quobyte volumes, value is set by the plugin
    */
   @JsonProperty("tenant")
   private String tenant;
 
   /**
-   * User to map volume access to Defaults to serivceaccount user
+   * user to map volume access to Defaults to serivceaccount user
    */
   @JsonProperty("user")
   private String user;
 
   /**
-   * Volume is a string that references an already created Quobyte volume by name.
+   * volume is a string that references an already created Quobyte volume by name.
    */
   @NonNull
   @JsonProperty("volume")

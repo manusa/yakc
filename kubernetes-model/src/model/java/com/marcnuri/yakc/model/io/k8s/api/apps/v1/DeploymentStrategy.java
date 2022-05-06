@@ -40,7 +40,7 @@ public class DeploymentStrategy implements Model {
   private RollingUpdateDeployment rollingUpdate;
 
   /**
-   * Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.<br><p> <br><p> Possible enum values:<br><p>  - `"Recreate"` Kill all existing pods before creating new ones.<br><p>  - `"RollingUpdate"` Replace the old ReplicaSets by new one using rolling update i.e gradually scale down the old ReplicaSets and scale up the new one.
+   * Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.<br><p> <br><p> 
    */
   @JsonProperty("type")
   private String type;
