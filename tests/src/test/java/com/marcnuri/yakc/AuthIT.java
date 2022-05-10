@@ -23,6 +23,7 @@ import com.marcnuri.yakc.model.io.k8s.api.core.v1.Node;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.ObjectReference;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Secret;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.ServiceAccount;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -52,7 +53,7 @@ class AuthIT {
   @Test
   void performTokenAuthInNewClient() throws IOException {
     // Given
-    final Secret secret = retrieveSecretForServiceAccount(retrieveServiceAccountSecret());
+    final Secret secret = retrieveSecretForServiceAccount();
     final Configuration configuration = Configuration.builder()
       .server(KC.getConfiguration().getServer())
       .certificateAuthorityData(secret.getData().get("ca.crt"))
@@ -68,21 +69,32 @@ class AuthIT {
       .hasFieldOrPropertyWithValue("metadata.name", nodeName);
   }
 
-  private String retrieveServiceAccountSecret() throws IOException {
-    return KC.create(CoreV1Api.class).listNamespacedServiceAccount(NAMESPACE)
-      .stream().findFirst()
-      .map(ServiceAccount::getSecrets)
-      .flatMap(secrets -> secrets.stream().findFirst().map(ObjectReference::getName))
-      .orElseThrow(() -> new AssertionError("No Service Account found"));
-  }
-
-  private Secret retrieveSecretForServiceAccount(String secretName) throws IOException {
-    return KC.create(CoreV1Api.class).listNamespacedSecret(NAMESPACE)
-      .stream()
-      .filter(s -> s.getType().equals("kubernetes.io/service-account-token"))
-      .filter(s -> s.getMetadata().getName().equals(secretName))
-      .findAny()
-      .orElseThrow(() -> new AssertionError(String.format("Secret %s doesn't exist", secretName)));
+  private Secret retrieveSecretForServiceAccount() throws IOException {
+    final ServiceAccount sa = KC.create(CoreV1Api.class).listNamespacedServiceAccount(NAMESPACE)
+      .stream().findFirst().orElseThrow(() -> new AssertionError("No Service Account found"));
+    final String secretName = sa.getSecrets() == null ? null : sa.getSecrets().stream()
+      .findFirst().map(ObjectReference::getName)
+      .orElse(null);
+    if (secretName != null) {
+      return KC.create(CoreV1Api.class).listNamespacedSecret(NAMESPACE)
+        .stream()
+        .filter(s -> s.getType().equals("kubernetes.io/service-account-token"))
+        .filter(s -> s.getMetadata().getName().equals(secretName))
+        .findAny()
+        .orElseThrow(() -> new AssertionError(String.format("Secret %s doesn't exist", secretName)));
+    } else {
+      // https://kubernetes.io/docs/concepts/configuration/secret/#service-account-token-secrets
+      final Secret serviceAccountTokenSecret = Secret.builder()
+        .metadata(ObjectMeta.builder()
+          .name(sa.getMetadata().getName() + "-token")
+          .putInAnnotations("kubernetes.io/service-account.name", sa.getMetadata().getName())
+          .build())
+        .type("kubernetes.io/service-account-token")
+        .putInStringData("token", "my-secret-token")
+        .build();
+      return KC.create(CoreV1Api.class)
+        .createNamespacedSecret(NAMESPACE, serviceAccountTokenSecret).get();
+    }
   }
 
 }
