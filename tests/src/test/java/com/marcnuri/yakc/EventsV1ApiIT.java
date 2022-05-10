@@ -119,14 +119,14 @@ class EventsV1ApiIT {
   void patchNamespacedEvent() throws IOException {
     // Given
     final Event patch = new Event();
-    patch.setReason("Reason has been patched");
+    patch.setMetadata(ObjectMeta.builder().generateName("patched").build());
     // When
     final Event result = KC.create(EventsV1Api.class)
       .patchNamespacedEvent(eventName, NAMESPACE, patch).get();
     // Then
     assertThat(result)
       .isNotNull()
-      .hasFieldOrPropertyWithValue("reason", "Reason has been patched")
+      .hasFieldOrPropertyWithValue("metadata.generateName", "patched")
       .extracting("metadata.resourceVersion").asString()
       .isNotEmpty()
       .isNotEqualTo(event.getMetadata().getResourceVersion());
@@ -148,6 +148,7 @@ class EventsV1ApiIT {
     return KC.create(EventsV1Api.class).createNamespacedEvent(NAMESPACE, Event.builder()
       .metadata(ObjectMeta.builder()
         .name(eventName)
+        .generateName("to-be-patched")
         .build())
       .action("mock-action")
       .type("Normal")
