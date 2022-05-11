@@ -54,12 +54,12 @@ class ServiceIT {
   @BeforeEach
   void setUp() throws IOException {
     serviceName = "a" + UUID.randomUUID();
-    service = createServiceForTest();
+    service = createServiceForTest(NAMESPACE, serviceName);
   }
 
   @AfterEach
   void tearDown() throws IOException {
-    deleteServiceForTest();
+    deleteServiceForTest(NAMESPACE, serviceName);
   }
 
   @Test
@@ -157,8 +157,8 @@ class ServiceIT {
       .hasFieldOrPropertyWithValue("name", serviceName);
   }
 
-  private Service createServiceForTest() throws IOException {
-    return KC.create(CoreV1Api.class).createNamespacedService(NAMESPACE, Service.builder()
+  static Service createServiceForTest(String namespace, String serviceName) throws IOException {
+    return KC.create(CoreV1Api.class).createNamespacedService(namespace, Service.builder()
       .metadata(ObjectMeta.builder()
         .name(serviceName)
         .putInLabels("app", "yakc-service-it")
@@ -180,10 +180,10 @@ class ServiceIT {
       .build()).get();
   }
 
-  private void deleteServiceForTest() throws IOException {
+  static void deleteServiceForTest(String namespace, String serviceName) throws IOException {
     try {
       KC.create(CoreV1Api.class)
-        .deleteNamespacedService(serviceName, NAMESPACE, DeleteOptions.builder().gracePeriodSeconds(0).build())
+        .deleteNamespacedService(serviceName, namespace, DeleteOptions.builder().gracePeriodSeconds(0).build())
         .get();
     } catch (NotFoundException ex) {
       // Ignore, this is only clean up. Resource may have been deleted by delete test
