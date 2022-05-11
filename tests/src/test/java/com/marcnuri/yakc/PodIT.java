@@ -57,9 +57,6 @@ import static com.marcnuri.yakc.KubernetesClientExtension.KC;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 
-/**
- * Created by Marc Nuri <marc@marcnuri.com> on 2020-04-25.
- */
 @ExtendWith(KubernetesClientExtension.class)
 class PodIT {
 
@@ -70,13 +67,13 @@ class PodIT {
 
   @BeforeEach
   void setUp() throws IOException {
-    podName = UUID.randomUUID().toString();
-    pod = createPodForTest();
+    podName = "a" + UUID.randomUUID();
+    pod = createPodForTest(NAMESPACE, podName);
   }
 
   @AfterEach
   void tearDown() throws IOException {
-    deletePodForTest();
+    deletePodForTest(NAMESPACE, podName);
   }
 
   @Test
@@ -294,7 +291,10 @@ class PodIT {
   }
 
   private void awaitPodReady() throws IOException {
-    KC.create(CoreV1Api.class).listNamespacedPod(NAMESPACE).watch()
+    awaitPodReady(NAMESPACE, podName);
+  }
+  static void awaitPodReady(String namespace, String podName) throws IOException {
+    KC.create(CoreV1Api.class).listNamespacedPod(namespace).watch()
       .filter(we -> we.getType() == Type.MODIFIED)
       .filter(we -> we.getObject().getMetadata().getName().equals(podName))
       .takeUntil(we -> (boolean)we.getObject().getStatus().getConditions().stream()
@@ -303,12 +303,12 @@ class PodIT {
       .subscribe();
     Awaitility.await()
       .atMost(20, TimeUnit.SECONDS)
-      .until(() -> KC.create(CoreV1Api.class).readNamespacedPod(podName, NAMESPACE).get()
+      .until(() -> KC.create(CoreV1Api.class).readNamespacedPod(podName, namespace).get()
           .getStatus().getPhase().equals("Running"));
   }
 
-  private Pod createPodForTest() throws IOException {
-    return KC.create(CoreV1Api.class).createNamespacedPod(NAMESPACE, Pod.builder()
+  static Pod createPodForTest(String namespace, String podName) throws IOException {
+    return KC.create(CoreV1Api.class).createNamespacedPod(namespace, Pod.builder()
       .metadata(ObjectMeta.builder()
         .name(podName)
         .putInLabels("app", "yakc-pod-it")
@@ -326,10 +326,10 @@ class PodIT {
       .build()).get();
   }
 
-  private void deletePodForTest() throws IOException {
+  static void deletePodForTest(String namespace, String podName) throws IOException {
     try {
       KC.create(CoreV1Api.class)
-        .deleteNamespacedPod(podName, NAMESPACE, DeleteOptions.builder().gracePeriodSeconds(0).build()).get();
+        .deleteNamespacedPod(podName, namespace, DeleteOptions.builder().gracePeriodSeconds(0).build()).get();
     } catch (NotFoundException ex) {
       // Ignore, this is only clean up. Resource may have been deleted by delete test
     }
