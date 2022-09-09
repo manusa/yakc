@@ -18,7 +18,7 @@ def availableSchemaNames = Arrays.asList(
   "kubernetes-1.19.6.json",
   "kubernetes-1.20.5.json",
   "kubernetes-1.21.0.json",
-  "kubernetes-1.22.0.json",
+  "kubernetes-1.22.13.json",
   "kubernetes-1.23.0.json",
   "kubernetes-1.24.0.json"
 )
