@@ -128,6 +128,7 @@ class PodIT {
         .metadata(
           ObjectMeta.builder()
             .putInLabels("patched", "label")
+            .clearAnnotations()
             .build()
         ).build()).get();
     // Then
@@ -155,8 +156,8 @@ class PodIT {
     // Then
     assertThat(error.get()).as("Expected error to be null, but was: %s", error.get()).isNull();
     assertThat(response.get())
-      .hasFieldOrPropertyWithValue("standardStream", StandardStream.STDOUT)
-      .hasFieldOrPropertyWithValue("message", "Hello World\n");
+      .returns(StandardStream.STDOUT, ExecMessage::getStandardStream)
+      .returns("Hello World\n", ExecMessage::getMessage);
   }
 
   @Test
@@ -173,8 +174,8 @@ class PodIT {
     // Then
     assertThat(error.get()).isNull();
     assertThat(response.get())
-      .hasFieldOrPropertyWithValue("standardStream", StandardStream.STDOUT)
-      .hasFieldOrPropertyWithValue("message", "Hello World for yakc-pod-it\n");
+      .returns(StandardStream.STDOUT, ExecMessage::getStandardStream)
+      .returns("Hello World for yakc-pod-it\n", ExecMessage::getMessage);
   }
 
   @Test
