@@ -54,7 +54,7 @@ public class PodStatus implements Model {
   private List<ContainerStatus> containerStatuses;
 
   /**
-   * Status for any ephemeral containers that have run in this pod. This field is beta-level and available on clusters that haven't disabled the EphemeralContainers feature gate.
+   * Status for any ephemeral containers that have run in this pod.
    */
   @JsonProperty("ephemeralContainerStatuses")
   @Singular(value = "addToEphemeralContainerStatuses", ignoreNullCollections = true)

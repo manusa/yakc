@@ -40,7 +40,7 @@ public class PolicyRule implements Model {
 
 
   /**
-   * APIGroups is the name of the APIGroup that contains the resources.  If multiple API groups are specified, any action requested against one of the enumerated resources in any API group will be allowed.
+   * APIGroups is the name of the APIGroup that contains the resources.  If multiple API groups are specified, any action requested against one of the enumerated resources in any API group will be allowed. "" represents the core API group and "&#42;" represents all API groups.
    */
   @JsonProperty("apiGroups")
   @Singular(value = "addToApiGroups", ignoreNullCollections = true)
