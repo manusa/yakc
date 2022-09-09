@@ -4,7 +4,7 @@ ext {
   version_awaitility = '4.2.0'
   version_bouncycastle = '1.70'
   version_jackson = '2.10.1' // Matches transitive version for retrofit2:converter-jackson:2.8.1
-  version_junit = '5.8.2'
+  version_junit = '5.9.0'
   version_mockito = '4.5.1'
   version_mustache = '1.15'
   version_projectlombok = '1.18.24'
