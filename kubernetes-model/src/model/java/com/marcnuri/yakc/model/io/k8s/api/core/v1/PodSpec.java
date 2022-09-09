@@ -79,7 +79,7 @@ public class PodSpec implements Model {
   private Boolean enableServiceLinks;
 
   /**
-   * List of ephemeral containers run in this pod. Ephemeral containers may be run in an existing pod to perform user-initiated actions such as debugging. This list cannot be specified when creating a pod, and it cannot be modified by updating the pod spec. In order to add an ephemeral container to an existing pod, use the pod's ephemeralcontainers subresource. This field is beta-level and available on clusters that haven't disabled the EphemeralContainers feature gate.
+   * List of ephemeral containers run in this pod. Ephemeral containers may be run in an existing pod to perform user-initiated actions such as debugging. This list cannot be specified when creating a pod, and it cannot be modified by updating the pod spec. In order to add an ephemeral container to an existing pod, use the pod's ephemeralcontainers subresource.
    */
   @JsonProperty("ephemeralContainers")
   @Singular(value = "addToEphemeralContainers", ignoreNullCollections = true)
@@ -109,6 +109,12 @@ public class PodSpec implements Model {
    */
   @JsonProperty("hostPID")
   private Boolean hostPID;
+
+  /**
+   * Use the host's user namespace. Optional: Default to true. If set to true or not present, the pod will be run in the host user namespace, useful for when the pod needs a feature only available to the host user namespace, such as loading a kernel module with CAP_SYS_MODULE. When set to false, a new userns is created for the pod. Setting false is useful for mitigating container breakout vulnerabilities even allowing users to run their containers as root without actually having root privileges on the host. This field is alpha-level and is only honored by servers that enable the UserNamespacesSupport feature.
+   */
+  @JsonProperty("hostUsers")
+  private Boolean hostUsers;
 
   /**
    * Specifies the hostname of the Pod If not specified, the pod's hostname will be set to a system-defined value.

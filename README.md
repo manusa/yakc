@@ -96,7 +96,7 @@ Provides the basic interfaces and Exception types to be used across the differen
 
 Kubernetes model objects to be used for REST API serialization/deserialization.
 
-Model types are generated for Kubernetes equivalents in versions ranging from 1.15 to 1.24.
+Model types are generated for Kubernetes equivalents in versions ranging from 1.15 to 1.25.
 
 #### kubernetes-api
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc/kubernetes-api)
@@ -108,7 +108,7 @@ Model types are generated for Kubernetes equivalents in versions ranging from 1.
 [Kubernetes JSON](https://github.com/kubernetes/kubernetes/blob/master/api/openapi-spec/swagger.json)
 [OpenAPI](https://swagger.io/specification/) schema.
 
-API methods for Kubernetes REST endpoints in versions ranging from 1.15 to 1.24.
+API methods for Kubernetes REST endpoints in versions ranging from 1.15 to 1.25.
 
 #### kubernetes-client
 [![Maven Central](https://img.shields.io/maven-central/v/com.marcnuri.yakc/kubernetes-client)

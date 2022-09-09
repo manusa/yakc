@@ -47,12 +47,6 @@ public class ObjectMeta implements Model {
   @Singular(value = "putInAnnotations", ignoreNullCollections = true)
   private Map<String, String> annotations;
 
-  /**
-   * Deprecated: ClusterName is a legacy field that was always cleared by the system and never used; it will be removed completely in 1.25.<br><p> <br><p> The name in the go struct is changed to help clients detect accidental use.
-   */
-  @JsonProperty("clusterName")
-  private String clusterName;
-
   @JsonProperty("creationTimestamp")
   private OffsetDateTime creationTimestamp;
 

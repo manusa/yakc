@@ -75,6 +75,9 @@ public class JobSpec implements Model {
   @JsonProperty("parallelism")
   private Number parallelism;
 
+  @JsonProperty("podFailurePolicy")
+  private PodFailurePolicy podFailurePolicy;
+
   @JsonProperty("selector")
   private LabelSelector selector;
 

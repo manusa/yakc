@@ -58,6 +58,9 @@ public class CSIPersistentVolumeSource implements Model {
   @JsonProperty("fsType")
   private String fsType;
 
+  @JsonProperty("nodeExpandSecretRef")
+  private SecretReference nodeExpandSecretRef;
+
   @JsonProperty("nodePublishSecretRef")
   private SecretReference nodePublishSecretRef;
 

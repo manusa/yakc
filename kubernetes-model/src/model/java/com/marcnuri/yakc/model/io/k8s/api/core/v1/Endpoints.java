@@ -28,7 +28,7 @@ import lombok.Singular;
 import lombok.ToString;
 
 /**
- * Endpoints is a collection of endpoints that implement the actual service. Example:<br><p>   Name: "mysvc",<br><p>   Subsets: [<br><p>     {<br><p>       Addresses: [{"ip": "10.10.1.1"}, {"ip": "10.10.2.2"}],<br><p>       Ports: [{"name": "a", "port": 8675}, {"name": "b", "port": 309}]<br><p>     },<br><p>     {<br><p>       Addresses: [{"ip": "10.10.3.3"}],<br><p>       Ports: [{"name": "a", "port": 93}, {"name": "b", "port": 76}]<br><p>     },<br><p>  ]
+ * Endpoints is a collection of endpoints that implement the actual service. Example:<br><p> <br><p> 	 Name: "mysvc",<br><p> 	 Subsets: [<br><p> 	   {<br><p> 	     Addresses: [{"ip": "10.10.1.1"}, {"ip": "10.10.2.2"}],<br><p> 	     Ports: [{"name": "a", "port": 8675}, {"name": "b", "port": 309}]<br><p> 	   },<br><p> 	   {<br><p> 	     Addresses: [{"ip": "10.10.3.3"}],<br><p> 	     Ports: [{"name": "a", "port": 93}, {"name": "b", "port": 76}]<br><p> 	   },<br><p> 	]
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")

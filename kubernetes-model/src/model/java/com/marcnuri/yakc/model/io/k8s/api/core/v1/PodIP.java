@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * IP address information for entries in the (plural) PodIPs field. Each entry includes:<br><p>    IP: An IP address allocated to the pod. Routable at least within the cluster.
+ * IP address information for entries in the (plural) PodIPs field. Each entry includes:<br><p> <br><p> 	IP: An IP address allocated to the pod. Routable at least within the cluster.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
