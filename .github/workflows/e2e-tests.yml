@@ -34,7 +34,7 @@ jobs:
         if: success()
         run: ./gradlew build -PskipPublishing
       - name: Sonar Analysis
-        if: success() && startsWith(matrix.kubernetes, 'v1.23')
+        if: success() && startsWith(matrix.kubernetes, 'v1.24')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: ./gradlew jacocoRootReport sonarqube -PskipPublishing
