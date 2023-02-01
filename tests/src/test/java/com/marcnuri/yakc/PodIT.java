@@ -223,7 +223,7 @@ class PodIT {
               case STDERR:
                 sb.append(bytes.substring(1).utf8());
             }
-            if (sb.toString().matches(".+[\\r\\n]{1,2}hello-world[\\r\\n]{1,2}.+")) {
+            if (sb.toString().matches("[\\s\\S]+[\\r\\n]{1,2}hello-world[\\r\\n]{1,2}[\\s\\S]+")) {
               messageLatch.countDown();
             }
           }
@@ -238,7 +238,9 @@ class PodIT {
       assertThat(openLatch.await(30, TimeUnit.SECONDS)).isTrue();
       send(ws, "echo hello-world\n");
       // Then
-      assertThat(messageLatch.await(30, TimeUnit.SECONDS)).isTrue();
+      assertThat(messageLatch.await(30, TimeUnit.SECONDS))
+        .withFailMessage(() -> "Expected a WebSocket message containing 'hello-world', but was: " + sb)
+        .isTrue();
     } finally {
       ws.close(1000, "");
     }
