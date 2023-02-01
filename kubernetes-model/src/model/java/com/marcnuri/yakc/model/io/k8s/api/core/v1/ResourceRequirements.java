@@ -18,6 +18,7 @@ package com.marcnuri.yakc.model.io.k8s.api.core.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,6 +38,13 @@ import lombok.ToString;
 @ToString
 public class ResourceRequirements implements Model {
 
+
+  /**
+   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.<br><p> <br><p> This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.<br><p> <br><p> This field is immutable.
+   */
+  @JsonProperty("claims")
+  @Singular(value = "addToClaims", ignoreNullCollections = true)
+  private List<ResourceClaim> claims;
 
   /**
    * Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/

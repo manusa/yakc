@@ -185,6 +185,13 @@ public class PodSpec implements Model {
   private List<PodReadinessGate> readinessGates;
 
   /**
+   * ResourceClaims defines which ResourceClaims must be allocated and reserved before the Pod is allowed to start. The resources will be made available to those containers which consume them by name.<br><p> <br><p> This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.<br><p> <br><p> This field is immutable.
+   */
+  @JsonProperty("resourceClaims")
+  @Singular(value = "addToResourceClaims", ignoreNullCollections = true)
+  private List<PodResourceClaim> resourceClaims;
+
+  /**
    * Restart policy for all containers within the pod. One of Always, OnFailure, Never. Default to Always. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy<br><p> <br><p> 
    */
   @JsonProperty("restartPolicy")
@@ -201,6 +208,13 @@ public class PodSpec implements Model {
    */
   @JsonProperty("schedulerName")
   private String schedulerName;
+
+  /**
+   * SchedulingGates is an opaque list of values that if specified will block scheduling the pod. More info:  https://git.k8s.io/enhancements/keps/sig-scheduling/3521-pod-scheduling-readiness.<br><p> <br><p> This is an alpha-level feature enabled by PodSchedulingReadiness feature gate.
+   */
+  @JsonProperty("schedulingGates")
+  @Singular(value = "addToSchedulingGates", ignoreNullCollections = true)
+  private List<PodSchedulingGate> schedulingGates;
 
   @JsonProperty("securityContext")
   private PodSecurityContext securityContext;

@@ -18,7 +18,6 @@ package com.marcnuri.yakc.model.io.k8s.api.networking.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
-import com.marcnuri.yakc.model.io.k8s.api.core.v1.LoadBalancerStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,7 +37,7 @@ public class IngressStatus implements Model {
 
 
   @JsonProperty("loadBalancer")
-  private LoadBalancerStatus loadBalancer;
+  private IngressLoadBalancerStatus loadBalancer;
 
 }
 

@@ -50,7 +50,7 @@ public class PersistentVolumeClaimSpec implements Model {
   private TypedLocalObjectReference dataSource;
 
   @JsonProperty("dataSourceRef")
-  private TypedLocalObjectReference dataSourceRef;
+  private TypedObjectReference dataSourceRef;
 
   @JsonProperty("resources")
   private ResourceRequirements resources;

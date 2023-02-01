@@ -21,7 +21,8 @@ def availableSchemaNames = Arrays.asList(
   "kubernetes-1.22.13.json",
   "kubernetes-1.23.10.json",
   "kubernetes-1.24.4.json",
-  "kubernetes-1.25.0.json"
+  "kubernetes-1.25.6.json",
+  "kubernetes-1.26.1.json"
 )
 def availableSchemas = availableSchemaNames.stream()
   .map { s -> new File(schemaDir, s) }
