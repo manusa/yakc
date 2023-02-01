@@ -48,6 +48,9 @@ public class StatefulSetSpec implements Model {
   @JsonProperty("minReadySeconds")
   private Number minReadySeconds;
 
+  @JsonProperty("ordinals")
+  private StatefulSetOrdinals ordinals;
+
   @JsonProperty("persistentVolumeClaimRetentionPolicy")
   private StatefulSetPersistentVolumeClaimRetentionPolicy persistentVolumeClaimRetentionPolicy;
 
