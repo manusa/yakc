@@ -17,6 +17,7 @@
  */
 package com.marcnuri.yakc;
 
+import com.marcnuri.yakc.api.NotFoundException;
 import com.marcnuri.yakc.api.core.v1.CoreV1Api;
 import com.marcnuri.yakc.config.Configuration;
 import com.marcnuri.yakc.model.io.k8s.api.core.v1.Node;
@@ -72,26 +73,32 @@ class AuthIT {
   private Secret retrieveSecretForServiceAccount() throws IOException {
     final ServiceAccount sa = KC.create(CoreV1Api.class).listNamespacedServiceAccount(NAMESPACE)
       .stream().findFirst().orElseThrow(() -> new AssertionError("No Service Account found"));
-    final String secretName = sa.getSecrets() == null ? null : sa.getSecrets().stream()
+    final String existentSecretName = sa.getSecrets() == null ? null : sa.getSecrets().stream()
       .findFirst().map(ObjectReference::getName)
       .orElse(null);
-    if (secretName != null) {
+    if (existentSecretName != null) {
       return KC.create(CoreV1Api.class).listNamespacedSecret(NAMESPACE)
         .stream()
         .filter(s -> s.getType().equals("kubernetes.io/service-account-token"))
-        .filter(s -> s.getMetadata().getName().equals(secretName))
+        .filter(s -> s.getMetadata().getName().equals(existentSecretName))
         .findAny()
-        .orElseThrow(() -> new AssertionError(String.format("Secret %s doesn't exist", secretName)));
+        .orElseThrow(() -> new AssertionError(String.format("Secret %s doesn't exist", existentSecretName)));
     } else {
       // https://kubernetes.io/docs/concepts/configuration/secret/#service-account-token-secrets
+      final String secretName = sa.getMetadata().getName() + "-token";
       final Secret serviceAccountTokenSecret = Secret.builder()
         .metadata(ObjectMeta.builder()
-          .name(sa.getMetadata().getName() + "-token")
+          .name(secretName)
           .putInAnnotations("kubernetes.io/service-account.name", sa.getMetadata().getName())
           .build())
         .type("kubernetes.io/service-account-token")
         .putInStringData("token", "my-secret-token")
         .build();
+      try {
+        KC.create(CoreV1Api.class).deleteNamespacedSecret(secretName, NAMESPACE).get();
+      } catch (NotFoundException ex) {
+        // Ignore, this is only clean up. Resource may have been deleted by delete test
+      }
       return KC.create(CoreV1Api.class)
         .createNamespacedSecret(NAMESPACE, serviceAccountTokenSecret).get();
     }
