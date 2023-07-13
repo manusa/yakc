@@ -1,5 +1,10 @@
 # YAKC - Kubernetes Dashboard
 
+> **Warning**
+>
+> This sample project has been migrated to a completely, full-fledged, Kubernetes Dashboard project.
+> You can find the new project at [YAKD - Yet Another Kubernetes Dashboard](https://github.com/manusa/yakd)
+
 PoC to show how to build a Kubernetes dashboard with YAKC,
 [Quarkus](https://quarkus.io) and [React](https://www.reactjs.org).
 
