@@ -151,14 +151,15 @@ class CustomResourceDefinitionV1IT {
         .build()).get();
   }
 
+  @SuppressWarnings("ResultOfMethodCallIgnored")
   static void awaitCustomResourceDefinitionReady(CustomResourceDefinition customResourceDefinition) throws IOException {
     KC.create(ApiextensionsV1Api.class).listCustomResourceDefinition().watch()
       .filter(we -> we.getType() == WatchEvent.Type.MODIFIED)
       .filter(we -> we.getObject().getMetadata().getName().equals(customResourceDefinition.getMetadata().getName()))
-      .takeUntil(we -> (boolean)we.getObject().getStatus().getConditions().stream()
+      .takeUntil(we -> (boolean) we.getObject().getStatus().getConditions().stream()
         .anyMatch(pc -> pc.getType().equals("Established")))
       .timeout(20, TimeUnit.SECONDS)
-      .subscribe();
+      .subscribe(WatchEvent::getObject, ex -> {/* ignore: prevent nasty, confusing messages in STANDARD_ERROR */});
   }
 
   static void deleteCustomResourceDefinitionForTest(
