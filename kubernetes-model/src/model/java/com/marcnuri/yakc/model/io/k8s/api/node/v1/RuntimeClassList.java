@@ -48,7 +48,7 @@ public class RuntimeClassList implements Model, ListModel<RuntimeClass> {
   private String apiVersion;
 
   /**
-   * Items is a list of schema objects.
+   * items is a list of schema objects.
    */
   @NonNull
   @JsonProperty("items")

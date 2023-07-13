@@ -42,13 +42,13 @@ public class HTTPIngressPath implements Model {
   private IngressBackend backend;
 
   /**
-   * Path is matched against the path of an incoming request. Currently it can contain characters disallowed from the conventional "path" part of a URL as defined by RFC 3986. Paths must begin with a '/' and must be present when using PathType with value "Exact" or "Prefix".
+   * path is matched against the path of an incoming request. Currently it can contain characters disallowed from the conventional "path" part of a URL as defined by RFC 3986. Paths must begin with a '/' and must be present when using PathType with value "Exact" or "Prefix".
    */
   @JsonProperty("path")
   private String path;
 
   /**
-   * PathType determines the interpretation of the Path matching. PathType can be one of the following values: &#42; Exact: Matches the URL path exactly. &#42; Prefix: Matches based on a URL path prefix split by '/'. Matching is<br><p>   done on a path element by element basis. A path element refers is the<br><p>   list of labels in the path split by the '/' separator. A request is a<br><p>   match for path p if every p is an element-wise prefix of p of the<br><p>   request path. Note that if the last element of the path is a substring<br><p>   of the last element in request path, it is not a match (e.g. /foo/bar<br><p>   matches /foo/bar/baz, but does not match /foo/barbaz).<br><p> &#42; ImplementationSpecific: Interpretation of the Path matching is up to<br><p>   the IngressClass. Implementations can treat this as a separate PathType<br><p>   or treat it identically to Prefix or Exact path types.<br><p> Implementations are required to support all path types.
+   * pathType determines the interpretation of the path matching. PathType can be one of the following values: &#42; Exact: Matches the URL path exactly. &#42; Prefix: Matches based on a URL path prefix split by '/'. Matching is<br><p>   done on a path element by element basis. A path element refers is the<br><p>   list of labels in the path split by the '/' separator. A request is a<br><p>   match for path p if every p is an element-wise prefix of p of the<br><p>   request path. Note that if the last element of the path is a substring<br><p>   of the last element in request path, it is not a match (e.g. /foo/bar<br><p>   matches /foo/bar/baz, but does not match /foo/barbaz).<br><p> &#42; ImplementationSpecific: Interpretation of the Path matching is up to<br><p>   the IngressClass. Implementations can treat this as a separate PathType<br><p>   or treat it identically to Prefix or Exact path types.<br><p> Implementations are required to support all path types.
    */
   @NonNull
   @JsonProperty("pathType")

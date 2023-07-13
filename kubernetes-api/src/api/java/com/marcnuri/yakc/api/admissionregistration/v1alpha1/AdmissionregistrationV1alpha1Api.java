@@ -199,6 +199,14 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public DeleteCollectionValidatingAdmissionPolicy sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
     public DeleteCollectionValidatingAdmissionPolicy timeoutSeconds(Number timeoutSeconds) {
@@ -298,6 +306,14 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public ListValidatingAdmissionPolicy sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
     public ListValidatingAdmissionPolicy timeoutSeconds(Number timeoutSeconds) {
@@ -371,7 +387,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
-     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public CreateValidatingAdmissionPolicy fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -597,7 +613,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
-     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public PatchValidatingAdmissionPolicy fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -676,9 +692,200 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
-     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public ReplaceValidatingAdmissionPolicy fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+  } 
+  /**
+   * read status of the specified ValidatingAdmissionPolicy
+   *
+   * @param name name of the ValidatingAdmissionPolicy
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies/{name}/status"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<ValidatingAdmissionPolicy> readValidatingAdmissionPolicyStatus(
+    @Path("name") String name);
+
+  /**
+   * read status of the specified ValidatingAdmissionPolicy
+   *
+   * @param name name of the ValidatingAdmissionPolicy
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies/{name}/status"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<ValidatingAdmissionPolicy> readValidatingAdmissionPolicyStatus(
+    @Path("name") String name, 
+    @QueryMap ReadValidatingAdmissionPolicyStatus queryParameters);
+
+  
+  final class ReadValidatingAdmissionPolicyStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReadValidatingAdmissionPolicyStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+  } 
+  /**
+   * partially update status of the specified ValidatingAdmissionPolicy
+   *
+   * @param name name of the ValidatingAdmissionPolicy
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<ValidatingAdmissionPolicy> patchValidatingAdmissionPolicyStatus(
+    @Path("name") String name, 
+    @Body ValidatingAdmissionPolicy body);
+
+  /**
+   * partially update status of the specified ValidatingAdmissionPolicy
+   *
+   * @param name name of the ValidatingAdmissionPolicy
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<ValidatingAdmissionPolicy> patchValidatingAdmissionPolicyStatus(
+    @Path("name") String name, 
+    @Body ValidatingAdmissionPolicy body, 
+    @QueryMap PatchValidatingAdmissionPolicyStatus queryParameters);
+
+  
+  final class PatchValidatingAdmissionPolicyStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public PatchValidatingAdmissionPolicyStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public PatchValidatingAdmissionPolicyStatus dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+     */
+    public PatchValidatingAdmissionPolicyStatus fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     */
+    public PatchValidatingAdmissionPolicyStatus fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
+     * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+     */
+    public PatchValidatingAdmissionPolicyStatus force(Boolean force) {
+      put("force", force);
+      return this;
+    }
+  } 
+  /**
+   * replace status of the specified ValidatingAdmissionPolicy
+   *
+   * @param name name of the ValidatingAdmissionPolicy
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ValidatingAdmissionPolicy> replaceValidatingAdmissionPolicyStatus(
+    @Path("name") String name, 
+    @Body ValidatingAdmissionPolicy body);
+
+  /**
+   * replace status of the specified ValidatingAdmissionPolicy
+   *
+   * @param name name of the ValidatingAdmissionPolicy
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/admissionregistration.k8s.io/v1alpha1/validatingadmissionpolicies/{name}/status",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ValidatingAdmissionPolicy> replaceValidatingAdmissionPolicyStatus(
+    @Path("name") String name, 
+    @Body ValidatingAdmissionPolicy body, 
+    @QueryMap ReplaceValidatingAdmissionPolicyStatus queryParameters);
+
+  
+  final class ReplaceValidatingAdmissionPolicyStatus extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public ReplaceValidatingAdmissionPolicyStatus pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public ReplaceValidatingAdmissionPolicyStatus dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public ReplaceValidatingAdmissionPolicyStatus fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     */
+    public ReplaceValidatingAdmissionPolicyStatus fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
       return this;
     }
@@ -834,6 +1041,14 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public DeleteCollectionValidatingAdmissionPolicyBinding sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
     public DeleteCollectionValidatingAdmissionPolicyBinding timeoutSeconds(Number timeoutSeconds) {
@@ -933,6 +1148,14 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public ListValidatingAdmissionPolicyBinding sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
     public ListValidatingAdmissionPolicyBinding timeoutSeconds(Number timeoutSeconds) {
@@ -1006,7 +1229,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
-     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public CreateValidatingAdmissionPolicyBinding fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -1232,7 +1455,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
-     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public PatchValidatingAdmissionPolicyBinding fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -1311,7 +1534,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
-     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public ReplaceValidatingAdmissionPolicyBinding fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -1406,6 +1629,14 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
      */
     public WatchValidatingAdmissionPolicyList resourceVersionMatch(String resourceVersionMatch) {
       put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchValidatingAdmissionPolicyList sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
       return this;
     }
 
@@ -1523,6 +1754,14 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchValidatingAdmissionPolicy sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
     public WatchValidatingAdmissionPolicy timeoutSeconds(Number timeoutSeconds) {
@@ -1626,6 +1865,14 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
      */
     public WatchValidatingAdmissionPolicyBindingList resourceVersionMatch(String resourceVersionMatch) {
       put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchValidatingAdmissionPolicyBindingList sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
       return this;
     }
 
@@ -1739,6 +1986,14 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
      */
     public WatchValidatingAdmissionPolicyBinding resourceVersionMatch(String resourceVersionMatch) {
       put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchValidatingAdmissionPolicyBinding sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
       return this;
     }
 

@@ -74,7 +74,7 @@ public class Container implements Model {
   private String image;
 
   /**
-   * Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images<br><p> <br><p> 
+   * Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More info: https://kubernetes.io/docs/concepts/containers/images#updating-images
    */
   @JsonProperty("imagePullPolicy")
   private String imagePullPolicy;
@@ -101,6 +101,13 @@ public class Container implements Model {
 
   @JsonProperty("readinessProbe")
   private Probe readinessProbe;
+
+  /**
+   * Resources resize policy for the container.
+   */
+  @JsonProperty("resizePolicy")
+  @Singular(value = "addToResizePolicy", ignoreNullCollections = true)
+  private List<ContainerResizePolicy> resizePolicy;
 
   @JsonProperty("resources")
   private ResourceRequirements resources;
@@ -130,7 +137,7 @@ public class Container implements Model {
   private String terminationMessagePath;
 
   /**
-   * Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.<br><p> <br><p> 
+   * Indicate how the termination message should be populated. File will use the contents of terminationMessagePath to populate the container status message on both success and failure. FallbackToLogsOnError will use the last chunk of container log output if the termination message file is empty and the container exited with an error. The log output is limited to 2048 bytes or 80 lines, whichever is smaller. Defaults to File. Cannot be updated.
    */
   @JsonProperty("terminationMessagePolicy")
   private String terminationMessagePolicy;

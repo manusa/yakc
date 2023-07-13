@@ -48,7 +48,7 @@ public class EndpointSliceList implements Model, ListModel<EndpointSlice> {
   private String apiVersion;
 
   /**
-   * List of endpoint slices
+   * items is the list of endpoint slices
    */
   @NonNull
   @JsonProperty("items")

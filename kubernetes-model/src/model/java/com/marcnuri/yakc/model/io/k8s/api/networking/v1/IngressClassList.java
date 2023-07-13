@@ -48,7 +48,7 @@ public class IngressClassList implements Model, ListModel<IngressClass> {
   private String apiVersion;
 
   /**
-   * Items is the list of IngressClasses.
+   * items is the list of IngressClasses.
    */
   @NonNull
   @JsonProperty("items")

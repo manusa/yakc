@@ -68,7 +68,7 @@ public class PersistentVolumeClaimStatus implements Model {
   private List<PersistentVolumeClaimCondition> conditions;
 
   /**
-   * phase represents the current phase of PersistentVolumeClaim.<br><p> <br><p> 
+   * phase represents the current phase of PersistentVolumeClaim.
    */
   @JsonProperty("phase")
   private String phase;

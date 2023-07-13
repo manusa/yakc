@@ -44,7 +44,7 @@ public class SeccompProfile implements Model {
   private String localhostProfile;
 
   /**
-   * type indicates which kind of seccomp profile will be applied. Valid options are:<br><p> <br><p> Localhost - a profile defined in a file on the node should be used. RuntimeDefault - the container runtime default profile should be used. Unconfined - no profile should be applied.<br><p> <br><p> 
+   * type indicates which kind of seccomp profile will be applied. Valid options are:<br><p> <br><p> Localhost - a profile defined in a file on the node should be used. RuntimeDefault - the container runtime default profile should be used. Unconfined - no profile should be applied.
    */
   @NonNull
   @JsonProperty("type")

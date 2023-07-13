@@ -38,7 +38,7 @@ public class IngressServiceBackend implements Model {
 
 
   /**
-   * Name is the referenced service. The service must exist in the same namespace as the Ingress object.
+   * name is the referenced service. The service must exist in the same namespace as the Ingress object.
    */
   @NonNull
   @JsonProperty("name")

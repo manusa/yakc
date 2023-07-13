@@ -40,7 +40,7 @@ public class DeploymentStrategy implements Model {
   private RollingUpdateDeployment rollingUpdate;
 
   /**
-   * Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.<br><p> <br><p> 
+   * Type of deployment. Can be "Recreate" or "RollingUpdate". Default is RollingUpdate.
    */
   @JsonProperty("type")
   private String type;

@@ -48,7 +48,7 @@ public class CSIStorageCapacityList implements Model, ListModel<CSIStorageCapaci
   private String apiVersion;
 
   /**
-   * Items is the list of CSIStorageCapacity objects.
+   * items is the list of CSIStorageCapacity objects.
    */
   @NonNull
   @JsonProperty("items")

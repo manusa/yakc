@@ -55,5 +55,8 @@ public class ValidatingAdmissionPolicy implements Model {
   @JsonProperty("spec")
   private ValidatingAdmissionPolicySpec spec;
 
+  @JsonProperty("status")
+  private ValidatingAdmissionPolicyStatus status;
+
 }
 

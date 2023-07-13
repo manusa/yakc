@@ -48,7 +48,7 @@ public class NetworkPolicyList implements Model, ListModel<NetworkPolicy> {
   private String apiVersion;
 
   /**
-   * Items is a list of schema objects.
+   * items is a list of schema objects.
    */
   @NonNull
   @JsonProperty("items")

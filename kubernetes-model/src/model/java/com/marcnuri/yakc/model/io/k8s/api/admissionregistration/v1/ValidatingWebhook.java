@@ -59,6 +59,13 @@ public class ValidatingWebhook implements Model {
   private String failurePolicy;
 
   /**
+   * MatchConditions is a list of conditions that must be met for a request to be sent to this webhook. Match conditions filter requests that have already been matched by the rules, namespaceSelector, and objectSelector. An empty list of matchConditions matches all requests. There are a maximum of 64 match conditions allowed.<br><p> <br><p> The exact matching logic is (in order):<br><p>   1. If ANY matchCondition evaluates to FALSE, the webhook is skipped.<br><p>   2. If ALL matchConditions evaluate to TRUE, the webhook is called.<br><p>   3. If any matchCondition evaluates to an error (but none are FALSE):<br><p>      - If failurePolicy=Fail, reject the request<br><p>      - If failurePolicy=Ignore, the error is ignored and the webhook is skipped<br><p> <br><p> This is an alpha feature and managed by the AdmissionWebhookMatchConditions feature gate.
+   */
+  @JsonProperty("matchConditions")
+  @Singular(value = "addToMatchConditions", ignoreNullCollections = true)
+  private List<MatchCondition> matchConditions;
+
+  /**
    * matchPolicy defines how the "rules" list is used to match incoming requests. Allowed values are "Exact" or "Equivalent".<br><p> <br><p> - Exact: match a request only if it exactly matches a specified rule. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, but "rules" only included `apiGroups:["apps"], apiVersions:["v1"], resources: ["deployments"]`, a request to apps/v1beta1 or extensions/v1beta1 would not be sent to the webhook.<br><p> <br><p> - Equivalent: match a request if modifies a resource listed in rules, even via another API group or version. For example, if deployments can be modified via apps/v1, apps/v1beta1, and extensions/v1beta1, and "rules" only included `apiGroups:["apps"], apiVersions:["v1"], resources: ["deployments"]`, a request to apps/v1beta1 or extensions/v1beta1 would be converted to apps/v1 and sent to the webhook.<br><p> <br><p> Defaults to "Equivalent"
    */
   @JsonProperty("matchPolicy")

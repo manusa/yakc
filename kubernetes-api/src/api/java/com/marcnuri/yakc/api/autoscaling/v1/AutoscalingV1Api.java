@@ -41,7 +41,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesCall<APIResourceList> getAPIResources();
@@ -53,7 +53,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/horizontalpodautoscalers"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesListCall<HorizontalPodAutoscalerList, HorizontalPodAutoscaler> listHorizontalPodAutoscalerForAllNamespaces();
@@ -65,14 +65,14 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/horizontalpodautoscalers"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesListCall<HorizontalPodAutoscalerList, HorizontalPodAutoscaler> listHorizontalPodAutoscalerForAllNamespaces(
     @QueryMap ListHorizontalPodAutoscalerForAllNamespaces queryParameters);
 
-  
-  final class ListHorizontalPodAutoscalerForAllNamespaces extends HashMap<String, Object> { 
+
+  final class ListHorizontalPodAutoscalerForAllNamespaces extends HashMap<String, Object> {
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -138,6 +138,14 @@ public interface AutoscalingV1Api extends Api {
     }
 
     /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public ListHorizontalPodAutoscalerForAllNamespaces sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
     public ListHorizontalPodAutoscalerForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
@@ -152,7 +160,7 @@ public interface AutoscalingV1Api extends Api {
       put("watch", watch);
       return this;
     }
-  } 
+  }
   /**
    * delete collection of HorizontalPodAutoscaler
    *
@@ -163,12 +171,12 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedHorizontalPodAutoscaler(
-    @Path("namespace") String namespace, 
+    @Path("namespace") String namespace,
     @Body DeleteOptions body);
 
     /**
@@ -181,7 +189,7 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -198,13 +206,13 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedHorizontalPodAutoscaler(
-    @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
+    @Path("namespace") String namespace,
+    @Body DeleteOptions body,
     @QueryMap DeleteCollectionNamespacedHorizontalPodAutoscaler queryParameters);
 
   /**
@@ -217,16 +225,16 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedHorizontalPodAutoscaler(
-    @Path("namespace") String namespace, 
+    @Path("namespace") String namespace,
     @QueryMap DeleteCollectionNamespacedHorizontalPodAutoscaler queryParameters);
 
-  
-  final class DeleteCollectionNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
+
+  final class DeleteCollectionNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -316,13 +324,21 @@ public interface AutoscalingV1Api extends Api {
     }
 
     /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public DeleteCollectionNamespacedHorizontalPodAutoscaler sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
     public DeleteCollectionNamespacedHorizontalPodAutoscaler timeoutSeconds(Number timeoutSeconds) {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
-  } 
+  }
   /**
    * list or watch objects of kind HorizontalPodAutoscaler
    *
@@ -332,7 +348,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesListCall<HorizontalPodAutoscalerList, HorizontalPodAutoscaler> listNamespacedHorizontalPodAutoscaler(
@@ -347,15 +363,15 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesListCall<HorizontalPodAutoscalerList, HorizontalPodAutoscaler> listNamespacedHorizontalPodAutoscaler(
-    @Path("namespace") String namespace, 
+    @Path("namespace") String namespace,
     @QueryMap ListNamespacedHorizontalPodAutoscaler queryParameters);
 
-  
-  final class ListNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
+
+  final class ListNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -421,6 +437,14 @@ public interface AutoscalingV1Api extends Api {
     }
 
     /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public ListNamespacedHorizontalPodAutoscaler sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
     public ListNamespacedHorizontalPodAutoscaler timeoutSeconds(Number timeoutSeconds) {
@@ -435,7 +459,7 @@ public interface AutoscalingV1Api extends Api {
       put("watch", watch);
       return this;
     }
-  } 
+  }
   /**
    * create a HorizontalPodAutoscaler
    *
@@ -446,12 +470,12 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> createNamespacedHorizontalPodAutoscaler(
-    @Path("namespace") String namespace, 
+    @Path("namespace") String namespace,
     @Body HorizontalPodAutoscaler body);
 
   /**
@@ -464,17 +488,17 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> createNamespacedHorizontalPodAutoscaler(
-    @Path("namespace") String namespace, 
-    @Body HorizontalPodAutoscaler body, 
+    @Path("namespace") String namespace,
+    @Body HorizontalPodAutoscaler body,
     @QueryMap CreateNamespacedHorizontalPodAutoscaler queryParameters);
 
-  
-  final class CreateNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
+
+  final class CreateNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -500,13 +524,13 @@ public interface AutoscalingV1Api extends Api {
     }
 
     /**
-     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public CreateNamespacedHorizontalPodAutoscaler fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  } 
+  }
   /**
    * delete a HorizontalPodAutoscaler
    *
@@ -518,13 +542,13 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace, 
+    @Path("namespace") String namespace,
     @Body DeleteOptions body);
 
     /**
@@ -538,7 +562,7 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -557,14 +581,14 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace, 
-    @Body DeleteOptions body, 
+    @Path("namespace") String namespace,
+    @Body DeleteOptions body,
     @QueryMap DeleteNamespacedHorizontalPodAutoscaler queryParameters);
 
   /**
@@ -578,17 +602,17 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace, 
+    @Path("namespace") String namespace,
     @QueryMap DeleteNamespacedHorizontalPodAutoscaler queryParameters);
 
-  
-  final class DeleteNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
+
+  final class DeleteNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -628,7 +652,7 @@ public interface AutoscalingV1Api extends Api {
       put("propagationPolicy", propagationPolicy);
       return this;
     }
-  } 
+  }
   /**
    * read the specified HorizontalPodAutoscaler
    *
@@ -639,7 +663,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> readNamespacedHorizontalPodAutoscaler(
@@ -656,16 +680,16 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> readNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace, 
+    @Path("namespace") String namespace,
     @QueryMap ReadNamespacedHorizontalPodAutoscaler queryParameters);
 
-  
-  final class ReadNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
+
+  final class ReadNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -673,7 +697,7 @@ public interface AutoscalingV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-  } 
+  }
   /**
    * partially update the specified HorizontalPodAutoscaler
    *
@@ -685,13 +709,13 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> patchNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace, 
+    @Path("namespace") String namespace,
     @Body HorizontalPodAutoscaler body);
 
   /**
@@ -705,18 +729,18 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> patchNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace, 
-    @Body HorizontalPodAutoscaler body, 
+    @Path("namespace") String namespace,
+    @Body HorizontalPodAutoscaler body,
     @QueryMap PatchNamespacedHorizontalPodAutoscaler queryParameters);
 
-  
-  final class PatchNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
+
+  final class PatchNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -742,7 +766,7 @@ public interface AutoscalingV1Api extends Api {
     }
 
     /**
-     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public PatchNamespacedHorizontalPodAutoscaler fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -756,7 +780,7 @@ public interface AutoscalingV1Api extends Api {
       put("force", force);
       return this;
     }
-  } 
+  }
   /**
    * replace the specified HorizontalPodAutoscaler
    *
@@ -768,13 +792,13 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> replaceNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace, 
+    @Path("namespace") String namespace,
     @Body HorizontalPodAutoscaler body);
 
   /**
@@ -788,18 +812,18 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> replaceNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace, 
-    @Body HorizontalPodAutoscaler body, 
+    @Path("namespace") String namespace,
+    @Body HorizontalPodAutoscaler body,
     @QueryMap ReplaceNamespacedHorizontalPodAutoscaler queryParameters);
 
-  
-  final class ReplaceNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
+
+  final class ReplaceNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -825,13 +849,13 @@ public interface AutoscalingV1Api extends Api {
     }
 
     /**
-     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public ReplaceNamespacedHorizontalPodAutoscaler fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  } 
+  }
   /**
    * read status of the specified HorizontalPodAutoscaler
    *
@@ -842,7 +866,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> readNamespacedHorizontalPodAutoscalerStatus(
@@ -859,16 +883,16 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> readNamespacedHorizontalPodAutoscalerStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace, 
+    @Path("namespace") String namespace,
     @QueryMap ReadNamespacedHorizontalPodAutoscalerStatus queryParameters);
 
-  
-  final class ReadNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> { 
+
+  final class ReadNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> {
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -876,7 +900,7 @@ public interface AutoscalingV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-  } 
+  }
   /**
    * partially update status of the specified HorizontalPodAutoscaler
    *
@@ -888,13 +912,13 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> patchNamespacedHorizontalPodAutoscalerStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace, 
+    @Path("namespace") String namespace,
     @Body HorizontalPodAutoscaler body);
 
   /**
@@ -908,18 +932,18 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> patchNamespacedHorizontalPodAutoscalerStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace, 
-    @Body HorizontalPodAutoscaler body, 
+    @Path("namespace") String namespace,
+    @Body HorizontalPodAutoscaler body,
     @QueryMap PatchNamespacedHorizontalPodAutoscalerStatus queryParameters);
 
-  
-  final class PatchNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> { 
+
+  final class PatchNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> {
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -945,7 +969,7 @@ public interface AutoscalingV1Api extends Api {
     }
 
     /**
-     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public PatchNamespacedHorizontalPodAutoscalerStatus fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
@@ -959,7 +983,7 @@ public interface AutoscalingV1Api extends Api {
       put("force", force);
       return this;
     }
-  } 
+  }
   /**
    * replace status of the specified HorizontalPodAutoscaler
    *
@@ -971,13 +995,13 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> replaceNamespacedHorizontalPodAutoscalerStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace, 
+    @Path("namespace") String namespace,
     @Body HorizontalPodAutoscaler body);
 
   /**
@@ -991,18 +1015,18 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status",
     hasBody = true
   )
-  @Headers({ 
+  @Headers({
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> replaceNamespacedHorizontalPodAutoscalerStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace, 
-    @Body HorizontalPodAutoscaler body, 
+    @Path("namespace") String namespace,
+    @Body HorizontalPodAutoscaler body,
     @QueryMap ReplaceNamespacedHorizontalPodAutoscalerStatus queryParameters);
 
-  
-  final class ReplaceNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> { 
+
+  final class ReplaceNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> {
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -1028,13 +1052,13 @@ public interface AutoscalingV1Api extends Api {
     }
 
     /**
-     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields, provided that the `ServerSideFieldValidation` feature gate is also enabled. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23 and is the default behavior when the `ServerSideFieldValidation` feature gate is disabled. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default when the `ServerSideFieldValidation` feature gate is enabled. - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public ReplaceNamespacedHorizontalPodAutoscalerStatus fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  } 
+  }
   /**
    * watch individual changes to a list of HorizontalPodAutoscaler. deprecated: use the 'watch' parameter with a list operation instead.
    */
@@ -1042,7 +1066,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/watch/horizontalpodautoscalers"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchHorizontalPodAutoscalerListForAllNamespaces();
@@ -1054,14 +1078,14 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/watch/horizontalpodautoscalers"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchHorizontalPodAutoscalerListForAllNamespaces(
     @QueryMap WatchHorizontalPodAutoscalerListForAllNamespaces queryParameters);
 
-  
-  final class WatchHorizontalPodAutoscalerListForAllNamespaces extends HashMap<String, Object> { 
+
+  final class WatchHorizontalPodAutoscalerListForAllNamespaces extends HashMap<String, Object> {
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -1127,6 +1151,14 @@ public interface AutoscalingV1Api extends Api {
     }
 
     /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchHorizontalPodAutoscalerListForAllNamespaces sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
     public WatchHorizontalPodAutoscalerListForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
@@ -1141,7 +1173,7 @@ public interface AutoscalingV1Api extends Api {
       put("watch", watch);
       return this;
     }
-  } 
+  }
   /**
    * watch individual changes to a list of HorizontalPodAutoscaler. deprecated: use the 'watch' parameter with a list operation instead.
    *
@@ -1151,7 +1183,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/watch/namespaces/{namespace}/horizontalpodautoscalers"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedHorizontalPodAutoscalerList(
@@ -1166,15 +1198,15 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/watch/namespaces/{namespace}/horizontalpodautoscalers"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedHorizontalPodAutoscalerList(
-    @Path("namespace") String namespace, 
+    @Path("namespace") String namespace,
     @QueryMap WatchNamespacedHorizontalPodAutoscalerList queryParameters);
 
-  
-  final class WatchNamespacedHorizontalPodAutoscalerList extends HashMap<String, Object> { 
+
+  final class WatchNamespacedHorizontalPodAutoscalerList extends HashMap<String, Object> {
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -1240,6 +1272,14 @@ public interface AutoscalingV1Api extends Api {
     }
 
     /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchNamespacedHorizontalPodAutoscalerList sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
     public WatchNamespacedHorizontalPodAutoscalerList timeoutSeconds(Number timeoutSeconds) {
@@ -1254,7 +1294,7 @@ public interface AutoscalingV1Api extends Api {
       put("watch", watch);
       return this;
     }
-  } 
+  }
   /**
    * watch changes to an object of kind HorizontalPodAutoscaler. deprecated: use the 'watch' parameter with a list operation instead, filtered to a single item with the 'fieldSelector' parameter.
    *
@@ -1265,7 +1305,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/watch/namespaces/{namespace}/horizontalpodautoscalers/{name}"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedHorizontalPodAutoscaler(
@@ -1282,16 +1322,16 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/watch/namespaces/{namespace}/horizontalpodautoscalers/{name}"
   )
-  @Headers({ 
+  @Headers({
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace, 
+    @Path("namespace") String namespace,
     @QueryMap WatchNamespacedHorizontalPodAutoscaler queryParameters);
 
-  
-  final class WatchNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
+
+  final class WatchNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -1357,6 +1397,14 @@ public interface AutoscalingV1Api extends Api {
     }
 
     /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchNamespacedHorizontalPodAutoscaler sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
      * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
      */
     public WatchNamespacedHorizontalPodAutoscaler timeoutSeconds(Number timeoutSeconds) {
@@ -1371,5 +1419,5 @@ public interface AutoscalingV1Api extends Api {
       put("watch", watch);
       return this;
     }
-  } 
+  }
 }

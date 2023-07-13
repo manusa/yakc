@@ -28,7 +28,7 @@ import lombok.Singular;
 import lombok.ToString;
 
 /**
- * PodFailurePolicyRule describes how a pod failure is handled when the requirements are met. One of OnExitCodes and onPodConditions, but not both, can be used in each rule.
+ * PodFailurePolicyRule describes how a pod failure is handled when the requirements are met. One of onExitCodes and onPodConditions, but not both, can be used in each rule.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -40,7 +40,7 @@ public class PodFailurePolicyRule implements Model {
 
 
   /**
-   * Specifies the action taken on a pod failure when the requirements are satisfied. Possible values are: - FailJob: indicates that the pod's job is marked as Failed and all<br><p>   running pods are terminated.<br><p> - Ignore: indicates that the counter towards the .backoffLimit is not<br><p>   incremented and a replacement pod is created.<br><p> - Count: indicates that the pod is handled in the default way - the<br><p>   counter towards the .backoffLimit is incremented.<br><p> Additional values are considered to be added in the future. Clients should react to an unknown action by skipping the rule.<br><p> <br><p> 
+   * Specifies the action taken on a pod failure when the requirements are satisfied. Possible values are:<br><p> <br><p> - FailJob: indicates that the pod's job is marked as Failed and all<br><p>   running pods are terminated.<br><p> - Ignore: indicates that the counter towards the .backoffLimit is not<br><p>   incremented and a replacement pod is created.<br><p> - Count: indicates that the pod is handled in the default way - the<br><p>   counter towards the .backoffLimit is incremented.<br><p> Additional values are considered to be added in the future. Clients should react to an unknown action by skipping the rule.
    */
   @NonNull
   @JsonProperty("action")

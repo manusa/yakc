@@ -48,7 +48,7 @@ public class ClusterCIDRList implements Model, ListModel<ClusterCIDR> {
   private String apiVersion;
 
   /**
-   * Items is the list of ClusterCIDRs.
+   * items is the list of ClusterCIDRs.
    */
   @NonNull
   @JsonProperty("items")

@@ -64,14 +64,14 @@ public class OwnerReference implements Model {
   private String kind;
 
   /**
-   * Name of the referent. More info: http://kubernetes.io/docs/user-guide/identifiers#names
+   * Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#names
    */
   @NonNull
   @JsonProperty("name")
   private String name;
 
   /**
-   * UID of the referent. More info: http://kubernetes.io/docs/user-guide/identifiers#uids
+   * UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names#uids
    */
   @NonNull
   @JsonProperty("uid")

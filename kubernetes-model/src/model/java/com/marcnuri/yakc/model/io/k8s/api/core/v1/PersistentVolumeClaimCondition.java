@@ -27,7 +27,7 @@ import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * PersistentVolumeClaimCondition contails details about state of pvc
+ * PersistentVolumeClaimCondition contains details about state of pvc
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")

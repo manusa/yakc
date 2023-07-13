@@ -39,7 +39,7 @@ public class Taint implements Model {
 
 
   /**
-   * Required. The effect of the taint on pods that do not tolerate the taint. Valid effects are NoSchedule, PreferNoSchedule and NoExecute.<br><p> <br><p> 
+   * Required. The effect of the taint on pods that do not tolerate the taint. Valid effects are NoSchedule, PreferNoSchedule and NoExecute.
    */
   @NonNull
   @JsonProperty("effect")

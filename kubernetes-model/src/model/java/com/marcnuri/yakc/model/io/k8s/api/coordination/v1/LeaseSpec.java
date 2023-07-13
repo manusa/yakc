@@ -47,7 +47,7 @@ public class LeaseSpec implements Model {
   private String holderIdentity;
 
   /**
-   * leaseDurationSeconds is a duration that candidates for a lease need to wait to force acquire it. This is measure against time of last observed RenewTime.
+   * leaseDurationSeconds is a duration that candidates for a lease need to wait to force acquire it. This is measure against time of last observed renewTime.
    */
   @JsonProperty("leaseDurationSeconds")
   private Number leaseDurationSeconds;

@@ -38,14 +38,14 @@ public class VolumeAttachmentSpec implements Model {
 
 
   /**
-   * Attacher indicates the name of the volume driver that MUST handle this request. This is the name returned by GetPluginName().
+   * attacher indicates the name of the volume driver that MUST handle this request. This is the name returned by GetPluginName().
    */
   @NonNull
   @JsonProperty("attacher")
   private String attacher;
 
   /**
-   * The node that the volume should be attached to.
+   * nodeName represents the node that the volume should be attached to.
    */
   @NonNull
   @JsonProperty("nodeName")
