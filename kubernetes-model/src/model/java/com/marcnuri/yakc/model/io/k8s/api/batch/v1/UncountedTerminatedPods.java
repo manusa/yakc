@@ -39,14 +39,14 @@ public class UncountedTerminatedPods implements Model {
 
 
   /**
-   * Failed holds UIDs of failed Pods.
+   * failed holds UIDs of failed Pods.
    */
   @JsonProperty("failed")
   @Singular(value = "addToFailed", ignoreNullCollections = true)
   private List<String> failed;
 
   /**
-   * Succeeded holds UIDs of succeeded Pods.
+   * succeeded holds UIDs of succeeded Pods.
    */
   @JsonProperty("succeeded")
   @Singular(value = "addToSucceeded", ignoreNullCollections = true)

@@ -51,7 +51,7 @@ public class PortStatus implements Model {
   private Number port;
 
   /**
-   * Protocol is the protocol of the service port of which status is recorded here The supported values are: "TCP", "UDP", "SCTP"<br><p> <br><p> 
+   * Protocol is the protocol of the service port of which status is recorded here The supported values are: "TCP", "UDP", "SCTP"
    */
   @NonNull
   @JsonProperty("protocol")

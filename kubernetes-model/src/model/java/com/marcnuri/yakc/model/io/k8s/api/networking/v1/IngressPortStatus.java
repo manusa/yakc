@@ -38,20 +38,20 @@ public class IngressPortStatus implements Model {
 
 
   /**
-   * Error is to record the problem with the service port The format of the error shall comply with the following rules: - built-in error values shall be specified in this file and those shall use<br><p>   CamelCase names<br><p> - cloud provider specific error values must have names that comply with the<br><p>   format foo.example.com/CamelCase.
+   * error is to record the problem with the service port The format of the error shall comply with the following rules: - built-in error values shall be specified in this file and those shall use<br><p>   CamelCase names<br><p> - cloud provider specific error values must have names that comply with the<br><p>   format foo.example.com/CamelCase.
    */
   @JsonProperty("error")
   private String error;
 
   /**
-   * Port is the port number of the ingress port.
+   * port is the port number of the ingress port.
    */
   @NonNull
   @JsonProperty("port")
   private Number port;
 
   /**
-   * Protocol is the protocol of the ingress port. The supported values are: "TCP", "UDP", "SCTP"<br><p> <br><p> 
+   * protocol is the protocol of the ingress port. The supported values are: "TCP", "UDP", "SCTP"
    */
   @NonNull
   @JsonProperty("protocol")

@@ -64,7 +64,7 @@ public class ServicePort implements Model {
   private Number port;
 
   /**
-   * The IP protocol for this port. Supports "TCP", "UDP", and "SCTP". Default is TCP.<br><p> <br><p> 
+   * The IP protocol for this port. Supports "TCP", "UDP", and "SCTP". Default is TCP.
    */
   @JsonProperty("protocol")
   private String protocol;

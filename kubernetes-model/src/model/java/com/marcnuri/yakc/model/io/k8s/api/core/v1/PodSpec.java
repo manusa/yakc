@@ -67,7 +67,7 @@ public class PodSpec implements Model {
   private PodDNSConfig dnsConfig;
 
   /**
-   * Set DNS policy for the pod. Defaults to "ClusterFirst". Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'.<br><p> <br><p> 
+   * Set DNS policy for the pod. Defaults to "ClusterFirst". Valid values are 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters given in DNSConfig will be merged with the policy selected with DNSPolicy. To have DNS options set along with hostNetwork, you have to specify DNS policy explicitly to 'ClusterFirstWithHostNet'.
    */
   @JsonProperty("dnsPolicy")
   private String dnsPolicy;
@@ -192,7 +192,7 @@ public class PodSpec implements Model {
   private List<PodResourceClaim> resourceClaims;
 
   /**
-   * Restart policy for all containers within the pod. One of Always, OnFailure, Never. Default to Always. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy<br><p> <br><p> 
+   * Restart policy for all containers within the pod. One of Always, OnFailure, Never. In some contexts, only a subset of those values may be permitted. Default to Always. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
    */
   @JsonProperty("restartPolicy")
   private String restartPolicy;
@@ -210,7 +210,7 @@ public class PodSpec implements Model {
   private String schedulerName;
 
   /**
-   * SchedulingGates is an opaque list of values that if specified will block scheduling the pod. More info:  https://git.k8s.io/enhancements/keps/sig-scheduling/3521-pod-scheduling-readiness.<br><p> <br><p> This is an alpha-level feature enabled by PodSchedulingReadiness feature gate.
+   * SchedulingGates is an opaque list of values that if specified will block scheduling the pod. If schedulingGates is not empty, the pod will stay in the SchedulingGated state and the scheduler will not attempt to schedule the pod.<br><p> <br><p> SchedulingGates can only be set at pod creation time, and be removed only afterwards.<br><p> <br><p> This is a beta feature enabled by the PodSchedulingReadiness feature gate.
    */
   @JsonProperty("schedulingGates")
   @Singular(value = "addToSchedulingGates", ignoreNullCollections = true)

@@ -48,7 +48,7 @@ public class HorizontalPodAutoscalerList implements Model, ListModel<HorizontalP
   private String apiVersion;
 
   /**
-   * list of horizontal pod autoscaler objects.
+   * items is the list of horizontal pod autoscaler objects.
    */
   @NonNull
   @JsonProperty("items")

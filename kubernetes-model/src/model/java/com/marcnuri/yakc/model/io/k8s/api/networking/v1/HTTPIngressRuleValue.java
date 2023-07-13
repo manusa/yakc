@@ -40,7 +40,7 @@ public class HTTPIngressRuleValue implements Model {
 
 
   /**
-   * A collection of paths that map requests to backends.
+   * paths is a collection of paths that map requests to backends.
    */
   @NonNull
   @JsonProperty("paths")

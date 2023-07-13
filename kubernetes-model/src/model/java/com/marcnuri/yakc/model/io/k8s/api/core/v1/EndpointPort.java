@@ -38,7 +38,7 @@ public class EndpointPort implements Model {
 
 
   /**
-   * The application protocol for this port. This field follows standard Kubernetes label syntax. Un-prefixed names are reserved for IANA standard service names (as per RFC-6335 and https://www.iana.org/assignments/service-names). Non-standard protocols should use prefixed names such as mycompany.com/my-custom-protocol.
+   * The application protocol for this port. This is used as a hint for implementations to offer richer behavior for protocols that they understand. This field follows standard Kubernetes label syntax. Valid values are either:<br><p> <br><p> &#42; Un-prefixed protocol names - reserved for IANA standard service names (as per RFC-6335 and https://www.iana.org/assignments/service-names).<br><p> <br><p> &#42; Kubernetes-defined prefixed names:<br><p>   &#42; 'kubernetes.io/h2c' - HTTP/2 over cleartext as described in https://www.rfc-editor.org/rfc/rfc7540<br><p> <br><p> &#42; Other protocols should use implementation-defined prefixed names such as mycompany.com/my-custom-protocol.
    */
   @JsonProperty("appProtocol")
   private String appProtocol;
@@ -57,7 +57,7 @@ public class EndpointPort implements Model {
   private Number port;
 
   /**
-   * The IP protocol for this port. Must be UDP, TCP, or SCTP. Default is TCP.<br><p> <br><p> 
+   * The IP protocol for this port. Must be UDP, TCP, or SCTP. Default is TCP.
    */
   @JsonProperty("protocol")
   private String protocol;

@@ -40,14 +40,14 @@ public class ScopedResourceSelectorRequirement implements Model {
 
 
   /**
-   * Represents a scope's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist.<br><p> <br><p> 
+   * Represents a scope's relationship to a set of values. Valid operators are In, NotIn, Exists, DoesNotExist.
    */
   @NonNull
   @JsonProperty("operator")
   private String operator;
 
   /**
-   * The name of the scope that the selector applies to.<br><p> <br><p> 
+   * The name of the scope that the selector applies to.
    */
   @NonNull
   @JsonProperty("scopeName")

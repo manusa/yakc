@@ -40,7 +40,7 @@ public class StatefulSetUpdateStrategy implements Model {
   private RollingUpdateStatefulSetStrategy rollingUpdate;
 
   /**
-   * Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.<br><p> <br><p> 
+   * Type indicates the type of the StatefulSetUpdateStrategy. Default is RollingUpdate.
    */
   @JsonProperty("type")
   private String type;

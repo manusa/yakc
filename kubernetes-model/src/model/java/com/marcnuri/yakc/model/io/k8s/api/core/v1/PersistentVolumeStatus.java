@@ -43,7 +43,7 @@ public class PersistentVolumeStatus implements Model {
   private String message;
 
   /**
-   * phase indicates if a volume is available, bound to a claim, or released by a claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase<br><p> <br><p> 
+   * phase indicates if a volume is available, bound to a claim, or released by a claim. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#phase
    */
   @JsonProperty("phase")
   private String phase;

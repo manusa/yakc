@@ -38,7 +38,7 @@ public class ContainerResourceMetricStatus implements Model {
 
 
   /**
-   * Container is the name of the container in the pods of the scaling target
+   * container is the name of the container in the pods of the scaling target
    */
   @NonNull
   @JsonProperty("container")
@@ -49,7 +49,7 @@ public class ContainerResourceMetricStatus implements Model {
   private MetricValueStatus current;
 
   /**
-   * Name is the name of the resource in question.
+   * name is the name of the resource in question.
    */
   @NonNull
   @JsonProperty("name")

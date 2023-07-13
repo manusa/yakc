@@ -38,21 +38,21 @@ public class HPAScalingPolicy implements Model {
 
 
   /**
-   * PeriodSeconds specifies the window of time for which the policy should hold true. PeriodSeconds must be greater than zero and less than or equal to 1800 (30 min).
+   * periodSeconds specifies the window of time for which the policy should hold true. PeriodSeconds must be greater than zero and less than or equal to 1800 (30 min).
    */
   @NonNull
   @JsonProperty("periodSeconds")
   private Number periodSeconds;
 
   /**
-   * Type is used to specify the scaling policy.
+   * type is used to specify the scaling policy.
    */
   @NonNull
   @JsonProperty("type")
   private String type;
 
   /**
-   * Value contains the amount of change which is permitted by the policy. It must be greater than zero
+   * value contains the amount of change which is permitted by the policy. It must be greater than zero
    */
   @NonNull
   @JsonProperty("value")

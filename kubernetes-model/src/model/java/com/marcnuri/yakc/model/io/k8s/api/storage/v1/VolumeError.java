@@ -38,7 +38,7 @@ public class VolumeError implements Model {
 
 
   /**
-   * String detailing the error encountered during Attach or Detach operation. This string may be logged, so it should not contain sensitive information.
+   * message represents the error encountered during Attach or Detach operation. This string may be logged, so it should not contain sensitive information.
    */
   @JsonProperty("message")
   private String message;

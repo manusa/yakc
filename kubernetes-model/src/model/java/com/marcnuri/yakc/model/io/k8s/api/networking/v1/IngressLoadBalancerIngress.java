@@ -39,19 +39,19 @@ public class IngressLoadBalancerIngress implements Model {
 
 
   /**
-   * Hostname is set for load-balancer ingress points that are DNS based.
+   * hostname is set for load-balancer ingress points that are DNS based.
    */
   @JsonProperty("hostname")
   private String hostname;
 
   /**
-   * IP is set for load-balancer ingress points that are IP based.
+   * ip is set for load-balancer ingress points that are IP based.
    */
   @JsonProperty("ip")
   private String ip;
 
   /**
-   * Ports provides information about the ports exposed by this LoadBalancer.
+   * ports provides information about the ports exposed by this LoadBalancer.
    */
   @JsonProperty("ports")
   @Singular(value = "addToPorts", ignoreNullCollections = true)

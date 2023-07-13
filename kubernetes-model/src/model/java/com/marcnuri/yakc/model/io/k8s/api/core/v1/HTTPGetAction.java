@@ -65,7 +65,7 @@ public class HTTPGetAction implements Model {
   private String port;
 
   /**
-   * Scheme to use for connecting to the host. Defaults to HTTP.<br><p> <br><p> 
+   * Scheme to use for connecting to the host. Defaults to HTTP.
    */
   @JsonProperty("scheme")
   private String scheme;

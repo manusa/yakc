@@ -38,7 +38,7 @@ public class HorizontalPodAutoscalerSpec implements Model {
 
 
   /**
-   * upper limit for the number of pods that can be set by the autoscaler; cannot be smaller than MinReplicas.
+   * maxReplicas is the upper limit for the number of pods that can be set by the autoscaler; cannot be smaller than MinReplicas.
    */
   @NonNull
   @JsonProperty("maxReplicas")
@@ -55,7 +55,7 @@ public class HorizontalPodAutoscalerSpec implements Model {
   private CrossVersionObjectReference scaleTargetRef;
 
   /**
-   * target average CPU utilization (represented as a percentage of requested CPU) over all the pods; if not specified the default autoscaling policy will be used.
+   * targetCPUUtilizationPercentage is the target average CPU utilization (represented as a percentage of requested CPU) over all the pods; if not specified the default autoscaling policy will be used.
    */
   @JsonProperty("targetCPUUtilizationPercentage")
   private Number targetCPUUtilizationPercentage;

@@ -40,14 +40,14 @@ public class IPBlock implements Model {
 
 
   /**
-   * CIDR is a string representing the IP Block Valid examples are "192.168.1.0/24" or "2001:db8::/64"
+   * cidr is a string representing the IPBlock Valid examples are "192.168.1.0/24" or "2001:db8::/64"
    */
   @NonNull
   @JsonProperty("cidr")
   private String cidr;
 
   /**
-   * Except is a slice of CIDRs that should not be included within an IP Block Valid examples are "192.168.1.0/24" or "2001:db8::/64" Except values will be rejected if they are outside the CIDR range
+   * except is a slice of CIDRs that should not be included within an IPBlock Valid examples are "192.168.1.0/24" or "2001:db8::/64" Except values will be rejected if they are outside the cidr range
    */
   @JsonProperty("except")
   @Singular(value = "addToExcept", ignoreNullCollections = true)

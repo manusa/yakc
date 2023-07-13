@@ -48,7 +48,7 @@ public class VolumeAttachmentList implements Model, ListModel<VolumeAttachment> 
   private String apiVersion;
 
   /**
-   * Items is the list of VolumeAttachments
+   * items is the list of VolumeAttachments
    */
   @NonNull
   @JsonProperty("items")

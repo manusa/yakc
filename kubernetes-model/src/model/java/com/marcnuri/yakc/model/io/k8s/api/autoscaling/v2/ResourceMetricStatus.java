@@ -42,7 +42,7 @@ public class ResourceMetricStatus implements Model {
   private MetricValueStatus current;
 
   /**
-   * Name is the name of the resource in question.
+   * name is the name of the resource in question.
    */
   @NonNull
   @JsonProperty("name")

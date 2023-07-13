@@ -28,7 +28,7 @@ import lombok.Singular;
 import lombok.ToString;
 
 /**
- * NetworkPolicyStatus describe the current state of the NetworkPolicy.
+ * NetworkPolicyStatus describes the current state of the NetworkPolicy.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -40,7 +40,7 @@ public class NetworkPolicyStatus implements Model {
 
 
   /**
-   * Conditions holds an array of metav1.Condition that describe the state of the NetworkPolicy. Current service state
+   * conditions holds an array of metav1.Condition that describe the state of the NetworkPolicy. Current service state
    */
   @JsonProperty("conditions")
   @Singular(value = "addToConditions", ignoreNullCollections = true)

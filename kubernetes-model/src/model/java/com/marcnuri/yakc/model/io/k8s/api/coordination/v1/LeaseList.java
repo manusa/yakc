@@ -48,7 +48,7 @@ public class LeaseList implements Model, ListModel<Lease> {
   private String apiVersion;
 
   /**
-   * Items is a list of schema objects.
+   * items is a list of schema objects.
    */
   @NonNull
   @JsonProperty("items")

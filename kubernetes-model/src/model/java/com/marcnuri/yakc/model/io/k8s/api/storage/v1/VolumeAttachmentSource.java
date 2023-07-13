@@ -41,7 +41,7 @@ public class VolumeAttachmentSource implements Model {
   private PersistentVolumeSpec inlineVolumeSpec;
 
   /**
-   * Name of the persistent volume to attach.
+   * persistentVolumeName represents the name of the persistent volume to attach.
    */
   @JsonProperty("persistentVolumeName")
   private String persistentVolumeName;

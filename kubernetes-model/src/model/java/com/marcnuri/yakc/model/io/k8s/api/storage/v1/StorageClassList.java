@@ -48,7 +48,7 @@ public class StorageClassList implements Model, ListModel<StorageClass> {
   private String apiVersion;
 
   /**
-   * Items is the list of StorageClasses
+   * items is the list of StorageClasses
    */
   @NonNull
   @JsonProperty("items")

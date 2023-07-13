@@ -39,7 +39,7 @@ public class IngressLoadBalancerStatus implements Model {
 
 
   /**
-   * Ingress is a list containing ingress points for the load-balancer.
+   * ingress is a list containing ingress points for the load-balancer.
    */
   @JsonProperty("ingress")
   @Singular(value = "addToIngress", ignoreNullCollections = true)

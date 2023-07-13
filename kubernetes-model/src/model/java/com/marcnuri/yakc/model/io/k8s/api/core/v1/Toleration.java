@@ -37,7 +37,7 @@ public class Toleration implements Model {
 
 
   /**
-   * Effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.<br><p> <br><p> 
+   * Effect indicates the taint effect to match. Empty means match all taint effects. When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
    */
   @JsonProperty("effect")
   private String effect;
@@ -49,7 +49,7 @@ public class Toleration implements Model {
   private String key;
 
   /**
-   * Operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.<br><p> <br><p> 
+   * Operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a pod can tolerate all taints of a particular category.
    */
   @JsonProperty("operator")
   private String operator;

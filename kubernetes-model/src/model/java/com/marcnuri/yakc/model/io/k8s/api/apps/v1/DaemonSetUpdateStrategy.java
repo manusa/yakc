@@ -40,7 +40,7 @@ public class DaemonSetUpdateStrategy implements Model {
   private RollingUpdateDaemonSet rollingUpdate;
 
   /**
-   * Type of daemon set update. Can be "RollingUpdate" or "OnDelete". Default is RollingUpdate.<br><p> <br><p> 
+   * Type of daemon set update. Can be "RollingUpdate" or "OnDelete". Default is RollingUpdate.
    */
   @JsonProperty("type")
   private String type;

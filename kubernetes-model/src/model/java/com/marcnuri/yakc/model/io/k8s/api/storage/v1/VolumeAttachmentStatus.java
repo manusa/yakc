@@ -43,14 +43,14 @@ public class VolumeAttachmentStatus implements Model {
   private VolumeError attachError;
 
   /**
-   * Indicates the volume is successfully attached. This field must only be set by the entity completing the attach operation, i.e. the external-attacher.
+   * attached indicates the volume is successfully attached. This field must only be set by the entity completing the attach operation, i.e. the external-attacher.
    */
   @NonNull
   @JsonProperty("attached")
   private Boolean attached;
 
   /**
-   * Upon successful attach, this field is populated with any information returned by the attach operation that must be passed into subsequent WaitForAttach or Mount calls. This field must only be set by the entity completing the attach operation, i.e. the external-attacher.
+   * attachmentMetadata is populated with any information returned by the attach operation, upon successful attach, that must be passed into subsequent WaitForAttach or Mount calls. This field must only be set by the entity completing the attach operation, i.e. the external-attacher.
    */
   @JsonProperty("attachmentMetadata")
   @Singular(value = "putInAttachmentMetadata", ignoreNullCollections = true)
