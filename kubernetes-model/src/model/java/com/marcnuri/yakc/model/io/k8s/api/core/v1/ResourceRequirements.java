@@ -40,7 +40,7 @@ public class ResourceRequirements implements Model {
 
 
   /**
-   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.<br><p> <br><p> This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.<br><p> <br><p> This field is immutable.
+   * Claims lists the names of resources, defined in spec.resourceClaims, that are used by this container.<br><p> <br><p> This is an alpha field and requires enabling the DynamicResourceAllocation feature gate.<br><p> <br><p> This field is immutable. It can only be set for containers.
    */
   @JsonProperty("claims")
   @Singular(value = "addToClaims", ignoreNullCollections = true)

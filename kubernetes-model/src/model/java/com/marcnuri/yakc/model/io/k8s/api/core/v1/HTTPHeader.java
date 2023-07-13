@@ -38,7 +38,7 @@ public class HTTPHeader implements Model {
 
 
   /**
-   * The header field name
+   * The header field name. This will be canonicalized upon output, so case-variant names will be understood as the same header.
    */
   @NonNull
   @JsonProperty("name")
