@@ -39,5 +39,5 @@ jobs:
         if: success() && startsWith(matrix.kubernetes, 'v1.25')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: ./gradlew jacocoRootReport sonar -PskipPublishing
+        run: ./gradlew -Dorg.gradle.jvmargs=-Xmx512m jacocoRootReport sonar -PskipPublishing
           -Dsonar.login=${{ secrets.SONARCLOUD_TOKEN }}
