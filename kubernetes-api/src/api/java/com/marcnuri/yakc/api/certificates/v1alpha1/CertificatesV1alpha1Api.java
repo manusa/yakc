@@ -41,7 +41,7 @@ public interface CertificatesV1alpha1Api extends Api {
     method = "GET",
     path = "/apis/certificates.k8s.io/v1alpha1/"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<APIResourceList> getAPIResources();
@@ -54,7 +54,7 @@ public interface CertificatesV1alpha1Api extends Api {
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -69,7 +69,7 @@ public interface CertificatesV1alpha1Api extends Api {
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -83,12 +83,12 @@ public interface CertificatesV1alpha1Api extends Api {
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionClusterTrustBundle(
-    @Body DeleteOptions body,
+    @Body DeleteOptions body, 
     @QueryMap DeleteCollectionClusterTrustBundle queryParameters);
 
   /**
@@ -99,15 +99,15 @@ public interface CertificatesV1alpha1Api extends Api {
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionClusterTrustBundle(
     @QueryMap DeleteCollectionClusterTrustBundle queryParameters);
 
-
-  final class DeleteCollectionClusterTrustBundle extends HashMap<String, Object> {
+  
+  final class DeleteCollectionClusterTrustBundle extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -211,7 +211,7 @@ public interface CertificatesV1alpha1Api extends Api {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
-  }
+  } 
   /**
    * list or watch objects of kind ClusterTrustBundle
    */
@@ -219,7 +219,7 @@ public interface CertificatesV1alpha1Api extends Api {
     method = "GET",
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<ClusterTrustBundleList, ClusterTrustBundle> listClusterTrustBundle();
@@ -231,14 +231,14 @@ public interface CertificatesV1alpha1Api extends Api {
     method = "GET",
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<ClusterTrustBundleList, ClusterTrustBundle> listClusterTrustBundle(
     @QueryMap ListClusterTrustBundle queryParameters);
 
-
-  final class ListClusterTrustBundle extends HashMap<String, Object> {
+  
+  final class ListClusterTrustBundle extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -326,7 +326,7 @@ public interface CertificatesV1alpha1Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * create a ClusterTrustBundle
    */
@@ -335,7 +335,7 @@ public interface CertificatesV1alpha1Api extends Api {
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -350,16 +350,16 @@ public interface CertificatesV1alpha1Api extends Api {
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ClusterTrustBundle> createClusterTrustBundle(
-    @Body ClusterTrustBundle body,
+    @Body ClusterTrustBundle body, 
     @QueryMap CreateClusterTrustBundle queryParameters);
 
-
-  final class CreateClusterTrustBundle extends HashMap<String, Object> {
+  
+  final class CreateClusterTrustBundle extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -391,7 +391,7 @@ public interface CertificatesV1alpha1Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * delete a ClusterTrustBundle
    *
@@ -402,12 +402,12 @@ public interface CertificatesV1alpha1Api extends Api {
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteClusterTrustBundle(
-    @Path("name") String name,
+    @Path("name") String name, 
     @Body DeleteOptions body);
 
     /**
@@ -420,7 +420,7 @@ public interface CertificatesV1alpha1Api extends Api {
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -437,13 +437,13 @@ public interface CertificatesV1alpha1Api extends Api {
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteClusterTrustBundle(
-    @Path("name") String name,
-    @Body DeleteOptions body,
+    @Path("name") String name, 
+    @Body DeleteOptions body, 
     @QueryMap DeleteClusterTrustBundle queryParameters);
 
   /**
@@ -456,16 +456,16 @@ public interface CertificatesV1alpha1Api extends Api {
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteClusterTrustBundle(
-    @Path("name") String name,
+    @Path("name") String name, 
     @QueryMap DeleteClusterTrustBundle queryParameters);
 
-
-  final class DeleteClusterTrustBundle extends HashMap<String, Object> {
+  
+  final class DeleteClusterTrustBundle extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -505,7 +505,7 @@ public interface CertificatesV1alpha1Api extends Api {
       put("propagationPolicy", propagationPolicy);
       return this;
     }
-  }
+  } 
   /**
    * read the specified ClusterTrustBundle
    *
@@ -515,7 +515,7 @@ public interface CertificatesV1alpha1Api extends Api {
     method = "GET",
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<ClusterTrustBundle> readClusterTrustBundle(
@@ -530,15 +530,15 @@ public interface CertificatesV1alpha1Api extends Api {
     method = "GET",
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<ClusterTrustBundle> readClusterTrustBundle(
-    @Path("name") String name,
+    @Path("name") String name, 
     @QueryMap ReadClusterTrustBundle queryParameters);
 
-
-  final class ReadClusterTrustBundle extends HashMap<String, Object> {
+  
+  final class ReadClusterTrustBundle extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -546,7 +546,7 @@ public interface CertificatesV1alpha1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-  }
+  } 
   /**
    * partially update the specified ClusterTrustBundle
    *
@@ -557,12 +557,12 @@ public interface CertificatesV1alpha1Api extends Api {
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<ClusterTrustBundle> patchClusterTrustBundle(
-    @Path("name") String name,
+    @Path("name") String name, 
     @Body ClusterTrustBundle body);
 
   /**
@@ -575,17 +575,17 @@ public interface CertificatesV1alpha1Api extends Api {
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<ClusterTrustBundle> patchClusterTrustBundle(
-    @Path("name") String name,
-    @Body ClusterTrustBundle body,
+    @Path("name") String name, 
+    @Body ClusterTrustBundle body, 
     @QueryMap PatchClusterTrustBundle queryParameters);
 
-
-  final class PatchClusterTrustBundle extends HashMap<String, Object> {
+  
+  final class PatchClusterTrustBundle extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -625,7 +625,7 @@ public interface CertificatesV1alpha1Api extends Api {
       put("force", force);
       return this;
     }
-  }
+  } 
   /**
    * replace the specified ClusterTrustBundle
    *
@@ -636,12 +636,12 @@ public interface CertificatesV1alpha1Api extends Api {
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ClusterTrustBundle> replaceClusterTrustBundle(
-    @Path("name") String name,
+    @Path("name") String name, 
     @Body ClusterTrustBundle body);
 
   /**
@@ -654,17 +654,17 @@ public interface CertificatesV1alpha1Api extends Api {
     path = "/apis/certificates.k8s.io/v1alpha1/clustertrustbundles/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ClusterTrustBundle> replaceClusterTrustBundle(
-    @Path("name") String name,
-    @Body ClusterTrustBundle body,
+    @Path("name") String name, 
+    @Body ClusterTrustBundle body, 
     @QueryMap ReplaceClusterTrustBundle queryParameters);
 
-
-  final class ReplaceClusterTrustBundle extends HashMap<String, Object> {
+  
+  final class ReplaceClusterTrustBundle extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -696,7 +696,7 @@ public interface CertificatesV1alpha1Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * watch individual changes to a list of ClusterTrustBundle. deprecated: use the 'watch' parameter with a list operation instead.
    */
@@ -704,7 +704,7 @@ public interface CertificatesV1alpha1Api extends Api {
     method = "GET",
     path = "/apis/certificates.k8s.io/v1alpha1/watch/clustertrustbundles"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchClusterTrustBundleList();
@@ -716,14 +716,14 @@ public interface CertificatesV1alpha1Api extends Api {
     method = "GET",
     path = "/apis/certificates.k8s.io/v1alpha1/watch/clustertrustbundles"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchClusterTrustBundleList(
     @QueryMap WatchClusterTrustBundleList queryParameters);
 
-
-  final class WatchClusterTrustBundleList extends HashMap<String, Object> {
+  
+  final class WatchClusterTrustBundleList extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -811,7 +811,7 @@ public interface CertificatesV1alpha1Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * watch changes to an object of kind ClusterTrustBundle. deprecated: use the 'watch' parameter with a list operation instead, filtered to a single item with the 'fieldSelector' parameter.
    *
@@ -821,7 +821,7 @@ public interface CertificatesV1alpha1Api extends Api {
     method = "GET",
     path = "/apis/certificates.k8s.io/v1alpha1/watch/clustertrustbundles/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchClusterTrustBundle(
@@ -836,15 +836,15 @@ public interface CertificatesV1alpha1Api extends Api {
     method = "GET",
     path = "/apis/certificates.k8s.io/v1alpha1/watch/clustertrustbundles/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchClusterTrustBundle(
-    @Path("name") String name,
+    @Path("name") String name, 
     @QueryMap WatchClusterTrustBundle queryParameters);
 
-
-  final class WatchClusterTrustBundle extends HashMap<String, Object> {
+  
+  final class WatchClusterTrustBundle extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -932,5 +932,5 @@ public interface CertificatesV1alpha1Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
 }

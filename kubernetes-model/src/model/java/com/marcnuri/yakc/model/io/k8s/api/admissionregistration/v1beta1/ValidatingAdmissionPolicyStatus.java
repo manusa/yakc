@@ -14,18 +14,21 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.k8s.api.core.v1;
+package com.marcnuri.yakc.model.io.k8s.api.admissionregistration.v1beta1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Condition;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Singular;
 import lombok.ToString;
 
 /**
- * PodIP represents a single IP address allocated to the pod.
+ * ValidatingAdmissionPolicyStatus represents the status of an admission validation policy.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -33,14 +36,24 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class PodIP implements Model {
+public class ValidatingAdmissionPolicyStatus implements Model {
 
 
   /**
-   * IP is the IP address assigned to the pod
+   * The conditions represent the latest available observations of a policy's current state.
    */
-  @JsonProperty("ip")
-  private String ip;
+  @JsonProperty("conditions")
+  @Singular(value = "addToConditions", ignoreNullCollections = true)
+  private List<Condition> conditions;
+
+  /**
+   * The generation observed by the controller.
+   */
+  @JsonProperty("observedGeneration")
+  private Number observedGeneration;
+
+  @JsonProperty("typeChecking")
+  private TypeChecking typeChecking;
 
 }
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.k8s.api.core.v1;
+package com.marcnuri.yakc.model.io.k8s.api.admissionregistration.v1beta1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
@@ -22,10 +22,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * PodIP represents a single IP address allocated to the pod.
+ * ExpressionWarning is a warning information that targets a specific expression.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -33,14 +34,22 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class PodIP implements Model {
+public class ExpressionWarning implements Model {
 
 
   /**
-   * IP is the IP address assigned to the pod
+   * The path to the field that refers the expression. For example, the reference to the expression of the first item of validations is "spec.validations[0].expression"
    */
-  @JsonProperty("ip")
-  private String ip;
+  @NonNull
+  @JsonProperty("fieldRef")
+  private String fieldRef;
+
+  /**
+   * The content of type checking information in a human-readable form. Each line of the warning contains the type that the expression is checked against, followed by the type check error from the compiler.
+   */
+  @NonNull
+  @JsonProperty("warning")
+  private String warning;
 
 }
 

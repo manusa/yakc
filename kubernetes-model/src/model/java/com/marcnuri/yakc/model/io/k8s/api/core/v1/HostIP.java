@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * PodIP represents a single IP address allocated to the pod.
+ * HostIP represents a single IP address allocated to the host.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -33,11 +33,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class PodIP implements Model {
+public class HostIP implements Model {
 
 
   /**
-   * IP is the IP address assigned to the pod
+   * IP is the IP address assigned to the host
    */
   @JsonProperty("ip")
   private String ip;

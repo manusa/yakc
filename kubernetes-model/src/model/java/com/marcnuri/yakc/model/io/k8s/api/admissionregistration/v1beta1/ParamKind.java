@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.k8s.api.core.v1;
+package com.marcnuri.yakc.model.io.k8s.api.admissionregistration.v1beta1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * PodIP represents a single IP address allocated to the pod.
+ * ParamKind is a tuple of Group Kind and Version.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -33,14 +33,20 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class PodIP implements Model {
+public class ParamKind implements Model {
 
 
   /**
-   * IP is the IP address assigned to the pod
+   * APIVersion is the API group version the resources belong to. In format of "group/version". Required.
    */
-  @JsonProperty("ip")
-  private String ip;
+  @JsonProperty("apiVersion")
+  private String apiVersion;
+
+  /**
+   * Kind is the API kind the resources belong to. Required.
+   */
+  @JsonProperty("kind")
+  private String kind;
 
 }
 

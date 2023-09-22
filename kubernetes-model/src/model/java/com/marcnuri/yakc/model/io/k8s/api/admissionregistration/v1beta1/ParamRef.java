@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.k8s.api.admissionregistration.v1alpha1;
+package com.marcnuri.yakc.model.io.k8s.api.admissionregistration.v1beta1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
@@ -38,7 +38,7 @@ public class ParamRef implements Model {
 
 
   /**
-   * `name` is the name of the resource being referenced.<br><p> <br><p> `name` and `selector` are mutually exclusive properties. If one is set, the other must be unset.
+   * name is the name of the resource being referenced.<br><p> <br><p> One of `name` or `selector` must be set, but `name` and `selector` are mutually exclusive properties. If one is set, the other must be unset.<br><p> <br><p> A single parameter used for all admission requests can be configured by setting the `name` field, leaving `selector` blank, and setting namespace if `paramKind` is namespace-scoped.
    */
   @JsonProperty("name")
   private String name;
@@ -50,7 +50,7 @@ public class ParamRef implements Model {
   private String namespace;
 
   /**
-   * `parameterNotFoundAction` controls the behavior of the binding when the resource exists, and name or selector is valid, but there are no parameters matched by the binding. If the value is set to `Allow`, then no matched parameters will be treated as successful validation by the binding. If set to `Deny`, then no matched parameters will be subject to the `failurePolicy` of the policy.<br><p> <br><p> Allowed values are `Allow` or `Deny` Default to `Deny`
+   * `parameterNotFoundAction` controls the behavior of the binding when the resource exists, and name or selector is valid, but there are no parameters matched by the binding. If the value is set to `Allow`, then no matched parameters will be treated as successful validation by the binding. If set to `Deny`, then no matched parameters will be subject to the `failurePolicy` of the policy.<br><p> <br><p> Allowed values are `Allow` or `Deny`<br><p> <br><p> Required
    */
   @JsonProperty("parameterNotFoundAction")
   private String parameterNotFoundAction;

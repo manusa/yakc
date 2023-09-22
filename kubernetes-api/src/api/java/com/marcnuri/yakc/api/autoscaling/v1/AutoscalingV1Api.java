@@ -41,7 +41,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<APIResourceList> getAPIResources();
@@ -53,7 +53,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/horizontalpodautoscalers"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<HorizontalPodAutoscalerList, HorizontalPodAutoscaler> listHorizontalPodAutoscalerForAllNamespaces();
@@ -65,14 +65,14 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/horizontalpodautoscalers"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<HorizontalPodAutoscalerList, HorizontalPodAutoscaler> listHorizontalPodAutoscalerForAllNamespaces(
     @QueryMap ListHorizontalPodAutoscalerForAllNamespaces queryParameters);
 
-
-  final class ListHorizontalPodAutoscalerForAllNamespaces extends HashMap<String, Object> {
+  
+  final class ListHorizontalPodAutoscalerForAllNamespaces extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -160,7 +160,7 @@ public interface AutoscalingV1Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * delete collection of HorizontalPodAutoscaler
    *
@@ -171,12 +171,12 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedHorizontalPodAutoscaler(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body DeleteOptions body);
 
     /**
@@ -189,7 +189,7 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -206,13 +206,13 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedHorizontalPodAutoscaler(
-    @Path("namespace") String namespace,
-    @Body DeleteOptions body,
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body, 
     @QueryMap DeleteCollectionNamespacedHorizontalPodAutoscaler queryParameters);
 
   /**
@@ -225,16 +225,16 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedHorizontalPodAutoscaler(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedHorizontalPodAutoscaler queryParameters);
 
-
-  final class DeleteCollectionNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
+  
+  final class DeleteCollectionNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -338,7 +338,7 @@ public interface AutoscalingV1Api extends Api {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
-  }
+  } 
   /**
    * list or watch objects of kind HorizontalPodAutoscaler
    *
@@ -348,7 +348,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<HorizontalPodAutoscalerList, HorizontalPodAutoscaler> listNamespacedHorizontalPodAutoscaler(
@@ -363,15 +363,15 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<HorizontalPodAutoscalerList, HorizontalPodAutoscaler> listNamespacedHorizontalPodAutoscaler(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap ListNamespacedHorizontalPodAutoscaler queryParameters);
 
-
-  final class ListNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
+  
+  final class ListNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -459,7 +459,7 @@ public interface AutoscalingV1Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * create a HorizontalPodAutoscaler
    *
@@ -470,12 +470,12 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> createNamespacedHorizontalPodAutoscaler(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body HorizontalPodAutoscaler body);
 
   /**
@@ -488,17 +488,17 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> createNamespacedHorizontalPodAutoscaler(
-    @Path("namespace") String namespace,
-    @Body HorizontalPodAutoscaler body,
+    @Path("namespace") String namespace, 
+    @Body HorizontalPodAutoscaler body, 
     @QueryMap CreateNamespacedHorizontalPodAutoscaler queryParameters);
 
-
-  final class CreateNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
+  
+  final class CreateNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -530,7 +530,7 @@ public interface AutoscalingV1Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * delete a HorizontalPodAutoscaler
    *
@@ -542,13 +542,13 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body DeleteOptions body);
 
     /**
@@ -562,7 +562,7 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -581,14 +581,14 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body DeleteOptions body,
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body, 
     @QueryMap DeleteNamespacedHorizontalPodAutoscaler queryParameters);
 
   /**
@@ -602,17 +602,17 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedHorizontalPodAutoscaler queryParameters);
 
-
-  final class DeleteNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
+  
+  final class DeleteNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -652,7 +652,7 @@ public interface AutoscalingV1Api extends Api {
       put("propagationPolicy", propagationPolicy);
       return this;
     }
-  }
+  } 
   /**
    * read the specified HorizontalPodAutoscaler
    *
@@ -663,7 +663,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> readNamespacedHorizontalPodAutoscaler(
@@ -680,16 +680,16 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> readNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap ReadNamespacedHorizontalPodAutoscaler queryParameters);
 
-
-  final class ReadNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
+  
+  final class ReadNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -697,7 +697,7 @@ public interface AutoscalingV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-  }
+  } 
   /**
    * partially update the specified HorizontalPodAutoscaler
    *
@@ -709,13 +709,13 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> patchNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body HorizontalPodAutoscaler body);
 
   /**
@@ -729,18 +729,18 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> patchNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body HorizontalPodAutoscaler body,
+    @Path("namespace") String namespace, 
+    @Body HorizontalPodAutoscaler body, 
     @QueryMap PatchNamespacedHorizontalPodAutoscaler queryParameters);
 
-
-  final class PatchNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
+  
+  final class PatchNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -780,7 +780,7 @@ public interface AutoscalingV1Api extends Api {
       put("force", force);
       return this;
     }
-  }
+  } 
   /**
    * replace the specified HorizontalPodAutoscaler
    *
@@ -792,13 +792,13 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> replaceNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body HorizontalPodAutoscaler body);
 
   /**
@@ -812,18 +812,18 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> replaceNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body HorizontalPodAutoscaler body,
+    @Path("namespace") String namespace, 
+    @Body HorizontalPodAutoscaler body, 
     @QueryMap ReplaceNamespacedHorizontalPodAutoscaler queryParameters);
 
-
-  final class ReplaceNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
+  
+  final class ReplaceNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -855,7 +855,7 @@ public interface AutoscalingV1Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * read status of the specified HorizontalPodAutoscaler
    *
@@ -866,7 +866,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> readNamespacedHorizontalPodAutoscalerStatus(
@@ -883,16 +883,16 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> readNamespacedHorizontalPodAutoscalerStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap ReadNamespacedHorizontalPodAutoscalerStatus queryParameters);
 
-
-  final class ReadNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> {
+  
+  final class ReadNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -900,7 +900,7 @@ public interface AutoscalingV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-  }
+  } 
   /**
    * partially update status of the specified HorizontalPodAutoscaler
    *
@@ -912,13 +912,13 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> patchNamespacedHorizontalPodAutoscalerStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body HorizontalPodAutoscaler body);
 
   /**
@@ -932,18 +932,18 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> patchNamespacedHorizontalPodAutoscalerStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body HorizontalPodAutoscaler body,
+    @Path("namespace") String namespace, 
+    @Body HorizontalPodAutoscaler body, 
     @QueryMap PatchNamespacedHorizontalPodAutoscalerStatus queryParameters);
 
-
-  final class PatchNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> {
+  
+  final class PatchNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -983,7 +983,7 @@ public interface AutoscalingV1Api extends Api {
       put("force", force);
       return this;
     }
-  }
+  } 
   /**
    * replace status of the specified HorizontalPodAutoscaler
    *
@@ -995,13 +995,13 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> replaceNamespacedHorizontalPodAutoscalerStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body HorizontalPodAutoscaler body);
 
   /**
@@ -1015,18 +1015,18 @@ public interface AutoscalingV1Api extends Api {
     path = "/apis/autoscaling/v1/namespaces/{namespace}/horizontalpodautoscalers/{name}/status",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<HorizontalPodAutoscaler> replaceNamespacedHorizontalPodAutoscalerStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body HorizontalPodAutoscaler body,
+    @Path("namespace") String namespace, 
+    @Body HorizontalPodAutoscaler body, 
     @QueryMap ReplaceNamespacedHorizontalPodAutoscalerStatus queryParameters);
 
-
-  final class ReplaceNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> {
+  
+  final class ReplaceNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -1058,7 +1058,7 @@ public interface AutoscalingV1Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * watch individual changes to a list of HorizontalPodAutoscaler. deprecated: use the 'watch' parameter with a list operation instead.
    */
@@ -1066,7 +1066,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/watch/horizontalpodautoscalers"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchHorizontalPodAutoscalerListForAllNamespaces();
@@ -1078,14 +1078,14 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/watch/horizontalpodautoscalers"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchHorizontalPodAutoscalerListForAllNamespaces(
     @QueryMap WatchHorizontalPodAutoscalerListForAllNamespaces queryParameters);
 
-
-  final class WatchHorizontalPodAutoscalerListForAllNamespaces extends HashMap<String, Object> {
+  
+  final class WatchHorizontalPodAutoscalerListForAllNamespaces extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -1173,7 +1173,7 @@ public interface AutoscalingV1Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * watch individual changes to a list of HorizontalPodAutoscaler. deprecated: use the 'watch' parameter with a list operation instead.
    *
@@ -1183,7 +1183,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/watch/namespaces/{namespace}/horizontalpodautoscalers"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedHorizontalPodAutoscalerList(
@@ -1198,15 +1198,15 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/watch/namespaces/{namespace}/horizontalpodautoscalers"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedHorizontalPodAutoscalerList(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap WatchNamespacedHorizontalPodAutoscalerList queryParameters);
 
-
-  final class WatchNamespacedHorizontalPodAutoscalerList extends HashMap<String, Object> {
+  
+  final class WatchNamespacedHorizontalPodAutoscalerList extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -1294,7 +1294,7 @@ public interface AutoscalingV1Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * watch changes to an object of kind HorizontalPodAutoscaler. deprecated: use the 'watch' parameter with a list operation instead, filtered to a single item with the 'fieldSelector' parameter.
    *
@@ -1305,7 +1305,7 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/watch/namespaces/{namespace}/horizontalpodautoscalers/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedHorizontalPodAutoscaler(
@@ -1322,16 +1322,16 @@ public interface AutoscalingV1Api extends Api {
     method = "GET",
     path = "/apis/autoscaling/v1/watch/namespaces/{namespace}/horizontalpodautoscalers/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedHorizontalPodAutoscaler(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap WatchNamespacedHorizontalPodAutoscaler queryParameters);
 
-
-  final class WatchNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> {
+  
+  final class WatchNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -1419,5 +1419,5 @@ public interface AutoscalingV1Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
 }

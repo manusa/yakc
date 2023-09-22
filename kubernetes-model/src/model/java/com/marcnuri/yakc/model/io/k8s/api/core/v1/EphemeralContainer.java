@@ -112,6 +112,12 @@ public class EphemeralContainer implements Model {
   @JsonProperty("resources")
   private ResourceRequirements resources;
 
+  /**
+   * Restart policy for the container to manage the restart behavior of each container within a pod. This may only be set for init containers. You cannot set this field on ephemeral containers.
+   */
+  @JsonProperty("restartPolicy")
+  private String restartPolicy;
+
   @JsonProperty("securityContext")
   private SecurityContext securityContext;
 

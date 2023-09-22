@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.k8s.api.core.v1;
+package com.marcnuri.yakc.model.io.k8s.api.authentication.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * PodIP represents a single IP address allocated to the pod.
+ * SelfSubjectReviewStatus is filled by the kube-apiserver and sent back to a user.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -33,14 +33,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class PodIP implements Model {
+public class SelfSubjectReviewStatus implements Model {
 
 
-  /**
-   * IP is the IP address assigned to the pod
-   */
-  @JsonProperty("ip")
-  private String ip;
+  @JsonProperty("userInfo")
+  private UserInfo userInfo;
 
 }
 

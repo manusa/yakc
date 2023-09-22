@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.k8s.api.core.v1;
+package com.marcnuri.yakc.model.io.k8s.api.admissionregistration.v1alpha1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
@@ -22,10 +22,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
- * PodIP represents a single IP address allocated to the pod.
+ * Variable is the definition of a variable that is used for composition.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -33,14 +34,22 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class PodIP implements Model {
+public class Variable implements Model {
 
 
   /**
-   * IP is the IP address assigned to the pod
+   * Expression is the expression that will be evaluated as the value of the variable. The CEL expression has access to the same identifiers as the CEL expressions in Validation.
    */
-  @JsonProperty("ip")
-  private String ip;
+  @NonNull
+  @JsonProperty("expression")
+  private String expression;
+
+  /**
+   * Name is the name of the variable. The name must be a valid CEL identifier and unique among all variables. The variable can be accessed in other expressions through `variables` For example, if name is "foo", the variable will be available as `variables.foo`
+   */
+  @NonNull
+  @JsonProperty("name")
+  private String name;
 
 }
 

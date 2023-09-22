@@ -40,7 +40,7 @@ public class PodFailurePolicyRule implements Model {
 
 
   /**
-   * Specifies the action taken on a pod failure when the requirements are satisfied. Possible values are:<br><p> <br><p> - FailJob: indicates that the pod's job is marked as Failed and all<br><p>   running pods are terminated.<br><p> - Ignore: indicates that the counter towards the .backoffLimit is not<br><p>   incremented and a replacement pod is created.<br><p> - Count: indicates that the pod is handled in the default way - the<br><p>   counter towards the .backoffLimit is incremented.<br><p> Additional values are considered to be added in the future. Clients should react to an unknown action by skipping the rule.
+   * Specifies the action taken on a pod failure when the requirements are satisfied. Possible values are:<br><p> <br><p> - FailJob: indicates that the pod's job is marked as Failed and all<br><p>   running pods are terminated.<br><p> - FailIndex: indicates that the pod's index is marked as Failed and will<br><p>   not be restarted.<br><p>   This value is alpha-level. It can be used when the<br><p>   `JobBackoffLimitPerIndex` feature gate is enabled (disabled by default).<br><p> - Ignore: indicates that the counter towards the .backoffLimit is not<br><p>   incremented and a replacement pod is created.<br><p> - Count: indicates that the pod is handled in the default way - the<br><p>   counter towards the .backoffLimit is incremented.<br><p> Additional values are considered to be added in the future. Clients should react to an unknown action by skipping the rule.
    */
   @NonNull
   @JsonProperty("action")
@@ -52,7 +52,6 @@ public class PodFailurePolicyRule implements Model {
   /**
    * Represents the requirement on the pod conditions. The requirement is represented as a list of pod condition patterns. The requirement is satisfied if at least one pattern matches an actual pod condition. At most 20 elements are allowed.
    */
-  @NonNull
   @JsonProperty("onPodConditions")
   @Singular(value = "addToOnPodConditions", ignoreNullCollections = true)
   private List<PodFailurePolicyOnPodConditionsPattern> onPodConditions;

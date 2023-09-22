@@ -18,6 +18,7 @@ package com.marcnuri.yakc.api.authentication.v1;
 
 import com.marcnuri.yakc.api.Api;
 import com.marcnuri.yakc.api.KubernetesCall;
+import com.marcnuri.yakc.model.io.k8s.api.authentication.v1.SelfSubjectReview;
 import com.marcnuri.yakc.model.io.k8s.api.authentication.v1.TokenReview;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.APIResourceList;
 import java.util.HashMap;
@@ -35,11 +36,76 @@ public interface AuthenticationV1Api extends Api {
     method = "GET",
     path = "/apis/authentication.k8s.io/v1/"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<APIResourceList> getAPIResources();
 
+  /**
+   * create a SelfSubjectReview
+   */
+  @HTTP(
+    method = "POST",
+    path = "/apis/authentication.k8s.io/v1/selfsubjectreviews",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<SelfSubjectReview> createSelfSubjectReview(
+    @Body SelfSubjectReview body);
+
+  /**
+   * create a SelfSubjectReview
+   */
+  @HTTP(
+    method = "POST",
+    path = "/apis/authentication.k8s.io/v1/selfsubjectreviews",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<SelfSubjectReview> createSelfSubjectReview(
+    @Body SelfSubjectReview body, 
+    @QueryMap CreateSelfSubjectReview queryParameters);
+
+  
+  final class CreateSelfSubjectReview extends HashMap<String, Object> { 
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public CreateSelfSubjectReview dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public CreateSelfSubjectReview fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     */
+    public CreateSelfSubjectReview fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed.
+     */
+    public CreateSelfSubjectReview pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+  } 
   /**
    * create a TokenReview
    */
@@ -48,7 +114,7 @@ public interface AuthenticationV1Api extends Api {
     path = "/apis/authentication.k8s.io/v1/tokenreviews",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -63,16 +129,16 @@ public interface AuthenticationV1Api extends Api {
     path = "/apis/authentication.k8s.io/v1/tokenreviews",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<TokenReview> createTokenReview(
-    @Body TokenReview body,
+    @Body TokenReview body, 
     @QueryMap CreateTokenReview queryParameters);
 
-
-  final class CreateTokenReview extends HashMap<String, Object> {
+  
+  final class CreateTokenReview extends HashMap<String, Object> { 
     /**
      * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
      */
@@ -104,5 +170,5 @@ public interface AuthenticationV1Api extends Api {
       put("pretty", pretty);
       return this;
     }
-  }
+  } 
 }

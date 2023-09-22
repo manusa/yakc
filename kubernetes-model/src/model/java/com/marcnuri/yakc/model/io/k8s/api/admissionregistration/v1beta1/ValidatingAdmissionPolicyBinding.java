@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.k8s.api.networking.v1;
+package com.marcnuri.yakc.model.io.k8s.api.admissionregistration.v1beta1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * NetworkPolicy describes what network traffic is allowed for a set of Pods
+ * ValidatingAdmissionPolicyBinding binds the ValidatingAdmissionPolicy with paramerized resources. ValidatingAdmissionPolicyBinding and parameter CRDs together define how cluster administrators configure policies for clusters.<br><p> <br><p> For a given admission request, each binding will cause its policy to be evaluated N times, where N is 1 for policies/bindings that don't use params, otherwise N is the number of parameters selected by the binding.<br><p> <br><p> The CEL expressions of a policy must have a computed CEL cost below the maximum CEL budget. Each evaluation of the policy is given an independent CEL cost budget. Adding/removing policies, bindings, or params can not affect whether a given (policy, binding, param) combination is within its own CEL budget.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -34,7 +34,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class NetworkPolicy implements Model {
+public class ValidatingAdmissionPolicyBinding implements Model {
 
 
   /**
@@ -53,7 +53,7 @@ public class NetworkPolicy implements Model {
   private ObjectMeta metadata;
 
   @JsonProperty("spec")
-  private NetworkPolicySpec spec;
+  private ValidatingAdmissionPolicyBindingSpec spec;
 
 }
 

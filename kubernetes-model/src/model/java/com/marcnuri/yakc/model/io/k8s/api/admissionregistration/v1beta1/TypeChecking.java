@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.k8s.api.core.v1;
+package com.marcnuri.yakc.model.io.k8s.api.admissionregistration.v1beta1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Singular;
 import lombok.ToString;
 
 /**
- * PodIP represents a single IP address allocated to the pod.
+ * TypeChecking contains results of type checking the expressions in the ValidatingAdmissionPolicy
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -33,14 +35,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class PodIP implements Model {
+public class TypeChecking implements Model {
 
 
   /**
-   * IP is the IP address assigned to the pod
+   * The type checking warnings for each expression.
    */
-  @JsonProperty("ip")
-  private String ip;
+  @JsonProperty("expressionWarnings")
+  @Singular(value = "addToExpressionWarnings", ignoreNullCollections = true)
+  private List<ExpressionWarning> expressionWarnings;
 
 }
 

@@ -37,6 +37,9 @@ import lombok.ToString;
 public class PriorityLevelConfigurationSpec implements Model {
 
 
+  @JsonProperty("exempt")
+  private ExemptPriorityLevelConfiguration exempt;
+
   @JsonProperty("limited")
   private LimitedPriorityLevelConfiguration limited;
 

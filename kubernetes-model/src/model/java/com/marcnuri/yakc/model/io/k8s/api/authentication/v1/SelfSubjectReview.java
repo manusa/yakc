@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.k8s.api.networking.v1;
+package com.marcnuri.yakc.model.io.k8s.api.authentication.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * NetworkPolicy describes what network traffic is allowed for a set of Pods
+ * SelfSubjectReview contains the user information that the kube-apiserver has about the user making this request. When using impersonation, users will receive the user info of the user being impersonated.  If impersonation or request header authentication is used, any extra keys will have their case ignored and returned as lowercase.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -34,7 +34,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class NetworkPolicy implements Model {
+public class SelfSubjectReview implements Model {
 
 
   /**
@@ -52,8 +52,8 @@ public class NetworkPolicy implements Model {
   @JsonProperty("metadata")
   private ObjectMeta metadata;
 
-  @JsonProperty("spec")
-  private NetworkPolicySpec spec;
+  @JsonProperty("status")
+  private SelfSubjectReviewStatus status;
 
 }
 
