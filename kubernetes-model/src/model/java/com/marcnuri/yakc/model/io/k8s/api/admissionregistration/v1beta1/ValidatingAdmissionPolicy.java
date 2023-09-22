@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.marcnuri.yakc.model.io.k8s.api.networking.v1;
+package com.marcnuri.yakc.model.io.k8s.api.admissionregistration.v1beta1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 /**
- * NetworkPolicy describes what network traffic is allowed for a set of Pods
+ * ValidatingAdmissionPolicy describes the definition of an admission validation policy that accepts or rejects an object without changing it.
  */
 @SuppressWarnings({"squid:S1192", "WeakerAccess", "unused"})
 @Builder(toBuilder = true, builderClassName = "Builder")
@@ -34,7 +34,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Data
 @ToString
-public class NetworkPolicy implements Model {
+public class ValidatingAdmissionPolicy implements Model {
 
 
   /**
@@ -53,7 +53,10 @@ public class NetworkPolicy implements Model {
   private ObjectMeta metadata;
 
   @JsonProperty("spec")
-  private NetworkPolicySpec spec;
+  private ValidatingAdmissionPolicySpec spec;
+
+  @JsonProperty("status")
+  private ValidatingAdmissionPolicyStatus status;
 
 }
 

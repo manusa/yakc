@@ -47,7 +47,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<APIResourceList> getAPIResources();
@@ -62,12 +62,12 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedPodSchedulingContext(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body DeleteOptions body);
 
     /**
@@ -80,7 +80,7 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -97,13 +97,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedPodSchedulingContext(
-    @Path("namespace") String namespace,
-    @Body DeleteOptions body,
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body, 
     @QueryMap DeleteCollectionNamespacedPodSchedulingContext queryParameters);
 
   /**
@@ -116,16 +116,16 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedPodSchedulingContext(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedPodSchedulingContext queryParameters);
 
-
-  final class DeleteCollectionNamespacedPodSchedulingContext extends HashMap<String, Object> {
+  
+  final class DeleteCollectionNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -229,7 +229,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
-  }
+  } 
   /**
    * list or watch objects of kind PodSchedulingContext
    *
@@ -239,7 +239,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<PodSchedulingContextList, PodSchedulingContext> listNamespacedPodSchedulingContext(
@@ -254,15 +254,15 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<PodSchedulingContextList, PodSchedulingContext> listNamespacedPodSchedulingContext(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap ListNamespacedPodSchedulingContext queryParameters);
 
-
-  final class ListNamespacedPodSchedulingContext extends HashMap<String, Object> {
+  
+  final class ListNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -350,7 +350,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * create a PodSchedulingContext
    *
@@ -361,12 +361,12 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> createNamespacedPodSchedulingContext(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body PodSchedulingContext body);
 
   /**
@@ -379,17 +379,17 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> createNamespacedPodSchedulingContext(
-    @Path("namespace") String namespace,
-    @Body PodSchedulingContext body,
+    @Path("namespace") String namespace, 
+    @Body PodSchedulingContext body, 
     @QueryMap CreateNamespacedPodSchedulingContext queryParameters);
 
-
-  final class CreateNamespacedPodSchedulingContext extends HashMap<String, Object> {
+  
+  final class CreateNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -421,7 +421,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * delete a PodSchedulingContext
    *
@@ -433,13 +433,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> deleteNamespacedPodSchedulingContext(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body DeleteOptions body);
 
     /**
@@ -453,7 +453,7 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -472,14 +472,14 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> deleteNamespacedPodSchedulingContext(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body DeleteOptions body,
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body, 
     @QueryMap DeleteNamespacedPodSchedulingContext queryParameters);
 
   /**
@@ -493,17 +493,17 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> deleteNamespacedPodSchedulingContext(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedPodSchedulingContext queryParameters);
 
-
-  final class DeleteNamespacedPodSchedulingContext extends HashMap<String, Object> {
+  
+  final class DeleteNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -543,7 +543,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("propagationPolicy", propagationPolicy);
       return this;
     }
-  }
+  } 
   /**
    * read the specified PodSchedulingContext
    *
@@ -554,7 +554,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> readNamespacedPodSchedulingContext(
@@ -571,16 +571,16 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> readNamespacedPodSchedulingContext(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap ReadNamespacedPodSchedulingContext queryParameters);
 
-
-  final class ReadNamespacedPodSchedulingContext extends HashMap<String, Object> {
+  
+  final class ReadNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -588,7 +588,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("pretty", pretty);
       return this;
     }
-  }
+  } 
   /**
    * partially update the specified PodSchedulingContext
    *
@@ -600,13 +600,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> patchNamespacedPodSchedulingContext(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body PodSchedulingContext body);
 
   /**
@@ -620,18 +620,18 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> patchNamespacedPodSchedulingContext(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body PodSchedulingContext body,
+    @Path("namespace") String namespace, 
+    @Body PodSchedulingContext body, 
     @QueryMap PatchNamespacedPodSchedulingContext queryParameters);
 
-
-  final class PatchNamespacedPodSchedulingContext extends HashMap<String, Object> {
+  
+  final class PatchNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -671,7 +671,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("force", force);
       return this;
     }
-  }
+  } 
   /**
    * replace the specified PodSchedulingContext
    *
@@ -683,13 +683,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> replaceNamespacedPodSchedulingContext(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body PodSchedulingContext body);
 
   /**
@@ -703,18 +703,18 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> replaceNamespacedPodSchedulingContext(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body PodSchedulingContext body,
+    @Path("namespace") String namespace, 
+    @Body PodSchedulingContext body, 
     @QueryMap ReplaceNamespacedPodSchedulingContext queryParameters);
 
-
-  final class ReplaceNamespacedPodSchedulingContext extends HashMap<String, Object> {
+  
+  final class ReplaceNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -746,7 +746,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * read status of the specified PodSchedulingContext
    *
@@ -757,7 +757,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}/status"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> readNamespacedPodSchedulingContextStatus(
@@ -774,16 +774,16 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}/status"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> readNamespacedPodSchedulingContextStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap ReadNamespacedPodSchedulingContextStatus queryParameters);
 
-
-  final class ReadNamespacedPodSchedulingContextStatus extends HashMap<String, Object> {
+  
+  final class ReadNamespacedPodSchedulingContextStatus extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -791,7 +791,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("pretty", pretty);
       return this;
     }
-  }
+  } 
   /**
    * partially update status of the specified PodSchedulingContext
    *
@@ -803,13 +803,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}/status",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> patchNamespacedPodSchedulingContextStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body PodSchedulingContext body);
 
   /**
@@ -823,18 +823,18 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}/status",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> patchNamespacedPodSchedulingContextStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body PodSchedulingContext body,
+    @Path("namespace") String namespace, 
+    @Body PodSchedulingContext body, 
     @QueryMap PatchNamespacedPodSchedulingContextStatus queryParameters);
 
-
-  final class PatchNamespacedPodSchedulingContextStatus extends HashMap<String, Object> {
+  
+  final class PatchNamespacedPodSchedulingContextStatus extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -874,7 +874,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("force", force);
       return this;
     }
-  }
+  } 
   /**
    * replace status of the specified PodSchedulingContext
    *
@@ -886,13 +886,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}/status",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> replaceNamespacedPodSchedulingContextStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body PodSchedulingContext body);
 
   /**
@@ -906,18 +906,18 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/podschedulingcontexts/{name}/status",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<PodSchedulingContext> replaceNamespacedPodSchedulingContextStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body PodSchedulingContext body,
+    @Path("namespace") String namespace, 
+    @Body PodSchedulingContext body, 
     @QueryMap ReplaceNamespacedPodSchedulingContextStatus queryParameters);
 
-
-  final class ReplaceNamespacedPodSchedulingContextStatus extends HashMap<String, Object> {
+  
+  final class ReplaceNamespacedPodSchedulingContextStatus extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -949,7 +949,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * delete collection of ResourceClaim
    *
@@ -960,12 +960,12 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedResourceClaim(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body DeleteOptions body);
 
     /**
@@ -978,7 +978,7 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -995,13 +995,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedResourceClaim(
-    @Path("namespace") String namespace,
-    @Body DeleteOptions body,
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body, 
     @QueryMap DeleteCollectionNamespacedResourceClaim queryParameters);
 
   /**
@@ -1014,16 +1014,16 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedResourceClaim(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedResourceClaim queryParameters);
 
-
-  final class DeleteCollectionNamespacedResourceClaim extends HashMap<String, Object> {
+  
+  final class DeleteCollectionNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -1127,7 +1127,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
-  }
+  } 
   /**
    * list or watch objects of kind ResourceClaim
    *
@@ -1137,7 +1137,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<ResourceClaimList, ResourceClaim> listNamespacedResourceClaim(
@@ -1152,15 +1152,15 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<ResourceClaimList, ResourceClaim> listNamespacedResourceClaim(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap ListNamespacedResourceClaim queryParameters);
 
-
-  final class ListNamespacedResourceClaim extends HashMap<String, Object> {
+  
+  final class ListNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -1248,7 +1248,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * create a ResourceClaim
    *
@@ -1259,12 +1259,12 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> createNamespacedResourceClaim(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body ResourceClaim body);
 
   /**
@@ -1277,17 +1277,17 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> createNamespacedResourceClaim(
-    @Path("namespace") String namespace,
-    @Body ResourceClaim body,
+    @Path("namespace") String namespace, 
+    @Body ResourceClaim body, 
     @QueryMap CreateNamespacedResourceClaim queryParameters);
 
-
-  final class CreateNamespacedResourceClaim extends HashMap<String, Object> {
+  
+  final class CreateNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -1319,7 +1319,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * delete a ResourceClaim
    *
@@ -1331,13 +1331,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> deleteNamespacedResourceClaim(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body DeleteOptions body);
 
     /**
@@ -1351,7 +1351,7 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -1370,14 +1370,14 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> deleteNamespacedResourceClaim(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body DeleteOptions body,
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body, 
     @QueryMap DeleteNamespacedResourceClaim queryParameters);
 
   /**
@@ -1391,17 +1391,17 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> deleteNamespacedResourceClaim(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedResourceClaim queryParameters);
 
-
-  final class DeleteNamespacedResourceClaim extends HashMap<String, Object> {
+  
+  final class DeleteNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -1441,7 +1441,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("propagationPolicy", propagationPolicy);
       return this;
     }
-  }
+  } 
   /**
    * read the specified ResourceClaim
    *
@@ -1452,7 +1452,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> readNamespacedResourceClaim(
@@ -1469,16 +1469,16 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> readNamespacedResourceClaim(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap ReadNamespacedResourceClaim queryParameters);
 
-
-  final class ReadNamespacedResourceClaim extends HashMap<String, Object> {
+  
+  final class ReadNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -1486,7 +1486,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("pretty", pretty);
       return this;
     }
-  }
+  } 
   /**
    * partially update the specified ResourceClaim
    *
@@ -1498,13 +1498,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> patchNamespacedResourceClaim(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body ResourceClaim body);
 
   /**
@@ -1518,18 +1518,18 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> patchNamespacedResourceClaim(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body ResourceClaim body,
+    @Path("namespace") String namespace, 
+    @Body ResourceClaim body, 
     @QueryMap PatchNamespacedResourceClaim queryParameters);
 
-
-  final class PatchNamespacedResourceClaim extends HashMap<String, Object> {
+  
+  final class PatchNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -1569,7 +1569,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("force", force);
       return this;
     }
-  }
+  } 
   /**
    * replace the specified ResourceClaim
    *
@@ -1581,13 +1581,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> replaceNamespacedResourceClaim(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body ResourceClaim body);
 
   /**
@@ -1601,18 +1601,18 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> replaceNamespacedResourceClaim(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body ResourceClaim body,
+    @Path("namespace") String namespace, 
+    @Body ResourceClaim body, 
     @QueryMap ReplaceNamespacedResourceClaim queryParameters);
 
-
-  final class ReplaceNamespacedResourceClaim extends HashMap<String, Object> {
+  
+  final class ReplaceNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -1644,7 +1644,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * read status of the specified ResourceClaim
    *
@@ -1655,7 +1655,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}/status"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> readNamespacedResourceClaimStatus(
@@ -1672,16 +1672,16 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}/status"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> readNamespacedResourceClaimStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap ReadNamespacedResourceClaimStatus queryParameters);
 
-
-  final class ReadNamespacedResourceClaimStatus extends HashMap<String, Object> {
+  
+  final class ReadNamespacedResourceClaimStatus extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -1689,7 +1689,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("pretty", pretty);
       return this;
     }
-  }
+  } 
   /**
    * partially update status of the specified ResourceClaim
    *
@@ -1701,13 +1701,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}/status",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> patchNamespacedResourceClaimStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body ResourceClaim body);
 
   /**
@@ -1721,18 +1721,18 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}/status",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> patchNamespacedResourceClaimStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body ResourceClaim body,
+    @Path("namespace") String namespace, 
+    @Body ResourceClaim body, 
     @QueryMap PatchNamespacedResourceClaimStatus queryParameters);
 
-
-  final class PatchNamespacedResourceClaimStatus extends HashMap<String, Object> {
+  
+  final class PatchNamespacedResourceClaimStatus extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -1772,7 +1772,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("force", force);
       return this;
     }
-  }
+  } 
   /**
    * replace status of the specified ResourceClaim
    *
@@ -1784,13 +1784,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}/status",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> replaceNamespacedResourceClaimStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body ResourceClaim body);
 
   /**
@@ -1804,18 +1804,18 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaims/{name}/status",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaim> replaceNamespacedResourceClaimStatus(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body ResourceClaim body,
+    @Path("namespace") String namespace, 
+    @Body ResourceClaim body, 
     @QueryMap ReplaceNamespacedResourceClaimStatus queryParameters);
 
-
-  final class ReplaceNamespacedResourceClaimStatus extends HashMap<String, Object> {
+  
+  final class ReplaceNamespacedResourceClaimStatus extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -1847,7 +1847,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * delete collection of ResourceClaimTemplate
    *
@@ -1858,12 +1858,12 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedResourceClaimTemplate(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body DeleteOptions body);
 
     /**
@@ -1876,7 +1876,7 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -1893,13 +1893,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedResourceClaimTemplate(
-    @Path("namespace") String namespace,
-    @Body DeleteOptions body,
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body, 
     @QueryMap DeleteCollectionNamespacedResourceClaimTemplate queryParameters);
 
   /**
@@ -1912,16 +1912,16 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionNamespacedResourceClaimTemplate(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap DeleteCollectionNamespacedResourceClaimTemplate queryParameters);
 
-
-  final class DeleteCollectionNamespacedResourceClaimTemplate extends HashMap<String, Object> {
+  
+  final class DeleteCollectionNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -2025,7 +2025,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
-  }
+  } 
   /**
    * list or watch objects of kind ResourceClaimTemplate
    *
@@ -2035,7 +2035,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<ResourceClaimTemplateList, ResourceClaimTemplate> listNamespacedResourceClaimTemplate(
@@ -2050,15 +2050,15 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<ResourceClaimTemplateList, ResourceClaimTemplate> listNamespacedResourceClaimTemplate(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap ListNamespacedResourceClaimTemplate queryParameters);
 
-
-  final class ListNamespacedResourceClaimTemplate extends HashMap<String, Object> {
+  
+  final class ListNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -2146,7 +2146,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * create a ResourceClaimTemplate
    *
@@ -2157,12 +2157,12 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaimTemplate> createNamespacedResourceClaimTemplate(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body ResourceClaimTemplate body);
 
   /**
@@ -2175,17 +2175,17 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaimTemplate> createNamespacedResourceClaimTemplate(
-    @Path("namespace") String namespace,
-    @Body ResourceClaimTemplate body,
+    @Path("namespace") String namespace, 
+    @Body ResourceClaimTemplate body, 
     @QueryMap CreateNamespacedResourceClaimTemplate queryParameters);
 
-
-  final class CreateNamespacedResourceClaimTemplate extends HashMap<String, Object> {
+  
+  final class CreateNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -2217,7 +2217,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * delete a ResourceClaimTemplate
    *
@@ -2229,13 +2229,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaimTemplate> deleteNamespacedResourceClaimTemplate(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body DeleteOptions body);
 
     /**
@@ -2249,7 +2249,7 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -2268,14 +2268,14 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaimTemplate> deleteNamespacedResourceClaimTemplate(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body DeleteOptions body,
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body, 
     @QueryMap DeleteNamespacedResourceClaimTemplate queryParameters);
 
   /**
@@ -2289,17 +2289,17 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaimTemplate> deleteNamespacedResourceClaimTemplate(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap DeleteNamespacedResourceClaimTemplate queryParameters);
 
-
-  final class DeleteNamespacedResourceClaimTemplate extends HashMap<String, Object> {
+  
+  final class DeleteNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -2339,7 +2339,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("propagationPolicy", propagationPolicy);
       return this;
     }
-  }
+  } 
   /**
    * read the specified ResourceClaimTemplate
    *
@@ -2350,7 +2350,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<ResourceClaimTemplate> readNamespacedResourceClaimTemplate(
@@ -2367,16 +2367,16 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<ResourceClaimTemplate> readNamespacedResourceClaimTemplate(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap ReadNamespacedResourceClaimTemplate queryParameters);
 
-
-  final class ReadNamespacedResourceClaimTemplate extends HashMap<String, Object> {
+  
+  final class ReadNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -2384,7 +2384,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("pretty", pretty);
       return this;
     }
-  }
+  } 
   /**
    * partially update the specified ResourceClaimTemplate
    *
@@ -2396,13 +2396,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaimTemplate> patchNamespacedResourceClaimTemplate(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body ResourceClaimTemplate body);
 
   /**
@@ -2416,18 +2416,18 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaimTemplate> patchNamespacedResourceClaimTemplate(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body ResourceClaimTemplate body,
+    @Path("namespace") String namespace, 
+    @Body ResourceClaimTemplate body, 
     @QueryMap PatchNamespacedResourceClaimTemplate queryParameters);
 
-
-  final class PatchNamespacedResourceClaimTemplate extends HashMap<String, Object> {
+  
+  final class PatchNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -2467,7 +2467,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("force", force);
       return this;
     }
-  }
+  } 
   /**
    * replace the specified ResourceClaimTemplate
    *
@@ -2479,13 +2479,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaimTemplate> replaceNamespacedResourceClaimTemplate(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @Body ResourceClaimTemplate body);
 
   /**
@@ -2499,18 +2499,18 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimtemplates/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClaimTemplate> replaceNamespacedResourceClaimTemplate(
     @Path("name") String name,
-    @Path("namespace") String namespace,
-    @Body ResourceClaimTemplate body,
+    @Path("namespace") String namespace, 
+    @Body ResourceClaimTemplate body, 
     @QueryMap ReplaceNamespacedResourceClaimTemplate queryParameters);
 
-
-  final class ReplaceNamespacedResourceClaimTemplate extends HashMap<String, Object> {
+  
+  final class ReplaceNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -2542,7 +2542,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * list or watch objects of kind PodSchedulingContext
    */
@@ -2550,7 +2550,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/podschedulingcontexts"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<PodSchedulingContextList, PodSchedulingContext> listPodSchedulingContextForAllNamespaces();
@@ -2562,14 +2562,14 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/podschedulingcontexts"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<PodSchedulingContextList, PodSchedulingContext> listPodSchedulingContextForAllNamespaces(
     @QueryMap ListPodSchedulingContextForAllNamespaces queryParameters);
 
-
-  final class ListPodSchedulingContextForAllNamespaces extends HashMap<String, Object> {
+  
+  final class ListPodSchedulingContextForAllNamespaces extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -2657,7 +2657,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * list or watch objects of kind ResourceClaim
    */
@@ -2665,7 +2665,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/resourceclaims"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<ResourceClaimList, ResourceClaim> listResourceClaimForAllNamespaces();
@@ -2677,14 +2677,14 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/resourceclaims"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<ResourceClaimList, ResourceClaim> listResourceClaimForAllNamespaces(
     @QueryMap ListResourceClaimForAllNamespaces queryParameters);
 
-
-  final class ListResourceClaimForAllNamespaces extends HashMap<String, Object> {
+  
+  final class ListResourceClaimForAllNamespaces extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -2772,7 +2772,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * list or watch objects of kind ResourceClaimTemplate
    */
@@ -2780,7 +2780,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/resourceclaimtemplates"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<ResourceClaimTemplateList, ResourceClaimTemplate> listResourceClaimTemplateForAllNamespaces();
@@ -2792,14 +2792,14 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/resourceclaimtemplates"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<ResourceClaimTemplateList, ResourceClaimTemplate> listResourceClaimTemplateForAllNamespaces(
     @QueryMap ListResourceClaimTemplateForAllNamespaces queryParameters);
 
-
-  final class ListResourceClaimTemplateForAllNamespaces extends HashMap<String, Object> {
+  
+  final class ListResourceClaimTemplateForAllNamespaces extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -2887,7 +2887,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * delete collection of ResourceClass
    */
@@ -2896,7 +2896,7 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -2911,7 +2911,7 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -2925,12 +2925,12 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionResourceClass(
-    @Body DeleteOptions body,
+    @Body DeleteOptions body, 
     @QueryMap DeleteCollectionResourceClass queryParameters);
 
   /**
@@ -2941,15 +2941,15 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<Status> deleteCollectionResourceClass(
     @QueryMap DeleteCollectionResourceClass queryParameters);
 
-
-  final class DeleteCollectionResourceClass extends HashMap<String, Object> {
+  
+  final class DeleteCollectionResourceClass extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -3053,7 +3053,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("timeoutSeconds", timeoutSeconds);
       return this;
     }
-  }
+  } 
   /**
    * list or watch objects of kind ResourceClass
    */
@@ -3061,7 +3061,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<ResourceClassList, ResourceClass> listResourceClass();
@@ -3073,14 +3073,14 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesListCall<ResourceClassList, ResourceClass> listResourceClass(
     @QueryMap ListResourceClass queryParameters);
 
-
-  final class ListResourceClass extends HashMap<String, Object> {
+  
+  final class ListResourceClass extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -3168,7 +3168,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * create a ResourceClass
    */
@@ -3177,7 +3177,7 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -3192,16 +3192,16 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClass> createResourceClass(
-    @Body ResourceClass body,
+    @Body ResourceClass body, 
     @QueryMap CreateResourceClass queryParameters);
 
-
-  final class CreateResourceClass extends HashMap<String, Object> {
+  
+  final class CreateResourceClass extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -3233,7 +3233,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * delete a ResourceClass
    *
@@ -3244,12 +3244,12 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClass> deleteResourceClass(
-    @Path("name") String name,
+    @Path("name") String name, 
     @Body DeleteOptions body);
 
     /**
@@ -3262,7 +3262,7 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
@@ -3279,13 +3279,13 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClass> deleteResourceClass(
-    @Path("name") String name,
-    @Body DeleteOptions body,
+    @Path("name") String name, 
+    @Body DeleteOptions body, 
     @QueryMap DeleteResourceClass queryParameters);
 
   /**
@@ -3298,16 +3298,16 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClass> deleteResourceClass(
-    @Path("name") String name,
+    @Path("name") String name, 
     @QueryMap DeleteResourceClass queryParameters);
 
-
-  final class DeleteResourceClass extends HashMap<String, Object> {
+  
+  final class DeleteResourceClass extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -3347,7 +3347,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("propagationPolicy", propagationPolicy);
       return this;
     }
-  }
+  } 
   /**
    * read the specified ResourceClass
    *
@@ -3357,7 +3357,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<ResourceClass> readResourceClass(
@@ -3372,15 +3372,15 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<ResourceClass> readResourceClass(
-    @Path("name") String name,
+    @Path("name") String name, 
     @QueryMap ReadResourceClass queryParameters);
 
-
-  final class ReadResourceClass extends HashMap<String, Object> {
+  
+  final class ReadResourceClass extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -3388,7 +3388,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("pretty", pretty);
       return this;
     }
-  }
+  } 
   /**
    * partially update the specified ResourceClass
    *
@@ -3399,12 +3399,12 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClass> patchResourceClass(
-    @Path("name") String name,
+    @Path("name") String name, 
     @Body ResourceClass body);
 
   /**
@@ -3417,17 +3417,17 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/merge-patch+json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClass> patchResourceClass(
-    @Path("name") String name,
-    @Body ResourceClass body,
+    @Path("name") String name, 
+    @Body ResourceClass body, 
     @QueryMap PatchResourceClass queryParameters);
 
-
-  final class PatchResourceClass extends HashMap<String, Object> {
+  
+  final class PatchResourceClass extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -3467,7 +3467,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("force", force);
       return this;
     }
-  }
+  } 
   /**
    * replace the specified ResourceClass
    *
@@ -3478,12 +3478,12 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClass> replaceResourceClass(
-    @Path("name") String name,
+    @Path("name") String name, 
     @Body ResourceClass body);
 
   /**
@@ -3496,17 +3496,17 @@ public interface ResourceV1alpha2Api extends Api {
     path = "/apis/resource.k8s.io/v1alpha2/resourceclasses/{name}",
     hasBody = true
   )
-  @Headers({
+  @Headers({ 
     "Content-Type: application/json",
     "Accept: */*"
   })
   KubernetesCall<ResourceClass> replaceResourceClass(
-    @Path("name") String name,
-    @Body ResourceClass body,
+    @Path("name") String name, 
+    @Body ResourceClass body, 
     @QueryMap ReplaceResourceClass queryParameters);
 
-
-  final class ReplaceResourceClass extends HashMap<String, Object> {
+  
+  final class ReplaceResourceClass extends HashMap<String, Object> { 
     /**
      * If 'true', then the output is pretty printed.
      */
@@ -3538,7 +3538,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("fieldValidation", fieldValidation);
       return this;
     }
-  }
+  } 
   /**
    * watch individual changes to a list of PodSchedulingContext. deprecated: use the 'watch' parameter with a list operation instead.
    *
@@ -3548,7 +3548,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/podschedulingcontexts"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedPodSchedulingContextList(
@@ -3563,15 +3563,15 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/podschedulingcontexts"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedPodSchedulingContextList(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap WatchNamespacedPodSchedulingContextList queryParameters);
 
-
-  final class WatchNamespacedPodSchedulingContextList extends HashMap<String, Object> {
+  
+  final class WatchNamespacedPodSchedulingContextList extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -3659,7 +3659,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * watch changes to an object of kind PodSchedulingContext. deprecated: use the 'watch' parameter with a list operation instead, filtered to a single item with the 'fieldSelector' parameter.
    *
@@ -3670,7 +3670,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/podschedulingcontexts/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedPodSchedulingContext(
@@ -3687,16 +3687,16 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/podschedulingcontexts/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedPodSchedulingContext(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap WatchNamespacedPodSchedulingContext queryParameters);
 
-
-  final class WatchNamespacedPodSchedulingContext extends HashMap<String, Object> {
+  
+  final class WatchNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -3784,7 +3784,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * watch individual changes to a list of ResourceClaim. deprecated: use the 'watch' parameter with a list operation instead.
    *
@@ -3794,7 +3794,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclaims"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedResourceClaimList(
@@ -3809,15 +3809,15 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclaims"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedResourceClaimList(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap WatchNamespacedResourceClaimList queryParameters);
 
-
-  final class WatchNamespacedResourceClaimList extends HashMap<String, Object> {
+  
+  final class WatchNamespacedResourceClaimList extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -3905,7 +3905,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * watch changes to an object of kind ResourceClaim. deprecated: use the 'watch' parameter with a list operation instead, filtered to a single item with the 'fieldSelector' parameter.
    *
@@ -3916,7 +3916,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclaims/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedResourceClaim(
@@ -3933,16 +3933,16 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclaims/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedResourceClaim(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap WatchNamespacedResourceClaim queryParameters);
 
-
-  final class WatchNamespacedResourceClaim extends HashMap<String, Object> {
+  
+  final class WatchNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -4030,7 +4030,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * watch individual changes to a list of ResourceClaimTemplate. deprecated: use the 'watch' parameter with a list operation instead.
    *
@@ -4040,7 +4040,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclaimtemplates"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedResourceClaimTemplateList(
@@ -4055,15 +4055,15 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclaimtemplates"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedResourceClaimTemplateList(
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap WatchNamespacedResourceClaimTemplateList queryParameters);
 
-
-  final class WatchNamespacedResourceClaimTemplateList extends HashMap<String, Object> {
+  
+  final class WatchNamespacedResourceClaimTemplateList extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -4151,7 +4151,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * watch changes to an object of kind ResourceClaimTemplate. deprecated: use the 'watch' parameter with a list operation instead, filtered to a single item with the 'fieldSelector' parameter.
    *
@@ -4162,7 +4162,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclaimtemplates/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedResourceClaimTemplate(
@@ -4179,16 +4179,16 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclaimtemplates/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchNamespacedResourceClaimTemplate(
     @Path("name") String name,
-    @Path("namespace") String namespace,
+    @Path("namespace") String namespace, 
     @QueryMap WatchNamespacedResourceClaimTemplate queryParameters);
 
-
-  final class WatchNamespacedResourceClaimTemplate extends HashMap<String, Object> {
+  
+  final class WatchNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -4276,7 +4276,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * watch individual changes to a list of PodSchedulingContext. deprecated: use the 'watch' parameter with a list operation instead.
    */
@@ -4284,7 +4284,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/podschedulingcontexts"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchPodSchedulingContextListForAllNamespaces();
@@ -4296,14 +4296,14 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/podschedulingcontexts"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchPodSchedulingContextListForAllNamespaces(
     @QueryMap WatchPodSchedulingContextListForAllNamespaces queryParameters);
 
-
-  final class WatchPodSchedulingContextListForAllNamespaces extends HashMap<String, Object> {
+  
+  final class WatchPodSchedulingContextListForAllNamespaces extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -4391,7 +4391,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * watch individual changes to a list of ResourceClaim. deprecated: use the 'watch' parameter with a list operation instead.
    */
@@ -4399,7 +4399,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/resourceclaims"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchResourceClaimListForAllNamespaces();
@@ -4411,14 +4411,14 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/resourceclaims"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchResourceClaimListForAllNamespaces(
     @QueryMap WatchResourceClaimListForAllNamespaces queryParameters);
 
-
-  final class WatchResourceClaimListForAllNamespaces extends HashMap<String, Object> {
+  
+  final class WatchResourceClaimListForAllNamespaces extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -4506,7 +4506,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * watch individual changes to a list of ResourceClaimTemplate. deprecated: use the 'watch' parameter with a list operation instead.
    */
@@ -4514,7 +4514,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/resourceclaimtemplates"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchResourceClaimTemplateListForAllNamespaces();
@@ -4526,14 +4526,14 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/resourceclaimtemplates"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchResourceClaimTemplateListForAllNamespaces(
     @QueryMap WatchResourceClaimTemplateListForAllNamespaces queryParameters);
 
-
-  final class WatchResourceClaimTemplateListForAllNamespaces extends HashMap<String, Object> {
+  
+  final class WatchResourceClaimTemplateListForAllNamespaces extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -4621,7 +4621,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * watch individual changes to a list of ResourceClass. deprecated: use the 'watch' parameter with a list operation instead.
    */
@@ -4629,7 +4629,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/resourceclasses"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchResourceClassList();
@@ -4641,14 +4641,14 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/resourceclasses"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchResourceClassList(
     @QueryMap WatchResourceClassList queryParameters);
 
-
-  final class WatchResourceClassList extends HashMap<String, Object> {
+  
+  final class WatchResourceClassList extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -4736,7 +4736,7 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
   /**
    * watch changes to an object of kind ResourceClass. deprecated: use the 'watch' parameter with a list operation instead, filtered to a single item with the 'fieldSelector' parameter.
    *
@@ -4746,7 +4746,7 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/resourceclasses/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchResourceClass(
@@ -4761,15 +4761,15 @@ public interface ResourceV1alpha2Api extends Api {
     method = "GET",
     path = "/apis/resource.k8s.io/v1alpha2/watch/resourceclasses/{name}"
   )
-  @Headers({
+  @Headers({ 
     "Accept: */*"
   })
   KubernetesCall<WatchEvent> watchResourceClass(
-    @Path("name") String name,
+    @Path("name") String name, 
     @QueryMap WatchResourceClass queryParameters);
 
-
-  final class WatchResourceClass extends HashMap<String, Object> {
+  
+  final class WatchResourceClass extends HashMap<String, Object> { 
     /**
      * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
      */
@@ -4857,5 +4857,5 @@ public interface ResourceV1alpha2Api extends Api {
       put("watch", watch);
       return this;
     }
-  }
+  } 
 }

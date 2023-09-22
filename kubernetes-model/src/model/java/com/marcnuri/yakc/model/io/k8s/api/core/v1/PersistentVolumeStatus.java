@@ -18,6 +18,7 @@ package com.marcnuri.yakc.model.io.k8s.api.core.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.time.OffsetDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,6 +36,9 @@ import lombok.ToString;
 @ToString
 public class PersistentVolumeStatus implements Model {
 
+
+  @JsonProperty("lastPhaseTransitionTime")
+  private OffsetDateTime lastPhaseTransitionTime;
 
   /**
    * message is a human-readable message indicating details about why the volume is in this state.

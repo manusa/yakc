@@ -57,5 +57,12 @@ public class ServerStorageVersion implements Model {
   @JsonProperty("encodingVersion")
   private String encodingVersion;
 
+  /**
+   * The API server can serve these versions. DecodableVersions must include all ServedVersions.
+   */
+  @JsonProperty("servedVersions")
+  @Singular(value = "addToServedVersions", ignoreNullCollections = true)
+  private List<String> servedVersions;
+
 }
 

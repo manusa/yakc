@@ -61,10 +61,17 @@ public class PodStatus implements Model {
   private List<ContainerStatus> ephemeralContainerStatuses;
 
   /**
-   * IP address of the host to which the pod is assigned. Empty if not yet scheduled.
+   * hostIP holds the IP address of the host to which the pod is assigned. Empty if the pod has not started yet. A pod can be assigned to a node that has a problem in kubelet which in turns mean that HostIP will not be updated even if there is a node is assigned to pod
    */
   @JsonProperty("hostIP")
   private String hostIP;
+
+  /**
+   * hostIPs holds the IP addresses allocated to the host. If this field is specified, the first entry must match the hostIP field. This list is empty if the pod has not started yet. A pod can be assigned to a node that has a problem in kubelet which in turns means that HostIPs will not be updated even if there is a node is assigned to this pod.
+   */
+  @JsonProperty("hostIPs")
+  @Singular(value = "addToHostIPs", ignoreNullCollections = true)
+  private List<HostIP> hostIPs;
 
   /**
    * The list has one entry per init container in the manifest. The most recent successful init container will have ready = true, the most recently started container will have startTime set. More info: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#pod-and-container-status
@@ -92,7 +99,7 @@ public class PodStatus implements Model {
   private String phase;
 
   /**
-   * IP address allocated to the pod. Routable at least within the cluster. Empty if not yet allocated.
+   * podIP address allocated to the pod. Routable at least within the cluster. Empty if not yet allocated.
    */
   @JsonProperty("podIP")
   private String podIP;
@@ -121,6 +128,13 @@ public class PodStatus implements Model {
    */
   @JsonProperty("resize")
   private String resize;
+
+  /**
+   * Status of resource claims.
+   */
+  @JsonProperty("resourceClaimStatuses")
+  @Singular(value = "addToResourceClaimStatuses", ignoreNullCollections = true)
+  private List<PodResourceClaimStatus> resourceClaimStatuses;
 
   @JsonProperty("startTime")
   private OffsetDateTime startTime;
