@@ -7,7 +7,7 @@ ext {
   version_junit = '5.9.0'
   version_mockito = '4.8.0'
   version_mustache = '1.15'
-  version_projectlombok = '1.18.24'
+  version_projectlombok = '1.18.30'
   version_retrofit = '2.9.0'
   version_rxjava2 = '2.2.21'
   version_swagger_parser = '2.1.1'
