@@ -111,7 +111,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class DeleteCollectionFlowSchema extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionFlowSchema pretty(String pretty) {
       put("pretty", pretty);
@@ -242,7 +242,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class ListFlowSchema extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListFlowSchema pretty(String pretty) {
       put("pretty", pretty);
@@ -363,7 +363,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class CreateFlowSchema extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateFlowSchema pretty(String pretty) {
       put("pretty", pretty);
@@ -469,7 +469,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class DeleteFlowSchema extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteFlowSchema pretty(String pretty) {
       put("pretty", pretty);
@@ -542,7 +542,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class ReadFlowSchema extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadFlowSchema pretty(String pretty) {
       put("pretty", pretty);
@@ -589,7 +589,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class PatchFlowSchema extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchFlowSchema pretty(String pretty) {
       put("pretty", pretty);
@@ -668,7 +668,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class ReplaceFlowSchema extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceFlowSchema pretty(String pretty) {
       put("pretty", pretty);
@@ -733,7 +733,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class ReadFlowSchemaStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadFlowSchemaStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -780,7 +780,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class PatchFlowSchemaStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchFlowSchemaStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -859,7 +859,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class ReplaceFlowSchemaStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceFlowSchemaStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -953,7 +953,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class DeleteCollectionPriorityLevelConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionPriorityLevelConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -1084,7 +1084,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class ListPriorityLevelConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListPriorityLevelConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -1205,7 +1205,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class CreatePriorityLevelConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreatePriorityLevelConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -1311,7 +1311,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class DeletePriorityLevelConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeletePriorityLevelConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -1384,7 +1384,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class ReadPriorityLevelConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadPriorityLevelConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -1431,7 +1431,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class PatchPriorityLevelConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchPriorityLevelConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -1510,7 +1510,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class ReplacePriorityLevelConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplacePriorityLevelConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -1575,7 +1575,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class ReadPriorityLevelConfigurationStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadPriorityLevelConfigurationStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1622,7 +1622,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class PatchPriorityLevelConfigurationStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchPriorityLevelConfigurationStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1701,7 +1701,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
   
   final class ReplacePriorityLevelConfigurationStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplacePriorityLevelConfigurationStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1800,7 +1800,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchFlowSchemaList pretty(String pretty) {
       put("pretty", pretty);
@@ -1921,7 +1921,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchFlowSchema pretty(String pretty) {
       put("pretty", pretty);
@@ -2036,7 +2036,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchPriorityLevelConfigurationList pretty(String pretty) {
       put("pretty", pretty);
@@ -2157,7 +2157,7 @@ public interface FlowcontrolApiserverV1beta3Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchPriorityLevelConfiguration pretty(String pretty) {
       put("pretty", pretty);

@@ -109,7 +109,7 @@ public interface CertificatesV1Api extends Api {
   
   final class DeleteCollectionCertificateSigningRequest extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionCertificateSigningRequest pretty(String pretty) {
       put("pretty", pretty);
@@ -240,7 +240,7 @@ public interface CertificatesV1Api extends Api {
   
   final class ListCertificateSigningRequest extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListCertificateSigningRequest pretty(String pretty) {
       put("pretty", pretty);
@@ -361,7 +361,7 @@ public interface CertificatesV1Api extends Api {
   
   final class CreateCertificateSigningRequest extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateCertificateSigningRequest pretty(String pretty) {
       put("pretty", pretty);
@@ -467,7 +467,7 @@ public interface CertificatesV1Api extends Api {
   
   final class DeleteCertificateSigningRequest extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCertificateSigningRequest pretty(String pretty) {
       put("pretty", pretty);
@@ -540,7 +540,7 @@ public interface CertificatesV1Api extends Api {
   
   final class ReadCertificateSigningRequest extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadCertificateSigningRequest pretty(String pretty) {
       put("pretty", pretty);
@@ -587,7 +587,7 @@ public interface CertificatesV1Api extends Api {
   
   final class PatchCertificateSigningRequest extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchCertificateSigningRequest pretty(String pretty) {
       put("pretty", pretty);
@@ -666,7 +666,7 @@ public interface CertificatesV1Api extends Api {
   
   final class ReplaceCertificateSigningRequest extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceCertificateSigningRequest pretty(String pretty) {
       put("pretty", pretty);
@@ -731,7 +731,7 @@ public interface CertificatesV1Api extends Api {
   
   final class ReadCertificateSigningRequestApproval extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadCertificateSigningRequestApproval pretty(String pretty) {
       put("pretty", pretty);
@@ -778,7 +778,7 @@ public interface CertificatesV1Api extends Api {
   
   final class PatchCertificateSigningRequestApproval extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchCertificateSigningRequestApproval pretty(String pretty) {
       put("pretty", pretty);
@@ -857,7 +857,7 @@ public interface CertificatesV1Api extends Api {
   
   final class ReplaceCertificateSigningRequestApproval extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceCertificateSigningRequestApproval pretty(String pretty) {
       put("pretty", pretty);
@@ -922,7 +922,7 @@ public interface CertificatesV1Api extends Api {
   
   final class ReadCertificateSigningRequestStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadCertificateSigningRequestStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -969,7 +969,7 @@ public interface CertificatesV1Api extends Api {
   
   final class PatchCertificateSigningRequestStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchCertificateSigningRequestStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1048,7 +1048,7 @@ public interface CertificatesV1Api extends Api {
   
   final class ReplaceCertificateSigningRequestStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceCertificateSigningRequestStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1147,7 +1147,7 @@ public interface CertificatesV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchCertificateSigningRequestList pretty(String pretty) {
       put("pretty", pretty);
@@ -1268,7 +1268,7 @@ public interface CertificatesV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchCertificateSigningRequest pretty(String pretty) {
       put("pretty", pretty);

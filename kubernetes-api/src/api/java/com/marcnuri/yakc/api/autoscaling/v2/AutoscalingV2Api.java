@@ -114,7 +114,7 @@ public interface AutoscalingV2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListHorizontalPodAutoscalerForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -236,7 +236,7 @@ public interface AutoscalingV2Api extends Api {
   
   final class DeleteCollectionNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedHorizontalPodAutoscaler pretty(String pretty) {
       put("pretty", pretty);
@@ -373,7 +373,7 @@ public interface AutoscalingV2Api extends Api {
   
   final class ListNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedHorizontalPodAutoscaler pretty(String pretty) {
       put("pretty", pretty);
@@ -500,7 +500,7 @@ public interface AutoscalingV2Api extends Api {
   
   final class CreateNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedHorizontalPodAutoscaler pretty(String pretty) {
       put("pretty", pretty);
@@ -614,7 +614,7 @@ public interface AutoscalingV2Api extends Api {
   
   final class DeleteNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedHorizontalPodAutoscaler pretty(String pretty) {
       put("pretty", pretty);
@@ -691,7 +691,7 @@ public interface AutoscalingV2Api extends Api {
   
   final class ReadNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedHorizontalPodAutoscaler pretty(String pretty) {
       put("pretty", pretty);
@@ -742,7 +742,7 @@ public interface AutoscalingV2Api extends Api {
   
   final class PatchNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedHorizontalPodAutoscaler pretty(String pretty) {
       put("pretty", pretty);
@@ -825,7 +825,7 @@ public interface AutoscalingV2Api extends Api {
   
   final class ReplaceNamespacedHorizontalPodAutoscaler extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedHorizontalPodAutoscaler pretty(String pretty) {
       put("pretty", pretty);
@@ -894,7 +894,7 @@ public interface AutoscalingV2Api extends Api {
   
   final class ReadNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedHorizontalPodAutoscalerStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -945,7 +945,7 @@ public interface AutoscalingV2Api extends Api {
   
   final class PatchNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedHorizontalPodAutoscalerStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1028,7 +1028,7 @@ public interface AutoscalingV2Api extends Api {
   
   final class ReplaceNamespacedHorizontalPodAutoscalerStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedHorizontalPodAutoscalerStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1127,7 +1127,7 @@ public interface AutoscalingV2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchHorizontalPodAutoscalerListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -1248,7 +1248,7 @@ public interface AutoscalingV2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedHorizontalPodAutoscalerList pretty(String pretty) {
       put("pretty", pretty);
@@ -1373,7 +1373,7 @@ public interface AutoscalingV2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedHorizontalPodAutoscaler pretty(String pretty) {
       put("pretty", pretty);

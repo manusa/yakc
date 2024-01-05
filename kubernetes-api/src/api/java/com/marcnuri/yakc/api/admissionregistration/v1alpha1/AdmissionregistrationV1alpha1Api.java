@@ -111,7 +111,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class DeleteCollectionValidatingAdmissionPolicy extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionValidatingAdmissionPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -242,7 +242,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class ListValidatingAdmissionPolicy extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListValidatingAdmissionPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -363,7 +363,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class CreateValidatingAdmissionPolicy extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateValidatingAdmissionPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -469,7 +469,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class DeleteValidatingAdmissionPolicy extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteValidatingAdmissionPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -542,7 +542,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class ReadValidatingAdmissionPolicy extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadValidatingAdmissionPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -589,7 +589,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class PatchValidatingAdmissionPolicy extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchValidatingAdmissionPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -668,7 +668,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class ReplaceValidatingAdmissionPolicy extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceValidatingAdmissionPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -733,7 +733,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class ReadValidatingAdmissionPolicyStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadValidatingAdmissionPolicyStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -780,7 +780,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class PatchValidatingAdmissionPolicyStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchValidatingAdmissionPolicyStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -859,7 +859,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class ReplaceValidatingAdmissionPolicyStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceValidatingAdmissionPolicyStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -953,7 +953,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class DeleteCollectionValidatingAdmissionPolicyBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionValidatingAdmissionPolicyBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -1084,7 +1084,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class ListValidatingAdmissionPolicyBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListValidatingAdmissionPolicyBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -1205,7 +1205,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class CreateValidatingAdmissionPolicyBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateValidatingAdmissionPolicyBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -1311,7 +1311,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class DeleteValidatingAdmissionPolicyBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteValidatingAdmissionPolicyBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -1384,7 +1384,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class ReadValidatingAdmissionPolicyBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadValidatingAdmissionPolicyBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -1431,7 +1431,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class PatchValidatingAdmissionPolicyBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchValidatingAdmissionPolicyBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -1510,7 +1510,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
   
   final class ReplaceValidatingAdmissionPolicyBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceValidatingAdmissionPolicyBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -1609,7 +1609,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchValidatingAdmissionPolicyList pretty(String pretty) {
       put("pretty", pretty);
@@ -1730,7 +1730,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchValidatingAdmissionPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -1845,7 +1845,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchValidatingAdmissionPolicyBindingList pretty(String pretty) {
       put("pretty", pretty);
@@ -1966,7 +1966,7 @@ public interface AdmissionregistrationV1alpha1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchValidatingAdmissionPolicyBinding pretty(String pretty) {
       put("pretty", pretty);

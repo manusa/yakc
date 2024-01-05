@@ -114,7 +114,7 @@ public interface CoordinationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListLeaseForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -236,7 +236,7 @@ public interface CoordinationV1Api extends Api {
   
   final class DeleteCollectionNamespacedLease extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedLease pretty(String pretty) {
       put("pretty", pretty);
@@ -373,7 +373,7 @@ public interface CoordinationV1Api extends Api {
   
   final class ListNamespacedLease extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedLease pretty(String pretty) {
       put("pretty", pretty);
@@ -500,7 +500,7 @@ public interface CoordinationV1Api extends Api {
   
   final class CreateNamespacedLease extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedLease pretty(String pretty) {
       put("pretty", pretty);
@@ -614,7 +614,7 @@ public interface CoordinationV1Api extends Api {
   
   final class DeleteNamespacedLease extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedLease pretty(String pretty) {
       put("pretty", pretty);
@@ -691,7 +691,7 @@ public interface CoordinationV1Api extends Api {
   
   final class ReadNamespacedLease extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedLease pretty(String pretty) {
       put("pretty", pretty);
@@ -742,7 +742,7 @@ public interface CoordinationV1Api extends Api {
   
   final class PatchNamespacedLease extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedLease pretty(String pretty) {
       put("pretty", pretty);
@@ -825,7 +825,7 @@ public interface CoordinationV1Api extends Api {
   
   final class ReplaceNamespacedLease extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedLease pretty(String pretty) {
       put("pretty", pretty);
@@ -924,7 +924,7 @@ public interface CoordinationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchLeaseListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -1045,7 +1045,7 @@ public interface CoordinationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedLeaseList pretty(String pretty) {
       put("pretty", pretty);
@@ -1170,7 +1170,7 @@ public interface CoordinationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedLease pretty(String pretty) {
       put("pretty", pretty);

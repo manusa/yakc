@@ -75,6 +75,15 @@ public class PersistentVolumeClaimStatus implements Model {
   private List<PersistentVolumeClaimCondition> conditions;
 
   /**
+   * currentVolumeAttributesClassName is the current name of the VolumeAttributesClass the PVC is using. When unset, there is no VolumeAttributeClass applied to this PersistentVolumeClaim This is an alpha field and requires enabling VolumeAttributesClass feature.
+   */
+  @JsonProperty("currentVolumeAttributesClassName")
+  private String currentVolumeAttributesClassName;
+
+  @JsonProperty("modifyVolumeStatus")
+  private ModifyVolumeStatus modifyVolumeStatus;
+
+  /**
    * phase represents the current phase of PersistentVolumeClaim.
    */
   @JsonProperty("phase")

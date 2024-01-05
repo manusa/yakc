@@ -42,6 +42,9 @@ public class LifecycleHandler implements Model {
   @JsonProperty("httpGet")
   private HTTPGetAction httpGet;
 
+  @JsonProperty("sleep")
+  private SleepAction sleep;
+
   @JsonProperty("tcpSocket")
   private TCPSocketAction tcpSocket;
 

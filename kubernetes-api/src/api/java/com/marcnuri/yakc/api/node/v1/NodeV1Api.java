@@ -109,7 +109,7 @@ public interface NodeV1Api extends Api {
   
   final class DeleteCollectionRuntimeClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionRuntimeClass pretty(String pretty) {
       put("pretty", pretty);
@@ -240,7 +240,7 @@ public interface NodeV1Api extends Api {
   
   final class ListRuntimeClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListRuntimeClass pretty(String pretty) {
       put("pretty", pretty);
@@ -361,7 +361,7 @@ public interface NodeV1Api extends Api {
   
   final class CreateRuntimeClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateRuntimeClass pretty(String pretty) {
       put("pretty", pretty);
@@ -467,7 +467,7 @@ public interface NodeV1Api extends Api {
   
   final class DeleteRuntimeClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteRuntimeClass pretty(String pretty) {
       put("pretty", pretty);
@@ -540,7 +540,7 @@ public interface NodeV1Api extends Api {
   
   final class ReadRuntimeClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadRuntimeClass pretty(String pretty) {
       put("pretty", pretty);
@@ -587,7 +587,7 @@ public interface NodeV1Api extends Api {
   
   final class PatchRuntimeClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchRuntimeClass pretty(String pretty) {
       put("pretty", pretty);
@@ -666,7 +666,7 @@ public interface NodeV1Api extends Api {
   
   final class ReplaceRuntimeClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceRuntimeClass pretty(String pretty) {
       put("pretty", pretty);
@@ -765,7 +765,7 @@ public interface NodeV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchRuntimeClassList pretty(String pretty) {
       put("pretty", pretty);
@@ -886,7 +886,7 @@ public interface NodeV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchRuntimeClass pretty(String pretty) {
       put("pretty", pretty);

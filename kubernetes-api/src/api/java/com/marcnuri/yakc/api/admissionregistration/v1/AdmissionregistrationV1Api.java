@@ -111,7 +111,7 @@ public interface AdmissionregistrationV1Api extends Api {
   
   final class DeleteCollectionMutatingWebhookConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionMutatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -242,7 +242,7 @@ public interface AdmissionregistrationV1Api extends Api {
   
   final class ListMutatingWebhookConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListMutatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -363,7 +363,7 @@ public interface AdmissionregistrationV1Api extends Api {
   
   final class CreateMutatingWebhookConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateMutatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -469,7 +469,7 @@ public interface AdmissionregistrationV1Api extends Api {
   
   final class DeleteMutatingWebhookConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteMutatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -542,7 +542,7 @@ public interface AdmissionregistrationV1Api extends Api {
   
   final class ReadMutatingWebhookConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadMutatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -589,7 +589,7 @@ public interface AdmissionregistrationV1Api extends Api {
   
   final class PatchMutatingWebhookConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchMutatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -668,7 +668,7 @@ public interface AdmissionregistrationV1Api extends Api {
   
   final class ReplaceMutatingWebhookConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceMutatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -762,7 +762,7 @@ public interface AdmissionregistrationV1Api extends Api {
   
   final class DeleteCollectionValidatingWebhookConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionValidatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -893,7 +893,7 @@ public interface AdmissionregistrationV1Api extends Api {
   
   final class ListValidatingWebhookConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListValidatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -1014,7 +1014,7 @@ public interface AdmissionregistrationV1Api extends Api {
   
   final class CreateValidatingWebhookConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateValidatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -1120,7 +1120,7 @@ public interface AdmissionregistrationV1Api extends Api {
   
   final class DeleteValidatingWebhookConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteValidatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -1193,7 +1193,7 @@ public interface AdmissionregistrationV1Api extends Api {
   
   final class ReadValidatingWebhookConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadValidatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -1240,7 +1240,7 @@ public interface AdmissionregistrationV1Api extends Api {
   
   final class PatchValidatingWebhookConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchValidatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -1319,7 +1319,7 @@ public interface AdmissionregistrationV1Api extends Api {
   
   final class ReplaceValidatingWebhookConfiguration extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceValidatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -1418,7 +1418,7 @@ public interface AdmissionregistrationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchMutatingWebhookConfigurationList pretty(String pretty) {
       put("pretty", pretty);
@@ -1539,7 +1539,7 @@ public interface AdmissionregistrationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchMutatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);
@@ -1654,7 +1654,7 @@ public interface AdmissionregistrationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchValidatingWebhookConfigurationList pretty(String pretty) {
       put("pretty", pretty);
@@ -1775,7 +1775,7 @@ public interface AdmissionregistrationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchValidatingWebhookConfiguration pretty(String pretty) {
       put("pretty", pretty);

@@ -36,6 +36,9 @@ import lombok.ToString;
 public class VolumeProjection implements Model {
 
 
+  @JsonProperty("clusterTrustBundle")
+  private ClusterTrustBundleProjection clusterTrustBundle;
+
   @JsonProperty("configMap")
   private ConfigMapProjection configMap;
 

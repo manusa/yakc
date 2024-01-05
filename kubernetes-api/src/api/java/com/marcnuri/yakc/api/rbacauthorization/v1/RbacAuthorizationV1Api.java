@@ -115,7 +115,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class DeleteCollectionClusterRoleBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionClusterRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -246,7 +246,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class ListClusterRoleBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListClusterRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -367,7 +367,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class CreateClusterRoleBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateClusterRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -473,7 +473,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class DeleteClusterRoleBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteClusterRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -546,7 +546,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class ReadClusterRoleBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadClusterRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -593,7 +593,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class PatchClusterRoleBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchClusterRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -672,7 +672,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class ReplaceClusterRoleBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceClusterRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -766,7 +766,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class DeleteCollectionClusterRole extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionClusterRole pretty(String pretty) {
       put("pretty", pretty);
@@ -897,7 +897,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class ListClusterRole extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListClusterRole pretty(String pretty) {
       put("pretty", pretty);
@@ -1018,7 +1018,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class CreateClusterRole extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateClusterRole pretty(String pretty) {
       put("pretty", pretty);
@@ -1124,7 +1124,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class DeleteClusterRole extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteClusterRole pretty(String pretty) {
       put("pretty", pretty);
@@ -1197,7 +1197,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class ReadClusterRole extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadClusterRole pretty(String pretty) {
       put("pretty", pretty);
@@ -1244,7 +1244,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class PatchClusterRole extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchClusterRole pretty(String pretty) {
       put("pretty", pretty);
@@ -1323,7 +1323,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class ReplaceClusterRole extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceClusterRole pretty(String pretty) {
       put("pretty", pretty);
@@ -1429,7 +1429,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class DeleteCollectionNamespacedRoleBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -1566,7 +1566,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class ListNamespacedRoleBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -1693,7 +1693,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class CreateNamespacedRoleBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -1807,7 +1807,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class DeleteNamespacedRoleBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -1884,7 +1884,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class ReadNamespacedRoleBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -1935,7 +1935,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class PatchNamespacedRoleBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -2018,7 +2018,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class ReplaceNamespacedRoleBinding extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -2124,7 +2124,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class DeleteCollectionNamespacedRole extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedRole pretty(String pretty) {
       put("pretty", pretty);
@@ -2261,7 +2261,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class ListNamespacedRole extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedRole pretty(String pretty) {
       put("pretty", pretty);
@@ -2388,7 +2388,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class CreateNamespacedRole extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedRole pretty(String pretty) {
       put("pretty", pretty);
@@ -2502,7 +2502,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class DeleteNamespacedRole extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedRole pretty(String pretty) {
       put("pretty", pretty);
@@ -2579,7 +2579,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class ReadNamespacedRole extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedRole pretty(String pretty) {
       put("pretty", pretty);
@@ -2630,7 +2630,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class PatchNamespacedRole extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedRole pretty(String pretty) {
       put("pretty", pretty);
@@ -2713,7 +2713,7 @@ public interface RbacAuthorizationV1Api extends Api {
   
   final class ReplaceNamespacedRole extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedRole pretty(String pretty) {
       put("pretty", pretty);
@@ -2812,7 +2812,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListRoleBindingForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -2927,7 +2927,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListRoleForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -3042,7 +3042,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchClusterRoleBindingList pretty(String pretty) {
       put("pretty", pretty);
@@ -3163,7 +3163,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchClusterRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -3278,7 +3278,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchClusterRoleList pretty(String pretty) {
       put("pretty", pretty);
@@ -3399,7 +3399,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchClusterRole pretty(String pretty) {
       put("pretty", pretty);
@@ -3520,7 +3520,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedRoleBindingList pretty(String pretty) {
       put("pretty", pretty);
@@ -3645,7 +3645,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedRoleBinding pretty(String pretty) {
       put("pretty", pretty);
@@ -3766,7 +3766,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedRoleList pretty(String pretty) {
       put("pretty", pretty);
@@ -3891,7 +3891,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedRole pretty(String pretty) {
       put("pretty", pretty);
@@ -4006,7 +4006,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchRoleBindingListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -4121,7 +4121,7 @@ public interface RbacAuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchRoleListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);

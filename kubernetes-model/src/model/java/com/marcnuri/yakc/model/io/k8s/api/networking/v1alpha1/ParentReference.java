@@ -60,11 +60,5 @@ public class ParentReference implements Model {
   @JsonProperty("resource")
   private String resource;
 
-  /**
-   * UID is the uid of the object being referenced.
-   */
-  @JsonProperty("uid")
-  private String uid;
-
 }
 

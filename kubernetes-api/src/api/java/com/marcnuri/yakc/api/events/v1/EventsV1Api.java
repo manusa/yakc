@@ -114,7 +114,7 @@ public interface EventsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListEventForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -236,7 +236,7 @@ public interface EventsV1Api extends Api {
   
   final class DeleteCollectionNamespacedEvent extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedEvent pretty(String pretty) {
       put("pretty", pretty);
@@ -373,7 +373,7 @@ public interface EventsV1Api extends Api {
   
   final class ListNamespacedEvent extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedEvent pretty(String pretty) {
       put("pretty", pretty);
@@ -500,7 +500,7 @@ public interface EventsV1Api extends Api {
   
   final class CreateNamespacedEvent extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedEvent pretty(String pretty) {
       put("pretty", pretty);
@@ -614,7 +614,7 @@ public interface EventsV1Api extends Api {
   
   final class DeleteNamespacedEvent extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedEvent pretty(String pretty) {
       put("pretty", pretty);
@@ -691,7 +691,7 @@ public interface EventsV1Api extends Api {
   
   final class ReadNamespacedEvent extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedEvent pretty(String pretty) {
       put("pretty", pretty);
@@ -742,7 +742,7 @@ public interface EventsV1Api extends Api {
   
   final class PatchNamespacedEvent extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedEvent pretty(String pretty) {
       put("pretty", pretty);
@@ -825,7 +825,7 @@ public interface EventsV1Api extends Api {
   
   final class ReplaceNamespacedEvent extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedEvent pretty(String pretty) {
       put("pretty", pretty);
@@ -924,7 +924,7 @@ public interface EventsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchEventListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -1045,7 +1045,7 @@ public interface EventsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedEventList pretty(String pretty) {
       put("pretty", pretty);
@@ -1170,7 +1170,7 @@ public interface EventsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedEvent pretty(String pretty) {
       put("pretty", pretty);

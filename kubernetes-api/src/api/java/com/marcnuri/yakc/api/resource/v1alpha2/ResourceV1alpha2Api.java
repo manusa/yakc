@@ -127,7 +127,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class DeleteCollectionNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedPodSchedulingContext pretty(String pretty) {
       put("pretty", pretty);
@@ -264,7 +264,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ListNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedPodSchedulingContext pretty(String pretty) {
       put("pretty", pretty);
@@ -391,7 +391,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class CreateNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedPodSchedulingContext pretty(String pretty) {
       put("pretty", pretty);
@@ -505,7 +505,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class DeleteNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedPodSchedulingContext pretty(String pretty) {
       put("pretty", pretty);
@@ -582,7 +582,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ReadNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedPodSchedulingContext pretty(String pretty) {
       put("pretty", pretty);
@@ -633,7 +633,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class PatchNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedPodSchedulingContext pretty(String pretty) {
       put("pretty", pretty);
@@ -716,7 +716,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ReplaceNamespacedPodSchedulingContext extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedPodSchedulingContext pretty(String pretty) {
       put("pretty", pretty);
@@ -785,7 +785,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ReadNamespacedPodSchedulingContextStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedPodSchedulingContextStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -836,7 +836,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class PatchNamespacedPodSchedulingContextStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedPodSchedulingContextStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -919,7 +919,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ReplaceNamespacedPodSchedulingContextStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedPodSchedulingContextStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1025,7 +1025,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class DeleteCollectionNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedResourceClaim pretty(String pretty) {
       put("pretty", pretty);
@@ -1162,7 +1162,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ListNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedResourceClaim pretty(String pretty) {
       put("pretty", pretty);
@@ -1289,7 +1289,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class CreateNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedResourceClaim pretty(String pretty) {
       put("pretty", pretty);
@@ -1403,7 +1403,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class DeleteNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedResourceClaim pretty(String pretty) {
       put("pretty", pretty);
@@ -1480,7 +1480,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ReadNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedResourceClaim pretty(String pretty) {
       put("pretty", pretty);
@@ -1531,7 +1531,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class PatchNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedResourceClaim pretty(String pretty) {
       put("pretty", pretty);
@@ -1614,7 +1614,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ReplaceNamespacedResourceClaim extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedResourceClaim pretty(String pretty) {
       put("pretty", pretty);
@@ -1683,7 +1683,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ReadNamespacedResourceClaimStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedResourceClaimStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1734,7 +1734,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class PatchNamespacedResourceClaimStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedResourceClaimStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1817,7 +1817,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ReplaceNamespacedResourceClaimStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedResourceClaimStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1923,7 +1923,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class DeleteCollectionNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedResourceClaimTemplate pretty(String pretty) {
       put("pretty", pretty);
@@ -2060,7 +2060,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ListNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedResourceClaimTemplate pretty(String pretty) {
       put("pretty", pretty);
@@ -2187,7 +2187,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class CreateNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedResourceClaimTemplate pretty(String pretty) {
       put("pretty", pretty);
@@ -2301,7 +2301,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class DeleteNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedResourceClaimTemplate pretty(String pretty) {
       put("pretty", pretty);
@@ -2378,7 +2378,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ReadNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedResourceClaimTemplate pretty(String pretty) {
       put("pretty", pretty);
@@ -2429,7 +2429,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class PatchNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedResourceClaimTemplate pretty(String pretty) {
       put("pretty", pretty);
@@ -2512,7 +2512,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ReplaceNamespacedResourceClaimTemplate extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedResourceClaimTemplate pretty(String pretty) {
       put("pretty", pretty);
@@ -2611,7 +2611,7 @@ public interface ResourceV1alpha2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListPodSchedulingContextForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -2726,7 +2726,7 @@ public interface ResourceV1alpha2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListResourceClaimForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -2841,7 +2841,7 @@ public interface ResourceV1alpha2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListResourceClaimTemplateForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -2951,7 +2951,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class DeleteCollectionResourceClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionResourceClass pretty(String pretty) {
       put("pretty", pretty);
@@ -3082,7 +3082,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ListResourceClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListResourceClass pretty(String pretty) {
       put("pretty", pretty);
@@ -3203,7 +3203,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class CreateResourceClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateResourceClass pretty(String pretty) {
       put("pretty", pretty);
@@ -3309,7 +3309,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class DeleteResourceClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteResourceClass pretty(String pretty) {
       put("pretty", pretty);
@@ -3382,7 +3382,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ReadResourceClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadResourceClass pretty(String pretty) {
       put("pretty", pretty);
@@ -3429,7 +3429,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class PatchResourceClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchResourceClass pretty(String pretty) {
       put("pretty", pretty);
@@ -3508,7 +3508,7 @@ public interface ResourceV1alpha2Api extends Api {
   
   final class ReplaceResourceClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceResourceClass pretty(String pretty) {
       put("pretty", pretty);
@@ -3613,7 +3613,7 @@ public interface ResourceV1alpha2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedPodSchedulingContextList pretty(String pretty) {
       put("pretty", pretty);
@@ -3738,7 +3738,7 @@ public interface ResourceV1alpha2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedPodSchedulingContext pretty(String pretty) {
       put("pretty", pretty);
@@ -3859,7 +3859,7 @@ public interface ResourceV1alpha2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedResourceClaimList pretty(String pretty) {
       put("pretty", pretty);
@@ -3984,7 +3984,7 @@ public interface ResourceV1alpha2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedResourceClaim pretty(String pretty) {
       put("pretty", pretty);
@@ -4105,7 +4105,7 @@ public interface ResourceV1alpha2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedResourceClaimTemplateList pretty(String pretty) {
       put("pretty", pretty);
@@ -4230,7 +4230,7 @@ public interface ResourceV1alpha2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedResourceClaimTemplate pretty(String pretty) {
       put("pretty", pretty);
@@ -4345,7 +4345,7 @@ public interface ResourceV1alpha2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchPodSchedulingContextListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -4460,7 +4460,7 @@ public interface ResourceV1alpha2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchResourceClaimListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -4575,7 +4575,7 @@ public interface ResourceV1alpha2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchResourceClaimTemplateListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -4690,7 +4690,7 @@ public interface ResourceV1alpha2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchResourceClassList pretty(String pretty) {
       put("pretty", pretty);
@@ -4811,7 +4811,7 @@ public interface ResourceV1alpha2Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchResourceClass pretty(String pretty) {
       put("pretty", pretty);

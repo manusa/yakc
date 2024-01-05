@@ -113,7 +113,7 @@ public interface NetworkingV1Api extends Api {
   
   final class DeleteCollectionIngressClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionIngressClass pretty(String pretty) {
       put("pretty", pretty);
@@ -244,7 +244,7 @@ public interface NetworkingV1Api extends Api {
   
   final class ListIngressClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListIngressClass pretty(String pretty) {
       put("pretty", pretty);
@@ -365,7 +365,7 @@ public interface NetworkingV1Api extends Api {
   
   final class CreateIngressClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateIngressClass pretty(String pretty) {
       put("pretty", pretty);
@@ -471,7 +471,7 @@ public interface NetworkingV1Api extends Api {
   
   final class DeleteIngressClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteIngressClass pretty(String pretty) {
       put("pretty", pretty);
@@ -544,7 +544,7 @@ public interface NetworkingV1Api extends Api {
   
   final class ReadIngressClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadIngressClass pretty(String pretty) {
       put("pretty", pretty);
@@ -591,7 +591,7 @@ public interface NetworkingV1Api extends Api {
   
   final class PatchIngressClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchIngressClass pretty(String pretty) {
       put("pretty", pretty);
@@ -670,7 +670,7 @@ public interface NetworkingV1Api extends Api {
   
   final class ReplaceIngressClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceIngressClass pretty(String pretty) {
       put("pretty", pretty);
@@ -769,7 +769,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListIngressForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -891,7 +891,7 @@ public interface NetworkingV1Api extends Api {
   
   final class DeleteCollectionNamespacedIngress extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedIngress pretty(String pretty) {
       put("pretty", pretty);
@@ -1028,7 +1028,7 @@ public interface NetworkingV1Api extends Api {
   
   final class ListNamespacedIngress extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedIngress pretty(String pretty) {
       put("pretty", pretty);
@@ -1155,7 +1155,7 @@ public interface NetworkingV1Api extends Api {
   
   final class CreateNamespacedIngress extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedIngress pretty(String pretty) {
       put("pretty", pretty);
@@ -1269,7 +1269,7 @@ public interface NetworkingV1Api extends Api {
   
   final class DeleteNamespacedIngress extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedIngress pretty(String pretty) {
       put("pretty", pretty);
@@ -1346,7 +1346,7 @@ public interface NetworkingV1Api extends Api {
   
   final class ReadNamespacedIngress extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedIngress pretty(String pretty) {
       put("pretty", pretty);
@@ -1397,7 +1397,7 @@ public interface NetworkingV1Api extends Api {
   
   final class PatchNamespacedIngress extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedIngress pretty(String pretty) {
       put("pretty", pretty);
@@ -1480,7 +1480,7 @@ public interface NetworkingV1Api extends Api {
   
   final class ReplaceNamespacedIngress extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedIngress pretty(String pretty) {
       put("pretty", pretty);
@@ -1549,7 +1549,7 @@ public interface NetworkingV1Api extends Api {
   
   final class ReadNamespacedIngressStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedIngressStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1600,7 +1600,7 @@ public interface NetworkingV1Api extends Api {
   
   final class PatchNamespacedIngressStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedIngressStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1683,7 +1683,7 @@ public interface NetworkingV1Api extends Api {
   
   final class ReplaceNamespacedIngressStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedIngressStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1789,7 +1789,7 @@ public interface NetworkingV1Api extends Api {
   
   final class DeleteCollectionNamespacedNetworkPolicy extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedNetworkPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -1926,7 +1926,7 @@ public interface NetworkingV1Api extends Api {
   
   final class ListNamespacedNetworkPolicy extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedNetworkPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -2053,7 +2053,7 @@ public interface NetworkingV1Api extends Api {
   
   final class CreateNamespacedNetworkPolicy extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedNetworkPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -2167,7 +2167,7 @@ public interface NetworkingV1Api extends Api {
   
   final class DeleteNamespacedNetworkPolicy extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedNetworkPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -2244,7 +2244,7 @@ public interface NetworkingV1Api extends Api {
   
   final class ReadNamespacedNetworkPolicy extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedNetworkPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -2295,7 +2295,7 @@ public interface NetworkingV1Api extends Api {
   
   final class PatchNamespacedNetworkPolicy extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedNetworkPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -2378,7 +2378,7 @@ public interface NetworkingV1Api extends Api {
   
   final class ReplaceNamespacedNetworkPolicy extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedNetworkPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -2477,7 +2477,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNetworkPolicyForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -2592,7 +2592,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchIngressClassList pretty(String pretty) {
       put("pretty", pretty);
@@ -2713,7 +2713,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchIngressClass pretty(String pretty) {
       put("pretty", pretty);
@@ -2828,7 +2828,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchIngressListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -2949,7 +2949,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedIngressList pretty(String pretty) {
       put("pretty", pretty);
@@ -3074,7 +3074,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedIngress pretty(String pretty) {
       put("pretty", pretty);
@@ -3195,7 +3195,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedNetworkPolicyList pretty(String pretty) {
       put("pretty", pretty);
@@ -3320,7 +3320,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedNetworkPolicy pretty(String pretty) {
       put("pretty", pretty);
@@ -3435,7 +3435,7 @@ public interface NetworkingV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNetworkPolicyListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
