@@ -2,7 +2,7 @@ ext {
   isPublishable = false
   version_assertj = '3.23.1'
   version_awaitility = '4.2.0'
-  version_bouncycastle = '1.70'
+  version_bouncycastle = '1.77'
   version_jackson = '2.10.1' // Matches transitive version for retrofit2:converter-jackson:2.8.1
   version_junit = '5.9.0'
   version_mockito = '4.8.0'
