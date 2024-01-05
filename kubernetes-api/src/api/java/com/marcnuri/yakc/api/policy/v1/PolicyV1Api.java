@@ -121,7 +121,7 @@ public interface PolicyV1Api extends Api {
   
   final class DeleteCollectionNamespacedPodDisruptionBudget extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedPodDisruptionBudget pretty(String pretty) {
       put("pretty", pretty);
@@ -258,7 +258,7 @@ public interface PolicyV1Api extends Api {
   
   final class ListNamespacedPodDisruptionBudget extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedPodDisruptionBudget pretty(String pretty) {
       put("pretty", pretty);
@@ -385,7 +385,7 @@ public interface PolicyV1Api extends Api {
   
   final class CreateNamespacedPodDisruptionBudget extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedPodDisruptionBudget pretty(String pretty) {
       put("pretty", pretty);
@@ -499,7 +499,7 @@ public interface PolicyV1Api extends Api {
   
   final class DeleteNamespacedPodDisruptionBudget extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedPodDisruptionBudget pretty(String pretty) {
       put("pretty", pretty);
@@ -576,7 +576,7 @@ public interface PolicyV1Api extends Api {
   
   final class ReadNamespacedPodDisruptionBudget extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedPodDisruptionBudget pretty(String pretty) {
       put("pretty", pretty);
@@ -627,7 +627,7 @@ public interface PolicyV1Api extends Api {
   
   final class PatchNamespacedPodDisruptionBudget extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedPodDisruptionBudget pretty(String pretty) {
       put("pretty", pretty);
@@ -710,7 +710,7 @@ public interface PolicyV1Api extends Api {
   
   final class ReplaceNamespacedPodDisruptionBudget extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedPodDisruptionBudget pretty(String pretty) {
       put("pretty", pretty);
@@ -779,7 +779,7 @@ public interface PolicyV1Api extends Api {
   
   final class ReadNamespacedPodDisruptionBudgetStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedPodDisruptionBudgetStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -830,7 +830,7 @@ public interface PolicyV1Api extends Api {
   
   final class PatchNamespacedPodDisruptionBudgetStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedPodDisruptionBudgetStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -913,7 +913,7 @@ public interface PolicyV1Api extends Api {
   
   final class ReplaceNamespacedPodDisruptionBudgetStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedPodDisruptionBudgetStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1012,7 +1012,7 @@ public interface PolicyV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListPodDisruptionBudgetForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -1133,7 +1133,7 @@ public interface PolicyV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedPodDisruptionBudgetList pretty(String pretty) {
       put("pretty", pretty);
@@ -1258,7 +1258,7 @@ public interface PolicyV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedPodDisruptionBudget pretty(String pretty) {
       put("pretty", pretty);
@@ -1373,7 +1373,7 @@ public interface PolicyV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchPodDisruptionBudgetListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);

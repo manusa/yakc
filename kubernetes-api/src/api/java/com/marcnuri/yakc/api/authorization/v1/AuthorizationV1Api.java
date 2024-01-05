@@ -108,7 +108,7 @@ public interface AuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedLocalSubjectAccessReview pretty(String pretty) {
       put("pretty", pretty);
@@ -173,7 +173,7 @@ public interface AuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateSelfSubjectAccessReview pretty(String pretty) {
       put("pretty", pretty);
@@ -238,7 +238,7 @@ public interface AuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateSelfSubjectRulesReview pretty(String pretty) {
       put("pretty", pretty);
@@ -303,7 +303,7 @@ public interface AuthorizationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateSubjectAccessReview pretty(String pretty) {
       put("pretty", pretty);

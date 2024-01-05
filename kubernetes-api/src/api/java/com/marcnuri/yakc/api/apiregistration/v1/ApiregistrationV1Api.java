@@ -109,7 +109,7 @@ public interface ApiregistrationV1Api extends Api {
   
   final class DeleteCollectionAPIService extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionAPIService pretty(String pretty) {
       put("pretty", pretty);
@@ -240,7 +240,7 @@ public interface ApiregistrationV1Api extends Api {
   
   final class ListAPIService extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListAPIService pretty(String pretty) {
       put("pretty", pretty);
@@ -361,7 +361,7 @@ public interface ApiregistrationV1Api extends Api {
   
   final class CreateAPIService extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateAPIService pretty(String pretty) {
       put("pretty", pretty);
@@ -467,7 +467,7 @@ public interface ApiregistrationV1Api extends Api {
   
   final class DeleteAPIService extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteAPIService pretty(String pretty) {
       put("pretty", pretty);
@@ -540,7 +540,7 @@ public interface ApiregistrationV1Api extends Api {
   
   final class ReadAPIService extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadAPIService pretty(String pretty) {
       put("pretty", pretty);
@@ -587,7 +587,7 @@ public interface ApiregistrationV1Api extends Api {
   
   final class PatchAPIService extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchAPIService pretty(String pretty) {
       put("pretty", pretty);
@@ -666,7 +666,7 @@ public interface ApiregistrationV1Api extends Api {
   
   final class ReplaceAPIService extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceAPIService pretty(String pretty) {
       put("pretty", pretty);
@@ -731,7 +731,7 @@ public interface ApiregistrationV1Api extends Api {
   
   final class ReadAPIServiceStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadAPIServiceStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -778,7 +778,7 @@ public interface ApiregistrationV1Api extends Api {
   
   final class PatchAPIServiceStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchAPIServiceStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -857,7 +857,7 @@ public interface ApiregistrationV1Api extends Api {
   
   final class ReplaceAPIServiceStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceAPIServiceStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -956,7 +956,7 @@ public interface ApiregistrationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchAPIServiceList pretty(String pretty) {
       put("pretty", pretty);
@@ -1077,7 +1077,7 @@ public interface ApiregistrationV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchAPIService pretty(String pretty) {
       put("pretty", pretty);

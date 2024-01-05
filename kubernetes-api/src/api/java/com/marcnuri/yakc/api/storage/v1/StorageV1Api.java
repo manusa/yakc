@@ -117,7 +117,7 @@ public interface StorageV1Api extends Api {
   
   final class DeleteCollectionCSIDriver extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionCSIDriver pretty(String pretty) {
       put("pretty", pretty);
@@ -248,7 +248,7 @@ public interface StorageV1Api extends Api {
   
   final class ListCSIDriver extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListCSIDriver pretty(String pretty) {
       put("pretty", pretty);
@@ -369,7 +369,7 @@ public interface StorageV1Api extends Api {
   
   final class CreateCSIDriver extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateCSIDriver pretty(String pretty) {
       put("pretty", pretty);
@@ -475,7 +475,7 @@ public interface StorageV1Api extends Api {
   
   final class DeleteCSIDriver extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCSIDriver pretty(String pretty) {
       put("pretty", pretty);
@@ -548,7 +548,7 @@ public interface StorageV1Api extends Api {
   
   final class ReadCSIDriver extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadCSIDriver pretty(String pretty) {
       put("pretty", pretty);
@@ -595,7 +595,7 @@ public interface StorageV1Api extends Api {
   
   final class PatchCSIDriver extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchCSIDriver pretty(String pretty) {
       put("pretty", pretty);
@@ -674,7 +674,7 @@ public interface StorageV1Api extends Api {
   
   final class ReplaceCSIDriver extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceCSIDriver pretty(String pretty) {
       put("pretty", pretty);
@@ -768,7 +768,7 @@ public interface StorageV1Api extends Api {
   
   final class DeleteCollectionCSINode extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionCSINode pretty(String pretty) {
       put("pretty", pretty);
@@ -899,7 +899,7 @@ public interface StorageV1Api extends Api {
   
   final class ListCSINode extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListCSINode pretty(String pretty) {
       put("pretty", pretty);
@@ -1020,7 +1020,7 @@ public interface StorageV1Api extends Api {
   
   final class CreateCSINode extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateCSINode pretty(String pretty) {
       put("pretty", pretty);
@@ -1126,7 +1126,7 @@ public interface StorageV1Api extends Api {
   
   final class DeleteCSINode extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCSINode pretty(String pretty) {
       put("pretty", pretty);
@@ -1199,7 +1199,7 @@ public interface StorageV1Api extends Api {
   
   final class ReadCSINode extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadCSINode pretty(String pretty) {
       put("pretty", pretty);
@@ -1246,7 +1246,7 @@ public interface StorageV1Api extends Api {
   
   final class PatchCSINode extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchCSINode pretty(String pretty) {
       put("pretty", pretty);
@@ -1325,7 +1325,7 @@ public interface StorageV1Api extends Api {
   
   final class ReplaceCSINode extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceCSINode pretty(String pretty) {
       put("pretty", pretty);
@@ -1424,7 +1424,7 @@ public interface StorageV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListCSIStorageCapacityForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -1546,7 +1546,7 @@ public interface StorageV1Api extends Api {
   
   final class DeleteCollectionNamespacedCSIStorageCapacity extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedCSIStorageCapacity pretty(String pretty) {
       put("pretty", pretty);
@@ -1683,7 +1683,7 @@ public interface StorageV1Api extends Api {
   
   final class ListNamespacedCSIStorageCapacity extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedCSIStorageCapacity pretty(String pretty) {
       put("pretty", pretty);
@@ -1810,7 +1810,7 @@ public interface StorageV1Api extends Api {
   
   final class CreateNamespacedCSIStorageCapacity extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedCSIStorageCapacity pretty(String pretty) {
       put("pretty", pretty);
@@ -1924,7 +1924,7 @@ public interface StorageV1Api extends Api {
   
   final class DeleteNamespacedCSIStorageCapacity extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedCSIStorageCapacity pretty(String pretty) {
       put("pretty", pretty);
@@ -2001,7 +2001,7 @@ public interface StorageV1Api extends Api {
   
   final class ReadNamespacedCSIStorageCapacity extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedCSIStorageCapacity pretty(String pretty) {
       put("pretty", pretty);
@@ -2052,7 +2052,7 @@ public interface StorageV1Api extends Api {
   
   final class PatchNamespacedCSIStorageCapacity extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedCSIStorageCapacity pretty(String pretty) {
       put("pretty", pretty);
@@ -2135,7 +2135,7 @@ public interface StorageV1Api extends Api {
   
   final class ReplaceNamespacedCSIStorageCapacity extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedCSIStorageCapacity pretty(String pretty) {
       put("pretty", pretty);
@@ -2229,7 +2229,7 @@ public interface StorageV1Api extends Api {
   
   final class DeleteCollectionStorageClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionStorageClass pretty(String pretty) {
       put("pretty", pretty);
@@ -2360,7 +2360,7 @@ public interface StorageV1Api extends Api {
   
   final class ListStorageClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListStorageClass pretty(String pretty) {
       put("pretty", pretty);
@@ -2481,7 +2481,7 @@ public interface StorageV1Api extends Api {
   
   final class CreateStorageClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateStorageClass pretty(String pretty) {
       put("pretty", pretty);
@@ -2587,7 +2587,7 @@ public interface StorageV1Api extends Api {
   
   final class DeleteStorageClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteStorageClass pretty(String pretty) {
       put("pretty", pretty);
@@ -2660,7 +2660,7 @@ public interface StorageV1Api extends Api {
   
   final class ReadStorageClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadStorageClass pretty(String pretty) {
       put("pretty", pretty);
@@ -2707,7 +2707,7 @@ public interface StorageV1Api extends Api {
   
   final class PatchStorageClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchStorageClass pretty(String pretty) {
       put("pretty", pretty);
@@ -2786,7 +2786,7 @@ public interface StorageV1Api extends Api {
   
   final class ReplaceStorageClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceStorageClass pretty(String pretty) {
       put("pretty", pretty);
@@ -2880,7 +2880,7 @@ public interface StorageV1Api extends Api {
   
   final class DeleteCollectionVolumeAttachment extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionVolumeAttachment pretty(String pretty) {
       put("pretty", pretty);
@@ -3011,7 +3011,7 @@ public interface StorageV1Api extends Api {
   
   final class ListVolumeAttachment extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListVolumeAttachment pretty(String pretty) {
       put("pretty", pretty);
@@ -3132,7 +3132,7 @@ public interface StorageV1Api extends Api {
   
   final class CreateVolumeAttachment extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateVolumeAttachment pretty(String pretty) {
       put("pretty", pretty);
@@ -3238,7 +3238,7 @@ public interface StorageV1Api extends Api {
   
   final class DeleteVolumeAttachment extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteVolumeAttachment pretty(String pretty) {
       put("pretty", pretty);
@@ -3311,7 +3311,7 @@ public interface StorageV1Api extends Api {
   
   final class ReadVolumeAttachment extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadVolumeAttachment pretty(String pretty) {
       put("pretty", pretty);
@@ -3358,7 +3358,7 @@ public interface StorageV1Api extends Api {
   
   final class PatchVolumeAttachment extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchVolumeAttachment pretty(String pretty) {
       put("pretty", pretty);
@@ -3437,7 +3437,7 @@ public interface StorageV1Api extends Api {
   
   final class ReplaceVolumeAttachment extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceVolumeAttachment pretty(String pretty) {
       put("pretty", pretty);
@@ -3502,7 +3502,7 @@ public interface StorageV1Api extends Api {
   
   final class ReadVolumeAttachmentStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadVolumeAttachmentStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -3549,7 +3549,7 @@ public interface StorageV1Api extends Api {
   
   final class PatchVolumeAttachmentStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchVolumeAttachmentStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -3628,7 +3628,7 @@ public interface StorageV1Api extends Api {
   
   final class ReplaceVolumeAttachmentStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceVolumeAttachmentStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -3727,7 +3727,7 @@ public interface StorageV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchCSIDriverList pretty(String pretty) {
       put("pretty", pretty);
@@ -3848,7 +3848,7 @@ public interface StorageV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchCSIDriver pretty(String pretty) {
       put("pretty", pretty);
@@ -3963,7 +3963,7 @@ public interface StorageV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchCSINodeList pretty(String pretty) {
       put("pretty", pretty);
@@ -4084,7 +4084,7 @@ public interface StorageV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchCSINode pretty(String pretty) {
       put("pretty", pretty);
@@ -4199,7 +4199,7 @@ public interface StorageV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchCSIStorageCapacityListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -4320,7 +4320,7 @@ public interface StorageV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedCSIStorageCapacityList pretty(String pretty) {
       put("pretty", pretty);
@@ -4445,7 +4445,7 @@ public interface StorageV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedCSIStorageCapacity pretty(String pretty) {
       put("pretty", pretty);
@@ -4560,7 +4560,7 @@ public interface StorageV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchStorageClassList pretty(String pretty) {
       put("pretty", pretty);
@@ -4681,7 +4681,7 @@ public interface StorageV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchStorageClass pretty(String pretty) {
       put("pretty", pretty);
@@ -4796,7 +4796,7 @@ public interface StorageV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchVolumeAttachmentList pretty(String pretty) {
       put("pretty", pretty);
@@ -4917,7 +4917,7 @@ public interface StorageV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchVolumeAttachment pretty(String pretty) {
       put("pretty", pretty);

@@ -109,7 +109,7 @@ public interface SchedulingV1Api extends Api {
   
   final class DeleteCollectionPriorityClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionPriorityClass pretty(String pretty) {
       put("pretty", pretty);
@@ -240,7 +240,7 @@ public interface SchedulingV1Api extends Api {
   
   final class ListPriorityClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListPriorityClass pretty(String pretty) {
       put("pretty", pretty);
@@ -361,7 +361,7 @@ public interface SchedulingV1Api extends Api {
   
   final class CreatePriorityClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreatePriorityClass pretty(String pretty) {
       put("pretty", pretty);
@@ -467,7 +467,7 @@ public interface SchedulingV1Api extends Api {
   
   final class DeletePriorityClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeletePriorityClass pretty(String pretty) {
       put("pretty", pretty);
@@ -540,7 +540,7 @@ public interface SchedulingV1Api extends Api {
   
   final class ReadPriorityClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadPriorityClass pretty(String pretty) {
       put("pretty", pretty);
@@ -587,7 +587,7 @@ public interface SchedulingV1Api extends Api {
   
   final class PatchPriorityClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchPriorityClass pretty(String pretty) {
       put("pretty", pretty);
@@ -666,7 +666,7 @@ public interface SchedulingV1Api extends Api {
   
   final class ReplacePriorityClass extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplacePriorityClass pretty(String pretty) {
       put("pretty", pretty);
@@ -765,7 +765,7 @@ public interface SchedulingV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchPriorityClassList pretty(String pretty) {
       put("pretty", pretty);
@@ -886,7 +886,7 @@ public interface SchedulingV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchPriorityClass pretty(String pretty) {
       put("pretty", pretty);

@@ -123,7 +123,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListControllerRevisionForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -238,7 +238,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListDaemonSetForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -353,7 +353,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListDeploymentForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -475,7 +475,7 @@ public interface AppsV1Api extends Api {
   
   final class DeleteCollectionNamespacedControllerRevision extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedControllerRevision pretty(String pretty) {
       put("pretty", pretty);
@@ -612,7 +612,7 @@ public interface AppsV1Api extends Api {
   
   final class ListNamespacedControllerRevision extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedControllerRevision pretty(String pretty) {
       put("pretty", pretty);
@@ -739,7 +739,7 @@ public interface AppsV1Api extends Api {
   
   final class CreateNamespacedControllerRevision extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedControllerRevision pretty(String pretty) {
       put("pretty", pretty);
@@ -853,7 +853,7 @@ public interface AppsV1Api extends Api {
   
   final class DeleteNamespacedControllerRevision extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedControllerRevision pretty(String pretty) {
       put("pretty", pretty);
@@ -930,7 +930,7 @@ public interface AppsV1Api extends Api {
   
   final class ReadNamespacedControllerRevision extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedControllerRevision pretty(String pretty) {
       put("pretty", pretty);
@@ -981,7 +981,7 @@ public interface AppsV1Api extends Api {
   
   final class PatchNamespacedControllerRevision extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedControllerRevision pretty(String pretty) {
       put("pretty", pretty);
@@ -1064,7 +1064,7 @@ public interface AppsV1Api extends Api {
   
   final class ReplaceNamespacedControllerRevision extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedControllerRevision pretty(String pretty) {
       put("pretty", pretty);
@@ -1170,7 +1170,7 @@ public interface AppsV1Api extends Api {
   
   final class DeleteCollectionNamespacedDaemonSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedDaemonSet pretty(String pretty) {
       put("pretty", pretty);
@@ -1307,7 +1307,7 @@ public interface AppsV1Api extends Api {
   
   final class ListNamespacedDaemonSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedDaemonSet pretty(String pretty) {
       put("pretty", pretty);
@@ -1434,7 +1434,7 @@ public interface AppsV1Api extends Api {
   
   final class CreateNamespacedDaemonSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedDaemonSet pretty(String pretty) {
       put("pretty", pretty);
@@ -1548,7 +1548,7 @@ public interface AppsV1Api extends Api {
   
   final class DeleteNamespacedDaemonSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedDaemonSet pretty(String pretty) {
       put("pretty", pretty);
@@ -1625,7 +1625,7 @@ public interface AppsV1Api extends Api {
   
   final class ReadNamespacedDaemonSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedDaemonSet pretty(String pretty) {
       put("pretty", pretty);
@@ -1676,7 +1676,7 @@ public interface AppsV1Api extends Api {
   
   final class PatchNamespacedDaemonSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedDaemonSet pretty(String pretty) {
       put("pretty", pretty);
@@ -1759,7 +1759,7 @@ public interface AppsV1Api extends Api {
   
   final class ReplaceNamespacedDaemonSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedDaemonSet pretty(String pretty) {
       put("pretty", pretty);
@@ -1828,7 +1828,7 @@ public interface AppsV1Api extends Api {
   
   final class ReadNamespacedDaemonSetStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedDaemonSetStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1879,7 +1879,7 @@ public interface AppsV1Api extends Api {
   
   final class PatchNamespacedDaemonSetStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedDaemonSetStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1962,7 +1962,7 @@ public interface AppsV1Api extends Api {
   
   final class ReplaceNamespacedDaemonSetStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedDaemonSetStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -2068,7 +2068,7 @@ public interface AppsV1Api extends Api {
   
   final class DeleteCollectionNamespacedDeployment extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedDeployment pretty(String pretty) {
       put("pretty", pretty);
@@ -2205,7 +2205,7 @@ public interface AppsV1Api extends Api {
   
   final class ListNamespacedDeployment extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedDeployment pretty(String pretty) {
       put("pretty", pretty);
@@ -2332,7 +2332,7 @@ public interface AppsV1Api extends Api {
   
   final class CreateNamespacedDeployment extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedDeployment pretty(String pretty) {
       put("pretty", pretty);
@@ -2446,7 +2446,7 @@ public interface AppsV1Api extends Api {
   
   final class DeleteNamespacedDeployment extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedDeployment pretty(String pretty) {
       put("pretty", pretty);
@@ -2523,7 +2523,7 @@ public interface AppsV1Api extends Api {
   
   final class ReadNamespacedDeployment extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedDeployment pretty(String pretty) {
       put("pretty", pretty);
@@ -2574,7 +2574,7 @@ public interface AppsV1Api extends Api {
   
   final class PatchNamespacedDeployment extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedDeployment pretty(String pretty) {
       put("pretty", pretty);
@@ -2657,7 +2657,7 @@ public interface AppsV1Api extends Api {
   
   final class ReplaceNamespacedDeployment extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedDeployment pretty(String pretty) {
       put("pretty", pretty);
@@ -2726,7 +2726,7 @@ public interface AppsV1Api extends Api {
   
   final class ReadNamespacedDeploymentScale extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedDeploymentScale pretty(String pretty) {
       put("pretty", pretty);
@@ -2777,7 +2777,7 @@ public interface AppsV1Api extends Api {
   
   final class PatchNamespacedDeploymentScale extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedDeploymentScale pretty(String pretty) {
       put("pretty", pretty);
@@ -2860,7 +2860,7 @@ public interface AppsV1Api extends Api {
   
   final class ReplaceNamespacedDeploymentScale extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedDeploymentScale pretty(String pretty) {
       put("pretty", pretty);
@@ -2929,7 +2929,7 @@ public interface AppsV1Api extends Api {
   
   final class ReadNamespacedDeploymentStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedDeploymentStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -2980,7 +2980,7 @@ public interface AppsV1Api extends Api {
   
   final class PatchNamespacedDeploymentStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedDeploymentStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -3063,7 +3063,7 @@ public interface AppsV1Api extends Api {
   
   final class ReplaceNamespacedDeploymentStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedDeploymentStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -3169,7 +3169,7 @@ public interface AppsV1Api extends Api {
   
   final class DeleteCollectionNamespacedReplicaSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedReplicaSet pretty(String pretty) {
       put("pretty", pretty);
@@ -3306,7 +3306,7 @@ public interface AppsV1Api extends Api {
   
   final class ListNamespacedReplicaSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedReplicaSet pretty(String pretty) {
       put("pretty", pretty);
@@ -3433,7 +3433,7 @@ public interface AppsV1Api extends Api {
   
   final class CreateNamespacedReplicaSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedReplicaSet pretty(String pretty) {
       put("pretty", pretty);
@@ -3547,7 +3547,7 @@ public interface AppsV1Api extends Api {
   
   final class DeleteNamespacedReplicaSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedReplicaSet pretty(String pretty) {
       put("pretty", pretty);
@@ -3624,7 +3624,7 @@ public interface AppsV1Api extends Api {
   
   final class ReadNamespacedReplicaSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedReplicaSet pretty(String pretty) {
       put("pretty", pretty);
@@ -3675,7 +3675,7 @@ public interface AppsV1Api extends Api {
   
   final class PatchNamespacedReplicaSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedReplicaSet pretty(String pretty) {
       put("pretty", pretty);
@@ -3758,7 +3758,7 @@ public interface AppsV1Api extends Api {
   
   final class ReplaceNamespacedReplicaSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedReplicaSet pretty(String pretty) {
       put("pretty", pretty);
@@ -3827,7 +3827,7 @@ public interface AppsV1Api extends Api {
   
   final class ReadNamespacedReplicaSetScale extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedReplicaSetScale pretty(String pretty) {
       put("pretty", pretty);
@@ -3878,7 +3878,7 @@ public interface AppsV1Api extends Api {
   
   final class PatchNamespacedReplicaSetScale extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedReplicaSetScale pretty(String pretty) {
       put("pretty", pretty);
@@ -3961,7 +3961,7 @@ public interface AppsV1Api extends Api {
   
   final class ReplaceNamespacedReplicaSetScale extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedReplicaSetScale pretty(String pretty) {
       put("pretty", pretty);
@@ -4030,7 +4030,7 @@ public interface AppsV1Api extends Api {
   
   final class ReadNamespacedReplicaSetStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedReplicaSetStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -4081,7 +4081,7 @@ public interface AppsV1Api extends Api {
   
   final class PatchNamespacedReplicaSetStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedReplicaSetStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -4164,7 +4164,7 @@ public interface AppsV1Api extends Api {
   
   final class ReplaceNamespacedReplicaSetStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedReplicaSetStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -4270,7 +4270,7 @@ public interface AppsV1Api extends Api {
   
   final class DeleteCollectionNamespacedStatefulSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedStatefulSet pretty(String pretty) {
       put("pretty", pretty);
@@ -4407,7 +4407,7 @@ public interface AppsV1Api extends Api {
   
   final class ListNamespacedStatefulSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedStatefulSet pretty(String pretty) {
       put("pretty", pretty);
@@ -4534,7 +4534,7 @@ public interface AppsV1Api extends Api {
   
   final class CreateNamespacedStatefulSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedStatefulSet pretty(String pretty) {
       put("pretty", pretty);
@@ -4648,7 +4648,7 @@ public interface AppsV1Api extends Api {
   
   final class DeleteNamespacedStatefulSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedStatefulSet pretty(String pretty) {
       put("pretty", pretty);
@@ -4725,7 +4725,7 @@ public interface AppsV1Api extends Api {
   
   final class ReadNamespacedStatefulSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedStatefulSet pretty(String pretty) {
       put("pretty", pretty);
@@ -4776,7 +4776,7 @@ public interface AppsV1Api extends Api {
   
   final class PatchNamespacedStatefulSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedStatefulSet pretty(String pretty) {
       put("pretty", pretty);
@@ -4859,7 +4859,7 @@ public interface AppsV1Api extends Api {
   
   final class ReplaceNamespacedStatefulSet extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedStatefulSet pretty(String pretty) {
       put("pretty", pretty);
@@ -4928,7 +4928,7 @@ public interface AppsV1Api extends Api {
   
   final class ReadNamespacedStatefulSetScale extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedStatefulSetScale pretty(String pretty) {
       put("pretty", pretty);
@@ -4979,7 +4979,7 @@ public interface AppsV1Api extends Api {
   
   final class PatchNamespacedStatefulSetScale extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedStatefulSetScale pretty(String pretty) {
       put("pretty", pretty);
@@ -5062,7 +5062,7 @@ public interface AppsV1Api extends Api {
   
   final class ReplaceNamespacedStatefulSetScale extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedStatefulSetScale pretty(String pretty) {
       put("pretty", pretty);
@@ -5131,7 +5131,7 @@ public interface AppsV1Api extends Api {
   
   final class ReadNamespacedStatefulSetStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedStatefulSetStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -5182,7 +5182,7 @@ public interface AppsV1Api extends Api {
   
   final class PatchNamespacedStatefulSetStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedStatefulSetStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -5265,7 +5265,7 @@ public interface AppsV1Api extends Api {
   
   final class ReplaceNamespacedStatefulSetStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedStatefulSetStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -5364,7 +5364,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListReplicaSetForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -5479,7 +5479,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListStatefulSetForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -5594,7 +5594,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchControllerRevisionListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -5709,7 +5709,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchDaemonSetListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -5824,7 +5824,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchDeploymentListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -5945,7 +5945,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedControllerRevisionList pretty(String pretty) {
       put("pretty", pretty);
@@ -6070,7 +6070,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedControllerRevision pretty(String pretty) {
       put("pretty", pretty);
@@ -6191,7 +6191,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedDaemonSetList pretty(String pretty) {
       put("pretty", pretty);
@@ -6316,7 +6316,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedDaemonSet pretty(String pretty) {
       put("pretty", pretty);
@@ -6437,7 +6437,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedDeploymentList pretty(String pretty) {
       put("pretty", pretty);
@@ -6562,7 +6562,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedDeployment pretty(String pretty) {
       put("pretty", pretty);
@@ -6683,7 +6683,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedReplicaSetList pretty(String pretty) {
       put("pretty", pretty);
@@ -6808,7 +6808,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedReplicaSet pretty(String pretty) {
       put("pretty", pretty);
@@ -6929,7 +6929,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedStatefulSetList pretty(String pretty) {
       put("pretty", pretty);
@@ -7054,7 +7054,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedStatefulSet pretty(String pretty) {
       put("pretty", pretty);
@@ -7169,7 +7169,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchReplicaSetListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -7284,7 +7284,7 @@ public interface AppsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchStatefulSetListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);

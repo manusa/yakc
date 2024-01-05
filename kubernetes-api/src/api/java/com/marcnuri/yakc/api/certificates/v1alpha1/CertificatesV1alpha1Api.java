@@ -109,7 +109,7 @@ public interface CertificatesV1alpha1Api extends Api {
   
   final class DeleteCollectionClusterTrustBundle extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionClusterTrustBundle pretty(String pretty) {
       put("pretty", pretty);
@@ -240,7 +240,7 @@ public interface CertificatesV1alpha1Api extends Api {
   
   final class ListClusterTrustBundle extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListClusterTrustBundle pretty(String pretty) {
       put("pretty", pretty);
@@ -361,7 +361,7 @@ public interface CertificatesV1alpha1Api extends Api {
   
   final class CreateClusterTrustBundle extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateClusterTrustBundle pretty(String pretty) {
       put("pretty", pretty);
@@ -467,7 +467,7 @@ public interface CertificatesV1alpha1Api extends Api {
   
   final class DeleteClusterTrustBundle extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteClusterTrustBundle pretty(String pretty) {
       put("pretty", pretty);
@@ -540,7 +540,7 @@ public interface CertificatesV1alpha1Api extends Api {
   
   final class ReadClusterTrustBundle extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadClusterTrustBundle pretty(String pretty) {
       put("pretty", pretty);
@@ -587,7 +587,7 @@ public interface CertificatesV1alpha1Api extends Api {
   
   final class PatchClusterTrustBundle extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchClusterTrustBundle pretty(String pretty) {
       put("pretty", pretty);
@@ -666,7 +666,7 @@ public interface CertificatesV1alpha1Api extends Api {
   
   final class ReplaceClusterTrustBundle extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceClusterTrustBundle pretty(String pretty) {
       put("pretty", pretty);
@@ -765,7 +765,7 @@ public interface CertificatesV1alpha1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchClusterTrustBundleList pretty(String pretty) {
       put("pretty", pretty);
@@ -886,7 +886,7 @@ public interface CertificatesV1alpha1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchClusterTrustBundle pretty(String pretty) {
       put("pretty", pretty);

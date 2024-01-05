@@ -114,7 +114,7 @@ public interface DiscoveryV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListEndpointSliceForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -236,7 +236,7 @@ public interface DiscoveryV1Api extends Api {
   
   final class DeleteCollectionNamespacedEndpointSlice extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedEndpointSlice pretty(String pretty) {
       put("pretty", pretty);
@@ -373,7 +373,7 @@ public interface DiscoveryV1Api extends Api {
   
   final class ListNamespacedEndpointSlice extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedEndpointSlice pretty(String pretty) {
       put("pretty", pretty);
@@ -500,7 +500,7 @@ public interface DiscoveryV1Api extends Api {
   
   final class CreateNamespacedEndpointSlice extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedEndpointSlice pretty(String pretty) {
       put("pretty", pretty);
@@ -614,7 +614,7 @@ public interface DiscoveryV1Api extends Api {
   
   final class DeleteNamespacedEndpointSlice extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedEndpointSlice pretty(String pretty) {
       put("pretty", pretty);
@@ -691,7 +691,7 @@ public interface DiscoveryV1Api extends Api {
   
   final class ReadNamespacedEndpointSlice extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedEndpointSlice pretty(String pretty) {
       put("pretty", pretty);
@@ -742,7 +742,7 @@ public interface DiscoveryV1Api extends Api {
   
   final class PatchNamespacedEndpointSlice extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedEndpointSlice pretty(String pretty) {
       put("pretty", pretty);
@@ -825,7 +825,7 @@ public interface DiscoveryV1Api extends Api {
   
   final class ReplaceNamespacedEndpointSlice extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedEndpointSlice pretty(String pretty) {
       put("pretty", pretty);
@@ -924,7 +924,7 @@ public interface DiscoveryV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchEndpointSliceListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -1045,7 +1045,7 @@ public interface DiscoveryV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedEndpointSliceList pretty(String pretty) {
       put("pretty", pretty);
@@ -1170,7 +1170,7 @@ public interface DiscoveryV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedEndpointSlice pretty(String pretty) {
       put("pretty", pretty);

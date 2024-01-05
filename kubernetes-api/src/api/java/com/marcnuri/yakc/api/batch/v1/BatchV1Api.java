@@ -116,7 +116,7 @@ public interface BatchV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListCronJobForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -231,7 +231,7 @@ public interface BatchV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListJobForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -353,7 +353,7 @@ public interface BatchV1Api extends Api {
   
   final class DeleteCollectionNamespacedCronJob extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedCronJob pretty(String pretty) {
       put("pretty", pretty);
@@ -490,7 +490,7 @@ public interface BatchV1Api extends Api {
   
   final class ListNamespacedCronJob extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedCronJob pretty(String pretty) {
       put("pretty", pretty);
@@ -617,7 +617,7 @@ public interface BatchV1Api extends Api {
   
   final class CreateNamespacedCronJob extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedCronJob pretty(String pretty) {
       put("pretty", pretty);
@@ -731,7 +731,7 @@ public interface BatchV1Api extends Api {
   
   final class DeleteNamespacedCronJob extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedCronJob pretty(String pretty) {
       put("pretty", pretty);
@@ -808,7 +808,7 @@ public interface BatchV1Api extends Api {
   
   final class ReadNamespacedCronJob extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedCronJob pretty(String pretty) {
       put("pretty", pretty);
@@ -859,7 +859,7 @@ public interface BatchV1Api extends Api {
   
   final class PatchNamespacedCronJob extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedCronJob pretty(String pretty) {
       put("pretty", pretty);
@@ -942,7 +942,7 @@ public interface BatchV1Api extends Api {
   
   final class ReplaceNamespacedCronJob extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedCronJob pretty(String pretty) {
       put("pretty", pretty);
@@ -1011,7 +1011,7 @@ public interface BatchV1Api extends Api {
   
   final class ReadNamespacedCronJobStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedCronJobStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1062,7 +1062,7 @@ public interface BatchV1Api extends Api {
   
   final class PatchNamespacedCronJobStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedCronJobStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1145,7 +1145,7 @@ public interface BatchV1Api extends Api {
   
   final class ReplaceNamespacedCronJobStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedCronJobStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1251,7 +1251,7 @@ public interface BatchV1Api extends Api {
   
   final class DeleteCollectionNamespacedJob extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionNamespacedJob pretty(String pretty) {
       put("pretty", pretty);
@@ -1388,7 +1388,7 @@ public interface BatchV1Api extends Api {
   
   final class ListNamespacedJob extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListNamespacedJob pretty(String pretty) {
       put("pretty", pretty);
@@ -1515,7 +1515,7 @@ public interface BatchV1Api extends Api {
   
   final class CreateNamespacedJob extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateNamespacedJob pretty(String pretty) {
       put("pretty", pretty);
@@ -1629,7 +1629,7 @@ public interface BatchV1Api extends Api {
   
   final class DeleteNamespacedJob extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteNamespacedJob pretty(String pretty) {
       put("pretty", pretty);
@@ -1706,7 +1706,7 @@ public interface BatchV1Api extends Api {
   
   final class ReadNamespacedJob extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedJob pretty(String pretty) {
       put("pretty", pretty);
@@ -1757,7 +1757,7 @@ public interface BatchV1Api extends Api {
   
   final class PatchNamespacedJob extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedJob pretty(String pretty) {
       put("pretty", pretty);
@@ -1840,7 +1840,7 @@ public interface BatchV1Api extends Api {
   
   final class ReplaceNamespacedJob extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedJob pretty(String pretty) {
       put("pretty", pretty);
@@ -1909,7 +1909,7 @@ public interface BatchV1Api extends Api {
   
   final class ReadNamespacedJobStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadNamespacedJobStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -1960,7 +1960,7 @@ public interface BatchV1Api extends Api {
   
   final class PatchNamespacedJobStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchNamespacedJobStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -2043,7 +2043,7 @@ public interface BatchV1Api extends Api {
   
   final class ReplaceNamespacedJobStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceNamespacedJobStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -2142,7 +2142,7 @@ public interface BatchV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchCronJobListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -2257,7 +2257,7 @@ public interface BatchV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchJobListForAllNamespaces pretty(String pretty) {
       put("pretty", pretty);
@@ -2378,7 +2378,7 @@ public interface BatchV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedCronJobList pretty(String pretty) {
       put("pretty", pretty);
@@ -2503,7 +2503,7 @@ public interface BatchV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedCronJob pretty(String pretty) {
       put("pretty", pretty);
@@ -2624,7 +2624,7 @@ public interface BatchV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedJobList pretty(String pretty) {
       put("pretty", pretty);
@@ -2749,7 +2749,7 @@ public interface BatchV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchNamespacedJob pretty(String pretty) {
       put("pretty", pretty);

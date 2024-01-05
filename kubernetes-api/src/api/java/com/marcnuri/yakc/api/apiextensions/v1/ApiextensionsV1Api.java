@@ -109,7 +109,7 @@ public interface ApiextensionsV1Api extends Api {
   
   final class DeleteCollectionCustomResourceDefinition extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionCustomResourceDefinition pretty(String pretty) {
       put("pretty", pretty);
@@ -240,7 +240,7 @@ public interface ApiextensionsV1Api extends Api {
   
   final class ListCustomResourceDefinition extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListCustomResourceDefinition pretty(String pretty) {
       put("pretty", pretty);
@@ -361,7 +361,7 @@ public interface ApiextensionsV1Api extends Api {
   
   final class CreateCustomResourceDefinition extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateCustomResourceDefinition pretty(String pretty) {
       put("pretty", pretty);
@@ -467,7 +467,7 @@ public interface ApiextensionsV1Api extends Api {
   
   final class DeleteCustomResourceDefinition extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCustomResourceDefinition pretty(String pretty) {
       put("pretty", pretty);
@@ -540,7 +540,7 @@ public interface ApiextensionsV1Api extends Api {
   
   final class ReadCustomResourceDefinition extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadCustomResourceDefinition pretty(String pretty) {
       put("pretty", pretty);
@@ -587,7 +587,7 @@ public interface ApiextensionsV1Api extends Api {
   
   final class PatchCustomResourceDefinition extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchCustomResourceDefinition pretty(String pretty) {
       put("pretty", pretty);
@@ -666,7 +666,7 @@ public interface ApiextensionsV1Api extends Api {
   
   final class ReplaceCustomResourceDefinition extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceCustomResourceDefinition pretty(String pretty) {
       put("pretty", pretty);
@@ -731,7 +731,7 @@ public interface ApiextensionsV1Api extends Api {
   
   final class ReadCustomResourceDefinitionStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadCustomResourceDefinitionStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -778,7 +778,7 @@ public interface ApiextensionsV1Api extends Api {
   
   final class PatchCustomResourceDefinitionStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchCustomResourceDefinitionStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -857,7 +857,7 @@ public interface ApiextensionsV1Api extends Api {
   
   final class ReplaceCustomResourceDefinitionStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceCustomResourceDefinitionStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -956,7 +956,7 @@ public interface ApiextensionsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchCustomResourceDefinitionList pretty(String pretty) {
       put("pretty", pretty);
@@ -1077,7 +1077,7 @@ public interface ApiextensionsV1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchCustomResourceDefinition pretty(String pretty) {
       put("pretty", pretty);

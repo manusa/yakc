@@ -98,7 +98,7 @@ public interface AuthenticationV1beta1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateSelfSubjectReview pretty(String pretty) {
       put("pretty", pretty);

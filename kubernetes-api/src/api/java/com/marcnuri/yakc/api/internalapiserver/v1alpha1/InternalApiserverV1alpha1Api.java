@@ -109,7 +109,7 @@ public interface InternalApiserverV1alpha1Api extends Api {
   
   final class DeleteCollectionStorageVersion extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteCollectionStorageVersion pretty(String pretty) {
       put("pretty", pretty);
@@ -240,7 +240,7 @@ public interface InternalApiserverV1alpha1Api extends Api {
   
   final class ListStorageVersion extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ListStorageVersion pretty(String pretty) {
       put("pretty", pretty);
@@ -361,7 +361,7 @@ public interface InternalApiserverV1alpha1Api extends Api {
   
   final class CreateStorageVersion extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public CreateStorageVersion pretty(String pretty) {
       put("pretty", pretty);
@@ -467,7 +467,7 @@ public interface InternalApiserverV1alpha1Api extends Api {
   
   final class DeleteStorageVersion extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public DeleteStorageVersion pretty(String pretty) {
       put("pretty", pretty);
@@ -540,7 +540,7 @@ public interface InternalApiserverV1alpha1Api extends Api {
   
   final class ReadStorageVersion extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadStorageVersion pretty(String pretty) {
       put("pretty", pretty);
@@ -587,7 +587,7 @@ public interface InternalApiserverV1alpha1Api extends Api {
   
   final class PatchStorageVersion extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchStorageVersion pretty(String pretty) {
       put("pretty", pretty);
@@ -666,7 +666,7 @@ public interface InternalApiserverV1alpha1Api extends Api {
   
   final class ReplaceStorageVersion extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceStorageVersion pretty(String pretty) {
       put("pretty", pretty);
@@ -731,7 +731,7 @@ public interface InternalApiserverV1alpha1Api extends Api {
   
   final class ReadStorageVersionStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReadStorageVersionStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -778,7 +778,7 @@ public interface InternalApiserverV1alpha1Api extends Api {
   
   final class PatchStorageVersionStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public PatchStorageVersionStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -857,7 +857,7 @@ public interface InternalApiserverV1alpha1Api extends Api {
   
   final class ReplaceStorageVersionStatus extends HashMap<String, Object> { 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public ReplaceStorageVersionStatus pretty(String pretty) {
       put("pretty", pretty);
@@ -956,7 +956,7 @@ public interface InternalApiserverV1alpha1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchStorageVersionList pretty(String pretty) {
       put("pretty", pretty);
@@ -1077,7 +1077,7 @@ public interface InternalApiserverV1alpha1Api extends Api {
     }
 
     /**
-     * If 'true', then the output is pretty printed.
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
      */
     public WatchStorageVersion pretty(String pretty) {
       put("pretty", pretty);
