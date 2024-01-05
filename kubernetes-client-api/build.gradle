@@ -3,7 +3,7 @@ apply from: rootDir.toPath().resolve('shared.gradle').toFile()
 ext {
   isPublishable = true
   pomName = 'Kubernetes Client API'
-  pomDescription = 'Main interfaces and Exception classes for te rest of com.marcnuri.yakc modules.'
+  pomDescription = 'Main interfaces and Exception classes for the rest of com.marcnuri.yakc modules.'
 }
 
 dependencies {
