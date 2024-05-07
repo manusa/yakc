@@ -72,6 +72,7 @@ public class SchemaUtils {
       "enum", "enumeration",
       "class", "clazz",
       "import", "imports",
+      "int", "int32",
       "private", "privates",
       "for", "fors",
       "return", "returns",

@@ -18,6 +18,7 @@ package com.marcnuri.yakc.model.io.k8s.api.core.v1;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.marcnuri.yakc.model.Model;
+import java.util.List;
 import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -101,6 +102,13 @@ public class ContainerStatus implements Model {
 
   @JsonProperty("state")
   private ContainerState state;
+
+  /**
+   * Status of volume mounts.
+   */
+  @JsonProperty("volumeMounts")
+  @Singular(value = "addToVolumeMounts", ignoreNullCollections = true)
+  private List<VolumeMountStatus> volumeMounts;
 
 }
 

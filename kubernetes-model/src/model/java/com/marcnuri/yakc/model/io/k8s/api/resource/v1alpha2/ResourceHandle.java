@@ -48,5 +48,8 @@ public class ResourceHandle implements Model {
   @JsonProperty("driverName")
   private String driverName;
 
+  @JsonProperty("structuredData")
+  private StructuredResourceHandle structuredData;
+
 }
 

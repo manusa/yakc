@@ -23,10 +23,16 @@ import com.marcnuri.yakc.model.io.k8s.api.resource.v1alpha2.PodSchedulingContext
 import com.marcnuri.yakc.model.io.k8s.api.resource.v1alpha2.PodSchedulingContextList;
 import com.marcnuri.yakc.model.io.k8s.api.resource.v1alpha2.ResourceClaim;
 import com.marcnuri.yakc.model.io.k8s.api.resource.v1alpha2.ResourceClaimList;
+import com.marcnuri.yakc.model.io.k8s.api.resource.v1alpha2.ResourceClaimParameters;
+import com.marcnuri.yakc.model.io.k8s.api.resource.v1alpha2.ResourceClaimParametersList;
 import com.marcnuri.yakc.model.io.k8s.api.resource.v1alpha2.ResourceClaimTemplate;
 import com.marcnuri.yakc.model.io.k8s.api.resource.v1alpha2.ResourceClaimTemplateList;
 import com.marcnuri.yakc.model.io.k8s.api.resource.v1alpha2.ResourceClass;
 import com.marcnuri.yakc.model.io.k8s.api.resource.v1alpha2.ResourceClassList;
+import com.marcnuri.yakc.model.io.k8s.api.resource.v1alpha2.ResourceClassParameters;
+import com.marcnuri.yakc.model.io.k8s.api.resource.v1alpha2.ResourceClassParametersList;
+import com.marcnuri.yakc.model.io.k8s.api.resource.v1alpha2.ResourceSlice;
+import com.marcnuri.yakc.model.io.k8s.api.resource.v1alpha2.ResourceSliceList;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.APIResourceList;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.DeleteOptions;
 import com.marcnuri.yakc.model.io.k8s.apimachinery.pkg.apis.meta.v1.Status;
@@ -946,6 +952,701 @@ public interface ResourceV1alpha2Api extends Api {
      * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
      */
     public ReplaceNamespacedPodSchedulingContextStatus fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+  } 
+  /**
+   * delete collection of ResourceClaimParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Status> deleteCollectionNamespacedResourceClaimParameters(
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body);
+
+    /**
+   * delete collection of ResourceClaimParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+    @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Status> deleteCollectionNamespacedResourceClaimParameters(
+    @Path("namespace") String namespace);
+
+  /**
+   * delete collection of ResourceClaimParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Status> deleteCollectionNamespacedResourceClaimParameters(
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body, 
+    @QueryMap DeleteCollectionNamespacedResourceClaimParameters queryParameters);
+
+  /**
+   * delete collection of ResourceClaimParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Status> deleteCollectionNamespacedResourceClaimParameters(
+    @Path("namespace") String namespace, 
+    @QueryMap DeleteCollectionNamespacedResourceClaimParameters queryParameters);
+
+  
+  final class DeleteCollectionNamespacedResourceClaimParameters extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public DeleteCollectionNamespacedResourceClaimParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public DeleteCollectionNamespacedResourceClaimParameters continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public DeleteCollectionNamespacedResourceClaimParameters dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public DeleteCollectionNamespacedResourceClaimParameters fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+     */
+    public DeleteCollectionNamespacedResourceClaimParameters gracePeriodSeconds(Number gracePeriodSeconds) {
+      put("gracePeriodSeconds", gracePeriodSeconds);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public DeleteCollectionNamespacedResourceClaimParameters labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public DeleteCollectionNamespacedResourceClaimParameters limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+     */
+    public DeleteCollectionNamespacedResourceClaimParameters orphanDependents(Boolean orphanDependents) {
+      put("orphanDependents", orphanDependents);
+      return this;
+    }
+
+    /**
+     * Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+     */
+    public DeleteCollectionNamespacedResourceClaimParameters propagationPolicy(String propagationPolicy) {
+      put("propagationPolicy", propagationPolicy);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionNamespacedResourceClaimParameters resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionNamespacedResourceClaimParameters resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public DeleteCollectionNamespacedResourceClaimParameters sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public DeleteCollectionNamespacedResourceClaimParameters timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+  } 
+  /**
+   * list or watch objects of kind ResourceClaimParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<ResourceClaimParametersList, ResourceClaimParameters> listNamespacedResourceClaimParameters(
+    @Path("namespace") String namespace);
+
+  /**
+   * list or watch objects of kind ResourceClaimParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<ResourceClaimParametersList, ResourceClaimParameters> listNamespacedResourceClaimParameters(
+    @Path("namespace") String namespace, 
+    @QueryMap ListNamespacedResourceClaimParameters queryParameters);
+
+  
+  final class ListNamespacedResourceClaimParameters extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public ListNamespacedResourceClaimParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+     */
+    public ListNamespacedResourceClaimParameters allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public ListNamespacedResourceClaimParameters continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public ListNamespacedResourceClaimParameters fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public ListNamespacedResourceClaimParameters labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public ListNamespacedResourceClaimParameters limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListNamespacedResourceClaimParameters resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListNamespacedResourceClaimParameters resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public ListNamespacedResourceClaimParameters sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public ListNamespacedResourceClaimParameters timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public ListNamespacedResourceClaimParameters watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * create ResourceClaimParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "POST",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClaimParameters> createNamespacedResourceClaimParameters(
+    @Path("namespace") String namespace, 
+    @Body ResourceClaimParameters body);
+
+  /**
+   * create ResourceClaimParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "POST",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClaimParameters> createNamespacedResourceClaimParameters(
+    @Path("namespace") String namespace, 
+    @Body ResourceClaimParameters body, 
+    @QueryMap CreateNamespacedResourceClaimParameters queryParameters);
+
+  
+  final class CreateNamespacedResourceClaimParameters extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public CreateNamespacedResourceClaimParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public CreateNamespacedResourceClaimParameters dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public CreateNamespacedResourceClaimParameters fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     */
+    public CreateNamespacedResourceClaimParameters fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+  } 
+  /**
+   * delete ResourceClaimParameters
+   *
+   * @param name name of the ResourceClaimParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClaimParameters> deleteNamespacedResourceClaimParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body);
+
+    /**
+   * delete ResourceClaimParameters
+   *
+   * @param name name of the ResourceClaimParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+    @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClaimParameters> deleteNamespacedResourceClaimParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * delete ResourceClaimParameters
+   *
+   * @param name name of the ResourceClaimParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClaimParameters> deleteNamespacedResourceClaimParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body, 
+    @QueryMap DeleteNamespacedResourceClaimParameters queryParameters);
+
+  /**
+   * delete ResourceClaimParameters
+   *
+   * @param name name of the ResourceClaimParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClaimParameters> deleteNamespacedResourceClaimParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap DeleteNamespacedResourceClaimParameters queryParameters);
+
+  
+  final class DeleteNamespacedResourceClaimParameters extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public DeleteNamespacedResourceClaimParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public DeleteNamespacedResourceClaimParameters dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+     */
+    public DeleteNamespacedResourceClaimParameters gracePeriodSeconds(Number gracePeriodSeconds) {
+      put("gracePeriodSeconds", gracePeriodSeconds);
+      return this;
+    }
+
+    /**
+     * Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+     */
+    public DeleteNamespacedResourceClaimParameters orphanDependents(Boolean orphanDependents) {
+      put("orphanDependents", orphanDependents);
+      return this;
+    }
+
+    /**
+     * Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+     */
+    public DeleteNamespacedResourceClaimParameters propagationPolicy(String propagationPolicy) {
+      put("propagationPolicy", propagationPolicy);
+      return this;
+    }
+  } 
+  /**
+   * read the specified ResourceClaimParameters
+   *
+   * @param name name of the ResourceClaimParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClaimParameters> readNamespacedResourceClaimParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * read the specified ResourceClaimParameters
+   *
+   * @param name name of the ResourceClaimParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClaimParameters> readNamespacedResourceClaimParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap ReadNamespacedResourceClaimParameters queryParameters);
+
+  
+  final class ReadNamespacedResourceClaimParameters extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public ReadNamespacedResourceClaimParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+  } 
+  /**
+   * partially update the specified ResourceClaimParameters
+   *
+   * @param name name of the ResourceClaimParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClaimParameters> patchNamespacedResourceClaimParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body ResourceClaimParameters body);
+
+  /**
+   * partially update the specified ResourceClaimParameters
+   *
+   * @param name name of the ResourceClaimParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClaimParameters> patchNamespacedResourceClaimParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body ResourceClaimParameters body, 
+    @QueryMap PatchNamespacedResourceClaimParameters queryParameters);
+
+  
+  final class PatchNamespacedResourceClaimParameters extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public PatchNamespacedResourceClaimParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public PatchNamespacedResourceClaimParameters dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+     */
+    public PatchNamespacedResourceClaimParameters fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     */
+    public PatchNamespacedResourceClaimParameters fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
+     * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+     */
+    public PatchNamespacedResourceClaimParameters force(Boolean force) {
+      put("force", force);
+      return this;
+    }
+  } 
+  /**
+   * replace the specified ResourceClaimParameters
+   *
+   * @param name name of the ResourceClaimParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClaimParameters> replaceNamespacedResourceClaimParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body ResourceClaimParameters body);
+
+  /**
+   * replace the specified ResourceClaimParameters
+   *
+   * @param name name of the ResourceClaimParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclaimparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClaimParameters> replaceNamespacedResourceClaimParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body ResourceClaimParameters body, 
+    @QueryMap ReplaceNamespacedResourceClaimParameters queryParameters);
+
+  
+  final class ReplaceNamespacedResourceClaimParameters extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public ReplaceNamespacedResourceClaimParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public ReplaceNamespacedResourceClaimParameters dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public ReplaceNamespacedResourceClaimParameters fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     */
+    public ReplaceNamespacedResourceClaimParameters fieldValidation(String fieldValidation) {
       put("fieldValidation", fieldValidation);
       return this;
     }
@@ -2544,6 +3245,701 @@ public interface ResourceV1alpha2Api extends Api {
     }
   } 
   /**
+   * delete collection of ResourceClassParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Status> deleteCollectionNamespacedResourceClassParameters(
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body);
+
+    /**
+   * delete collection of ResourceClassParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+    @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Status> deleteCollectionNamespacedResourceClassParameters(
+    @Path("namespace") String namespace);
+
+  /**
+   * delete collection of ResourceClassParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Status> deleteCollectionNamespacedResourceClassParameters(
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body, 
+    @QueryMap DeleteCollectionNamespacedResourceClassParameters queryParameters);
+
+  /**
+   * delete collection of ResourceClassParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Status> deleteCollectionNamespacedResourceClassParameters(
+    @Path("namespace") String namespace, 
+    @QueryMap DeleteCollectionNamespacedResourceClassParameters queryParameters);
+
+  
+  final class DeleteCollectionNamespacedResourceClassParameters extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public DeleteCollectionNamespacedResourceClassParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public DeleteCollectionNamespacedResourceClassParameters continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public DeleteCollectionNamespacedResourceClassParameters dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public DeleteCollectionNamespacedResourceClassParameters fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+     */
+    public DeleteCollectionNamespacedResourceClassParameters gracePeriodSeconds(Number gracePeriodSeconds) {
+      put("gracePeriodSeconds", gracePeriodSeconds);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public DeleteCollectionNamespacedResourceClassParameters labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public DeleteCollectionNamespacedResourceClassParameters limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+     */
+    public DeleteCollectionNamespacedResourceClassParameters orphanDependents(Boolean orphanDependents) {
+      put("orphanDependents", orphanDependents);
+      return this;
+    }
+
+    /**
+     * Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+     */
+    public DeleteCollectionNamespacedResourceClassParameters propagationPolicy(String propagationPolicy) {
+      put("propagationPolicy", propagationPolicy);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionNamespacedResourceClassParameters resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionNamespacedResourceClassParameters resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public DeleteCollectionNamespacedResourceClassParameters sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public DeleteCollectionNamespacedResourceClassParameters timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+  } 
+  /**
+   * list or watch objects of kind ResourceClassParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<ResourceClassParametersList, ResourceClassParameters> listNamespacedResourceClassParameters(
+    @Path("namespace") String namespace);
+
+  /**
+   * list or watch objects of kind ResourceClassParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<ResourceClassParametersList, ResourceClassParameters> listNamespacedResourceClassParameters(
+    @Path("namespace") String namespace, 
+    @QueryMap ListNamespacedResourceClassParameters queryParameters);
+
+  
+  final class ListNamespacedResourceClassParameters extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public ListNamespacedResourceClassParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+     */
+    public ListNamespacedResourceClassParameters allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public ListNamespacedResourceClassParameters continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public ListNamespacedResourceClassParameters fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public ListNamespacedResourceClassParameters labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public ListNamespacedResourceClassParameters limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListNamespacedResourceClassParameters resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListNamespacedResourceClassParameters resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public ListNamespacedResourceClassParameters sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public ListNamespacedResourceClassParameters timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public ListNamespacedResourceClassParameters watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * create ResourceClassParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "POST",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClassParameters> createNamespacedResourceClassParameters(
+    @Path("namespace") String namespace, 
+    @Body ResourceClassParameters body);
+
+  /**
+   * create ResourceClassParameters
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "POST",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClassParameters> createNamespacedResourceClassParameters(
+    @Path("namespace") String namespace, 
+    @Body ResourceClassParameters body, 
+    @QueryMap CreateNamespacedResourceClassParameters queryParameters);
+
+  
+  final class CreateNamespacedResourceClassParameters extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public CreateNamespacedResourceClassParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public CreateNamespacedResourceClassParameters dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public CreateNamespacedResourceClassParameters fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     */
+    public CreateNamespacedResourceClassParameters fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+  } 
+  /**
+   * delete ResourceClassParameters
+   *
+   * @param name name of the ResourceClassParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClassParameters> deleteNamespacedResourceClassParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body);
+
+    /**
+   * delete ResourceClassParameters
+   *
+   * @param name name of the ResourceClassParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+    @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClassParameters> deleteNamespacedResourceClassParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * delete ResourceClassParameters
+   *
+   * @param name name of the ResourceClassParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClassParameters> deleteNamespacedResourceClassParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body DeleteOptions body, 
+    @QueryMap DeleteNamespacedResourceClassParameters queryParameters);
+
+  /**
+   * delete ResourceClassParameters
+   *
+   * @param name name of the ResourceClassParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClassParameters> deleteNamespacedResourceClassParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap DeleteNamespacedResourceClassParameters queryParameters);
+
+  
+  final class DeleteNamespacedResourceClassParameters extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public DeleteNamespacedResourceClassParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public DeleteNamespacedResourceClassParameters dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+     */
+    public DeleteNamespacedResourceClassParameters gracePeriodSeconds(Number gracePeriodSeconds) {
+      put("gracePeriodSeconds", gracePeriodSeconds);
+      return this;
+    }
+
+    /**
+     * Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+     */
+    public DeleteNamespacedResourceClassParameters orphanDependents(Boolean orphanDependents) {
+      put("orphanDependents", orphanDependents);
+      return this;
+    }
+
+    /**
+     * Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+     */
+    public DeleteNamespacedResourceClassParameters propagationPolicy(String propagationPolicy) {
+      put("propagationPolicy", propagationPolicy);
+      return this;
+    }
+  } 
+  /**
+   * read the specified ResourceClassParameters
+   *
+   * @param name name of the ResourceClassParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClassParameters> readNamespacedResourceClassParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * read the specified ResourceClassParameters
+   *
+   * @param name name of the ResourceClassParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClassParameters> readNamespacedResourceClassParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap ReadNamespacedResourceClassParameters queryParameters);
+
+  
+  final class ReadNamespacedResourceClassParameters extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public ReadNamespacedResourceClassParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+  } 
+  /**
+   * partially update the specified ResourceClassParameters
+   *
+   * @param name name of the ResourceClassParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClassParameters> patchNamespacedResourceClassParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body ResourceClassParameters body);
+
+  /**
+   * partially update the specified ResourceClassParameters
+   *
+   * @param name name of the ResourceClassParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClassParameters> patchNamespacedResourceClassParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body ResourceClassParameters body, 
+    @QueryMap PatchNamespacedResourceClassParameters queryParameters);
+
+  
+  final class PatchNamespacedResourceClassParameters extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public PatchNamespacedResourceClassParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public PatchNamespacedResourceClassParameters dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+     */
+    public PatchNamespacedResourceClassParameters fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     */
+    public PatchNamespacedResourceClassParameters fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
+     * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+     */
+    public PatchNamespacedResourceClassParameters force(Boolean force) {
+      put("force", force);
+      return this;
+    }
+  } 
+  /**
+   * replace the specified ResourceClassParameters
+   *
+   * @param name name of the ResourceClassParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClassParameters> replaceNamespacedResourceClassParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body ResourceClassParameters body);
+
+  /**
+   * replace the specified ResourceClassParameters
+   *
+   * @param name name of the ResourceClassParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/resource.k8s.io/v1alpha2/namespaces/{namespace}/resourceclassparameters/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceClassParameters> replaceNamespacedResourceClassParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @Body ResourceClassParameters body, 
+    @QueryMap ReplaceNamespacedResourceClassParameters queryParameters);
+
+  
+  final class ReplaceNamespacedResourceClassParameters extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public ReplaceNamespacedResourceClassParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public ReplaceNamespacedResourceClassParameters dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public ReplaceNamespacedResourceClassParameters fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     */
+    public ReplaceNamespacedResourceClassParameters fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+  } 
+  /**
    * list or watch objects of kind PodSchedulingContext
    */
   @HTTP(
@@ -2654,6 +4050,121 @@ public interface ResourceV1alpha2Api extends Api {
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
     public ListPodSchedulingContextForAllNamespaces watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * list or watch objects of kind ResourceClaimParameters
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceclaimparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<ResourceClaimParametersList, ResourceClaimParameters> listResourceClaimParametersForAllNamespaces();
+
+  /**
+   * list or watch objects of kind ResourceClaimParameters
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceclaimparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<ResourceClaimParametersList, ResourceClaimParameters> listResourceClaimParametersForAllNamespaces(
+    @QueryMap ListResourceClaimParametersForAllNamespaces queryParameters);
+
+  
+  final class ListResourceClaimParametersForAllNamespaces extends HashMap<String, Object> { 
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+     */
+    public ListResourceClaimParametersForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public ListResourceClaimParametersForAllNamespaces continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public ListResourceClaimParametersForAllNamespaces fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public ListResourceClaimParametersForAllNamespaces labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public ListResourceClaimParametersForAllNamespaces limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public ListResourceClaimParametersForAllNamespaces pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListResourceClaimParametersForAllNamespaces resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListResourceClaimParametersForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public ListResourceClaimParametersForAllNamespaces sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public ListResourceClaimParametersForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public ListResourceClaimParametersForAllNamespaces watch(Boolean watch) {
       put("watch", watch);
       return this;
     }
@@ -3540,6 +5051,772 @@ public interface ResourceV1alpha2Api extends Api {
     }
   } 
   /**
+   * list or watch objects of kind ResourceClassParameters
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceclassparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<ResourceClassParametersList, ResourceClassParameters> listResourceClassParametersForAllNamespaces();
+
+  /**
+   * list or watch objects of kind ResourceClassParameters
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceclassparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<ResourceClassParametersList, ResourceClassParameters> listResourceClassParametersForAllNamespaces(
+    @QueryMap ListResourceClassParametersForAllNamespaces queryParameters);
+
+  
+  final class ListResourceClassParametersForAllNamespaces extends HashMap<String, Object> { 
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+     */
+    public ListResourceClassParametersForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public ListResourceClassParametersForAllNamespaces continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public ListResourceClassParametersForAllNamespaces fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public ListResourceClassParametersForAllNamespaces labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public ListResourceClassParametersForAllNamespaces limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public ListResourceClassParametersForAllNamespaces pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListResourceClassParametersForAllNamespaces resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListResourceClassParametersForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public ListResourceClassParametersForAllNamespaces sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public ListResourceClassParametersForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public ListResourceClassParametersForAllNamespaces watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * delete collection of ResourceSlice
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Status> deleteCollectionResourceSlice(
+    @Body DeleteOptions body);
+
+    /**
+   * delete collection of ResourceSlice
+   */
+    @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Status> deleteCollectionResourceSlice();
+
+  /**
+   * delete collection of ResourceSlice
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Status> deleteCollectionResourceSlice(
+    @Body DeleteOptions body, 
+    @QueryMap DeleteCollectionResourceSlice queryParameters);
+
+  /**
+   * delete collection of ResourceSlice
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<Status> deleteCollectionResourceSlice(
+    @QueryMap DeleteCollectionResourceSlice queryParameters);
+
+  
+  final class DeleteCollectionResourceSlice extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public DeleteCollectionResourceSlice pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public DeleteCollectionResourceSlice continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public DeleteCollectionResourceSlice dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public DeleteCollectionResourceSlice fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+     */
+    public DeleteCollectionResourceSlice gracePeriodSeconds(Number gracePeriodSeconds) {
+      put("gracePeriodSeconds", gracePeriodSeconds);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public DeleteCollectionResourceSlice labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public DeleteCollectionResourceSlice limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+     */
+    public DeleteCollectionResourceSlice orphanDependents(Boolean orphanDependents) {
+      put("orphanDependents", orphanDependents);
+      return this;
+    }
+
+    /**
+     * Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+     */
+    public DeleteCollectionResourceSlice propagationPolicy(String propagationPolicy) {
+      put("propagationPolicy", propagationPolicy);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionResourceSlice resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public DeleteCollectionResourceSlice resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public DeleteCollectionResourceSlice sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public DeleteCollectionResourceSlice timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+  } 
+  /**
+   * list or watch objects of kind ResourceSlice
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<ResourceSliceList, ResourceSlice> listResourceSlice();
+
+  /**
+   * list or watch objects of kind ResourceSlice
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesListCall<ResourceSliceList, ResourceSlice> listResourceSlice(
+    @QueryMap ListResourceSlice queryParameters);
+
+  
+  final class ListResourceSlice extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public ListResourceSlice pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+     */
+    public ListResourceSlice allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public ListResourceSlice continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public ListResourceSlice fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public ListResourceSlice labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public ListResourceSlice limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListResourceSlice resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public ListResourceSlice resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public ListResourceSlice sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public ListResourceSlice timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public ListResourceSlice watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * create a ResourceSlice
+   */
+  @HTTP(
+    method = "POST",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceSlice> createResourceSlice(
+    @Body ResourceSlice body);
+
+  /**
+   * create a ResourceSlice
+   */
+  @HTTP(
+    method = "POST",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceSlice> createResourceSlice(
+    @Body ResourceSlice body, 
+    @QueryMap CreateResourceSlice queryParameters);
+
+  
+  final class CreateResourceSlice extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public CreateResourceSlice pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public CreateResourceSlice dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public CreateResourceSlice fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     */
+    public CreateResourceSlice fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+  } 
+  /**
+   * delete a ResourceSlice
+   *
+   * @param name name of the ResourceSlice
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceSlice> deleteResourceSlice(
+    @Path("name") String name, 
+    @Body DeleteOptions body);
+
+    /**
+   * delete a ResourceSlice
+   *
+   * @param name name of the ResourceSlice
+   */
+    @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceSlice> deleteResourceSlice(
+    @Path("name") String name);
+
+  /**
+   * delete a ResourceSlice
+   *
+   * @param name name of the ResourceSlice
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceSlice> deleteResourceSlice(
+    @Path("name") String name, 
+    @Body DeleteOptions body, 
+    @QueryMap DeleteResourceSlice queryParameters);
+
+  /**
+   * delete a ResourceSlice
+   *
+   * @param name name of the ResourceSlice
+   */
+  @HTTP(
+    method = "DELETE",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceSlice> deleteResourceSlice(
+    @Path("name") String name, 
+    @QueryMap DeleteResourceSlice queryParameters);
+
+  
+  final class DeleteResourceSlice extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public DeleteResourceSlice pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public DeleteResourceSlice dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
+     */
+    public DeleteResourceSlice gracePeriodSeconds(Number gracePeriodSeconds) {
+      put("gracePeriodSeconds", gracePeriodSeconds);
+      return this;
+    }
+
+    /**
+     * Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the "orphan" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
+     */
+    public DeleteResourceSlice orphanDependents(Boolean orphanDependents) {
+      put("orphanDependents", orphanDependents);
+      return this;
+    }
+
+    /**
+     * Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
+     */
+    public DeleteResourceSlice propagationPolicy(String propagationPolicy) {
+      put("propagationPolicy", propagationPolicy);
+      return this;
+    }
+  } 
+  /**
+   * read the specified ResourceSlice
+   *
+   * @param name name of the ResourceSlice
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceSlice> readResourceSlice(
+    @Path("name") String name);
+
+  /**
+   * read the specified ResourceSlice
+   *
+   * @param name name of the ResourceSlice
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceSlice> readResourceSlice(
+    @Path("name") String name, 
+    @QueryMap ReadResourceSlice queryParameters);
+
+  
+  final class ReadResourceSlice extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public ReadResourceSlice pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+  } 
+  /**
+   * partially update the specified ResourceSlice
+   *
+   * @param name name of the ResourceSlice
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceSlice> patchResourceSlice(
+    @Path("name") String name, 
+    @Body ResourceSlice body);
+
+  /**
+   * partially update the specified ResourceSlice
+   *
+   * @param name name of the ResourceSlice
+   */
+  @HTTP(
+    method = "PATCH",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/merge-patch+json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceSlice> patchResourceSlice(
+    @Path("name") String name, 
+    @Body ResourceSlice body, 
+    @QueryMap PatchResourceSlice queryParameters);
+
+  
+  final class PatchResourceSlice extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public PatchResourceSlice pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public PatchResourceSlice dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
+     */
+    public PatchResourceSlice fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     */
+    public PatchResourceSlice fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+
+    /**
+     * Force is going to "force" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
+     */
+    public PatchResourceSlice force(Boolean force) {
+      put("force", force);
+      return this;
+    }
+  } 
+  /**
+   * replace the specified ResourceSlice
+   *
+   * @param name name of the ResourceSlice
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceSlice> replaceResourceSlice(
+    @Path("name") String name, 
+    @Body ResourceSlice body);
+
+  /**
+   * replace the specified ResourceSlice
+   *
+   * @param name name of the ResourceSlice
+   */
+  @HTTP(
+    method = "PUT",
+    path = "/apis/resource.k8s.io/v1alpha2/resourceslices/{name}",
+    hasBody = true
+  )
+  @Headers({ 
+    "Content-Type: application/json",
+    "Accept: */*"
+  })
+  KubernetesCall<ResourceSlice> replaceResourceSlice(
+    @Path("name") String name, 
+    @Body ResourceSlice body, 
+    @QueryMap ReplaceResourceSlice queryParameters);
+
+  
+  final class ReplaceResourceSlice extends HashMap<String, Object> { 
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public ReplaceResourceSlice pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
+     */
+    public ReplaceResourceSlice dryRun(String dryRun) {
+      put("dryRun", dryRun);
+      return this;
+    }
+
+    /**
+     * fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
+     */
+    public ReplaceResourceSlice fieldManager(String fieldManager) {
+      put("fieldManager", fieldManager);
+      return this;
+    }
+
+    /**
+     * fieldValidation instructs the server on how to handle objects in the request (POST/PUT/PATCH) containing unknown or duplicate fields. Valid values are: - Ignore: This will ignore any unknown fields that are silently dropped from the object, and will ignore all but the last duplicate field that the decoder encounters. This is the default behavior prior to v1.23. - Warn: This will send a warning via the standard warning response header for each unknown field that is dropped from the object, and for each duplicate field that is encountered. The request will still succeed if there are no other errors, and will only persist the last of any duplicate fields. This is the default in v1.23+ - Strict: This will fail the request with a BadRequest error if any unknown fields would be dropped from the object, or if any duplicate fields are present. The error returned from the server will contain all unknown and duplicate fields encountered.
+     */
+    public ReplaceResourceSlice fieldValidation(String fieldValidation) {
+      put("fieldValidation", fieldValidation);
+      return this;
+    }
+  } 
+  /**
    * watch individual changes to a list of PodSchedulingContext. deprecated: use the 'watch' parameter with a list operation instead.
    *
    * @param namespace object name and auth scope, such as for teams and projects
@@ -3781,6 +6058,252 @@ public interface ResourceV1alpha2Api extends Api {
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
     public WatchNamespacedPodSchedulingContext watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * watch individual changes to a list of ResourceClaimParameters. deprecated: use the 'watch' parameter with a list operation instead.
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclaimparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchNamespacedResourceClaimParametersList(
+    @Path("namespace") String namespace);
+
+  /**
+   * watch individual changes to a list of ResourceClaimParameters. deprecated: use the 'watch' parameter with a list operation instead.
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclaimparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchNamespacedResourceClaimParametersList(
+    @Path("namespace") String namespace, 
+    @QueryMap WatchNamespacedResourceClaimParametersList queryParameters);
+
+  
+  final class WatchNamespacedResourceClaimParametersList extends HashMap<String, Object> { 
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+     */
+    public WatchNamespacedResourceClaimParametersList allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public WatchNamespacedResourceClaimParametersList continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public WatchNamespacedResourceClaimParametersList fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public WatchNamespacedResourceClaimParametersList labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public WatchNamespacedResourceClaimParametersList limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public WatchNamespacedResourceClaimParametersList pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchNamespacedResourceClaimParametersList resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchNamespacedResourceClaimParametersList resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchNamespacedResourceClaimParametersList sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public WatchNamespacedResourceClaimParametersList timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public WatchNamespacedResourceClaimParametersList watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * watch changes to an object of kind ResourceClaimParameters. deprecated: use the 'watch' parameter with a list operation instead, filtered to a single item with the 'fieldSelector' parameter.
+   *
+   * @param name name of the ResourceClaimParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclaimparameters/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchNamespacedResourceClaimParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * watch changes to an object of kind ResourceClaimParameters. deprecated: use the 'watch' parameter with a list operation instead, filtered to a single item with the 'fieldSelector' parameter.
+   *
+   * @param name name of the ResourceClaimParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclaimparameters/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchNamespacedResourceClaimParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap WatchNamespacedResourceClaimParameters queryParameters);
+
+  
+  final class WatchNamespacedResourceClaimParameters extends HashMap<String, Object> { 
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+     */
+    public WatchNamespacedResourceClaimParameters allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public WatchNamespacedResourceClaimParameters continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public WatchNamespacedResourceClaimParameters fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public WatchNamespacedResourceClaimParameters labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public WatchNamespacedResourceClaimParameters limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public WatchNamespacedResourceClaimParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchNamespacedResourceClaimParameters resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchNamespacedResourceClaimParameters resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchNamespacedResourceClaimParameters sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public WatchNamespacedResourceClaimParameters timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public WatchNamespacedResourceClaimParameters watch(Boolean watch) {
       put("watch", watch);
       return this;
     }
@@ -4278,6 +6801,252 @@ public interface ResourceV1alpha2Api extends Api {
     }
   } 
   /**
+   * watch individual changes to a list of ResourceClassParameters. deprecated: use the 'watch' parameter with a list operation instead.
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclassparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchNamespacedResourceClassParametersList(
+    @Path("namespace") String namespace);
+
+  /**
+   * watch individual changes to a list of ResourceClassParameters. deprecated: use the 'watch' parameter with a list operation instead.
+   *
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclassparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchNamespacedResourceClassParametersList(
+    @Path("namespace") String namespace, 
+    @QueryMap WatchNamespacedResourceClassParametersList queryParameters);
+
+  
+  final class WatchNamespacedResourceClassParametersList extends HashMap<String, Object> { 
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+     */
+    public WatchNamespacedResourceClassParametersList allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public WatchNamespacedResourceClassParametersList continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public WatchNamespacedResourceClassParametersList fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public WatchNamespacedResourceClassParametersList labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public WatchNamespacedResourceClassParametersList limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public WatchNamespacedResourceClassParametersList pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchNamespacedResourceClassParametersList resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchNamespacedResourceClassParametersList resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchNamespacedResourceClassParametersList sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public WatchNamespacedResourceClassParametersList timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public WatchNamespacedResourceClassParametersList watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * watch changes to an object of kind ResourceClassParameters. deprecated: use the 'watch' parameter with a list operation instead, filtered to a single item with the 'fieldSelector' parameter.
+   *
+   * @param name name of the ResourceClassParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclassparameters/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchNamespacedResourceClassParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace);
+
+  /**
+   * watch changes to an object of kind ResourceClassParameters. deprecated: use the 'watch' parameter with a list operation instead, filtered to a single item with the 'fieldSelector' parameter.
+   *
+   * @param name name of the ResourceClassParameters
+   * @param namespace object name and auth scope, such as for teams and projects
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/namespaces/{namespace}/resourceclassparameters/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchNamespacedResourceClassParameters(
+    @Path("name") String name,
+    @Path("namespace") String namespace, 
+    @QueryMap WatchNamespacedResourceClassParameters queryParameters);
+
+  
+  final class WatchNamespacedResourceClassParameters extends HashMap<String, Object> { 
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+     */
+    public WatchNamespacedResourceClassParameters allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public WatchNamespacedResourceClassParameters continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public WatchNamespacedResourceClassParameters fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public WatchNamespacedResourceClassParameters labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public WatchNamespacedResourceClassParameters limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public WatchNamespacedResourceClassParameters pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchNamespacedResourceClassParameters resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchNamespacedResourceClassParameters resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchNamespacedResourceClassParameters sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public WatchNamespacedResourceClassParameters timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public WatchNamespacedResourceClassParameters watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
    * watch individual changes to a list of PodSchedulingContext. deprecated: use the 'watch' parameter with a list operation instead.
    */
   @HTTP(
@@ -4388,6 +7157,121 @@ public interface ResourceV1alpha2Api extends Api {
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
     public WatchPodSchedulingContextListForAllNamespaces watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * watch individual changes to a list of ResourceClaimParameters. deprecated: use the 'watch' parameter with a list operation instead.
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/resourceclaimparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchResourceClaimParametersListForAllNamespaces();
+
+  /**
+   * watch individual changes to a list of ResourceClaimParameters. deprecated: use the 'watch' parameter with a list operation instead.
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/resourceclaimparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchResourceClaimParametersListForAllNamespaces(
+    @QueryMap WatchResourceClaimParametersListForAllNamespaces queryParameters);
+
+  
+  final class WatchResourceClaimParametersListForAllNamespaces extends HashMap<String, Object> { 
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+     */
+    public WatchResourceClaimParametersListForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public WatchResourceClaimParametersListForAllNamespaces continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public WatchResourceClaimParametersListForAllNamespaces fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public WatchResourceClaimParametersListForAllNamespaces labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public WatchResourceClaimParametersListForAllNamespaces limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public WatchResourceClaimParametersListForAllNamespaces pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchResourceClaimParametersListForAllNamespaces resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchResourceClaimParametersListForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchResourceClaimParametersListForAllNamespaces sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public WatchResourceClaimParametersListForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public WatchResourceClaimParametersListForAllNamespaces watch(Boolean watch) {
       put("watch", watch);
       return this;
     }
@@ -4854,6 +7738,357 @@ public interface ResourceV1alpha2Api extends Api {
      * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
      */
     public WatchResourceClass watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * watch individual changes to a list of ResourceClassParameters. deprecated: use the 'watch' parameter with a list operation instead.
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/resourceclassparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchResourceClassParametersListForAllNamespaces();
+
+  /**
+   * watch individual changes to a list of ResourceClassParameters. deprecated: use the 'watch' parameter with a list operation instead.
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/resourceclassparameters"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchResourceClassParametersListForAllNamespaces(
+    @QueryMap WatchResourceClassParametersListForAllNamespaces queryParameters);
+
+  
+  final class WatchResourceClassParametersListForAllNamespaces extends HashMap<String, Object> { 
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+     */
+    public WatchResourceClassParametersListForAllNamespaces allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public WatchResourceClassParametersListForAllNamespaces continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public WatchResourceClassParametersListForAllNamespaces fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public WatchResourceClassParametersListForAllNamespaces labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public WatchResourceClassParametersListForAllNamespaces limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public WatchResourceClassParametersListForAllNamespaces pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchResourceClassParametersListForAllNamespaces resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchResourceClassParametersListForAllNamespaces resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchResourceClassParametersListForAllNamespaces sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public WatchResourceClassParametersListForAllNamespaces timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public WatchResourceClassParametersListForAllNamespaces watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * watch individual changes to a list of ResourceSlice. deprecated: use the 'watch' parameter with a list operation instead.
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/resourceslices"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchResourceSliceList();
+
+  /**
+   * watch individual changes to a list of ResourceSlice. deprecated: use the 'watch' parameter with a list operation instead.
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/resourceslices"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchResourceSliceList(
+    @QueryMap WatchResourceSliceList queryParameters);
+
+  
+  final class WatchResourceSliceList extends HashMap<String, Object> { 
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+     */
+    public WatchResourceSliceList allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public WatchResourceSliceList continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public WatchResourceSliceList fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public WatchResourceSliceList labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public WatchResourceSliceList limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public WatchResourceSliceList pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchResourceSliceList resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchResourceSliceList resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchResourceSliceList sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public WatchResourceSliceList timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public WatchResourceSliceList watch(Boolean watch) {
+      put("watch", watch);
+      return this;
+    }
+  } 
+  /**
+   * watch changes to an object of kind ResourceSlice. deprecated: use the 'watch' parameter with a list operation instead, filtered to a single item with the 'fieldSelector' parameter.
+   *
+   * @param name name of the ResourceSlice
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/resourceslices/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchResourceSlice(
+    @Path("name") String name);
+
+  /**
+   * watch changes to an object of kind ResourceSlice. deprecated: use the 'watch' parameter with a list operation instead, filtered to a single item with the 'fieldSelector' parameter.
+   *
+   * @param name name of the ResourceSlice
+   */
+  @HTTP(
+    method = "GET",
+    path = "/apis/resource.k8s.io/v1alpha2/watch/resourceslices/{name}"
+  )
+  @Headers({ 
+    "Accept: */*"
+  })
+  KubernetesCall<WatchEvent> watchResourceSlice(
+    @Path("name") String name, 
+    @QueryMap WatchResourceSlice queryParameters);
+
+  
+  final class WatchResourceSlice extends HashMap<String, Object> { 
+    /**
+     * allowWatchBookmarks requests watch events with type "BOOKMARK". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored.
+     */
+    public WatchResourceSlice allowWatchBookmarks(Boolean allowWatchBookmarks) {
+      put("allowWatchBookmarks", allowWatchBookmarks);
+      return this;
+    }
+
+    /**
+     * The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the "next key".<br><p> <br><p> This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
+     */
+    public WatchResourceSlice continues(String continues) {
+      put("continue", continues);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their fields. Defaults to everything.
+     */
+    public WatchResourceSlice fieldSelector(String fieldSelector) {
+      put("fieldSelector", fieldSelector);
+      return this;
+    }
+
+    /**
+     * A selector to restrict the list of returned objects by their labels. Defaults to everything.
+     */
+    public WatchResourceSlice labelSelector(String labelSelector) {
+      put("labelSelector", labelSelector);
+      return this;
+    }
+
+    /**
+     * limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.<br><p> <br><p> The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
+     */
+    public WatchResourceSlice limit(Number limit) {
+      put("limit", limit);
+      return this;
+    }
+
+    /**
+     * If 'true', then the output is pretty printed. Defaults to 'false' unless the user-agent indicates a browser or command-line HTTP tool (curl and wget).
+     */
+    public WatchResourceSlice pretty(String pretty) {
+      put("pretty", pretty);
+      return this;
+    }
+
+    /**
+     * resourceVersion sets a constraint on what resource versions a request may be served from. See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchResourceSlice resourceVersion(String resourceVersion) {
+      put("resourceVersion", resourceVersion);
+      return this;
+    }
+
+    /**
+     * resourceVersionMatch determines how resourceVersion is applied to list calls. It is highly recommended that resourceVersionMatch be set for list calls where resourceVersion is set See https://kubernetes.io/docs/reference/using-api/api-concepts/#resource-versions for details.<br><p> <br><p> Defaults to unset
+     */
+    public WatchResourceSlice resourceVersionMatch(String resourceVersionMatch) {
+      put("resourceVersionMatch", resourceVersionMatch);
+      return this;
+    }
+
+    /**
+     * `sendInitialEvents=true` may be set together with `watch=true`. In that case, the watch stream will begin with synthetic events to produce the current state of objects in the collection. Once all such events have been sent, a synthetic "Bookmark" event  will be sent. The bookmark will report the ResourceVersion (RV) corresponding to the set of objects, and be marked with `"k8s.io/initial-events-end": "true"` annotation. Afterwards, the watch stream will proceed as usual, sending watch events corresponding to changes (subsequent to the RV) to objects watched.<br><p> <br><p> When `sendInitialEvents` option is set, we require `resourceVersionMatch` option to also be set. The semantic of the watch request is as following: - `resourceVersionMatch` = NotOlderThan<br><p>   is interpreted as "data at least as new as the provided `resourceVersion`"<br><p>   and the bookmark event is send when the state is synced<br><p>   to a `resourceVersion` at least as fresh as the one provided by the ListOptions.<br><p>   If `resourceVersion` is unset, this is interpreted as "consistent read" and the<br><p>   bookmark event is send when the state is synced at least to the moment<br><p>   when request started being processed.<br><p> - `resourceVersionMatch` set to any other value or unset<br><p>   Invalid error is returned.<br><p> <br><p> Defaults to true if `resourceVersion=""` or `resourceVersion="0"` (for backward compatibility reasons) and to false otherwise.
+     */
+    public WatchResourceSlice sendInitialEvents(Boolean sendInitialEvents) {
+      put("sendInitialEvents", sendInitialEvents);
+      return this;
+    }
+
+    /**
+     * Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
+     */
+    public WatchResourceSlice timeoutSeconds(Number timeoutSeconds) {
+      put("timeoutSeconds", timeoutSeconds);
+      return this;
+    }
+
+    /**
+     * Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
+     */
+    public WatchResourceSlice watch(Boolean watch) {
       put("watch", watch);
       return this;
     }

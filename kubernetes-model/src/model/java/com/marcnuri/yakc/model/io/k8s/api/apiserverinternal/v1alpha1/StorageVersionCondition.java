@@ -44,6 +44,7 @@ public class StorageVersionCondition implements Model {
   /**
    * A human readable message indicating details about the transition.
    */
+  @NonNull
   @JsonProperty("message")
   private String message;
 

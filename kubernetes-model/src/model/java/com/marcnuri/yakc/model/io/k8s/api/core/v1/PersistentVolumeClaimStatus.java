@@ -68,7 +68,7 @@ public class PersistentVolumeClaimStatus implements Model {
   private Map<String, String> capacity;
 
   /**
-   * conditions is the current Condition of persistent volume claim. If underlying persistent volume is being resized then the Condition will be set to 'ResizeStarted'.
+   * conditions is the current Condition of persistent volume claim. If underlying persistent volume is being resized then the Condition will be set to 'Resizing'.
    */
   @JsonProperty("conditions")
   @Singular(value = "addToConditions", ignoreNullCollections = true)

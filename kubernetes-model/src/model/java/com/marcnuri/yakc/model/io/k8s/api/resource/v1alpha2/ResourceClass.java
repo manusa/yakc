@@ -64,6 +64,12 @@ public class ResourceClass implements Model {
   @JsonProperty("parametersRef")
   private ResourceClassParametersReference parametersRef;
 
+  /**
+   * If and only if allocation of claims using this class is handled via structured parameters, then StructuredParameters must be set to true.
+   */
+  @JsonProperty("structuredParameters")
+  private Boolean structuredParameters;
+
   @JsonProperty("suitableNodes")
   private NodeSelector suitableNodes;
 

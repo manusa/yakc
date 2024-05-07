@@ -22,6 +22,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.ToString;
 
 /**
@@ -45,6 +46,7 @@ public class ParentReference implements Model {
   /**
    * Name is the name of the object being referenced.
    */
+  @NonNull
   @JsonProperty("name")
   private String name;
 
@@ -57,6 +59,7 @@ public class ParentReference implements Model {
   /**
    * Resource is the resource of the object being referenced.
    */
+  @NonNull
   @JsonProperty("resource")
   private String resource;
 

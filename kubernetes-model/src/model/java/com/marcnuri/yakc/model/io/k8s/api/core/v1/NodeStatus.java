@@ -90,6 +90,13 @@ public class NodeStatus implements Model {
   private String phase;
 
   /**
+   * The available runtime handlers.
+   */
+  @JsonProperty("runtimeHandlers")
+  @Singular(value = "addToRuntimeHandlers", ignoreNullCollections = true)
+  private List<NodeRuntimeHandler> runtimeHandlers;
+
+  /**
    * List of volumes that are attached to the node.
    */
   @JsonProperty("volumesAttached")
