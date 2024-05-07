@@ -42,6 +42,9 @@ public class SecurityContext implements Model {
   @JsonProperty("allowPrivilegeEscalation")
   private Boolean allowPrivilegeEscalation;
 
+  @JsonProperty("appArmorProfile")
+  private AppArmorProfile appArmorProfile;
+
   @JsonProperty("capabilities")
   private Capabilities capabilities;
 

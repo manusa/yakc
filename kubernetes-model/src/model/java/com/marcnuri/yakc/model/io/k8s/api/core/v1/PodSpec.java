@@ -86,7 +86,7 @@ public class PodSpec implements Model {
   private List<EphemeralContainer> ephemeralContainers;
 
   /**
-   * HostAliases is an optional list of hosts and IPs that will be injected into the pod's hosts file if specified. This is only valid for non-hostNetwork pods.
+   * HostAliases is an optional list of hosts and IPs that will be injected into the pod's hosts file if specified.
    */
   @JsonProperty("hostAliases")
   @Singular(value = "addToHostAliases", ignoreNullCollections = true)
@@ -210,7 +210,7 @@ public class PodSpec implements Model {
   private String schedulerName;
 
   /**
-   * SchedulingGates is an opaque list of values that if specified will block scheduling the pod. If schedulingGates is not empty, the pod will stay in the SchedulingGated state and the scheduler will not attempt to schedule the pod.<br><p> <br><p> SchedulingGates can only be set at pod creation time, and be removed only afterwards.<br><p> <br><p> This is a beta feature enabled by the PodSchedulingReadiness feature gate.
+   * SchedulingGates is an opaque list of values that if specified will block scheduling the pod. If schedulingGates is not empty, the pod will stay in the SchedulingGated state and the scheduler will not attempt to schedule the pod.<br><p> <br><p> SchedulingGates can only be set at pod creation time, and be removed only afterwards.
    */
   @JsonProperty("schedulingGates")
   @Singular(value = "addToSchedulingGates", ignoreNullCollections = true)
@@ -220,7 +220,7 @@ public class PodSpec implements Model {
   private PodSecurityContext securityContext;
 
   /**
-   * DeprecatedServiceAccount is a depreciated alias for ServiceAccountName. Deprecated: Use serviceAccountName instead.
+   * DeprecatedServiceAccount is a deprecated alias for ServiceAccountName. Deprecated: Use serviceAccountName instead.
    */
   @JsonProperty("serviceAccount")
   private String serviceAccount;

@@ -51,7 +51,7 @@ public class PersistentVolumeClaimCondition implements Model {
   private String message;
 
   /**
-   * reason is a unique, this should be a short, machine understandable string that gives the reason for condition's last transition. If it reports "ResizeStarted" that means the underlying persistent volume is being resized.
+   * reason is a unique, this should be a short, machine understandable string that gives the reason for condition's last transition. If it reports "Resizing" that means the underlying persistent volume is being resized.
    */
   @JsonProperty("reason")
   private String reason;
